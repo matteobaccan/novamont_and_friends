@@ -699,6 +699,7 @@ function displayStatistics() {
     const highestScore = document.getElementById('highest-score');
     const totalTeams = document.getElementById('total-teams');
     const currentRound = document.getElementById('current-round');
+    const worstPointsLost = document.getElementById('worst-points-lost');
 
     if (!fantacalcioData || !fantacalcioData.teams || fantacalcioData.teams.length === 0) {
         return;
@@ -714,6 +715,41 @@ function displayStatistics() {
     if (highestScore) highestScore.textContent = maxAvgScore.toFixed(1);
     if (totalTeams) totalTeams.textContent = totalTeamsCount;
     if (currentRound) currentRound.textContent = `Giornata ${currentRoundNumber}`;
+
+    // Calcola i maggiori punti persi
+    let maxPointsLost = 0;
+    let worstTeam = '';
+    
+    if (fantacalcioData.rounds && fantacalcioData.rounds.length > 0) {
+        fantacalcioData.rounds.forEach(round => {
+            if (round.matches) {
+                round.matches.forEach(match => {
+                    if (match.homeIdealScore !== undefined && match.awayIdealScore !== undefined) {
+                        const homePointsLost = Math.max(0, match.homeIdealScore - match.homeScore);
+                        const awayPointsLost = Math.max(0, match.awayIdealScore - match.awayScore);
+                        
+                        if (homePointsLost > maxPointsLost) {
+                            maxPointsLost = homePointsLost;
+                            worstTeam = match.homeTeam;
+                        }
+                        
+                        if (awayPointsLost > maxPointsLost) {
+                            maxPointsLost = awayPointsLost;
+                            worstTeam = match.awayTeam;
+                        }
+                    }
+                });
+            }
+        });
+    }
+    
+    if (worstPointsLost) {
+        if (maxPointsLost > 0) {
+            worstPointsLost.textContent = `${maxPointsLost.toFixed(1)} (${worstTeam})`;
+        } else {
+            worstPointsLost.textContent = 'Nessuno';
+        }
+    }
 
     // Genera il confronto reale vs ideale solo se siamo nella sezione statistiche
     const statisticsSection = document.getElementById('statistiche');
@@ -833,6 +869,12 @@ function displayRoundResults(roundNumber) {
     }
 
     let html = '';
+    
+    // Aggiungi la classifica del miglior allenatore subito dopo il commento
+    const coachRankingHtml = generateCoachRanking(round);
+    if (coachRankingHtml) {
+        html += coachRankingHtml;
+    }
     round.matches.forEach((match, index) => {
         let resultClass = '';
         let resultText = '';
@@ -990,6 +1032,118 @@ function displayRoundResults(roundNumber) {
     });
 
     roundResults.innerHTML = html;
+}
+
+// Funzione per generare la classifica del miglior allenatore
+function generateCoachRanking(round) {
+    if (!round || !round.matches) return '';
+    
+    // Controlla se ci sono punteggi ideali disponibili
+    let hasIdealData = false;
+    const coachData = [];
+    
+    round.matches.forEach(match => {
+        if (match.homeIdealScore !== undefined && match.awayIdealScore !== undefined) {
+            hasIdealData = true;
+            
+            // Calcola punti persi per squadra casa
+            const homePointsLost = Math.max(0, match.homeIdealScore - match.homeScore);
+            coachData.push({
+                team: match.homeTeam,
+                realScore: match.homeScore,
+                idealScore: match.homeIdealScore,
+                pointsLost: homePointsLost,
+                efficiency: ((match.homeScore / match.homeIdealScore) * 100).toFixed(1)
+            });
+            
+            // Calcola punti persi per squadra trasferta
+            const awayPointsLost = Math.max(0, match.awayIdealScore - match.awayScore);
+            coachData.push({
+                team: match.awayTeam,
+                realScore: match.awayScore,
+                idealScore: match.awayIdealScore,
+                pointsLost: awayPointsLost,
+                efficiency: ((match.awayScore / match.awayIdealScore) * 100).toFixed(1)
+            });
+        }
+    });
+    
+    if (!hasIdealData || coachData.length === 0) return '';
+    
+    // Ordina per punti persi (meno punti persi = miglior allenatore)
+    coachData.sort((a, b) => a.pointsLost - b.pointsLost);
+    
+    let html = `
+        <div class="coach-ranking-section">
+            <div class="coach-ranking-header">
+                <h3><i class="fas fa-chess-king"></i> Classifica Miglior Allenatore</h3>
+                <p class="coach-ranking-subtitle">Basata sui punti persi rispetto alla formazione ideale - Chi perde meno è il migliore!</p>
+            </div>
+            <div class="coach-ranking-table">
+                <div class="coach-ranking-headers">
+                    <div class="pos-header">Pos</div>
+                    <div class="team-header">Squadra</div>
+                    <div class="real-header">Reale</div>
+                    <div class="ideal-header">Ideale</div>
+                    <div class="lost-header">Persi</div>
+                    <div class="efficiency-header">Efficienza</div>
+                    <div class="award-header">Premio</div>
+                </div>
+    `;
+    
+    coachData.forEach((coach, index) => {
+        let positionClass = '';
+        let award = '';
+        
+        if (index === 0) {
+            positionClass = 'gold';
+            award = '🏆 Miglior Allenatore';
+        } else if (index === 1) {
+            positionClass = 'silver';
+            award = '🥈 Secondo posto';
+        } else if (index === 2) {
+            positionClass = 'bronze';
+            award = '🥉 Terzo posto';
+        } else if (index === coachData.length - 1) {
+            positionClass = 'worst';
+            award = '😅 Da rivedere';
+        }
+        
+        const lostPointsDisplay = coach.pointsLost === 0 ? '0 (perfetto!)' : coach.pointsLost.toFixed(1);
+        
+        html += `
+            <div class="coach-ranking-row ${positionClass}">
+                <div class="coach-pos">${index + 1}°</div>
+                <div class="coach-team">${coach.team}</div>
+                <div class="coach-real">${coach.realScore.toFixed(1)}</div>
+                <div class="coach-ideal">${coach.idealScore.toFixed(1)}</div>
+                <div class="coach-lost ${coach.pointsLost === 0 ? 'perfect' : ''}">${lostPointsDisplay}</div>
+                <div class="coach-efficiency">${coach.efficiency}%</div>
+                <div class="coach-award">${award}</div>
+            </div>
+        `;
+    });
+    
+    html += `
+            </div>
+            <div class="coach-ranking-insights">
+                <div class="insight-perfect">
+                    <i class="fas fa-star"></i>
+                    <span><strong>Formazione Perfetta:</strong> ${coachData.filter(c => c.pointsLost === 0).length} squadre hanno fatto le scelte ideali!</span>
+                </div>
+                <div class="insight-avg">
+                    <i class="fas fa-calculator"></i>
+                    <span><strong>Media punti persi:</strong> ${(coachData.reduce((sum, c) => sum + c.pointsLost, 0) / coachData.length).toFixed(1)} punti</span>
+                </div>
+                <div class="insight-best">
+                    <i class="fas fa-trophy"></i>
+                    <span><strong>Miglior allenatore:</strong> ${coachData[0].team} (solo ${coachData[0].pointsLost.toFixed(1)} punti persi, ${coachData[0].efficiency}% di efficienza)</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return html;
 }
 
 // Funzione per mostrare il commento della giornata
