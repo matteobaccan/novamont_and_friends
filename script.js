@@ -1146,3 +1146,108 @@ window.FantacalcioApp = {
     testGoalCalculation,
     getData: () => fantacalcioData
 };
+
+// Theme Management
+class ThemeManager {
+    constructor() {
+        this.themes = ['auto', 'light', 'dark'];
+        this.currentTheme = this.getStoredTheme() || 'auto';
+        this.themeToggle = document.getElementById('theme-toggle');
+        
+        this.init();
+    }
+    
+    init() {
+        this.setTheme(this.currentTheme);
+        this.updateToggleIcon();
+        this.addEventListeners();
+        
+        // Listen for system theme changes
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (this.currentTheme === 'auto') {
+                    this.applyTheme();
+                }
+            });
+        }
+    }
+    
+    addEventListeners() {
+        this.themeToggle.addEventListener('click', () => {
+            this.cycleTheme();
+        });
+    }
+    
+    cycleTheme() {
+        const currentIndex = this.themes.indexOf(this.currentTheme);
+        const nextIndex = (currentIndex + 1) % this.themes.length;
+        const nextTheme = this.themes[nextIndex];
+        
+        this.setTheme(nextTheme);
+        this.storeTheme(nextTheme);
+    }
+    
+    setTheme(theme) {
+        this.currentTheme = theme;
+        this.applyTheme();
+        this.updateToggleIcon();
+    }
+    
+    applyTheme() {
+        const html = document.documentElement;
+        
+        if (this.currentTheme === 'auto') {
+            // Use system preference
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        } else {
+            html.setAttribute('data-theme', this.currentTheme);
+        }
+        
+        // Add animation class
+        html.classList.add('theme-transition');
+        setTimeout(() => {
+            html.classList.remove('theme-transition');
+        }, 300);
+    }
+    
+    updateToggleIcon() {
+        const icon = this.themeToggle.querySelector('i');
+        
+        switch (this.currentTheme) {
+            case 'light':
+                icon.className = 'fas fa-sun';
+                this.themeToggle.title = 'Tema: Chiaro (click per Scuro)';
+                break;
+            case 'dark':
+                icon.className = 'fas fa-moon';
+                this.themeToggle.title = 'Tema: Scuro (click per Auto)';
+                break;
+            case 'auto':
+                icon.className = 'fas fa-adjust';
+                this.themeToggle.title = 'Tema: Auto (click per Chiaro)';
+                break;
+        }
+    }
+    
+    getStoredTheme() {
+        try {
+            return localStorage.getItem('fantacalcio-theme');
+        } catch (e) {
+            return null;
+        }
+    }
+    
+    storeTheme(theme) {
+        try {
+            localStorage.setItem('fantacalcio-theme', theme);
+        } catch (e) {
+            console.warn('Could not save theme preference');
+        }
+    }
+}
+
+// Initialize theme manager when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    window.themeManager = new ThemeManager();
+});
