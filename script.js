@@ -857,22 +857,101 @@ function displayRoundResults(roundNumber) {
             const awayIdealGoals = match.awayIdealGoals !== undefined ? match.awayIdealGoals : calculateGoalsFromScore(match.awayIdealScore);
             const idealGoalScore = `${homeIdealGoals}-${awayIdealGoals}`;
             
+            // Calcola differenze e confronti
+            const homeDifference = match.homeIdealScore - match.homeScore;
+            const awayDifference = match.awayIdealScore - match.awayScore;
+            const homeGoalsDiff = homeIdealGoals - homeGoals;
+            const awayGoalsDiff = awayIdealGoals - awayGoals;
+            
+            // Determina il risultato reale e ideale
+            const realResult = homeGoals > awayGoals ? match.homeTeam : 
+                             awayGoals > homeGoals ? match.awayTeam : 'Pareggio';
+            const idealResult = homeIdealGoals > awayIdealGoals ? match.homeTeam : 
+                              awayIdealGoals > homeIdealGoals ? match.awayTeam : 'Pareggio';
+            
+            const sameResult = realResult === idealResult;
+            
             idealSection = `
                 <div class="ideal-scores">
-                    <h4><i class="fas fa-star"></i> Punteggi Ideali</h4>
-                    <div class="ideal-match-teams">
-                        <div class="ideal-team">
-                            <div class="ideal-score">${homeIdealGoals}</div>
-                            <div class="ideal-fantasy-score">(${match.homeIdealScore} pt)</div>
-                        </div>
-                        <div class="vs-ideal">VS</div>
-                        <div class="ideal-team">
-                            <div class="ideal-score">${awayIdealGoals}</div>
-                            <div class="ideal-fantasy-score">(${match.awayIdealScore} pt)</div>
+                    <div class="ideal-header">
+                        <h4><i class="fas fa-star"></i> Formazioni Ideali vs Reali</h4>
+                        <div class="match-comparison-status ${sameResult ? 'same-result' : 'different-result'}">
+                            ${sameResult ? '✓ Stesso risultato' : '⚠️ Risultato diverso'}
                         </div>
                     </div>
-                    <div class="ideal-result">
-                        Risultato ideale: <strong>${idealGoalScore}</strong>
+                    
+                    <div class="ideal-comparison-grid">
+                        <div class="comparison-team">
+                            <div class="team-name-ideal">${match.homeTeam}</div>
+                            <div class="scores-comparison">
+                                <div class="score-real">
+                                    <span class="label">Reale:</span>
+                                    <span class="value">${homeGoals} gol (${match.homeScore} pt)</span>
+                                </div>
+                                <div class="score-ideal">
+                                    <span class="label">Ideale:</span>
+                                    <span class="value">${homeIdealGoals} gol (${match.homeIdealScore} pt)</span>
+                                </div>
+                                <div class="score-difference ${homeDifference >= 0 ? 'positive' : 'negative'}">
+                                    <span class="label">Differenza:</span>
+                                    <span class="value">
+                                        ${homeDifference >= 0 ? '+' : ''}${homeDifference.toFixed(1)} pt
+                                        ${homeGoalsDiff !== 0 ? `(${homeGoalsDiff >= 0 ? '+' : ''}${homeGoalsDiff} gol)` : ''}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="vs-ideal-section">
+                            <div class="vs-label">VS</div>
+                            <div class="result-comparison">
+                                <div class="real-result">Reale: ${goalScore}</div>
+                                <div class="ideal-result">Ideale: ${idealGoalScore}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-team">
+                            <div class="team-name-ideal">${match.awayTeam}</div>
+                            <div class="scores-comparison">
+                                <div class="score-real">
+                                    <span class="label">Reale:</span>
+                                    <span class="value">${awayGoals} gol (${match.awayScore} pt)</span>
+                                </div>
+                                <div class="score-ideal">
+                                    <span class="label">Ideale:</span>
+                                    <span class="value">${awayIdealGoals} gol (${match.awayIdealScore} pt)</span>
+                                </div>
+                                <div class="score-difference ${awayDifference >= 0 ? 'positive' : 'negative'}">
+                                    <span class="label">Differenza:</span>
+                                    <span class="value">
+                                        ${awayDifference >= 0 ? '+' : ''}${awayDifference.toFixed(1)} pt
+                                        ${awayGoalsDiff !== 0 ? `(${awayGoalsDiff >= 0 ? '+' : ''}${awayGoalsDiff} gol)` : ''}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ideal-insights">
+                        <div class="insight-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>
+                                ${homeDifference > 0 && awayDifference > 0 ? 
+                                    'Entrambe le squadre potevano fare meglio con scelte diverse' :
+                                homeDifference > awayDifference ? 
+                                    `${match.homeTeam} ha sprecato più potenziale (${homeDifference.toFixed(1)} pt)` :
+                                awayDifference > homeDifference ?
+                                    `${match.awayTeam} ha sprecato più potenziale (${awayDifference.toFixed(1)} pt)` :
+                                    'Entrambe le squadre hanno fatto scelte simili alle ideali'
+                                }
+                            </span>
+                        </div>
+                        ${!sameResult ? `
+                        <div class="insight-item alert">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Con le formazioni ideali il risultato sarebbe stato: <strong>${idealResult === 'Pareggio' ? 'Pareggio' : 'Vittoria ' + idealResult}</strong></span>
+                        </div>
+                        ` : ''}
                     </div>
                 </div>
             `;
@@ -907,71 +986,10 @@ function displayRoundResults(roundNumber) {
 
     roundResults.innerHTML = html;
     
-    // Mostra il confronto reale vs ideale per questa giornata
-    displayRoundComparison(roundNumber);
-    
     // Mostra il commento se è la prima giornata
     if (roundNumber === 1) {
         displayMatchCommentary(roundNumber);
     }
-}
-
-// Funzione per mostrare il confronto reale vs ideale per una giornata specifica
-function displayRoundComparison(roundNumber) {
-    const comparisonSection = document.getElementById('giornata-comparison');
-    const comparisonContent = document.getElementById('giornata-comparison-content');
-    
-    const round = fantacalcioData.rounds.find(r => r.round === roundNumber);
-    
-    if (!round || !round.matches.some(m => m.homeIdealScore && m.awayIdealScore)) {
-        comparisonSection.style.display = 'none';
-        return;
-    }
-    
-    let html = '';
-    round.matches.forEach(match => {
-        if (match.homeIdealScore && match.awayIdealScore) {
-            const realHomeGoals = calculateGoalsFromScore(match.homeScore);
-            const realAwayGoals = calculateGoalsFromScore(match.awayScore);
-            const idealHomeGoals = calculateGoalsFromScore(match.homeIdealScore);
-            const idealAwayGoals = calculateGoalsFromScore(match.awayIdealScore);
-            
-            const realResult = realHomeGoals > realAwayGoals ? match.homeTeam : 
-                             realAwayGoals > realHomeGoals ? match.awayTeam : 'Pareggio';
-            const idealResult = idealHomeGoals > idealAwayGoals ? match.homeTeam : 
-                              idealAwayGoals > idealHomeGoals ? match.awayTeam : 'Pareggio';
-            
-            const sameResult = realResult === idealResult;
-            
-            html += `
-                <div class="comparison-match">
-                    <div class="match-teams-comparison">
-                        <span class="team-name">${match.homeTeam}</span>
-                        <span class="vs-text">vs</span>
-                        <span class="team-name">${match.awayTeam}</span>
-                    </div>
-                    <div class="results-comparison">
-                        <div class="result-column">
-                            <h4>Reale</h4>
-                            <div class="score">${realHomeGoals}-${realAwayGoals}</div>
-                            <div class="result">${realResult}</div>
-                        </div>
-                        <div class="result-column">
-                            <h4>Ideale</h4>
-                            <div class="score">${idealHomeGoals}-${idealAwayGoals}</div>
-                            <div class="result">${idealResult}</div>
-                        </div>
-                        <div class="result-status ${sameResult ? 'same' : 'different'}">
-                            ${sameResult ? '✓ Stesso risultato' : '✗ Risultato diverso'}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-    });
-    
-    comparisonContent.innerHTML = html;
-    comparisonSection.style.display = 'block';
 }
 
 // Funzione per mostrare il commento della giornata
