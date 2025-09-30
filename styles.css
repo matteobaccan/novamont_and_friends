@@ -1296,6 +1296,20 @@ html.theme-transition *:after {
     font-weight: 500;
 }
 
+.stat-card.worst-points {
+    background: linear-gradient(135deg, rgba(255, 99, 71, 0.1), rgba(255, 140, 0, 0.1));
+    border-left: 4px solid #ff6347;
+}
+
+.stat-card.worst-points .stat-icon {
+    color: #ff6347;
+}
+
+.stat-card.worst-points .stat-info h3 {
+    color: #d63031;
+    font-weight: 700;
+}
+
 /* Goal Calculation Info */
 .goal-calculation-info {
     background: rgba(255, 255, 255, 0.95);
@@ -1460,53 +1474,75 @@ html.theme-transition *:after {
         border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     }
     
-    /* Mobile column widths */
-    .position { 
-        flex: 0 0 30px; 
-        text-align: center; 
-        font-weight: 600;
-    }
+    /* Mobile column widths - Solo squadra e punteggio */
     .team-name { 
         flex: 1; 
         min-width: 0; 
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        font-weight: 600;
+        font-size: 1rem;
     }
     .points { 
-        flex: 0 0 40px; 
+        flex: 0 0 60px; 
         text-align: center; 
-        font-weight: 600;
-    }
-    .wins { 
-        flex: 0 0 35px; 
-        text-align: center; 
-    }
-    .goal-difference { 
-        flex: 0 0 45px; 
-        text-align: center; 
-        font-weight: 600;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--primary-color);
     }
     
-    /* Mobile header widths */
-    .sortable-header[data-column="position"] { flex: 0 0 30px; text-align: center; }
-    .sortable-header[data-column="name"] { flex: 1; }
-    .sortable-header[data-column="points"] { flex: 0 0 40px; text-align: center; }
-    .sortable-header[data-column="wins"] { flex: 0 0 35px; text-align: center; }
-    .sortable-header[data-column="goalDifference"] { flex: 0 0 45px; text-align: center; }
+    /* Nascondi tutte le altre colonne su mobile */
+    .position,
+    .wins,
+    .goal-difference {
+        display: none;
+    }
+    
+    /* Mobile header widths - Solo squadra e punteggio */
+    .sortable-header[data-column="name"] { 
+        flex: 1; 
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+    .sortable-header[data-column="points"] { 
+        flex: 0 0 60px; 
+        text-align: center; 
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+    
+    /* Nascondi header delle colonne non necessarie su mobile */
+    .sortable-header[data-column="position"],
+    .sortable-header[data-column="wins"],
+    .sortable-header[data-column="goalDifference"] {
+        display: none;
+    }
     
     #ideal-standings-table .table-header,
     #ideal-standings-table .team-row {
         display: flex !important;
         align-items: center;
-        gap: 0.25rem;
-        font-size: 0.8rem;
-        padding: 0.6rem 0.4rem;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        padding: 0.75rem 0.5rem;
     }
     
     #ideal-standings-table .table-header {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
+    
+    /* Per la classifica ideale su mobile, mostra solo nome e punti ideali */
+    #ideal-standings-table .team-name {
+        font-size: 1rem;
         font-weight: 600;
+    }
+    
+    #ideal-standings-table .points {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--accent-color);
     }
     
     .draws,
@@ -1694,5 +1730,229 @@ html.theme-transition *:after {
     
     .subtitle {
         font-size: 0.8rem;
+    }
+}
+
+/* Classifica Miglior Allenatore */
+.coach-ranking-section {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px var(--shadow);
+    margin: 2rem 0;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    animation: slideInUp 0.6s ease-out;
+    width: 100%;
+    max-width: none;
+}
+
+.coach-ranking-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.coach-ranking-header h3 {
+    color: var(--primary-color);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.coach-ranking-subtitle {
+    color: var(--text-secondary);
+    margin: 0;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.coach-ranking-table {
+    background: var(--bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.coach-ranking-headers {
+    display: grid;
+    grid-template-columns: 60px 2fr 100px 100px 100px 120px 2fr;
+    gap: 1rem;
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.coach-ranking-row {
+    display: grid;
+    grid-template-columns: 60px 2fr 100px 100px 100px 120px 2fr;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    align-items: center;
+}
+
+.coach-ranking-row:hover {
+    background: var(--hover-bg);
+    transform: translateY(-1px);
+}
+
+.coach-ranking-row:last-child {
+    border-bottom: none;
+}
+
+.coach-ranking-row.gold {
+    background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+    border-left: 4px solid #FFD700;
+}
+
+.coach-ranking-row.silver {
+    background: linear-gradient(45deg, rgba(192, 192, 192, 0.1), rgba(192, 192, 192, 0.05));
+    border-left: 4px solid #C0C0C0;
+}
+
+.coach-ranking-row.bronze {
+    background: linear-gradient(45deg, rgba(205, 127, 50, 0.1), rgba(205, 127, 50, 0.05));
+    border-left: 4px solid #CD7F32;
+}
+
+.coach-ranking-row.worst {
+    background: linear-gradient(45deg, rgba(255, 99, 71, 0.1), rgba(255, 99, 71, 0.05));
+    border-left: 4px solid #FF6347;
+}
+
+.coach-pos {
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.coach-team {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    padding-left: 0.5rem;
+}
+
+.coach-real, .coach-ideal {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.coach-lost {
+    text-align: center;
+    font-weight: 700;
+    color: #ff4757;
+    font-size: 1rem;
+}
+
+.coach-lost.perfect {
+    color: #2ed573;
+    font-weight: 700;
+}
+
+.coach-efficiency {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.coach-award {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 0.5rem;
+}
+
+.coach-ranking-insights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.insight-perfect,
+.insight-avg,
+.insight-best {
+    background: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+}
+
+.insight-perfect i {
+    color: #2ed573;
+}
+
+.insight-avg i {
+    color: #3742fa;
+}
+
+.insight-best i {
+    color: #FFD700;
+}
+
+/* Responsive per classifica allenatori */
+@media (max-width: 768px) {
+    .coach-ranking-headers,
+    .coach-ranking-row {
+        grid-template-columns: 40px 1fr 55px 55px 55px 70px;
+        gap: 0.3rem;
+        padding: 0.6rem 0.4rem;
+        font-size: 0.8rem;
+    }
+    
+    .coach-award {
+        display: none;
+    }
+    
+    .coach-ranking-insights {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .insight-perfect,
+    .insight-avg,
+    .insight-best {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .coach-ranking-header h3 {
+        font-size: 1.2rem;
+    }
+    
+    .coach-ranking-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .coach-ranking-headers,
+    .coach-ranking-row {
+        grid-template-columns: 35px 1fr 50px 50px 50px;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.3rem;
+    }
+    
+    .coach-ideal,
+    .coach-efficiency {
+        display: none;
     }
 }
