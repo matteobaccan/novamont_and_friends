@@ -911,12 +911,14 @@ html.theme-transition *:after {
 
 /* Match Commentary */
 .match-commentary {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: white;
+    background: var(--bg-card);
+    color: var(--text-primary);
     border-radius: 15px;
     padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px var(--shadow);
     margin-top: 2rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
 }
 
 .commentary-header {
@@ -927,6 +929,7 @@ html.theme-transition *:after {
 .commentary-header h3 {
     margin: 0 0 1rem 0;
     font-size: 1.5rem;
+    color: var(--text-primary);
 }
 
 .commentators {
@@ -944,22 +947,23 @@ html.theme-transition *:after {
 }
 
 .commentator.primary {
-    background: rgba(255, 215, 0, 0.9);
-    color: #1e3c72;
+    background: #ffd700;
+    color: #1a1a1a;
 }
 
 .commentator.secondary {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
 }
 
 .commentary-content {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-secondary);
     border-radius: 10px;
     padding: 1.5rem;
     font-style: italic;
     line-height: 1.6;
+    border: 1px solid var(--border-color);
 }
 
 .commentary-dialogue {
@@ -968,11 +972,49 @@ html.theme-transition *:after {
 
 .speaker {
     font-weight: 700;
-    color: #FFD700;
+    color: #ffd700;
 }
 
 .speaker.bergomi {
-    color: #87CEEB;
+    color: #87ceeb;
+}
+
+/* Dark theme commentary styles */
+[data-theme="dark"] .match-commentary {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .commentary-content {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .commentator.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+/* Light theme commentary styles */
+[data-theme="light"] .match-commentary {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .commentary-content {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .commentator.secondary {
+    background: rgba(0, 0, 0, 0.05);
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    color: var(--text-primary);
 }
 
 
