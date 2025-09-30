@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-wid                        <div class="formula">Gol = Math.floor(Punteggio ÷ 6)</div>
+                    </div>
+                </div>
+
+                <div class="ideal-vs-real-comparison">
+                    <h3><i class="fas fa-balance-scale"></i> Confronto Reale vs Ideale</h3>
+                    <div class="comparison-grid" id="comparison-grid">
+                        <!-- Generato dinamicamente -->
+                    </div>
+                </div> initial-scale=1.0">
+    <title>Fantacalcio Novamont & Friends</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="config.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-trophy"></i>
+                <h1>Novamont & Friends</h1>
+                <span class="subtitle">Fantacalcio Championship 2025-2026</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-tab="classifica">
+                    <i class="fas fa-medal"></i>
+                    Classifica
+                </button>
+                <button class="nav-btn" data-tab="classifica-ideale">
+                    <i class="fas fa-star"></i>
+                    Classifica Ideale
+                </button>
+                <button class="nav-btn" data-tab="giornate">
+                    <i class="fas fa-calendar-alt"></i>
+                    Giornate
+                </button>
+                <button class="nav-btn" data-tab="statistiche">
+                    <i class="fas fa-chart-bar"></i>
+                    Statistiche
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Sezione Classifica -->
+            <section id="classifica" class="tab-content active">
+                <div class="section-header">
+                    <h2><i class="fas fa-trophy"></i> Classifica Generale</h2>
+                    <div class="last-update">
+                        Ultimo aggiornamento: <span id="last-update">Caricamento...</span>
+                    </div>
+                </div>
+                <div class="standings-container">
+                    <div class="standings-table" id="standings-table">
+                        <!-- Tabella generata dinamicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sezione Classifica Ideale -->
+            <section id="classifica-ideale" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-star"></i> Classifica Ideale</h2>
+                    <p class="section-description">Classifica basata sulle migliori formazioni possibili</p>
+                    <div class="last-update">
+                        Ultimo aggiornamento: <span id="last-update-ideal">Caricamento...</span>
+                    </div>
+                </div>
+                <div class="standings-container">
+                    <div class="standings-table" id="ideal-standings-table">
+                        <!-- Tabella generata dinamicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sezione Giornate -->
+            <section id="giornate" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-alt"></i> Risultati per Giornata</h2>
+                    <div class="giornata-selector">
+                        <label for="giornata-select">Seleziona Giornata:</label>
+                        <select id="giornata-select">
+                            <!-- Opzioni generate dinamicamente -->
+                        </select>
+                    </div>
+                </div>
+                <div class="giornata-results" id="giornata-results">
+                    <!-- Risultati generati dinamicamente -->
+                </div>
+            </section>
+
+            <!-- Sezione Statistiche -->
+            <section id="statistiche" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-bar"></i> Statistiche</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="leader-name">-</h3>
+                            <p>Primo in classifica</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="highest-score">-</h3>
+                            <p>Punteggio più alto</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-teams">-</h3>
+                            <p>Squadre partecipanti</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="current-round">-</h3>
+                            <p>Giornata attuale</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="goal-calculation-info">
+                    <h3><i class="fas fa-calculator"></i> Come Funziona il Calcolo Gol</h3>
+                    <div class="calculation-rule">
+                        <p><strong>Regola:</strong> Primo gol a 66 punti, poi ogni 6 punti un gol in più</p>
+                        <div class="examples">
+                            <div class="example">66 punti = 1 gol</div>
+                            <div class="example">72 punti = 2 gol</div>
+                            <div class="example">78 punti = 3 gol</div>
+                        </div>
+                        <p class="formula">Gol = Math.floor((Punteggio - 60) ÷ 6) se Punteggio ≥ 66, altrimenti 0</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Fantacalcio Novamont & Friends. Tutti i diritti riservati.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
