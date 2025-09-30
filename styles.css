@@ -991,6 +991,20 @@ body {
         gap: 1rem;
     }
     
+    .nav {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+    
+    .nav-btn {
+        flex: 1;
+        min-width: 120px;
+        max-width: 200px;
+        font-size: 0.85rem;
+        padding: 0.6rem 0.8rem;
+    }
+    
     .section-header {
         flex-direction: column;
         text-align: center;
@@ -1003,10 +1017,22 @@ body {
         font-size: 0.9rem;
     }
     
+    .table-header {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.75rem 0.5rem;
+    }
+    
     #ideal-standings-table .table-header,
     #ideal-standings-table .team-row {
         grid-template-columns: 40px 1fr 40px 40px 50px;
         font-size: 0.8rem;
+    }
+    
+    #ideal-standings-table .table-header {
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.75rem 0.5rem;
     }
     
     .draws,
@@ -1018,6 +1044,24 @@ body {
     .position-difference,
     .points-difference {
         display: none;
+    }
+    
+    /* Hide corresponding headers on mobile */
+    .sortable-header[data-column="draws"],
+    .sortable-header[data-column="losses"],
+    .sortable-header[data-column="goalsFor"],
+    .sortable-header[data-column="goalsAgainst"],
+    .sortable-header[data-column="avgScore"],
+    .sortable-header[data-column="totalScore"],
+    .sortable-header[data-column="positionDifference"],
+    .sortable-header[data-column="pointsDifference"] {
+        display: none;
+    }
+    
+    /* Improve header icons visibility on mobile */
+    .sortable-header i {
+        font-size: 0.7rem;
+        margin-left: 0.25rem;
     }
     
     .ideal-comparison-grid {
@@ -1096,6 +1140,46 @@ body {
     
     .nav-btn {
         padding: 10px 15px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .table-header,
+    .team-row {
+        grid-template-columns: 40px 1fr 40px 35px 45px;
+        gap: 0.2rem;
+        font-size: 0.8rem;
+    }
+    
+    .table-header {
+        font-size: 0.7rem;
+        padding: 0.5rem 0.3rem;
+    }
+    
+    #ideal-standings-table .table-header,
+    #ideal-standings-table .team-row {
+        grid-template-columns: 35px 1fr 35px 35px 40px;
+        font-size: 0.75rem;
+    }
+    
+    #ideal-standings-table .table-header {
+        font-size: 0.65rem;
+        padding: 0.5rem 0.3rem;
+    }
+    
+    .nav-btn {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.6rem;
+        min-width: 100px;
+    }
+    
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+    
+    .subtitle {
         font-size: 0.8rem;
     }
 }

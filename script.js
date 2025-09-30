@@ -595,43 +595,43 @@ function displayIdealStandings() {
     
     let html = `
         <div class="table-header">
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="position">
                 Pos. <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="name">
                 Squadra <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="points">
                 Pt <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="wins">
                 V <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="draws">
                 P <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="losses">
                 S <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="goalsFor">
                 GF <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="goalsAgainst">
                 GS <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="goalDifference">
                 DR <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="totalScore">
                 Tot Pt <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="avgScore">
                 Media <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="positionDifference">
                 Diff Pos <i class="fas fa-sort"></i>
             </div>
-            <div class="sortable-header">
+            <div class="sortable-header" data-column="pointsDifference">
                 Diff Pt <i class="fas fa-sort"></i>
             </div>
         </div>
