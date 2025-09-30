@@ -821,6 +821,11 @@ function setupRoundSelector() {
 function displayRoundResults(roundNumber) {
     const roundResults = document.getElementById('giornata-results');
     const round = fantacalcioData.rounds.find(r => r.round === roundNumber);
+    
+    // Mostra il commento se è la prima giornata (all'inizio)
+    if (roundNumber === 1) {
+        displayMatchCommentary(roundNumber);
+    }
 
     if (!round) {
         roundResults.innerHTML = '<p>Nessun risultato disponibile per questa giornata.</p>';
@@ -985,11 +990,6 @@ function displayRoundResults(roundNumber) {
     });
 
     roundResults.innerHTML = html;
-    
-    // Mostra il commento se è la prima giornata
-    if (roundNumber === 1) {
-        displayMatchCommentary(roundNumber);
-    }
 }
 
 // Funzione per mostrare il commento della giornata
@@ -1250,4 +1250,12 @@ class ThemeManager {
 // Initialize theme manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.themeManager = new ThemeManager();
+    
+    // Add trophy reload functionality
+    const trophyReload = document.getElementById('trophy-reload');
+    if (trophyReload) {
+        trophyReload.addEventListener('click', () => {
+            location.reload();
+        });
+    }
 });
