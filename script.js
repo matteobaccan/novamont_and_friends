@@ -411,9 +411,7 @@ function setupNavigationTabs() {
             document.getElementById(targetTab).classList.add('active');
             
             // Aggiorna contenuti specifici dei tab
-            if (targetTab === 'statistiche') {
-                displayIdealVsRealComparison();
-            } else if (targetTab === 'classifica-ideale') {
+            if (targetTab === 'classifica-ideale') {
                 displayIdealStandings();
             } else if (targetTab === 'classifica') {
                 displayStandings();
@@ -871,6 +869,115 @@ function displayRoundResults(roundNumber) {
     });
 
     roundResults.innerHTML = html;
+    
+    // Mostra il confronto reale vs ideale per questa giornata
+    displayRoundComparison(roundNumber);
+    
+    // Mostra il commento se è la prima giornata
+    if (roundNumber === 1) {
+        displayMatchCommentary(roundNumber);
+    }
+}
+
+// Funzione per mostrare il confronto reale vs ideale per una giornata specifica
+function displayRoundComparison(roundNumber) {
+    const comparisonSection = document.getElementById('giornata-comparison');
+    const comparisonContent = document.getElementById('giornata-comparison-content');
+    
+    const round = fantacalcioData.rounds.find(r => r.round === roundNumber);
+    
+    if (!round || !round.matches.some(m => m.homeIdealScore && m.awayIdealScore)) {
+        comparisonSection.style.display = 'none';
+        return;
+    }
+    
+    let html = '';
+    round.matches.forEach(match => {
+        if (match.homeIdealScore && match.awayIdealScore) {
+            const realHomeGoals = calculateGoalsFromScore(match.homeScore);
+            const realAwayGoals = calculateGoalsFromScore(match.awayScore);
+            const idealHomeGoals = calculateGoalsFromScore(match.homeIdealScore);
+            const idealAwayGoals = calculateGoalsFromScore(match.awayIdealScore);
+            
+            const realResult = realHomeGoals > realAwayGoals ? match.homeTeam : 
+                             realAwayGoals > realHomeGoals ? match.awayTeam : 'Pareggio';
+            const idealResult = idealHomeGoals > idealAwayGoals ? match.homeTeam : 
+                              idealAwayGoals > idealHomeGoals ? match.awayTeam : 'Pareggio';
+            
+            const sameResult = realResult === idealResult;
+            
+            html += `
+                <div class="comparison-match">
+                    <div class="match-teams-comparison">
+                        <span class="team-name">${match.homeTeam}</span>
+                        <span class="vs-text">vs</span>
+                        <span class="team-name">${match.awayTeam}</span>
+                    </div>
+                    <div class="results-comparison">
+                        <div class="result-column">
+                            <h4>Reale</h4>
+                            <div class="score">${realHomeGoals}-${realAwayGoals}</div>
+                            <div class="result">${realResult}</div>
+                        </div>
+                        <div class="result-column">
+                            <h4>Ideale</h4>
+                            <div class="score">${idealHomeGoals}-${idealAwayGoals}</div>
+                            <div class="result">${idealResult}</div>
+                        </div>
+                        <div class="result-status ${sameResult ? 'same' : 'different'}">
+                            ${sameResult ? '✓ Stesso risultato' : '✗ Risultato diverso'}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    });
+    
+    comparisonContent.innerHTML = html;
+    comparisonSection.style.display = 'block';
+}
+
+// Funzione per mostrare il commento della giornata
+function displayMatchCommentary(roundNumber) {
+    const commentarySection = document.getElementById('match-commentary');
+    const commentaryContent = document.getElementById('commentary-content');
+    
+    if (roundNumber === 1) {
+        const commentary = `
+            <div class="commentary-dialogue">
+                <span class="speaker">Caressa:</span> "Beppe, che bella prima giornata di Fantacalcio! Partiamo subito con un match che ha fatto discutere: CUSIANA contro CORTOMUSO, un classico 1-1 che non ha lasciato soddisfatto nessuno!"
+            </div>
+            
+            <div class="commentary-dialogue">
+                <span class="speaker bergomi">Bergomi:</span> "Eh sì Fabio, ma guarda che se avessero schierato le formazioni ideali sarebbe finita 1-2 per il CORTOMUSO! Qui si vede la differenza tra chi sa gestire la rosa e chi si affida solo al feeling..."
+            </div>
+            
+            <div class="commentary-dialogue">
+                <span class="speaker">Caressa:</span> "Assolutamente! E che dire di Real Ichnusa-Cambra City? Un 2-3 spettacolare! Ma sai cosa mi colpisce? Anche con le formazioni ideali il risultato sarebbe stato lo stesso: 3-4 per il Cambra City!"
+            </div>
+            
+            <div class="commentary-dialogue">
+                <span class="speaker bergomi">Bergomi:</span> "Questo dimostra che il Cambra City ha una rosa profonda, Fabio. Non è un caso che sia in testa alla classifica! E poi guarda Shakhtar Donuts: 2-1 all'Ultimo, ma con la formazione ideale sarebbe stato un pareggio 3-3..."
+            </div>
+            
+            <div class="commentary-dialogue">
+                <span class="speaker">Caressa:</span> "L'Ultimo sta vivendo un momento difficile, si vede che la preparazione estiva non è stata delle migliori! E PARTIZAN TIRANA? Sconfitto 0-1 dall'SM Frattese, ma con le scelte giuste poteva pareggiare 2-2!"
+            </div>
+            
+            <div class="commentary-dialogue">
+                <span class="speaker bergomi">Bergomi:</span> "La cosa che mi preoccupa di più, Fabio, è che troppe squadre stanno lasciando punti per strada con scelte sbagliate. In un campionato così equilibrato, ogni formazione conta!"
+            </div>
+            
+            <div class="commentary-dialogue">
+                <span class="speaker">Caressa:</span> "Hai ragione Beppe! E ora tutti gli occhi sono puntati sulla prossima giornata. Chi saprà fare le scelte giuste? Lo scopriremo solo... giocando!"
+            </div>
+        `;
+        
+        commentaryContent.innerHTML = commentary;
+        commentarySection.style.display = 'block';
+    } else {
+        commentarySection.style.display = 'none';
+    }
 }
 
 // Aggiornamento dell'ultimo update

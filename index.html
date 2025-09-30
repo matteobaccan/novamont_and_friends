@@ -2,16 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-wid                        <div class="formula">Gol = Math.floor(Punteggio ÷ 6)</div>
-                    </div>
-                </div>
-
-                <div class="ideal-vs-real-comparison">
-                    <h3><i class="fas fa-balance-scale"></i> Confronto Reale vs Ideale</h3>
-                    <div class="comparison-grid" id="comparison-grid">
-                        <!-- Generato dinamicamente -->
-                    </div>
-                </div> initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantacalcio Novamont & Friends</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -93,6 +84,31 @@
                 </div>
                 <div class="giornata-results" id="giornata-results">
                     <!-- Risultati generati dinamicamente -->
+                </div>
+                
+                <!-- Confronto Reale vs Ideale per Giornata -->
+                <div class="ideal-vs-real-comparison" id="giornata-comparison" style="display: none;">
+                    <div class="comparison-header">
+                        <h3><i class="fas fa-balance-scale"></i> Confronto Reale vs Ideale</h3>
+                        <p>Come sarebbe andata la giornata con le migliori formazioni</p>
+                    </div>
+                    <div class="comparison-content" id="giornata-comparison-content">
+                        <!-- Contenuto generato dinamicamente -->
+                    </div>
+                </div>
+
+                <!-- Commento della Giornata -->
+                <div class="match-commentary" id="match-commentary" style="display: none;">
+                    <div class="commentary-header">
+                        <h3><i class="fas fa-microphone"></i> Il Commento della Giornata</h3>
+                        <div class="commentators">
+                            <span class="commentator primary">Fabio Caressa</span>
+                            <span class="commentator secondary">Beppe Bergomi</span>
+                        </div>
+                    </div>
+                    <div class="commentary-content" id="commentary-content">
+                        <!-- Contenuto generato dinamicamente -->
+                    </div>
                 </div>
             </section>
 

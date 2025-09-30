@@ -470,6 +470,144 @@ body {
     display: none; /* Nascosto inizialmente */
 }
 
+/* Match Commentary */
+.match-commentary {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-top: 2rem;
+}
+
+.commentary-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.commentary-header h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+}
+
+.commentators {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.commentator {
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.commentator.primary {
+    background: rgba(255, 215, 0, 0.9);
+    color: #1e3c72;
+}
+
+.commentator.secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.commentary-content {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.commentary-dialogue {
+    margin-bottom: 1rem;
+}
+
+.speaker {
+    font-weight: 700;
+    color: #FFD700;
+}
+
+.speaker.bergomi {
+    color: #87CEEB;
+}
+
+/* Comparison Styles for Round */
+.comparison-match {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.match-teams-comparison {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.vs-text {
+    margin: 0 1rem;
+    color: #666;
+}
+
+.results-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.result-column {
+    text-align: center;
+}
+
+.result-column h4 {
+    margin: 0 0 0.5rem 0;
+    color: #667eea;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.result-column .score {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.result-column .result {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.result-status {
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.result-status.same {
+    background: #d4edda;
+    color: #155724;
+}
+
+.result-status.different {
+    background: #f8d7da;
+    color: #721c24;
+}
+
 .ideal-vs-real-comparison h3 {
     font-size: 1.5rem;
     color: #333;
@@ -729,6 +867,20 @@ body {
     .goals-against,
     .avg-score {
         display: none;
+    }
+    
+    .results-comparison {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .commentators {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .commentary-dialogue {
+        font-size: 0.9rem;
     }
     
     .match-teams {
