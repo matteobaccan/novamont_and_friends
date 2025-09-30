@@ -492,41 +492,45 @@ function displayStandings() {
     console.log('Teams ordinati:', sortedTeams);
     
     let html = `
-        <div class="table-header">
-            <div class="sortable-header" data-column="position">
-                Pos. <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="name">
-                Squadra <i class="fas fa-sort ${sortState.column === 'name' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
-            </div>
-            <div class="sortable-header" data-column="points">
-                Pt <i class="fas fa-sort ${sortState.column === 'points' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
-            </div>
-            <div class="sortable-header" data-column="wins">
-                V <i class="fas fa-sort ${sortState.column === 'wins' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
-            </div>
-            <div class="sortable-header" data-column="draws">
-                P <i class="fas fa-sort ${sortState.column === 'draws' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
-            </div>
-            <div class="sortable-header" data-column="losses">
-                S <i class="fas fa-sort ${sortState.column === 'losses' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
-            </div>
-            <div class="sortable-header" data-column="goalsFor">
-                GF <i class="fas fa-sort ${sortState.column === 'goalsFor' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
-            </div>
-            <div class="sortable-header" data-column="goalsAgainst">
-                GS <i class="fas fa-sort ${sortState.column === 'goalsAgainst' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
-            </div>
-            <div class="sortable-header" data-column="goalDifference">
-                DR <i class="fas fa-sort ${sortState.column === 'goalDifference' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
-            </div>
-            <div class="sortable-header" data-column="totalScore">
-                Pt <i class="fas fa-sort ${sortState.column === 'totalScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
-            </div>
-            <div class="sortable-header" data-column="avgScore">
-                Media <i class="fas fa-sort ${sortState.column === 'avgScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
-            </div>
-        </div>
+        <table class="standings-table">
+            <thead>
+                <tr class="table-header">
+                    <th class="sortable-header" data-column="position">
+                        Pos. <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header" data-column="name">
+                        Squadra <i class="fas fa-sort ${sortState.column === 'name' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header" data-column="points">
+                        Pt <i class="fas fa-sort ${sortState.column === 'points' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="wins">
+                        V <i class="fas fa-sort ${sortState.column === 'wins' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="draws">
+                        P <i class="fas fa-sort ${sortState.column === 'draws' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="losses">
+                        S <i class="fas fa-sort ${sortState.column === 'losses' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="goalsFor">
+                        GF <i class="fas fa-sort ${sortState.column === 'goalsFor' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="goalsAgainst">
+                        GS <i class="fas fa-sort ${sortState.column === 'goalsAgainst' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="goalDifference">
+                        DR <i class="fas fa-sort ${sortState.column === 'goalDifference' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="totalScore">
+                        Pt <i class="fas fa-sort ${sortState.column === 'totalScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="avgScore">
+                        Media <i class="fas fa-sort ${sortState.column === 'avgScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
     `;
 
     sortedTeams.forEach((team, index) => {
@@ -538,21 +542,26 @@ function displayStandings() {
         else if (position === 3) positionClass = 'third';
 
         html += `
-            <div class="team-row" style="animation-delay: ${index * 0.1}s">
-                <div class="position ${positionClass}">${position}</div>
-                <div class="team-name">${team.name}</div>
-                <div class="points">${team.points}</div>
-                <div class="wins">${team.wins}</div>
-                <div class="draws">${team.draws}</div>
-                <div class="losses">${team.losses}</div>
-                <div class="goals-for">${team.goalsFor || 0}</div>
-                <div class="goals-against">${team.goalsAgainst || 0}</div>
-                <div class="goal-difference ${team.goalDifference >= 0 ? 'positive' : 'negative'}">${team.goalDifference >= 0 ? '+' : ''}${team.goalDifference || 0}</div>
-                <div class="total-score">${team.totalScore || 0}</div>
-                <div class="avg-score">${team.avgScore}</div>
-            </div>
+            <tr class="team-row ${positionClass}" style="animation-delay: ${index * 0.1}s">
+                <td class="position">${position}</td>
+                <td class="team-name">${team.name}</td>
+                <td class="points">${team.points}</td>
+                <td class="wins mobile-hide">${team.wins}</td>
+                <td class="draws mobile-hide">${team.draws}</td>
+                <td class="losses mobile-hide">${team.losses}</td>
+                <td class="goals-for mobile-hide">${team.goalsFor || 0}</td>
+                <td class="goals-against mobile-hide">${team.goalsAgainst || 0}</td>
+                <td class="goal-difference mobile-hide ${team.goalDifference >= 0 ? 'positive' : 'negative'}">${team.goalDifference >= 0 ? '+' : ''}${team.goalDifference || 0}</td>
+                <td class="total-score mobile-hide">${team.totalScore || 0}</td>
+                <td class="avg-score mobile-hide">${team.avgScore}</td>
+            </tr>
         `;
     });
+
+    html += `
+            </tbody>
+        </table>
+    `;
 
     standingsTable.innerHTML = html;
     
@@ -594,47 +603,51 @@ function displayIdealStandings() {
     });
     
     let html = `
-        <div class="table-header">
-            <div class="sortable-header" data-column="position">
-                Pos. <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="name">
-                Squadra <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="points">
-                Pt <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="wins">
-                V <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="draws">
-                P <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="losses">
-                S <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="goalsFor">
-                GF <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="goalsAgainst">
-                GS <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="goalDifference">
-                DR <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="totalScore">
-                Pt <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="avgScore">
-                Media <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="positionDifference">
-                Diff Pos <i class="fas fa-sort"></i>
-            </div>
-            <div class="sortable-header" data-column="pointsDifference">
-                Diff Pt <i class="fas fa-sort"></i>
-            </div>
-        </div>
+        <table class="standings-table ideal-standings-table">
+            <thead>
+                <tr class="table-header">
+                    <th class="sortable-header" data-column="position">
+                        Pos. <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header" data-column="name">
+                        Squadra <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header" data-column="points">
+                        Pt <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="wins">
+                        V <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="draws">
+                        P <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="losses">
+                        S <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="goalsFor">
+                        GF <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="goalsAgainst">
+                        GS <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="goalDifference">
+                        DR <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="totalScore">
+                        Pt <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="avgScore">
+                        Media <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="positionDifference">
+                        Diff Pos <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="pointsDifference">
+                        Diff Pt <i class="fas fa-sort"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
     `;
 
     idealStandings.forEach((team, index) => {
@@ -646,27 +659,32 @@ function displayIdealStandings() {
         else if (position === 3) positionClass = 'third';
 
         html += `
-            <div class="team-row" style="animation-delay: ${index * 0.1}s">
-                <div class="position ${positionClass}">${position}</div>
-                <div class="team-name">${team.name}</div>
-                <div class="points">${team.points}</div>
-                <div class="wins">${team.wins}</div>
-                <div class="draws">${team.draws}</div>
-                <div class="losses">${team.losses}</div>
-                <div class="goals-for">${team.goalsFor}</div>
-                <div class="goals-against">${team.goalsAgainst}</div>
-                <div class="goal-difference ${team.goalDifference >= 0 ? 'positive' : 'negative'}">${team.goalDifference >= 0 ? '+' : ''}${team.goalDifference}</div>
-                <div class="total-score">${team.totalScore}</div>
-                <div class="avg-score">${team.avgScore}</div>
-                <div class="position-difference ${team.positionDifference > 0 ? 'worse' : team.positionDifference < 0 ? 'better' : 'same'}">
+            <tr class="team-row ${positionClass}" style="animation-delay: ${index * 0.1}s">
+                <td class="position">${position}</td>
+                <td class="team-name">${team.name}</td>
+                <td class="points">${team.points}</td>
+                <td class="wins mobile-hide">${team.wins}</td>
+                <td class="draws mobile-hide">${team.draws}</td>
+                <td class="losses mobile-hide">${team.losses}</td>
+                <td class="goals-for mobile-hide">${team.goalsFor}</td>
+                <td class="goals-against mobile-hide">${team.goalsAgainst}</td>
+                <td class="goal-difference mobile-hide ${team.goalDifference >= 0 ? 'positive' : 'negative'}">${team.goalDifference >= 0 ? '+' : ''}${team.goalDifference}</td>
+                <td class="total-score mobile-hide">${team.totalScore}</td>
+                <td class="avg-score mobile-hide">${team.avgScore}</td>
+                <td class="position-difference mobile-hide ${team.positionDifference > 0 ? 'worse' : team.positionDifference < 0 ? 'better' : 'same'}">
                     ${team.positionDifference > 0 ? '+' : ''}${team.positionDifference || 0}
-                </div>
-                <div class="points-difference ${team.pointsDifference > 0 ? 'worse' : team.pointsDifference < 0 ? 'better' : 'same'}">
+                </td>
+                <td class="points-difference mobile-hide ${team.pointsDifference > 0 ? 'worse' : team.pointsDifference < 0 ? 'better' : 'same'}">
                     ${team.pointsDifference > 0 ? '+' : ''}${team.pointsDifference || 0}
-                </div>
-            </div>
+                </td>
+            </tr>
         `;
     });
+
+    html += `
+            </tbody>
+        </table>
+    `;
 
     idealStandingsTable.innerHTML = html;
 }
