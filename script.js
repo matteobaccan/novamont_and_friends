@@ -445,6 +445,10 @@ function sortTeams(teams, column, direction) {
             case 'goalsFor':
             case 'goalsAgainst':
             case 'goalDifference':
+            case 'totalScore':
+            case 'positionDifference':
+            case 'pointsDifference':
+            case 'scoreDifference':
                 valueA = a[column] || 0;
                 valueB = b[column] || 0;
                 break;
@@ -516,6 +520,9 @@ function displayStandings() {
             <div class="sortable-header" data-column="goalDifference">
                 DR <i class="fas fa-sort ${sortState.column === 'goalDifference' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
             </div>
+            <div class="sortable-header" data-column="totalScore">
+                Tot Pt <i class="fas fa-sort ${sortState.column === 'totalScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+            </div>
             <div class="sortable-header" data-column="avgScore">
                 Media <i class="fas fa-sort ${sortState.column === 'avgScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
             </div>
@@ -541,6 +548,7 @@ function displayStandings() {
                 <div class="goals-for">${team.goalsFor || 0}</div>
                 <div class="goals-against">${team.goalsAgainst || 0}</div>
                 <div class="goal-difference ${team.goalDifference >= 0 ? 'positive' : 'negative'}">${team.goalDifference >= 0 ? '+' : ''}${team.goalDifference || 0}</div>
+                <div class="total-score">${team.totalScore || 0}</div>
                 <div class="avg-score">${team.avgScore}</div>
             </div>
         `;
@@ -572,6 +580,19 @@ function displayIdealStandings() {
     const idealStandings = calculateIdealStandingsFromResults();
     console.log('Classifica ideale calcolata:', idealStandings);
     
+    // Calcola la classifica reale per confronto
+    const realStandings = calculateStandingsFromResults();
+    
+    // Aggiungi le differenze alla classifica ideale
+    idealStandings.forEach((idealTeam, idealIndex) => {
+        const realTeamIndex = realStandings.findIndex(realTeam => realTeam.name === idealTeam.name);
+        const realTeam = realStandings[realTeamIndex];
+        
+        idealTeam.positionDifference = realTeamIndex - idealIndex; // Positivo = peggioramento nella reale
+        idealTeam.pointsDifference = (realTeam ? realTeam.points : 0) - idealTeam.points;
+        idealTeam.scoreDifference = (realTeam ? realTeam.totalScore : 0) - idealTeam.totalScore;
+    });
+    
     let html = `
         <div class="table-header">
             <div class="sortable-header">
@@ -602,7 +623,16 @@ function displayIdealStandings() {
                 DR <i class="fas fa-sort"></i>
             </div>
             <div class="sortable-header">
+                Tot Pt <i class="fas fa-sort"></i>
+            </div>
+            <div class="sortable-header">
                 Media <i class="fas fa-sort"></i>
+            </div>
+            <div class="sortable-header">
+                Diff Pos <i class="fas fa-sort"></i>
+            </div>
+            <div class="sortable-header">
+                Diff Pt <i class="fas fa-sort"></i>
             </div>
         </div>
     `;
@@ -626,7 +656,14 @@ function displayIdealStandings() {
                 <div class="goals-for">${team.goalsFor}</div>
                 <div class="goals-against">${team.goalsAgainst}</div>
                 <div class="goal-difference ${team.goalDifference >= 0 ? 'positive' : 'negative'}">${team.goalDifference >= 0 ? '+' : ''}${team.goalDifference}</div>
+                <div class="total-score">${team.totalScore}</div>
                 <div class="avg-score">${team.avgScore}</div>
+                <div class="position-difference ${team.positionDifference > 0 ? 'worse' : team.positionDifference < 0 ? 'better' : 'same'}">
+                    ${team.positionDifference > 0 ? '+' : ''}${team.positionDifference || 0}
+                </div>
+                <div class="points-difference ${team.pointsDifference > 0 ? 'worse' : team.pointsDifference < 0 ? 'better' : 'same'}">
+                    ${team.pointsDifference > 0 ? '+' : ''}${team.pointsDifference || 0}
+                </div>
             </div>
         `;
     });

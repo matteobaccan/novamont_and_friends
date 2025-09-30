@@ -166,7 +166,7 @@ body {
     color: white;
     padding: 1rem;
     display: grid;
-    grid-template-columns: 60px 1fr 60px 40px 40px 40px 50px 50px 60px 80px;
+    grid-template-columns: 60px 1fr 60px 40px 40px 40px 50px 50px 60px 70px 80px;
     gap: 0.5rem;
     font-weight: 600;
     align-items: center;
@@ -208,7 +208,7 @@ body {
 .team-row {
     padding: 1rem;
     display: grid;
-    grid-template-columns: 60px 1fr 60px 40px 40px 40px 50px 50px 60px 80px;
+    grid-template-columns: 60px 1fr 60px 40px 40px 40px 50px 50px 60px 70px 80px;
     gap: 0.5rem;
     align-items: center;
     border-bottom: 1px solid #eee;
@@ -262,7 +262,7 @@ body {
     font-size: 1.1rem;
 }
 
-.points, .wins, .draws, .losses, .avg-score, .goals-for, .goals-against, .goal-difference {
+.points, .wins, .draws, .losses, .avg-score, .goals-for, .goals-against, .goal-difference, .total-score, .position-difference, .points-difference {
     text-align: center;
     font-weight: 500;
 }
@@ -281,6 +281,41 @@ body {
 .goal-difference.negative {
     color: #dc3545;
     font-weight: 600;
+}
+
+/* Classifica Ideale - Layout Più Ampio */
+#ideal-standings-table .table-header {
+    grid-template-columns: 60px 1fr 50px 35px 35px 35px 45px 45px 50px 60px 65px 60px 60px;
+    font-size: 0.85rem;
+}
+
+#ideal-standings-table .team-row {
+    grid-template-columns: 60px 1fr 50px 35px 35px 35px 45px 45px 50px 60px 65px 60px 60px;
+    font-size: 0.9rem;
+}
+
+.position-difference, .points-difference {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.position-difference.better, .points-difference.better {
+    color: #28a745;
+}
+
+.position-difference.worse, .points-difference.worse {
+    color: #dc3545;
+}
+
+.position-difference.same, .points-difference.same {
+    color: #6c757d;
+}
+
+.total-score {
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
 }
 
 /* Giornata selector */
@@ -861,11 +896,20 @@ body {
         font-size: 0.9rem;
     }
     
+    #ideal-standings-table .table-header,
+    #ideal-standings-table .team-row {
+        grid-template-columns: 40px 1fr 40px 40px 50px;
+        font-size: 0.8rem;
+    }
+    
     .draws,
     .losses,
     .goals-for,
     .goals-against,
-    .avg-score {
+    .avg-score,
+    .total-score,
+    .position-difference,
+    .points-difference {
         display: none;
     }
     
