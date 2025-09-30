@@ -15,31 +15,31 @@
 }
 
 [data-theme="dark"] {
-    --bg-primary: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
-    --bg-secondary: rgba(255, 255, 255, 0.1);
-    --bg-card: rgba(255, 255, 255, 0.08);
+    --bg-primary: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    --bg-secondary: rgba(0, 0, 0, 0.4);
+    --bg-card: rgba(0, 0, 0, 0.3);
     --text-primary: #ffffff;
-    --text-secondary: #d0d0d0;
+    --text-secondary: #f0f0f0;
     --text-light: #ffffff;
-    --border-color: rgba(255, 255, 255, 0.2);
-    --shadow: rgba(0, 0, 0, 0.6);
-    --accent: #81c784;
-    --accent-danger: #e57373;
-    --accent-warning: #ffb74d;
+    --border-color: rgba(255, 255, 255, 0.15);
+    --shadow: rgba(0, 0, 0, 0.9);
+    --accent: #00d4ff;
+    --accent-danger: #ff6b6b;
+    --accent-warning: #ffd93d;
 }
 
 [data-theme="light"] {
-    --bg-primary: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    --bg-secondary: rgba(0, 0, 0, 0.04);
-    --bg-card: rgba(255, 255, 255, 0.95);
-    --text-primary: #1a1a1a;
-    --text-secondary: #555555;
-    --text-light: #1a1a1a;
-    --border-color: rgba(0, 0, 0, 0.12);
-    --shadow: rgba(0, 0, 0, 0.1);
-    --accent: #28a745;
-    --accent-danger: #dc3545;
-    --accent-warning: #e67e22;
+    --bg-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    --bg-secondary: rgba(0, 0, 0, 0.06);
+    --bg-card: rgba(255, 255, 255, 0.98);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-light: #0f172a;
+    --border-color: rgba(0, 0, 0, 0.15);
+    --shadow: rgba(0, 0, 0, 0.12);
+    --accent: #059669;
+    --accent-danger: #dc2626;
+    --accent-warning: #d97706;
 }
 
 /* Reset e base styles */
@@ -313,6 +313,68 @@ html.theme-transition *:after {
     border-bottom: none;
 }
 
+/* Dark theme specific improvements */
+[data-theme="dark"] .team-row {
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+[data-theme="dark"] .team-row:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .team-name {
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .points,
+[data-theme="dark"] .wins,
+[data-theme="dark"] .goal-difference,
+[data-theme="dark"] .position {
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .position.first,
+[data-theme="dark"] .position.second,
+[data-theme="dark"] .position.third {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Light theme header improvements */
+[data-theme="light"] .table-header {
+    background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+    color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .team-row {
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .team-row:hover {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+[data-theme="light"] .team-name {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+/* Dark theme header improvements */
+[data-theme="dark"] .table-header {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
 .position {
     font-size: 1.5rem;
     font-weight: 700;
@@ -399,6 +461,27 @@ html.theme-transition *:after {
 
 .position-difference.same, .points-difference.same {
     color: var(--text-secondary);
+}
+
+/* Enhanced colors for better visibility */
+[data-theme="dark"] .goal-difference.positive {
+    color: #34d399;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .goal-difference.negative {
+    color: #f87171;
+    font-weight: 700;
+}
+
+[data-theme="light"] .goal-difference.positive {
+    color: #059669;
+    font-weight: 700;
+}
+
+[data-theme="light"] .goal-difference.negative {
+    color: #dc2626;
+    font-weight: 700;
 }
 
 .total-score {
