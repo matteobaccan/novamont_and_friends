@@ -1926,14 +1926,43 @@ html.theme-transition *:after {
 @media (max-width: 768px) {
     .coach-ranking-headers,
     .coach-ranking-row {
-        grid-template-columns: 40px 1fr 55px 55px 55px 70px;
-        gap: 0.3rem;
-        padding: 0.6rem 0.4rem;
-        font-size: 0.8rem;
+        grid-template-columns: 50px 1fr 80px;
+        gap: 0.5rem;
+        padding: 0.8rem 0.5rem;
+        font-size: 0.9rem;
     }
     
+    /* Nascondi colonne non essenziali su mobile */
+    .coach-real,
+    .coach-ideal,
+    .coach-efficiency,
     .coach-award {
         display: none;
+    }
+    
+    /* Nascondi header delle colonne non essenziali */
+    .coach-ranking-headers .real-header,
+    .coach-ranking-headers .ideal-header,
+    .coach-ranking-headers .efficiency-header,
+    .coach-ranking-headers .award-header {
+        display: none;
+    }
+    
+    /* Migliora la visualizzazione delle colonne rimaste */
+    .coach-pos {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+    
+    .coach-team {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    
+    .coach-lost {
+        font-size: 1rem;
+        font-weight: 700;
+        text-align: center;
     }
     
     .coach-ranking-insights {
@@ -1960,13 +1989,22 @@ html.theme-transition *:after {
     
     .coach-ranking-headers,
     .coach-ranking-row {
-        grid-template-columns: 35px 1fr 50px 50px 50px;
-        font-size: 0.75rem;
-        padding: 0.5rem 0.3rem;
+        grid-template-columns: 45px 1fr 70px;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        padding: 0.6rem 0.4rem;
     }
     
-    .coach-ideal,
-    .coach-efficiency {
-        display: none;
+    /* Su schermi molto piccoli, manteniamo solo le 3 colonne essenziali */
+    .coach-pos {
+        font-size: 0.9rem;
+    }
+    
+    .coach-team {
+        font-size: 0.9rem;
+    }
+    
+    .coach-lost {
+        font-size: 0.9rem;
     }
 }
