@@ -1733,6 +1733,14 @@ html.theme-transition *:after {
     }
 }
 
+/* Contenitore Classifica Miglior Allenatore */
+#coach-ranking-container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
 /* Classifica Miglior Allenatore */
 .coach-ranking-section {
     background: var(--bg-card);
@@ -1746,6 +1754,8 @@ html.theme-transition *:after {
     animation: slideInUp 0.6s ease-out;
     width: 100%;
     max-width: none;
+    box-sizing: border-box;
+    display: block;
 }
 
 .coach-ranking-header {
@@ -1778,27 +1788,31 @@ html.theme-transition *:after {
     overflow: hidden;
     margin-bottom: 1.5rem;
     border: 1px solid var(--border-color);
+    width: 100%;
+    table-layout: fixed;
 }
 
 .coach-ranking-headers {
     display: grid;
-    grid-template-columns: 60px 2fr 100px 100px 100px 120px 2fr;
+    grid-template-columns: 80px 3fr 120px 120px 120px 140px 3fr;
     gap: 1rem;
     background: var(--primary-color);
     color: white;
     padding: 1rem;
     font-weight: 600;
     font-size: 1rem;
+    width: 100%;
 }
 
 .coach-ranking-row {
     display: grid;
-    grid-template-columns: 60px 2fr 100px 100px 100px 120px 2fr;
+    grid-template-columns: 80px 3fr 120px 120px 120px 140px 3fr;
     gap: 1rem;
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
     transition: all 0.3s ease;
     align-items: center;
+    width: 100%;
 }
 
 .coach-ranking-row:hover {

@@ -870,10 +870,11 @@ function displayRoundResults(roundNumber) {
 
     let html = '';
     
-    // Aggiungi la classifica del miglior allenatore subito dopo il commento
+    // Inserisci la classifica del miglior allenatore nel contenitore dedicato
+    const coachRankingContainer = document.getElementById('coach-ranking-container');
     const coachRankingHtml = generateCoachRanking(round);
-    if (coachRankingHtml) {
-        html += coachRankingHtml;
+    if (coachRankingContainer) {
+        coachRankingContainer.innerHTML = coachRankingHtml || '';
     }
     round.matches.forEach((match, index) => {
         let resultClass = '';
