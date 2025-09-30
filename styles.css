@@ -103,6 +103,16 @@ html.theme-transition *:after {
     color: #ffd700;
 }
 
+.trophy-reload {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.trophy-reload:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.2);
+}
+
 .logo h1 {
     font-size: 1.8rem;
     font-weight: 700;
@@ -395,6 +405,19 @@ html.theme-transition *:after {
 [data-theme="light"] .theme-toggle:hover {
     background: rgba(0, 0, 0, 0.12);
     color: #111827;
+}
+
+/* Light theme logo improvements */
+[data-theme="light"] .logo {
+    color: #1f2937;
+}
+
+[data-theme="light"] .logo h1 {
+    color: #000000;
+}
+
+[data-theme="light"] .subtitle {
+    color: #374151;
 }
 
 /* Dark theme header improvements */
