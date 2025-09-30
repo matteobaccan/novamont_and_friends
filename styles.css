@@ -1017,6 +1017,147 @@ html.theme-transition *:after {
     color: var(--text-primary);
 }
 
+/* Dark theme match-card improvements */
+[data-theme="dark"] .match-card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .match-card:hover {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+}
+
+/* Light theme match-card improvements */
+[data-theme="light"] .match-card {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .match-card:hover {
+    background: rgba(248, 250, 252, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Dark theme match content improvements */
+[data-theme="dark"] .match-card .team-name {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .match-card .team-score {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .match-card .fantasy-score {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .match-card .match-header {
+    color: #ffffff;
+}
+
+/* Dark theme ideal sections */
+[data-theme="dark"] .ideal-scores {
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .ideal-score {
+    color: #ffd700;
+}
+
+[data-theme="dark"] .ideal-fantasy-score {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .vs-ideal {
+    color: #ffd700;
+}
+
+[data-theme="dark"] .ideal-result {
+    color: #ffd700;
+}
+
+/* Dark theme comparison sections */
+[data-theme="dark"] .comparison-team {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .team-name-ideal {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .score-real {
+    background: rgba(255, 193, 7, 0.2);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    color: #ffd700;
+}
+
+[data-theme="dark"] .score-ideal {
+    background: rgba(33, 150, 243, 0.2);
+    border: 1px solid rgba(33, 150, 243, 0.3);
+    color: #64b5f6;
+}
+
+[data-theme="dark"] .score-difference.positive {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    color: #81c784;
+}
+
+[data-theme="dark"] .score-difference.negative {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: #e57373;
+}
+
+[data-theme="dark"] .vs-ideal-section {
+    background: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+/* Dark theme match results */
+[data-theme="dark"] .match-result.win {
+    background: rgba(76, 175, 80, 0.3);
+    color: #81c784;
+}
+
+[data-theme="dark"] .match-result.loss {
+    background: rgba(244, 67, 54, 0.3);
+    color: #e57373;
+}
+
+[data-theme="dark"] .match-result.draw {
+    background: rgba(255, 193, 7, 0.3);
+    color: #ffd54f;
+}
+
+/* Dark theme additional elements */
+[data-theme="dark"] .team-name-match {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .match-score-display {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .giornata-selector label {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .giornata-selector select {
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 
 
 .ideal-vs-real-comparison h3 {
@@ -1321,7 +1462,7 @@ html.theme-transition *:after {
     
     /* Mobile column widths */
     .position { 
-        flex: 0 0 40px; 
+        flex: 0 0 30px; 
         text-align: center; 
         font-weight: 600;
     }
@@ -1348,7 +1489,7 @@ html.theme-transition *:after {
     }
     
     /* Mobile header widths */
-    .sortable-header[data-column="position"] { flex: 0 0 40px; text-align: center; }
+    .sortable-header[data-column="position"] { flex: 0 0 30px; text-align: center; }
     .sortable-header[data-column="name"] { flex: 1; }
     .sortable-header[data-column="points"] { flex: 0 0 40px; text-align: center; }
     .sortable-header[data-column="wins"] { flex: 0 0 35px; text-align: center; }
@@ -1492,7 +1633,7 @@ html.theme-transition *:after {
     
     /* Extra small mobile column widths */
     .position { 
-        flex: 0 0 35px; 
+        flex: 0 0 28px; 
         font-weight: 600;
     }
     .team-name { 
@@ -1515,7 +1656,7 @@ html.theme-transition *:after {
     }
     
     /* Extra small mobile header widths */
-    .sortable-header[data-column="position"] { flex: 0 0 35px; }
+    .sortable-header[data-column="position"] { flex: 0 0 28px; }
     .sortable-header[data-column="name"] { flex: 1; }
     .sortable-header[data-column="points"] { flex: 0 0 35px; }
     .sortable-header[data-column="wins"] { flex: 0 0 30px; }
