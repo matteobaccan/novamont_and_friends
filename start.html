@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Rapida - Fantacalcio Novamont & Friends</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; text-align: center; }
+        .button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        .button:hover { background: #764ba2; }
+        .section { margin: 20px 0; }
+        .code {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏆 Fantacalcio Novamont & Friends</h1>
+        
+        <div class="section">
+            <h2>🚀 Avvia il sito</h2>
+            <a href="index.html" class="button">Apri il Sito Principal</a>
+        </div>
+
+        <div class="section">
+            <h2>💻 Server di Sviluppo (Opzionale)</h2>
+            <p>Per testare il sito con un server locale, puoi utilizzare:</p>
+            
+            <h3>Python (se installato):</h3>
+            <div class="code">
+                # Python 3
+                python -m http.server 8000
+                
+                # Python 2
+                python -m SimpleHTTPServer 8000
+            </div>
+            <p>Poi apri: <strong>http://localhost:8000</strong></p>
+
+            <h3>Node.js (se installato):</h3>
+            <div class="code">
+                # Installa http-server globalmente
+                npm install -g http-server
+                
+                # Avvia il server
+                http-server
+            </div>
+
+            <h3>PHP (se installato):</h3>
+            <div class="code">
+                php -S localhost:8000
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📝 Come aggiornare i dati</h2>
+            <ol>
+                <li><strong>Metodo Semplice</strong>: Modifica il file <code>script.js</code> nella sezione <code>fantacalcioData</code></li>
+                <li><strong>Metodo Avanzato</strong>: Modifica il file <code>data.json</code> e implementa il caricamento dinamico</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>📱 Caratteristiche</h2>
+            <ul>
+                <li>✅ Design moderno e responsive</li>
+                <li>✅ Classifica in tempo reale</li>
+                <li>✅ Risultati per giornata</li>
+                <li>✅ Statistiche avanzate</li>
+                <li>✅ Animazioni fluide</li>
+                <li>✅ Compatibile con tutti i dispositivi</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🎯 File del progetto</h2>
+            <ul>
+                <li><code>index.html</code> - Pagina principale</li>
+                <li><code>styles.css</code> - Stili e design</li>
+                <li><code>script.js</code> - Logica e funzionalità</li>
+                <li><code>data.json</code> - Dati strutturati (opzionale)</li>
+                <li><code>README.md</code> - Documentazione completa</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

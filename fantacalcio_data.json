@@ -1,0 +1,126 @@
+{
+  "lastUpdate": "30 Settembre 2025, 18:30",
+  "season": "2025-2026",
+  "currentRound": 1,
+  "teams": [
+    {
+      "id": 1,
+      "name": "Cambra City",
+      "owner": "Manager 1"
+    },
+    {
+      "id": 2,
+      "name": "Shakhtar Donuts",
+      "owner": "Manager 2"
+    },
+    {
+      "id": 3,
+      "name": "SM Frattese",
+      "owner": "Manager 3"
+    },
+    {
+      "id": 4,
+      "name": "CORTOMUSO",
+      "owner": "Manager 4"
+    },
+    {
+      "id": 5,
+      "name": "CUSIANA",
+      "owner": "Manager 5"
+    },
+    {
+      "id": 6,
+      "name": "Real Ichnusa",
+      "owner": "Manager 6"
+    },
+    {
+      "id": 7,
+      "name": "Ultimo",
+      "owner": "Manager 7"
+    },
+    {
+      "id": 8,
+      "name": "PARTIZAN TIRANA",
+      "owner": "Manager 8"
+    }
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "date": "Settembre 2025",
+      "matches": [
+        {
+          "id": 1,
+          "homeTeam": "CUSIANA",
+          "awayTeam": "CORTOMUSO",
+          "homeScore": 69.0,
+          "awayScore": 70.0,
+          "homeIdealScore": 70.0,
+          "awayIdealScore": 74.0,
+          "homeGoals": 1,
+          "awayGoals": 1,
+          "homeIdealGoals": 1,
+          "awayIdealGoals": 2,
+          "result": "draw",
+          "idealResult": "away"
+        },
+        {
+          "id": 2,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Cambra City",
+          "homeScore": 77.5,
+          "awayScore": 78.0,
+          "homeIdealScore": 83.0,
+          "awayIdealScore": 84.5,
+          "homeGoals": 2,
+          "awayGoals": 3,
+          "homeIdealGoals": 3,
+          "awayIdealGoals": 4,
+          "result": "away",
+          "idealResult": "away"
+        },
+        {
+          "id": 3,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "Ultimo",
+          "homeScore": 75.5,
+          "awayScore": 69.5,
+          "homeIdealScore": 82.5,
+          "awayIdealScore": 80.0,
+          "homeGoals": 2,
+          "awayGoals": 1,
+          "homeIdealGoals": 3,
+          "awayIdealGoals": 3,
+          "result": "home",
+          "idealResult": "draw"
+        },
+        {
+          "id": 4,
+          "homeTeam": "PARTIZAN TIRANA",
+          "awayTeam": "SM Frattese",
+          "homeScore": 64.0,
+          "awayScore": 67.5,
+          "homeIdealScore": 72.0,
+          "awayIdealScore": 72.0,
+          "homeGoals": 0,
+          "awayGoals": 1,
+          "homeIdealGoals": 2,
+          "awayIdealGoals": 2,
+          "result": "away",
+          "idealResult": "draw"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "pointsForWin": 3,
+    "pointsForDraw": 1,
+    "pointsForLoss": 0,
+    "leagueFormat": "Girone all'italiana",
+    "totalRounds": 14,
+    "goalCalculation": {
+      "pointsPerGoal": 6,
+      "description": "Ogni 6 punti fantacalcio = 1 gol"
+    }
+  }
+}

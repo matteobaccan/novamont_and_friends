@@ -1,0 +1,271 @@
+{
+  "lastUpdate": "30 Settembre 2025, 18:30",
+  "season": "2025-2026",
+  "currentRound": 1,
+  "teams": [
+    {
+      "id": 1,
+      "name": "Cambra City",
+      "owner": "Manager 1",
+      "points": 245,
+      "wins": 8,
+      "draws": 2,
+      "losses": 2,
+      "avgScore": 82.5,
+      "totalScore": 990,
+      "matchesPlayed": 12
+    },
+    {
+      "id": 2,
+      "name": "Shakhtar Donuts",
+      "owner": "Manager 2",
+      "points": 238,
+      "wins": 7,
+      "draws": 4,
+      "losses": 1,
+      "avgScore": 79.8,
+      "totalScore": 958,
+      "matchesPlayed": 12
+    },
+    {
+      "id": 3,
+      "name": "SM Frattese",
+      "owner": "Manager 3",
+      "points": 235,
+      "wins": 7,
+      "draws": 3,
+      "losses": 2,
+      "avgScore": 78.3,
+      "totalScore": 940,
+      "matchesPlayed": 12
+    },
+    {
+      "id": 4,
+      "name": "Cortomuso",
+      "owner": "Manager 4",
+      "points": 228,
+      "wins": 6,
+      "draws": 4,
+      "losses": 2,
+      "avgScore": 76.0,
+      "totalScore": 912,
+      "matchesPlayed": 12
+    },
+    {
+      "id": 5,
+      "name": "Cusiana",
+      "owner": "Manager 5",
+      "points": 225,
+      "wins": 6,
+      "draws": 3,
+      "losses": 3,
+      "avgScore": 75.0,
+      "totalScore": 900,
+      "matchesPlayed": 12
+    },
+    {
+      "id": 6,
+      "name": "Real Ichnusa",
+      "owner": "Manager 6",
+      "points": 218,
+      "wins": 5,
+      "draws": 5,
+      "losses": 2,
+      "avgScore": 72.7,
+      "totalScore": 872,
+      "matchesPlayed": 12
+    },
+    {
+      "id": 7,
+      "name": "Ultimo",
+      "owner": "Manager 7",
+      "points": 212,
+      "wins": 5,
+      "draws": 3,
+      "losses": 4,
+      "avgScore": 70.7,
+      "totalScore": 848,
+      "matchesPlayed": 12
+    },
+    {
+      "id": 8,
+      "name": "PARTIZAN TIRANA",
+      "owner": "Manager 8",
+      "points": 205,
+      "wins": 4,
+      "draws": 5,
+      "losses": 3,
+      "avgScore": 68.3,
+      "totalScore": 820,
+      "matchesPlayed": 12
+    }
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "date": "Settembre 2025",
+      "matches": [
+        {
+          "id": 1,
+          "homeTeam": "CUSIANA",
+          "awayTeam": "CORTOMUSO",
+          "homeScore": 69.0,
+          "awayScore": 70.0,
+          "homeIdealScore": 70.0,
+          "awayIdealScore": 74.0,
+          "homeGoals": 11,
+          "awayGoals": 11,
+          "homeIdealGoals": 11,
+          "awayIdealGoals": 12,
+          "result": "away",
+          "idealResult": "away"
+        },
+        {
+          "id": 2,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Cambra City",
+          "homeScore": 77.5,
+          "awayScore": 78.0,
+          "homeIdealScore": 83.0,
+          "awayIdealScore": 84.5,
+          "homeGoals": 12,
+          "awayGoals": 13,
+          "homeIdealGoals": 13,
+          "awayIdealGoals": 14,
+          "result": "away",
+          "idealResult": "away"
+        },
+        {
+          "id": 3,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "Ultimo",
+          "homeScore": 75.5,
+          "awayScore": 69.5,
+          "homeIdealScore": 82.5,
+          "awayIdealScore": 80.0,
+          "homeGoals": 12,
+          "awayGoals": 11,
+          "homeIdealGoals": 13,
+          "awayIdealGoals": 13,
+          "result": "home",
+          "idealResult": "home"
+        },
+        {
+          "id": 4,
+          "homeTeam": "PARTIZAN TIRANA",
+          "awayTeam": "SM Frattese",
+          "homeScore": 64.0,
+          "awayScore": 67.5,
+          "homeIdealScore": 72.0,
+          "awayIdealScore": 72.0,
+          "homeGoals": 10,
+          "awayGoals": 11,
+          "homeIdealGoals": 12,
+          "awayIdealGoals": 12,
+          "result": "away",
+          "idealResult": "draw"
+        }
+      ]
+    }
+  ],
+    {
+      "round": 2,
+      "date": "22 Agosto 2025",
+      "matches": [
+        {
+          "id": 5,
+          "homeTeam": "Gli Amici United",
+          "awayTeam": "Dream Team FC",
+          "homeScore": 84,
+          "awayScore": 76,
+          "result": "home",
+          "homeFormation": "4-3-3",
+          "awayFormation": "3-5-2"
+        },
+        {
+          "id": 6,
+          "homeTeam": "Squadra Vincente",
+          "awayTeam": "I Campioni",
+          "homeScore": 73,
+          "awayScore": 81,
+          "result": "away",
+          "homeFormation": "4-4-2",
+          "awayFormation": "4-3-3"
+        },
+        {
+          "id": 7,
+          "homeTeam": "Super Squad",
+          "awayTeam": "Team Fantasia",
+          "homeScore": 77,
+          "awayScore": 69,
+          "result": "home",
+          "homeFormation": "3-4-3",
+          "awayFormation": "4-5-1"
+        },
+        {
+          "id": 8,
+          "homeTeam": "Calcio Magico",
+          "awayTeam": "FC Novamont",
+          "homeScore": 65,
+          "awayScore": 92,
+          "result": "away",
+          "homeFormation": "4-2-3-1",
+          "awayFormation": "3-5-2"
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "date": "29 Agosto 2025",
+      "matches": [
+        {
+          "id": 9,
+          "homeTeam": "FC Novamont",
+          "awayTeam": "Dream Team FC",
+          "homeScore": 86,
+          "awayScore": 83,
+          "result": "home",
+          "homeFormation": "4-3-3",
+          "awayFormation": "4-4-2"
+        },
+        {
+          "id": 10,
+          "homeTeam": "I Campioni",
+          "awayTeam": "Gli Amici United",
+          "homeScore": 74,
+          "awayScore": 80,
+          "result": "away",
+          "homeFormation": "3-5-2",
+          "awayFormation": "4-3-3"
+        },
+        {
+          "id": 11,
+          "homeTeam": "Team Fantasia",
+          "awayTeam": "Squadra Vincente",
+          "homeScore": 72,
+          "awayScore": 78,
+          "result": "away",
+          "homeFormation": "4-5-1",
+          "awayFormation": "3-4-3"
+        },
+        {
+          "id": 12,
+          "homeTeam": "Calcio Magico",
+          "awayTeam": "Super Squad",
+          "homeScore": 70,
+          "awayScore": 75,
+          "result": "away",
+          "homeFormation": "4-2-3-1",
+          "awayFormation": "4-4-2"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "pointsForWin": 3,
+    "pointsForDraw": 1,
+    "pointsForLoss": 0,
+    "leagueFormat": "Girone all'italiana",
+    "totalRounds": 14
+  }
+}
