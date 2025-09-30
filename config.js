@@ -58,7 +58,7 @@ const CONFIG = {
     autoUpdate: {
         enabled: false,
         interval: 300000, // 5 minuti in millisecondi
-        source: "data.json"
+        source: "fantacalcio_data.json"
     },
     
     // Social links (footer)

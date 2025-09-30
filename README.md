@@ -56,7 +56,7 @@ Modifica il file `script.js` nella sezione `fantacalcioData` per aggiornare:
 - Data ultimo aggiornamento
 
 ### Metodo avanzato (file JSON):
-Modifica il file `data.json` per gestire tutti i dati in modo più organizzato.
+Modifica il file `fantacalcio_data.json` per gestire tutti i dati in modo più organizzato.
 
 ## 📱 Compatibilità
 
