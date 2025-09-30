@@ -1,23 +1,51 @@
 # 🏆 Fantacalcio Novamont & Friends
 
-Sito web moderno per la gestione e visualizzazione della classifica del Fantacalcio Novamont & Friends.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b010ff6f-b676-4765-9d71-1fb72eee96cf/deploy-status)](https://app.netlify.com/projects/novamontfriends/deploys)
 
-## ✨ Caratteristiche
+Sito web moderno e completo per la gestione e visualizzazione della classifica del Fantacalcio Novamont & Friends. Una piattaforma interattiva che trasforma il tuo campionato di fantacalcio in un'esperienza coinvolgente e professionale.
 
-- **Classifica in tempo reale** con posizioni, punti, vittorie e medie
-- **Risultati per giornata** con dettagli di ogni match
-- **Statistiche avanzate** del torneo
-- **Design moderno e responsive** ottimizzato per tutti i dispositivi
-- **Animazioni fluide** e interfaccia intuitiva
-- **Dati facilmente aggiornabili** tramite file JSON
+## ✨ Caratteristiche Principali
+
+### 🏆 **Classifiche Complete**
+- **Classifica Reale**: Posizioni, punti campionato, gol fatti/subiti, differenza reti, totale punti fantacalcio
+- **Classifica Ideale**: Simulazione con le migliori formazioni possibili e confronto con la classifica reale
+- **Ordinamento Dinamico**: Clicca su qualsiasi colonna per ordinare i dati
+- **Algoritmo Gol**: Sistema preciso di calcolo gol (66pt = 1 gol, poi ogni 6 punti)
+
+### 📅 **Gestione Giornate Avanzata**
+- **Risultati Dettagliati**: Punteggi reali e ideali per ogni match
+- **Confronto Intelligente**: Analisi automatica reale vs ideale per ogni giornata
+- **Commenti Esclusivi**: Analisi in stile Caressa-Bergomi per la prima giornata
+- **Selezione Dinamica**: Naviga facilmente tra le diverse giornate
+
+### 📊 **Statistiche e Analisi**
+- **Dashboard Completo**: Leader, punteggi più alti, squadre partecipanti
+- **Spiegazione Algoritmi**: Info dettagliate sul calcolo dei gol
+- **Metriche Avanzate**: Media punti, differenze prestazioni, confronti storici
+
+### 🎨 **Design e Usabilità**
+- **Interface Moderna**: Design gradient con animazioni fluide
+- **100% Responsive**: Ottimizzato per desktop, tablet e mobile
+- **Navigazione Intuitiva**: Tab system per accesso rapido alle sezioni
+- **Font Awesome Icons**: Iconografie professionali in tutto il sito
 
 ## 🚀 Come utilizzare
 
-1. **Aprire il sito**: Apri `index.html` in un browser web
-2. **Navigare**: Usa i pulsanti nella barra di navigazione per spostarti tra le sezioni:
-   - 🥇 **Classifica**: Visualizza la classifica generale
-   - 📅 **Giornate**: Vedi i risultati per ogni giornata
-   - 📊 **Statistiche**: Consulta le statistiche del torneo
+### 🌐 **Accesso**
+- **Online**: Visita il sito su Netlify (vedi badge stato)
+- **Locale**: Apri `index.html` in un browser web o avvia un server locale
+
+### 🧭 **Navigazione**
+1. **🏆 Classifica**: Visualizza la classifica attuale con tutti i dettagli
+2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette
+3. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti
+4. **📊 Statistiche**: Consulta dashboard e spiegazioni tecniche
+
+### 💡 **Funzionalità Interattive**
+- **Clicca** sulle colonne delle tabelle per ordinare i dati
+- **Seleziona** la giornata dal dropdown per vedere risultati specifici
+- **Scorri** per vedere il confronto reale vs ideale
+- **Leggi** i commenti esclusivi in stile telecronaca
 
 ## 📝 Aggiornare i dati
 
@@ -56,60 +84,101 @@ Modifica il file `script.js` per aggiungere:
 
 ```
 novamont_and_friends/
-├── index.html          # Pagina principale
-├── styles.css          # Stili CSS
-├── script.js           # Logica JavaScript
-├── data.json           # Dati del fantacalcio (opzionale)
-└── README.md           # Documentazione
+├── index.html              # Pagina principale
+├── styles.css              # Stili CSS responsive
+├── script.js               # Logica JavaScript completa
+├── config.js               # Configurazioni sistema
+├── fantacalcio_data.json   # Dati reali del campionato
+└── README.md               # Documentazione completa
 ```
 
-## 🔧 Funzioni avanzate
+### 🗂️ **Dettaglio File**
+- **`index.html`**: Interface completa con 4 sezioni (Classifica, Classifica Ideale, Giornate, Statistiche)
+- **`styles.css`**: 700+ righe di CSS responsive con animazioni e design moderno
+- **`script.js`**: 1000+ righe di JavaScript con algoritmi avanzati e gestione dati
+- **`fantacalcio_data.json`**: Database JSON con teams, rounds, matches e punteggi ideali
+- **`config.js`**: Impostazioni configurabili per personalizzazione
 
-### Aggiungere una nuova giornata:
+## 🔧 Funzioni Avanzate
+
+### 🎯 **Algoritmo Calcolo Gol**
+```javascript
+function calculateGoalsFromScore(score) {
+    // 66 punti = 1 gol, poi ogni 6 punti un gol in più
+    if (score < 66) return 0;
+    return Math.floor((score - 60) / 6);
+}
+```
+
+### 📊 **Aggiungere una Nuova Giornata**
 ```javascript
 const nuovaGiornata = {
-    round: 4,
-    date: "5 Settembre 2025",
+    round: 2,
+    date: "Ottobre 2025",
     matches: [
         {
-            homeTeam: "Squadra A",
-            awayTeam: "Squadra B",
-            homeScore: 85,
-            awayScore: 78,
-            result: "home"
+            homeTeam: "CUSIANA",
+            awayTeam: "Real Ichnusa",
+            homeScore: 75.5,
+            awayScore: 82.0,
+            homeIdealScore: 88.0,  // Punteggio con formazione ideale
+            awayIdealScore: 85.5,
+            homeGoals: 2,
+            awayGoals: 3,
+            homeIdealGoals: 4,
+            awayIdealGoals: 4,
+            result: "away",
+            idealResult: "draw"
         }
         // ... altri match
     ]
 };
-
-FantacalcioApp.addNewRound(nuovaGiornata);
 ```
 
-### Aggiornare la classifica:
+### 🏆 **Struttura Dati Squadra Completa**
 ```javascript
-const nuovaClassifica = [
-    {
-        name: "FC Novamont",
-        points: 250,
-        wins: 9,
-        draws: 2,
-        losses: 2,
-        avgScore: 83.5
-    }
-    // ... altre squadre
-];
-
-FantacalcioApp.updateTeamStandings(nuovaClassifica);
+const squadra = {
+    id: 1,
+    name: "CUSIANA",
+    owner: "Manager",
+    points: 3,              // Punti campionato
+    wins: 1,
+    draws: 0, 
+    losses: 0,
+    totalScore: 145.5,      // Somma punti fantacalcio
+    goalsFor: 3,
+    goalsAgainst: 2,
+    goalDifference: 1,
+    avgScore: 72.75,
+    matchesPlayed: 2
+};
 ```
 
-## 🎯 Prossimi sviluppi
+## 🎯 Prossimi Sviluppi
 
-- [ ] Grafici interattivi con Chart.js
-- [ ] Sistema di login per ogni squadra
-- [ ] Storico confronti testa a testa
-- [ ] Export PDF della classifica
-- [ ] Notifiche push per nuovi risultati
-- [ ] Integrazione con API fantacalcio
+### 📈 **Analytics Avanzate**
+- [ ] Grafici interattivi con Chart.js (trend performance, confronti)
+- [ ] Heatmap delle prestazioni per giornata
+- [ ] Predizioni AI per prossime giornate
+- [ ] Analisi dettagliate rosa squadre
+
+### 🔐 **Sistema Utenti**
+- [ ] Login personalizzato per ogni manager
+- [ ] Dashboard privato con statistiche personali
+- [ ] Sistema notifiche push per risultati
+- [ ] Chat integrata tra squadre
+
+### 🚀 **Integrazioni**
+- [ ] API Fantacalcio® ufficiali per dati real-time
+- [ ] Export PDF/Excel classifiche e statistiche
+- [ ] Integrazione social (condivisione risultati)
+- [ ] App mobile PWA (Progressive Web App)
+
+### 🎮 **Gamification**
+- [ ] Sistema achievement e trofei
+- [ ] Storico confronti head-to-head
+- [ ] Prediction game per prossimi risultati
+- [ ] Classifica Fair Play e migliori manager
 
 ## 🤝 Contribuire
 
@@ -129,4 +198,4 @@ Sviluppato con ❤️ per il Fantacalcio Novamont & Friends
 
 ---
 
-**Ultimo aggiornamento**: Settembre 2025
+**Ultimo aggiornamento**: 30 Settembre 2025 🚀
