@@ -8,6 +8,13 @@ function calculateGoalsFromScore(score) {
     return Math.floor((score - 60) / 6);
 }
 
+// Algoritmo per calcolare i gol ideali con bonus casa
+function calculateIdealGoalsFromScore(score, isHome = false) {
+    // Applica il bonus di +1 punto solo per la squadra di casa nei punteggi ideali
+    const adjustedScore = isHome ? score + 1 : score;
+    return calculateGoalsFromScore(adjustedScore);
+}
+
 // Funzione per determinare il risultato del match
 function getMatchResult(homeScore, awayScore) {
     const homeGoals = calculateGoalsFromScore(homeScore);
@@ -139,8 +146,8 @@ function calculateIdealStandingsFromResults() {
             const homeTeam = match.homeTeam;
             const awayTeam = match.awayTeam;
             const result = getMatchResult(homeScore, awayScore);
-            const homeGoals = calculateGoalsFromScore(homeScore);
-            const awayGoals = calculateGoalsFromScore(awayScore);
+            const homeGoals = calculateIdealGoalsFromScore(homeScore, true);
+            const awayGoals = calculateIdealGoalsFromScore(awayScore, false);
             
             // Aggiorna statistiche squadra casa
             standings[homeTeam].totalScore += homeScore;
@@ -258,11 +265,7 @@ const fallbackData = {
                     awayScore: 70.0,
                     homeIdealScore: 70.0,
                     awayIdealScore: 74.0,
-                    homeGoals: 1, // 69 punti = 1 gol (69-60)/6 = 1.5 -> 1
-                    awayGoals: 1, // 70 punti = 1 gol (70-60)/6 = 1.66 -> 1
-                    homeIdealGoals: 1, // 70 punti = 1 gol
-                    awayIdealGoals: 2, // 74 punti = 2 gol (74-60)/6 = 2.33 -> 2
-                    result: "draw", // Stesso numero di gol
+                    result: "draw",
                     idealResult: "away"
                 },
                 {
@@ -273,10 +276,6 @@ const fallbackData = {
                     awayScore: 78.0,
                     homeIdealScore: 83.0,
                     awayIdealScore: 84.5,
-                    homeGoals: 2, // 77.5 punti = 2 gol (77.5-60)/6 = 2.91 -> 2
-                    awayGoals: 3, // 78 punti = 3 gol (78-60)/6 = 3 -> 3
-                    homeIdealGoals: 3, // 83 punti = 3 gol (83-60)/6 = 3.83 -> 3
-                    awayIdealGoals: 4, // 84.5 punti = 4 gol (84.5-60)/6 = 4.08 -> 4
                     result: "away",
                     idealResult: "away"
                 },
@@ -288,10 +287,6 @@ const fallbackData = {
                     awayScore: 69.5,
                     homeIdealScore: 82.5,
                     awayIdealScore: 80.0,
-                    homeGoals: 2, // 75.5 punti = 2 gol (75.5-60)/6 = 2.58 -> 2
-                    awayGoals: 1, // 69.5 punti = 1 gol (69.5-60)/6 = 1.58 -> 1
-                    homeIdealGoals: 3, // 82.5 punti = 3 gol (82.5-60)/6 = 3.75 -> 3
-                    awayIdealGoals: 3, // 80 punti = 3 gol (80-60)/6 = 3.33 -> 3
                     result: "home",
                     idealResult: "draw"
                 },
@@ -303,10 +298,6 @@ const fallbackData = {
                     awayScore: 67.5,
                     homeIdealScore: 72.0,
                     awayIdealScore: 72.0,
-                    homeGoals: 0, // 64 punti = 0 gol (sotto i 66)
-                    awayGoals: 1, // 67.5 punti = 1 gol (67.5-60)/6 = 1.25 -> 1
-                    homeIdealGoals: 2, // 72 punti = 2 gol (72-60)/6 = 2 -> 2
-                    awayIdealGoals: 2, // 72 punti = 2 gol (72-60)/6 = 2 -> 2
                     result: "away",
                     idealResult: "draw"
                 }
@@ -919,8 +910,8 @@ function displayRoundResults(roundNumber) {
         let idealSection = '';
         
         if (hasIdealScores) {
-            const homeIdealGoals = match.homeIdealGoals !== undefined ? match.homeIdealGoals : calculateGoalsFromScore(match.homeIdealScore);
-            const awayIdealGoals = match.awayIdealGoals !== undefined ? match.awayIdealGoals : calculateGoalsFromScore(match.awayIdealScore);
+            const homeIdealGoals = match.homeIdealGoals !== undefined ? match.homeIdealGoals : calculateIdealGoalsFromScore(match.homeIdealScore, true);
+            const awayIdealGoals = match.awayIdealGoals !== undefined ? match.awayIdealGoals : calculateIdealGoalsFromScore(match.awayIdealScore, false);
             const idealGoalScore = `${homeIdealGoals}-${awayIdealGoals}`;
             
             // Calcola differenze e confronti
@@ -1314,6 +1305,7 @@ window.FantacalcioApp = {
     displayRoundResults,
     displayIdealVsRealComparison,
     calculateGoalsFromScore,
+    calculateIdealGoalsFromScore,
     getMatchResult,
     formatMatchScore,
     testGoalCalculation,
