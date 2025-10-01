@@ -264,9 +264,7 @@ const fallbackData = {
                     homeScore: 69.0,
                     awayScore: 70.0,
                     homeIdealScore: 70.0,
-                    awayIdealScore: 74.0,
-                    result: "draw",
-                    idealResult: "away"
+                    awayIdealScore: 74.0
                 },
                 {
                     id: 2,
@@ -275,9 +273,7 @@ const fallbackData = {
                     homeScore: 77.5,
                     awayScore: 78.0,
                     homeIdealScore: 83.0,
-                    awayIdealScore: 84.5,
-                    result: "away",
-                    idealResult: "away"
+                    awayIdealScore: 84.5
                 },
                 {
                     id: 3,
@@ -286,9 +282,7 @@ const fallbackData = {
                     homeScore: 75.5,
                     awayScore: 69.5,
                     homeIdealScore: 82.5,
-                    awayIdealScore: 80.0,
-                    result: "home",
-                    idealResult: "draw"
+                    awayIdealScore: 80.0
                 },
                 {
                     id: 4,
@@ -297,9 +291,7 @@ const fallbackData = {
                     homeScore: 64.0,
                     awayScore: 67.5,
                     homeIdealScore: 72.0,
-                    awayIdealScore: 72.0,
-                    result: "away",
-                    idealResult: "draw"
+                    awayIdealScore: 72.0
                 }
             ]
         }
@@ -888,11 +880,14 @@ function displayRoundResults(roundNumber) {
     round.matches.forEach((match, index) => {
         let resultClass = '';
         let resultText = '';
+        
+        // Calcola il risultato dinamicamente
+        const matchResult = getMatchResult(match.homeScore, match.awayScore);
 
-        if (match.result === 'home') {
+        if (matchResult === 'home') {
             resultClass = 'win';
             resultText = `Vittoria ${match.homeTeam}`;
-        } else if (match.result === 'away') {
+        } else if (matchResult === 'away') {
             resultClass = 'win';
             resultText = `Vittoria ${match.awayTeam}`;
         } else {
