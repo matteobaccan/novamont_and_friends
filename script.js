@@ -1,3 +1,104 @@
+// ============================================
+// SERVICE WORKER REGISTRATION & CACHE MANAGEMENT
+// ============================================
+
+// Registra il Service Worker se supportato
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                console.log('Service Worker registrato con successo:', registration.scope);
+                
+                // Controlla aggiornamenti ogni 5 minuti
+                setInterval(() => {
+                    registration.update();
+                }, 5 * 60 * 1000);
+                
+                // Gestisce gli aggiornamenti del service worker
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // Nuovo contenuto disponibile, notifica l'utente
+                            showUpdateNotification();
+                        }
+                    });
+                });
+            })
+            .catch((error) => {
+                console.log('Registrazione Service Worker fallita:', error);
+            });
+    });
+}
+
+// Funzione per mostrare notifica di aggiornamento
+function showUpdateNotification() {
+    const notification = document.createElement('div');
+    notification.className = 'update-notification';
+    notification.innerHTML = `
+        <div class="update-content">
+            <i class="fas fa-sync-alt"></i>
+            <span>Nuova versione disponibile!</span>
+            <button onclick="updateApp()" class="update-btn">Aggiorna</button>
+            <button onclick="dismissUpdate()" class="dismiss-btn">Più tardi</button>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+}
+
+// Funzione per aggiornare l'app
+function updateApp() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then((registration) => {
+            if (registration && registration.waiting) {
+                registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+            }
+        });
+    }
+    // Ricarica la pagina forzando il bypass della cache
+    window.location.reload(true);
+}
+
+// Funzione per dismissare la notifica
+function dismissUpdate() {
+    const notification = document.querySelector('.update-notification');
+    if (notification) {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }
+}
+
+// Funzione per svuotare manualmente la cache
+function clearAllCache() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then((registration) => {
+            if (registration) {
+                registration.active.postMessage({ type: 'CLEAR_CACHE' });
+            }
+        });
+    }
+    
+    if ('caches' in window) {
+        caches.keys().then((names) => {
+            names.forEach((name) => {
+                caches.delete(name);
+            });
+        });
+    }
+    
+    console.log('Cache svuotata!');
+    alert('Cache svuotata! La pagina verrà ricaricata.');
+    window.location.reload(true);
+}
+
+// ============================================
+// ALGORITMI DI CALCOLO GOL
+// ============================================
+
 // Algoritmo per calcolare i gol dal punteggio fantacalcio
 function calculateGoalsFromScore(score) {
     // Il primo gol si ottiene a 66 punti, poi ogni 6 punti in più
@@ -218,18 +319,107 @@ let fantacalcioData = null;
 // Funzione per caricare i dati dal file JSON
 async function loadFantacalcioData() {
     try {
-        const response = await fetch('fantacalcio_data.json');
+        // Cache busting: aggiungi timestamp per forzare il reload
+        const timestamp = new Date().getTime();
+        const url = `fantacalcio_data.json?t=${timestamp}`;
+        
+        const response = await fetch(url, {
+            cache: 'no-store', // Forza il bypass della cache del browser
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        });
+        
         if (!response.ok) {
             throw new Error(`Errore HTTP! Status: ${response.status}`);
         }
+        
         fantacalcioData = await response.json();
         console.log('Dati caricati dal JSON con successo:', fantacalcioData);
+        console.log('Timestamp caricamento:', new Date(timestamp).toLocaleString());
         return fantacalcioData;
     } catch (error) {
         console.error('Impossibile caricare il file JSON:', error.message);
         // Rilanciamo l'errore per gestirlo nell'inizializzazione
         throw error;
     }
+}
+
+// Funzione per ricaricare solo i dati JSON senza refresh completo
+async function reloadDataOnly() {
+    try {
+        console.log('Ricaricamento dati in corso...');
+        
+        // Mostra un indicatore di caricamento
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'loading-indicator';
+        loadingIndicator.innerHTML = `
+            <div class="loading-content">
+                <i class="fas fa-sync-alt fa-spin"></i>
+                <span>Aggiornamento dati in corso...</span>
+            </div>
+        `;
+        document.body.appendChild(loadingIndicator);
+        setTimeout(() => loadingIndicator.classList.add('show'), 10);
+        
+        // Ricarica i dati
+        await loadFantacalcioData();
+        
+        // Ricalcola tutto
+        if (fantacalcioData && fantacalcioData.teams && fantacalcioData.rounds) {
+            fantacalcioData.teams = calculateStandingsFromResults();
+        }
+        
+        // Aggiorna le visualizzazioni
+        displayStandings();
+        displayIdealStandings();
+        displayStatistics();
+        setupRoundSelector();
+        updateLastUpdate();
+        
+        // Aggiorna la giornata corrente se siamo nella tab giornate
+        const activeTab = document.querySelector('.tab-content.active');
+        if (activeTab && activeTab.id === 'giornate') {
+            const roundSelect = document.getElementById('giornata-select');
+            if (roundSelect) {
+                displayRoundResults(parseInt(roundSelect.value));
+            }
+        }
+        
+        // Nascondi l'indicatore
+        setTimeout(() => {
+            loadingIndicator.classList.remove('show');
+            setTimeout(() => loadingIndicator.remove(), 300);
+        }, 500);
+        
+        console.log('Dati aggiornati con successo!');
+        
+        // Mostra notifica di successo
+        showSuccessNotification('Dati aggiornati!');
+        
+    } catch (error) {
+        console.error('Errore durante il ricaricamento dei dati:', error);
+        alert('Errore durante l\'aggiornamento dei dati. Ricarica la pagina.');
+    }
+}
+
+// Funzione per mostrare notifica di successo
+function showSuccessNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'success-notification';
+    notification.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => notification.classList.add('show'), 10);
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 2000);
 }
 
 // Inizializzazione dell'applicazione
@@ -836,9 +1026,13 @@ function displayRoundResults(roundNumber) {
             
             const idealGoalScore = `${homeIdealGoals}-${awayIdealGoals}`;
             
-            // Calcola differenze e confronti
-            const homeDifference = match.homeIdealScore - match.homeScore;
-            const awayDifference = match.awayIdealScore - match.awayScore;
+            // Calcola i punteggi ideali con bonus casa per la visualizzazione
+            const homeIdealScoreWithBonus = match.homeIdealScore + 1; // Bonus casa
+            const awayIdealScoreWithBonus = match.awayIdealScore; // Nessun bonus per trasferta
+            
+            // Calcola differenze e confronti (usando i punteggi con bonus per la casa)
+            const homeDifference = homeIdealScoreWithBonus - match.homeScore;
+            const awayDifference = awayIdealScoreWithBonus - match.awayScore;
             const homeGoalsDiff = homeIdealGoals - homeGoals;
             const awayGoalsDiff = awayIdealGoals - awayGoals;
             
@@ -869,7 +1063,8 @@ function displayRoundResults(roundNumber) {
                                 </div>
                                 <div class="score-ideal">
                                     <span class="label">Ideale:</span>
-                                    <span class="value">${homeIdealGoals} gol (${match.homeIdealScore} pt)</span>
+                                    <span class="value">${homeIdealGoals} gol (${homeIdealScoreWithBonus} pt)</span>
+                                    <span class="bonus-indicator">+1 bonus casa</span>
                                 </div>
                                 <div class="score-difference ${homeDifference >= 0 ? 'positive' : 'negative'}">
                                     <span class="label">Differenza:</span>
@@ -898,7 +1093,7 @@ function displayRoundResults(roundNumber) {
                                 </div>
                                 <div class="score-ideal">
                                     <span class="label">Ideale:</span>
-                                    <span class="value">${awayIdealGoals} gol (${match.awayIdealScore} pt)</span>
+                                    <span class="value">${awayIdealGoals} gol (${awayIdealScoreWithBonus} pt)</span>
                                 </div>
                                 <div class="score-difference ${awayDifference >= 0 ? 'positive' : 'negative'}">
                                     <span class="label">Differenza:</span>
@@ -1338,11 +1533,24 @@ class ThemeManager {
 document.addEventListener('DOMContentLoaded', () => {
     window.themeManager = new ThemeManager();
     
-    // Add trophy reload functionality
+    // Add trophy reload functionality - ricarica solo i dati JSON
     const trophyReload = document.getElementById('trophy-reload');
     if (trophyReload) {
-        trophyReload.addEventListener('click', () => {
-            location.reload();
+        trophyReload.addEventListener('click', async (e) => {
+            e.preventDefault();
+            // Aggiungi animazione di rotazione
+            trophyReload.style.animation = 'rotate 1s linear';
+            
+            // Ricarica solo i dati
+            await reloadDataOnly();
+            
+            // Rimuovi animazione
+            setTimeout(() => {
+                trophyReload.style.animation = '';
+            }, 1000);
         });
+        
+        // Tooltip migliorato
+        trophyReload.title = 'Aggiorna dati (senza ricaricare la pagina)';
     }
 });

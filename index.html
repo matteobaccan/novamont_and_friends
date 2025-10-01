@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Fantacalcio Novamont & Friends</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <script src="config.js"></script>
+    <script src="config.js?v=2.0"></script>
 </head>
 <body>
     <header class="header">
@@ -36,6 +39,9 @@
                 </button>
                 <button class="theme-toggle" id="theme-toggle" title="Cambia Tema">
                     <i class="fas fa-sun"></i>
+                </button>
+                <button class="cache-clear-btn" onclick="clearAllCache()" title="Svuota Cache e Ricarica">
+                    <i class="fas fa-broom"></i>
                 </button>
             </nav>
         </div>
@@ -185,6 +191,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=2.0"></script>
 </body>
 </html>
