@@ -2143,3 +2143,14 @@ html.theme-transition *:after {
 [data-theme="dark"] .error-message .error-details {
     background: rgba(0, 0, 0, 0.2);
 }
+
+/* Tema light per footer */
+[data-theme="light"] .footer p {
+    color: #0f172a;
+    opacity: 0.8;
+}
+
+[data-theme="light"] .social-links a {
+    color: #0f172a;
+    opacity: 0.8;
+}
