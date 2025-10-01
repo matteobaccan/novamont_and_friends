@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Calcolo Gol Ideali</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .result {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .correct { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Test Calcolo Gol Ideali - Match 2</h1>
+    <div id="results"></div>
+
+    <script>
+        // Copia le funzioni dallo script principale
+        function calculateGoalsFromScore(score) {
+            if (score < 66) {
+                return 0;
+            }
+            return Math.floor((score - 60) / 6);
+        }
+
+        function calculateIdealGoalsFromScore(score, isHome = false) {
+            const adjustedScore = isHome ? score + 1 : score;
+            return calculateGoalsFromScore(adjustedScore);
+        }
+
+        // Test Match 2: Real Ichnusa vs Cambra City
+        const match2 = {
+            homeTeam: "Real Ichnusa",
+            awayTeam: "Cambra City",
+            homeIdealScore: 83,
+            awayIdealScore: 84.5
+        };
+
+        const homeIdealGoals = calculateIdealGoalsFromScore(match2.homeIdealScore, true);
+        const awayIdealGoals = calculateIdealGoalsFromScore(match2.awayIdealScore, false);
+        const idealGoalScore = `${homeIdealGoals}-${awayIdealGoals}`;
+
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = `
+            <div class="result">
+                <h2>${match2.homeTeam} vs ${match2.awayTeam}</h2>
+                <p><strong>homeIdealScore:</strong> ${match2.homeIdealScore}</p>
+                <p><strong>awayIdealScore:</strong> ${match2.awayIdealScore}</p>
+                <hr>
+                <p><strong>Calcolo Casa (con bonus +1):</strong></p>
+                <p>Score: ${match2.homeIdealScore} + 1 = ${match2.homeIdealScore + 1}</p>
+                <p>Formula: (${match2.homeIdealScore + 1} - 60) / 6 = ${(match2.homeIdealScore + 1 - 60) / 6}</p>
+                <p>Floor: ${homeIdealGoals} gol</p>
+                <hr>
+                <p><strong>Calcolo Trasferta (senza bonus):</strong></p>
+                <p>Score: ${match2.awayIdealScore}</p>
+                <p>Formula: (${match2.awayIdealScore} - 60) / 6 = ${(match2.awayIdealScore - 60) / 6}</p>
+                <p>Floor: ${awayIdealGoals} gol</p>
+                <hr>
+                <h3 class="${idealGoalScore === '4-4' ? 'correct' : 'error'}">
+                    Risultato Ideale: ${idealGoalScore}
+                </h3>
+                <p class="${idealGoalScore === '4-4' ? 'correct' : 'error'}">
+                    ${idealGoalScore === '4-4' ? '✓ CORRETTO!' : '✗ ERRORE! Dovrebbe essere 4-4'}
+                </p>
+            </div>
+        `;
+    </script>
+</body>
+</html>

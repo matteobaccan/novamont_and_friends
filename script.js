@@ -25,6 +25,16 @@ function getMatchResult(homeScore, awayScore) {
     return "draw";
 }
 
+// Funzione per calcolare il risultato considerando i gol ideali con bonus casa
+function getIdealMatchResult(homeScore, awayScore) {
+    const homeGoals = calculateIdealGoalsFromScore(homeScore, true);
+    const awayGoals = calculateIdealGoalsFromScore(awayScore, false);
+    
+    if (homeGoals > awayGoals) return "home";
+    if (awayGoals > homeGoals) return "away";
+    return "draw";
+}
+
 // Funzione per calcolare la classifica dai risultati
 function calculateStandingsFromResults() {
     console.log('Calcolo classifica - dati disponibili:', fantacalcioData);
@@ -145,7 +155,7 @@ function calculateIdealStandingsFromResults() {
             
             const homeTeam = match.homeTeam;
             const awayTeam = match.awayTeam;
-            const result = getMatchResult(homeScore, awayScore);
+            const result = getIdealMatchResult(homeScore, awayScore);
             const homeGoals = calculateIdealGoalsFromScore(homeScore, true);
             const awayGoals = calculateIdealGoalsFromScore(awayScore, false);
             
@@ -814,6 +824,16 @@ function displayRoundResults(roundNumber) {
         if (hasIdealScores) {
             const homeIdealGoals = match.homeIdealGoals !== undefined ? match.homeIdealGoals : calculateIdealGoalsFromScore(match.homeIdealScore, true);
             const awayIdealGoals = match.awayIdealGoals !== undefined ? match.awayIdealGoals : calculateIdealGoalsFromScore(match.awayIdealScore, false);
+            
+            // Debug logging per match 2
+            if (match.homeTeam === "Real Ichnusa") {
+                console.log('DEBUG Match 2:');
+                console.log('homeIdealScore:', match.homeIdealScore);
+                console.log('awayIdealScore:', match.awayIdealScore);
+                console.log('homeIdealGoals calculated:', homeIdealGoals);
+                console.log('awayIdealGoals calculated:', awayIdealGoals);
+            }
+            
             const idealGoalScore = `${homeIdealGoals}-${awayIdealGoals}`;
             
             // Calcola differenze e confronti
@@ -1074,15 +1094,15 @@ function displayMatchCommentary(roundNumber) {
             </div>
             
             <div class="commentary-dialogue">
-                <span class="speaker">Caressa:</span> "Assolutamente! E che dire di Real Ichnusa-Cambra City? Un 2-3 spettacolare! Ma sai cosa mi colpisce? Anche con le formazioni ideali il risultato sarebbe stato lo stesso: 3-4 per il Cambra City!"
+                <span class="speaker">Caressa:</span> "Assolutamente! E che dire di Real Ichnusa-Cambra City? Un 2-3 spettacolare per gli ospiti! Ma sai cosa mi colpisce? Con le formazioni ideali sarebbe finita 4-4, un pareggio pirotecnico! Cambra City ha lasciato solo 0.5 punti in panchina!"
             </div>
             
             <div class="commentary-dialogue">
-                <span class="speaker bergomi">Bergomi:</span> "Questo dimostra che il Cambra City ha una rosa profonda, Fabio. Non è un caso che sia in testa alla classifica! E poi guarda Shakhtar Donuts: 2-1 all'Ultimo, ma con la formazione ideale sarebbe stato un pareggio 3-3..."
+                <span class="speaker bergomi">Bergomi:</span> "Esatto Fabio! Entrambe le squadre hanno fatto ottime scelte! E poi guarda Shakhtar Donuts: 2-1 all'Ultimo, ma con la formazione ideale sarebbe stato un pareggio 3-3. Occasione sprecata dall'Ultimo!"
             </div>
             
             <div class="commentary-dialogue">
-                <span class="speaker">Caressa:</span> "L'Ultimo sta vivendo un momento difficile, si vede che la preparazione estiva non è stata delle migliori! E PARTIZAN TIRANA? Sconfitto 0-1 dall'SM Frattese, ma con le scelte giuste poteva pareggiare 2-2!"
+                <span class="speaker">Caressa:</span> "L'Ultimo sta vivendo un momento difficile, si vede che la preparazione estiva non è stata delle migliori! E PARTIZAN TIRANA? Sconfitto 0-1 dall'SM Frattese, ma con le scelte giuste poteva pareggiare 2-2! Due punti buttati via!"
             </div>
             
             <div class="commentary-dialogue">
