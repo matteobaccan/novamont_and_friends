@@ -254,14 +254,17 @@ function calculateIdealStandingsFromResults() {
             const homeScore = match.homeIdealScore || match.homeScore;
             const awayScore = match.awayIdealScore || match.awayScore;
             
+            // Applica il bonus casa al punteggio ideale della squadra di casa
+            const homeScoreWithBonus = homeScore + 1;
+            
             const homeTeam = match.homeTeam;
             const awayTeam = match.awayTeam;
             const result = getIdealMatchResult(homeScore, awayScore);
             const homeGoals = calculateIdealGoalsFromScore(homeScore, true);
             const awayGoals = calculateIdealGoalsFromScore(awayScore, false);
             
-            // Aggiorna statistiche squadra casa
-            standings[homeTeam].totalScore += homeScore;
+            // Aggiorna statistiche squadra casa (usa punteggio con bonus per la media)
+            standings[homeTeam].totalScore += homeScoreWithBonus;
             standings[homeTeam].matchesPlayed += 1;
             standings[homeTeam].goalsFor += homeGoals;
             standings[homeTeam].goalsAgainst += awayGoals;
@@ -1173,17 +1176,18 @@ function generateCoachRanking(round) {
         if (match.homeIdealScore !== undefined && match.awayIdealScore !== undefined) {
             hasIdealData = true;
             
-            // Calcola punti persi per squadra casa
-            const homePointsLost = Math.max(0, match.homeIdealScore - match.homeScore);
+            // Calcola punti persi per squadra casa (con bonus casa +1)
+            const homeIdealScoreWithBonus = match.homeIdealScore + 1;
+            const homePointsLost = Math.max(0, homeIdealScoreWithBonus - match.homeScore);
             coachData.push({
                 team: match.homeTeam,
                 realScore: match.homeScore,
-                idealScore: match.homeIdealScore,
+                idealScore: homeIdealScoreWithBonus, // Usa punteggio con bonus
                 pointsLost: homePointsLost,
-                efficiency: ((match.homeScore / match.homeIdealScore) * 100).toFixed(1)
+                efficiency: ((match.homeScore / homeIdealScoreWithBonus) * 100).toFixed(1)
             });
             
-            // Calcola punti persi per squadra trasferta
+            // Calcola punti persi per squadra trasferta (nessun bonus)
             const awayPointsLost = Math.max(0, match.awayIdealScore - match.awayScore);
             coachData.push({
                 team: match.awayTeam,
