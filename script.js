@@ -205,126 +205,20 @@ function formatMatchScore(homeScore, awayScore) {
 // Variabile globale per i dati del fantacalcio
 let fantacalcioData = null;
 
-// Dati di fallback integrati nel caso il JSON non si carichi
-const fallbackData = {
-    lastUpdate: "30 Settembre 2025, 18:30",
-    season: "2025-2026",
-    currentRound: 1,
-    teams: [
-        {
-            id: 1,
-            name: "Cambra City",
-            owner: "Manager 1"
-        },
-        {
-            id: 2,
-            name: "Shakhtar Donuts",
-            owner: "Manager 2"
-        },
-        {
-            id: 3,
-            name: "SM Frattese",
-            owner: "Manager 3"
-        },
-        {
-            id: 4,
-            name: "CORTOMUSO",
-            owner: "Manager 4"
-        },
-        {
-            id: 5,
-            name: "CUSIANA",
-            owner: "Manager 5"
-        },
-        {
-            id: 6,
-            name: "Real Ichnusa",
-            owner: "Manager 6"
-        },
-        {
-            id: 7,
-            name: "Ultimo",
-            owner: "Manager 7"
-        },
-        {
-            id: 8,
-            name: "PARTIZAN TIRANA",
-            owner: "Manager 8"
-        }
-    ],
-    rounds: [
-        {
-            round: 1,
-            date: "Settembre 2025",
-            matches: [
-                {
-                    id: 1,
-                    homeTeam: "CUSIANA",
-                    awayTeam: "CORTOMUSO",
-                    homeScore: 69.0,
-                    awayScore: 70.0,
-                    homeIdealScore: 70.0,
-                    awayIdealScore: 74.0
-                },
-                {
-                    id: 2,
-                    homeTeam: "Real Ichnusa",
-                    awayTeam: "Cambra City",
-                    homeScore: 77.5,
-                    awayScore: 78.0,
-                    homeIdealScore: 83.0,
-                    awayIdealScore: 84.5
-                },
-                {
-                    id: 3,
-                    homeTeam: "Shakhtar Donuts",
-                    awayTeam: "Ultimo",
-                    homeScore: 75.5,
-                    awayScore: 69.5,
-                    homeIdealScore: 82.5,
-                    awayIdealScore: 80.0
-                },
-                {
-                    id: 4,
-                    homeTeam: "PARTIZAN TIRANA",
-                    awayTeam: "SM Frattese",
-                    homeScore: 64.0,
-                    awayScore: 67.5,
-                    homeIdealScore: 72.0,
-                    awayIdealScore: 72.0
-                }
-            ]
-        }
-    ],
-    settings: {
-        pointsForWin: 3,
-        pointsForDraw: 1,
-        pointsForLoss: 0,
-        leagueFormat: "Girone all'italiana",
-        totalRounds: 14,
-        goalCalculation: {
-            pointsPerGoal: 6,
-            description: "Ogni 6 punti fantacalcio = 1 gol"
-        }
-    }
-};
-
 // Funzione per caricare i dati dal file JSON
 async function loadFantacalcioData() {
     try {
         const response = await fetch('fantacalcio_data.json');
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`Errore HTTP! Status: ${response.status}`);
         }
         fantacalcioData = await response.json();
         console.log('Dati caricati dal JSON con successo:', fantacalcioData);
         return fantacalcioData;
     } catch (error) {
-        console.warn('Impossibile caricare il file JSON, uso dati integrati:', error.message);
-        // Usa i dati di fallback integrati
-        fantacalcioData = JSON.parse(JSON.stringify(fallbackData)); // Deep copy
-        console.log('Dati di fallback caricati:', fantacalcioData);
-        return fantacalcioData;
+        console.error('Impossibile caricare il file JSON:', error.message);
+        // Rilanciamo l'errore per gestirlo nell'inizializzazione
+        throw error;
     }
 }
 
@@ -332,6 +226,28 @@ async function loadFantacalcioData() {
 document.addEventListener('DOMContentLoaded', async function() {
     await initializeApp();
 });
+
+// Funzione per mostrare un messaggio d'errore all'utente
+function showErrorMessage(error) {
+    const mainContent = document.querySelector('main') || document.body;
+    
+    const errorContainer = document.createElement('div');
+    errorContainer.className = 'error-message';
+    errorContainer.innerHTML = `
+        <i class="fas fa-exclamation-triangle"></i>
+        <h2>Errore nel Caricamento dei Dati</h2>
+        <p>Non è stato possibile caricare i dati del fantacalcio. Verifica che il file "fantacalcio_data.json" sia presente e accessibile.</p>
+        <div class="error-details">
+            <strong>Dettagli tecnici:</strong><br>
+            ${error.message}
+        </div>
+        <p>Ricarica la pagina per riprovare.</p>
+    `;
+    
+    // Rimuovi tutto il contenuto esistente e mostra solo l'errore
+    mainContent.innerHTML = '';
+    mainContent.appendChild(errorContainer);
+}
 
 async function initializeApp() {
     try {
@@ -342,8 +258,7 @@ async function initializeApp() {
         
         // Verifica che i dati siano caricati correttamente
         if (!fantacalcioData) {
-            console.error('Nessun dato disponibile');
-            return;
+            throw new Error('Nessun dato disponibile dopo il caricamento');
         }
         
         console.log('Dati disponibili:', fantacalcioData);
@@ -363,16 +278,8 @@ async function initializeApp() {
         
     } catch (error) {
         console.error('Errore durante l\'inizializzazione:', error);
-        // Mostra un messaggio di errore all'utente
-        const standingsTable = document.getElementById('standings-table');
-        if (standingsTable) {
-            standingsTable.innerHTML = `
-                <div style="text-align: center; padding: 2rem; color: #666;">
-                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                    <p>Errore nel caricamento dei dati. Ricarica la pagina.</p>
-                </div>
-            `;
-        }
+        // Mostra un messaggio di errore visibile all'utente
+        showErrorMessage(error);
     }
 }
 

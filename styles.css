@@ -2090,3 +2090,56 @@ html.theme-transition *:after {
         font-size: 0.9rem;
     }
 }
+
+/* Stili per il messaggio d'errore */
+.error-message {
+    background: linear-gradient(135deg, #ff6b6b, #ff5252);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 8px 32px rgba(255, 107, 107, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.error-message h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.error-message p {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.error-message i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    opacity: 0.8;
+}
+
+.error-message .error-details {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+/* Tema scuro per messaggio d'errore */
+[data-theme="dark"] .error-message {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .error-message .error-details {
+    background: rgba(0, 0, 0, 0.2);
+}
