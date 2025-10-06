@@ -16,6 +16,23 @@ awayIdealScore = punteggioFantacalcio  // Nessun bonus
 awayIdealGoals = Math.floor((awayIdealScore - 60) / 6)
 ```
 
+## ⚖️ Regola Speciale: Pareggio con Grande Differenza
+
+**Se il risultato ideale è un pareggio MA la differenza di punti è ≥ 4**:
+- La squadra con il punteggio maggiore riceve **+1 gol bonus**
+- Questo riflette la dominanza effettiva nonostante il pareggio nei gol
+
+### Esempio:
+```
+Squadra A (casa): 78 pt + 1 (bonus) = 79 pt → 3 gol
+Squadra B (trasferta): 83 pt → 3 gol
+Risultato base: 3-3 (pareggio)
+
+Differenza punti: |79 - 83| = 4 pt
+→ Squadra B riceve +1 gol bonus
+Risultato finale: 3-4 per Squadra B
+```
+
 ## 🎯 Esempio Pratico: Real Ichnusa vs Cambra City
 
 ### Dati dal JSON:
