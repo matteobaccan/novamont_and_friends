@@ -133,6 +133,17 @@ function getIdealMatchResult(homeScore, awayScore) {
     
     if (homeGoals > awayGoals) return "home";
     if (awayGoals > homeGoals) return "away";
+    
+    // In caso di pareggio, verifica la differenza di punti
+    // Se la differenza è >= 4 punti, chi ha il punteggio maggiore riceve 1 gol in più
+    const homeScoreWithBonus = homeScore + 1; // Bonus casa
+    const scoreDifference = Math.abs(homeScoreWithBonus - awayScore);
+    
+    if (scoreDifference >= 4) {
+        if (homeScoreWithBonus > awayScore) return "home";
+        if (awayScore > homeScoreWithBonus) return "away";
+    }
+    
     return "draw";
 }
 
@@ -969,10 +980,8 @@ function displayRoundResults(roundNumber) {
     const roundResults = document.getElementById('giornata-results');
     const round = fantacalcioData.rounds.find(r => r.round === roundNumber);
     
-    // Mostra il commento se è la prima giornata (all'inizio)
-    if (roundNumber === 1) {
-        displayMatchCommentary(roundNumber);
-    }
+    // Mostra il commento per la giornata selezionata
+    displayMatchCommentary(roundNumber);
 
     if (!round) {
         roundResults.innerHTML = '<p>Nessun risultato disponibile per questa giornata.</p>';
