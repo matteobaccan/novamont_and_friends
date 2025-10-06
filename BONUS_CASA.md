@@ -64,7 +64,7 @@ Nella sezione **Giornate** → **Formazioni Ideali vs Reali**, vedrai:
 ```
 Real Ichnusa (Casa)
 ├─ Ideale: 4 gol (84 pt)
-│  └─ 🏠 +1 bonus casa
+│  └─ 🏠 +1
 ├─ Reale: 2 gol (77.5 pt)
 └─ Differenza: +6.5 pt (+2 gol)  ← Usa 84 pt!
 
@@ -129,7 +129,7 @@ const awayIdealScoreWithBonus = match.awayIdealScore;     // Nessun bonus
 
 // Visualizza nella UI
 ${homeIdealGoals} gol (${homeIdealScoreWithBonus} pt)
-<span class="bonus-indicator">+1 bonus casa</span>
+<span class="bonus-indicator">+1</span>
 ```
 
 ## 🎨 Indicatore Visuale

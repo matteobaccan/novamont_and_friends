@@ -1067,7 +1067,7 @@ function displayRoundResults(roundNumber) {
                                 <div class="score-ideal">
                                     <span class="label">Ideale:</span>
                                     <span class="value">${homeIdealGoals} gol (${homeIdealScoreWithBonus} pt)</span>
-                                    <span class="bonus-indicator">+1 bonus casa</span>
+                                    <span class="bonus-indicator">+1</span>
                                 </div>
                                 <div class="score-difference ${homeDifference >= 0 ? 'positive' : 'negative'}">
                                     <span class="label">Differenza:</span>
@@ -1282,39 +1282,38 @@ function displayMatchCommentary(roundNumber) {
     const commentarySection = document.getElementById('match-commentary');
     const commentaryContent = document.getElementById('commentary-content');
     
-    if (roundNumber === 1) {
-        const commentary = `
-            <div class="commentary-dialogue">
-                <span class="speaker">Caressa:</span> "Beppe, che bella prima giornata di Fantacalcio! Partiamo subito con un match che ha fatto discutere: CUSIANA contro CORTOMUSO, un classico 1-1 che non ha lasciato soddisfatto nessuno!"
-            </div>
-            
-            <div class="commentary-dialogue">
-                <span class="speaker bergomi">Bergomi:</span> "Eh sì Fabio, ma guarda che se avessero schierato le formazioni ideali sarebbe finita 1-2 per il CORTOMUSO! Qui si vede la differenza tra chi sa gestire la rosa e chi si affida solo al feeling..."
-            </div>
-            
-            <div class="commentary-dialogue">
-                <span class="speaker">Caressa:</span> "Assolutamente! E che dire di Real Ichnusa-Cambra City? Un 2-3 spettacolare per gli ospiti! Ma sai cosa mi colpisce? Con le formazioni ideali sarebbe finita 4-4, un pareggio pirotecnico! Cambra City ha lasciato solo 0.5 punti in panchina!"
-            </div>
-            
-            <div class="commentary-dialogue">
-                <span class="speaker bergomi">Bergomi:</span> "Esatto Fabio! Entrambe le squadre hanno fatto ottime scelte! E poi guarda Shakhtar Donuts: 2-1 all'Ultimo, ma con la formazione ideale sarebbe stato un pareggio 3-3. Occasione sprecata dall'Ultimo!"
-            </div>
-            
-            <div class="commentary-dialogue">
-                <span class="speaker">Caressa:</span> "L'Ultimo sta vivendo un momento difficile, si vede che la preparazione estiva non è stata delle migliori! E PARTIZAN TIRANA? Sconfitto 0-1 dall'SM Frattese, ma con le scelte giuste poteva pareggiare 2-2! Due punti buttati via!"
-            </div>
-            
-            <div class="commentary-dialogue">
-                <span class="speaker bergomi">Bergomi:</span> "La cosa che mi preoccupa di più, Fabio, è che troppe squadre stanno lasciando punti per strada con scelte sbagliate. In un campionato così equilibrato, ogni formazione conta!"
-            </div>
-            
-            <div class="commentary-dialogue">
-                <span class="speaker">Caressa:</span> "Hai ragione Beppe! E ora tutti gli occhi sono puntati sulla prossima giornata. Chi saprà fare le scelte giuste? Lo scopriremo solo... giocando!"
-            </div>
-        `;
+    // Trova il round corrente
+    const round = fantacalcioData.rounds.find(r => r.round === roundNumber);
+    
+    if (round && round.matches && round.matches.length > 0) {
+        let commentary = '';
         
-        commentaryContent.innerHTML = commentary;
-        commentarySection.style.display = 'block';
+        // Genera i commenti per ogni match del round
+        round.matches.forEach(match => {
+            if (match.commentary) {
+                commentary += `
+                    <div class="commentary-match">
+                        <div class="commentary-match-title">
+                            <i class="fas fa-futbol"></i>
+                            ${match.homeTeam} vs ${match.awayTeam}
+                        </div>
+                        <div class="commentary-dialogue">
+                            <span class="speaker">Caressa:</span> "${match.commentary.caressa}"
+                        </div>
+                        <div class="commentary-dialogue">
+                            <span class="speaker bergomi">Bergomi:</span> "${match.commentary.bergomi}"
+                        </div>
+                    </div>
+                `;
+            }
+        });
+        
+        if (commentary) {
+            commentaryContent.innerHTML = commentary;
+            commentarySection.style.display = 'block';
+        } else {
+            commentarySection.style.display = 'none';
+        }
     } else {
         commentarySection.style.display = 'none';
     }

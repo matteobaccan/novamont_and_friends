@@ -1,7 +1,7 @@
 {
-  "lastUpdate": "30 Settembre 2025, 18:30",
+  "lastUpdate": "6 Ottobre 2025, 18:30",
   "season": "2025-2026",
-  "currentRound": 1,
+  "currentRound": 2,
   "teams": [
     {
       "id": 1,
@@ -56,7 +56,11 @@
           "homeScore": 69.0,
           "awayScore": 70.0,
           "homeIdealScore": 70.0,
-          "awayIdealScore": 74.0
+          "awayIdealScore": 74.0,
+          "commentary": {
+            "caressa": "Che bella prima giornata! CUSIANA-CORTOMUSO finisce 1-1, un pareggio che non lascia soddisfatto nessuno!",
+            "bergomi": "Guarda che se avessero schierato le formazioni ideali sarebbe finita 2-2! Con il bonus casa la Cusiana sarebbe arrivata a 71 contro i 74 del Cortomuso. Qui si vede la differenza tra chi sa gestire la rosa e chi si affida al feeling."
+          }
         },
         {
           "id": 2,
@@ -65,7 +69,11 @@
           "homeScore": 77.5,
           "awayScore": 78.0,
           "homeIdealScore": 83.0,
-          "awayIdealScore": 84.5
+          "awayIdealScore": 84.5,
+          "commentary": {
+            "caressa": "Real Ichnusa-Cambra City! Un 2-3 spettacolare per gli ospiti! Ma sai cosa mi colpisce? Con le formazioni ideali sarebbe finita 4-4, un pareggio pirotecnico!",
+            "bergomi": "Cambra City ha fatto scelte eccellenti, lasciato solo 0.5 punti in panchina! Entrambe le squadre hanno giocato molto bene. Con il bonus casa il Real sarebbe arrivato a 84 contro gli 84.5 del Cambra."
+          }
         },
         {
           "id": 3,
@@ -74,7 +82,11 @@
           "homeScore": 75.5,
           "awayScore": 69.5,
           "homeIdealScore": 82.5,
-          "awayIdealScore": 80.0
+          "awayIdealScore": 80.0,
+          "commentary": {
+            "caressa": "Shakhtar Donuts batte l'Ultimo 2-1! Ma con la formazione ideale sarebbe stato un pirotecnico 3-3!",
+            "bergomi": "Occasione sprecata dall'Ultimo! Con il bonus casa lo Shakhtar arriva a 83.5 contro gli 80 dell'Ultimo. L'Ultimo sta vivendo un momento difficile, si vede che la preparazione estiva non è stata delle migliori."
+          }
         },
         {
           "id": 4,
@@ -83,7 +95,69 @@
           "homeScore": 64.0,
           "awayScore": 67.5,
           "homeIdealScore": 72.0,
-          "awayIdealScore": 72.0
+          "awayIdealScore": 72.0,
+          "commentary": {
+            "caressa": "PARTIZAN TIRANA sconfitto 0-1 dall'SM Frattese! Match combattuto che finisce con la vittoria esterna della Frattese!",
+            "bergomi": "Con le scelte giuste poteva finire 2-2! Con il bonus casa il Partizan arriva a 73 contro i 72 della Frattese. Due punti buttati via! In un campionato così equilibrato, ogni formazione conta!"
+          }
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "date": "Ottobre 2025",
+      "matches": [
+        {
+          "id": 5,
+          "homeTeam": "CORTOMUSO",
+          "awayTeam": "PARTIZAN TIRANA",
+          "homeScore": 78.5,
+          "awayScore": 72.0,
+          "homeIdealScore": 81.0,
+          "awayIdealScore": 75.0,
+          "commentary": {
+            "caressa": "GOOOOL! GOOOOL! CORTOMUSO! Vittoria convincente per 3-2! Con il bonus casa sale a 82 punti ideali e domina la partita!",
+            "bergomi": "Partita ben gestita da Sir Alex Baccan. L'attacco ha funzionato alla perfezione, 78.5 punti reali contro i 72 del Partizan. Tre punti meritati."
+          }
+        },
+        {
+          "id": 6,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 75.0,
+          "awayScore": 69.0,
+          "homeIdealScore": 79.0,
+          "awayIdealScore": 70.5,
+          "commentary": {
+            "caressa": "Rete decisiva! SM Frattese batte 2-1 lo Shakhtar! Con l'80 ideale grazie al bonus casa, Pezant si porta a casa i tre punti!",
+            "bergomi": "Difesa solida della Frattese. 75 punti reali sufficienti per contenere i 69 dello Shakhtar. Match ben interpretato, vittoria meritata."
+          }
+        },
+        {
+          "id": 7,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 73.5,
+          "awayScore": 71.5,
+          "homeIdealScore": 79.0,
+          "awayIdealScore": 79.0,
+          "commentary": {
+            "caressa": "ULTIMO VINCE! 2-1 contro il Real Ichnusa! Partita equilibratissima, idealmente 2-2 con entrambe le squadre a 79 e 80 con il bonus, ma decide il risultato reale!",
+            "bergomi": "Match molto tirato. 73.5 contro 71.5, soli 2 punti di differenza. L'Ultimo sfrutta il fattore campo e conquista tre punti d'oro. Il Real recrimina."
+          }
+        },
+        {
+          "id": 8,
+          "homeTeam": "Cambra City",
+          "awayTeam": "CUSIANA",
+          "homeScore": 71.5,
+          "awayScore": 68.5,
+          "homeIdealScore": 71.0,
+          "awayIdealScore": 69.5,
+          "commentary": {
+            "caressa": "Pareggio! 1-1 tra Cambra City e CUSIANA! Match combattuto, idealmente sarebbe finita 1-1 con Cambra a 72 (bonus casa) contro i 69.5 della Cusiana!",
+            "bergomi": "Partita bloccata. 71.5 contro 68.5, tre punti di scarto ma entrambe le squadre portano a casa un punto. Prestazioni sottotono da entrambe le parti."
+          }
         }
       ]
     }
