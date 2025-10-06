@@ -8,25 +8,26 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 
 ### 🏆 **Classifiche Complete**
 - **Classifica Reale**: Posizioni, punti campionato, gol fatti/subiti, differenza reti, totale punti fantacalcio
-- **Classifica Ideale**: Simulazione con le migliori formazioni possibili e confronto con la classifica reale
+- **Classifica Ideale**: Simulazione con le migliori formazioni possibili, confronto con la classifica reale e statistiche allenatori
+- **Statistiche Allenatori**: Podio con ranking basato su efficienza e punti persi medi
 - **Ordinamento Dinamico**: Clicca su qualsiasi colonna per ordinare i dati
 - **Algoritmo Gol**: Sistema preciso di calcolo gol (66pt = 1 gol, poi ogni 6 punti)
+- **Tie-Breaker Intelligente**: Nelle partite ideali pareggiate, se la differenza punti è ≥4, vince chi ha il punteggio più alto
 
 ### 📅 **Gestione Giornate Avanzata**
 - **Risultati Dettagliati**: Punteggi reali e ideali per ogni match
 - **Confronto Intelligente**: Analisi automatica reale vs ideale per ogni giornata
-- **Commenti Esclusivi**: Analisi in stile Caressa-Bergomi per la prima giornata
+- **Commenti Inline**: Analisi in stile Caressa-Bergomi direttamente sotto ogni partita
+- **Commenti in JSON**: Tutti i commenti gestiti in formato JSON per facile manutenzione
 - **Selezione Dinamica**: Naviga facilmente tra le diverse giornate
-
-### 📊 **Statistiche e Analisi**
-- **Dashboard Completo**: Leader, punteggi più alti, squadre partecipanti
-- **Spiegazione Algoritmi**: Info dettagliate sul calcolo dei gol
-- **Metriche Avanzate**: Media punti, differenze prestazioni, confronti storici
+- **Bonus Casa**: Sistema automatico di bonus +1 punto per la squadra di casa nei calcoli ideali
 
 ### 🎨 **Design e Usabilità**
-- **Interface Moderna**: Design gradient con animazioni fluide
-- **100% Responsive**: Ottimizzato per desktop, tablet e mobile
-- **Navigazione Intuitiva**: Tab system per accesso rapido alle sezioni
+- **Glassmorphism Design**: Effetti blur, trasparenze e gradienti moderni
+- **Animazioni Fluide**: Effetti float, pulse e spin per un'esperienza dinamica
+- **100% Responsive**: Layout 2 colonne su desktop, 1 colonna su mobile (max 450px per colonna)
+- **Tema Personalizzabile**: Supporto per dark mode e light mode
+- **Navigazione Pulita**: 3 sezioni principali (Classifica, Classifica Ideale, Giornate)
 - **Font Awesome Icons**: Iconografie professionali in tutto il sito
 
 ## 🚀 Come utilizzare
@@ -37,9 +38,8 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 
 ### 🧭 **Navigazione**
 1. **🏆 Classifica**: Visualizza la classifica attuale con tutti i dettagli
-2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette
-3. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti
-4. **📊 Statistiche**: Consulta dashboard e spiegazioni tecniche
+2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette e statistiche allenatori
+3. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti inline
 
 ### 💡 **Funzionalità Interattive**
 - **Clicca** sulle colonne delle tabelle per ordinare i dati
@@ -93,10 +93,10 @@ novamont_and_friends/
 ```
 
 ### 🗂️ **Dettaglio File**
-- **`index.html`**: Interface completa con 4 sezioni (Classifica, Classifica Ideale, Giornate, Statistiche)
-- **`styles.css`**: 700+ righe di CSS responsive con animazioni e design moderno
-- **`script.js`**: 1000+ righe di JavaScript con algoritmi avanzati e gestione dati
-- **`fantacalcio_data.json`**: Database JSON con teams, rounds, matches e punteggi ideali
+- **`index.html`**: Interface completa con 3 sezioni (Classifica, Classifica Ideale, Giornate)
+- **`styles.css`**: 2800+ righe di CSS responsive con glassmorphism e animazioni moderne
+- **`script.js`**: 1600+ righe di JavaScript con algoritmi avanzati e gestione dati
+- **`fantacalcio_data.json`**: Database JSON con teams, rounds, matches, punteggi ideali e commenti
 - **`config.js`**: Impostazioni configurabili per personalizzazione
 
 ## 🔧 Funzioni Avanzate
@@ -198,4 +198,4 @@ Sviluppato con ❤️ per il Fantacalcio Novamont & Friends
 
 ---
 
-**Ultimo aggiornamento**: 30 Settembre 2025 🚀
+**Ultimo aggiornamento**: Ottobre 2025 🚀

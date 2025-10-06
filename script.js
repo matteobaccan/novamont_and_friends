@@ -832,44 +832,44 @@ function displayIdealStandings() {
         <table class="standings-table ideal-standings-table">
             <thead>
                 <tr class="table-header">
-                    <th class="sortable-header" data-column="position">
-                        Pos. <i class="fas fa-sort"></i>
+                    <th>
+                        Pos.
                     </th>
-                    <th class="sortable-header" data-column="name">
-                        Squadra <i class="fas fa-sort"></i>
+                    <th>
+                        Squadra
                     </th>
-                    <th class="sortable-header" data-column="points">
-                        Pt <i class="fas fa-sort"></i>
+                    <th>
+                        Pt
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="wins">
-                        V <i class="fas fa-sort"></i>
+                    <th class="mobile-hide">
+                        V
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="draws">
-                        P <i class="fas fa-sort"></i>
+                    <th class="mobile-hide">
+                        P
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="losses">
-                        S <i class="fas fa-sort"></i>
+                    <th class="mobile-hide">
+                        S
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="goalsFor">
-                        GF <i class="fas fa-sort"></i>
+                    <th class="mobile-hide">
+                        GF
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="goalsAgainst">
-                        GS <i class="fas fa-sort"></i>
+                    <th class="mobile-hide">
+                        GS
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="goalDifference">
-                        DR <i class="fas fa-sort"></i>
+                    <th class="mobile-hide">
+                        DR
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="totalScore">
-                        Pt <i class="fas fa-sort"></i>
+                    <th class="mobile-hide">
+                        Pt
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="avgScore">
-                        Media <i class="fas fa-sort"></i>
+                    <th class="mobile-hide">
+                        Media
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="positionDifference">
-                        Diff Pos <i class="fas fa-sort"></i>
+                    <th class="mobile-hide">
+                        Diff Pos
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="pointsDifference">
-                        Diff Pt <i class="fas fa-sort"></i>
+                    <th class="mobile-hide">
+                        Diff Pt
                     </th>
                 </tr>
             </thead>
