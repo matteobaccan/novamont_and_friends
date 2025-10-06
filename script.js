@@ -673,6 +673,65 @@ function displayStandings() {
     setupSortableHeaders();
 }
 
+// Funzione per calcolare le statistiche complessive degli allenatori
+function calculateOverallCoachStats() {
+    if (!fantacalcioData || !fantacalcioData.rounds) return [];
+    
+    const teamStats = {};
+    
+    // Inizializza le statistiche per ogni team
+    fantacalcioData.teams.forEach(team => {
+        teamStats[team.name] = {
+            team: team.name,
+            totalPointsLost: 0,
+            totalRealScore: 0,
+            totalIdealScore: 0,
+            matchesPlayed: 0,
+            avgPointsLost: 0,
+            efficiency: 0
+        };
+    });
+    
+    // Calcola i punti persi per ogni giornata
+    fantacalcioData.rounds.forEach(round => {
+        round.matches.forEach(match => {
+            // Squadra di casa
+            if (match.homeIdealScore !== undefined) {
+                const homeIdealScoreWithBonus = match.homeIdealScore + 1; // Bonus casa
+                const homePointsLost = homeIdealScoreWithBonus - match.homeScore;
+                teamStats[match.homeTeam].totalPointsLost += homePointsLost;
+                teamStats[match.homeTeam].totalRealScore += match.homeScore;
+                teamStats[match.homeTeam].totalIdealScore += homeIdealScoreWithBonus;
+                teamStats[match.homeTeam].matchesPlayed += 1;
+            }
+            
+            // Squadra in trasferta
+            if (match.awayIdealScore !== undefined) {
+                const awayPointsLost = match.awayIdealScore - match.awayScore;
+                teamStats[match.awayTeam].totalPointsLost += awayPointsLost;
+                teamStats[match.awayTeam].totalRealScore += match.awayScore;
+                teamStats[match.awayTeam].totalIdealScore += match.awayIdealScore;
+                teamStats[match.awayTeam].matchesPlayed += 1;
+            }
+        });
+    });
+    
+    // Calcola medie ed efficienza
+    Object.values(teamStats).forEach(stat => {
+        if (stat.matchesPlayed > 0) {
+            stat.avgPointsLost = stat.totalPointsLost / stat.matchesPlayed;
+            // Efficienza: stessa formula della giornata singola (realScore / idealScore * 100)
+            const efficiencyRaw = (stat.totalRealScore / stat.totalIdealScore) * 100;
+            stat.efficiency = parseFloat(efficiencyRaw.toFixed(2));
+        }
+    });
+    
+    // Ordina per media punti persi (meno punti persi = miglior allenatore)
+    return Object.values(teamStats)
+        .filter(stat => stat.matchesPlayed > 0)
+        .sort((a, b) => a.avgPointsLost - b.avgPointsLost);
+}
+
 // Funzione per visualizzare la classifica ideale
 function displayIdealStandings() {
     const idealStandingsTable = document.getElementById('ideal-standings-table');
@@ -696,6 +755,9 @@ function displayIdealStandings() {
     // Calcola la classifica reale per confronto
     const realStandings = calculateStandingsFromResults();
     
+    // Calcola statistiche allenatore (media punti persi per tutte le giornate)
+    const coachStats = calculateOverallCoachStats();
+    
     // Aggiungi le differenze alla classifica ideale
     idealStandings.forEach((idealTeam, idealIndex) => {
         const realTeamIndex = realStandings.findIndex(realTeam => realTeam.name === idealTeam.name);
@@ -706,7 +768,67 @@ function displayIdealStandings() {
         idealTeam.scoreDifference = (realTeam ? realTeam.totalScore : 0) - idealTeam.totalScore;
     });
     
-    let html = `
+    // Genera HTML per la statistica del miglior allenatore
+    let coachStatsHtml = '';
+    if (coachStats && coachStats.length > 0) {
+        coachStatsHtml = `
+            <div class="coach-stats-ideal">
+                <div class="coach-stats-header">
+                    <h3><i class="fas fa-medal"></i> Miglior Allenatore (Media Globale)</h3>
+                    <p class="coach-stats-subtitle">Basato sulla media dei punti persi in tutte le giornate</p>
+                </div>
+                <div class="coach-stats-podium">
+                    ${coachStats.slice(0, 3).map((coach, index) => `
+                        <div class="coach-podium-item ${index === 0 ? 'gold' : index === 1 ? 'silver' : 'bronze'}">
+                            <div class="podium-position">${index + 1}°</div>
+                            <div class="podium-team">${coach.team}</div>
+                            <div class="podium-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>${coach.avgPointsLost.toFixed(1)} pt persi/giornata</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-percentage"></i>
+                                    <span>${coach.efficiency}% efficienza</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>${coach.matchesPlayed} giornate</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <details class="coach-full-ranking">
+                    <summary><i class="fas fa-list"></i> Vedi classifica completa allenatori</summary>
+                    <table class="coach-ranking-table">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Squadra</th>
+                                <th>Media Pt Persi</th>
+                                <th>Efficienza</th>
+                                <th>Giornate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${coachStats.map((coach, index) => `
+                                <tr class="${index < 3 ? 'top-three' : ''}">
+                                    <td>${index + 1}</td>
+                                    <td>${coach.team}</td>
+                                    <td>${coach.avgPointsLost.toFixed(1)}</td>
+                                    <td>${coach.efficiency}%</td>
+                                    <td>${coach.matchesPlayed}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </details>
+            </div>
+        `;
+    }
+
+    let html = coachStatsHtml + `
         <table class="standings-table ideal-standings-table">
             <thead>
                 <tr class="table-header">

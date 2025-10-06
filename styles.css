@@ -630,6 +630,216 @@ html.theme-transition *:after {
     font-weight: 600;
 }
 
+/* Statistiche Miglior Allenatore - Classifica Ideale */
+.coach-stats-ideal {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px var(--shadow-lg);
+}
+
+.coach-stats-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.coach-stats-header h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.coach-stats-header h3 i {
+    color: #ffd700;
+    font-size: 2rem;
+    filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.4));
+}
+
+.coach-stats-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+.coach-stats-podium {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.coach-podium-item {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 2px solid;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.coach-podium-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+.coach-podium-item.gold {
+    border-color: #ffd700;
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+}
+
+.coach-podium-item.gold::before {
+    background: linear-gradient(90deg, #ffd700, #ffed4e);
+}
+
+.coach-podium-item.silver {
+    border-color: #c0c0c0;
+    box-shadow: 0 8px 32px rgba(192, 192, 192, 0.3);
+}
+
+.coach-podium-item.silver::before {
+    background: linear-gradient(90deg, #c0c0c0, #e8e8e8);
+}
+
+.coach-podium-item.bronze {
+    border-color: #cd7f32;
+    box-shadow: 0 8px 32px rgba(205, 127, 50, 0.3);
+}
+
+.coach-podium-item.bronze::before {
+    background: linear-gradient(90deg, #cd7f32, #e89f5f);
+}
+
+.coach-podium-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 48px var(--shadow-lg);
+}
+
+.podium-position {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--text-light), var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.podium-team {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.podium-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.stat-item i {
+    color: var(--accent);
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.coach-full-ranking {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 1.5rem;
+}
+
+.coach-full-ranking summary {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 1rem;
+    background: var(--glass-bg);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.coach-full-ranking summary:hover {
+    background: var(--glass-border);
+    transform: translateX(4px);
+}
+
+.coach-full-ranking summary i {
+    color: var(--accent);
+}
+
+.coach-ranking-table {
+    width: 100%;
+    margin-top: 1rem;
+    border-collapse: collapse;
+}
+
+.coach-ranking-table thead {
+    background: var(--glass-bg);
+}
+
+.coach-ranking-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 700;
+    color: var(--text-light);
+    border-bottom: 2px solid var(--glass-border);
+}
+
+.coach-ranking-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+}
+
+.coach-ranking-table tr:hover {
+    background: var(--glass-bg);
+}
+
+.coach-ranking-table tr.top-three {
+    font-weight: 600;
+    background: var(--glass-bg);
+}
+
+.coach-ranking-table tr.top-three td:first-child {
+    color: #ffd700;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
 /* Classifica Ideale - Layout Più Ampio */
 #ideal-standings-table .table-header {
     grid-template-columns: 60px 1fr 50px 35px 35px 35px 45px 45px 50px 60px 65px 60px 60px;
