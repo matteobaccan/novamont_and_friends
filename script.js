@@ -1143,6 +1143,24 @@ function displayRoundResults(roundNumber) {
             `;
         }
 
+        // Sezione commento se disponibile
+        let commentarySection = '';
+        if (match.commentary) {
+            commentarySection = `
+                <div class="match-commentary-inline">
+                    <div class="commentary-title">
+                        <i class="fas fa-microphone"></i> Commento Match
+                    </div>
+                    <div class="commentary-dialogue-inline">
+                        <span class="speaker">Caressa:</span> "${match.commentary.caressa}"
+                    </div>
+                    <div class="commentary-dialogue-inline">
+                        <span class="speaker bergomi">Bergomi:</span> "${match.commentary.bergomi}"
+                    </div>
+                </div>
+            `;
+        }
+
         html += `
             <div class="match-card" style="animation-delay: ${index * 0.1}s">
                 <div class="match-header">Match ${index + 1}</div>
@@ -1166,6 +1184,7 @@ function displayRoundResults(roundNumber) {
                     ${resultText}
                 </div>
                 ${idealSection}
+                ${commentarySection}
             </div>
         `;
     });
@@ -1286,44 +1305,12 @@ function generateCoachRanking(round) {
     return html;
 }
 
-// Funzione per mostrare il commento della giornata
+// Funzione per mostrare il commento della giornata (ora non serve più, commenti inline)
 function displayMatchCommentary(roundNumber) {
+    // I commenti sono ora mostrati inline dentro ogni match card
+    // Questa funzione viene mantenuta per retrocompatibilità ma nasconde la sezione
     const commentarySection = document.getElementById('match-commentary');
-    const commentaryContent = document.getElementById('commentary-content');
-    
-    // Trova il round corrente
-    const round = fantacalcioData.rounds.find(r => r.round === roundNumber);
-    
-    if (round && round.matches && round.matches.length > 0) {
-        let commentary = '';
-        
-        // Genera i commenti per ogni match del round
-        round.matches.forEach(match => {
-            if (match.commentary) {
-                commentary += `
-                    <div class="commentary-match">
-                        <div class="commentary-match-title">
-                            <i class="fas fa-futbol"></i>
-                            ${match.homeTeam} vs ${match.awayTeam}
-                        </div>
-                        <div class="commentary-dialogue">
-                            <span class="speaker">Caressa:</span> "${match.commentary.caressa}"
-                        </div>
-                        <div class="commentary-dialogue">
-                            <span class="speaker bergomi">Bergomi:</span> "${match.commentary.bergomi}"
-                        </div>
-                    </div>
-                `;
-            }
-        });
-        
-        if (commentary) {
-            commentaryContent.innerHTML = commentary;
-            commentarySection.style.display = 'block';
-        } else {
-            commentarySection.style.display = 'none';
-        }
-    } else {
+    if (commentarySection) {
         commentarySection.style.display = 'none';
     }
 }
