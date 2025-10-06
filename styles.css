@@ -1256,6 +1256,69 @@ html.theme-transition *:after {
     color: #87ceeb;
 }
 
+/* Commento inline dentro la match card */
+.match-commentary-inline {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    border-left: 4px solid #667eea;
+}
+
+.commentary-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.commentary-title i {
+    color: #667eea;
+}
+
+.commentary-dialogue-inline {
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.commentary-dialogue-inline:last-child {
+    margin-bottom: 0;
+}
+
+.commentary-dialogue-inline .speaker {
+    font-size: 1rem;
+}
+
+/* Dark theme per commento inline */
+[data-theme="dark"] .match-commentary-inline {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .commentary-dialogue-inline {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Light theme per commento inline */
+[data-theme="light"] .match-commentary-inline {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .commentary-dialogue-inline {
+    background: rgba(0, 0, 0, 0.02);
+}
+
 /* Dark theme commentary styles */
 [data-theme="dark"] .match-commentary {
     background: rgba(0, 0, 0, 0.4);
