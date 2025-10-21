@@ -234,5 +234,7 @@
       "pointsPerGoal": 6,
       "description": "Ogni 6 punti fantacalcio = 1 gol"
     }
+    ,
+    "insightThreshold": 3
   }
 }
