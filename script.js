@@ -1406,27 +1406,27 @@ function displayRoundResults(roundNumber) {
             if (homeDifferenceForComment > 0 && awayDifferenceForComment > 0) {
                 const maxDiff = Math.max(Math.abs(homeDifferenceForComment), Math.abs(awayDifferenceForComment));
                 if (maxDiff > threshold) {
-                    autoInsightCaressa = ' Nel complesso entrambe le squadre avrebbero potuto ottenere di più rispetto a quanto mostrato in campo.';
-                    autoInsightBergomi = ' Dal punto di vista tecnico, si legge una sottoutilizzazione del potenziale a disposizione.';
+                    autoInsightCaressa = ' Clamoroso flop! Entrambe le squadre HANNO DELUSO: c\'era molto di più in campo e lo hanno buttato via!';
+                    autoInsightBergomi = ' Un vero spreco di qualità: tattiche confuse e scelte sbagliate hanno tradito il potenziale mostrato sulla carta.';
                 } else {
-                    autoInsightCaressa = ' È stata una partita decisa dai dettagli più che da un netto divario nei valori.';
-                    autoInsightBergomi = ' Le scelte di formazione hanno inciso marginalmente, la differenza è nei particolari.';
+                    autoInsightCaressa = ' Partita al cardiopalma: decisa dai dettagli, con errori e scelte che hanno fatto esplodere la tensione fino alla fine!';
+                    autoInsightBergomi = ' Match tiratissimo, risolto dai particolari — qualche scelta ha inciso in modo decisivo sul risultato.';
                 }
             } else if (homeDifferenceForComment > awayDifferenceForComment) {
                 if (homeDifferenceForComment > threshold) {
-                    autoInsightCaressa = ` ${match.homeTeam} non è riuscita a trasformare il potenziale della rosa in punti, lasciando margini evidenti.`;
-                    autoInsightBergomi = ` Tecnica e panchina di ${match.homeTeam} non hanno capitalizzato le aspettative.`;
+                    autoInsightCaressa = ` Scandaloso! ${match.homeTeam} ha sprecato punti pesanti — una prova sotto le aspettative e dai contorni drammatici!`;
+                    autoInsightBergomi = ` Grave passo falso: la gestione di ${match.homeTeam} è stata discutibile, con scelte che non si spiegano alla luce del potenziale.`;
                 } else if (homeDifferenceForComment > 0) {
-                    autoInsightCaressa = ` ${match.homeTeam} ha lasciato qualche punto per strada, ma non è stato un divario netto.`;
-                    autoInsightBergomi = ` Qualche scelta non perfetta da parte di ${match.homeTeam}, ma nulla di decisivo.`;
+                    autoInsightCaressa = ` ${match.homeTeam} ha lasciato qualche punto per strada: non catastrofico, ma certo c\'è rammarico in panchina.`;
+                    autoInsightBergomi = ` Qualche scelta infelice da parte di ${match.homeTeam}, sì, ma la partita è stata combattuta e tutto si è deciso per dettagli.`;
                 }
             } else if (awayDifferenceForComment > homeDifferenceForComment) {
                 if (awayDifferenceForComment > threshold) {
-                    autoInsightCaressa = ` ${match.awayTeam} non ha sfruttato il potenziale della propria rosa, con margini evidenti.`;
-                    autoInsightBergomi = ` Dal lato tecnico, ${match.awayTeam} ha fallito nel convertire il potenziale in punti.`;
+                    autoInsightCaressa = ` Incredibile: ${match.awayTeam} ha tradito le attese e ha buttato via punti pesanti — esplode il rammarico tra i tifosi!`;
+                    autoInsightBergomi = ` Un rovescio tecnico per ${match.awayTeam}: le scelte tattiche non hanno reso giustizia alla rosa disponibile.`;
                 } else if (awayDifferenceForComment > 0) {
-                    autoInsightCaressa = ` ${match.awayTeam} ha lasciato qualche punto per strada, senza grandi scostamenti.`;
-                    autoInsightBergomi = ` Poche scelte decisive da parte di ${match.awayTeam}, ma non un divario netto.`;
+                    autoInsightCaressa = ` ${match.awayTeam} ha perso qualche punto per strada: non è stata una débâcle, ma certo c\'è spazio per rimpianti.`;
+                    autoInsightBergomi = ` Poche scelte decisive da parte di ${match.awayTeam}; la partita si è decisa su dettagli più che su un netto dominio.`;
                 }
             }
 
