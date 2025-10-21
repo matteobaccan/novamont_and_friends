@@ -1556,6 +1556,62 @@ html.theme-transition *:after {
     background: rgba(0,0,0,0.03);
 }
 
+/* Commento generale per la giornata */
+.round-general-comment {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    margin: 0 0 1.25rem 0;
+    box-shadow: 0 10px 30px var(--shadow);
+    color: var(--text-primary);
+}
+
+.round-general-comment h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.round-general-comment h4 i {
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+.round-general-comment p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* Theme tweaks */
+[data-theme="dark"] .round-general-comment {
+    background: rgba(0,0,0,0.45);
+    border-color: rgba(255,255,255,0.08);
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .round-general-comment p {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .round-general-comment {
+    background: rgba(255,255,255,0.98);
+    border-color: rgba(0,0,0,0.06);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .round-general-comment p {
+    color: var(--text-secondary);
+}
+
 .team-match-item .match-teams {
     font-weight: 700;
     margin-top: 0.25rem;
