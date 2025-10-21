@@ -1278,7 +1278,36 @@ function displayRoundResults(roundNumber) {
                               awayIdealGoals > homeIdealGoals ? match.awayTeam : 'Pareggio';
             
             const sameResult = realResult === idealResult;
-            
+
+            // Scegli testo insight in base allo scarto reale vs ideale (soglia 3 punti)
+            let insightText = '';
+            const absHomeDiff = Math.abs(homeDifference);
+            const absAwayDiff = Math.abs(awayDifference);
+            const maxDiff = Math.max(absHomeDiff, absAwayDiff);
+
+            if (homeDifference > 0 && awayDifference > 0) {
+                // Entrambe sotto l'ideale
+                if (maxDiff > 3) {
+                    insightText = 'Entrambe le squadre potevano fare meglio con scelte diverse.';
+                } else {
+                    insightText = 'Entrambe le squadre hanno perso qualche punto rispetto all\'ideale; la partita è stata decisa da dettagli piuttosto che da un netto divario.';
+                }
+            } else if (homeDifference > awayDifference) {
+                if (homeDifference > 3) {
+                    insightText = `${match.homeTeam} ha sprecato più potenziale (${homeDifference.toFixed(1)} pt) — avrebbe potuto fare di più rispetto a quanto mostrato.`;
+                } else {
+                    insightText = `${match.homeTeam} ha lasciato qualche punto per strada (${homeDifference.toFixed(1)} pt), ma lo scarto non è eccessivo.`;
+                }
+            } else if (awayDifference > homeDifference) {
+                if (awayDifference > 3) {
+                    insightText = `${match.awayTeam} ha sprecato più potenziale (${awayDifference.toFixed(1)} pt) — avrebbe potuto fare di più rispetto a quanto mostrato.`;
+                } else {
+                    insightText = `${match.awayTeam} ha lasciato qualche punto per strada (${awayDifference.toFixed(1)} pt), ma lo scarto non è eccessivo.`;
+                }
+            } else {
+                insightText = 'Entrambe le squadre hanno fatto scelte simili alle ideali.';
+            }
+
             idealSection = `
                 <div class="ideal-scores">
                     <div class="ideal-header">
@@ -1344,16 +1373,7 @@ function displayRoundResults(roundNumber) {
                     <div class="ideal-insights">
                         <div class="insight-item">
                             <i class="fas fa-lightbulb"></i>
-                            <span>
-                                ${homeDifference > 0 && awayDifference > 0 ? 
-                                    'Entrambe le squadre potevano fare meglio con scelte diverse' :
-                                homeDifference > awayDifference ? 
-                                    `${match.homeTeam} ha sprecato più potenziale (${homeDifference.toFixed(1)} pt)` :
-                                awayDifference > homeDifference ?
-                                    `${match.awayTeam} ha sprecato più potenziale (${awayDifference.toFixed(1)} pt)` :
-                                    'Entrambe le squadre hanno fatto scelte simili alle ideali'
-                                }
-                            </span>
+                            <span>${insightText}</span>
                         </div>
                         ${!sameResult ? `
                         <div class="insight-item alert">
