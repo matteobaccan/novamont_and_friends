@@ -1204,9 +1204,20 @@ function displayRoundResults(roundNumber) {
     
     // Inserisci la classifica del miglior allenatore nel contenitore dedicato
     const coachRankingContainer = document.getElementById('coach-ranking-container');
-    const coachRankingHtml = generateCoachRanking(round);
+    // Mostra il commento generale della giornata (se presente) prima della classifica del miglior allenatore
     if (coachRankingContainer) {
-        coachRankingContainer.innerHTML = coachRankingHtml || '';
+        let generalHtml = '';
+        if (round && round.generalComment) {
+            generalHtml = `
+                <div class="round-general-comment">
+                    <h4>Commento Generale Giornata ${round.round}</h4>
+                    <p>${round.generalComment}</p>
+                </div>
+            `;
+        }
+
+        const coachRankingHtml = generateCoachRanking(round);
+        coachRankingContainer.innerHTML = generalHtml + (coachRankingHtml || '');
     }
     round.matches.forEach((match, index) => {
         let resultClass = '';
