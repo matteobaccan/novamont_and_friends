@@ -671,6 +671,96 @@ function displayStandings() {
     
     // Aggiungi event listeners per l'ordinamento
     setupSortableHeaders();
+    
+    // Aggiungi listener su ogni riga per mostrare i dettagli della squadra
+    const rows = standingsTable.querySelectorAll('.team-row');
+    rows.forEach(row => {
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', () => {
+            const teamName = row.querySelector('.team-name').innerText;
+            showTeamMatches(teamName, row);
+        });
+    });
+}
+
+// Mostra dettaglio partite per una squadra (toggle)
+// showTeamMatches: create a table row inserted after the clicked row with match-only data
+function showTeamMatches(teamName, clickedRow) {
+    // Remove existing detail row if present
+    const existingRow = document.querySelector('.team-details-row');
+    if (existingRow) {
+        const existingTeam = existingRow.getAttribute('data-team');
+        if (existingTeam === teamName) {
+            existingRow.remove();
+            return; // toggle off
+        }
+        existingRow.remove();
+    }
+
+    // Collect matches for the team
+    const matches = [];
+    (fantacalcioData.rounds || []).forEach(round => {
+        (round.matches || []).forEach(match => {
+            if (match.homeTeam === teamName || match.awayTeam === teamName) {
+                matches.push({ round: round.round, date: round.date, match });
+            }
+        });
+    });
+
+    // Build a details table row to insert after clickedRow
+    const table = clickedRow.closest('table');
+    const colCount = table ? table.querySelectorAll('thead th').length : 11;
+    const detailsRow = document.createElement('tr');
+    detailsRow.className = 'team-details-row';
+    detailsRow.setAttribute('data-team', teamName);
+
+    const td = document.createElement('td');
+    td.setAttribute('colspan', colCount);
+    td.style.padding = '0';
+
+    // Panel content (only real match data, team vs opponent and realtime score)
+    let content = `
+        <div class="team-details-panel">
+            <div class="team-details-header">
+                <strong>Partite di ${teamName}</strong>
+                <button class="team-details-close" title="Chiudi">✖</button>
+            </div>
+            <div class="team-matches-list">
+    `;
+
+    if (matches.length === 0) {
+        content += `<div class="team-match-item">Nessuna partita trovata.</div>`;
+    } else {
+        matches.forEach(item => {
+            const m = item.match;
+            const isHome = m.homeTeam === teamName;
+            const opponent = isHome ? m.awayTeam : m.homeTeam;
+            const teamPoints = isHome ? m.homeScore : m.awayScore;
+            const oppPoints = isHome ? m.awayScore : m.homeScore;
+            const teamGoals = calculateGoalsFromScore(teamPoints);
+            const oppGoals = calculateGoalsFromScore(oppPoints);
+
+            // Show: TeamName vs Opponent — Risultato: teamGoals - oppGoals (teamPoints pt - oppPoints pt)
+            content += `
+                <div class="team-match-item">
+                    <div class="match-meta">Giornata ${item.round} — ${item.date}</div>
+                    <div class="match-teams">${teamName} <span class="match-score">${teamGoals}</span> - <span class="match-score">${oppGoals}</span> ${opponent}</div>
+                    <div class="match-points">(${teamPoints} pt - ${oppPoints} pt)</div>
+                </div>
+            `;
+        });
+    }
+
+    content += `</div></div>`;
+    td.innerHTML = content;
+    detailsRow.appendChild(td);
+
+    // Insert the details row after the clicked row
+    clickedRow.parentNode.insertBefore(detailsRow, clickedRow.nextSibling);
+
+    // Wire up close button
+    const closeBtn = detailsRow.querySelector('.team-details-close');
+    if (closeBtn) closeBtn.addEventListener('click', () => detailsRow.remove());
 }
 
 // Funzione per calcolare le statistiche complessive degli allenatori
