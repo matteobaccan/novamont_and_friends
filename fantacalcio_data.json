@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "6 Ottobre 2025, 18:30",
+  "lastUpdate": "21 Ottobre 2025, 12:00",
   "season": "2025-2026",
   "currentRound": 2,
   "teams": [
@@ -157,6 +157,65 @@
           "commentary": {
             "caressa": "Pareggio tra Cambra City e CUSIANA! 1-1 il finale! 71.5 punti per il Cambra, 68.5 per la Cusiana. Tre punti di differenza ma un punto a testa!",
             "bergomi": "Partita bloccata, Fabio. Prestazioni sottotono da entrambe le parti. Con le formazioni ideali sarebbe finita 1-1 comunque! Almeno hanno fatto scelte coerenti con le loro rose."
+          }
+        }
+      ]
+    }
+    ,
+    {
+      "round": 3,
+      "date": "Ottobre 2025",
+      "matches": [
+        {
+          "id": 9,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "CORTOMUSO",
+          "homeScore": 65.0,
+          "awayScore": 78.5,
+          "homeIdealScore": 68.0,
+          "awayIdealScore": 79.0,
+          "commentary": {
+            "caressa": "CORTOMUSO passeggia: 78.5 nel reale e ottiene tre punti netti. Curiosità ideale: 79 vs 68, che si traduce in un 3-1 ideale per il Cortomuso.",
+            "bergomi": "Shakhtar sotto tono, Cortomuso molto concreto. Nell'ideale il gap è ancora netto (79-68 -> 3-1), confermando la supremazia offensiva degli ospiti."
+          }
+        },
+        {
+          "id": 10,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "SM Frattese",
+          "homeScore": 68.0,
+          "awayScore": 62.5,
+          "homeIdealScore": 68.5,
+          "awayIdealScore": 71.5,
+          "commentary": {
+            "caressa": "Real Ichnusa trova i tre punti nel reale con 68.0, ma l'ideale mostra un confronto più equilibrato: 68.5 vs 71.5 che porta a un 1-1 ideale.",
+            "bergomi": "Frattese fatica nel reale ma in ottica ideale la partita sarebbe stata in equilibrio (71.5-68.5 -> 1-1). Un'occasione persa per la Frattese di trasformare il potenziale in punti."
+          }
+        },
+        {
+          "id": 11,
+          "homeTeam": "PARTIZAN TIRANA",
+          "awayTeam": "CUSIANA",
+          "homeScore": 66.5,
+          "awayScore": 62.0,
+          "homeIdealScore": 67.0,
+          "awayIdealScore": 64.0,
+          "commentary": {
+            "caressa": "Partizan vince sul campo e mostra anche nell'ideale un leggero vantaggio: 67 vs 64, che equivale a un 1-0 ideale a favore del Partizan.",
+            "bergomi": "Cusiana troppo sottotono e non riesce a impensierire seriamente. L'ideale conferma il risultato stretto (67-64 -> 1-0)."
+          }
+        },
+        {
+          "id": 12,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Cambra City",
+          "homeScore": 68.5,
+          "awayScore": 72.5,
+          "homeIdealScore": 71.0,
+          "awayIdealScore": 82.0,
+          "commentary": {
+            "caressa": "Cambra City vince anche nel reale e l'ideale è impietoso: 82 vs 71, che corrisponde a un 3-2 ideale in favore del Cambra.",
+            "bergomi": "Ultimo ci ha provato ma non è bastato. L'ideale conferma la superiorità del Cambra (82-71 -> 3-2), ottima prova offensiva degli ospiti."
           }
         }
       ]
