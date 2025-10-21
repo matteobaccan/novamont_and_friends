@@ -1567,6 +1567,22 @@ html.theme-transition *:after {
     color: var(--text-primary);
 }
 
+/* Improve speaker contrast in light theme */
+[data-theme="light"] .commentary-dialogue .speaker,
+[data-theme="light"] .commentary-dialogue-inline .speaker,
+[data-theme="light"] .commentary-content .speaker {
+    /* darker, high-contrast gold-like for Caressa */
+    color: #b06b00;
+    text-shadow: none;
+}
+
+[data-theme="light"] .commentary-dialogue .speaker.bergomi,
+[data-theme="light"] .commentary-dialogue-inline .speaker.bergomi,
+[data-theme="light"] .commentary-content .speaker.bergomi {
+    /* deeper blue for Bergomi */
+    color: #0b66a3;
+}
+
 /* Dark theme match-card improvements */
 [data-theme="dark"] .match-card {
     background: rgba(0, 0, 0, 0.6);
