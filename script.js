@@ -1389,16 +1389,57 @@ function displayRoundResults(roundNumber) {
         // Sezione commento se disponibile
         let commentarySection = '';
         if (match.commentary) {
+            // Read threshold from settings (fallback to 3)
+            const threshold = (fantacalcioData && fantacalcioData.settings && typeof fantacalcioData.settings.insightThreshold === 'number') ? fantacalcioData.settings.insightThreshold : 3;
+
+            // Compute differences (reuse previously calculated values)
+            const homeIdealScoreWithBonus = match.homeIdealScore + 1;
+            const awayIdealScoreWithBonus = match.awayIdealScore;
+            const homeDifferenceForComment = homeIdealScoreWithBonus - match.homeScore;
+            const awayDifferenceForComment = awayIdealScoreWithBonus - match.awayScore;
+
+            // Build subtle auto-insight sentences without mentioning the threshold
+            let autoInsightCaressa = '';
+            let autoInsightBergomi = '';
+
+            // If both underperformed
+            if (homeDifferenceForComment > 0 && awayDifferenceForComment > 0) {
+                const maxDiff = Math.max(Math.abs(homeDifferenceForComment), Math.abs(awayDifferenceForComment));
+                if (maxDiff > threshold) {
+                    autoInsightCaressa = ' Nel complesso entrambe le squadre avrebbero potuto ottenere di più rispetto a quanto mostrato in campo.';
+                    autoInsightBergomi = ' Dal punto di vista tecnico, si legge una sottoutilizzazione del potenziale a disposizione.';
+                } else {
+                    autoInsightCaressa = ' È stata una partita decisa dai dettagli più che da un netto divario nei valori.';
+                    autoInsightBergomi = ' Le scelte di formazione hanno inciso marginalmente, la differenza è nei particolari.';
+                }
+            } else if (homeDifferenceForComment > awayDifferenceForComment) {
+                if (homeDifferenceForComment > threshold) {
+                    autoInsightCaressa = ` ${match.homeTeam} non è riuscita a trasformare il potenziale della rosa in punti, lasciando margini evidenti.`;
+                    autoInsightBergomi = ` Tecnica e panchina di ${match.homeTeam} non hanno capitalizzato le aspettative.`;
+                } else if (homeDifferenceForComment > 0) {
+                    autoInsightCaressa = ` ${match.homeTeam} ha lasciato qualche punto per strada, ma non è stato un divario netto.`;
+                    autoInsightBergomi = ` Qualche scelta non perfetta da parte di ${match.homeTeam}, ma nulla di decisivo.`;
+                }
+            } else if (awayDifferenceForComment > homeDifferenceForComment) {
+                if (awayDifferenceForComment > threshold) {
+                    autoInsightCaressa = ` ${match.awayTeam} non ha sfruttato il potenziale della propria rosa, con margini evidenti.`;
+                    autoInsightBergomi = ` Dal lato tecnico, ${match.awayTeam} ha fallito nel convertire il potenziale in punti.`;
+                } else if (awayDifferenceForComment > 0) {
+                    autoInsightCaressa = ` ${match.awayTeam} ha lasciato qualche punto per strada, senza grandi scostamenti.`;
+                    autoInsightBergomi = ` Poche scelte decisive da parte di ${match.awayTeam}, ma non un divario netto.`;
+                }
+            }
+
             commentarySection = `
                 <div class="match-commentary-inline">
                     <div class="commentary-title">
                         <i class="fas fa-microphone"></i> Commento Match
                     </div>
                     <div class="commentary-dialogue-inline">
-                        <span class="speaker">Caressa:</span> "${match.commentary.caressa}"
+                        <span class="speaker">Caressa:</span> "${match.commentary.caressa}${autoInsightCaressa}"
                     </div>
                     <div class="commentary-dialogue-inline">
-                        <span class="speaker bergomi">Bergomi:</span> "${match.commentary.bergomi}"
+                        <span class="speaker bergomi">Bergomi:</span> "${match.commentary.bergomi}${autoInsightBergomi}"
                     </div>
                 </div>
             `;
