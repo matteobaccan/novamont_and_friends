@@ -48,6 +48,7 @@
     {
       "round": 1,
       "date": "Settembre 2025",
+      "generalComment": "Apertura di stagione combattuta: molte partite molto equilibrate e pochi scarti netti. Alcune squadre hanno già mostrato solidità difensiva, altre devono ancora trovare continuità offensiva.",
       "matches": [
         {
           "id": 1,
@@ -106,6 +107,7 @@
     {
       "round": 2,
       "date": "Ottobre 2025",
+      "generalComment": "Giornata di conferme e sorprese: alcune squadre hanno consolidato il buon momento, mentre altre hanno lasciato punti importanti in panchina. La classifica inizia a prendere forma.",
       "matches": [
         {
           "id": 5,
@@ -165,6 +167,7 @@
     {
       "round": 3,
       "date": "Ottobre 2025",
+      "generalComment": "Terza giornata segnata da scarti importanti in alcuni match e performance sottotono rispetto alle aspettative ideali: emergono prime indicazioni su chi è più solido nella gestione delle partite.",
       "matches": [
         {
           "id": 9,
