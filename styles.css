@@ -1509,6 +1509,69 @@ html.theme-transition *:after {
     font-size: 1rem;
 }
 
+/* Team details panel inserted under standings row */
+.team-details-row td {
+    background: transparent;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.team-details-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.team-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.team-details-header strong {
+    font-size: 1rem;
+}
+
+.team-details-close {
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.team-matches-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.team-match-item {
+    padding: 0.5rem;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.03);
+}
+
+.team-match-item .match-teams {
+    font-weight: 700;
+    margin-top: 0.25rem;
+}
+
+.team-match-item .match-score {
+    color: var(--accent-color, #667eea);
+    font-weight: 800;
+    margin: 0 0.25rem;
+}
+
+.team-match-item .match-points {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
 /* Dark theme per commento inline */
 [data-theme="dark"] .match-commentary-inline {
     background: rgba(0, 0, 0, 0.3);
