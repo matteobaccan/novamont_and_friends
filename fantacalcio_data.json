@@ -1,7 +1,7 @@
 {
   "lastUpdate": "21 Ottobre 2025, 12:00",
   "season": "2025-2026",
-  "currentRound": 2,
+  "currentRound": 4,
   "teams": [
     {
       "id": 1,
@@ -219,6 +219,66 @@
           "commentary": {
             "caressa": "Cambra City è l'esempio perfetto di come il valore sulla carta e la realtà di una partita possano divergere: idealmente il Cambra veniva proiettato a 82 punti, ma nella trasferta il punteggio effettivo è stato di 72.5, oltre nove punti in meno rispetto all'ideale. Dal momento che lo scarto supera la soglia dei quattro punti, è giusto riportare il numero reale: nonostante questo, la squadra ha mostrato capacità di adattamento e freddezza nei momenti chiave, trovando il gol decisivo e portando a casa i tre punti. In sintesi: il potenziale è evidente, ma la prova praticata è stata più pragmatica e meno eclatante rispetto alle attese.",
             "bergomi": "Il Cambra dispone di risorse importanti e l'ideale lo conferma, tuttavia la trasferta ha messo in luce problemi di esecuzione che hanno ridotto il divario numerico rispetto alle proiezioni. Poiché lo scostamento reale-ideale è significativo, lo sottolineo con i numeri: 82 idealmente contro 72.5 realmente. Malgrado ciò, la squadra ha saputo gestire la pressione e finalizzare quando necessario, meritandosi la vittoria."
+          }
+        }
+      ]
+    }
+    ,
+    {
+      "round": 4,
+      "date": "Ottobre 2025",
+      "generalComment": "Quarta giornata: nuovi verdetti e alcune conferme. Numeri reali e ideali mostrano differenze interessanti.",
+      "matches": [
+        {
+          "id": 13,
+          "homeTeam": "CORTOMUSO",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 72.5,
+          "awayScore": 70.5,
+          "homeIdealScore": 79.0,
+          "awayIdealScore": 75.0,
+          "commentary": {
+            "caressa": "CORTOMUSO vs Real Ichnusa: partita combattuta, 72.5 a 70.5 il risultato reale.",
+            "bergomi": "Differenza sottile ma fondamentale, entrambe le squadre hanno mostrato voglia di vittoria."
+          }
+        },
+        {
+          "id": 14,
+          "homeTeam": "CUSIANA",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 63.5,
+          "awayScore": 81.0,
+          "homeIdealScore": 67.0,
+          "awayIdealScore": 85.5,
+          "commentary": {
+            "caressa": "Shakhtar Donuts travolgente in trasferta: 81 a 63.5, prestazione super per Marco Fedele.",
+            "bergomi": "Lo scarto reale-ideale restituisce l'idea di una performance dominante dello Shakhtar; la Cusiana è stata troppo timida in fase offensiva."
+          }
+        },
+        {
+          "id": 15,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Ultimo",
+          "homeScore": 70.5,
+          "awayScore": 59.5,
+          "homeIdealScore": 73.5,
+          "awayIdealScore": 72.0,
+          "commentary": {
+            "caressa": "SM Frattese controlla il match e porta a casa i tre punti: 70.5 a 59.5.",
+            "bergomi": "Prestazione solida della Frattese, l'Ultimo ha pagato qualche errore di impostazione."
+          }
+        },
+        {
+          "id": 16,
+          "homeTeam": "Cambra City",
+          "awayTeam": "PARTIZAN TIRANA",
+          "homeScore": 62.5,
+          "awayScore": 67.5,
+          "homeIdealScore": 64.5,
+          "awayIdealScore": 75.0,
+          "commentary": {
+            "caressa": "PARTIZAN TIRANA espugna la trasferta: 67.5 a 62.5, una vittoria importante.",
+            "bergomi": "Il Partizan ha saputo sfruttare i momenti chiave; il Cambra non è riuscito a concretizzare il suo potenziale."
           }
         }
       ]
