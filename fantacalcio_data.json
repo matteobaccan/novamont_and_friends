@@ -283,6 +283,66 @@
         }
       ]
     }
+    ,
+    {
+      "round": 5,
+      "date": "Novembre 2025",
+      "generalComment": "Giornata 5 da brividi: colpi di scena, ribaltoni e verdetti che incendiano la classifica! L'Ultimo annienta il Cortomuso con una prestazione monumentale, la Frattese soffia punti pesanti e si conferma mina vagante, lo Shakhtar tiene accesa la sfida per i piani alti mentre la Cusiana mostra fame e cattiveria agonistica. In poche ore la graduatoria si è accorciata e ogni errore diventa fatale — il campionato entra finalmente nella fase calda e promette sorprese a non finire.",
+      "matches": [
+        {
+          "id": 17,
+          "homeTeam": "Ultimo",
+          "awayTeam": "CORTOMUSO",
+          "homeScore": 78.5,
+          "awayScore": 63.5,
+          "homeIdealScore": 76.0,
+          "awayIdealScore": 65.6,
+          "commentary": {
+            "caressa": "Giornata 5, e che giornata per l'Ultimo: 78.5 a 63.5 contro il Cortomuso. Un successo netto che vale punti pesanti in classifica e dà morale alla squadra di casa.",
+            "bergomi": "L'Ultimo ha interpretato la partita con grande concretezza. Dal punto di vista della classifica questi tre punti possono essere decisivi: il Cortomuso invece dovrà rivedere qualche scelta in chiave formazione."
+          }
+        },
+        {
+          "id": 18,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "CUSIANA",
+          "homeScore": 72.5,
+          "awayScore": 74.0,
+          "homeIdealScore": 73.5,
+          "awayIdealScore": 76.0,
+          "commentary": {
+            "caressa": "Real Ichnusa contro Cusiana, giornata 5: 72.5 a 74, partita tirata e decisa da dettagli. La Cusiana conquista una vittoria importante che la mantiene in corsa in classifica.",
+            "bergomi": "Scontro equilibrato, decisione arrivata nei momenti topici. La classifica si accorcia: entrambe le squadre dimostrano carattere, ma la Cusiana è stata più lucida nel finale."
+          }
+        },
+        {
+          "id": 19,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "PARTIZAN TIRANA",
+          "homeScore": 69.0,
+          "awayScore": 64.5,
+          "homeIdealScore": 73.5,
+          "awayIdealScore": 72.0,
+          "commentary": {
+            "caressa": "Shakhtar Donuts vince 69-64.5 in questa giornata 5: una prova di carattere che tiene lontano il Partizan nella corsa ai piani alti della classifica.",
+            "bergomi": "Lo Shakhtar ha mostrato maggiore incisività nelle situazioni decisive; per il Partizan una battuta d'arresto che complica il suo percorso in campionato, serve rapidità nelle scelte."
+          }
+        },
+        {
+          "id": 20,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Cambra City",
+          "homeScore": 76.5,
+          "awayScore": 74.5,
+          "homeIdealScore": 84.5,
+          "awayIdealScore": 74.0,
+          "commentary": {
+            "caressa": "Frattese-Cambra City, 76.5 contro 74.5: match vibrante nella giornata 5. Tre punti che confermano la bontà del momento della Frattese e la tengono in alto in classifica.",
+            "bergomi": "Prestazione di sostanza della Frattese: ha saputo gestire meglio i momenti chiave. Il Cambra esce a testa alta ma dovrà lavorare sulla concretezza per scalare la classifica."
+          }
+        }
+      ]
+    }
   ],
   "settings": {
     "pointsForWin": 3,
