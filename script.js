@@ -72,28 +72,8 @@ function dismissUpdate() {
     }
 }
 
-// Funzione per svuotare manualmente la cache
-function clearAllCache() {
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistration().then((registration) => {
-            if (registration) {
-                registration.active.postMessage({ type: 'CLEAR_CACHE' });
-            }
-        });
-    }
-    
-    if ('caches' in window) {
-        caches.keys().then((names) => {
-            names.forEach((name) => {
-                caches.delete(name);
-            });
-        });
-    }
-    
-    console.log('Cache svuotata!');
-    alert('Cache svuotata! La pagina verrà ricaricata.');
-    window.location.reload(true);
-}
+// Manual cache-clear button removed — cache management handled via service worker update flow and
+// the trophy reload (reloadDataOnly) which refreshes JSON without forcing a full page reload.
 
 // ============================================
 // ALGORITMI DI CALCOLO GOL
