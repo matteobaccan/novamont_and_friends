@@ -1,7 +1,7 @@
 {
   "lastUpdate": "21 Ottobre 2025, 12:00",
   "season": "2025-2026",
-  "currentRound": 4,
+  "currentRound": 6,
   "teams": [
     {
       "id": 1,
@@ -339,6 +339,66 @@
           "commentary": {
             "caressa": "Frattese-Cambra City, 76.5 contro 74.5: match vibrante nella giornata 5. Tre punti che confermano la bontà del momento della Frattese e la tengono in alto in classifica.",
             "bergomi": "Prestazione di sostanza della Frattese: ha saputo gestire meglio i momenti chiave. Il Cambra esce a testa alta ma dovrà lavorare sulla concretezza per scalare la classifica."
+          }
+        }
+      ]
+    }
+    ,
+    {
+      "round": 6,
+      "date": "Novembre 2025",
+      "generalComment": "Giornata 6: la bagarre continua e la classifica si fa sempre più corta — ogni errore ora può essere letale. Verdetti parziali e conferme arrivano dai piani alti, ma attenzione alle sorprese dal fondo: la corsa al vertice non dà respiro.",
+      "matches": [
+        {
+          "id": 21,
+          "homeTeam": "CORTOMUSO",
+          "awayTeam": "SM Frattese",
+          "homeScore": 75.5,
+          "awayScore": 72.5,
+          "homeIdealScore": 77.5,
+          "awayIdealScore": 78.5,
+          "commentary": {
+            "caressa": "Giornata 6: grandissimo equilibrio tra CORTOMUSO e Frattese, partita da pareggio che vale come un pugno nello stomaco per entrambe le squadre. Un punto a testa che mantiene alta la tensione in classifica e dimostra quanto questo campionato sia combattuto.",
+            "bergomi": "Dal punto di vista tattico, partita intensa. La Frattese ha ceduto nei momenti chiave, mentre il Cortomuso ha saputo sfruttare meglio le opportunità. In ottica classifica questo successo consolida la posizione del Cortomuso tra i protagonisti della stagione."
+          }
+        },
+        {
+          "id": 22,
+          "homeTeam": "CUSIANA",
+          "awayTeam": "Ultimo",
+          "homeScore": 60.0,
+          "awayScore": 69.0,
+          "homeIdealScore": 65.0,
+          "awayIdealScore": 72.0,
+          "commentary": {
+            "caressa": "Giornata 6: Vittoria esterna dell'Ultimo, 69-60 contro la Cusiana. Un risultato che vale più di tre punti: l'Ultimo si afferma come una mina vagante della classifica e mette pressione alle inseguitrici.",
+            "bergomi": "La Cusiana non è riuscita a reggere il ritmo, mentre l'Ultimo ha messo intensità e concretezza. In chiave graduatoria questi tre punti possono essere fondamentali per la corsa alle posizioni alte."
+          }
+        },
+        {
+          "id": 23,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "Cambra City",
+          "homeScore": 72.5,
+          "awayScore": 53.0,
+          "homeIdealScore": 78.5,
+          "awayIdealScore": 62.5,
+          "commentary": {
+            "caressa": "Giornata 6: lo Shakhtar domina la trasferta e sconfigge il Cambra 72.5-53. Una prestazione autoritaria che mantiene lo Shakhtar in scia ai piani alti: la squadra risponde presente quando conta.",
+            "bergomi": "Prestazione solida dello Shakhtar, che limita le iniziative del Cambra e incassa tre punti fondamentali. Per il Cambra è una battuta d'arresto che complica la risalita in classifica."
+          }
+        },
+        {
+          "id": 24,
+          "homeTeam": "PARTIZAN TIRANA",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 62.0,
+          "awayScore": 70.5,
+          "homeIdealScore": 70.5,
+          "awayIdealScore": 73.0,
+          "commentary": {
+            "caressa": "Giornata 6: Real Ichnusa espugna il campo del Partizan per 70.5-62.0 e mette punti importanti in cascina. Una vittoria che dà respiro e fiducia, e che può cambiare prospettive in classifica per gli ospiti.",
+            "bergomi": "Il Real Ichnusa ha interpretato la partita con grande personalità, sfruttando gli errori del Partizan. In termini di graduatoria questo successo può rappresentare un punto di svolta per il loro cammino stagionale."
           }
         }
       ]
