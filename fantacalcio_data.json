@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "4 Novembre 2025, 12:00",
+  "lastUpdate": "10 Novembre 2025, 12:00",
   "season": "2025-2026",
   "teams": [
     {
@@ -161,8 +161,7 @@
           }
         }
       ]
-    }
-    ,
+    },
     {
       "round": 3,
       "date": "Ottobre 2025",
@@ -221,8 +220,7 @@
           }
         }
       ]
-    }
-    ,
+    },
     {
       "round": 4,
       "date": "Ottobre 2025",
@@ -281,8 +279,7 @@
           }
         }
       ]
-    }
-    ,
+    },
     {
       "round": 5,
       "date": "Novembre 2025",
@@ -341,8 +338,7 @@
           }
         }
       ]
-    }
-    ,
+    },
     {
       "round": 6,
       "date": "Novembre 2025",
@@ -401,6 +397,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 7,
+      "date": "Novembre 2025",
+      "generalComment": "Settima giornata: verdetti importanti e qualche sorpresa. Risultati netti in alcune partite, mentre altri match hanno confermato la grande lotta in classifica — ogni punto vale doppio in questa fase della stagione.",
+      "matches": [
+        {
+          "id": 25,
+          "homeTeam": "Cambra City",
+          "awayTeam": "CORTOMUSO",
+          "homeScore": 56.0,
+          "awayScore": 71.0,
+          "homeIdealScore": 61.5,
+          "awayIdealScore": 76.5,
+          "commentary": {
+            "caressa": "Giornata 7: il CORTOMUSO mette ordine e vince 71-56 contro il Cambra City. In chiave classifica questi tre punti pesano e permettono al CORTOMUSO di consolidare la sua posizione tra i protagonisti della stagione.",
+            "bergomi": "Tatticamente il Cortomuso ha saputo gestire meglio i momenti chiave; il Cambra ha avuto difficoltà a trovare continuità. In prospettiva classifica è un passo importante per Sir Alex Baccan."
+          }
+        },
+        {
+          "id": 26,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 65.0,
+          "awayScore": 64.5,
+          "homeIdealScore": 72.0,
+          "awayIdealScore": 68.5,
+          "commentary": {
+            "caressa": "Giornata 7: Real Ichnusa vince di misura 65-64.5 in una sfida combattuta — un successo che porta morale e punti pesanti nella corsa verso la zona alta della graduatoria.",
+            "bergomi": "Partita decisa dai dettagli: il Real Ichnusa ha mostrato più concretezza nei momenti decisivi. Per lo Shakhtar è un campanello d'allarme in ottica classifica."
+          }
+        },
+        {
+          "id": 27,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "CUSIANA",
+          "homeScore": 63.5,
+          "awayScore": 70.5,
+          "homeIdealScore": 81.5,
+          "awayIdealScore": 74.5,
+          "commentary": {
+            "caressa": "Giornata 7: la CUSIANA espugna il campo della Frattese per 70.5-63.5. In termini di classifica è una vittoria che può dare slancio alla corsa verso le posizioni di vertice.",
+            "bergomi": "La Frattese non è riuscita a esprimere il suo potenziale ideale; la Cusiana ha colto l'occasione e porta a casa tre punti molto importanti per la sua fiducia in campionato."
+          }
+        },
+        {
+          "id": 28,
+          "homeTeam": "Ultimo",
+          "awayTeam": "PARTIZAN TIRANA",
+          "homeScore": 80.5,
+          "awayScore": 62.5,
+          "homeIdealScore": 84.5,
+          "awayIdealScore": 69.0,
+          "commentary": {
+            "caressa": "Giornata 7: l'Ultimo domina e vince 80.5-62.5 contro il Partizan. Prestazione da applausi che vale punti pesanti in classifica e conferma l'ottimo momento della squadra di casa.",
+            "bergomi": "Ottima prova dell'Ultimo: intensità e concretezza hanno fatto la differenza. Il Partizan invece subisce un duro colpo in ottica classifica."
+          }
+        }
+      ]
     }
   ],
   "settings": {
@@ -412,8 +467,7 @@
     "goalCalculation": {
       "pointsPerGoal": 6,
       "description": "Ogni 6 punti fantacalcio = 1 gol"
-    }
-    ,
+    },
     "insightThreshold": 3
   }
 }
