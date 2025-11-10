@@ -19,12 +19,12 @@
     },
     {
       "id": 4,
-      "name": "CORTOMUSO",
+      "name": "Cortomuso",
       "owner": "Sir Alex Baccan"
     },
     {
       "id": 5,
-      "name": "CUSIANA",
+      "name": "Cusiana",
       "owner": "Roby"
     },
     {
@@ -39,7 +39,7 @@
     },
     {
       "id": 8,
-      "name": "PARTIZAN TIRANA",
+      "name": "Partizan Tirana",
       "owner": "Loran10"
     }
   ],
@@ -51,14 +51,14 @@
       "matches": [
         {
           "id": 1,
-          "homeTeam": "CUSIANA",
-          "awayTeam": "CORTOMUSO",
+          "homeTeam": "Cusiana",
+          "awayTeam": "Cortomuso",
           "homeScore": 69.0,
           "awayScore": 70.0,
           "homeIdealScore": 70.0,
           "awayIdealScore": 74.0,
           "commentary": {
-            "caressa": "Che partita equilibrata! CUSIANA e CORTOMUSO si dividono la posta: 1-1 il risultato finale! 69 punti per la Cusiana, 70 per il Cortomuso, ma entrambe portano a casa un punto!",
+            "caressa": "Che partita equilibrata! Cusiana e Cortomuso si dividono la posta: 1-1 il risultato finale! 69 punti per la Cusiana, 70 per la Cortomuso, ma entrambe portano a casa un punto!",
             "bergomi": "Match tiratissimo, Fabio. Solo un punto di differenza! Curiosità: con le formazioni ideali sarebbe comunque finita 2-2. Nessuna delle due ha saputo sfruttare al meglio la propria rosa."
           }
         },
@@ -90,14 +90,14 @@
         },
         {
           "id": 4,
-          "homeTeam": "PARTIZAN TIRANA",
+          "homeTeam": "Partizan Tirana",
           "awayTeam": "SM Frattese",
           "homeScore": 64.0,
           "awayScore": 67.5,
           "homeIdealScore": 72.0,
           "awayIdealScore": 72.0,
           "commentary": {
-            "caressa": "Vittoria esterna dell'SM Frattese! 0-1 sul campo del PARTIZAN TIRANA! 64 punti per il Partizan, 67.5 per la Frattese. Pezant porta a casa tre punti d'oro!",
+            "caressa": "Vittoria esterna dell'SM Frattese! 0-1 sul campo del Partizan Tirana! 64 punti per il Partizan, 67.5 per la Frattese. Pezant porta a casa tre punti d'oro!",
             "bergomi": "Match combattuto ma la Frattese è stata più concreta. Il Partizan ha lasciato 8 punti in panchina, Fabio! Con le scelte giuste poteva essere un 2-2. Occasione sprecata!"
           }
         }
@@ -110,14 +110,14 @@
       "matches": [
         {
           "id": 5,
-          "homeTeam": "CORTOMUSO",
-          "awayTeam": "PARTIZAN TIRANA",
+          "homeTeam": "Cortomuso",
+          "awayTeam": "Partizan Tirana",
           "homeScore": 78.5,
           "awayScore": 72.0,
           "homeIdealScore": 81.0,
           "awayIdealScore": 75.0,
           "commentary": {
-            "caressa": "GOOOOL! CORTOMUSO! Vittoria netta per 3-2 sul PARTIZAN TIRANA! 78.5 punti contro 72, sei punti di vantaggio. Sir Alex Baccan domina la partita!",
+            "caressa": "GOOOOL! Cortomuso! Vittoria netta per 3-2 sul Partizan Tirana! 78.5 punti contro 72, sei punti di vantaggio. Sir Alex Baccan domina la partita!",
             "bergomi": "Partita ben gestita, Fabio. L'attacco del Cortomuso ha funzionato alla perfezione. Con le formazioni ideali sarebbe finita 3-2 comunque, stesso risultato! Scelte azzeccate da entrambe le parti."
           }
         },
@@ -150,13 +150,13 @@
         {
           "id": 8,
           "homeTeam": "Cambra City",
-          "awayTeam": "CUSIANA",
+          "awayTeam": "Cusiana",
           "homeScore": 71.5,
           "awayScore": 68.5,
           "homeIdealScore": 71.0,
           "awayIdealScore": 69.5,
           "commentary": {
-            "caressa": "Pareggio tra Cambra City e CUSIANA! 1-1 il finale! 71.5 punti per il Cambra, 68.5 per la Cusiana. Tre punti di differenza ma un punto a testa!",
+            "caressa": "Pareggio tra Cambra City e Cusiana! 1-1 il finale! 71.5 punti per il Cambra, 68.5 per la Cusiana. Tre punti di differenza ma un punto a testa!",
             "bergomi": "Partita bloccata, Fabio. Prestazioni sottotono da entrambe le parti. Con le formazioni ideali sarebbe finita 1-1 comunque! Almeno hanno fatto scelte coerenti con le loro rose."
           }
         }
@@ -170,7 +170,7 @@
         {
           "id": 9,
           "homeTeam": "Shakhtar Donuts",
-          "awayTeam": "CORTOMUSO",
+          "awayTeam": "Cortomuso",
           "homeScore": 65.0,
           "awayScore": 78.5,
           "homeIdealScore": 68.0,
@@ -195,8 +195,8 @@
         },
         {
           "id": 11,
-          "homeTeam": "PARTIZAN TIRANA",
-          "awayTeam": "CUSIANA",
+          "homeTeam": "Partizan Tirana",
+          "awayTeam": "Cusiana",
           "homeScore": 66.5,
           "awayScore": 62.0,
           "homeIdealScore": 67.0,
@@ -228,7 +228,7 @@
       "matches": [
         {
           "id": 13,
-          "homeTeam": "CORTOMUSO",
+          "homeTeam": "Cortomuso",
           "awayTeam": "Real Ichnusa",
           "homeScore": 72.5,
           "awayScore": 70.5,
@@ -241,7 +241,7 @@
         },
         {
           "id": 14,
-          "homeTeam": "CUSIANA",
+          "homeTeam": "Cusiana",
           "awayTeam": "Shakhtar Donuts",
           "homeScore": 63.5,
           "awayScore": 81.0,
@@ -268,7 +268,7 @@
         {
           "id": 16,
           "homeTeam": "Cambra City",
-          "awayTeam": "PARTIZAN TIRANA",
+          "awayTeam": "Partizan Tirana",
           "homeScore": 62.5,
           "awayScore": 67.5,
           "homeIdealScore": 64.5,
@@ -288,7 +288,7 @@
         {
           "id": 17,
           "homeTeam": "Ultimo",
-          "awayTeam": "CORTOMUSO",
+          "awayTeam": "Cortomuso",
           "homeScore": 78.5,
           "awayScore": 63.5,
           "homeIdealScore": 76.0,
@@ -301,7 +301,7 @@
         {
           "id": 18,
           "homeTeam": "Real Ichnusa",
-          "awayTeam": "CUSIANA",
+          "awayTeam": "Cusiana",
           "homeScore": 72.5,
           "awayScore": 74.0,
           "homeIdealScore": 73.5,
@@ -314,7 +314,7 @@
         {
           "id": 19,
           "homeTeam": "Shakhtar Donuts",
-          "awayTeam": "PARTIZAN TIRANA",
+          "awayTeam": "Partizan Tirana",
           "homeScore": 69.0,
           "awayScore": 64.5,
           "homeIdealScore": 73.5,
@@ -346,7 +346,7 @@
       "matches": [
         {
           "id": 21,
-          "homeTeam": "CORTOMUSO",
+          "homeTeam": "Cortomuso",
           "awayTeam": "SM Frattese",
           "homeScore": 75.5,
           "awayScore": 72.5,
@@ -359,7 +359,7 @@
         },
         {
           "id": 22,
-          "homeTeam": "CUSIANA",
+          "homeTeam": "Cusiana",
           "awayTeam": "Ultimo",
           "homeScore": 60.0,
           "awayScore": 69.0,
@@ -385,7 +385,7 @@
         },
         {
           "id": 24,
-          "homeTeam": "PARTIZAN TIRANA",
+          "homeTeam": "Partizan Tirana",
           "awayTeam": "Real Ichnusa",
           "homeScore": 62.0,
           "awayScore": 70.5,

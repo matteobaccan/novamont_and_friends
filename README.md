@@ -117,7 +117,7 @@ const nuovaGiornata = {
     date: "Ottobre 2025",
     matches: [
         {
-            homeTeam: "CUSIANA",
+            homeTeam: "Cusiana",
             awayTeam: "Real Ichnusa",
             homeScore: 75.5,
             awayScore: 82.0,
@@ -139,7 +139,7 @@ const nuovaGiornata = {
 ```javascript
 const squadra = {
     id: 1,
-    name: "CUSIANA",
+    name: "Cusiana",
     owner: "Manager",
     points: 3,              // Punti campionato
     wins: 1,
