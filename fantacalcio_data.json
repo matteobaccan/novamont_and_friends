@@ -235,7 +235,7 @@
           "homeIdealScore": 79.0,
           "awayIdealScore": 75.0,
           "commentary": {
-            "caressa": "CORTOMUSO vs Real Ichnusa: partita combattuta, 72.5 a 70.5 il risultato reale.",
+            "caressa": "Cortomuso vs Real Ichnusa: partita combattuta, 72.5 a 70.5 il risultato reale.",
             "bergomi": "Differenza sottile ma fondamentale, entrambe le squadre hanno mostrato voglia di vittoria."
           }
         },
@@ -274,7 +274,7 @@
           "homeIdealScore": 64.5,
           "awayIdealScore": 75.0,
           "commentary": {
-            "caressa": "PARTIZAN TIRANA espugna la trasferta: 67.5 a 62.5, una vittoria importante.",
+            "caressa": "Partizan Tirana espugna la trasferta: 67.5 a 62.5, una vittoria importante.",
             "bergomi": "Il Partizan ha saputo sfruttare i momenti chiave; il Cambra non è riuscito a concretizzare il suo potenziale."
           }
         }
@@ -353,7 +353,7 @@
           "homeIdealScore": 77.5,
           "awayIdealScore": 78.5,
           "commentary": {
-            "caressa": "Giornata 6: grandissimo equilibrio tra CORTOMUSO e Frattese, partita da pareggio che vale come un pugno nello stomaco per entrambe le squadre. Un punto a testa che mantiene alta la tensione in classifica e dimostra quanto questo campionato sia combattuto.",
+            "caressa": "Giornata 6: grandissimo equilibrio tra Cortomuso e Frattese, partita da pareggio che vale come un pugno nello stomaco per entrambe le squadre. Un punto a testa che mantiene alta la tensione in classifica e dimostra quanto questo campionato sia combattuto.",
             "bergomi": "Dal punto di vista tattico, partita intensa. La Frattese ha ceduto nei momenti chiave, mentre il Cortomuso ha saputo sfruttare meglio le opportunità. In ottica classifica questo successo consolida la posizione del Cortomuso tra i protagonisti della stagione."
           }
         },
@@ -406,13 +406,13 @@
         {
           "id": 25,
           "homeTeam": "Cambra City",
-          "awayTeam": "CORTOMUSO",
+          "awayTeam": "Cortomuso",
           "homeScore": 56.0,
           "awayScore": 71.0,
           "homeIdealScore": 61.5,
           "awayIdealScore": 76.5,
           "commentary": {
-            "caressa": "Giornata 7: il CORTOMUSO mette ordine e vince 71-56 contro il Cambra City. In chiave classifica questi tre punti pesano e permettono al CORTOMUSO di consolidare la sua posizione tra i protagonisti della stagione.",
+            "caressa": "Giornata 7: il Cortomuso mette ordine e vince 71-56 contro il Cambra City. In chiave classifica questi tre punti pesano e permettono al Cortomuso di consolidare la sua posizione tra i protagonisti della stagione.",
             "bergomi": "Tatticamente il Cortomuso ha saputo gestire meglio i momenti chiave; il Cambra ha avuto difficoltà a trovare continuità. In prospettiva classifica è un passo importante per Sir Alex Baccan."
           }
         },
@@ -432,20 +432,20 @@
         {
           "id": 27,
           "homeTeam": "SM Frattese",
-          "awayTeam": "CUSIANA",
+          "awayTeam": "Cusiana",
           "homeScore": 63.5,
           "awayScore": 70.5,
           "homeIdealScore": 81.5,
           "awayIdealScore": 74.5,
           "commentary": {
-            "caressa": "Giornata 7: la CUSIANA espugna il campo della Frattese per 70.5-63.5. In termini di classifica è una vittoria che può dare slancio alla corsa verso le posizioni di vertice.",
+            "caressa": "Giornata 7: la Cusiana espugna il campo della Frattese per 70.5-63.5. In termini di classifica è una vittoria che può dare slancio alla corsa verso le posizioni di vertice.",
             "bergomi": "La Frattese non è riuscita a esprimere il suo potenziale ideale; la Cusiana ha colto l'occasione e porta a casa tre punti molto importanti per la sua fiducia in campionato."
           }
         },
         {
           "id": 28,
           "homeTeam": "Ultimo",
-          "awayTeam": "PARTIZAN TIRANA",
+          "awayTeam": "Partizan Tirana",
           "homeScore": 80.5,
           "awayScore": 62.5,
           "homeIdealScore": 84.5,
