@@ -456,6 +456,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 8,
+      "date": "Novembre 2025",
+      "generalComment": "Ottava giornata: confronti tirati e qualche conferma dai piani alti. Risultati che mantengono la classifica viva.",
+      "matches": [
+        {
+          "id": 29,
+          "homeTeam": "Cortomuso",
+          "awayTeam": "Cusiana",
+          "homeScore": 78.5,
+          "awayScore": 72.5,
+          "homeIdealScore": 81.0,
+          "awayIdealScore": 72.5,
+          "commentary": {
+            "caressa": "Cortomuso batte la Cusiana 78.5-72.5 in una partita ricca di occasioni: tre punti preziosi per Sir Alex Baccan.",
+            "bergomi": "Prestazione concreta del Cortomuso, la Cusiana ha provato a reagire ma ha pagato qualche scelta non ottimale in fase realizzativa."
+          }
+        },
+        {
+          "id": 30,
+          "homeTeam": "Cambra City",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 75.5,
+          "awayScore": 73.0,
+          "homeIdealScore": 77.5,
+          "awayIdealScore": 83.0,
+          "commentary": {
+            "caressa": "Cambra City vince di misura 75.5-73 contro il Real Ichnusa: partita vera fino all'ultimo minuto.",
+            "bergomi": "Il Cambra è riuscito a spuntarla nei momenti decisivi; l'Ichnusa ha mostrato qualità, ma non è bastato per portare a casa il risultato."
+          }
+        },
+        {
+          "id": 31,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 69.0,
+          "awayScore": 66.5,
+          "homeIdealScore": 71.0,
+          "awayIdealScore": 77.5,
+          "commentary": {
+            "caressa": "Ultimo ha la meglio sullo Shakhtar per 69-66.5: vittoria sofferta ma meritata.",
+            "bergomi": "Lo Shakhtar è rimasto sotto il suo ideale, mentre l'Ultimo ha capitalizzato il proprio potenziale nei momenti chiave."
+          }
+        },
+        {
+          "id": 32,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 76.5,
+          "awayScore": 66.5,
+          "homeIdealScore": 77.0,
+          "awayIdealScore": 73.0,
+          "commentary": {
+            "caressa": "Frattese solida in casa: 76.5-66.5 sul Partizan, tre punti importanti per la classifica.",
+            "bergomi": "Prestazione convincente della Frattese, il Partizan ha pagato qualche errore e non ha saputo sfruttare al meglio le proprie opportunità."
+          }
+        }
+      ]
     }
   ],
   "settings": {
