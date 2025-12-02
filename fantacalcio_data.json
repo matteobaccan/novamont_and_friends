@@ -515,6 +515,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 9,
+      "date": "Novembre 2025",
+      "generalComment": "Nona giornata: equilibrio e qualche risultato inaspettato. La classifica resta viva e pronta a ribaltamenti.",
+      "matches": [
+        {
+          "id": 33,
+          "homeTeam": "Partizan Tirana",
+          "awayTeam": "Cortomuso",
+          "homeScore": 79.0,
+          "awayScore": 69.5,
+          "homeIdealScore": 78.5,
+          "awayIdealScore": 75.5,
+          "commentary": {
+            "caressa": "Partizan domina la partita e batte il Cortomuso 79-69.5: tre punti importanti per la squadra di casa.",
+            "bergomi": "Prestazione di sostanza del Partizan, il Cortomuso ha pagato qualche errore difensivo e non è riuscito a rimontare."
+          }
+        },
+        {
+          "id": 34,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "SM Frattese",
+          "homeScore": 70.0,
+          "awayScore": 70.0,
+          "homeIdealScore": 74.0,
+          "awayIdealScore": 75.0,
+          "commentary": {
+            "caressa": "Pareggio spettacolare tra Shakhtar Donuts e SM Frattese: 70-70 il risultato finale.",
+            "bergomi": "Match equilibrato con poche differenze reali; entrambe le squadre restano in corsa dopo questo punto a testa."
+          }
+        },
+        {
+          "id": 35,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Ultimo",
+          "homeScore": 72.0,
+          "awayScore": 71.5,
+          "homeIdealScore": 80.5,
+          "awayIdealScore": 73.5,
+          "commentary": {
+            "caressa": "Real Ichnusa la spunta per un soffio sull'Ultimo: 72-71.5, partita decisa sul filo.",
+            "bergomi": "L'Ichnusa ha sfruttato qualche occasione in più; l'Ultimo ha dato battaglia ma non è riuscito a trovare il guizzo vincente."
+          }
+        },
+        {
+          "id": 36,
+          "homeTeam": "Cusiana",
+          "awayTeam": "Cambra City",
+          "homeScore": 78.5,
+          "awayScore": 74.0,
+          "homeIdealScore": 77.0,
+          "awayIdealScore": 74.5,
+          "commentary": {
+            "caressa": "Cusiana vince 78.5-74 contro il Cambra City: una prova convincente che vale tre punti pesanti.",
+            "bergomi": "Ottima prova offensiva della Cusiana, il Cambra ha provato a reagire ma è mancata la precisione finale."
+          }
+        }
+      ]
     }
   ],
   "settings": {
