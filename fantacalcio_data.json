@@ -574,6 +574,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 10,
+      "date": "Dicembre 2025",
+      "generalComment": "Decima giornata: risultati importanti e conferme in classifica. Il Real Ichnusa domina, mentre il Cambra e l'Ultimo si dividono la posta.",
+      "matches": [
+        {
+          "id": 37,
+          "homeTeam": "Cortomuso",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 64.0,
+          "awayScore": 72.0,
+          "homeIdealScore": 66.0,
+          "awayIdealScore": 74.5,
+          "commentary": {
+            "caressa": "Shakhtar Donuts vince 72-64 in trasferta contro il Cortomuso: tre punti che rilanciano la squadra di Marco Fedele.",
+            "bergomi": "Prestazione solida dello Shakhtar, il Cortomuso ha faticato in fase offensiva e non è riuscito a trovare il ritmo giusto."
+          }
+        },
+        {
+          "id": 38,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 67.5,
+          "awayScore": 82.5,
+          "homeIdealScore": 69.5,
+          "awayIdealScore": 89.5,
+          "commentary": {
+            "caressa": "Real Ichnusa travolgente: 82.5-67.5 in trasferta, una prestazione da standing ovation!",
+            "bergomi": "Prestazione straordinaria dell'Ichnusa che si avvicina al suo ideale monstre di 89.5. La Frattese ha subito la superiorità avversaria."
+          }
+        },
+        {
+          "id": 39,
+          "homeTeam": "Cusiana",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 64.0,
+          "awayScore": 71.5,
+          "homeIdealScore": 72.0,
+          "awayIdealScore": 72.5,
+          "commentary": {
+            "caressa": "Partizan Tirana espugna il campo della Cusiana per 71.5-64: vittoria esterna che vale punti pesanti.",
+            "bergomi": "Il Partizan è stato più cinico nei momenti chiave, la Cusiana ha pagato una prestazione sottotono rispetto al suo potenziale."
+          }
+        },
+        {
+          "id": 40,
+          "homeTeam": "Cambra City",
+          "awayTeam": "Ultimo",
+          "homeScore": 72.5,
+          "awayScore": 72.5,
+          "homeIdealScore": 80.0,
+          "awayIdealScore": 76.5,
+          "commentary": {
+            "caressa": "Pareggio perfetto tra Cambra City e Ultimo: 72.5-72.5, un punto a testa in una sfida equilibrata.",
+            "bergomi": "Match combattuto con entrambe le squadre sotto il loro ideale, ma l'equilibrio ha premiato il fairplay calcistico."
+          }
+        }
+      ]
     }
   ],
   "settings": {
