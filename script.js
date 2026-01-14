@@ -89,6 +89,27 @@ function calculateGoalsFromScore(score) {
     return Math.floor((score - 60) / 6);
 }
 
+// Funzione per calcolare i gol di una partita considerando la regola del bonus
+function calculateMatchGoals(homeScore, awayScore) {
+    let homeGoals = calculateGoalsFromScore(homeScore);
+    let awayGoals = calculateGoalsFromScore(awayScore);
+    
+    // Se i gol sono uguali, verifica la differenza di punti
+    // Se la differenza è >= 4 punti, chi ha il punteggio maggiore riceve 1 gol in più
+    if (homeGoals === awayGoals) {
+        const scoreDifference = Math.abs(homeScore - awayScore);
+        if (scoreDifference >= 4) {
+            if (homeScore > awayScore) {
+                homeGoals += 1;
+            } else if (awayScore > homeScore) {
+                awayGoals += 1;
+            }
+        }
+    }
+    
+    return { homeGoals, awayGoals };
+}
+
 // Algoritmo per calcolare i gol ideali con bonus casa
 function calculateIdealGoalsFromScore(score, isHome = false) {
     // Applica il bonus di +1 punto solo per la squadra di casa nei punteggi ideali
@@ -98,8 +119,7 @@ function calculateIdealGoalsFromScore(score, isHome = false) {
 
 // Funzione per determinare il risultato del match
 function getMatchResult(homeScore, awayScore) {
-    const homeGoals = calculateGoalsFromScore(homeScore);
-    const awayGoals = calculateGoalsFromScore(awayScore);
+    const { homeGoals, awayGoals } = calculateMatchGoals(homeScore, awayScore);
     
     if (homeGoals > awayGoals) return "home";
     if (awayGoals > homeGoals) return "away";
@@ -161,8 +181,7 @@ function calculateStandingsFromResults() {
             const homeTeam = match.homeTeam;
             const awayTeam = match.awayTeam;
             const result = getMatchResult(match.homeScore, match.awayScore);
-            const homeGoals = calculateGoalsFromScore(match.homeScore);
-            const awayGoals = calculateGoalsFromScore(match.awayScore);
+            const { homeGoals, awayGoals } = calculateMatchGoals(match.homeScore, match.awayScore);
             
             // Aggiorna statistiche squadra casa
             standings[homeTeam].totalScore += match.homeScore;
@@ -302,8 +321,7 @@ function calculateIdealStandingsFromResults() {
 
 // Funzione per formattare il risultato come stringa
 function formatMatchScore(homeScore, awayScore) {
-    const homeGoals = calculateGoalsFromScore(homeScore);
-    const awayGoals = calculateGoalsFromScore(awayScore);
+    const { homeGoals, awayGoals } = calculateMatchGoals(homeScore, awayScore);
     return `${homeGoals}-${awayGoals}`;
 }
 
@@ -717,8 +735,11 @@ function showTeamMatches(teamName, clickedRow) {
             const opponent = isHome ? m.awayTeam : m.homeTeam;
             const teamPoints = isHome ? m.homeScore : m.awayScore;
             const oppPoints = isHome ? m.awayScore : m.homeScore;
-            const teamGoals = calculateGoalsFromScore(teamPoints);
-            const oppGoals = calculateGoalsFromScore(oppPoints);
+            
+            // Calcola i gol con la regola del bonus
+            const goals = calculateMatchGoals(m.homeScore, m.awayScore);
+            const teamGoals = isHome ? goals.homeGoals : goals.awayGoals;
+            const oppGoals = isHome ? goals.awayGoals : goals.homeGoals;
 
             // Show: TeamName vs Opponent — Risultato: teamGoals - oppGoals (teamPoints pt - oppPoints pt)
             content += `
@@ -1218,8 +1239,15 @@ function displayRoundResults(roundNumber) {
         }
 
         // Calcola i gol se non sono già presenti
-        const homeGoals = match.homeGoals !== undefined ? match.homeGoals : calculateGoalsFromScore(match.homeScore);
-        const awayGoals = match.awayGoals !== undefined ? match.awayGoals : calculateGoalsFromScore(match.awayScore);
+        let homeGoals, awayGoals;
+        if (match.homeGoals !== undefined && match.awayGoals !== undefined) {
+            homeGoals = match.homeGoals;
+            awayGoals = match.awayGoals;
+        } else {
+            const goals = calculateMatchGoals(match.homeScore, match.awayScore);
+            homeGoals = goals.homeGoals;
+            awayGoals = goals.awayGoals;
+        }
         const goalScore = `${homeGoals}-${awayGoals}`;
 
         // Punteggi ideali se disponibili
@@ -1668,9 +1696,8 @@ function testGoalCalculation() {
     if (fantacalcioData && fantacalcioData.rounds && fantacalcioData.rounds[0]) {
         const round1 = fantacalcioData.rounds[0];
         round1.matches.forEach((match, index) => {
-            const homeGoals = calculateGoalsFromScore(match.homeScore);
-            const awayGoals = calculateGoalsFromScore(match.awayScore);
-            console.log(`Match ${index + 1}: ${match.homeTeam} ${homeGoals}-${awayGoals} ${match.awayTeam}`);
+            const goals = calculateMatchGoals(match.homeScore, match.awayScore);
+            console.log(`Match ${index + 1}: ${match.homeTeam} ${goals.homeGoals}-${goals.awayGoals} ${match.awayTeam}`);
             console.log(`  Punteggi: ${match.homeScore} - ${match.awayScore}`);
         });
     }
@@ -1685,6 +1712,7 @@ window.FantacalcioApp = {
     displayRoundResults,
     displayIdealVsRealComparison,
     calculateGoalsFromScore,
+    calculateMatchGoals,
     calculateIdealGoalsFromScore,
     getMatchResult,
     formatMatchScore,
