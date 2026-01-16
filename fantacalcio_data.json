@@ -696,10 +696,69 @@
     {
       "round": 12,
       "date": "Gennaio 2026",
-      "generalComment": "Giornata 12: partite combattute con margini ridotti. Lo Shakhtar e il Partizan vincono di misura, mentre Cusiana batte l'Ultimo in trasferta.",
+      "generalComment": "Giornata 12: equilibrio e spettacolo. Cambra e Frattese vincono le rispettive partite, mentre Cortomuso supera l'Ultimo e Cusiana batte il Real Ichnusa di misura.",
       "matches": [
         {
           "id": 45,
+          "homeTeam": "Cortomuso",
+          "awayTeam": "Ultimo",
+          "homeScore": 84.0,
+          "awayScore": 68.0,
+          "homeIdealScore": 84.0,
+          "awayIdealScore": 68.0,
+          "commentary": {
+            "caressa": "Vittoria netta del Cortomuso! 84-68 contro l'Ultimo! Sir Alex Baccan porta a casa tre punti importanti!",
+            "bergomi": "Il Cortomuso perfetto, Fabio! Ha fatto esattamente il suo ideale: 84 su 84! L'Ultimo invece ha dato il massimo ma non è bastato."
+          }
+        },
+        {
+          "id": 46,
+          "homeTeam": "Cusiana",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 66.5,
+          "awayScore": 65.5,
+          "homeIdealScore": 66.5,
+          "awayIdealScore": 65.5,
+          "commentary": {
+            "caressa": "CHE EQUILIBRIO! Cusiana batte il Real Ichnusa 66.5-65.5! Un solo punto di differenza!",
+            "bergomi": "Fabio, qui siamo alla perfezione assoluta! ENTRAMBE le squadre hanno fatto ESATTAMENTE il loro ideale! 66.5 su 66.5 per la Cusiana e 65.5 su 65.5 per il Real! Non si può giocare meglio di così!"
+          }
+        },
+        {
+          "id": 47,
+          "homeTeam": "Partizan Tirana",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 69.0,
+          "awayScore": 64.5,
+          "homeIdealScore": 69.0,
+          "awayIdealScore": 64.5,
+          "commentary": {
+            "caressa": "Partizan Tirana batte lo Shakhtar Donuts 69-64.5! Vittoria importante per Loran10!",
+            "bergomi": "Anche qui perfezione assoluta, Fabio! Il Partizan ha fatto 69 su 69 di ideale, lo Shakhtar 64.5 su 64.5! Entrambe impeccabili nella gestione della rosa."
+          }
+        },
+        {
+          "id": 48,
+          "homeTeam": "Cambra City",
+          "awayTeam": "SM Frattese",
+          "homeScore": 71.5,
+          "awayScore": 85.0,
+          "homeIdealScore": 71.5,
+          "awayIdealScore": 85.0,
+          "commentary": {
+            "caressa": "SM FRATTESE SHOW! 85 punti in trasferta contro il Cambra City! 71.5-85 il risultato finale! Che prestazione di Pezant!",
+            "bergomi": "Entrambe PERFETTE, Fabio! Il Cambra 71.5 su 71.5, la Frattese 85 su 85! È raro vedere partite dove tutte e due le squadre fanno esattamente il loro ideale. Complimenti a entrambi!"
+          }
+        }
+      ]
+    },
+    {
+      "round": 13,
+      "date": "Gennaio 2026",
+      "generalComment": "Giornata 13: partite combattute con margini ridotti. Lo Shakhtar e il Partizan vincono di misura, mentre Cusiana batte l'Ultimo in trasferta.",
+      "matches": [
+        {
+          "id": 49,
           "homeTeam": "SM Frattese",
           "awayTeam": "Cortomuso",
           "homeScore": 74.0,
@@ -712,7 +771,7 @@
           }
         },
         {
-          "id": 46,
+          "id": 50,
           "homeTeam": "Ultimo",
           "awayTeam": "Cusiana",
           "homeScore": 63.5,
@@ -725,7 +784,7 @@
           }
         },
         {
-          "id": 47,
+          "id": 51,
           "homeTeam": "Cambra City",
           "awayTeam": "Shakhtar Donuts",
           "homeScore": 77.5,
@@ -738,7 +797,7 @@
           }
         },
         {
-          "id": 48,
+          "id": 52,
           "homeTeam": "Real Ichnusa",
           "awayTeam": "Partizan Tirana",
           "homeScore": 76.5,
@@ -753,12 +812,12 @@
       ]
     },
     {
-      "round": 13,
+      "round": 14,
       "date": "Gennaio 2026",
-      "generalComment": "Giornata 13: il Cortomuso domina il Cambra City, mentre le altre partite si decidono per dettagli. Lo Shakhtar batte di misura il Real Ichnusa.",
+      "generalComment": "Giornata 14: il Cortomuso domina il Cambra City, mentre le altre partite si decidono per dettagli. Lo Shakhtar batte di misura il Real Ichnusa.",
       "matches": [
         {
-          "id": 49,
+          "id": 53,
           "homeTeam": "Cortomuso",
           "awayTeam": "Cambra City",
           "homeScore": 76.0,
@@ -771,7 +830,7 @@
           }
         },
         {
-          "id": 50,
+          "id": 54,
           "homeTeam": "Shakhtar Donuts",
           "awayTeam": "Real Ichnusa",
           "homeScore": 71.0,
@@ -784,7 +843,7 @@
           }
         },
         {
-          "id": 51,
+          "id": 55,
           "homeTeam": "Cusiana",
           "awayTeam": "SM Frattese",
           "homeScore": 73.0,
@@ -797,7 +856,7 @@
           }
         },
         {
-          "id": 52,
+          "id": 56,
           "homeTeam": "Partizan Tirana",
           "awayTeam": "Ultimo",
           "homeScore": 69.0,
@@ -812,12 +871,12 @@
       ]
     },
     {
-      "round": 14,
+      "round": 15,
       "date": "Gennaio 2026",
-      "generalComment": "Ultima giornata: il Cambra City vince in trasferta con 82 punti, mentre la SM Frattese espugna il campo del Partizan. Partita tiratissima tra Shakhtar e Ultimo.",
+      "generalComment": "Giornata 15: il Cambra City vince in trasferta con 82 punti, mentre la SM Frattese espugna il campo del Partizan. Partita tiratissima tra Shakhtar e Ultimo.",
       "matches": [
         {
-          "id": 53,
+          "id": 57,
           "homeTeam": "Cusiana",
           "awayTeam": "Cortomuso",
           "homeScore": 72.5,
@@ -830,7 +889,7 @@
           }
         },
         {
-          "id": 54,
+          "id": 58,
           "homeTeam": "Real Ichnusa",
           "awayTeam": "Cambra City",
           "homeScore": 62.0,
@@ -843,7 +902,7 @@
           }
         },
         {
-          "id": 55,
+          "id": 59,
           "homeTeam": "Shakhtar Donuts",
           "awayTeam": "Ultimo",
           "homeScore": 70.5,
@@ -856,7 +915,7 @@
           }
         },
         {
-          "id": 56,
+          "id": 60,
           "homeTeam": "Partizan Tirana",
           "awayTeam": "SM Frattese",
           "homeScore": 72.0,
@@ -871,12 +930,12 @@
       ]
     },
     {
-      "round": 15,
+      "round": 16,
       "date": "Gennaio 2026",
-      "generalComment": "Giornata 15: la SM Frattese domina con 83 punti contro lo Shakhtar, il Cambra batte la Cusiana e il Partizan vince in trasferta contro il Cortomuso.",
+      "generalComment": "Giornata 16: la SM Frattese domina con 83 punti contro lo Shakhtar, il Cambra batte la Cusiana e il Partizan vince in trasferta contro il Cortomuso.",
       "matches": [
         {
-          "id": 57,
+          "id": 61,
           "homeTeam": "Cortomuso",
           "awayTeam": "Partizan Tirana",
           "homeScore": 69.5,
@@ -889,7 +948,7 @@
           }
         },
         {
-          "id": 58,
+          "id": 62,
           "homeTeam": "SM Frattese",
           "awayTeam": "Shakhtar Donuts",
           "homeScore": 83.0,
@@ -902,7 +961,7 @@
           }
         },
         {
-          "id": 59,
+          "id": 63,
           "homeTeam": "Ultimo",
           "awayTeam": "Real Ichnusa",
           "homeScore": 72.5,
@@ -915,7 +974,7 @@
           }
         },
         {
-          "id": 60,
+          "id": 64,
           "homeTeam": "Cambra City",
           "awayTeam": "Cusiana",
           "homeScore": 77.0,
@@ -935,7 +994,7 @@
     "pointsForDraw": 1,
     "pointsForLoss": 0,
     "leagueFormat": "Girone all'italiana",
-    "totalRounds": 14,
+    "totalRounds": 15,
     "goalCalculation": {
       "pointsPerGoal": 6,
       "description": "Ogni 6 punti fantacalcio = 1 gol"
