@@ -987,6 +987,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 17,
+      "date": "Gennaio 2026",
+      "generalComment": "Giornata 17: la Cusiana domina con 77.5 punti contro il Partizan Tirana, il Cambra vince di misura contro l'Ultimo, mentre il Real Ichnusa e lo Shakhtar Donuts conquistano vittorie importanti.",
+      "matches": [
+        {
+          "id": 65,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "Cortomuso",
+          "homeScore": 70.5,
+          "awayScore": 68.0,
+          "homeIdealScore": 73.0,
+          "awayIdealScore": 70.0,
+          "commentary": {
+            "caressa": "Lo Shakhtar Donuts batte il Cortomuso 70.5-68! Vittoria di misura ma importante per Marco Fedele!",
+            "bergomi": "Match equilibrato, Fabio. Lo Shakhtar ha lasciato 2.5 punti in panchina, il Cortomuso 2. Entrambe sotto il loro ideale."
+          }
+        },
+        {
+          "id": 66,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "SM Frattese",
+          "homeScore": 71.5,
+          "awayScore": 68.0,
+          "homeIdealScore": 74.5,
+          "awayIdealScore": 73.5,
+          "commentary": {
+            "caressa": "Il Real Ichnusa batte la SM Frattese 71.5-68! Tre punti d'oro per Robertino Trogu!",
+            "bergomi": "Entrambe sotto il loro ideale, Fabio. Il Real ha lasciato 3 punti, la Frattese 5.5. Poteva essere una partita più spettacolare con le formazioni ideali!"
+          }
+        },
+        {
+          "id": 67,
+          "homeTeam": "Partizan Tirana",
+          "awayTeam": "Cusiana",
+          "homeScore": 67.5,
+          "awayScore": 77.5,
+          "homeIdealScore": 71.0,
+          "awayIdealScore": 77.5,
+          "commentary": {
+            "caressa": "DOMINIO TOTALE! La Cusiana travolge il Partizan Tirana 77.5-67.5! Roby mette in campo una formazione perfetta!",
+            "bergomi": "Prestazione eccezionale della Cusiana, Fabio! Formazione ideale perfetta: 77.5 su 77.5! Il Partizan invece ha lasciato 3.5 punti in panchina."
+          }
+        },
+        {
+          "id": 68,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Cambra City",
+          "homeScore": 61.0,
+          "awayScore": 62.0,
+          "homeIdealScore": 67.5,
+          "awayIdealScore": 72.0,
+          "commentary": {
+            "caressa": "Il Cambra City vince di un soffio contro l'Ultimo! 62-61! Partita combattuta fino all'ultimo!",
+            "bergomi": "Che brivido finale, Fabio! L'Ultimo ha lasciato 6.5 punti in panchina, il Cambra ben 10! Con le formazioni ideali sarebbe finita 9-11!"
+          }
+        }
+      ]
     }
   ],
   "settings": {
