@@ -1046,6 +1046,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 18,
+      "date": "Gennaio 2026",
+      "generalComment": "Giornata 18: il Cambra City mette a segno 87.5 punti e travolge il Partizan Tirana, lo Shakhtar Donuts vince di misura contro la Cusiana, mentre Real Ichnusa e Ultimo conquistano vittorie esterne.",
+      "matches": [
+        {
+          "id": 69,
+          "homeTeam": "Cortomuso",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 66.5,
+          "awayScore": 73.0,
+          "homeIdealScore": 68.0,
+          "awayIdealScore": 74.0,
+          "commentary": {
+            "caressa": "Il Real Ichnusa vince in trasferta 73-66.5 contro il Cortomuso! Robertino Trogu porta a casa tre punti importanti!",
+            "bergomi": "Entrambe vicine al loro ideale, Fabio. Il Cortomuso ha lasciato 1.5 punti, il Real solo 1. Prestazione quasi perfetta del Real!"
+          }
+        },
+        {
+          "id": 70,
+          "homeTeam": "Cusiana",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 78.5,
+          "awayScore": 80.0,
+          "homeIdealScore": 80.0,
+          "awayIdealScore": 82.0,
+          "commentary": {
+            "caressa": "CHE SFIDA! Lo Shakhtar Donuts vince 80-78.5 contro la Cusiana! Partita spettacolare con oltre 158 punti totali!",
+            "bergomi": "Match combattuto fino all'ultimo, Fabio! La Cusiana ha lasciato 1.5 punti, lo Shakhtar 2. Entrambe hanno giocato quasi alla perfezione!"
+          }
+        },
+        {
+          "id": 71,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Ultimo",
+          "homeScore": 70.5,
+          "awayScore": 73.5,
+          "homeIdealScore": 75.0,
+          "awayIdealScore": 80.5,
+          "commentary": {
+            "caressa": "L'Ultimo vince in trasferta 73.5-70.5 contro la SM Frattese! Beppe continua la sua rincorsa!",
+            "bergomi": "Entrambe sotto il loro ideale, Fabio. La Frattese ha lasciato 4.5 punti, l'Ultimo ben 7! Con le formazioni ideali sarebbe stata una partita più equilibrata."
+          }
+        },
+        {
+          "id": 72,
+          "homeTeam": "Cambra City",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 87.5,
+          "awayScore": 75.0,
+          "homeIdealScore": 88.0,
+          "awayIdealScore": 82.0,
+          "commentary": {
+            "caressa": "PRESTAZIONE STRAORDINARIA! Il Cambra City travolge il Partizan Tirana 87.5-75! Stefano mette in campo una squadra devastante!",
+            "bergomi": "Che numeri, Fabio! Il Cambra quasi perfetto con solo 0.5 punti lasciati in panchina! 87.5 su 88! Il Partizan invece ha lasciato 7 punti."
+          }
+        }
+      ]
     }
   ],
   "settings": {
