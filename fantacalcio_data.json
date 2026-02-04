@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "10 Novembre 2025, 12:00",
+  "lastUpdate": "04 Febbraio 2026, 12:00",
   "season": "2025-2026",
   "teams": [
     {
@@ -1105,6 +1105,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 19,
+      "date": "Febbraio 2026",
+      "generalComment": "Giornata 19: Shakhtar Donuts e Ultimo incassano vittorie preziose, mentre regna l'equilibrio sugli altri campi con due pareggi.",
+      "matches": [
+        {
+          "id": 73,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Cortomuso",
+          "homeScore": 69.0,
+          "awayScore": 65.0,
+          "homeIdealScore": 82.5,
+          "awayIdealScore": 77.0,
+          "commentary": {
+            "caressa": "Vittoria di misura dell'Ultimo! 1-0 sul Cortomuso con un punteggio di 69 a 65.",
+            "bergomi": "Partita che poteva offrire molto di più, Fabio. L'Ultimo ha lasciato 13.5 punti in panchina, il Cortomuso 12. Un vero peccato!"
+          }
+        },
+        {
+          "id": 74,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Cusiana",
+          "homeScore": 67.5,
+          "awayScore": 68.0,
+          "homeIdealScore": 89.5,
+          "awayIdealScore": 71.0,
+          "commentary": {
+            "caressa": "Pareggio combattuto tra Real e Cusiana! Un 1-1 frutto di un 67.5 a 68.",
+            "bergomi": "Il Real Ichnusa deve mangiarsi le mani: 22 punti lasciati fuori! Con la formazione ideale avrebbe vinto 4-1. Occasione sprecata."
+          }
+        },
+        {
+          "id": 75,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 75.5,
+          "awayScore": 67.5,
+          "homeIdealScore": 80.5,
+          "awayIdealScore": 73.0,
+          "commentary": {
+            "caressa": "Lo Shakhtar Donuts si impone 2-1 sul Partizan Tirana! 75.5 a 67.5 il punteggio fantacalcio.",
+            "bergomi": "Buona prova dello Shakhtar, che ha sfruttato bene la rosa lasciando solo 5 punti fuori. Il Partizan un po' sottotono."
+          }
+        },
+        {
+          "id": 76,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Cambra City",
+          "homeScore": 72.5,
+          "awayScore": 72.0,
+          "homeIdealScore": 78.0,
+          "awayIdealScore": 85.5,
+          "commentary": {
+            "caressa": "Spettacolo al cardiopalma! Frattese e Cambra chiudono sul 2-2! Punteggi quasi identici: 72.5 a 72.",
+            "bergomi": "Il Cambra City ha lasciato troppi punti in panchina, 13.5 per l'esattezza. Poteva portare a casa l'intera posta in palio."
+          }
+        }
+      ]
     }
   ],
   "settings": {
@@ -1112,7 +1171,6 @@
     "pointsForDraw": 1,
     "pointsForLoss": 0,
     "leagueFormat": "Girone all'italiana",
-    "totalRounds": 15,
     "goalCalculation": {
       "pointsPerGoal": 6,
       "description": "Ogni 6 punti fantacalcio = 1 gol"
