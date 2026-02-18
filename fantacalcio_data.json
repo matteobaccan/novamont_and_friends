@@ -1164,6 +1164,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 20,
+      "date": "Febbraio 2026",
+      "generalComment": "Giornata 20: Cortomuso, Real Ichnusa, SM Frattese e Ultimo conquistano i 3 punti. Giornata caratterizzata da punteggi ideali molto alti non sempre convertiti in campo.",
+      "matches": [
+        {
+          "id": 77,
+          "homeTeam": "Cambra City",
+          "awayTeam": "Cortomuso",
+          "homeScore": 70.0,
+          "awayScore": 74.5,
+          "homeIdealScore": 73.5,
+          "awayIdealScore": 81.0,
+          "commentary": {
+            "caressa": "Il Cortomuso espugna il campo del Cambra City! 74.5 punti contro 70.0! Una vittoria fondamentale per la classifica!",
+            "bergomi": "Entrambe le squadre potevano fare meglio, Fabio. Il Cambra ha lasciato 3.5 punti, il Cortomuso ben 6.5! Con le formazioni ideali, il divario sarebbe stato ancora più netto."
+          }
+        },
+        {
+          "id": 78,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 67.5,
+          "awayScore": 62.0,
+          "homeIdealScore": 76.5,
+          "awayIdealScore": 72.5,
+          "commentary": {
+            "caressa": "Vittoria di misura per il Real Ichnusa! 67.5 a 62.0 contro gli Shakhtar Donuts. Pochi bonus ma tre punti pesanti!",
+            "bergomi": "Che spreco però, Fabio! Il Real ha lasciato 9 punti in panchina, i Donuts addirittura 10.5! Poteva essere una partita molto più spettacolare."
+          }
+        },
+        {
+          "id": 79,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Cusiana",
+          "homeScore": 76.5,
+          "awayScore": 64.0,
+          "homeIdealScore": 85.0,
+          "awayIdealScore": 67.5,
+          "commentary": {
+            "caressa": "La SM Frattese domina contro la Cusiana! 76.5 a 64.0! Una prestazione convincente che non lascia scampo agli avversari.",
+            "bergomi": "Vittoria netta, ma attenzione: la Frattese aveva un potenziale mostruoso di 85 punti! Ha lasciato 8.5 punti fuori. La Cusiana invece ha fatto quel che poteva."
+          }
+        },
+        {
+          "id": 80,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 75.5,
+          "awayScore": 62.0,
+          "homeIdealScore": 80.5,
+          "awayIdealScore": 69.0,
+          "commentary": {
+            "caressa": "L'Ultimo non sbaglia un colpo in casa! 75.5 contro i 62.0 del Partizan Tirana. Vittoria mai in discussione!",
+            "bergomi": "L'Ultimo ha gestito bene, anche se ha lasciato 5 punti in panchina. Il Partizan invece fatica a trovare continuità, ben 7 punti lasciati fuori oggi."
+          }
+        }
+      ]
     }
   ],
   "settings": {
