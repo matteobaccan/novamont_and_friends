@@ -1223,6 +1223,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 21,
+      "date": "Febbraio 2026",
+      "generalComment": "Giornata 21: Vincono Cortomuso, Ultimo, Shakhtar Donuts e Partizan Tirana.",
+      "matches": [
+        {
+          "id": 81,
+          "homeTeam": "Cortomuso",
+          "awayTeam": "SM Frattese",
+          "homeScore": 75.5,
+          "awayScore": 71.5,
+          "homeIdealScore": 75.5,
+          "awayIdealScore": 71.5,
+          "commentary": {
+            "caressa": "Il Cortomuso batte la SM Frattese 75.5 a 71.5!",
+            "bergomi": "Vittoria importante per il Cortomuso."
+          }
+        },
+        {
+          "id": 82,
+          "homeTeam": "Cusiana",
+          "awayTeam": "Ultimo",
+          "homeScore": 71.5,
+          "awayScore": 72.5,
+          "homeIdealScore": 71.5,
+          "awayIdealScore": 72.5,
+          "commentary": {
+            "caressa": "Ultimo passa di misura su Cusiana, 72.5 a 71.5.",
+            "bergomi": "Che partita tirata! Un solo punto di differenza."
+          }
+        },
+        {
+          "id": 83,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "Cambra City",
+          "homeScore": 71.0,
+          "awayScore": 70.5,
+          "homeIdealScore": 71.0,
+          "awayIdealScore": 70.5,
+          "commentary": {
+            "caressa": "Shakhtar Donuts vince di un soffio su Cambra City: 71 a 70.5.",
+            "bergomi": "Davvero per mezzo punto! Incredibile."
+          }
+        },
+        {
+          "id": 84,
+          "homeTeam": "Partizan Tirana",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 83.5,
+          "awayScore": 72.5,
+          "homeIdealScore": 83.5,
+          "awayIdealScore": 72.5,
+          "commentary": {
+            "caressa": "Partizan Tirana travolgente contro Real Ichnusa: 83.5 a 72.5!",
+            "bergomi": "Prestazione superlativa del Partizan."
+          }
+        }
+      ]
     }
   ],
   "settings": {
