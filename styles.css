@@ -2953,3 +2953,30 @@ html.theme-transition *:after {
         font-size: 0.9rem;
     }
 }
+/* Highlights per punteggi totali */
+.best-score {
+    color: var(--accent);
+    font-weight: bold;
+    position: relative;
+}
+
+.best-score::after {
+    content: '\25B2';
+    font-size: 0.7em;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.worst-score {
+    color: var(--accent-danger);
+    font-weight: bold;
+    position: relative;
+}
+
+.worst-score::after {
+    content: '\25BC';
+    font-size: 0.7em;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
