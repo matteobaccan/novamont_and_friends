@@ -526,6 +526,12 @@ let sortState = {
     direction: 'desc'
 };
 
+// Stato dell'ordinamento classifica ideale
+let idealSortState = {
+    column: 'points',
+    direction: 'desc'
+};
+
 // Funzione per ordinare i team
 function sortTeams(teams, column, direction) {
     return teams.slice().sort((a, b) => {
@@ -598,41 +604,50 @@ function displayStandings() {
     const sortedTeams = sortTeams(standings, sortState.column, sortState.direction);
     console.log('Teams ordinati:', sortedTeams);
     
+    // Trova i punteggi totali più alti e più bassi
+    let maxTotalScore = -Infinity;
+    let minTotalScore = Infinity;
+    
+    standings.forEach(team => {
+        if (team.totalScore > maxTotalScore) maxTotalScore = team.totalScore;
+        if (team.totalScore < minTotalScore) minTotalScore = team.totalScore;
+    });
+
     let html = `
-        <table class="standings-table">
+        <table class="standings-table" id="main-standings-table">
             <thead>
                 <tr class="table-header">
-                    <th class="sortable-header" data-column="position">
+                    <th class="sortable-header" data-column="position" data-table="main">
                         Pos. <i class="fas fa-sort"></i>
                     </th>
-                    <th class="sortable-header" data-column="name">
+                    <th class="sortable-header" data-column="name" data-table="main">
                         Squadra <i class="fas fa-sort ${sortState.column === 'name' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="sortable-header" data-column="points">
+                    <th class="sortable-header" data-column="points" data-table="main">
                         Pt <i class="fas fa-sort ${sortState.column === 'points' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="wins">
+                    <th class="sortable-header mobile-hide" data-column="wins" data-table="main">
                         V <i class="fas fa-sort ${sortState.column === 'wins' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="draws">
+                    <th class="sortable-header mobile-hide" data-column="draws" data-table="main">
                         P <i class="fas fa-sort ${sortState.column === 'draws' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="losses">
+                    <th class="sortable-header mobile-hide" data-column="losses" data-table="main">
                         S <i class="fas fa-sort ${sortState.column === 'losses' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="goalsFor">
+                    <th class="sortable-header mobile-hide" data-column="goalsFor" data-table="main">
                         GF <i class="fas fa-sort ${sortState.column === 'goalsFor' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="goalsAgainst">
+                    <th class="sortable-header mobile-hide" data-column="goalsAgainst" data-table="main">
                         GS <i class="fas fa-sort ${sortState.column === 'goalsAgainst' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="goalDifference">
+                    <th class="sortable-header mobile-hide" data-column="goalDifference" data-table="main">
                         DR <i class="fas fa-sort ${sortState.column === 'goalDifference' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="totalScore">
+                    <th class="sortable-header mobile-hide" data-column="totalScore" data-table="main">
                         Pt <i class="fas fa-sort ${sortState.column === 'totalScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="sortable-header mobile-hide" data-column="avgScore">
+                    <th class="sortable-header mobile-hide" data-column="avgScore" data-table="main">
                         Media <i class="fas fa-sort ${sortState.column === 'avgScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
                 </tr>
@@ -648,6 +663,11 @@ function displayStandings() {
         else if (position === 2) positionClass = 'second';
         else if (position === 3) positionClass = 'third';
 
+        // Check for best/worst total score
+        let totalScoreClass = '';
+        if (team.totalScore === maxTotalScore) totalScoreClass = 'best-score';
+        if (team.totalScore === minTotalScore) totalScoreClass = 'worst-score';
+
         html += `
             <tr class="team-row ${positionClass}" style="animation-delay: ${index * 0.1}s">
                 <td class="position">${position}</td>
@@ -659,7 +679,7 @@ function displayStandings() {
                 <td class="goals-for mobile-hide">${team.goalsFor || 0}</td>
                 <td class="goals-against mobile-hide">${team.goalsAgainst || 0}</td>
                 <td class="goal-difference mobile-hide ${team.goalDifference >= 0 ? 'positive' : 'negative'}">${team.goalDifference >= 0 ? '+' : ''}${team.goalDifference || 0}</td>
-                <td class="total-score mobile-hide">${team.totalScore || 0}</td>
+                <td class="total-score mobile-hide ${totalScoreClass}">${team.totalScore || 0}</td>
                 <td class="avg-score mobile-hide">${team.avgScore}</td>
             </tr>
         `;
@@ -673,7 +693,7 @@ function displayStandings() {
     standingsTable.innerHTML = html;
     
     // Aggiungi event listeners per l'ordinamento
-    setupSortableHeaders();
+    setupSortableHeaders('main');
     
     // Aggiungi listener su ogni riga per mostrare i dettagli della squadra
     const rows = standingsTable.querySelectorAll('.team-row');
@@ -851,15 +871,35 @@ function displayIdealStandings() {
     // Calcola la classifica reale per confronto
     const realStandings = calculateStandingsFromResults();
     
+    // Ordina i team secondo lo stato attuale della classifica ideale
+    const sortedIdealTeams = sortTeams(idealStandings, idealSortState.column, idealSortState.direction);
+
     // Calcola statistiche allenatore (media punti persi per tutte le giornate)
     const coachStats = calculateOverallCoachStats();
     
+    // Trova i punteggi totali più alti e più bassi
+    let maxTotalScore = -Infinity;
+    let minTotalScore = Infinity;
+    
+    sortedIdealTeams.forEach(team => {
+        if (team.totalScore > maxTotalScore) maxTotalScore = team.totalScore;
+        if (team.totalScore < minTotalScore) minTotalScore = team.totalScore;
+    });
+    
     // Aggiungi le differenze alla classifica ideale
-    idealStandings.forEach((idealTeam, idealIndex) => {
+    sortedIdealTeams.forEach((idealTeam, idealIndex) => {
         const realTeamIndex = realStandings.findIndex(realTeam => realTeam.name === idealTeam.name);
         const realTeam = realStandings[realTeamIndex];
         
-        idealTeam.positionDifference = realTeamIndex - idealIndex; // Positivo = peggioramento nella reale
+        // Calcola la posizione reale basata su sortedIdealTeams (posizione visualizzata nella tabella)
+        // Ma qui stiamo iterando sui team ordinati, quindi idealIndex+1 è la posizione visualizzata
+        // Tuttavia, per positionDifference vogliamo confrontare con la classifica reale.
+        // La posizione reale è realTeamIndex + 1 (assumendo realStandings ordinato correttamente)
+        
+        idealTeam.positionDifference = (realTeamIndex + 1) - (idealIndex + 1); // Positivo = peggioramento nella reale?
+        // Se reale è 5° e ideale è 3°, diff = 5-3 = 2 (positivo). Ha perso 2 posizioni.
+        // Se reale è 1° e ideale è 3°, diff = 1-3 = -2 (negativo). Ha guadagnato 2 posizioni.
+        
         idealTeam.pointsDifference = (realTeam ? realTeam.points : 0) - idealTeam.points;
         idealTeam.scoreDifference = (realTeam ? realTeam.totalScore : 0) - idealTeam.totalScore;
     });
@@ -925,60 +965,65 @@ function displayIdealStandings() {
     }
 
     let html = coachStatsHtml + `
-        <table class="standings-table ideal-standings-table">
+          <table class="standings-table ideal-standings-table" id="ideal-standings-table">
             <thead>
                 <tr class="table-header">
-                    <th>
-                        Pos.
+                    <th class="sortable-header" data-column="position" data-table="ideal">
+                        Pos. <i class="fas fa-sort"></i>
                     </th>
-                    <th>
-                        Squadra
+                    <th class="sortable-header" data-column="name" data-table="ideal">
+                        Squadra <i class="fas fa-sort ${idealSortState.column === 'name' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th>
-                        Pt
+                    <th class="sortable-header" data-column="points" data-table="ideal">
+                        Pt <i class="fas fa-sort ${idealSortState.column === 'points' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="mobile-hide">
-                        V
+                    <th class="sortable-header mobile-hide" data-column="wins" data-table="ideal">
+                        V <i class="fas fa-sort ${idealSortState.column === 'wins' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="mobile-hide">
-                        P
+                    <th class="sortable-header mobile-hide" data-column="draws" data-table="ideal">
+                        P <i class="fas fa-sort ${idealSortState.column === 'draws' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="mobile-hide">
-                        S
+                    <th class="sortable-header mobile-hide" data-column="losses" data-table="ideal">
+                        S <i class="fas fa-sort ${idealSortState.column === 'losses' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="mobile-hide">
-                        GF
+                    <th class="sortable-header mobile-hide" data-column="goalsFor" data-table="ideal">
+                        GF <i class="fas fa-sort ${idealSortState.column === 'goalsFor' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="mobile-hide">
-                        GS
+                    <th class="sortable-header mobile-hide" data-column="goalsAgainst" data-table="ideal">
+                        GS <i class="fas fa-sort ${idealSortState.column === 'goalsAgainst' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="mobile-hide">
-                        DR
+                    <th class="sortable-header mobile-hide" data-column="goalDifference" data-table="ideal">
+                        DR <i class="fas fa-sort ${idealSortState.column === 'goalDifference' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="mobile-hide">
-                        Pt
+                    <th class="sortable-header mobile-hide" data-column="totalScore" data-table="ideal">
+                        Pt <i class="fas fa-sort ${idealSortState.column === 'totalScore' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="mobile-hide">
-                        Media
+                    <th class="sortable-header mobile-hide" data-column="avgScore" data-table="ideal">
+                        Media <i class="fas fa-sort ${idealSortState.column === 'avgScore' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="mobile-hide">
-                        Diff Pos
+                    <th class="sortable-header mobile-hide" data-column="positionDifference" data-table="ideal">
+                        Diff Pos <i class="fas fa-sort ${idealSortState.column === 'positionDifference' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
-                    <th class="mobile-hide">
-                        Diff Pt
+                    <th class="sortable-header mobile-hide" data-column="pointsDifference" data-table="ideal">
+                        Diff Pt <i class="fas fa-sort ${idealSortState.column === 'pointsDifference' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
                 </tr>
             </thead>
             <tbody>
     `;
 
-    idealStandings.forEach((team, index) => {
+    sortedIdealTeams.forEach((team, index) => {
         const position = index + 1;
         let positionClass = 'other';
         
         if (position === 1) positionClass = 'first';
         else if (position === 2) positionClass = 'second';
         else if (position === 3) positionClass = 'third';
+
+        // Check for best/worst total score
+        let totalScoreClass = '';
+        if (team.totalScore === maxTotalScore) totalScoreClass = 'best-score';
+        if (team.totalScore === minTotalScore) totalScoreClass = 'worst-score';
 
         html += `
             <tr class="team-row ${positionClass}" style="animation-delay: ${index * 0.1}s">
@@ -991,7 +1036,7 @@ function displayIdealStandings() {
                 <td class="goals-for mobile-hide">${team.goalsFor}</td>
                 <td class="goals-against mobile-hide">${team.goalsAgainst}</td>
                 <td class="goal-difference mobile-hide ${team.goalDifference >= 0 ? 'positive' : 'negative'}">${team.goalDifference >= 0 ? '+' : ''}${team.goalDifference}</td>
-                <td class="total-score mobile-hide">${team.totalScore}</td>
+                <td class="total-score mobile-hide ${totalScoreClass}">${team.totalScore}</td>
                 <td class="avg-score mobile-hide">${team.avgScore}</td>
                 <td class="position-difference mobile-hide ${team.positionDifference > 0 ? 'worse' : team.positionDifference < 0 ? 'better' : 'same'}">
                     ${team.positionDifference > 0 ? '+' : ''}${team.positionDifference || 0}
@@ -1009,26 +1054,46 @@ function displayIdealStandings() {
     `;
 
     idealStandingsTable.innerHTML = html;
+    
+    // Aggiungi event listeners per l'ordinamento
+    setupSortableHeaders('ideal');
 }
 
 // Setup event listeners per le colonne ordinabili
-function setupSortableHeaders() {
-    const headers = document.querySelectorAll('.sortable-header');
+// Imposta i listener per gli header sortabili
+function setupSortableHeaders(tableType = 'main') {
+    const selector = tableType === 'main' 
+        ? '#main-standings-table .sortable-header' 
+        : '#ideal-standings-table .sortable-header';
+        
+    const headers = document.querySelectorAll(selector);
+    
     headers.forEach(header => {
         header.addEventListener('click', () => {
             const column = header.getAttribute('data-column');
             
-            // Se è la stessa colonna, inverti la direzione
-            if (sortState.column === column) {
-                sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
+            if (tableType === 'main') {
+                // Se è la stessa colonna, inverti la direzione
+                if (sortState.column === column) {
+                    sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    // Nuova colonna, imposta direzione predefinita
+                    sortState.column = column;
+                    sortState.direction = column === 'name' ? 'asc' : 'desc';
+                }
+                // Rigenera la tabella principale
+                displayStandings();
             } else {
-                // Nuova colonna, imposta direzione predefinita
-                sortState.column = column;
-                sortState.direction = column === 'name' ? 'asc' : 'desc';
+                // Classifica ideale
+                if (idealSortState.column === column) {
+                    idealSortState.direction = idealSortState.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    idealSortState.column = column;
+                    idealSortState.direction = column === 'name' ? 'asc' : 'desc';
+                }
+                // Rigenera la tabella ideale
+                displayIdealStandings();
             }
-            
-            // Rigenera la tabella
-            displayStandings();
         });
     });
 }
