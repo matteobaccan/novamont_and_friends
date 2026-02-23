@@ -221,11 +221,10 @@ function calculateStandingsFromResults() {
         team.goalDifference = team.goalsFor - team.goalsAgainst;
     });
     
-    // Converte in array e ordina per punti, differenza reti, poi per media
+    // Converte in array e ordina per punti, poi per totale punti
     return Object.values(standings).sort((a, b) => {
         if (b.points !== a.points) return b.points - a.points;
-        if (b.goalDifference !== a.goalDifference) return b.goalDifference - a.goalDifference;
-        return b.avgScore - a.avgScore;
+        return b.totalScore - a.totalScore;
     });
 }
 
@@ -311,11 +310,10 @@ function calculateIdealStandingsFromResults() {
         team.goalDifference = team.goalsFor - team.goalsAgainst;
     });
     
-    // Converte in array e ordina per punti, differenza reti, poi per media
+    // Converte in array e ordina per punti, poi per totale punti
     return Object.values(standings).sort((a, b) => {
         if (b.points !== a.points) return b.points - a.points;
-        if (b.goalDifference !== a.goalDifference) return b.goalDifference - a.goalDifference;
-        return b.avgScore - a.avgScore;
+        return b.totalScore - a.totalScore;
     });
 }
 
@@ -561,10 +559,17 @@ function sortTeams(teams, column, direction) {
                 return 0;
         }
         
+        if (valueA === valueB) {
+            if (column === 'points') {
+                return direction === 'asc' ? a.totalScore - b.totalScore : b.totalScore - a.totalScore;
+            }
+            return 0;
+        }
+        
         if (direction === 'asc') {
-            return valueA > valueB ? 1 : valueA < valueB ? -1 : 0;
+            return valueA > valueB ? 1 : -1;
         } else {
-            return valueA < valueB ? 1 : valueA > valueB ? -1 : 0;
+            return valueA < valueB ? 1 : -1;
         }
     });
 }
