@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "04 Febbraio 2026, 12:00",
+  "lastUpdate": "06 Marzo 2026, 12:00",
   "season": "2025-2026",
   "teams": [
     {
@@ -1279,6 +1279,65 @@
           "commentary": {
             "caressa": "Partizan Tirana travolgente contro Real Ichnusa: 83.5 a 72.5!",
             "bergomi": "Prestazione superlativa del Partizan."
+          }
+        }
+      ]
+    },
+    {
+      "round": 22,
+      "date": "Marzo 2026",
+      "generalComment": "Giornata 22: Vittorie per Cortomuso, Cambra City, Ultimo e SM Frattese.",
+      "matches": [
+        {
+          "id": 85,
+          "homeTeam": "Cortomuso",
+          "awayTeam": "Cusiana",
+          "homeScore": 70.0,
+          "awayScore": 66.5,
+          "homeIdealScore": 73.0,
+          "awayIdealScore": 66.0,
+          "commentary": {
+            "caressa": "Il Cortomuso vince 70 a 66.5 contro la Cusiana! Gara decisa sul filo dei punti.",
+            "bergomi": "Match equilibrato. Cortomuso ha lasciato 3 punti. Cusiana ha fatto meglio del suo ideale!"
+          }
+        },
+        {
+          "id": 86,
+          "homeTeam": "Cambra City",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 73.5,
+          "awayScore": 66.0,
+          "homeIdealScore": 79.5,
+          "awayIdealScore": 72.0,
+          "commentary": {
+            "caressa": "Cambra City si impone nettamente sul Real Ichnusa: 73.5 a 66.",
+            "bergomi": "Entrambe potevano fare meglio: Cambra ha lasciato 6 punti, il Real 6. Vittoria meritata del Cambra."
+          }
+        },
+        {
+          "id": 87,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 71.5,
+          "awayScore": 65.5,
+          "homeIdealScore": 73.5,
+          "awayIdealScore": 66.0,
+          "commentary": {
+            "caressa": "L'Ultimo batte Shakhtar Donuts 71.5 a 65.5. Punti importanti per la classifica.",
+            "bergomi": "Partita equilibrata nelle potenzialità, ma l'Ultimo è stato più concreto."
+          }
+        },
+        {
+          "id": 88,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 81.0,
+          "awayScore": 73.0,
+          "homeIdealScore": 81.0,
+          "awayIdealScore": 76.0,
+          "commentary": {
+            "caressa": "Grande prestazione della SM Frattese che vince 81 a 73 contro il Partizan Tirana!",
+            "bergomi": "Frattese perfetta! Ha schierato la formazione migliore possibile ottenendo il massimo: 81 su 81. Chapeau."
           }
         }
       ]
