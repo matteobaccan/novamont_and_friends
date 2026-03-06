@@ -1341,6 +1341,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 23,
+      "date": "Marzo 2026",
+      "generalComment": "Giornata 23: Il Cambra City domina in trasferta, mentre regna l'equilibrio sugli altri campi con due pareggi e uno 0-0.",
+      "matches": [
+        {
+          "id": 89,
+          "homeTeam": "Partizan Tirana",
+          "awayTeam": "Cortomuso",
+          "homeScore": 72.0,
+          "awayScore": 76.5,
+          "homeIdealScore": 76.0,
+          "awayIdealScore": 82.0,
+          "commentary": {
+            "caressa": "Pareggio scoppiettante! 2-2 tra Partizan e Cortomuso. 72 punti contro 76.5.",
+            "bergomi": "Cortomuso ha sfiorato la vittoria, ma il fattore casa ha aiutato il Partizan. Entrambe hanno lasciato punti importanti in panca."
+          }
+        },
+        {
+          "id": 90,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "SM Frattese",
+          "homeScore": 73.0,
+          "awayScore": 75.5,
+          "homeIdealScore": 84.0,
+          "awayIdealScore": 87.5,
+          "commentary": {
+            "caressa": "Altro 2-2! Shakhtar Donuts e Frattese si dividono la posta in palio. 73 a 75.5.",
+            "bergomi": "Che occasione persa per entrambe! Donuts ha lasciato 11 punti fuori, Frattese 12! Con le formazioni ideali sarebbe stato un match da 4-4."
+          }
+        },
+        {
+          "id": 91,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Ultimo",
+          "homeScore": 65.5,
+          "awayScore": 63.0,
+          "homeIdealScore": 67.5,
+          "awayIdealScore": 74.0,
+          "commentary": {
+            "caressa": "Vincono le difese a Olbia: 0-0 tra Real Ichnusa e Ultimo. Punteggi bassi: 65.5 a 63.",
+            "bergomi": "Partita brutta, Fabio. L'Ultimo in particolare ha deluso molto rispetto al potenziale di 74 punti."
+          }
+        },
+        {
+          "id": 92,
+          "homeTeam": "Cusiana",
+          "awayTeam": "Cambra City",
+          "homeScore": 64.5,
+          "awayScore": 81.0,
+          "homeIdealScore": 68.0,
+          "awayIdealScore": 84.0,
+          "commentary": {
+            "caressa": "Il Cambra City è un rullo compressore! 0-3 in casa della Cusiana con un perentorio 81 punti.",
+            "bergomi": "Cambra dominante, 81 punti sono tanti. Cusiana non poteva fare molto di più oggi."
+          }
+        }
+      ]
     }
   ],
   "settings": {
