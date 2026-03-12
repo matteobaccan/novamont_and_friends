@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "06 Marzo 2026, 12:00",
+  "lastUpdate": "12 Marzo 2026, 12:00",
   "season": "2025-2026",
   "teams": [
     {
@@ -1397,6 +1397,65 @@
           "commentary": {
             "caressa": "Il Cambra City è un rullo compressore! 0-3 in casa della Cusiana con un perentorio 81 punti.",
             "bergomi": "Cambra dominante, 81 punti sono tanti. Cusiana non poteva fare molto di più oggi."
+          }
+        }
+      ]
+    },
+    {
+      "round": 24,
+      "date": "Marzo 2026",
+      "generalComment": "Giornata 24: risultati pesanti in chiave classifica, con vittorie importanti per Donuts, Real Ichnusa e Ultimo.",
+      "matches": [
+        {
+          "id": 93,
+          "homeTeam": "Cortomuso",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 70.0,
+          "awayScore": 72.0,
+          "homeIdealScore": 82.0,
+          "awayIdealScore": 74.0,
+          "commentary": {
+            "caressa": "Shakhtar Donuts espugna il campo del Cortomuso: 72 a 70 in una sfida molto tirata.",
+            "bergomi": "Partita equilibrata ma decisa nei dettagli. Cortomuso lascia tanto potenziale in panchina rispetto all'ideale di 82."
+          }
+        },
+        {
+          "id": 94,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 64.5,
+          "awayScore": 73.0,
+          "homeIdealScore": 72.5,
+          "awayIdealScore": 80.0,
+          "commentary": {
+            "caressa": "Real Ichnusa passa sul campo della Frattese: 73 a 64.5, vittoria netta e meritata.",
+            "bergomi": "Ichnusa più concreta per tutta la gara. La Frattese resta lontana dal suo ideale e paga il divario."
+          }
+        },
+        {
+          "id": 95,
+          "homeTeam": "Cusiana",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 78.5,
+          "awayScore": 70.5,
+          "homeIdealScore": 78.5,
+          "awayIdealScore": 81.0,
+          "commentary": {
+            "caressa": "Cusiana vince 78.5 a 70.5 contro il Partizan Tirana, prestazione di alto livello.",
+            "bergomi": "Cusiana perfetta sul proprio ideale, mentre il Partizan non concretizza il potenziale da 81 punti."
+          }
+        },
+        {
+          "id": 96,
+          "homeTeam": "Cambra City",
+          "awayTeam": "Ultimo",
+          "homeScore": 67.0,
+          "awayScore": 77.0,
+          "homeIdealScore": 73.5,
+          "awayIdealScore": 85.5,
+          "commentary": {
+            "caressa": "Ultimo domina in trasferta: 77 a 67 contro Cambra City e tre punti pesantissimi.",
+            "bergomi": "Prestazione solida dell'Ultimo, vicino ai piani alti. Cambra sotto ritmo rispetto all'ideale."
           }
         }
       ]
