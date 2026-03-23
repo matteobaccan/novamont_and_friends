@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "12 Marzo 2026, 12:00",
+  "lastUpdate": "23 Marzo 2026, 12:00",
   "season": "2025-2026",
   "teams": [
     {
@@ -1456,6 +1456,124 @@
           "commentary": {
             "caressa": "Ultimo domina in trasferta: 77 a 67 contro Cambra City e tre punti pesantissimi.",
             "bergomi": "Prestazione solida dell'Ultimo, vicino ai piani alti. Cambra sotto ritmo rispetto all'ideale."
+          }
+        }
+      ]
+    },
+    {
+      "round": 25,
+      "date": "Marzo 2026",
+      "generalComment": "Giornata 25 ad alto punteggio: Frattese e Tirana brillano, Cortomuso espugna il campo di Real Ichnusa.",
+      "matches": [
+        {
+          "id": 97,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Cortomuso",
+          "homeScore": 62.0,
+          "awayScore": 68.5,
+          "homeIdealScore": 72.0,
+          "awayIdealScore": 73.0,
+          "commentary": {
+            "caressa": "Colpo esterno del Cortomuso: 68.5 a 62 sul campo del Real Ichnusa.",
+            "bergomi": "Cortomuso più concreto nei momenti chiave; Ichnusa ben sotto l'ideale da 72 punti."
+          }
+        },
+        {
+          "id": 98,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "Cusiana",
+          "homeScore": 62.5,
+          "awayScore": 69.0,
+          "homeIdealScore": 66.0,
+          "awayIdealScore": 69.0,
+          "commentary": {
+            "caressa": "La Cusiana passa in trasferta: 69 a 62.5 contro lo Shakhtar Donuts.",
+            "bergomi": "Risultato netto nonostante ideali alla pari: la Cusiana sfrutta meglio le scelte decisive."
+          }
+        },
+        {
+          "id": 99,
+          "homeTeam": "Ultimo",
+          "awayTeam": "SM Frattese",
+          "homeScore": 66.5,
+          "awayScore": 75.5,
+          "homeIdealScore": 73.5,
+          "awayIdealScore": 81.0,
+          "commentary": {
+            "caressa": "SM Frattese dominante: 75.5 a 66.5 sul campo dell'Ultimo.",
+            "bergomi": "Frattese solidissima e vicina all'ideale; Ultimo paga un passaggio a vuoto pesante."
+          }
+        },
+        {
+          "id": 100,
+          "homeTeam": "Partizan Tirana",
+          "awayTeam": "Cambra City",
+          "homeScore": 80.5,
+          "awayScore": 75.0,
+          "homeIdealScore": 82.0,
+          "awayIdealScore": 79.5,
+          "commentary": {
+            "caressa": "Spettacolo a Tirana: 80.5 a 75 contro Cambra City e tre punti pesantissimi per il Partizan.",
+            "bergomi": "Partizan sopra l'ideale di giornata e grande intensita' offensiva; Cambra resta competitivo ma cede nel finale."
+          }
+        }
+      ]
+    },
+    {
+      "round": 26,
+      "date": "Marzo 2026",
+      "generalComment": "Giornata 26 ricca di gol: Donuts devastante a Tirana, vittorie esterne pesanti per Ultimo e Frattese.",
+      "matches": [
+        {
+          "id": 101,
+          "homeTeam": "Cortomuso",
+          "awayTeam": "Ultimo",
+          "homeScore": 68.5,
+          "awayScore": 71.0,
+          "homeIdealScore": 70.0,
+          "awayIdealScore": 74.5,
+          "commentary": {
+            "caressa": "Ultimo espugna il campo del Cortomuso: 71 a 68.5 al termine di una sfida tirata.",
+            "bergomi": "Partita equilibrata ma gestita meglio dall'Ultimo nei momenti decisivi; Cortomuso resta vicino al proprio ideale."
+          }
+        },
+        {
+          "id": 102,
+          "homeTeam": "Cusiana",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 70.5,
+          "awayScore": 63.5,
+          "homeIdealScore": 69.5,
+          "awayIdealScore": 85.5,
+          "commentary": {
+            "caressa": "Cusiana vince in casa 70.5 a 63.5 contro Real Ichnusa, tre punti importanti.",
+            "bergomi": "Ichnusa lontanissima dall'ideale da 85.5: la differenza di rendimento e' stata decisiva."
+          }
+        },
+        {
+          "id": 103,
+          "homeTeam": "Partizan Tirana",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 70.0,
+          "awayScore": 83.0,
+          "homeIdealScore": 71.0,
+          "awayIdealScore": 80.0,
+          "commentary": {
+            "caressa": "Shakhtar Donuts straripante in trasferta: 83 a 70 sul campo del Partizan Tirana.",
+            "bergomi": "Donuts dominante e anche sopra il proprio ideale: prestazione offensiva di altissimo livello."
+          }
+        },
+        {
+          "id": 104,
+          "homeTeam": "Cambra City",
+          "awayTeam": "SM Frattese",
+          "homeScore": 73.5,
+          "awayScore": 74.0,
+          "homeIdealScore": 84.5,
+          "awayIdealScore": 81.0,
+          "commentary": {
+            "caressa": "SM Frattese passa di misura: 74 a 73.5 sul campo del Cambra City.",
+            "bergomi": "Finale deciso da dettagli minimi, con Cambra che lascia parecchio potenziale rispetto all'84.5 ideale."
           }
         }
       ]
