@@ -1636,6 +1636,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 28,
+      "date": "Aprile 2026",
+      "generalComment": "Giornata 28 combattuta: Cambra fa il colpo sul campo del Cortomuso, Donuts supera Ichnusa, Frattese domina a Cusiana e pari spettacolare tra Tirana e Ultimo.",
+      "matches": [
+        {
+          "id": 109,
+          "homeTeam": "Cortomuso",
+          "awayTeam": "Cambra City",
+          "homeScore": 66.0,
+          "awayScore": 70.5,
+          "homeIdealScore": 74.5,
+          "awayIdealScore": 77.5,
+          "commentary": {
+            "caressa": "Cambra City passa sul campo del Cortomuso: 70.5 a 66, vittoria preziosa in trasferta.",
+            "bergomi": "Cortomuso resta sotto il proprio ideale, mentre Cambra mantiene buona continuita' e porta a casa tre punti importanti."
+          }
+        },
+        {
+          "id": 110,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 70.5,
+          "awayScore": 64.5,
+          "homeIdealScore": 72.5,
+          "awayIdealScore": 72.5,
+          "commentary": {
+            "caressa": "Shakhtar Donuts batte Real Ichnusa 70.5 a 64.5 e consolida la propria corsa.",
+            "bergomi": "Donuts concreto nei momenti chiave; Ichnusa paga un rendimento reale lontano dal livello necessario."
+          }
+        },
+        {
+          "id": 111,
+          "homeTeam": "Cusiana",
+          "awayTeam": "SM Frattese",
+          "homeScore": 72.0,
+          "awayScore": 81.0,
+          "homeIdealScore": 70.5,
+          "awayIdealScore": 87.0,
+          "commentary": {
+            "caressa": "SM Frattese dominante in trasferta: 81 a 72 contro la Cusiana.",
+            "bergomi": "Frattese devastante anche rispetto all'ideale, con ritmo e qualita' superiori per tutta la gara."
+          }
+        },
+        {
+          "id": 112,
+          "homeTeam": "Partizan Tirana",
+          "awayTeam": "Ultimo",
+          "homeScore": 75.0,
+          "awayScore": 75.0,
+          "homeIdealScore": 81.5,
+          "awayIdealScore": 82.0,
+          "commentary": {
+            "caressa": "Pari ad alta intensita' tra Partizan Tirana e Ultimo: 75-75, un punto a testa.",
+            "bergomi": "Equilibrio totale nel punteggio reale, con ideali altissimi per entrambe: match aperto fino all'ultimo."
+          }
+        }
+      ]
     }
   ],
   "settings": {
