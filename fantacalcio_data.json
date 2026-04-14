@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "23 Marzo 2026, 12:00",
+  "lastUpdate": "14 Aprile 2026, 12:00",
   "season": "2025-2026",
   "teams": [
     {
@@ -1574,6 +1574,65 @@
           "commentary": {
             "caressa": "SM Frattese passa di misura: 74 a 73.5 sul campo del Cambra City.",
             "bergomi": "Finale deciso da dettagli minimi, con Cambra che lascia parecchio potenziale rispetto all'84.5 ideale."
+          }
+        }
+      ]
+    },
+    {
+      "round": 27,
+      "date": "Aprile 2026",
+      "generalComment": "Giornata 27 con conferme importanti: Frattese, Ultimo e Cambra vincono con autorita', mentre il Partizan si impone nettamente contro Real Ichnusa.",
+      "matches": [
+        {
+          "id": 105,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Cortomuso",
+          "homeScore": 79.0,
+          "awayScore": 64.5,
+          "homeIdealScore": 82.5,
+          "awayIdealScore": 66.0,
+          "commentary": {
+            "caressa": "SM Frattese travolgente: 79 a 64.5 contro Cortomuso, vittoria larga e meritata.",
+            "bergomi": "Frattese molto vicina al proprio ideale e partita indirizzata subito; Cortomuso fatica a tenere il ritmo."
+          }
+        },
+        {
+          "id": 106,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Cusiana",
+          "homeScore": 79.5,
+          "awayScore": 66.5,
+          "homeIdealScore": 85.5,
+          "awayIdealScore": 73.0,
+          "commentary": {
+            "caressa": "Ultimo domina in casa: 79.5 a 66.5 contro la Cusiana e tre punti pesantissimi.",
+            "bergomi": "Differenza netta in entrambe le fasi: Ultimo crea e concretizza, Cusiana resta troppo distante dal livello richiesto."
+          }
+        },
+        {
+          "id": 107,
+          "homeTeam": "Cambra City",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 83.5,
+          "awayScore": 77.5,
+          "homeIdealScore": 81.0,
+          "awayIdealScore": 78.5,
+          "commentary": {
+            "caressa": "Grande spettacolo tra Cambra e Donuts: finisce 83.5 a 77.5, Cambra porta a casa una vittoria di spessore.",
+            "bergomi": "Entrambe sopra quota alta, ma Cambra ha avuto piu' continuita' nei momenti decisivi e ha gestito meglio il vantaggio."
+          }
+        },
+        {
+          "id": 108,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 56.0,
+          "awayScore": 70.0,
+          "homeIdealScore": 77.5,
+          "awayIdealScore": 76.5,
+          "commentary": {
+            "caressa": "Partizan Tirana passa con autorita' sul campo del Real Ichnusa: 70 a 56 il finale.",
+            "bergomi": "Scarto pesante e prova opaca del Real, lontanissimo dal proprio ideale; Partizan cinico e ordinato."
           }
         }
       ]
