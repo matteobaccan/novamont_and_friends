@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "14 Aprile 2026, 12:00",
+  "lastUpdate": "4 Maggio 2026, 12:00",
   "season": "2025-2026",
   "teams": [
     {
@@ -1692,6 +1692,65 @@
           "commentary": {
             "caressa": "Pari ad alta intensita' tra Partizan Tirana e Ultimo: 75-75, un punto a testa.",
             "bergomi": "Equilibrio totale nel punteggio reale, con ideali altissimi per entrambe: match aperto fino all'ultimo."
+          }
+        }
+      ]
+    },
+    {
+      "round": 29,
+      "date": "Maggio 2026",
+      "generalComment": "Giornata 29: vittorie esterne per Cortomuso, Cambra City, Ultimo e SM Frattese. Partite combattute con scarti ridotti ma risultati chiari in chiave classifica.",
+      "matches": [
+        {
+          "id": 113,
+          "homeTeam": "Cusiana",
+          "awayTeam": "Cortomuso",
+          "homeScore": 65.0,
+          "awayScore": 69.5,
+          "homeIdealScore": 63.5,
+          "awayIdealScore": 79.0,
+          "commentary": {
+            "caressa": "Cortomuso espugna il campo della Cusiana: 69.5 a 65 in una sfida molto tirata.",
+            "bergomi": "Partita equilibrata ma decisa nei dettagli. Cusiana ha fatto meglio del proprio ideale, ma Cortomuso è stato più concreto."
+          }
+        },
+        {
+          "id": 114,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Cambra City",
+          "homeScore": 67.0,
+          "awayScore": 69.5,
+          "homeIdealScore": 73.0,
+          "awayIdealScore": 71.0,
+          "commentary": {
+            "caressa": "Cambra City passa sul campo del Real Ichnusa: 69.5 a 67, vittoria preziosa in trasferta.",
+            "bergomi": "Entrambe le squadre sotto il proprio ideale, ma Cambra ha gestito meglio i momenti decisivi."
+          }
+        },
+        {
+          "id": 115,
+          "homeTeam": "Shakhtar Donuts",
+          "awayTeam": "Ultimo",
+          "homeScore": 63.0,
+          "awayScore": 72.5,
+          "homeIdealScore": 74.0,
+          "awayIdealScore": 80.5,
+          "commentary": {
+            "caressa": "Ultimo domina in trasferta: 72.5 a 63 contro Shakhtar Donuts e tre punti pesantissimi.",
+            "bergomi": "Prestazione solida dell'Ultimo, vicino ai piani alti. Donuts sotto ritmo rispetto all'ideale."
+          }
+        },
+        {
+          "id": 116,
+          "homeTeam": "Partizan Tirana",
+          "awayTeam": "SM Frattese",
+          "homeScore": 70.0,
+          "awayScore": 74.5,
+          "homeIdealScore": 73.5,
+          "awayIdealScore": 79.5,
+          "commentary": {
+            "caressa": "SM Frattese vince in trasferta: 74.5 a 70 contro Partizan Tirana.",
+            "bergomi": "Frattese più concreta per tutta la gara; Partizan resta lontana dal proprio ideale."
           }
         }
       ]
