@@ -1754,6 +1754,65 @@
           }
         }
       ]
+    },
+    {
+      "round": 30,
+      "date": "Maggio 2026",
+      "generalComment": "Giornata 30: vittorie casalinghe per Cortomuso, Shakhtar Donuts, Ultimo e Cambra City. Prestazioni importanti con punteggi ideali molto alti per diverse squadre.",
+      "matches": [
+        {
+          "id": 117,
+          "homeTeam": "Cortomuso",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 69.0,
+          "awayScore": 68.5,
+          "homeIdealScore": 75.4,
+          "awayIdealScore": 77.5,
+          "commentary": {
+            "caressa": "Cortomuso batte Partizan Tirana 69 a 68.5 in una sfida molto tirata.",
+            "bergomi": "Partita equilibrata decisa da dettagli minimi. Entrambe le squadre sotto il proprio ideale."
+          }
+        },
+        {
+          "id": 118,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 68.5,
+          "awayScore": 79.5,
+          "homeIdealScore": 71.0,
+          "awayIdealScore": 80.0,
+          "commentary": {
+            "caressa": "Shakhtar Donuts travolgente in trasferta: 79.5 a 68.5 contro SM Frattese.",
+            "bergomi": "Prestazione dominante dei Donuts, vicinissimi all'ideale. Frattese sotto ritmo."
+          }
+        },
+        {
+          "id": 119,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 75.5,
+          "awayScore": 73.0,
+          "homeIdealScore": 77.5,
+          "awayIdealScore": 76.0,
+          "commentary": {
+            "caressa": "Ultimo vince 75.5 a 73 contro Real Ichnusa in una partita combattuta.",
+            "bergomi": "Entrambe vicine al proprio ideale, ma Ultimo più concreto nei momenti decisivi."
+          }
+        },
+        {
+          "id": 120,
+          "homeTeam": "Cambra City",
+          "awayTeam": "Cusiana",
+          "homeScore": 79.5,
+          "awayScore": 59.0,
+          "homeIdealScore": 79.5,
+          "awayIdealScore": 66.0,
+          "commentary": {
+            "caressa": "Cambra City domina contro Cusiana: 79.5 a 59, vittoria netta e meritata.",
+            "bergomi": "Cambra perfetta sul proprio ideale, prestazione maiuscola. Cusiana sotto ritmo."
+          }
+        }
+      ]
     }
   ],
   "settings": {
