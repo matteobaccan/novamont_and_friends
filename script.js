@@ -1880,6 +1880,8 @@ function calcolaStatisticheGiocatori() {
         puntiInPanchina: 0,
         gol: 0,
         assist: 0,
+        golPanchina: 0,
+        assistPanchina: 0,
         amm: 0,
         esp: 0,
         rigParato: 0,
@@ -1911,6 +1913,11 @@ function calcolaStatisticheGiocatori() {
                     } else if (g.t === 'b') {
                         s.panchine += 1;
                         if (g.b !== undefined) s.puntiInPanchina += g.b;
+                        // Quel che ha combinato in Serie A mentre il fantallenatore
+                        // lo teneva fuori: non entra nelle classifiche di gol e
+                        // assist, ma è il rimpianto che vale la sua classifica
+                        if (g.e && g.e.gol) s.golPanchina += g.e.gol;
+                        if (g.e && g.e.assist) s.assistPanchina += g.e.assist;
                     }
                 }
             }
@@ -1921,6 +1928,7 @@ function calcolaStatisticheGiocatori() {
         s.mediaVoto = s.presenze > 0 ? s.sommaVoto / s.presenze : null;
         s.mediaFanta = s.presenze > 0 ? s.sommaBonus / s.presenze : null;
         s.puntiInPanchina = Math.round(s.puntiInPanchina * 10) / 10;
+        s.incompreso = s.golPanchina + s.assistPanchina;
     }
 
     return stats;
@@ -2449,16 +2457,20 @@ function schedaRosa(team, stats) {
 }
 
 // Classifiche individuali: contano solo i giocatori realmente schierati
-function classificaIndividuale(stats, chiave, titolo, icona, limite = 10) {
+function classificaIndividuale(stats, chiave, titolo, icona, opzioni = {}) {
+    const { limite = 10, dettaglio = null, sottotitolo = '' } = opzioni;
     const righe = Object.values(stats)
         .filter(s => s[chiave] > 0)
         .sort((a, b) => b[chiave] - a[chiave] || (b.mediaFanta || 0) - (a.mediaFanta || 0))
         .slice(0, limite);
 
+    const intestazione = `<h4><i class="fas ${icona}"></i> ${titolo}</h4>`
+        + (sottotitolo ? `<p class="classifica-sottotitolo">${sottotitolo}</p>` : '');
+
     if (righe.length === 0) {
         return `
             <div class="classifica-individuale">
-                <h4><i class="fas ${icona}"></i> ${titolo}</h4>
+                ${intestazione}
                 <p class="nessun-dato">Nessun dato ancora.</p>
             </div>
         `;
@@ -2466,12 +2478,13 @@ function classificaIndividuale(stats, chiave, titolo, icona, limite = 10) {
 
     return `
         <div class="classifica-individuale">
-            <h4><i class="fas ${icona}"></i> ${titolo}</h4>
+            ${intestazione}
             <ol class="classifica-lista">
                 ${righe.map((s, i) => {
                     const info = anagraficaGiocatore(s.pid);
+                    const titolo = dettaglio ? ` title="${dettaglio(s)}"` : '';
                     return `
-                        <li class="${i === 0 ? 'primo' : ''}">
+                        <li class="${i === 0 ? 'primo' : ''}"${titolo}>
                             <span class="pos">${i + 1}</span>
                             <span class="nome">${info.name}</span>
                             <span class="squadra">${s.team}</span>
@@ -2754,14 +2767,24 @@ function displayRosters() {
     }
 
     const stats = calcolaStatisticheGiocatori();
-    const cartellini = { ...stats };
-    for (const s of Object.values(cartellini)) s.cartellini = s.amm + s.esp;
+
+    // Gialli e rossi separati: sommarli metteva sullo stesso piano
+    // un'ammonizione da mezzo punto e un'espulsione da un punto pieno
+    const plurale = (quanti, singolare, plurale) => `${quanti} ${quanti === 1 ? singolare : plurale}`;
 
     const classifiche = `
         <div class="classifiche-individuali">
             ${classificaIndividuale(stats, 'gol', 'Marcatori', 'fa-futbol')}
             ${classificaIndividuale(stats, 'assist', 'Assist', 'fa-shoe-prints')}
-            ${classificaIndividuale(cartellini, 'cartellini', 'Cartellini', 'fa-square')}
+            ${classificaIndividuale(stats, 'amm', 'Ammonizioni', 'fa-square evento-amm')}
+            ${classificaIndividuale(stats, 'esp', 'Espulsioni', 'fa-square evento-esp')}
+            ${classificaIndividuale(stats, 'incompreso', 'Incompresi', 'fa-face-frown', {
+                sottotitolo: 'Gol e assist fatti mentre erano in panchina',
+                dettaglio: (s) => [
+                    s.golPanchina ? plurale(s.golPanchina, 'gol', 'gol') : '',
+                    s.assistPanchina ? plurale(s.assistPanchina, 'assist', 'assist') : ''
+                ].filter(Boolean).join(' e ') + ` in ${plurale(s.panchine, 'panchina', 'panchine')}`
+            })}
         </div>
     `;
 

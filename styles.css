@@ -3250,6 +3250,13 @@ html.theme-transition *:after {
     padding: 1rem 1.1rem;
 }
 
+.classifica-sottotitolo {
+    margin: -0.35rem 0 0.6rem;
+    font-size: 0.66rem;
+    opacity: 0.55;
+    line-height: 1.35;
+}
+
 .classifica-individuale h4 {
     margin: 0 0 0.7rem;
     font-size: 0.95rem;
