@@ -27,7 +27,7 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 - **Animazioni Fluide**: Effetti float, pulse e spin per un'esperienza dinamica
 - **100% Responsive**: Layout 2 colonne su desktop, 1 colonna su mobile (max 450px per colonna)
 - **Tema Personalizzabile**: Supporto per dark mode e light mode
-- **Navigazione Pulita**: 4 sezioni principali (Classifica, Classifica Ideale, Giornate, Rose)
+- **Navigazione Pulita**: 5 sezioni (Classifica, Classifica Ideale, Giornate, Rose, Formazione)
 - **Font Awesome Icons**: Iconografie professionali in tutto il sito
 
 ## 🚀 Come utilizzare
@@ -41,6 +41,7 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette e statistiche allenatori
 3. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti inline
 4. **👥 Rose**: Rendimento di ogni giocatore e classifiche marcatori, assist e cartellini
+5. **🪄 Formazione**: Undici consigliato per la prossima giornata
 
 In Classifica e Classifica Ideale, un clic sulla squadra apre l'elenco delle sue partite;
 un clic sulla partita mostra le formazioni con voti ed eventi di tutti i giocatori.
@@ -110,6 +111,24 @@ Da questi dati sono derivate rose, statistiche di rendimento e classifiche indiv
 **Gol, assist e cartellini contano solo per i giocatori effettivamente schierati**: quello
 che un giocatore combina restando in panchina non entra nelle classifiche.
 
+## 🪄 Formazione consigliata
+
+La sezione Formazione propone l'undici migliore per la prossima giornata, provando tutti i
+moduli ammessi. Il punteggio atteso di ogni giocatore combina:
+
+- **media fantavoto** sulle giornate in cui ha preso un voto
+- **forma recente**, media pesata delle ultime giornate (le più recenti pesano di più)
+- **continuità**, quante volte ha preso un voto in Serie A sulle giornate disputate
+
+Qui, a differenza delle classifiche, **contano anche i voti presi stando in panchina**:
+per prevedere il rendimento conta che il giocatore abbia giocato in Serie A, non che il
+fantallenatore lo avesse schierato. Altrimenti il suggerimento non proporrebbe mai di
+promuovere una riserva, che è invece il consiglio più utile.
+
+**Cosa non considera**: infortuni, squalifiche, probabili formazioni e avversario di Serie
+A. Sono dati che il sito non ha. Con poche giornate disputate il suggerimento è debole e
+la pagina lo dichiara esplicitamente.
+
 ## 📱 Compatibilità
 
 - ✅ Chrome, Firefox, Safari, Edge
@@ -150,7 +169,7 @@ novamont_and_friends/
 ```
 
 ### 🗂️ **Dettaglio File**
-- **`index.html`**: Interface completa con 4 sezioni (Classifica, Classifica Ideale, Giornate, Rose) e selettore stagione
+- **`index.html`**: Interface completa con 5 sezioni (Classifica, Classifica Ideale, Giornate, Rose, Formazione) e selettore stagione
 - **`styles.css`**: 2800+ righe di CSS responsive con glassmorphism e animazioni moderne
 - **`script.js`**: 1600+ righe di JavaScript con algoritmi avanzati e gestione dati
 - **`data/seasons.json`**: Indice delle stagioni: id, etichetta, file e stato

@@ -484,6 +484,8 @@ function renderAllSections() {
         }
     } else if (activeTab && activeTab.id === 'rose') {
         displayRosters();
+    } else if (activeTab && activeTab.id === 'formazione') {
+        displayFormazione();
     }
 }
 
@@ -677,6 +679,8 @@ function setupNavigationTabs() {
                 displayStandings();
             } else if (targetTab === 'rose') {
                 displayRosters();
+            } else if (targetTab === 'formazione') {
+                displayFormazione();
             }
         });
     });
@@ -1929,6 +1933,157 @@ function rosaDellaSquadra(team, round = Infinity) {
 }
 
 // ============================================================
+// Suggerimento formazione
+// ============================================================
+
+// Moduli ammessi: difensori, centrocampisti, attaccanti (il portiere è sempre uno)
+const MODULI = [
+    [3, 4, 3], [3, 5, 2], [4, 3, 3], [4, 4, 2], [4, 5, 1], [5, 3, 2], [5, 4, 1]
+];
+
+// Quanto pesa la forma recente rispetto alla media di stagione
+const PESO_FORMA = 0.4;
+
+// Media di reparto usata per chi non ha ancora un voto: non è una previsione,
+// è solo un segnaposto che lo tiene dietro a chiunque abbia dati veri
+const ATTESO_SENZA_DATI = { P: 5.5, D: 5.5, C: 5.5, A: 5.5 };
+
+// Storico dei voti con bonus di un giocatore, dalla giornata più vecchia.
+//
+// A differenza delle classifiche marcatori, qui contano anche le giornate in
+// cui era in panchina: per prevedere come renderà conta se ha giocato in Serie
+// A e quanto ha fatto, non se il suo fantallenatore lo aveva schierato.
+function storicoVoti(pid) {
+    const voti = [];
+    for (const round of (fantacalcioData.rounds || [])) {
+        for (const match of round.matches) {
+            if (!match.lineups) continue;
+            for (const lato of ['home', 'away']) {
+                const g = match.lineups[lato].find(x => x.p === Number(pid));
+                if (g && g.b !== undefined) {
+                    voti.push({ round: round.round, voto: g.b, schierato: SCHIERATO.has(g.t) });
+                }
+            }
+        }
+    }
+    return voti.sort((a, b) => a.round - b.round);
+}
+
+// Media pesata delle ultime giornate: più recente, più pesa
+function mediaForma(voti, quante = 5) {
+    const ultimi = voti.slice(-quante);
+    if (ultimi.length === 0) return null;
+
+    let somma = 0, pesi = 0;
+    ultimi.forEach((v, i) => {
+        const peso = i + 1;
+        somma += v.voto * peso;
+        pesi += peso;
+    });
+    return somma / pesi;
+}
+
+// Stima del rendimento atteso di un giocatore alla prossima giornata.
+// Tiene conto di media di stagione, forma recente e continuità di impiego:
+// un fuoriclasse che non prende mai un voto vale meno di un titolare fisso.
+function punteggioAtteso(pid, stats, giornateGiocate) {
+    const info = anagraficaGiocatore(pid);
+    const voti = storicoVoti(pid);
+
+    // Continuità = quante volte ha preso un voto in Serie A, non quante volte
+    // è stato schierato: misura la disponibilità del giocatore, non le scelte
+    // del fantallenatore
+    const votiPresi = voti.length;
+    const affidabilita = giornateGiocate > 0 ? votiPresi / giornateGiocate : 0;
+
+    if (votiPresi === 0) {
+        return {
+            pid: Number(pid),
+            atteso: ATTESO_SENZA_DATI[info.role] * 0.5,
+            media: null,
+            forma: null,
+            affidabilita: 0,
+            presenze: 0,
+            schierato: stats[pid] ? stats[pid].presenze : 0,
+            senzaDati: true
+        };
+    }
+
+    const media = voti.reduce((somma, v) => somma + v.voto, 0) / votiPresi;
+    const forma = mediaForma(voti);
+    const base = forma === null ? media : media * (1 - PESO_FORMA) + forma * PESO_FORMA;
+
+    // La continuità scala il punteggio fra il 60% e il 100%: pesa, ma non
+    // azzera chi ha saltato una giornata
+    const fattoreContinuita = 0.6 + 0.4 * affidabilita;
+
+    return {
+        pid: Number(pid),
+        atteso: base * fattoreContinuita,
+        media,
+        forma,
+        affidabilita,
+        presenze: votiPresi,
+        schierato: stats[pid] ? stats[pid].presenze : 0,
+        senzaDati: false
+    };
+}
+
+// Miglior 11 fra i giocatori disponibili, provando tutti i moduli
+function miglioreFormazione(candidati) {
+    const perRuolo = { P: [], D: [], C: [], A: [] };
+    for (const c of candidati) {
+        const ruolo = anagraficaGiocatore(c.pid).role;
+        if (perRuolo[ruolo]) perRuolo[ruolo].push(c);
+    }
+    for (const ruolo of Object.keys(perRuolo)) {
+        perRuolo[ruolo].sort((a, b) => b.atteso - a.atteso);
+    }
+
+    if (perRuolo.P.length === 0) return null;
+
+    let migliore = null;
+    for (const [d, c, a] of MODULI) {
+        if (perRuolo.D.length < d || perRuolo.C.length < c || perRuolo.A.length < a) continue;
+
+        const undici = [
+            perRuolo.P[0],
+            ...perRuolo.D.slice(0, d),
+            ...perRuolo.C.slice(0, c),
+            ...perRuolo.A.slice(0, a)
+        ];
+        const totale = undici.reduce((somma, g) => somma + g.atteso, 0);
+
+        if (!migliore || totale > migliore.totale) {
+            migliore = { modulo: `${d}-${c}-${a}`, undici, totale };
+        }
+    }
+
+    if (!migliore) return null;
+
+    const titolari = new Set(migliore.undici.map(g => g.pid));
+    migliore.panchina = candidati
+        .filter(c => !titolari.has(c.pid))
+        .sort((a, b) => b.atteso - a.atteso);
+
+    return migliore;
+}
+
+// Suggerisce la formazione per una squadra alla prossima giornata
+function suggerisciFormazione(team) {
+    const stats = calcolaStatisticheGiocatori();
+    const giornateGiocate = (fantacalcioData.rounds || []).length;
+    const rosa = rosaDellaSquadra(team);
+
+    if (rosa.length === 0) return null;
+
+    const candidati = rosa.map(pid => punteggioAtteso(pid, stats, giornateGiocate));
+    const formazione = miglioreFormazione(candidati);
+
+    return formazione ? { ...formazione, giornateGiocate, prossima: giornateGiocate + 1 } : null;
+}
+
+// ============================================================
 // Sezione Rose
 // ============================================================
 
@@ -2053,6 +2208,137 @@ function classificaIndividuale(stats, chiave, titolo, icona, limite = 10) {
             </ol>
         </div>
     `;
+}
+
+// ============================================================
+// Vista "Formazione consigliata"
+// ============================================================
+
+const SQUADRA_STORAGE_KEY = 'fantacalcio-squadra';
+
+function frecciaForma(g) {
+    if (g.forma === null || g.media === null) return '';
+    const delta = g.forma - g.media;
+    if (delta > 0.4) return '<i class="fas fa-arrow-trend-up forma-su" title="In crescita"></i>';
+    if (delta < -0.4) return '<i class="fas fa-arrow-trend-down forma-giu" title="In calo"></i>';
+    return '<i class="fas fa-minus forma-stabile" title="Stabile"></i>';
+}
+
+function rigaConsiglio(g, titolare) {
+    const info = anagraficaGiocatore(g.pid);
+    const continuita = Math.round(g.affidabilita * 100);
+
+    // Segnala chi il modello promuove dalla panchina: è il consiglio che conta
+    let nota = '';
+    if (g.senzaDati) nota = 'nessun voto';
+    else if (titolare && g.schierato === 0) nota = 'era in panchina';
+    else if (g.affidabilita < 0.5) nota = `solo ${g.presenze} vot${g.presenze === 1 ? 'o' : 'i'}`;
+
+    return `
+        <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}">
+            <span class="ruolo-${info.role}">${info.role}</span>
+            <span class="consiglio-nome">${info.name}</span>
+            <span class="consiglio-serieA">${siglaSerieA(info.serieA)}</span>
+            <span class="consiglio-forma">${frecciaForma(g)}</span>
+            <span class="consiglio-nota">${nota}</span>
+            <span class="consiglio-continuita" title="Quante giornate su quelle disputate ha preso un voto">${continuita}%</span>
+            <span class="consiglio-atteso">${g.atteso.toFixed(2)}</span>
+        </div>
+    `;
+}
+
+function displayFormazione() {
+    const contenitore = document.getElementById('formazione-container');
+    if (!contenitore) return;
+
+    if (!fantacalcioData || !fantacalcioData.players || !fantacalcioData.rosterHistory) {
+        contenitore.innerHTML = `
+            <div class="empty-season">
+                <i class="fas fa-wand-magic-sparkles"></i>
+                <h3>Suggerimenti non disponibili</h3>
+                <p>Servono i dati per giocatore, presenti dalla stagione 2026-2027.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const squadre = fantacalcioData.teams
+        .map(t => t.name)
+        .filter(nome => rosaDellaSquadra(nome).length > 0);
+
+    if (squadre.length === 0) {
+        contenitore.innerHTML = '<div class="empty-season"><h3>Nessuna rosa disponibile</h3></div>';
+        return;
+    }
+
+    let scelta = null;
+    try { scelta = localStorage.getItem(SQUADRA_STORAGE_KEY); } catch (e) { /* non disponibile */ }
+    if (!squadre.includes(scelta)) scelta = squadre[0];
+
+    const f = suggerisciFormazione(scelta);
+    const giornate = (fantacalcioData.rounds || []).length;
+
+    const avvisoDati = giornate < 4
+        ? `<div class="consiglio-avviso attenzione">
+               <i class="fas fa-triangle-exclamation"></i>
+               Solo ${giornate} giornat${giornate === 1 ? 'a' : 'e'} disputat${giornate === 1 ? 'a' : 'e'}:
+               con così pochi dati il suggerimento vale poco. Diventa attendibile dopo qualche giornata.
+           </div>`
+        : '';
+
+    const corpo = !f
+        ? '<div class="empty-season"><h3>Rosa insufficiente</h3><p>Non ci sono abbastanza giocatori per comporre un modulo valido.</p></div>'
+        : `
+            <div class="consiglio-card">
+                <div class="consiglio-header">
+                    <h3>${scelta}</h3>
+                    <span class="consiglio-modulo">${f.modulo}</span>
+                    <span class="consiglio-totale" title="Somma dei punteggi attesi">
+                        ${f.totale.toFixed(1)} pt attesi
+                    </span>
+                </div>
+                <div class="consiglio-lista">
+                    <div class="consiglio-row intestazione">
+                        <span>R</span><span>Giocatore</span><span>Team</span>
+                        <span title="Forma recente rispetto alla media">Forma</span>
+                        <span></span>
+                        <span title="Quante giornate su quelle disputate ha preso un voto in Serie A">Cont.</span>
+                        <span title="Punteggio atteso">Atteso</span>
+                    </div>
+                    ${f.undici.map(g => rigaConsiglio(g, true)).join('')}
+                    <div class="consiglio-separatore">Panchina, in ordine di preferenza</div>
+                    ${f.panchina.slice(0, 8).map(g => rigaConsiglio(g, false)).join('')}
+                </div>
+            </div>
+        `;
+
+    contenitore.innerHTML = `
+        <div class="consiglio-barra">
+            <label for="squadra-select">Squadra</label>
+            <select id="squadra-select" class="season-select">
+                ${squadre.map(s => `<option value="${s}" ${s === scelta ? 'selected' : ''}>${s}</option>`).join('')}
+            </select>
+            <span class="consiglio-giornata">Giornata ${giornate + 1}</span>
+        </div>
+        ${avvisoDati}
+        ${corpo}
+        <div class="consiglio-avviso">
+            <i class="fas fa-circle-info"></i>
+            Il calcolo usa <strong>media fantavoto</strong>, <strong>forma delle ultime giornate</strong>
+            e <strong>continuità di impiego in Serie A</strong>. Contano anche i voti presi stando in
+            panchina: per prevedere il rendimento conta che il giocatore abbia giocato, non che il
+            fantallenatore lo avesse schierato. Non tiene conto di infortuni,
+            squalifiche, probabili formazioni né dell'avversario di Serie A: quei dati il sito non li ha.
+        </div>
+    `;
+
+    const select = document.getElementById('squadra-select');
+    if (select) {
+        select.addEventListener('change', () => {
+            try { localStorage.setItem(SQUADRA_STORAGE_KEY, select.value); } catch (e) { /* non disponibile */ }
+            displayFormazione();
+        });
+    }
 }
 
 function displayRosters() {
