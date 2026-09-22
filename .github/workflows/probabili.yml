@@ -1,0 +1,79 @@
+name: Probabili formazioni
+
+# Le probabili di Serie A si consolidano nei giorni prima della giornata: tre
+# passaggi fra giovedì e sabato seguono il consolidamento e arrivano prima del
+# blocco delle formazioni del sabato pomeriggio. Gli orari sono UTC, quindi le
+# 10:00 italiane d'estate e le 09:00 d'inverno. Per i turni infrasettimanali
+# c'è l'avvio a mano.
+on:
+  schedule:
+    - cron: '0 8 * * 4,5,6'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probabili
+  cancel-in-progress: false
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Scarica probabili, rigoristi, infortunati e contesto
+        run: node .claude/skills/aggiorna-giornata/scarica-probabili.mjs
+
+      # Lo script si ferma da solo se non trova nessuna squadra, ma non se ne
+      # trova tre. Senza questo controllo un cambio di impaginazione su
+      # fantacalcio.it peggiorerebbe i suggerimenti in silenzio invece di
+      # rompere il job. Se fallisce, i passi dopo non girano e il file scritto
+      # muore con il runner: non serve ripristinarlo.
+      - name: Controlla che il file sia plausibile
+        run: |
+          node -e "
+            const p = require('./data/probabili.json');
+            const giocatori = Object.keys(p.giocatori || {}).length;
+
+            const problemi = [];
+            if (!(p.squadre >= 18)) problemi.push('squadre: ' + p.squadre);
+            if (giocatori < 300) problemi.push('giocatori: ' + giocatori);
+
+            if (problemi.length > 0) {
+              console.error('::error::probabili.json non plausibile — ' + problemi.join(', '));
+              process.exit(1);
+            }
+
+            // Le rifiniture non bloccano, ma se si svuotano va detto
+            const rifiniture = {
+              rigoristi: Object.keys(p.rigoristi || {}).length,
+              infortunati: (p.infortunati || []).length,
+              classifica: Object.keys(p.classificaSerieA || {}).length,
+              forma: Object.keys(p.formaSerieA || {}).length,
+              partite: ((p.prossimoTurno || {}).partite || []).length
+            };
+            for (const [nome, quanti] of Object.entries(rifiniture)) {
+              if (quanti === 0) console.log('::warning::' + nome + ': nessun dato');
+            }
+
+            console.log(p.squadre + ' squadre, ' + giocatori + ' giocatori, ' + JSON.stringify(rifiniture));
+          "
+
+      # Si committa a ogni giro, anche quando le percentuali non cambiano: lo
+      # scarto sarebbe il solo campo 'aggiornato', ed è proprio quello che la
+      # pagina mostra per dire quanto sono fresche le probabili. Saltare il
+      # commit farebbe segnalare come vecchi dei dati appena verificati.
+      - name: Committa il JSON aggiornato
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/probabili.json
+          git diff --staged --quiet && echo 'Nessuna modifica da committare' && exit 0
+          git commit -m 'chore: Refresh Serie A starting probabilities'
+          git push
