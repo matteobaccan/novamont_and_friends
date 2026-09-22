@@ -2005,12 +2005,13 @@ const PROB_FUORI_LISTA = 0.15;
 // rientra e un recupero in extremis capita
 const PROB_INFORTUNATO = 0.03;
 
-// Fascia entro la quale due giocatori si considerano equivalenti e decide il
-// rigore. Non si può spareggiare sull'uguaglianza esatta: fra numeri in virgola
-// mobile non scatterebbe mai. Un rigorista designato vale circa +0,2/+0,3 a
-// partita (~0,25 rigori per squadra × ~75% di realizzazione × 3 punti), quindi
-// sotto 0,15 lo scarto è dentro a quello che il modello non sta misurando.
-const EPS_PARITA = 0.15;
+// Quanto vale a partita battere i rigori della propria squadra. Il primo
+// rigorista ne calcia dai 5 ai 10 in una stagione: su una trentina di partite
+// giocate fanno ~0,22 rigori a partita, e ogni rigore vale in media
+// 0,76 × 3 − 0,24 × 3 ≈ 1,56 di fantavoto fra realizzato e sbagliato.
+// Il prodotto è ~0,35, e non è uno spareggio: è punteggio vero che la media dei
+// fantavoto non vede arrivare, quindi entra direttamente nel valore atteso.
+const BONUS_RIGORE_PARTITA = 0.35;
 
 // Quanto pesa ciascuna delle tre voci di contesto: campo, differenza di
 // classifica e forma recente della squadra di Serie A. Al massimo ±9% in tutto,
@@ -2070,18 +2071,22 @@ function costruisciIndiceInfortunati() {
     return indiceInfortunati;
 }
 
-// La voce di infortunio di un giocatore della lega, se c'è
-function infortunioDi(pid) {
+function infortunioPer(nomeGiocatore, squadraSerieA) {
     const indice = costruisciIndiceInfortunati();
     if (!indice || indice.size === 0) return null;
 
-    const info = anagraficaGiocatore(pid);
-    const squadra = normalizzaNome(info.serieA);
-    const nome = normalizzaNome(info.name);
+    const squadra = normalizzaNome(squadraSerieA);
+    const nome = normalizzaNome(nomeGiocatore);
 
     return indice.get(`${nome}|${squadra}`)
         || indice.get(`~${nome}|${squadra}`)
         || null;
+}
+
+// La voce di infortunio di un giocatore della lega, se c'è
+function infortunioDi(pid) {
+    const info = anagraficaGiocatore(pid);
+    return infortunioPer(info.name, info.serieA);
 }
 
 // Probabilità che un giocatore scenda in campo nella prossima giornata.
@@ -2108,6 +2113,59 @@ function probabilitaDiGiocare(pid, continuitaStorica) {
         return { p: PROB_INFORTUNATO, fonte: 'infortunato', voce: null, infortunio };
     }
     return { p: PROB_FUORI_LISTA, fonte: 'fuori-lista', voce: null, infortunio: null };
+}
+
+// Indice dei rigoristi: pid -> squadra di Serie A e posto nella gerarchia.
+// I dati arrivano per squadra perché per pesare il secondo bisogna sapere chi
+// ha davanti, non solo che è secondo.
+let indiceRigoristi = null;
+let indiceRigoristiPer = null;
+
+function costruisciIndiceRigoristi() {
+    if (indiceRigoristiPer === probabiliFormazioni) return indiceRigoristi;
+
+    indiceRigoristiPer = probabiliFormazioni;
+    indiceRigoristi = new Map();
+
+    const perSquadra = (probabiliFormazioni && probabiliFormazioni.rigoristi) || {};
+    for (const [squadra, voci] of Object.entries(perSquadra)) {
+        voci.forEach((voce, i) => {
+            if (!indiceRigoristi.has(voce.pid)) {
+                indiceRigoristi.set(voce.pid, { squadra, ordine: i + 1, voci });
+            }
+        });
+    }
+    return indiceRigoristi;
+}
+
+// Probabilità che un rigorista scenda in campo. Può non essere in nessuna rosa
+// della lega, quindi non ha anagrafica locale: nome e squadra vengono dalla
+// pagina dei rigoristi e servono a riconoscerlo fra gli infortunati.
+function probabilitaRigorista(voce, squadra) {
+    const inProbabili = (probabiliFormazioni.giocatori || {})[voce.pid];
+    if (inProbabili) return inProbabili.probabilita / 100;
+    return infortunioPer(voce.nome, squadra) ? PROB_INFORTUNATO : PROB_FUORI_LISTA;
+}
+
+// Quanti rigori della squadra ci si aspetta che calci questo giocatore.
+// Il primo rigorista li batte tutti quando gioca; il secondo solo quando il
+// primo non c'è; il terzo quando mancano entrambi. È il motivo per cui una
+// gerarchia va letta intera: se il rigorista designato è infortunato, il suo
+// vice vale quanto lui.
+function quotaRigori(pid) {
+    const indice = costruisciIndiceRigoristi();
+    const voce = indice.get(Number(pid));
+    if (!voce) return null;
+
+    let quota = 1;
+    const davanti = [];
+    for (const precedente of voce.voci.slice(0, voce.ordine - 1)) {
+        const p = probabilitaRigorista(precedente, voce.squadra);
+        quota *= (1 - p);
+        davanti.push({ nome: precedente.nome, p });
+    }
+
+    return { ordine: voce.ordine, quota, bonus: quota * BONUS_RIGORE_PARTITA, davanti };
 }
 
 // Contesto della partita di Serie A: giocare in casa, contro chi, e con che
@@ -2268,11 +2326,14 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
     const contesto = contestoPartita(squadraSerieA);
     const resa = qualita * contesto.fattore;
 
-    // Valore atteso: se gioca rende `resa`, se non gioca il posto lo prende
-    // un cambio che vale `VOTO_RIPIEGO`
-    const atteso = p * resa + (1 - p) * VOTO_RIPIEGO;
+    // I rigori sono punteggio in più che arriva solo se scende in campo, quindi
+    // stanno dentro la parentesi con la resa e non fuori
+    const rigori = quotaRigori(pid);
+    const bonusRigori = rigori ? rigori.bonus : 0;
 
-    const rigoristi = (probabiliFormazioni && probabiliFormazioni.rigoristi) || {};
+    // Valore atteso: se gioca rende `resa` più i rigori che ci si aspetta calci,
+    // se non gioca il posto lo prende un cambio che vale `VOTO_RIPIEGO`
+    const atteso = p * (resa + bonusRigori) + (1 - p) * VOTO_RIPIEGO;
 
     return {
         pid: Number(pid),
@@ -2284,7 +2345,8 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
         forma,
         probabilita: p,
         fonteProbabilita: fonte,
-        rigorista: rigoristi[pid] || null,
+        rigorista: rigori ? rigori.ordine : null,
+        rigori,
         infortunio: infortunio ? infortunio.nota : null,
         titolareProbabile: voce ? voce.titolare : null,
         squadraSerieA,
@@ -2295,17 +2357,10 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
     };
 }
 
-// Ordina due candidati per valore atteso, ma dentro la fascia di parità decide
-// chi batte i rigori: un bonus da rigore è punteggio che il modello non vede,
-// perché la media dei fantavoto non sa da dove vengono i punti.
-// La relazione non è perfettamente transitiva — è il prezzo di una fascia invece
-// di un'uguaglianza esatta — e al più scambia l'ordine di due quasi pari.
+// Ordina due candidati per valore atteso. I rigori non hanno bisogno di uno
+// spareggio a parte: sono già dentro l'atteso, pesati per quanti se ne aspetta
+// davvero ciascuno.
 function confrontaCandidati(a, b) {
-    if (Math.abs(a.atteso - b.atteso) <= EPS_PARITA) {
-        const rigoreA = a.rigorista || 9;
-        const rigoreB = b.rigorista || 9;
-        if (rigoreA !== rigoreB) return rigoreA - rigoreB;
-    }
     return b.atteso - a.atteso;
 }
 
@@ -2568,6 +2623,25 @@ function glifoContesto(contesto) {
     return `<span class="consiglio-contesto ${classe}" title="${pezzi.join(' · ')}">${glifo}</span>`;
 }
 
+// Il pallone accanto al nome dice anche quanto pesa: un secondo rigorista con il
+// titolare sano vale quasi nulla, lo stesso con il titolare infortunato vale
+// quanto un primo. Il title mostra il conto, l'opacità lo fa vedere da lontano.
+const GRADI_RIGORE = ['Primo', 'Secondo', 'Terzo'];
+
+function badgeRigorista(rigori) {
+    const grado = GRADI_RIGORE[rigori.ordine - 1] || `${rigori.ordine}º`;
+    const pezzi = [`${grado} rigorista`];
+
+    for (const davanti of rigori.davanti) {
+        pezzi.push(`${davanti.nome} gioca al ${Math.round(davanti.p * 100)}%`);
+    }
+    pezzi.push(`rigori attesi ${Math.round(rigori.quota * 100)}%, +${rigori.bonus.toFixed(2)}`);
+
+    // Sotto un ventesimo di punto il pallone c'è ma non deve attirare l'occhio
+    const classe = rigori.bonus >= 0.05 ? 'consiglio-rigorista' : 'consiglio-rigorista tenue';
+    return `<i class="fas fa-futbol ${classe}" title="${pezzi.join(' · ')}"></i>`;
+}
+
 function rigaConsiglio(g, titolare) {
     const info = anagraficaGiocatore(g.pid);
     const perc = Math.round(g.probabilita * 100);
@@ -2590,9 +2664,7 @@ function rigaConsiglio(g, titolare) {
 
     const qualita = g.senzaDati ? '—' : g.qualita.toFixed(2);
 
-    const rigori = g.rigorista
-        ? `<i class="fas fa-futbol consiglio-rigorista" title="${g.rigorista === 1 ? 'Primo rigorista' : `Rigorista, ${g.rigorista}ª scelta`}"></i>`
-        : '';
+    const rigori = g.rigori ? badgeRigorista(g.rigori) : '';
 
     return `
         <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}${g.infortunio ? ' infortunato' : ''}">
@@ -2752,12 +2824,16 @@ function displayFormazione() {
                         il posto resta scoperto. Per questo un fuoriclasse in dubbio può valere meno di
                         un titolare fisso mediocre.
                     </dd>
-                    <dt>A parità, il rigorista</dt>
+                    <dt>I rigori</dt>
                     <dd>
-                        Fra due giocatori che distano meno di 0,15 punti attesi vince chi batte i
+                        Chi batte i
                         <a href="https://www.fantacalcio.it/rigoristi-serie-a" target="_blank" rel="noopener noreferrer">rigori</a>
-                        (⚽ accanto al nome): un bonus da rigore è punteggio che la media dei fantavoto
-                        non vede arrivare.
+                        (⚽ accanto al nome) si porta dentro punteggio che la media dei fantavoto non
+                        vede arrivare: il primo rigorista ne calcia 5-10 a stagione, che valgono
+                        circa <strong>+0,35 a partita</strong>. Secondo e terzo però li tirano solo
+                        quando chi li precede non gioca, quindi il bonus è moltiplicato per la
+                        probabilità che il posto si liberi: con il titolare sano vale quasi nulla,
+                        con il titolare infortunato vale quanto il suo.
                     </dd>
                     <dt>A parità, l'attacco</dt>
                     <dd>
