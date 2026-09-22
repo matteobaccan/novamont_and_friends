@@ -1,3 +1,11 @@
+/* Un elemento con l'attributo hidden deve sparire davvero. La regola dello user
+   agent ([hidden] { display: none }) perde contro qualunque regola d'autore, e
+   qui i pannelli a scomparsa hanno tutti una classe che impone un display: senza
+   questa riga si aprirebbero già espansi e il toggle non si vedrebbe agire. */
+[hidden] {
+    display: none !important;
+}
+
 /* Theme Variables */
 :root {
     /* Light Theme - Vibrant Modern */
