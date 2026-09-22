@@ -3250,6 +3250,12 @@ html.theme-transition *:after {
     padding: 1rem 1.1rem;
 }
 
+/* Un rosso dentro la colonna cartellini: il conteggio non lo distingue da un
+   giallo, il colore sì */
+.rosa-cella.cartellini-cella.con-rosso { color: #dc2626; font-weight: 700; }
+
+[data-theme="dark"] .rosa-cella.cartellini-cella.con-rosso { color: #f87171; }
+
 .classifica-sottotitolo {
     margin: -0.35rem 0 0.6rem;
     font-size: 0.66rem;

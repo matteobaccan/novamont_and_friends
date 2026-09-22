@@ -1761,6 +1761,18 @@ function displayRoundResults(roundNumber) {
 // Un giocatore è "sceso in campo" se titolare o subentrato
 const SCHIERATO = new Set(['s', 'in']);
 
+// Quanto toglie al fantavoto ogni malus, secondo il regolamento Fantacalcio.
+// I gol subiti restano fuori di proposito: sono il mestiere del portiere, non
+// un errore di condotta, e da soli riempirebbero la classifica di portieri.
+const MALUS = { amm: 0.5, esp: 1, autogol: 2, rigSbagliato: 3 };
+
+const ETICHETTE_MALUS = {
+    amm: ['ammonizione', 'ammonizioni'],
+    esp: ['espulsione', 'espulsioni'],
+    autogol: ['autogol', 'autogol'],
+    rigSbagliato: ['rigore sbagliato', 'rigori sbagliati']
+};
+
 const EVENTI_UI = {
     gol: { icona: 'fa-futbol', label: 'gol', classe: 'evento-gol' },
     assist: { icona: 'fa-shoe-prints', label: 'assist', classe: 'evento-assist' },
@@ -1929,6 +1941,12 @@ function calcolaStatisticheGiocatori() {
         s.mediaFanta = s.presenze > 0 ? s.sommaBonus / s.presenze : null;
         s.puntiInPanchina = Math.round(s.puntiInPanchina * 10) / 10;
         s.incompreso = s.golPanchina + s.assistPanchina;
+
+        // Punti persi in malus stando in campo: un'espulsione non vale come
+        // un'ammonizione, quindi si sommano i punti e non gli episodi
+        const persi = Object.entries(MALUS).reduce((somma, [chiave, peso]) => somma + s[chiave] * peso, 0);
+        s.malus = Math.round(persi * 10) / 10;
+        s.episodiMalus = Object.keys(MALUS).reduce((somma, chiave) => somma + s[chiave], 0);
     }
 
     return stats;
@@ -2375,8 +2393,18 @@ function numero(valore, decimali = 2) {
     return valore === null || valore === undefined ? '—' : valore.toFixed(decimali);
 }
 
-function cellaConteggio(valore, classe = '') {
-    return `<span class="rosa-cella ${classe} ${valore ? '' : 'zero'}">${valore || '—'}</span>`;
+function cellaConteggio(valore, classe = '', titolo = '') {
+    const attributo = titolo ? ` title="${titolo}"` : '';
+    return `<span class="rosa-cella ${classe} ${valore ? '' : 'zero'}"${attributo}>${valore || '—'}</span>`;
+}
+
+// La colonna dei cartellini è una sola per non allargare la griglia, ma gialli
+// e rossi non pesano uguale: la distinzione vive nel title e nel colore
+function dettaglioCartellini(s) {
+    const pezzi = [];
+    if (s.amm) pezzi.push(`${s.amm} ammonizion${s.amm === 1 ? 'e' : 'i'}`);
+    if (s.esp) pezzi.push(`${s.esp} espulsion${s.esp === 1 ? 'e' : 'i'}`);
+    return pezzi.join(', ');
 }
 
 // Le sigle tengono stretta la colonna Serie A: il nome intero resta nel title
@@ -2413,7 +2441,7 @@ function rigaRosa(pid, stats) {
             <span class="rosa-cella forte">${numero(s.mediaFanta)}</span>
             ${cellaConteggio(s.gol, 'gol-cella')}
             ${cellaConteggio(s.assist, 'assist-cella')}
-            ${cellaConteggio(s.amm + s.esp, 'cartellini-cella')}
+            ${cellaConteggio(s.amm + s.esp, `cartellini-cella${s.esp ? ' con-rosso' : ''}`, dettaglioCartellini(s))}
             <span class="rosa-cella panchina-persi ${s.puntiInPanchina ? '' : 'zero'}">${s.puntiInPanchina || '—'}</span>
         </div>
     `;
@@ -2778,6 +2806,13 @@ function displayRosters() {
             ${classificaIndividuale(stats, 'assist', 'Assist', 'fa-shoe-prints')}
             ${classificaIndividuale(stats, 'amm', 'Ammonizioni', 'fa-square evento-amm')}
             ${classificaIndividuale(stats, 'esp', 'Espulsioni', 'fa-square evento-esp')}
+            ${classificaIndividuale(stats, 'malus', 'Malus', 'fa-thumbs-down', {
+                sottotitolo: 'Punti persi in campo. I gol subiti dai portieri non contano',
+                dettaglio: (s) => Object.entries(ETICHETTE_MALUS)
+                    .filter(([chiave]) => s[chiave] > 0)
+                    .map(([chiave, etichette]) => plurale(s[chiave], etichette[0], etichette[1]))
+                    .join(', ')
+            })}
             ${classificaIndividuale(stats, 'incompreso', 'Incompresi', 'fa-face-frown', {
                 sottotitolo: 'Gol e assist fatti mentre erano in panchina',
                 dettaglio: (s) => [
