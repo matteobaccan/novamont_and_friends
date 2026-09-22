@@ -1,0 +1,22 @@
+{
+  "currentSeason": "2026-2027",
+  "seasons": [
+    {
+      "id": "2026-2027",
+      "label": "2026-2027",
+      "file": "data/2026-2027.json",
+      "status": "current",
+      "source": {
+        "roundUrl": "https://leghe.fantacalcio.it/novamont-8-friends/view/competition/805779/round/{round}?i={match}",
+        "rosterUrl": "https://leghe.fantacalcio.it/novamont-8-friends/rose",
+        "standingsUrl": "https://leghe.fantacalcio.it/novamont-8-friends/classifica"
+      }
+    },
+    {
+      "id": "2025-2026",
+      "label": "2025-2026",
+      "file": "data/2025-2026.json",
+      "status": "archived"
+    }
+  ]
+}

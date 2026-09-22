@@ -323,113 +323,265 @@ function formatMatchScore(homeScore, awayScore) {
     return `${homeGoals}-${awayGoals}`;
 }
 
-// Variabile globale per i dati del fantacalcio
+// Variabile globale per i dati del fantacalcio (stagione attualmente visualizzata)
 let fantacalcioData = null;
 
-// Funzione per caricare i dati dal file JSON
-async function loadFantacalcioData() {
-    try {
-        // Cache busting: aggiungi timestamp per forzare il reload
-        const timestamp = new Date().getTime();
-        const url = `fantacalcio_data.json?t=${timestamp}`;
-        
-        const response = await fetch(url, {
-            cache: 'no-store', // Forza il bypass della cache del browser
-            headers: {
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0'
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`Errore HTTP! Status: ${response.status}`);
+// Indice delle stagioni disponibili e id della stagione a video
+let seasonsIndex = null;
+let currentSeasonId = null;
+
+const SEASONS_INDEX_PATH = 'data/seasons.json';
+const SEASON_STORAGE_KEY = 'fantacalcio-season';
+const SEASON_URL_PARAM = 'stagione';
+
+// Scarica un JSON bypassando ogni cache: i dati devono essere sempre freschi
+async function fetchJsonNoCache(path) {
+    // Cache busting: aggiungi timestamp per forzare il reload
+    const timestamp = new Date().getTime();
+    const separator = path.includes('?') ? '&' : '?';
+    const url = `${path}${separator}t=${timestamp}`;
+
+    const response = await fetch(url, {
+        cache: 'no-store', // Forza il bypass della cache del browser
+        headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
         }
-        
-        fantacalcioData = await response.json();
-        console.log('Dati caricati dal JSON con successo:', fantacalcioData);
-        console.log('Timestamp caricamento:', new Date(timestamp).toLocaleString());
+    });
+
+    if (!response.ok) {
+        throw new Error(`Errore HTTP su ${path}! Status: ${response.status}`);
+    }
+
+    return response.json();
+}
+
+// Funzione per caricare l'indice delle stagioni disponibili
+async function loadSeasonsIndex() {
+    try {
+        seasonsIndex = await fetchJsonNoCache(SEASONS_INDEX_PATH);
+
+        if (!seasonsIndex || !Array.isArray(seasonsIndex.seasons) || seasonsIndex.seasons.length === 0) {
+            throw new Error(`L'indice ${SEASONS_INDEX_PATH} non contiene nessuna stagione`);
+        }
+
+        console.log('Indice stagioni caricato:', seasonsIndex);
+        return seasonsIndex;
+    } catch (error) {
+        console.error('Impossibile caricare l\'indice delle stagioni:', error.message);
+        throw error;
+    }
+}
+
+// Cerca una stagione nell'indice, null se l'id non esiste
+function getSeasonById(seasonId) {
+    if (!seasonsIndex || !seasonId) return null;
+    return seasonsIndex.seasons.find(season => season.id === seasonId) || null;
+}
+
+// Legge la stagione salvata in localStorage (che può non essere disponibile)
+function readStoredSeasonId() {
+    try {
+        return localStorage.getItem(SEASON_STORAGE_KEY);
+    } catch (error) {
+        console.warn('localStorage non accessibile:', error.message);
+        return null;
+    }
+}
+
+// Determina quale stagione mostrare: parametro URL > scelta salvata > stagione corrente
+function resolveInitialSeasonId() {
+    const fromUrl = new URLSearchParams(window.location.search).get(SEASON_URL_PARAM);
+    if (getSeasonById(fromUrl)) return fromUrl;
+
+    const stored = readStoredSeasonId();
+    if (getSeasonById(stored)) return stored;
+
+    if (getSeasonById(seasonsIndex.currentSeason)) return seasonsIndex.currentSeason;
+
+    return seasonsIndex.seasons[0].id;
+}
+
+// Ricorda la stagione scelta, sia in localStorage che nell'URL (link condivisibile)
+function persistSeasonChoice(seasonId) {
+    try {
+        localStorage.setItem(SEASON_STORAGE_KEY, seasonId);
+    } catch (error) {
+        console.warn('Impossibile salvare la stagione scelta:', error.message);
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.set(SEASON_URL_PARAM, seasonId);
+    window.history.replaceState({}, '', url);
+}
+
+// Funzione per caricare i dati di una singola stagione dal file JSON
+async function loadSeasonData(seasonId) {
+    const season = getSeasonById(seasonId);
+
+    if (!season) {
+        throw new Error(`Stagione "${seasonId}" non presente in ${SEASONS_INDEX_PATH}`);
+    }
+
+    try {
+        fantacalcioData = await fetchJsonNoCache(season.file);
+        currentSeasonId = season.id;
+        console.log(`Dati della stagione ${season.id} caricati con successo:`, fantacalcioData);
         return fantacalcioData;
     } catch (error) {
-        console.error('Impossibile caricare il file JSON:', error.message);
+        console.error(`Impossibile caricare i dati della stagione ${seasonId}:`, error.message);
         // Rilanciamo l'errore per gestirlo nell'inizializzazione
         throw error;
     }
 }
 
+// Mostra un indicatore di caricamento a schermo e ne restituisce il riferimento
+function showLoadingIndicator(message) {
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.className = 'loading-indicator';
+    loadingIndicator.innerHTML = `
+        <div class="loading-content">
+            <i class="fas fa-sync-alt fa-spin"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    document.body.appendChild(loadingIndicator);
+    setTimeout(() => loadingIndicator.classList.add('show'), 10);
+    return loadingIndicator;
+}
+
+function hideLoadingIndicator(loadingIndicator) {
+    if (!loadingIndicator) return;
+    setTimeout(() => {
+        loadingIndicator.classList.remove('show');
+        setTimeout(() => loadingIndicator.remove(), 300);
+    }, 500);
+}
+
+// Ricalcola la classifica dai risultati e ridisegna tutte le sezioni
+function renderAllSections() {
+    if (fantacalcioData && fantacalcioData.teams && fantacalcioData.rounds) {
+        fantacalcioData.teams = calculateStandingsFromResults();
+    }
+
+    displayStandings();
+    displayIdealStandings();
+    displayStatistics();
+    setupRoundSelector();
+    updateLastUpdate();
+    updateSeasonLabels();
+
+    // Aggiorna la giornata corrente se siamo nella tab giornate
+    const activeTab = document.querySelector('.tab-content.active');
+    if (activeTab && activeTab.id === 'giornate') {
+        const roundSelect = document.getElementById('giornata-select');
+        if (roundSelect && roundSelect.value) {
+            displayRoundResults(parseInt(roundSelect.value));
+        }
+    }
+}
+
 // Funzione per ricaricare solo i dati JSON senza refresh completo
 async function reloadDataOnly() {
+    const loadingIndicator = showLoadingIndicator('Aggiornamento dati in corso...');
+
     try {
         console.log('Ricaricamento dati in corso...');
-        
-        // Mostra un indicatore di caricamento
-        const loadingIndicator = document.createElement('div');
-        loadingIndicator.className = 'loading-indicator';
-        loadingIndicator.innerHTML = `
-            <div class="loading-content">
-                <i class="fas fa-sync-alt fa-spin"></i>
-                <span>Aggiornamento dati in corso...</span>
-            </div>
-        `;
-        document.body.appendChild(loadingIndicator);
-        setTimeout(() => loadingIndicator.classList.add('show'), 10);
-        
-        // Ricarica i dati
-        await loadFantacalcioData();
-        
-        // Ricalcola tutto
-        if (fantacalcioData && fantacalcioData.teams && fantacalcioData.rounds) {
-            fantacalcioData.teams = calculateStandingsFromResults();
-        }
-        
-        // Aggiorna le visualizzazioni
-        displayStandings();
-        displayIdealStandings();
-        displayStatistics();
-        setupRoundSelector();
-        updateLastUpdate();
-        
-        // Aggiorna la giornata corrente se siamo nella tab giornate
-        const activeTab = document.querySelector('.tab-content.active');
-        if (activeTab && activeTab.id === 'giornate') {
-            const roundSelect = document.getElementById('giornata-select');
-            if (roundSelect) {
-                displayRoundResults(parseInt(roundSelect.value));
-            }
-        }
-        
-        // Nascondi l'indicatore
-        setTimeout(() => {
-            loadingIndicator.classList.remove('show');
-            setTimeout(() => loadingIndicator.remove(), 300);
-        }, 500);
-        
+
+        await loadSeasonData(currentSeasonId);
+        renderAllSections();
+
+        hideLoadingIndicator(loadingIndicator);
         console.log('Dati aggiornati con successo!');
-        
+
         // Mostra notifica di successo
         showSuccessNotification('Dati aggiornati!');
-        
+
     } catch (error) {
+        hideLoadingIndicator(loadingIndicator);
         console.error('Errore durante il ricaricamento dei dati:', error);
-        alert('Errore durante l\'aggiornamento dei dati. Ricarica la pagina.');
+        showErrorNotification('Errore nell\'aggiornamento. Ricarica la pagina.');
+    }
+}
+
+// Cambia la stagione visualizzata ricaricando il JSON corrispondente
+async function switchSeason(seasonId) {
+    if (!seasonId || seasonId === currentSeasonId) return;
+
+    const previousSeasonId = currentSeasonId;
+    const season = getSeasonById(seasonId);
+    const loadingIndicator = showLoadingIndicator(`Caricamento stagione ${season ? season.label : seasonId}...`);
+
+    try {
+        await loadSeasonData(seasonId);
+        persistSeasonChoice(seasonId);
+        renderAllSections();
+
+        hideLoadingIndicator(loadingIndicator);
+        showSuccessNotification(`Stagione ${season.label}`);
+
+    } catch (error) {
+        hideLoadingIndicator(loadingIndicator);
+        console.error('Errore durante il cambio stagione:', error);
+        showErrorNotification('Impossibile caricare la stagione selezionata.');
+
+        // Riporta il selettore sulla stagione effettivamente a video
+        const select = document.getElementById('season-select');
+        if (select) select.value = previousSeasonId;
+    }
+}
+
+// Popola il selettore stagione nell'header e ne gestisce il cambio
+function setupSeasonSelector() {
+    const select = document.getElementById('season-select');
+    if (!select || !seasonsIndex) return;
+
+    select.innerHTML = seasonsIndex.seasons
+        .map(season => `<option value="${season.id}">${season.label}</option>`)
+        .join('');
+    select.value = currentSeasonId;
+
+    select.addEventListener('change', () => switchSeason(select.value));
+}
+
+// Allinea al nome della stagione attiva le scritte fisse di header e footer
+function updateSeasonLabels() {
+    const season = getSeasonById(currentSeasonId);
+    if (!season) return;
+
+    document.title = `Fantacalcio Novamont & Friends ${season.label}`;
+
+    const footerSeason = document.getElementById('footer-season');
+    if (footerSeason) {
+        footerSeason.textContent = season.label.replace('-', '/');
     }
 }
 
 // Funzione per mostrare notifica di successo
 function showSuccessNotification(message) {
+    showNotification(message, 'success-notification', 'fa-check-circle');
+}
+
+// Funzione per mostrare notifica di errore
+function showErrorNotification(message) {
+    showNotification(message, 'error-notification', 'fa-exclamation-circle', 4000);
+}
+
+function showNotification(message, className, iconClass, duration = 2000) {
     const notification = document.createElement('div');
-    notification.className = 'success-notification';
+    notification.className = className;
     notification.innerHTML = `
-        <i class="fas fa-check-circle"></i>
+        <i class="fas ${iconClass}"></i>
         <span>${message}</span>
     `;
     document.body.appendChild(notification);
-    
+
     setTimeout(() => notification.classList.add('show'), 10);
     setTimeout(() => {
         notification.classList.remove('show');
         setTimeout(() => notification.remove(), 300);
-    }, 2000);
+    }, duration);
 }
 
 // Inizializzazione dell'applicazione
@@ -446,7 +598,7 @@ function showErrorMessage(error) {
     errorContainer.innerHTML = `
         <i class="fas fa-exclamation-triangle"></i>
         <h2>Errore nel Caricamento dei Dati</h2>
-        <p>Non è stato possibile caricare i dati del fantacalcio. Verifica che il file "fantacalcio_data.json" sia presente e accessibile.</p>
+        <p>Non è stato possibile caricare i dati del fantacalcio. Verifica che i file nella cartella "data/" (a partire da "seasons.json") siano presenti e accessibili.</p>
         <div class="error-details">
             <strong>Dettagli tecnici:</strong><br>
             ${error.message}
@@ -461,31 +613,34 @@ function showErrorMessage(error) {
 
 async function initializeApp() {
     try {
-        // Carica i dati dal file JSON
-        await loadFantacalcioData();
-        
+        // Carica l'elenco delle stagioni e i dati di quella da mostrare
+        await loadSeasonsIndex();
+        await loadSeasonData(resolveInitialSeasonId());
+
         setupNavigationTabs();
-        
+        setupSeasonSelector();
+
         // Verifica che i dati siano caricati correttamente
         if (!fantacalcioData) {
             throw new Error('Nessun dato disponibile dopo il caricamento');
         }
-        
+
         console.log('Dati disponibili:', fantacalcioData);
         console.log('Teams:', fantacalcioData.teams);
         console.log('Rounds:', fantacalcioData.rounds);
-        
+
         // Calcola la classifica automaticamente dai risultati
         if (fantacalcioData && fantacalcioData.teams && fantacalcioData.rounds) {
             fantacalcioData.teams = calculateStandingsFromResults();
             console.log('Classifica calcolata:', fantacalcioData.teams);
         }
-        
+
         displayStandings();
         displayStatistics();
         setupRoundSelector();
         updateLastUpdate();
-        
+        updateSeasonLabels();
+
     } catch (error) {
         console.error('Errore durante l\'inizializzazione:', error);
         // Mostra un messaggio di errore visibile all'utente
@@ -1236,26 +1391,56 @@ function displayIdealVsRealComparison() {
 // Setup del selettore delle giornate
 function setupRoundSelector() {
     const roundSelect = document.getElementById('giornata-select');
-    const roundResults = document.getElementById('giornata-results');
+    const rounds = (fantacalcioData && fantacalcioData.rounds) || [];
+
+    // Svuota il selettore: la funzione viene richiamata ad ogni cambio stagione
+    roundSelect.innerHTML = '';
 
     // Popola il selettore delle giornate
-    fantacalcioData.rounds.forEach(round => {
+    rounds.forEach(round => {
         const option = document.createElement('option');
         option.value = round.round;
         option.textContent = `Giornata ${round.round}`;
         roundSelect.appendChild(option);
     });
 
+    roundSelect.disabled = rounds.length === 0;
+
     // Imposta la giornata più recente come default
-    if (fantacalcioData.rounds.length > 0) {
-        roundSelect.value = fantacalcioData.rounds[fantacalcioData.rounds.length - 1].round;
-        displayRoundResults(fantacalcioData.rounds[fantacalcioData.rounds.length - 1].round);
+    if (rounds.length > 0) {
+        roundSelect.value = rounds[rounds.length - 1].round;
+        displayRoundResults(rounds[rounds.length - 1].round);
+    } else {
+        displayNoRoundsMessage();
     }
 
-    // Event listener per il cambio di giornata
-    roundSelect.addEventListener('change', (e) => {
-        displayRoundResults(parseInt(e.target.value));
-    });
+    // Event listener per il cambio di giornata, registrato una sola volta
+    if (!roundSelect.dataset.listenerAttached) {
+        roundSelect.addEventListener('change', (e) => {
+            displayRoundResults(parseInt(e.target.value));
+        });
+        roundSelect.dataset.listenerAttached = 'true';
+    }
+}
+
+// Stato mostrato quando una stagione è nel calendario ma non ha ancora giornate
+function displayNoRoundsMessage() {
+    const commentary = document.getElementById('match-commentary');
+    if (commentary) commentary.style.display = 'none';
+
+    const coachRanking = document.getElementById('coach-ranking-container');
+    if (coachRanking) coachRanking.innerHTML = '';
+
+    const roundResults = document.getElementById('giornata-results');
+    if (roundResults) {
+        roundResults.innerHTML = `
+            <div class="empty-season">
+                <i class="fas fa-hourglass-start"></i>
+                <h3>Stagione non ancora iniziata</h3>
+                <p>Nessuna giornata disponibile per questa stagione. Torna dopo il primo turno!</p>
+            </div>
+        `;
+    }
 }
 
 // Visualizzazione dei risultati per giornata
@@ -1775,7 +1960,11 @@ function testGoalCalculation() {
 
 // Esporta le funzioni per uso futuro
 window.FantacalcioApp = {
-    loadFantacalcioData,
+    loadSeasonsIndex,
+    loadSeasonData,
+    switchSeason,
+    getSeasons: () => seasonsIndex,
+    getCurrentSeasonId: () => currentSeasonId,
     addNewRound,
     updateTeamStandings,
     displayStandings,

@@ -47,16 +47,46 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 - **Scorri** per vedere il confronto reale vs ideale
 - **Leggi** i commenti esclusivi in stile telecronaca
 
+## 📅 Stagioni
+
+Il sito gestisce più stagioni. L'elenco vive in `data/seasons.json`, che è l'unica
+fonte di verità su quali stagioni esistono e quale è quella corrente:
+
+```json
+{
+  "currentSeason": "2026-2027",
+  "seasons": [
+    { "id": "2026-2027", "label": "2026-2027", "file": "data/2026-2027.json", "status": "current" },
+    { "id": "2025-2026", "label": "2025-2026", "file": "data/2025-2026.json", "status": "archived" }
+  ]
+}
+```
+
+Ogni stagione ha il suo file in `data/<id>.json` e viene caricata solo quando la si
+seleziona dal menu a tendina nell'header. La stagione scelta viene ricordata in
+`localStorage` e finisce nell'URL (`?stagione=2025-2026`), così il link è condivisibile.
+
+### Aprire una nuova stagione
+
+1. Crea `data/<nuova-stagione>.json` con `lastUpdate`, `season`, `teams`, `rounds: []` e `settings`
+   (copia la struttura da una stagione esistente).
+2. Aggiungi la stagione **in cima** all'array `seasons` di `data/seasons.json` e aggiorna
+   `currentSeason`; porta la vecchia stagione a `"status": "archived"`.
+3. Finché `rounds` è vuoto, la sezione Giornate mostra "Stagione non ancora iniziata".
+
+Nessuna modifica al codice è necessaria: il nome del file deve solo rispettare il
+formato `AAAA-AAAA.json`, richiesto dalla whitelist in `.htaccess`.
+
 ## 📝 Aggiornare i dati
 
-### Metodo semplice (modifica diretta nel JavaScript):
-Modifica il file `script.js` nella sezione `fantacalcioData` per aggiornare:
-- Classifica delle squadre
-- Risultati delle giornate
-- Data ultimo aggiornamento
+Modifica il file JSON della stagione in corso (`data/<id>.json`) per aggiornare
+risultati delle giornate, commenti e data di ultimo aggiornamento. Classifica reale,
+classifica ideale e statistiche allenatori sono **ricalcolate dai risultati**, quindi
+non vanno inserite a mano.
 
-### Metodo avanzato (file JSON):
-Modifica il file `fantacalcio_data.json` per gestire tutti i dati in modo più organizzato.
+I campi `homeIdealScore` / `awayIdealScore` sono facoltativi: dove mancano, la
+Classifica Miglior Allenatore per quella giornata non viene mostrata e la Classifica
+Ideale ricade sui punteggi reali.
 
 ## 📱 Compatibilità
 
@@ -88,15 +118,19 @@ novamont_and_friends/
 ├── styles.css              # Stili CSS responsive
 ├── script.js               # Logica JavaScript completa
 ├── config.js               # Configurazioni sistema
-├── fantacalcio_data.json   # Dati reali del campionato
+├── data/
+│   ├── seasons.json        # Indice delle stagioni disponibili
+│   ├── 2026-2027.json      # Stagione corrente
+│   └── 2025-2026.json      # Stagione archiviata
 └── README.md               # Documentazione completa
 ```
 
 ### 🗂️ **Dettaglio File**
-- **`index.html`**: Interface completa con 3 sezioni (Classifica, Classifica Ideale, Giornate)
+- **`index.html`**: Interface completa con 3 sezioni (Classifica, Classifica Ideale, Giornate) e selettore stagione
 - **`styles.css`**: 2800+ righe di CSS responsive con glassmorphism e animazioni moderne
 - **`script.js`**: 1600+ righe di JavaScript con algoritmi avanzati e gestione dati
-- **`fantacalcio_data.json`**: Database JSON con teams, rounds, matches, punteggi ideali e commenti
+- **`data/seasons.json`**: Indice delle stagioni: id, etichetta, file e stato
+- **`data/<stagione>.json`**: Database JSON con teams, rounds, matches, punteggi ideali e commenti
 - **`config.js`**: Impostazioni configurabili per personalizzazione
 
 ## 🔧 Funzioni Avanzate

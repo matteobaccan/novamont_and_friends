@@ -1,14 +1,14 @@
 // Service Worker per gestione cache intelligente
-const CACHE_VERSION = 'v2.0';
+const CACHE_VERSION = 'v3.0';
 const CACHE_NAME = `fantacalcio-cache-${CACHE_VERSION}`;
 
 // File da cachare (escludiamo i dati dinamici)
 const urlsToCache = [
   '/',
   '/index.html',
-  '/styles.css?v=2.0',
-  '/script.js?v=2.0',
-  '/config.js?v=2.0',
+  '/styles.css?v=3.0',
+  '/script.js?v=3.0',
+  '/config.js?v=3.0',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css'
 ];
@@ -16,7 +16,7 @@ const urlsToCache = [
 // File che devono essere sempre aggiornati (network-first)
 // Usa un pattern per gestire anche le query string con timestamp
 const networkFirstPatterns = [
-  /fantacalcio_data\.json/,
+  /\/data\/.*\.json/,
   /\.json$/
 ];
 

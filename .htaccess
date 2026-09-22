@@ -103,8 +103,10 @@
     Deny from all
     Satisfy All
     
-    # Permetti solo fantacalcio_data.json
-    <FilesMatch "^fantacalcio_data\.json$">
+    # Permetti solo i dati del campionato in data/: l'indice stagioni e i file
+    # per stagione (es. 2025-2026.json). FilesMatch confronta il nome del file,
+    # quindi il pattern vale anche dentro la cartella data/.
+    <FilesMatch "^(seasons|[0-9]{4}-[0-9]{4})\.json$">
         Order allow,deny
         Allow from all
     </FilesMatch>
