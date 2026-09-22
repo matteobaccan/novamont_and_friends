@@ -3734,3 +3734,132 @@ html.theme-transition *:after {
     font-weight: 700;
     opacity: 0.8;
 }
+
+/* ============================================================
+   FORMAZIONE CONSIGLIATA
+   ============================================================ */
+
+.consiglio-barra {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+.consiglio-giornata {
+    margin-left: auto;
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
+
+.consiglio-card {
+    background: var(--glass-bg, rgba(255, 255, 255, 0.6));
+    border: 1px solid rgba(127, 127, 127, 0.18);
+    border-radius: 14px;
+    padding: 1rem 1.1rem 1.2rem;
+}
+
+.consiglio-header {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+}
+
+.consiglio-header h3 { margin: 0; font-size: 1.05rem; }
+
+.consiglio-modulo {
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 20px;
+    background: rgba(59, 130, 246, 0.14);
+    color: #1d4ed8;
+}
+
+[data-theme="dark"] .consiglio-modulo { color: #93c5fd; }
+
+.consiglio-totale {
+    margin-left: auto;
+    font-size: 0.75rem;
+    opacity: 0.65;
+    font-variant-numeric: tabular-nums;
+}
+
+.consiglio-row {
+    display: grid;
+    grid-template-columns: 1.15rem minmax(0, 1fr) 2.1rem 1.4rem minmax(0, 5rem) 2.6rem 2.8rem;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.28rem 0.25rem;
+    font-size: 0.78rem;
+    border-radius: 6px;
+}
+
+.consiglio-row.titolare:nth-child(even) { background: rgba(127, 127, 127, 0.07); }
+.consiglio-row.panca { opacity: 0.6; }
+
+.consiglio-row.intestazione {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    opacity: 0.55;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(127, 127, 127, 0.2);
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.25rem;
+}
+
+.consiglio-row.intestazione span:nth-child(n+4) { text-align: right; }
+
+.consiglio-nome { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.consiglio-serieA { font-size: 0.63rem; opacity: 0.55; text-align: right; }
+.consiglio-forma { text-align: right; font-size: 0.68rem; }
+.consiglio-nota { font-size: 0.63rem; opacity: 0.55; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.consiglio-continuita { text-align: right; font-size: 0.7rem; opacity: 0.65; font-variant-numeric: tabular-nums; }
+.consiglio-atteso { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.forma-su { color: #16a34a; }
+.forma-giu { color: #dc2626; }
+.forma-stabile { opacity: 0.3; }
+
+[data-theme="dark"] .forma-su { color: #4ade80; }
+[data-theme="dark"] .forma-giu { color: #f87171; }
+
+.consiglio-separatore {
+    margin: 0.7rem 0 0.35rem;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.45;
+    border-top: 1px solid rgba(127, 127, 127, 0.18);
+    padding-top: 0.6rem;
+}
+
+.consiglio-avviso {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    background: rgba(127, 127, 127, 0.08);
+    font-size: 0.73rem;
+    line-height: 1.45;
+    opacity: 0.85;
+}
+
+.consiglio-avviso.attenzione {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    background: rgba(234, 179, 8, 0.14);
+}
+
+.consiglio-avviso i { margin-top: 0.15rem; opacity: 0.6; }
+
+@media (max-width: 600px) {
+    .consiglio-row { grid-template-columns: 1.15rem minmax(0, 1fr) 1.3rem 2.4rem 2.6rem; }
+    .consiglio-serieA, .consiglio-nota { display: none; }
+}
