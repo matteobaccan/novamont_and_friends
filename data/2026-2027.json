@@ -1,0 +1,936 @@
+{
+  "lastUpdate": "22 Settembre 2026, 12:00",
+  "season": "2026-2027",
+  "teams": [
+    {
+      "id": 1,
+      "name": "Cusiana",
+      "owner": "Roby, Gaiuz"
+    },
+    {
+      "id": 2,
+      "name": "Partizan Tirana",
+      "owner": "Loran10"
+    },
+    {
+      "id": 3,
+      "name": "Real Ichnusa",
+      "owner": "Robertino Trogu"
+    },
+    {
+      "id": 4,
+      "name": "Real Pattagghiu",
+      "owner": "Andre"
+    },
+    {
+      "id": 5,
+      "name": "Shakhtar Donuts",
+      "owner": "Marco Fedele"
+    },
+    {
+      "id": 6,
+      "name": "SM Frattese",
+      "owner": "Pezant"
+    },
+    {
+      "id": 7,
+      "name": "Team24",
+      "owner": "Nereo Sacchi"
+    },
+    {
+      "id": 8,
+      "name": "Ultimo",
+      "owner": "Beppe"
+    }
+  ],
+  "rosters": {
+    "Partizan Tirana": [
+      {
+        "name": "Di Gennaro",
+        "role": "P"
+      },
+      {
+        "name": "Martinez Jo.",
+        "role": "P"
+      },
+      {
+        "name": "Provedel",
+        "role": "P"
+      },
+      {
+        "name": "Celik",
+        "role": "D"
+      },
+      {
+        "name": "Chalobah T.",
+        "role": "D"
+      },
+      {
+        "name": "Diego Carlos",
+        "role": "D"
+      },
+      {
+        "name": "Dimarco",
+        "role": "D"
+      },
+      {
+        "name": "Gabbia",
+        "role": "D"
+      },
+      {
+        "name": "Hermoso",
+        "role": "D"
+      },
+      {
+        "name": "Ranieri L.",
+        "role": "D"
+      },
+      {
+        "name": "Vojvoda",
+        "role": "D"
+      },
+      {
+        "name": "Bernardeschi",
+        "role": "C"
+      },
+      {
+        "name": "Cissè A.",
+        "role": "C"
+      },
+      {
+        "name": "Gonzalez N.",
+        "role": "C"
+      },
+      {
+        "name": "Gudmundsson A.",
+        "role": "C"
+      },
+      {
+        "name": "Paz N.",
+        "role": "C"
+      },
+      {
+        "name": "Politano",
+        "role": "C"
+      },
+      {
+        "name": "Taylor K.",
+        "role": "C"
+      },
+      {
+        "name": "Zhegrova",
+        "role": "C"
+      },
+      {
+        "name": "Bowie",
+        "role": "A"
+      },
+      {
+        "name": "Colombo",
+        "role": "A"
+      },
+      {
+        "name": "Kean",
+        "role": "A"
+      },
+      {
+        "name": "Lang",
+        "role": "A"
+      },
+      {
+        "name": "Pinamonti",
+        "role": "A"
+      },
+      {
+        "name": "Raimondo",
+        "role": "A"
+      }
+    ],
+    "Real Ichnusa": [
+      {
+        "name": "Maignan",
+        "role": "P"
+      },
+      {
+        "name": "Terracciano",
+        "role": "P"
+      },
+      {
+        "name": "Torriani",
+        "role": "P"
+      },
+      {
+        "name": "Bastoni",
+        "role": "D"
+      },
+      {
+        "name": "Carlos Augusto",
+        "role": "D"
+      },
+      {
+        "name": "Gila",
+        "role": "D"
+      },
+      {
+        "name": "Mangas",
+        "role": "D"
+      },
+      {
+        "name": "Marcandalli",
+        "role": "D"
+      },
+      {
+        "name": "Molina N.",
+        "role": "D"
+      },
+      {
+        "name": "Scalvini",
+        "role": "D"
+      },
+      {
+        "name": "Stones",
+        "role": "D"
+      },
+      {
+        "name": "Baturina",
+        "role": "C"
+      },
+      {
+        "name": "Frattesi",
+        "role": "C"
+      },
+      {
+        "name": "Frendrup",
+        "role": "C"
+      },
+      {
+        "name": "Koopmeiners",
+        "role": "C"
+      },
+      {
+        "name": "Mastantuono",
+        "role": "C"
+      },
+      {
+        "name": "McTominay",
+        "role": "C"
+      },
+      {
+        "name": "Pulisic",
+        "role": "C"
+      },
+      {
+        "name": "Vergara",
+        "role": "C"
+      },
+      {
+        "name": "Adams C.",
+        "role": "A"
+      },
+      {
+        "name": "Douvikas",
+        "role": "A"
+      },
+      {
+        "name": "Kvernadze",
+        "role": "A"
+      },
+      {
+        "name": "Raspadori",
+        "role": "A"
+      },
+      {
+        "name": "Scamacca",
+        "role": "A"
+      },
+      {
+        "name": "Yildiz",
+        "role": "A"
+      }
+    ],
+    "Ultimo": [
+      {
+        "name": "De Marzi",
+        "role": "P"
+      },
+      {
+        "name": "Gollini",
+        "role": "P"
+      },
+      {
+        "name": "Svilar",
+        "role": "P"
+      },
+      {
+        "name": "De Winter",
+        "role": "D"
+      },
+      {
+        "name": "Di Lorenzo",
+        "role": "D"
+      },
+      {
+        "name": "Hainaut",
+        "role": "D"
+      },
+      {
+        "name": "Lucumì",
+        "role": "D"
+      },
+      {
+        "name": "Spinazzola",
+        "role": "D"
+      },
+      {
+        "name": "Tiago Gabriel",
+        "role": "D"
+      },
+      {
+        "name": "Wesley",
+        "role": "D"
+      },
+      {
+        "name": "Zappacosta",
+        "role": "D"
+      },
+      {
+        "name": "Calhanoglu",
+        "role": "C"
+      },
+      {
+        "name": "Ederson D.S.",
+        "role": "C"
+      },
+      {
+        "name": "Ekkelenkamp",
+        "role": "C"
+      },
+      {
+        "name": "Jashari",
+        "role": "C"
+      },
+      {
+        "name": "Modric",
+        "role": "C"
+      },
+      {
+        "name": "Perrone",
+        "role": "C"
+      },
+      {
+        "name": "Zalewski",
+        "role": "C"
+      },
+      {
+        "name": "Zielinski",
+        "role": "C"
+      },
+      {
+        "name": "Bonny",
+        "role": "A"
+      },
+      {
+        "name": "Esposito Se.",
+        "role": "A"
+      },
+      {
+        "name": "Lucca",
+        "role": "A"
+      },
+      {
+        "name": "Martinez L.",
+        "role": "A"
+      },
+      {
+        "name": "Yeboah J.",
+        "role": "A"
+      },
+      {
+        "name": "Zapata D.",
+        "role": "A"
+      }
+    ],
+    "Team24": [
+      {
+        "name": "Contini",
+        "role": "P"
+      },
+      {
+        "name": "Meret",
+        "role": "P"
+      },
+      {
+        "name": "Milinkovic-Savic V.",
+        "role": "P"
+      },
+      {
+        "name": "Abankwah",
+        "role": "D"
+      },
+      {
+        "name": "Bracaglia",
+        "role": "D"
+      },
+      {
+        "name": "Carboni A.",
+        "role": "D"
+      },
+      {
+        "name": "Coco",
+        "role": "D"
+      },
+      {
+        "name": "Comuzzo",
+        "role": "D"
+      },
+      {
+        "name": "Doig",
+        "role": "D"
+      },
+      {
+        "name": "Lucchesi",
+        "role": "D"
+      },
+      {
+        "name": "Valle",
+        "role": "D"
+      },
+      {
+        "name": "Coulibaly L.",
+        "role": "C"
+      },
+      {
+        "name": "Fagioli",
+        "role": "C"
+      },
+      {
+        "name": "Mandragora",
+        "role": "C"
+      },
+      {
+        "name": "Matic",
+        "role": "C"
+      },
+      {
+        "name": "Moreira",
+        "role": "C"
+      },
+      {
+        "name": "Rabiot",
+        "role": "C"
+      },
+      {
+        "name": "Vlasic",
+        "role": "C"
+      },
+      {
+        "name": "Zaniolo",
+        "role": "C"
+      },
+      {
+        "name": "Berardi",
+        "role": "A"
+      },
+      {
+        "name": "Hojlund",
+        "role": "A"
+      },
+      {
+        "name": "Krstovic",
+        "role": "A"
+      },
+      {
+        "name": "Laurientè",
+        "role": "A"
+      },
+      {
+        "name": "Maldini",
+        "role": "A"
+      },
+      {
+        "name": "Simeone",
+        "role": "A"
+      }
+    ],
+    "Cusiana": [
+      {
+        "name": "Butez",
+        "role": "P"
+      },
+      {
+        "name": "Carnesecchi",
+        "role": "P"
+      },
+      {
+        "name": "Skorupski",
+        "role": "P"
+      },
+      {
+        "name": "Birindelli",
+        "role": "D"
+      },
+      {
+        "name": "Ehizibue",
+        "role": "D"
+      },
+      {
+        "name": "Kalulu",
+        "role": "D"
+      },
+      {
+        "name": "Kamara H.",
+        "role": "D"
+      },
+      {
+        "name": "Mancini",
+        "role": "D"
+      },
+      {
+        "name": "Solet",
+        "role": "D"
+      },
+      {
+        "name": "Valeri",
+        "role": "D"
+      },
+      {
+        "name": "Vasquez",
+        "role": "D"
+      },
+      {
+        "name": "Adzic",
+        "role": "C"
+      },
+      {
+        "name": "Conceicao",
+        "role": "C"
+      },
+      {
+        "name": "Douglas Luiz",
+        "role": "C"
+      },
+      {
+        "name": "Gilmour",
+        "role": "C"
+      },
+      {
+        "name": "Konè M.",
+        "role": "C"
+      },
+      {
+        "name": "Lobotka",
+        "role": "C"
+      },
+      {
+        "name": "McKennie",
+        "role": "C"
+      },
+      {
+        "name": "Thorstvedt",
+        "role": "C"
+      },
+      {
+        "name": "Boga",
+        "role": "A"
+      },
+      {
+        "name": "Malen",
+        "role": "A"
+      },
+      {
+        "name": "Mendy P.",
+        "role": "A"
+      },
+      {
+        "name": "Osmajic",
+        "role": "A"
+      },
+      {
+        "name": "Stulic",
+        "role": "A"
+      },
+      {
+        "name": "Woltemade",
+        "role": "A"
+      }
+    ],
+    "SM Frattese": [
+      {
+        "name": "Caprile",
+        "role": "P"
+      },
+      {
+        "name": "Sanchez Ro.",
+        "role": "P"
+      },
+      {
+        "name": "Vicario",
+        "role": "P"
+      },
+      {
+        "name": "Bellanova",
+        "role": "D"
+      },
+      {
+        "name": "Bremer",
+        "role": "D"
+      },
+      {
+        "name": "Cambiaso",
+        "role": "D"
+      },
+      {
+        "name": "Jimenez A.",
+        "role": "D"
+      },
+      {
+        "name": "N'Dicka",
+        "role": "D"
+      },
+      {
+        "name": "Pavlovic",
+        "role": "D"
+      },
+      {
+        "name": "Ramon",
+        "role": "D"
+      },
+      {
+        "name": "Theate",
+        "role": "D"
+      },
+      {
+        "name": "Alajbegovic",
+        "role": "C"
+      },
+      {
+        "name": "Atta",
+        "role": "C"
+      },
+      {
+        "name": "Chukwueze",
+        "role": "C"
+      },
+      {
+        "name": "De Bruyne",
+        "role": "C"
+      },
+      {
+        "name": "Mora",
+        "role": "C"
+      },
+      {
+        "name": "Orsolini",
+        "role": "C"
+      },
+      {
+        "name": "Rowe",
+        "role": "C"
+      },
+      {
+        "name": "Zaccagni",
+        "role": "C"
+      },
+      {
+        "name": "Beto",
+        "role": "A"
+      },
+      {
+        "name": "Diao",
+        "role": "A"
+      },
+      {
+        "name": "Esposito F.P.",
+        "role": "A"
+      },
+      {
+        "name": "Kolo Muani",
+        "role": "A"
+      },
+      {
+        "name": "Ramos G.",
+        "role": "A"
+      },
+      {
+        "name": "Santos A.",
+        "role": "A"
+      }
+    ],
+    "Shakhtar Donuts": [
+      {
+        "name": "De Gea",
+        "role": "P"
+      },
+      {
+        "name": "Muric",
+        "role": "P"
+      },
+      {
+        "name": "Okoye",
+        "role": "P"
+      },
+      {
+        "name": "Couto",
+        "role": "D"
+      },
+      {
+        "name": "Delprato",
+        "role": "D"
+      },
+      {
+        "name": "Kristensen T.",
+        "role": "D"
+      },
+      {
+        "name": "Lulli",
+        "role": "D"
+      },
+      {
+        "name": "Monterisi",
+        "role": "D"
+      },
+      {
+        "name": "Rrahmani",
+        "role": "D"
+      },
+      {
+        "name": "Tavares N.",
+        "role": "D"
+      },
+      {
+        "name": "Valdepenas",
+        "role": "D"
+      },
+      {
+        "name": "Barella",
+        "role": "C"
+      },
+      {
+        "name": "Busio",
+        "role": "C"
+      },
+      {
+        "name": "Calò",
+        "role": "C"
+      },
+      {
+        "name": "Colpani",
+        "role": "C"
+      },
+      {
+        "name": "Diouf",
+        "role": "C"
+      },
+      {
+        "name": "Ilic",
+        "role": "C"
+      },
+      {
+        "name": "Romano",
+        "role": "C"
+      },
+      {
+        "name": "Schmid",
+        "role": "C"
+      },
+      {
+        "name": "Adams A.",
+        "role": "A"
+      },
+      {
+        "name": "Castro S.",
+        "role": "A"
+      },
+      {
+        "name": "Davis K.",
+        "role": "A"
+      },
+      {
+        "name": "Pellegrino M.",
+        "role": "A"
+      },
+      {
+        "name": "Robinson J.",
+        "role": "A"
+      },
+      {
+        "name": "Thuram",
+        "role": "A"
+      }
+    ],
+    "Real Pattagghiu": [
+      {
+        "name": "Mandas",
+        "role": "P"
+      },
+      {
+        "name": "Motta",
+        "role": "P"
+      },
+      {
+        "name": "Renzetti",
+        "role": "P"
+      },
+      {
+        "name": "Akanji",
+        "role": "D"
+      },
+      {
+        "name": "Bisseck",
+        "role": "D"
+      },
+      {
+        "name": "Dragusin",
+        "role": "D"
+      },
+      {
+        "name": "Gatti",
+        "role": "D"
+      },
+      {
+        "name": "Juan Jesus",
+        "role": "D"
+      },
+      {
+        "name": "Kabasele",
+        "role": "D"
+      },
+      {
+        "name": "Miranda J.",
+        "role": "D"
+      },
+      {
+        "name": "Ostigard",
+        "role": "D"
+      },
+      {
+        "name": "Adopo",
+        "role": "C"
+      },
+      {
+        "name": "Baldanzi",
+        "role": "C"
+      },
+      {
+        "name": "Da Cunha",
+        "role": "C"
+      },
+      {
+        "name": "Fabbian",
+        "role": "C"
+      },
+      {
+        "name": "Fazzini",
+        "role": "C"
+      },
+      {
+        "name": "Isaksen",
+        "role": "C"
+      },
+      {
+        "name": "Kessiè",
+        "role": "C"
+      },
+      {
+        "name": "Mbangula",
+        "role": "C"
+      },
+      {
+        "name": "De Ketelaere",
+        "role": "A"
+      },
+      {
+        "name": "Dovbyk",
+        "role": "A"
+      },
+      {
+        "name": "Dybala",
+        "role": "A"
+      },
+      {
+        "name": "Piccoli",
+        "role": "A"
+      },
+      {
+        "name": "Soulè",
+        "role": "A"
+      },
+      {
+        "name": "Varela G.",
+        "role": "A"
+      }
+    ]
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "date": "Settembre 2026",
+      "matches": [
+        {
+          "id": 1,
+          "homeTeam": "Real Pattagghiu",
+          "awayTeam": "Real Ichnusa",
+          "homeScore": 75.5,
+          "awayScore": 70,
+          "homeIdealScore": 79,
+          "awayIdealScore": 76.5,
+          "commentary": {
+            "caressa": "Parte col piede giusto il Real Pattagghiu! 2-1 al Real Ichnusa, 75.5 punti contro 70. E il nome sulla copertina è quello di Varela G., 13 punti da solo: un esordio così se lo sognava!",
+            "bergomi": "Vittoria meritata, Fabio, ma il Real Ichnusa può recriminare. Pulisic ha fatto la sua parte con 10.5, il problema è dietro: Marcandalli a 4.5 pesa. Curiosità: con le formazioni ideali finirebbe 3-2, stesso verdetto. Andre ha lasciato in panchina solo 4.5 punti, gestione già da veterano."
+          }
+        },
+        {
+          "id": 2,
+          "homeTeam": "Team24",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 78.5,
+          "awayScore": 70.5,
+          "homeIdealScore": 80.5,
+          "awayIdealScore": 78.5,
+          "commentary": {
+            "caressa": "TEAM24 SI PRESENTA COSÌ! 3-1 allo Shakhtar Donuts e 78.5 punti! Moreira, Rabiot e Maldini tutti e tre a quota 10: il centrocampo ha deciso la partita!",
+            "bergomi": "Tre giocatori in doppia cifra sono tanta roba, Fabio. Ma guarda la panchina dello Shakhtar: Calò a 10, lasciato fuori. Con le formazioni ideali sarebbe 3-3, e Marco Fedele si mangia le mani: 8 punti buttati via."
+          }
+        },
+        {
+          "id": 3,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 69.5,
+          "awayScore": 67,
+          "homeIdealScore": 74,
+          "awayIdealScore": 75,
+          "commentary": {
+            "caressa": "Non si fanno male Ultimo e Partizan Tirana: 1-1 e tanta fatica! 69.5 a 67. Martinez L. fa il fenomeno con 14 punti, ma dall'altra parte Yeboah J. ne combina di tutti i colori: 1.5!",
+            "bergomi": "Partita da dimenticare per entrambe, Fabio. Beppe si salva solo grazie al Toro. E il Partizan? Bernardeschi a 10 rimasto in panchina, roba da non credere. Con le formazioni ideali sarebbe 2-2: qui hanno sbagliato in due."
+          }
+        },
+        {
+          "id": 4,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Cusiana",
+          "homeScore": 78,
+          "awayScore": 84,
+          "homeIdealScore": 84,
+          "awayIdealScore": 90.5,
+          "commentary": {
+            "caressa": "CHE SPETTACOLO! Cusiana espugna il campo della SM Frattese 4-3, 84 punti a 78! Konè M. a 14, Adzic e Osmajic a 10, Conceicao a 9.5: un attacco devastante!",
+            "bergomi": "Il miglior punteggio di giornata, Fabio, e non per caso. Ma attenzione alla SM Frattese: Bremer e Zaccagni a 10, però Jimenez A. a 10 è rimasto fuori. Con le formazioni ideali sarebbe 4-5, quindi Roby e Gaiuz avrebbero vinto comunque. Pezant però lascia per strada 7 punti pieni."
+          }
+        }
+      ],
+      "generalComment": "Si riparte, e la prima giornata dice subito che la nuova stagione non sarà per cuori deboli: due volti nuovi al via, Team24 e Real Pattagghiu, ed entrambi portano a casa i tre punti. Cusiana passa in trasferta nell'unica partita con più di cinque gol complessivi, mentre Ultimo e Partizan Tirana si annullano in un match bloccatissimo."
+    }
+  ],
+  "settings": {
+    "pointsForWin": 3,
+    "pointsForDraw": 1,
+    "pointsForLoss": 0,
+    "leagueFormat": "Girone all'italiana",
+    "goalCalculation": {
+      "pointsPerGoal": 6,
+      "description": "Ogni 6 punti fantacalcio = 1 gol"
+    },
+    "insightThreshold": 3
+  }
+}

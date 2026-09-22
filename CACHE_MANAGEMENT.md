@@ -18,7 +18,7 @@ Tutti i file CSS e JavaScript hanno un parametro di versione nell'URL:
 ⭐ **NUOVO**: Il file JSON viene caricato con un timestamp dinamico:
 ```javascript
 const timestamp = new Date().getTime();
-const url = `fantacalcio_data.json?t=${timestamp}`;
+const url = `data/${seasonFile}?t=${timestamp}`;
 fetch(url, { cache: 'no-store' })
 ```
 Questo garantisce che **ogni richiesta ottenga sempre i dati più recenti**.
@@ -67,7 +67,7 @@ Regole di cache ottimizzate per Apache:
 
 ### Per i Dati JSON (Partite):
 **3 Livelli di Protezione:**
-1. **Timestamp nella richiesta**: `fantacalcio_data.json?t=1234567890`
+1. **Timestamp nella richiesta**: `data/2026-2027.json?t=1234567890`
 2. **Headers no-cache**: `cache: 'no-store'`, `Cache-Control: no-cache`
 3. **Service Worker bypass**: Nessuna cache per i file JSON
 
@@ -112,7 +112,7 @@ Regole di cache ottimizzate per Apache:
 | Tipo File | Strategia | Durata | Motivo |
 |-----------|-----------|--------|---------|
 | `index.html` | No cache | 0 sec | Sempre aggiornato |
-| `fantacalcio_data.json` | Network-first | 0 sec | Dati dinamici |
+| `data/*.json` | Network-first | 0 sec | Dati dinamici |
 | `script.js?v=X` | Cache-first | 1 settimana | Performance + versioning |
 | `styles.css?v=X` | Cache-first | 1 settimana | Performance + versioning |
 | Immagini | Cache | 1 anno | Immutabili |

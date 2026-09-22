@@ -3,9 +3,10 @@
 
 const CONFIG = {
     // Informazioni generali
+    // La stagione non è più definita qui: l'elenco delle stagioni e quella
+    // corrente vivono in data/seasons.json, unica fonte di verità.
     leagueName: "Novamont & Friends",
-    season: "2025-2026",
-    
+
     // Impostazioni punteggi
     scoring: {
         win: 3,
@@ -58,7 +59,7 @@ const CONFIG = {
     autoUpdate: {
         enabled: false,
         interval: 300000, // 5 minuti in millisecondi
-        source: "fantacalcio_data.json"
+        source: "data/seasons.json"
     },
     
     // Social links (footer)

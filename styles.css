@@ -140,6 +140,71 @@ html.theme-transition *:after {
     font-size: 0.9rem;
     opacity: 0.8;
     font-weight: 300;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* Selettore della stagione nell'header: deve leggersi come il sottotitolo,
+   non come un controllo di form. Il riquadro compare solo al passaggio. */
+.season-picker {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Freccia disegnata a parte: il select nativo non accetta pseudo-elementi */
+.season-picker::after {
+    content: '';
+    position: absolute;
+    right: 0.4rem;
+    top: 50%;
+    transform: translateY(-25%);
+    width: 0;
+    height: 0;
+    border-left: 3.5px solid transparent;
+    border-right: 3.5px solid transparent;
+    border-top: 4px solid currentColor;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.season-select {
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    padding: 0.1rem 1.1rem 0.1rem 0.25rem;
+    margin: 0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.season-select:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 1px;
+}
+
+/* Le option sono disegnate dal sistema operativo: vanno colorate a mano */
+.season-select option {
+    color: #1f2937;
+    background: #ffffff;
+}
+
+[data-theme="light"] .season-select:hover {
+    background: rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="dark"] .season-select:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+[data-theme="dark"] .season-select option {
+    color: #e5e7eb;
+    background: #1f2937;
 }
 
 .nav {
@@ -2903,8 +2968,9 @@ html.theme-transition *:after {
     font-weight: 600;
 }
 
-/* Notifica di Successo */
-.success-notification {
+/* Notifica di Successo / Errore */
+.success-notification,
+.error-notification {
     position: fixed;
     top: -100px;
     left: 50%;
@@ -2922,12 +2988,42 @@ html.theme-transition *:after {
     font-weight: 600;
 }
 
-.success-notification.show {
+.error-notification {
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    box-shadow: 0 8px 32px rgba(239, 68, 68, 0.3);
+}
+
+.success-notification.show,
+.error-notification.show {
     top: 20px;
 }
 
-.success-notification i {
+.success-notification i,
+.error-notification i {
     font-size: 1.5rem;
+}
+
+/* Stagione senza giornate disputate */
+.empty-season {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    opacity: 0.75;
+}
+
+.empty-season i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.empty-season h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.empty-season p {
+    margin: 0;
+    font-size: 0.95rem;
 }
 
 /* Tema scuro */
@@ -2940,10 +3036,15 @@ html.theme-transition *:after {
     background: linear-gradient(135deg, #059669 0%, #047857 100%);
 }
 
+[data-theme="dark"] .error-notification {
+    background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .loading-indicator,
-    .success-notification {
+    .success-notification,
+    .error-notification {
         min-width: auto;
         width: calc(100% - 40px);
         max-width: 350px;

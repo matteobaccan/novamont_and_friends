@@ -7,10 +7,10 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Fantacalcio Novamont & Friends</title>
-    <link rel="stylesheet" href="styles.css?v=2.0">
+    <link rel="stylesheet" href="styles.css?v=3.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <script src="config.js?v=2.0"></script>
+    <script src="config.js?v=3.0"></script>
 </head>
 <body>
     <header class="header">
@@ -18,7 +18,14 @@
             <div class="logo">
                 <i class="fas fa-trophy trophy-reload" id="trophy-reload" title="Ricarica pagina"></i>
                 <h1>Novamont & Friends</h1>
-                <span class="subtitle">Fantacalcio 2025-2026</span>
+                <div class="subtitle">
+                    <label for="season-select">Fantacalcio</label>
+                    <span class="season-picker">
+                        <select id="season-select" class="season-select" title="Cambia stagione">
+                            <!-- Opzioni generate dinamicamente da data/seasons.json -->
+                        </select>
+                    </span>
+                </div>
             </div>
             <nav class="nav">
                 <button class="nav-btn active" data-tab="classifica">
@@ -113,7 +120,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>2025/2026 Fantacalcio Novamont & Friends. MIT license.</p>
+            <p><span id="footer-season">2026/2027</span> Fantacalcio Novamont & Friends. MIT license.</p>
             <p>
                 <a href="https://github.com/matteobaccan/novamont_and_friends" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-github"></i> Progetto su GitHub
@@ -122,6 +129,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=2.0"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
 </html>
