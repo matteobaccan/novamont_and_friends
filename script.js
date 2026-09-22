@@ -1937,10 +1937,18 @@ function rosaDellaSquadra(team, round = Infinity) {
 // Suggerimento formazione
 // ============================================================
 
-// Moduli ammessi: difensori, centrocampisti, attaccanti (il portiere è sempre uno)
+// Moduli ammessi: difensori, centrocampisti, attaccanti (il portiere è sempre
+// uno). L'ordine è una preferenza: prima più attaccanti, poi più centrocampisti.
+// A parità sostanziale di punteggio atteso vince il primo di questa lista.
 const MODULI = [
-    [3, 4, 3], [3, 5, 2], [4, 3, 3], [4, 4, 2], [4, 5, 1], [5, 3, 2], [5, 4, 1]
+    [3, 4, 3], [4, 3, 3], [3, 5, 2], [4, 4, 2], [5, 3, 2], [4, 5, 1], [5, 4, 1]
 ];
+
+// Di quanto un modulo più arretrato deve battere uno più offensivo per essere
+// preferito. L'atteso è una media, e gli attaccanti hanno la coda destra più
+// lunga: gol e bonus stanno lì, quindi una media li sottovaluta rispetto ai
+// difensori. Un punto sull'undici è meno di 0,1 per slot.
+const EPS_MODULO = 1.0;
 
 // Quanto pesa la forma recente rispetto alla media di stagione
 const PESO_FORMA = 0.4;
@@ -1961,6 +1969,24 @@ const VOTO_RIPIEGO = 4.5;
 // (infortunio, squalifica, fuori lista): resta una possibilità minima
 const PROB_FUORI_LISTA = 0.15;
 
+// Chi è nell'elenco infortunati e non compare nelle probabili: 15% è troppo
+// generoso per un lungo stop, ma non si azzera perché l'elenco non dice quando
+// rientra e un recupero in extremis capita
+const PROB_INFORTUNATO = 0.03;
+
+// Fascia entro la quale due giocatori si considerano equivalenti e decide il
+// rigore. Non si può spareggiare sull'uguaglianza esatta: fra numeri in virgola
+// mobile non scatterebbe mai. Un rigorista designato vale circa +0,2/+0,3 a
+// partita (~0,25 rigori per squadra × ~75% di realizzazione × 3 punti), quindi
+// sotto 0,15 lo scarto è dentro a quello che il modello non sta misurando.
+const EPS_PARITA = 0.15;
+
+// Quanto pesa ciascuna delle tre voci di contesto: campo, differenza di
+// classifica e forma recente della squadra di Serie A. Al massimo ±9% in tutto,
+// cioè meno di ±0,6 di fantavoto su una resa da 6,5: un leggero vantaggio, che
+// riordina due giocatori quasi pari senza ribaltare uno scarto vero.
+const PESO_CONTESTO = 0.03;
+
 // Probabili formazioni di Serie A, caricate a parte perché cambiano ogni
 // settimana e non fanno parte dello storico della stagione
 let probabiliFormazioni = null;
@@ -1978,6 +2004,55 @@ async function loadProbabiliFormazioni() {
     return probabiliFormazioni;
 }
 
+// Nomi e squadre arrivano da due fonti diverse (l'API della lega e le pagine di
+// fantacalcio.it) che usano la stessa convenzione ma non sempre la stessa
+// punteggiatura: il confronto va fatto su una forma ridotta.
+function normalizzaNome(testo) {
+    return (testo || '')
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z]/g, '');
+}
+
+// L'elenco infortunati non porta gli id: si abbina per nome e squadra di Serie A
+// sull'anagrafica della lega, che il browser ha già. L'indice si costruisce una
+// volta sola e si butta quando cambiano i dati caricati.
+let indiceInfortunati = null;
+let indiceInfortunatiPer = null;
+
+function costruisciIndiceInfortunati() {
+    if (indiceInfortunatiPer === probabiliFormazioni) return indiceInfortunati;
+
+    indiceInfortunatiPer = probabiliFormazioni;
+    indiceInfortunati = new Map();
+
+    for (const voce of (probabiliFormazioni && probabiliFormazioni.infortunati) || []) {
+        const squadra = normalizzaNome(voce.squadra);
+        indiceInfortunati.set(`${normalizzaNome(voce.nome)}|${squadra}`, voce);
+        // Ripiego sul solo cognome: serve quando una fonte scrive "Zambo Anguissa"
+        // e l'altra "Anguissa". Non sovrascrive mai un abbinamento esatto.
+        const cognome = normalizzaNome(voce.nome.replace(/\s+[A-Z]\.$/, ''));
+        const chiaveRipiego = `~${cognome}|${squadra}`;
+        if (!indiceInfortunati.has(chiaveRipiego)) indiceInfortunati.set(chiaveRipiego, voce);
+    }
+    return indiceInfortunati;
+}
+
+// La voce di infortunio di un giocatore della lega, se c'è
+function infortunioDi(pid) {
+    const indice = costruisciIndiceInfortunati();
+    if (!indice || indice.size === 0) return null;
+
+    const info = anagraficaGiocatore(pid);
+    const squadra = normalizzaNome(info.serieA);
+    const nome = normalizzaNome(info.name);
+
+    return indice.get(`${nome}|${squadra}`)
+        || indice.get(`~${nome}|${squadra}`)
+        || null;
+}
+
 // Probabilità che un giocatore scenda in campo nella prossima giornata.
 // Viene dalle probabili formazioni quando ci sono, altrimenti da quante volte
 // ha preso un voto finora.
@@ -1987,12 +2062,114 @@ function probabilitaDiGiocare(pid, continuitaStorica) {
         : null;
 
     if (!probabiliFormazioni) {
-        return { p: continuitaStorica, fonte: 'storico', voce: null };
+        return { p: continuitaStorica, fonte: 'storico', voce: null, infortunio: null };
     }
-    if (!voce) {
-        return { p: PROB_FUORI_LISTA, fonte: 'fuori-lista', voce: null };
+
+    const infortunio = infortunioDi(pid);
+
+    // Chi è nelle probabili con una percentuale ha già il giudizio più
+    // aggiornato: l'elenco infortunati sa dell'acciacco, le probabili sanno
+    // anche se il rientro è previsto per domenica
+    if (voce) {
+        return { p: voce.probabilita / 100, fonte: 'probabili', voce, infortunio };
     }
-    return { p: voce.probabilita / 100, fonte: 'probabili', voce };
+    if (infortunio) {
+        return { p: PROB_INFORTUNATO, fonte: 'infortunato', voce: null, infortunio };
+    }
+    return { p: PROB_FUORI_LISTA, fonte: 'fuori-lista', voce: null, infortunio: null };
+}
+
+// Contesto della partita di Serie A: giocare in casa, contro chi, e con che
+// forma ci si arriva. Tre leggeri vantaggi che moltiplicano la resa — non la
+// probabilità di giocare, che dipende dalle scelte dell'allenatore e non
+// dall'avversario.
+const contestiPartita = new Map();
+let contestiPartitaPer = null;
+
+function contestoPartita(squadraSerieA) {
+    if (contestiPartitaPer !== probabiliFormazioni) {
+        contestiPartitaPer = probabiliFormazioni;
+        contestiPartita.clear();
+    }
+    if (contestiPartita.has(squadraSerieA)) return contestiPartita.get(squadraSerieA);
+
+    const contesto = calcolaContestoPartita(squadraSerieA);
+    contestiPartita.set(squadraSerieA, contesto);
+    return contesto;
+}
+
+function calcolaContestoPartita(squadraSerieA) {
+    const neutro = { fattore: 1, noto: false };
+    if (!squadraSerieA || !probabiliFormazioni) return neutro;
+
+    const turno = probabiliFormazioni.prossimoTurno;
+    const partita = turno && (turno.partite || []).find(p => p.casa === squadraSerieA || p.fuori === squadraSerieA);
+
+    // Squadra che riposa, o dati di contesto non scaricati: nessun aggiustamento
+    if (!partita) return neutro;
+
+    const casa = partita.casa === squadraSerieA;
+    const avversario = casa ? partita.fuori : partita.casa;
+
+    const classifica = probabiliFormazioni.classificaSerieA || {};
+    const posizione = classifica[squadraSerieA] || null;
+    const posizioneAvversario = classifica[avversario] || null;
+
+    const forma = (probabiliFormazioni.formaSerieA || {})[squadraSerieA] || null;
+
+    const campo = casa ? PESO_CONTESTO : -PESO_CONTESTO;
+
+    // Proporzionale alla distanza in classifica: fra squadre vicine tende a zero
+    // da sé, che è giusto anche a inizio stagione quando la classifica dice poco
+    const graduatoria = posizione && posizioneAvversario
+        ? PESO_CONTESTO * (posizioneAvversario - posizione) / 19
+        : 0;
+
+    // Media punti delle ultime giornate contate, riportata sull'intervallo
+    // [-1, +1]: 3 punti a partita in alto, zero in basso, 1,5 al centro
+    const andamento = forma && forma.partite > 0
+        ? PESO_CONTESTO * ((forma.punti / forma.partite) - 1.5) / 1.5
+        : 0;
+
+    return {
+        fattore: 1 + campo + graduatoria + andamento,
+        noto: true,
+        squadra: squadraSerieA,
+        casa,
+        avversario,
+        posizione,
+        posizioneAvversario,
+        punti: forma ? forma.punti : null,
+        partite: forma ? forma.partite : null,
+        esiti: forma ? forma.esiti : ''
+    };
+}
+
+// Quanto sono vecchie le probabili formazioni caricate. L'errore che questo
+// evita è silenzioso: un file della settimana scorsa continua a produrre
+// percentuali dall'aria credibile, ma riferite a una giornata già giocata.
+function freschezzaProbabili() {
+    if (!probabiliFormazioni || !probabiliFormazioni.aggiornato) {
+        return { stato: 'mancanti' };
+    }
+
+    const aggiornato = new Date(probabiliFormazioni.aggiornato);
+    if (isNaN(aggiornato.getTime())) return { stato: 'mancanti' };
+
+    // Giorni di calendario, non millisecondi divisi: altrimenti "ieri sera"
+    // diventa oggi o due giorni fa secondo l'ora in cui si guarda la pagina
+    const aMezzanotte = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    const giorni = Math.round((aMezzanotte(new Date()) - aMezzanotte(aggiornato)) / 86400000);
+
+    const data = aggiornato.toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit' });
+    const quando = giorni <= 0 ? 'oggi' : (giorni === 1 ? 'ieri' : `${giorni} giorni fa`);
+
+    return {
+        stato: giorni > 2 ? 'vecchie' : 'fresche',
+        giorni,
+        data,
+        quando
+    };
 }
 
 // Storico dei voti con bonus di un giocatore, dalla giornata più vecchia.
@@ -2052,27 +2229,53 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
         ? ATTESO_SENZA_DATI[info.role]
         : (forma === null ? media : media * (1 - PESO_FORMA) + forma * PESO_FORMA);
 
-    const { p, fonte, voce } = probabilitaDiGiocare(pid, affidabilita);
+    const { p, fonte, voce, infortunio } = probabilitaDiGiocare(pid, affidabilita);
 
-    // Valore atteso: se gioca rende `qualita`, se non gioca il posto lo prende
+    // Prima di stimare cosa farà il giocatore si guarda la partita che lo
+    // aspetta: campo, avversario e forma della sua squadra di Serie A
+    const squadraSerieA = voce ? voce.squadra : info.serieA;
+    const contesto = contestoPartita(squadraSerieA);
+    const resa = qualita * contesto.fattore;
+
+    // Valore atteso: se gioca rende `resa`, se non gioca il posto lo prende
     // un cambio che vale `VOTO_RIPIEGO`
-    const atteso = p * qualita + (1 - p) * VOTO_RIPIEGO;
+    const atteso = p * resa + (1 - p) * VOTO_RIPIEGO;
+
+    const rigoristi = (probabiliFormazioni && probabiliFormazioni.rigoristi) || {};
 
     return {
         pid: Number(pid),
         atteso,
-        qualita,
+        qualita: resa,
+        qualitaBase: qualita,
+        contesto,
         media,
         forma,
         probabilita: p,
         fonteProbabilita: fonte,
+        rigorista: rigoristi[pid] || null,
+        infortunio: infortunio ? infortunio.nota : null,
         titolareProbabile: voce ? voce.titolare : null,
-        squadraSerieA: voce ? voce.squadra : info.serieA,
+        squadraSerieA,
         affidabilita,
         presenze: votiPresi,
         schierato: stats[pid] ? stats[pid].presenze : 0,
         senzaDati
     };
+}
+
+// Ordina due candidati per valore atteso, ma dentro la fascia di parità decide
+// chi batte i rigori: un bonus da rigore è punteggio che il modello non vede,
+// perché la media dei fantavoto non sa da dove vengono i punti.
+// La relazione non è perfettamente transitiva — è il prezzo di una fascia invece
+// di un'uguaglianza esatta — e al più scambia l'ordine di due quasi pari.
+function confrontaCandidati(a, b) {
+    if (Math.abs(a.atteso - b.atteso) <= EPS_PARITA) {
+        const rigoreA = a.rigorista || 9;
+        const rigoreB = b.rigorista || 9;
+        if (rigoreA !== rigoreB) return rigoreA - rigoreB;
+    }
+    return b.atteso - a.atteso;
 }
 
 // Miglior 11 fra i giocatori disponibili, provando tutti i moduli
@@ -2083,12 +2286,13 @@ function miglioreFormazione(candidati) {
         if (perRuolo[ruolo]) perRuolo[ruolo].push(c);
     }
     for (const ruolo of Object.keys(perRuolo)) {
-        perRuolo[ruolo].sort((a, b) => b.atteso - a.atteso);
+        perRuolo[ruolo].sort(confrontaCandidati);
     }
 
     if (perRuolo.P.length === 0) return null;
 
     let migliore = null;
+    let massimo = null;
     for (const [d, c, a] of MODULI) {
         if (perRuolo.D.length < d || perRuolo.C.length < c || perRuolo.A.length < a) continue;
 
@@ -2100,12 +2304,27 @@ function miglioreFormazione(candidati) {
         ];
         const totale = undici.reduce((somma, g) => somma + g.atteso, 0);
 
-        if (!migliore || totale > migliore.totale) {
+        // MODULI è in ordine di preferenza, dal più offensivo: un assetto più
+        // arretrato entra solo se guadagna più di EPS_MODULO, altrimenti a
+        // parità sostanziale resta quello sbilanciato in avanti
+        if (!migliore || totale > migliore.totale + EPS_MODULO) {
             migliore = { modulo: `${d}-${c}-${a}`, undici, totale };
+        }
+        // Il massimo puro serve solo a dire in pagina quando la scelta è stata
+        // fatta per sbilanciamento e non per totale
+        if (!massimo || totale > massimo.totale) {
+            massimo = { modulo: `${d}-${c}-${a}`, totale };
         }
     }
 
     if (!migliore) return null;
+
+    // Se esisteva un assetto che somma di più, la scelta è stata la preferenza
+    // per l'attacco: la pagina lo dice, invece di far sembrare il modulo il
+    // massimo aritmetico
+    migliore.sbilanciato = massimo && massimo.modulo !== migliore.modulo
+        ? { modulo: massimo.modulo, totale: massimo.totale }
+        : null;
 
     // La panchina va letta come ordine di sostituzione: prima per ruolo, poi
     // per chi ha più probabilità di scendere in campo, perché un cambio serve
@@ -2118,7 +2337,7 @@ function miglioreFormazione(candidati) {
             const ruoloB = ORDINE_RUOLI[anagraficaGiocatore(b.pid).role] ?? 9;
             if (ruoloA !== ruoloB) return ruoloA - ruoloB;
             if (b.probabilita !== a.probabilita) return b.probabilita - a.probabilita;
-            return b.atteso - a.atteso;
+            return confrontaCandidati(a, b);
         });
 
     return migliore;
@@ -2279,6 +2498,30 @@ function frecciaForma(g) {
     return '<i class="fas fa-minus forma-stabile" title="Stabile"></i>';
 }
 
+// Come la partita di Serie A pesa sulla resa: una freccia con il conto intero
+// nel title, perché la tabella non ha spazio per un'altra colonna
+function glifoContesto(contesto) {
+    if (!contesto || !contesto.noto) return '';
+
+    const scarto = contesto.fattore - 1;
+    const partita = contesto.casa
+        ? `${contesto.squadra}-${contesto.avversario}`
+        : `${contesto.avversario}-${contesto.squadra}`;
+
+    const pezzi = [partita, contesto.casa ? 'in casa' : 'in trasferta'];
+    if (contesto.posizione) pezzi.push(`${contesto.posizione}° in classifica`);
+    if (contesto.posizioneAvversario) pezzi.push(`avversario ${contesto.posizioneAvversario}°`);
+    if (contesto.partite) pezzi.push(`${contesto.punti} punti nelle ultime ${contesto.partite} (${contesto.esiti})`);
+    pezzi.push(`contesto ${scarto > 0 ? '+' : ''}${Math.round(scarto * 100)}%`);
+
+    const su = scarto > 0.005;
+    const giu = scarto < -0.005;
+    const classe = su ? 'contesto-su' : (giu ? 'contesto-giu' : 'contesto-pari');
+    const glifo = su ? '↑' : (giu ? '↓' : '=');
+
+    return `<span class="consiglio-contesto ${classe}" title="${pezzi.join(' · ')}">${glifo}</span>`;
+}
+
 function rigaConsiglio(g, titolare) {
     const info = anagraficaGiocatore(g.pid);
     const perc = Math.round(g.probabilita * 100);
@@ -2287,22 +2530,32 @@ function rigaConsiglio(g, titolare) {
     if (perc >= 70) classeProb = 'prob-alta';
     else if (perc >= 40) classeProb = 'prob-media';
 
+    // L'infortunio viene prima di tutto: è il motivo per cui non schierarlo, e
+    // spiega da solo anche l'assenza dalle probabili
     let nota = '';
-    if (g.fonteProbabilita === 'fuori-lista') nota = 'fuori dalle probabili';
+    let titoloNota = '';
+    if (g.infortunio) {
+        nota = 'infortunato';
+        titoloNota = g.infortunio;
+    } else if (g.fonteProbabilita === 'fuori-lista') nota = 'fuori dalle probabili';
     else if (g.titolareProbabile === false) nota = 'in panchina in Serie A';
     else if (g.senzaDati) nota = 'nessun voto finora';
     else if (titolare && g.schierato === 0) nota = 'era in panchina';
 
     const qualita = g.senzaDati ? '—' : g.qualita.toFixed(2);
 
+    const rigori = g.rigorista
+        ? `<i class="fas fa-futbol consiglio-rigorista" title="${g.rigorista === 1 ? 'Primo rigorista' : `Rigorista, ${g.rigorista}ª scelta`}"></i>`
+        : '';
+
     return `
-        <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}">
+        <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}${g.infortunio ? ' infortunato' : ''}">
             <span class="ruolo-${info.role}">${info.role}</span>
-            <span class="consiglio-nome">${info.name}</span>
-            <span class="consiglio-serieA">${siglaSerieA(g.squadraSerieA)}</span>
+            <span class="consiglio-nome">${info.name}${rigori}</span>
+            <span class="consiglio-serieA">${siglaSerieA(g.squadraSerieA)}${glifoContesto(g.contesto)}</span>
             <span class="consiglio-forma">${frecciaForma(g)}</span>
-            <span class="consiglio-nota">${nota}</span>
-            <span class="consiglio-qualita" title="Rendimento medio quando gioca">${qualita}</span>
+            <span class="consiglio-nota"${titoloNota ? ` title="${titoloNota.replace(/"/g, '&quot;')}"` : ''}>${nota}</span>
+            <span class="consiglio-qualita" title="Rendimento medio quando gioca, corretto per il contesto della partita">${qualita}</span>
             <span class="consiglio-prob ${classeProb}" title="Probabilità di scendere in campo">${perc}%</span>
             <span class="consiglio-atteso" title="Valore atteso: probabilità x rendimento">${g.atteso.toFixed(2)}</span>
         </div>
@@ -2348,13 +2601,33 @@ function displayFormazione() {
            </div>`
         : '';
 
+    // Da quando sono ferme le probabili formazioni. Senza questa riga un file
+    // vecchio consiglia sulla giornata sbagliata senza dare alcun segnale.
+    const fresche = freschezzaProbabili();
+    const avvisoProbabili = fresche.stato === 'mancanti'
+        ? `<div class="consiglio-avviso attenzione">
+               <i class="fas fa-triangle-exclamation"></i>
+               Probabili formazioni non disponibili: la colonna Gioca usa la continuità storica,
+               non le probabili di Serie A.
+           </div>`
+        : (fresche.stato === 'vecchie'
+            ? `<div class="consiglio-avviso attenzione">
+                   <i class="fas fa-triangle-exclamation"></i>
+                   Probabili formazioni del ${fresche.data}, ${fresche.quando}: potrebbero riferirsi
+                   alla giornata già giocata.
+               </div>`
+            : `<div class="consiglio-avviso nota">
+                   <i class="fas fa-clock-rotate-left"></i>
+                   Probabili formazioni del ${fresche.data}, aggiornate ${fresche.quando}.
+               </div>`);
+
     const corpo = !f
         ? '<div class="empty-season"><h3>Rosa insufficiente</h3><p>Non ci sono abbastanza giocatori per comporre un modulo valido.</p></div>'
         : `
             <div class="consiglio-card">
                 <div class="consiglio-header">
                     <h3>${scelta}</h3>
-                    <span class="consiglio-modulo">${f.modulo}</span>
+                    <span class="consiglio-modulo"${f.sbilanciato ? ` title="Scelto per sbilanciamento in avanti: ${f.sbilanciato.modulo} sommerebbe ${f.sbilanciato.totale.toFixed(1)}"` : ''}>${f.modulo}</span>
                     <span class="consiglio-totale" title="Somma dei punteggi attesi">
                         ${f.totale.toFixed(1)} pt attesi
                     </span>
@@ -2386,6 +2659,7 @@ function displayFormazione() {
             <span class="consiglio-giornata">Giornata ${giornate + 1}</span>
         </div>
         ${avvisoDati}
+        ${avvisoProbabili}
         ${corpo}
         <details class="consiglio-spiegazione">
             <summary><i class="fas fa-circle-info"></i> Come nasce questo suggerimento</summary>
@@ -2405,12 +2679,24 @@ function displayFormazione() {
                         presi stando in panchina — per prevedere il rendimento conta che il giocatore
                         abbia giocato in Serie A, non che il fantallenatore lo avesse schierato.
                     </dd>
+                    <dt>Contesto della partita</dt>
+                    <dd>
+                        Prima di stimare cosa farà il giocatore si guarda la partita che lo aspetta.
+                        Tre leggeri vantaggi correggono la resa, fino a un massimo del 9% in tutto:
+                        giocare <strong>in casa</strong>, affrontare un avversario <strong>più in
+                        basso in classifica</strong> (tanto più quanto è distante), e arrivarci con
+                        <strong>punti nelle ultime tre giornate</strong>. La freccia accanto alla
+                        sigla di Serie A riassume il conto, con il dettaglio nel suggerimento.
+                    </dd>
                     <dt>Gioca</dt>
                     <dd>
                         Probabilità di scendere in campo, presa dalle
                         <a href="https://www.fantacalcio.it/probabili-formazioni-serie-a" target="_blank" rel="noopener noreferrer">probabili formazioni di Serie A</a>.
-                        Chi non compare affatto nell'elenco (infortunato, squalificato, fuori lista)
-                        scende al 15%.
+                        Chi non compare affatto nell'elenco (squalificato, fuori lista) scende al 15%,
+                        e chi è anche fra gli
+                        <a href="https://www.fantacalcio.it/infortunati-serie-a" target="_blank" rel="noopener noreferrer">infortunati</a>
+                        al 3%, con il motivo scritto in riga. Chi invece è infortunato ma compare nelle
+                        probabili tiene la sua percentuale: quella sa già dei rientri in dubbio.
                     </dd>
                     <dt>Il termine di ripiego</dt>
                     <dd>
@@ -2420,11 +2706,24 @@ function displayFormazione() {
                         il posto resta scoperto. Per questo un fuoriclasse in dubbio può valere meno di
                         un titolare fisso mediocre.
                     </dd>
+                    <dt>A parità, il rigorista</dt>
+                    <dd>
+                        Fra due giocatori che distano meno di 0,15 punti attesi vince chi batte i
+                        <a href="https://www.fantacalcio.it/rigoristi-serie-a" target="_blank" rel="noopener noreferrer">rigori</a>
+                        (⚽ accanto al nome): un bonus da rigore è punteggio che la media dei fantavoto
+                        non vede arrivare.
+                    </dd>
+                    <dt>A parità, l'attacco</dt>
+                    <dd>
+                        Fra due moduli che sommano quasi lo stesso vince quello con più attaccanti, poi
+                        quello con più centrocampisti. L'atteso è una media, e gol e bonus stanno nella
+                        coda: una media sottovaluta gli attaccanti rispetto ai difensori.
+                    </dd>
                 </dl>
                 <p class="spiegazione-limiti">
-                    <strong>Cosa non considera:</strong> l'avversario di Serie A e la difficoltà della
-                    partita, i ballottaggi oltre alla percentuale, e il fatto che i primi tre cambi in
-                    panchina hanno più probabilità di entrare degli altri.
+                    <strong>Cosa non considera:</strong> i ballottaggi oltre alla percentuale, la forza
+                    reale dell'avversario al di là della posizione in classifica, e il fatto che i primi
+                    tre cambi in panchina hanno più probabilità di entrare degli altri.
                 </p>
             </div>
         </details>
