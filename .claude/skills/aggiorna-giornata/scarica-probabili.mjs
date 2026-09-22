@@ -154,8 +154,11 @@ function dividiCardSquadra(html) {
     return blocchi;
 }
 
-// pid -> ordine di rigore (1 = primo rigorista). Interessa solo la colonna
-// "Rigori": i calci piazzati sono un'altra cosa e non danno bonus diretto.
+// squadra -> rigoristi in ordine di gerarchia. Serve la gerarchia intera e non
+// il solo grado del singolo: il secondo calcia i rigori quando il primo non
+// gioca, quindi per pesarlo bisogna sapere chi ha davanti e quanto è probabile
+// che scenda in campo. Interessa solo la colonna "Rigori": i calci piazzati
+// sono un'altra cosa e non danno bonus diretto.
 function analizzaRigoristi(html) {
     const rigoristi = {};
 
@@ -163,12 +166,12 @@ function analizzaRigoristi(html) {
         const colonna = /<header class="primary">Rigori<\/header>\s*<ol[^>]*>([\s\S]*?)<\/ol>/.exec(blocco.html);
         if (!colonna) continue;
 
-        const ids = [...colonna[1].matchAll(/href="[^"]*\/(\d+)"/g)].map(m => Number(m[1]));
-        ids.forEach((pid, i) => {
-            // Un giocatore potrebbe comparire in due squadre dopo un trasferimento:
-            // vince la gerarchia più alta
-            if (!rigoristi[pid] || rigoristi[pid] > i + 1) rigoristi[pid] = i + 1;
-        });
+        // Il nome serve al browser per riconoscere un rigorista infortunato che
+        // non è in nessuna rosa della lega, e quindi senza anagrafica locale
+        const voci = [...colonna[1].matchAll(/href="[^"]*\/(\d+)"[^>]*>\s*<span>([^<]+)<\/span>/g)]
+            .map(m => ({ pid: Number(m[1]), nome: decodificaEntita(m[2].trim()) }));
+
+        if (voci.length > 0) rigoristi[blocco.squadra] = voci;
     }
     return rigoristi;
 }
@@ -329,7 +332,8 @@ async function main() {
     let rigoristi = {};
     try {
         rigoristi = analizzaRigoristi(await scarica(URL_RIGORISTI));
-        console.log(`\nRigoristi: ${Object.keys(rigoristi).length}`);
+        const quantiRigoristi = Object.values(rigoristi).reduce((somma, v) => somma + v.length, 0);
+        console.log(`\nRigoristi: ${quantiRigoristi} in ${Object.keys(rigoristi).length} squadre`);
     } catch (error) {
         console.warn(`\nRigoristi non disponibili: ${error.message}`);
     }

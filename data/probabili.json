@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-09-22T22:21:53.281Z",
+  "aggiornato": "2026-09-22T23:04:12.575Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -212,66 +212,286 @@
     }
   },
   "rigoristi": {
-    "152": 2,
-    "184": 2,
-    "309": 2,
-    "531": 1,
-    "536": 3,
-    "632": 1,
-    "1933": 3,
-    "2038": 2,
-    "2061": 2,
-    "2097": 2,
-    "2137": 1,
-    "2155": 1,
-    "2167": 1,
-    "2194": 1,
-    "2423": 2,
-    "2517": 1,
-    "2606": 3,
-    "2764": 3,
-    "2766": 3,
-    "4179": 3,
-    "4210": 3,
-    "4387": 3,
-    "4463": 2,
-    "4923": 1,
-    "5029": 1,
-    "5119": 3,
-    "5336": 1,
-    "5507": 1,
-    "5559": 1,
-    "5585": 1,
-    "5637": 1,
-    "5687": 1,
-    "5694": 3,
-    "5750": 2,
-    "5800": 3,
-    "5862": 2,
-    "5951": 1,
-    "6015": 3,
-    "6052": 2,
-    "6060": 3,
-    "6145": 3,
-    "6229": 1,
-    "6397": 1,
-    "6435": 2,
-    "6572": 3,
-    "6666": 3,
-    "6675": 3,
-    "6752": 2,
-    "6956": 2,
-    "7017": 3,
-    "7078": 2,
-    "7252": 2,
-    "7472": 1,
-    "7484": 2,
-    "7523": 2,
-    "7547": 2,
-    "7551": 2,
-    "7600": 3,
-    "7612": 3,
-    "7625": 1
+    "Atalanta": [
+      {
+        "pid": 2137,
+        "nome": "Scamacca"
+      },
+      {
+        "pid": 6435,
+        "nome": "Krstovic"
+      },
+      {
+        "pid": 5119,
+        "nome": "Samardzic"
+      }
+    ],
+    "Bologna": [
+      {
+        "pid": 2167,
+        "nome": "Orsolini"
+      },
+      {
+        "pid": 184,
+        "nome": "Bernardeschi"
+      },
+      {
+        "pid": 6675,
+        "nome": "Dovbyk"
+      }
+    ],
+    "Cagliari": [
+      {
+        "pid": 5336,
+        "nome": "Nzola"
+      },
+      {
+        "pid": 7547,
+        "nome": "Kevin Carlos"
+      },
+      {
+        "pid": 4210,
+        "nome": "Mina"
+      }
+    ],
+    "Como": [
+      {
+        "pid": 5559,
+        "nome": "Da Cunha"
+      },
+      {
+        "pid": 2097,
+        "nome": "Kean"
+      },
+      {
+        "pid": 7017,
+        "nome": "Douvikas"
+      }
+    ],
+    "Fiorentina": [
+      {
+        "pid": 7625,
+        "nome": "Goncalves P."
+      },
+      {
+        "pid": 7078,
+        "nome": "Mastantuono"
+      },
+      {
+        "pid": 5694,
+        "nome": "Beto"
+      }
+    ],
+    "Frosinone": [
+      {
+        "pid": 7472,
+        "nome": "Calò"
+      },
+      {
+        "pid": 7551,
+        "nome": "Schmid"
+      },
+      {
+        "pid": 7612,
+        "nome": "Bobcek"
+      }
+    ],
+    "Genoa": [
+      {
+        "pid": 4923,
+        "nome": "Colombo"
+      },
+      {
+        "pid": 5750,
+        "nome": "Ostigard"
+      },
+      {
+        "pid": 7600,
+        "nome": "Osmajic"
+      }
+    ],
+    "Inter": [
+      {
+        "pid": 2194,
+        "nome": "Calhanoglu"
+      },
+      {
+        "pid": 152,
+        "nome": "Zielinski"
+      },
+      {
+        "pid": 2764,
+        "nome": "Martinez L."
+      }
+    ],
+    "Juventus": [
+      {
+        "pid": 5951,
+        "nome": "Kolo Muani"
+      },
+      {
+        "pid": 6752,
+        "nome": "Woltemade"
+      },
+      {
+        "pid": 4179,
+        "nome": "Gonzalez N."
+      }
+    ],
+    "Lazio": [
+      {
+        "pid": 632,
+        "nome": "Zaccagni"
+      },
+      {
+        "pid": 2038,
+        "nome": "Pinamonti"
+      },
+      {
+        "pid": 5800,
+        "nome": "Gudmundsson A."
+      }
+    ],
+    "Lecce": [
+      {
+        "pid": 5029,
+        "nome": "Geubbels"
+      },
+      {
+        "pid": 7252,
+        "nome": "Stulic"
+      },
+      {
+        "pid": 6015,
+        "nome": "Berisha M."
+      }
+    ],
+    "Milan": [
+      {
+        "pid": 6397,
+        "nome": "Ramos G."
+      },
+      {
+        "pid": 2423,
+        "nome": "Pulisic"
+      },
+      {
+        "pid": 2606,
+        "nome": "Modric"
+      }
+    ],
+    "Monza": [
+      {
+        "pid": 2155,
+        "nome": "Cutrone"
+      },
+      {
+        "pid": 7523,
+        "nome": "Varela G."
+      },
+      {
+        "pid": 6145,
+        "nome": "Ngonge"
+      }
+    ],
+    "Napoli": [
+      {
+        "pid": 2517,
+        "nome": "De Bruyne"
+      },
+      {
+        "pid": 6052,
+        "nome": "Hojlund"
+      },
+      {
+        "pid": 536,
+        "nome": "Politano"
+      }
+    ],
+    "Parma": [
+      {
+        "pid": 6229,
+        "nome": "Tourè E."
+      },
+      {
+        "pid": 5862,
+        "nome": "Valeri"
+      },
+      {
+        "pid": 6666,
+        "nome": "Bernabè"
+      }
+    ],
+    "Roma": [
+      {
+        "pid": 5585,
+        "nome": "Malen"
+      },
+      {
+        "pid": 309,
+        "nome": "Dybala"
+      },
+      {
+        "pid": 6572,
+        "nome": "Castro S."
+      }
+    ],
+    "Sassuolo": [
+      {
+        "pid": 531,
+        "nome": "Berardi"
+      },
+      {
+        "pid": 4463,
+        "nome": "Esposito Se."
+      },
+      {
+        "pid": 6060,
+        "nome": "Laurientè"
+      }
+    ],
+    "Torino": [
+      {
+        "pid": 5687,
+        "nome": "Vlasic"
+      },
+      {
+        "pid": 2061,
+        "nome": "Simeone"
+      },
+      {
+        "pid": 1933,
+        "nome": "Mandragora"
+      }
+    ],
+    "Udinese": [
+      {
+        "pid": 5637,
+        "nome": "Davis K."
+      },
+      {
+        "pid": 6956,
+        "nome": "Solet"
+      },
+      {
+        "pid": 2766,
+        "nome": "Zaniolo"
+      }
+    ],
+    "Venezia": [
+      {
+        "pid": 5507,
+        "nome": "Busio"
+      },
+      {
+        "pid": 7484,
+        "nome": "Adams A."
+      },
+      {
+        "pid": 4387,
+        "nome": "Adorante"
+      }
+    ]
   },
   "infortunati": [
     {

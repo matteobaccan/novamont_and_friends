@@ -3987,7 +3987,12 @@ html.theme-transition *:after {
 
 /* Rigoristi, contesto della partita e infortunati: tutti segni piccoli dentro
    celle esistenti, per non aggiungere una colonna a una griglia già stretta */
-.consiglio-rigorista { margin-left: 0.3rem; font-size: 0.58rem; color: #ca8a04; }
+.consiglio-rigorista { margin-left: 0.3rem; font-size: 0.58rem; color: #ca8a04; cursor: help; }
+
+/* Secondo o terzo rigorista con i titolari sani: il pallone resta, perché
+   l'informazione è vera, ma non deve pesare quanto quello di chi li batte */
+.consiglio-rigorista.tenue { opacity: 0.35; }
+
 [data-theme="dark"] .consiglio-rigorista { color: #fde047; }
 
 .consiglio-contesto { margin-left: 0.2rem; font-weight: 700; font-size: 0.72rem; }

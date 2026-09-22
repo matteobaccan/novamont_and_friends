@@ -188,16 +188,39 @@ anche fra gli [infortunati](https://www.fantacalcio.it/infortunati-serie-a) al 3
 motivo dell'infortunio scritto nella riga. Chi invece è infortunato ma compare comunque
 nelle probabili tiene la sua percentuale: quella fonte sa già dei rientri in dubbio.
 
-### I due spareggi
+### I rigori
 
-- **A parità, il rigorista.** Fra due giocatori che distano meno di 0,15 punti attesi vince
-  chi batte i [rigori](https://www.fantacalcio.it/rigoristi-serie-a), segnalato da un ⚽
-  accanto al nome. Un bonus da rigore è punteggio che la media dei fantavoto non vede
-  arrivare, e fra numeri in virgola mobile un pareggio esatto non capiterebbe mai.
-- **A parità, l'attacco.** Fra due moduli che sommano quasi lo stesso (entro un punto
-  sull'undici) vince quello con più attaccanti, poi quello con più centrocampisti. L'atteso
-  è una media, e gol e bonus stanno nella coda della distribuzione: una media sottovaluta
-  gli attaccanti rispetto ai difensori.
+Chi batte i [rigori](https://www.fantacalcio.it/rigoristi-serie-a) porta punteggio che la
+media dei fantavoto non vede arrivare, quindi entra dritto nel valore atteso:
+
+```
+atteso = gioca × (resa + rigori) + (1 − gioca) × 4,5
+```
+
+Il **primo rigorista** ne calcia dai 5 ai 10 in una stagione: su una trentina di partite
+giocate sono ~0,22 rigori a partita, e ogni rigore vale in media `0,76 × 3 − 0,24 × 3 ≈ 1,56`
+di fantavoto fra realizzato e sbagliato. Il prodotto è **+0,35 a partita**.
+
+Secondo e terzo invece li tirano **solo quando chi li precede non gioca**, e quella
+probabilità è già nelle probabili formazioni. La quota di rigori attesi è quindi:
+
+```
+1º:  1
+2º:  1 − gioca(1º)
+3º:  (1 − gioca(1º)) × (1 − gioca(2º))
+```
+
+Il risultato è che lo stesso giocatore vale cose diverse a seconda della settimana. Con i
+dati del turno 6: Osmajic, terzo del Como dietro due titolari sani, prende +0,01 e il suo
+pallone resta sbiadito; **Adams A., secondo del Venezia, ne prende +0,34 come un primo,
+perché Busio è infortunato al 3%**. Il conto per esteso sta nel suggerimento del pallone.
+
+### A parità, l'attacco
+
+Fra due moduli che sommano quasi lo stesso — entro un punto sull'undici — vince quello con
+più attaccanti, poi quello con più centrocampisti. L'atteso è una media, e gol e bonus
+stanno nella coda della distribuzione: una media sottovaluta gli attaccanti rispetto ai
+difensori.
 
 ### I dati
 
