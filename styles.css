@@ -1569,6 +1569,13 @@ html.theme-transition *:after {
     font-size: 1rem;
 }
 
+.team-details-conto {
+    margin-right: auto;
+    margin-left: 0.6rem;
+    font-size: 0.7rem;
+    opacity: 0.5;
+}
+
 .team-details-close {
     background: transparent;
     border: none;
@@ -3438,10 +3445,12 @@ html.theme-transition *:after {
     gap: 2px;
 }
 
-/* Una riga sola per partita: giornata, avversario, risultato, punti */
+/* Una riga sola per partita, nell'ordine del calendario: giornata, casa-fuori,
+   risultato, punti. Le due squadre stanno in una cella sola perché devono
+   restringersi insieme, non una a spese dell'altra. */
 .team-match-item {
     display: grid;
-    grid-template-columns: 2rem 1.1rem minmax(0, 1fr) 3rem 5rem 1rem;
+    grid-template-columns: 2rem minmax(0, 1fr) 3.2rem 5.5rem 1rem;
     align-items: center;
     gap: 0.5rem;
     padding: 0.35rem 0.6rem;
@@ -3462,8 +3471,25 @@ html.theme-transition *:after {
 }
 
 .tmi-giornata { font-weight: 700; opacity: 0.55; font-size: 0.72rem; }
-.tmi-casa { opacity: 0.45; font-size: 0.66rem; text-align: center; }
-.tmi-avversario { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.tmi-sfida {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    min-width: 0;
+}
+
+/* Nessuna delle due squadre deve mangiarsi l'altra quando lo spazio manca */
+.tmi-squadra {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Quella di cui si stanno guardando le partite */
+.tmi-squadra.propria { font-weight: 700; }
+
+.tmi-sep { flex: none; opacity: 0.4; }
 
 .tmi-risultato {
     font-weight: 700;
@@ -3508,7 +3534,7 @@ html.theme-transition *:after {
 
 @media (max-width: 700px) {
     .team-match-lineups { grid-template-columns: 1fr; }
-    .team-match-item { grid-template-columns: 1.8rem 1rem minmax(0, 1fr) 2.7rem 1rem; }
+    .team-match-item { grid-template-columns: 1.8rem minmax(0, 1fr) 2.9rem 1rem; }
     .tmi-punti { display: none; }
 }
 

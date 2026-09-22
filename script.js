@@ -913,6 +913,7 @@ function showTeamMatches(teamName, clickedRow, modo = 'reale') {
         <div class="team-details-panel">
             <div class="team-details-header">
                 <strong>Partite di ${teamName}${modo === "ideale" ? " — formazioni ideali" : ""}</strong>
+                <span class="team-details-conto">${matches.length} giornat${matches.length === 1 ? 'a' : 'e'}</span>
                 <button class="team-details-close" title="Chiudi">✖</button>
             </div>
             <div class="team-matches-list">
@@ -924,7 +925,6 @@ function showTeamMatches(teamName, clickedRow, modo = 'reale') {
         matches.forEach(item => {
             const m = item.match;
             const isHome = m.homeTeam === teamName;
-            const opponent = isHome ? m.awayTeam : m.homeTeam;
 
             // In modalità ideale si usano i punteggi delle formazioni perfette;
             // il bonus casa +1 va applicato qui, perché nel JSON non c'è
@@ -932,27 +932,32 @@ function showTeamMatches(teamName, clickedRow, modo = 'reale') {
             const puntiCasa = ideale ? m.homeIdealScore + 1 : m.homeScore;
             const puntiFuori = ideale ? m.awayIdealScore : m.awayScore;
 
-            const teamPoints = isHome ? puntiCasa : puntiFuori;
-            const oppPoints = isHome ? puntiFuori : puntiCasa;
-
             const golCasa = calculateGoalsFromScore(puntiCasa);
             const golFuori = calculateGoalsFromScore(puntiFuori);
-            const teamGoals = isHome ? golCasa : golFuori;
-            const oppGoals = isHome ? golFuori : golCasa;
 
-            const esito = teamGoals > oppGoals ? 'vinta' : teamGoals < oppGoals ? 'persa' : 'pari';
+            // L'esito è quello della squadra aperta, non della squadra di casa
+            const golPropri = isHome ? golCasa : golFuori;
+            const golSubiti = isHome ? golFuori : golCasa;
+            const esito = golPropri > golSubiti ? 'vinta' : golPropri < golSubiti ? 'persa' : 'pari';
             const espandibile = Boolean(m.lineups);
             const idDettaglio = `tm-${modo}-${item.round}`;
 
-            // Una riga sola: giornata, avversario, risultato e punti
+            // Una riga sola per partita, letta come nel calendario: casa a
+            // sinistra, trasferta a destra, punteggi nello stesso ordine. Il
+            // colore del risultato però resta dal punto di vista della squadra
+            // aperta, che è di chi è l'elenco, e il suo nome è in grassetto.
             content += `
                 <div class="team-match-item ${espandibile ? 'espandibile' : ''}"
-                     ${espandibile ? `data-dettaglio="${idDettaglio}" role="button" tabindex="0"` : ''}>
+                     ${espandibile ? `data-dettaglio="${idDettaglio}" role="button" tabindex="0"` : ''}
+                     title="Giornata ${item.round}: ${m.homeTeam} - ${m.awayTeam}">
                     <span class="tmi-giornata">G${item.round}</span>
-                    <span class="tmi-casa">${isHome ? '<i class="fas fa-house" title="In casa"></i>' : '<i class="fas fa-plane" title="In trasferta"></i>'}</span>
-                    <span class="tmi-avversario">${opponent}</span>
-                    <span class="tmi-risultato ${esito}">${teamGoals}-${oppGoals}</span>
-                    <span class="tmi-punti">${teamPoints} - ${oppPoints}</span>
+                    <span class="tmi-sfida">
+                        <span class="tmi-squadra ${isHome ? 'propria' : ''}">${m.homeTeam}</span>
+                        <span class="tmi-sep">-</span>
+                        <span class="tmi-squadra ${isHome ? '' : 'propria'}">${m.awayTeam}</span>
+                    </span>
+                    <span class="tmi-risultato ${esito}" title="${esito === 'vinta' ? 'Vinta' : esito === 'persa' ? 'Persa' : 'Pareggiata'} da ${teamName}">${golCasa}-${golFuori}</span>
+                    <span class="tmi-punti">${puntiCasa} - ${puntiFuori}</span>
                     ${espandibile ? '<i class="fas fa-chevron-down tmi-chevron"></i>' : ''}
                 </div>
                 ${espandibile ? `
