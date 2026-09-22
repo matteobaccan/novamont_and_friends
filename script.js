@@ -623,6 +623,7 @@ async function initializeApp() {
         // Carica l'elenco delle stagioni e i dati di quella da mostrare
         await loadSeasonsIndex();
         await loadSeasonData(resolveInitialSeasonId());
+        await loadProbabiliFormazioni();
 
         setupNavigationTabs();
         setupSeasonSelector();
@@ -1944,9 +1945,55 @@ const MODULI = [
 // Quanto pesa la forma recente rispetto alla media di stagione
 const PESO_FORMA = 0.4;
 
-// Media di reparto usata per chi non ha ancora un voto: non è una previsione,
-// è solo un segnaposto che lo tiene dietro a chiunque abbia dati veri
-const ATTESO_SENZA_DATI = { P: 5.5, D: 5.5, C: 5.5, A: 5.5 };
+// Resa presunta di chi non ha ancora un voto: leggermente sotto la media,
+// perché un giocatore ignoto è una scommessa, non una certezza
+const ATTESO_SENZA_DATI = { P: 5, D: 5, C: 5, A: 5 };
+
+// Quanto vale uno slot occupato da chi non scende in campo. Non è zero — un
+// cambio dalla panchina lo rimpiazza — ma deve restare sotto una prestazione
+// vera anche mediocre: altrimenti "non gioca" batterebbe "gioca male", che è
+// l'opposto di quello che deve consigliare il modello. Il cambio inoltre non
+// sempre scatta: oltre tre sostituzioni, o senza un pari ruolo che ha giocato,
+// il posto resta scoperto.
+const VOTO_RIPIEGO = 4.5;
+
+// Chi non compare affatto nelle probabili formazioni è quasi certamente fuori
+// (infortunio, squalifica, fuori lista): resta una possibilità minima
+const PROB_FUORI_LISTA = 0.15;
+
+// Probabili formazioni di Serie A, caricate a parte perché cambiano ogni
+// settimana e non fanno parte dello storico della stagione
+let probabiliFormazioni = null;
+
+async function loadProbabiliFormazioni() {
+    try {
+        probabiliFormazioni = await fetchJsonNoCache('data/probabili.json');
+        console.log('Probabili formazioni caricate:', probabiliFormazioni.squadre, 'squadre');
+    } catch (error) {
+        // Non è un errore bloccante: senza probabili il suggeritore ripiega
+        // sulla continuità storica
+        console.warn('Probabili formazioni non disponibili:', error.message);
+        probabiliFormazioni = null;
+    }
+    return probabiliFormazioni;
+}
+
+// Probabilità che un giocatore scenda in campo nella prossima giornata.
+// Viene dalle probabili formazioni quando ci sono, altrimenti da quante volte
+// ha preso un voto finora.
+function probabilitaDiGiocare(pid, continuitaStorica) {
+    const voce = probabiliFormazioni && probabiliFormazioni.giocatori
+        ? probabiliFormazioni.giocatori[pid]
+        : null;
+
+    if (!probabiliFormazioni) {
+        return { p: continuitaStorica, fonte: 'storico', voce: null };
+    }
+    if (!voce) {
+        return { p: PROB_FUORI_LISTA, fonte: 'fuori-lista', voce: null };
+    }
+    return { p: voce.probabilita / 100, fonte: 'probabili', voce };
+}
 
 // Storico dei voti con bonus di un giocatore, dalla giornata più vecchia.
 //
@@ -1996,36 +2043,35 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
     const votiPresi = voti.length;
     const affidabilita = giornateGiocate > 0 ? votiPresi / giornateGiocate : 0;
 
-    if (votiPresi === 0) {
-        return {
-            pid: Number(pid),
-            atteso: ATTESO_SENZA_DATI[info.role] * 0.5,
-            media: null,
-            forma: null,
-            affidabilita: 0,
-            presenze: 0,
-            schierato: stats[pid] ? stats[pid].presenze : 0,
-            senzaDati: true
-        };
-    }
+    const senzaDati = votiPresi === 0;
 
-    const media = voti.reduce((somma, v) => somma + v.voto, 0) / votiPresi;
-    const forma = mediaForma(voti);
-    const base = forma === null ? media : media * (1 - PESO_FORMA) + forma * PESO_FORMA;
+    // Qualità = quanto rende QUANDO gioca, senza ancora considerare se giocherà
+    const media = senzaDati ? null : voti.reduce((somma, v) => somma + v.voto, 0) / votiPresi;
+    const forma = senzaDati ? null : mediaForma(voti);
+    const qualita = senzaDati
+        ? ATTESO_SENZA_DATI[info.role]
+        : (forma === null ? media : media * (1 - PESO_FORMA) + forma * PESO_FORMA);
 
-    // La continuità scala il punteggio fra il 60% e il 100%: pesa, ma non
-    // azzera chi ha saltato una giornata
-    const fattoreContinuita = 0.6 + 0.4 * affidabilita;
+    const { p, fonte, voce } = probabilitaDiGiocare(pid, affidabilita);
+
+    // Valore atteso: se gioca rende `qualita`, se non gioca il posto lo prende
+    // un cambio che vale `VOTO_RIPIEGO`
+    const atteso = p * qualita + (1 - p) * VOTO_RIPIEGO;
 
     return {
         pid: Number(pid),
-        atteso: base * fattoreContinuita,
+        atteso,
+        qualita,
         media,
         forma,
+        probabilita: p,
+        fonteProbabilita: fonte,
+        titolareProbabile: voce ? voce.titolare : null,
+        squadraSerieA: voce ? voce.squadra : info.serieA,
         affidabilita,
         presenze: votiPresi,
         schierato: stats[pid] ? stats[pid].presenze : 0,
-        senzaDati: false
+        senzaDati
     };
 }
 
@@ -2226,23 +2272,30 @@ function frecciaForma(g) {
 
 function rigaConsiglio(g, titolare) {
     const info = anagraficaGiocatore(g.pid);
-    const continuita = Math.round(g.affidabilita * 100);
+    const perc = Math.round(g.probabilita * 100);
 
-    // Segnala chi il modello promuove dalla panchina: è il consiglio che conta
+    let classeProb = 'prob-bassa';
+    if (perc >= 70) classeProb = 'prob-alta';
+    else if (perc >= 40) classeProb = 'prob-media';
+
     let nota = '';
-    if (g.senzaDati) nota = 'nessun voto';
+    if (g.fonteProbabilita === 'fuori-lista') nota = 'fuori dalle probabili';
+    else if (g.titolareProbabile === false) nota = 'in panchina in Serie A';
+    else if (g.senzaDati) nota = 'nessun voto finora';
     else if (titolare && g.schierato === 0) nota = 'era in panchina';
-    else if (g.affidabilita < 0.5) nota = `solo ${g.presenze} vot${g.presenze === 1 ? 'o' : 'i'}`;
+
+    const qualita = g.senzaDati ? '—' : g.qualita.toFixed(2);
 
     return `
         <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}">
             <span class="ruolo-${info.role}">${info.role}</span>
             <span class="consiglio-nome">${info.name}</span>
-            <span class="consiglio-serieA">${siglaSerieA(info.serieA)}</span>
+            <span class="consiglio-serieA">${siglaSerieA(g.squadraSerieA)}</span>
             <span class="consiglio-forma">${frecciaForma(g)}</span>
             <span class="consiglio-nota">${nota}</span>
-            <span class="consiglio-continuita" title="Quante giornate su quelle disputate ha preso un voto">${continuita}%</span>
-            <span class="consiglio-atteso">${g.atteso.toFixed(2)}</span>
+            <span class="consiglio-qualita" title="Rendimento medio quando gioca">${qualita}</span>
+            <span class="consiglio-prob ${classeProb}" title="Probabilità di scendere in campo">${perc}%</span>
+            <span class="consiglio-atteso" title="Valore atteso: probabilità x rendimento">${g.atteso.toFixed(2)}</span>
         </div>
     `;
 }
@@ -2302,12 +2355,15 @@ function displayFormazione() {
                         <span>R</span><span>Giocatore</span><span>Team</span>
                         <span title="Forma recente rispetto alla media">Forma</span>
                         <span></span>
-                        <span title="Quante giornate su quelle disputate ha preso un voto in Serie A">Cont.</span>
-                        <span title="Punteggio atteso">Atteso</span>
+                        <span title="Rendimento medio quando gioca">Resa</span>
+                        <span title="Probabilità di scendere in campo">Gioca</span>
+                        <span title="Valore atteso">Atteso</span>
                     </div>
                     ${f.undici.map(g => rigaConsiglio(g, true)).join('')}
-                    <div class="consiglio-separatore">Panchina, in ordine di preferenza</div>
-                    ${f.panchina.slice(0, 8).map(g => rigaConsiglio(g, false)).join('')}
+                    <div class="consiglio-separatore">
+                        Panchina, in ordine di preferenza (${f.panchina.length} giocatori)
+                    </div>
+                    ${f.panchina.map(g => rigaConsiglio(g, false)).join('')}
                 </div>
             </div>
         `;
@@ -2322,14 +2378,47 @@ function displayFormazione() {
         </div>
         ${avvisoDati}
         ${corpo}
-        <div class="consiglio-avviso">
-            <i class="fas fa-circle-info"></i>
-            Il calcolo usa <strong>media fantavoto</strong>, <strong>forma delle ultime giornate</strong>
-            e <strong>continuità di impiego in Serie A</strong>. Contano anche i voti presi stando in
-            panchina: per prevedere il rendimento conta che il giocatore abbia giocato, non che il
-            fantallenatore lo avesse schierato. Non tiene conto di infortuni,
-            squalifiche, probabili formazioni né dell'avversario di Serie A: quei dati il sito non li ha.
-        </div>
+        <details class="consiglio-spiegazione">
+            <summary><i class="fas fa-circle-info"></i> Come nasce questo suggerimento</summary>
+            <div class="spiegazione-corpo">
+                <p>
+                    Per ogni giocatore si stima un <strong>valore atteso</strong>, poi si prova ogni
+                    modulo ammesso e si tiene la combinazione che somma di più. Il valore atteso è:
+                </p>
+                <p class="formula">
+                    atteso = <em>gioca</em> × <em>resa</em> + (1 − <em>gioca</em>) × 4,5
+                </p>
+                <dl>
+                    <dt>Resa</dt>
+                    <dd>
+                        Quanto rende <em>quando gioca</em>: media fantavoto di stagione (60%) più forma
+                        delle ultime 5 giornate (40%), pesata verso le più recenti. Contano anche i voti
+                        presi stando in panchina — per prevedere il rendimento conta che il giocatore
+                        abbia giocato in Serie A, non che il fantallenatore lo avesse schierato.
+                    </dd>
+                    <dt>Gioca</dt>
+                    <dd>
+                        Probabilità di scendere in campo, presa dalle
+                        <a href="https://www.fantacalcio.it/probabili-formazioni-serie-a" target="_blank" rel="noopener noreferrer">probabili formazioni di Serie A</a>.
+                        Chi non compare affatto nell'elenco (infortunato, squalificato, fuori lista)
+                        scende al 15%.
+                    </dd>
+                    <dt>Il termine di ripiego</dt>
+                    <dd>
+                        Se il giocatore non scende in campo non prende zero: il suo posto lo occupa un
+                        cambio. Ma vale meno di una prestazione vera anche modesta, perché il cambio non
+                        sempre scatta — oltre tre sostituzioni, o senza un pari ruolo che abbia giocato,
+                        il posto resta scoperto. Per questo un fuoriclasse in dubbio può valere meno di
+                        un titolare fisso mediocre.
+                    </dd>
+                </dl>
+                <p class="spiegazione-limiti">
+                    <strong>Cosa non considera:</strong> l'avversario di Serie A e la difficoltà della
+                    partita, i ballottaggi oltre alla percentuale, e il fatto che i primi tre cambi in
+                    panchina hanno più probabilità di entrare degli altri.
+                </p>
+            </div>
+        </details>
     `;
 
     const select = document.getElementById('squadra-select');

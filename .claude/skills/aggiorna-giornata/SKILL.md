@@ -146,6 +146,26 @@ Cita solo numeri che hai davvero letto. Un voto inventato è indistinguibile da 
 | `la giornata N esiste già` | rimuovila dal JSON prima di reinserirla |
 | Classifica diversa da quella della lega | `homeScore` deve includere il fattore campo, come lo dà l'API |
 
+## Probabili formazioni
+
+Il suggeritore usa le probabili formazioni di Serie A per pesare quanto è probabile che
+un giocatore scenda in campo. Sono un'istantanea della **prossima** giornata, non storico:
+vanno riscaricate ogni settimana, prima che si giochi.
+
+```bash
+node .claude/skills/aggiorna-giornata/scarica-probabili.mjs
+```
+
+La pagina è pubblica, non serve token. Lo script scrive `data/probabili.json` con, per
+ogni giocatore, la percentuale di titolarità e se è fra i probabili titolari. I giocatori
+sono identificati con lo stesso id globale Fantacalcio usato altrove, quindi il match è
+esatto: l'ultima verifica copriva 195 dei 200 giocatori della lega.
+
+Se stampa `ATTENZIONE, squadre senza 11 titolari` le probabili non sono ancora complete
+(succede a inizio settimana): il file resta valido ma il suggerimento è più debole.
+Se si ferma con `nessuna squadra trovata`, la pagina ha cambiato struttura e vanno riviste
+le espressioni regolari in `scarica-probabili.mjs`.
+
 ## Dopo la scrittura
 
 `git add` dei file in `data/`. Il sito è statico: nessun build, il push su `main` basta.

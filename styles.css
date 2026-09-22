@@ -3914,3 +3914,69 @@ html.theme-transition *:after {
     font-size: 0.75rem;
     opacity: 0.65;
 }
+
+/* Colonne aggiuntive del suggeritore */
+.consiglio-row {
+    grid-template-columns: 1.15rem minmax(0, 1fr) 2.1rem 1.4rem minmax(0, 6.5rem) 2.6rem 2.5rem 2.8rem;
+}
+
+.consiglio-qualita { text-align: right; font-size: 0.73rem; opacity: 0.7; font-variant-numeric: tabular-nums; }
+.consiglio-prob { text-align: right; font-size: 0.72rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.prob-alta { color: #16a34a; }
+.prob-media { color: #ca8a04; }
+.prob-bassa { color: #dc2626; }
+
+[data-theme="dark"] .prob-alta { color: #4ade80; }
+[data-theme="dark"] .prob-media { color: #fde047; }
+[data-theme="dark"] .prob-bassa { color: #f87171; }
+
+/* Spiegazione del modello, chiusa di default */
+.consiglio-spiegazione {
+    margin-top: 1rem;
+    border: 1px solid rgba(127, 127, 127, 0.2);
+    border-radius: 10px;
+    background: rgba(127, 127, 127, 0.05);
+}
+
+.consiglio-spiegazione summary {
+    padding: 0.7rem 0.9rem;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.consiglio-spiegazione summary::-webkit-details-marker { display: none; }
+.consiglio-spiegazione summary i { opacity: 0.55; }
+
+.spiegazione-corpo {
+    padding: 0 0.9rem 0.9rem;
+    font-size: 0.76rem;
+    line-height: 1.55;
+    opacity: 0.9;
+}
+
+.spiegazione-corpo p { margin: 0 0 0.6rem; }
+
+.spiegazione-corpo .formula {
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    background: rgba(127, 127, 127, 0.12);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.74rem;
+    text-align: center;
+}
+
+.spiegazione-corpo dl { margin: 0.6rem 0; }
+.spiegazione-corpo dt { font-weight: 700; margin-top: 0.5rem; }
+.spiegazione-corpo dd { margin: 0.15rem 0 0; padding-left: 0.8rem; border-left: 2px solid rgba(127, 127, 127, 0.25); }
+
+.spiegazione-limiti { margin-top: 0.8rem; opacity: 0.75; }
+
+@media (max-width: 600px) {
+    .consiglio-row { grid-template-columns: 1.15rem minmax(0, 1fr) 2.4rem 2.5rem 2.8rem; }
+    .consiglio-serieA, .consiglio-nota, .consiglio-forma, .consiglio-qualita { display: none; }
+}

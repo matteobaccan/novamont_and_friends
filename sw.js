@@ -1,14 +1,14 @@
 // Service Worker per gestione cache intelligente
-const CACHE_VERSION = 'v5.0';
+const CACHE_VERSION = 'v6.0';
 const CACHE_NAME = `fantacalcio-cache-${CACHE_VERSION}`;
 
 // File da cachare (escludiamo i dati dinamici)
 const urlsToCache = [
   '/',
   '/index.html',
-  '/styles.css?v=5.0',
-  '/script.js?v=5.0',
-  '/config.js?v=5.0',
+  '/styles.css?v=6.0',
+  '/script.js?v=6.0',
+  '/config.js?v=6.0',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css'
 ];

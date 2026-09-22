@@ -125,9 +125,25 @@ per prevedere il rendimento conta che il giocatore abbia giocato in Serie A, non
 fantallenatore lo avesse schierato. Altrimenti il suggerimento non proporrebbe mai di
 promuovere una riserva, che è invece il consiglio più utile.
 
-**Cosa non considera**: infortuni, squalifiche, probabili formazioni e avversario di Serie
-A. Sono dati che il sito non ha. Con poche giornate disputate il suggerimento è debole e
-la pagina lo dichiara esplicitamente.
+Il peso maggiore però ce l'ha la **probabilità di scendere in campo**, presa dalle
+[probabili formazioni di Serie A](https://www.fantacalcio.it/probabili-formazioni-serie-a)
+e salvata in `data/probabili.json`. Il valore atteso è:
+
+```
+atteso = gioca × resa + (1 − gioca) × 4.5
+```
+
+dove `4.5` è quanto vale uno slot occupato da chi non gioca: non zero, perché un cambio lo
+rimpiazza, ma meno di una prestazione vera anche modesta — altrimenti "non gioca"
+batterebbe "gioca male". Chi non compare affatto nelle probabili scende al 15%.
+
+`data/probabili.json` è un'istantanea della prossima giornata e va riscaricato ogni
+settimana con `scarica-probabili.mjs` della skill.
+
+**Cosa non considera**: l'avversario di Serie A e la difficoltà della partita, i
+ballottaggi oltre alla percentuale, e il fatto che i primi cambi in panchina hanno più
+probabilità di entrare degli altri. Con poche giornate disputate il suggerimento resta
+debole e la pagina lo dichiara.
 
 ## 📱 Compatibilità
 
