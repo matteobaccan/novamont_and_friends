@@ -40,7 +40,8 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 1. **🏆 Classifica**: Visualizza la classifica attuale con tutti i dettagli
 2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette e statistiche allenatori
 3. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti inline
-4. **👥 Rose**: Rendimento di ogni giocatore e classifiche marcatori, assist e cartellini
+4. **👥 Rose**: Rendimento di ogni giocatore e sei classifiche — marcatori, assist,
+   ammonizioni, espulsioni, malus e incompresi
 5. **🪄 Formazione**: Undici consigliato per la prossima giornata
 
 In Classifica e Classifica Ideale, un clic sulla squadra apre l'elenco delle sue partite;
@@ -95,6 +96,9 @@ Ideale ricade sui punteggi reali.
 
 L'inserimento non va fatto a mano: la skill in `.claude/skills/aggiorna-giornata/`
 scarica la giornata dall'API della lega, calcola i punteggi ideali e scrive il JSON.
+Nella stessa cartella vive `scarica-probabili.mjs`, che raccoglie i dati di Serie A per il
+suggeritore di formazione e gira anche da solo (vedi
+[Aggiornamento automatico](#-aggiornamento-automatico)).
 
 ### 👥 Dati per giocatore
 
@@ -111,23 +115,67 @@ Da questi dati sono derivate rose, statistiche di rendimento e classifiche indiv
 **Gol, assist e cartellini contano solo per i giocatori effettivamente schierati**: quello
 che un giocatore combina restando in panchina non entra nelle classifiche.
 
+L'unica eccezione è la classifica **Incompresi**, che esiste proprio per misurare il
+rimpianto: conta i gol e gli assist fatti in Serie A mentre il fantallenatore li teneva
+fuori. Accanto, la classifica **Malus** somma i punti persi in campo — mezzo punto per
+un'ammonizione, uno per un'espulsione, due per un autogol, tre per un rigore sbagliato.
+I gol subiti dai portieri restano fuori: sono il loro mestiere, non un errore, e da soli
+riempirebbero la classifica di portieri.
+
+## 🤖 Aggiornamento automatico
+
+`data/probabili.json` non dipende più dalla memoria di nessuno: il workflow
+`.github/workflows/probabili.yml` rilancia `scarica-probabili.mjs` **giovedì, venerdì e
+sabato mattina** e committa il risultato, così Netlify ridispiega il sito da sé. Le pagine
+di fantacalcio.it sono pubbliche e lo script non usa token, quindi il workflow non ha
+bisogno di nessun segreto.
+
+Prima di committare, un controllo di plausibilità ferma il job se il file scende sotto le
+18 squadre o i 300 giocatori: lo script si accorge da solo di una pagina vuota, ma non di
+una pagina che è cambiata e si lascia interpretare a metà. Rigoristi, infortunati e
+contesto vuoti sono solo un avviso, perché sono rifiniture e non il cuore del calcolo.
+
+Per i turni infrasettimanali c'è **Actions → Probabili formazioni → Run workflow**, e lo
+script resta lanciabile a mano:
+
+```bash
+node .claude/skills/aggiorna-giornata/scarica-probabili.mjs [--dry-run]
+```
+
 ## 🪄 Formazione consigliata
 
 La sezione Formazione propone l'undici migliore per la prossima giornata, provando tutti i
-moduli ammessi. Il punteggio atteso di ogni giocatore combina:
+moduli ammessi. Il punteggio atteso di ogni giocatore parte dalla sua **resa**, cioè quanto
+rende quando gioca:
 
 - **media fantavoto** sulle giornate in cui ha preso un voto
 - **forma recente**, media pesata delle ultime giornate (le più recenti pesano di più)
-- **continuità**, quante volte ha preso un voto in Serie A sulle giornate disputate
 
 Qui, a differenza delle classifiche, **contano anche i voti presi stando in panchina**:
 per prevedere il rendimento conta che il giocatore abbia giocato in Serie A, non che il
 fantallenatore lo avesse schierato. Altrimenti il suggerimento non proporrebbe mai di
 promuovere una riserva, che è invece il consiglio più utile.
 
-Il peso maggiore però ce l'ha la **probabilità di scendere in campo**, presa dalle
-[probabili formazioni di Serie A](https://www.fantacalcio.it/probabili-formazioni-serie-a)
-e salvata in `data/probabili.json`. Il valore atteso è:
+### Il contesto della partita
+
+Prima di stimare cosa farà il giocatore si guarda la partita che lo aspetta. Tre leggeri
+vantaggi correggono la resa, ognuno al massimo del 3%:
+
+| Voce | Segno |
+|---|---|
+| **Campo** | in casa +3%, in trasferta −3% |
+| **Classifica** | proporzionale alla distanza dall'avversario, ±3% agli estremi |
+| **Forma** | media punti nelle ultime 3 giornate, da +3% (nove punti) a −3% (zero) |
+
+Al massimo ±9% in tutto, meno di ±0,6 di fantavoto su una resa da 6,5: abbastanza per
+riordinare due giocatori quasi pari, non per ribaltare uno scarto vero. La freccia accanto
+alla sigla di Serie A riassume il conto, con partita, posizioni e punti nel suggerimento.
+
+### Probabilità di giocare
+
+Il peso maggiore ce l'ha la **probabilità di scendere in campo**, presa dalle
+[probabili formazioni di Serie A](https://www.fantacalcio.it/probabili-formazioni-serie-a).
+Il valore atteso è:
 
 ```
 atteso = gioca × resa + (1 − gioca) × 4.5
@@ -135,13 +183,34 @@ atteso = gioca × resa + (1 − gioca) × 4.5
 
 dove `4.5` è quanto vale uno slot occupato da chi non gioca: non zero, perché un cambio lo
 rimpiazza, ma meno di una prestazione vera anche modesta — altrimenti "non gioca"
-batterebbe "gioca male". Chi non compare affatto nelle probabili scende al 15%.
+batterebbe "gioca male". Chi non compare affatto nelle probabili scende al 15%, e chi è
+anche fra gli [infortunati](https://www.fantacalcio.it/infortunati-serie-a) al 3%, con il
+motivo dell'infortunio scritto nella riga. Chi invece è infortunato ma compare comunque
+nelle probabili tiene la sua percentuale: quella fonte sa già dei rientri in dubbio.
 
-`data/probabili.json` è un'istantanea della prossima giornata e va riscaricato ogni
-settimana con `scarica-probabili.mjs` della skill.
+### I due spareggi
 
-**Cosa non considera**: l'avversario di Serie A e la difficoltà della partita, i
-ballottaggi oltre alla percentuale, e il fatto che i primi cambi in panchina hanno più
+- **A parità, il rigorista.** Fra due giocatori che distano meno di 0,15 punti attesi vince
+  chi batte i [rigori](https://www.fantacalcio.it/rigoristi-serie-a), segnalato da un ⚽
+  accanto al nome. Un bonus da rigore è punteggio che la media dei fantavoto non vede
+  arrivare, e fra numeri in virgola mobile un pareggio esatto non capiterebbe mai.
+- **A parità, l'attacco.** Fra due moduli che sommano quasi lo stesso (entro un punto
+  sull'undici) vince quello con più attaccanti, poi quello con più centrocampisti. L'atteso
+  è una media, e gol e bonus stanno nella coda della distribuzione: una media sottovaluta
+  gli attaccanti rispetto ai difensori.
+
+### I dati
+
+Tutto quello che il suggeritore legge da fuori sta in `data/probabili.json`: percentuali,
+rigoristi, infortunati, classifica di Serie A, partite del turno e forma recente. Lo scrive
+`scarica-probabili.mjs` della skill, che lo rigenera anche **da solo tre volte a settimana**
+(vedi [Aggiornamento automatico](#-aggiornamento-automatico)). La pagina mostra sempre la
+data dell'ultimo aggiornamento e avvisa quando il file ha più di due giorni o manca del
+tutto: senza quella riga, un file vecchio continuerebbe a produrre percentuali dall'aria
+credibile riferite a una giornata già giocata.
+
+**Cosa non considera**: i ballottaggi oltre alla percentuale, la forza reale dell'avversario
+al di là della posizione in classifica, e il fatto che i primi cambi in panchina hanno più
 probabilità di entrare degli altri. Con poche giornate disputate il suggerimento resta
 debole e la pagina lo dichiara.
 
@@ -171,25 +240,36 @@ Modifica il file `script.js` per aggiungere:
 
 ```
 novamont_and_friends/
-├── index.html              # Pagina principale
-├── styles.css              # Stili CSS responsive
-├── script.js               # Logica JavaScript completa
-├── config.js               # Configurazioni sistema
+├── index.html              # Pagina principale, 5 sezioni
+├── styles.css              # Stili responsive
+├── script.js               # Tutta la logica: classifiche, rose, suggeritore
+├── config.js               # Impostazioni di presentazione
+├── sw.js                   # Service worker, cache versionata
+├── .htaccess               # Header di cache e whitelist dei file dati
 ├── data/
 │   ├── seasons.json        # Indice delle stagioni disponibili
 │   ├── 2026-2027.json      # Stagione corrente
-│   └── 2025-2026.json      # Stagione archiviata
-├── .claude/skills/
-│   └── aggiorna-giornata/  # Skill per inserire una nuova giornata
-└── README.md               # Documentazione completa
+│   ├── 2025-2026.json      # Stagione archiviata
+│   └── probabili.json      # Dati di Serie A per il suggeritore
+├── .claude/skills/aggiorna-giornata/
+│   ├── SKILL.md            # Istruzioni della skill
+│   ├── scarica-giornata.mjs   # Giornata dall'API della lega
+│   ├── calcola-giornata.mjs   # Punteggi ideali
+│   └── scarica-probabili.mjs  # Probabili, rigoristi, infortunati, contesto
+├── .github/workflows/
+│   └── probabili.yml       # Rigenera probabili.json tre volte a settimana
+├── BONUS_CASA.md           # Il bonus casa nei gol ideali
+├── CACHE_MANAGEMENT.md     # Come è gestita la cache
+└── README.md               # Questo file
 ```
 
 ### 🗂️ **Dettaglio File**
-- **`index.html`**: Interface completa con 5 sezioni (Classifica, Classifica Ideale, Giornate, Rose, Formazione) e selettore stagione
-- **`styles.css`**: 2800+ righe di CSS responsive con glassmorphism e animazioni moderne
-- **`script.js`**: 1600+ righe di JavaScript con algoritmi avanzati e gestione dati
+- **`index.html`**: Interfaccia con 5 sezioni (Classifica, Classifica Ideale, Giornate, Rose, Formazione) e selettore stagione
+- **`styles.css`**: ~4000 righe di CSS responsive con glassmorphism e animazioni
+- **`script.js`**: ~3200 righe di JavaScript: calcolo classifiche, rose e suggeritore di formazione
 - **`data/seasons.json`**: Indice delle stagioni: id, etichetta, file e stato
-- **`data/<stagione>.json`**: Database JSON con teams, rounds, matches, punteggi ideali e commenti
+- **`data/<stagione>.json`**: Database JSON con teams, players, rosterHistory, rounds e settings
+- **`data/probabili.json`**: Istantanea di Serie A rigenerata dal workflow, non scritta a mano
 - **`config.js`**: Impostazioni configurabili per personalizzazione
 
 ## 🔧 Funzioni Avanzate
@@ -203,75 +283,88 @@ function calculateGoalsFromScore(score) {
 }
 ```
 
-### 📊 **Aggiungere una Nuova Giornata**
+Nei **gol ideali** la squadra di casa riceve prima un bonus di +1 punto, come nel
+regolamento della lega: il dettaglio sta in [`BONUS_CASA.md`](BONUS_CASA.md).
+
+### 📊 **Come è fatta una giornata**
+
+Le giornate non si scrivono a mano — ci pensa la skill — ma questa è la forma che hanno
+in `data/<stagione>.json`. Si inseriscono solo i punteggi: **gol, risultati e classifica
+sono ricalcolati**, quindi non compaiono nel file.
+
 ```javascript
-const nuovaGiornata = {
-    round: 2,
-    date: "Ottobre 2025",
+{
+    round: 1,
+    date: "Settembre 2026",
     matches: [
         {
-            homeTeam: "Cusiana",
+            id: 1,
+            homeTeam: "Real Pattagghiu",
             awayTeam: "Real Ichnusa",
             homeScore: 75.5,
-            awayScore: 82.0,
-            homeIdealScore: 88.0,  // Punteggio con formazione ideale
-            awayIdealScore: 85.5,
-            homeGoals: 2,
-            awayGoals: 3,
-            homeIdealGoals: 4,
-            awayIdealGoals: 4,
-            result: "away",
-            idealResult: "draw"
+            awayScore: 70,
+            homeIdealScore: 79,      // facoltativi: senza, niente Classifica Allenatori
+            awayIdealScore: 76.5,
+            commentary: { caressa: "...", bergomi: "..." },
+            lineups: { home: [ /* una voce per giocatore */ ], away: [ /* ... */ ] }
         }
-        // ... altri match
     ]
-};
+}
 ```
 
-### 🏆 **Struttura Dati Squadra Completa**
+Una voce di `lineups` è compatta perché si ripete per ogni giocatore di ogni partita:
+`p` è il pid, `t` lo stato (`s` titolare, `b` panchina, `in` entrato, `out` sostituito),
+`v` il voto, `b` il voto con bonus, `e` gli eventi (`gol`, `assist`, `amm`, `esp`,
+`autogol`, `rigSbagliato`, `rigParato`, `golSubiti`).
+
+### 🏆 **Struttura Dati Squadra**
+
+In `teams` sta solo l'anagrafica; punti, vittorie, gol e medie **non si scrivono**, li
+calcola `calcolaClassifica()` dai risultati a ogni caricamento.
+
 ```javascript
-const squadra = {
-    id: 1,
-    name: "Cusiana",
-    owner: "Manager",
-    points: 3,              // Punti campionato
-    wins: 1,
-    draws: 0, 
-    losses: 0,
-    totalScore: 145.5,      // Somma punti fantacalcio
-    goalsFor: 3,
-    goalsAgainst: 2,
-    goalDifference: 1,
-    avgScore: 72.75,
-    matchesPlayed: 2
-};
+{ id: 1, name: "Cusiana", owner: "Roby, Gaiuz" }
 ```
 
 ## 🎯 Prossimi Sviluppi
 
-### 📈 **Analytics Avanzate**
-- [ ] Grafici interattivi con Chart.js (trend performance, confronti)
-- [ ] Heatmap delle prestazioni per giornata
-- [ ] Predizioni AI per prossime giornate
-- [ ] Analisi dettagliate rosa squadre
+### ✅ **Fatto**
+- [x] **Analisi dettagliate rosa squadre** — sezione Rose con rendimento per giocatore e
+      sei classifiche individuali
+- [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
+      è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
+- [x] **Dati di Serie A aggiornati da soli** — il workflow rigenera `probabili.json` tre
+      volte a settimana. Il *real-time dal browser* resta impossibile: fantacalcio.it non
+      manda header CORS e il sito è statico, quindi non c'è un proxy che possa chiamarlo
 
-### 🔐 **Sistema Utenti**
-- [ ] Login personalizzato per ogni manager
-- [ ] Dashboard privato con statistiche personali
-- [ ] Sistema notifiche push per risultati
-- [ ] Chat integrata tra squadre
+### 📈 **Da fare, in ordine di resa**
 
-### 🚀 **Integrazioni**
-- [ ] API Fantacalcio® ufficiali per dati real-time
-- [ ] Export PDF/Excel classifiche e statistiche
-- [ ] Integrazione social (condivisione risultati)
-- [ ] App mobile PWA (Progressive Web App)
+Le prime cinque non richiedono dati nuovi né dipendenze: tutto è già in `data/<stagione>.json`.
 
-### 🎮 **Gamification**
-- [ ] Sistema achievement e trofei
-- [ ] Storico confronti head-to-head
-- [ ] Prediction game per prossimi risultati
-- [ ] Classifica Fair Play e migliori manager
+- [ ] **`manifest.json` e icone** — il service worker c'è già e funziona, manca solo il
+      manifest perché il sito diventi installabile. È la casella "App mobile PWA" a un passo
+      dall'essere chiusa
+- [ ] **Scontri diretti** — tabella 8×8 fra le squadre della lega, ricavata da
+      `rounds[].matches`. In una lega che gioca da anni è la statistica che si chiede sempre
+- [ ] **Andamento per giornata** — spezzata di punti e posizione per squadra. Meglio in SVG
+      inline che con Chart.js: il grafico è semplice e il peso della libreria non si giustifica
+- [ ] **Heatmap giornata × squadra** dei punteggi — una CSS grid con scala di colore, zero librerie
+- [ ] **Export CSV** delle classifiche — `Blob` più `<a download>`. L'export PDF invece
+      richiederebbe una dipendenza vera: lasciato cadere
+- [ ] **Achievement** derivati dai dati: miglior punteggio di giornata, striscia di vittorie,
+      peggior scarto dall'ideale
+- [ ] **Qualche test automatico** — ~3200 righe di JavaScript e i parser dello scraper non ne
+      hanno nessuno, e lo scraper ora gira in una Action senza che nessuno guardi. Bastano
+      `node --test` e pochi casi su `calculateGoalsFromScore`, sul bonus casa e sui parser
+      HTML, con un frammento di pagina salvato come fixture
+
+### 🚫 **Fuori portata, e perché**
+
+Login personalizzato, dashboard privato, chat fra squadre, notifiche push e prediction game
+richiedono **autenticazione e un backend con stato**. Il sito è statico su Netlify e il repo
+è pubblico: servirebbero un servizio esterno e delle credenziali da custodire, che qui non
+avrebbero un posto sicuro dove stare. Meglio dirlo che lasciare caselle destinate a non
+essere mai spuntate.
 
 ## 🤝 Contribuire
 

@@ -146,25 +146,35 @@ Cita solo numeri che hai davvero letto. Un voto inventato è indistinguibile da 
 | `la giornata N esiste già` | rimuovila dal JSON prima di reinserirla |
 | Classifica diversa da quella della lega | `homeScore` deve includere il fattore campo, come lo dà l'API |
 
-## Probabili formazioni
+## Dati di Serie A per il suggeritore
 
-Il suggeritore usa le probabili formazioni di Serie A per pesare quanto è probabile che
-un giocatore scenda in campo. Sono un'istantanea della **prossima** giornata, non storico:
-vanno riscaricate ogni settimana, prima che si giochi.
+**Di norma non serve lanciarlo a mano**: il workflow `.github/workflows/probabili.yml` lo
+esegue giovedì, venerdì e sabato mattina e committa il risultato. Serve solo per anticipare
+l'Action, tipicamente prima di un turno infrasettimanale.
 
 ```bash
-node .claude/skills/aggiorna-giornata/scarica-probabili.mjs
+node .claude/skills/aggiorna-giornata/scarica-probabili.mjs [--dry-run]
 ```
 
-La pagina è pubblica, non serve token. Lo script scrive `data/probabili.json` con, per
-ogni giocatore, la percentuale di titolarità e se è fra i probabili titolari. I giocatori
-sono identificati con lo stesso id globale Fantacalcio usato altrove, quindi il match è
-esatto: l'ultima verifica copriva 195 dei 200 giocatori della lega.
+Le pagine sono pubbliche, non serve token. Lo script scrive `data/probabili.json`, che è
+un'istantanea della **prossima** giornata e non storico, con:
+
+| Chiave | Da dove viene | A cosa serve |
+|---|---|---|
+| `giocatori` | probabili formazioni | percentuale di titolarità, per pesare "gioca" |
+| `rigoristi` | pagina rigoristi | spareggio a parità di punteggio atteso |
+| `infortunati` | pagina infortunati | chi non schierare, con il motivo |
+| `classificaSerieA`, `prossimoTurno`, `formaSerieA` | widget e calendario | il contesto della partita |
+
+Giocatori e rigoristi portano il pid nell'href, quindi combaciano esattamente con
+`data/<stagione>.json`. Gli **infortunati no**: quella pagina non espone id, quindi si
+salvano nome e squadra e l'abbinamento alla rosa lo fa il browser, che ha già l'anagrafica.
 
 Se stampa `ATTENZIONE, squadre senza 11 titolari` le probabili non sono ancora complete
 (succede a inizio settimana): il file resta valido ma il suggerimento è più debole.
 Se si ferma con `nessuna squadra trovata`, la pagina ha cambiato struttura e vanno riviste
-le espressioni regolari in `scarica-probabili.mjs`.
+le espressioni regolari in `scarica-probabili.mjs`. Se invece a mancare è una delle altre
+chiavi, lo script si limita a un warning: sono rifiniture, e il suggeritore regge lo stesso.
 
 ## Dopo la scrittura
 
