@@ -27,7 +27,7 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 - **Animazioni Fluide**: Effetti float, pulse e spin per un'esperienza dinamica
 - **100% Responsive**: Layout 2 colonne su desktop, 1 colonna su mobile (max 450px per colonna)
 - **Tema Personalizzabile**: Supporto per dark mode e light mode
-- **Navigazione Pulita**: 3 sezioni principali (Classifica, Classifica Ideale, Giornate)
+- **Navigazione Pulita**: 4 sezioni principali (Classifica, Classifica Ideale, Giornate, Rose)
 - **Font Awesome Icons**: Iconografie professionali in tutto il sito
 
 ## 🚀 Come utilizzare
@@ -40,6 +40,10 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 1. **🏆 Classifica**: Visualizza la classifica attuale con tutti i dettagli
 2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette e statistiche allenatori
 3. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti inline
+4. **👥 Rose**: Rendimento di ogni giocatore e classifiche marcatori, assist e cartellini
+
+In Classifica e Classifica Ideale, un clic sulla squadra apre l'elenco delle sue partite;
+un clic sulla partita mostra le formazioni con voti ed eventi di tutti i giocatori.
 
 ### 💡 **Funzionalità Interattive**
 - **Clicca** sulle colonne delle tabelle per ordinare i dati
@@ -88,6 +92,24 @@ I campi `homeIdealScore` / `awayIdealScore` sono facoltativi: dove mancano, la
 Classifica Miglior Allenatore per quella giornata non viene mostrata e la Classifica
 Ideale ricade sui punteggi reali.
 
+L'inserimento non va fatto a mano: la skill in `.claude/skills/aggiorna-giornata/`
+scarica la giornata dall'API della lega, calcola i punteggi ideali e scrive il JSON.
+
+### 👥 Dati per giocatore
+
+Dalla stagione 2026-2027 il JSON contiene anche:
+
+- **`players`**: dizionario `pid → nome, ruolo, squadra di Serie A`, dove `pid` è
+  l'identificativo globale Fantacalcio
+- **`rosterHistory`**: snapshot delle rose con `fromRound`, scritti solo quando una rosa
+  cambia, così i trasferimenti di metà stagione restano tracciati
+- **`rounds[].matches[].lineups`**: per ogni giocatore lo stato (titolare, panchina,
+  entrato, sostituito), il voto, il voto con bonus e gli eventi (gol, assist, cartellini)
+
+Da questi dati sono derivate rose, statistiche di rendimento e classifiche individuali.
+**Gol, assist e cartellini contano solo per i giocatori effettivamente schierati**: quello
+che un giocatore combina restando in panchina non entra nelle classifiche.
+
 ## 📱 Compatibilità
 
 - ✅ Chrome, Firefox, Safari, Edge
@@ -122,11 +144,13 @@ novamont_and_friends/
 │   ├── seasons.json        # Indice delle stagioni disponibili
 │   ├── 2026-2027.json      # Stagione corrente
 │   └── 2025-2026.json      # Stagione archiviata
+├── .claude/skills/
+│   └── aggiorna-giornata/  # Skill per inserire una nuova giornata
 └── README.md               # Documentazione completa
 ```
 
 ### 🗂️ **Dettaglio File**
-- **`index.html`**: Interface completa con 3 sezioni (Classifica, Classifica Ideale, Giornate) e selettore stagione
+- **`index.html`**: Interface completa con 4 sezioni (Classifica, Classifica Ideale, Giornate, Rose) e selettore stagione
 - **`styles.css`**: 2800+ righe di CSS responsive con glassmorphism e animazioni moderne
 - **`script.js`**: 1600+ righe di JavaScript con algoritmi avanzati e gestione dati
 - **`data/seasons.json`**: Indice delle stagioni: id, etichetta, file e stato

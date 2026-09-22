@@ -7,10 +7,10 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Fantacalcio Novamont & Friends</title>
-    <link rel="stylesheet" href="styles.css?v=3.0">
+    <link rel="stylesheet" href="styles.css?v=4.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <script src="config.js?v=3.0"></script>
+    <script src="config.js?v=4.0"></script>
 </head>
 <body>
     <header class="header">
@@ -39,6 +39,10 @@
                 <button class="nav-btn" data-tab="giornate">
                     <i class="fas fa-calendar-alt"></i>
                     Giornate
+                </button>
+                <button class="nav-btn" data-tab="rose">
+                    <i class="fas fa-users"></i>
+                    Rose
                 </button>
                 <button class="theme-toggle" id="theme-toggle" title="Cambia Tema">
                     <i class="fas fa-sun"></i>
@@ -115,6 +119,19 @@
                     <!-- Risultati generati dinamicamente -->
                 </div>
             </section>
+
+            <!-- Sezione Rose -->
+            <section id="rose" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Rose e Rendimento</h2>
+                    <p class="section-description">
+                        Gol, assist e cartellini contano solo per i giocatori effettivamente schierati
+                    </p>
+                </div>
+                <div id="rose-container">
+                    <!-- Contenuto generato dinamicamente -->
+                </div>
+            </section>
         </div>
     </main>
 
@@ -129,6 +146,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=3.0"></script>
+    <script src="script.js?v=4.0"></script>
 </body>
 </html>

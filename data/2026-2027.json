@@ -43,824 +43,1231 @@
       "owner": "Beppe"
     }
   ],
-  "rosters": {
-    "Partizan Tirana": [
-      {
-        "name": "Di Gennaro",
-        "role": "P"
-      },
-      {
-        "name": "Martinez Jo.",
-        "role": "P"
-      },
-      {
-        "name": "Provedel",
-        "role": "P"
-      },
-      {
-        "name": "Celik",
-        "role": "D"
-      },
-      {
-        "name": "Chalobah T.",
-        "role": "D"
-      },
-      {
-        "name": "Diego Carlos",
-        "role": "D"
-      },
-      {
-        "name": "Dimarco",
-        "role": "D"
-      },
-      {
-        "name": "Gabbia",
-        "role": "D"
-      },
-      {
-        "name": "Hermoso",
-        "role": "D"
-      },
-      {
-        "name": "Ranieri L.",
-        "role": "D"
-      },
-      {
-        "name": "Vojvoda",
-        "role": "D"
-      },
-      {
-        "name": "Bernardeschi",
-        "role": "C"
-      },
-      {
-        "name": "Cissè A.",
-        "role": "C"
-      },
-      {
-        "name": "Gonzalez N.",
-        "role": "C"
-      },
-      {
-        "name": "Gudmundsson A.",
-        "role": "C"
-      },
-      {
-        "name": "Paz N.",
-        "role": "C"
-      },
-      {
-        "name": "Politano",
-        "role": "C"
-      },
-      {
-        "name": "Taylor K.",
-        "role": "C"
-      },
-      {
-        "name": "Zhegrova",
-        "role": "C"
-      },
-      {
-        "name": "Bowie",
-        "role": "A"
-      },
-      {
-        "name": "Colombo",
-        "role": "A"
-      },
-      {
-        "name": "Kean",
-        "role": "A"
-      },
-      {
-        "name": "Lang",
-        "role": "A"
-      },
-      {
-        "name": "Pinamonti",
-        "role": "A"
-      },
-      {
-        "name": "Raimondo",
-        "role": "A"
-      }
-    ],
-    "Real Ichnusa": [
-      {
-        "name": "Maignan",
-        "role": "P"
-      },
-      {
-        "name": "Terracciano",
-        "role": "P"
-      },
-      {
-        "name": "Torriani",
-        "role": "P"
-      },
-      {
-        "name": "Bastoni",
-        "role": "D"
-      },
-      {
-        "name": "Carlos Augusto",
-        "role": "D"
-      },
-      {
-        "name": "Gila",
-        "role": "D"
-      },
-      {
-        "name": "Mangas",
-        "role": "D"
-      },
-      {
-        "name": "Marcandalli",
-        "role": "D"
-      },
-      {
-        "name": "Molina N.",
-        "role": "D"
-      },
-      {
-        "name": "Scalvini",
-        "role": "D"
-      },
-      {
-        "name": "Stones",
-        "role": "D"
-      },
-      {
-        "name": "Baturina",
-        "role": "C"
-      },
-      {
-        "name": "Frattesi",
-        "role": "C"
-      },
-      {
-        "name": "Frendrup",
-        "role": "C"
-      },
-      {
-        "name": "Koopmeiners",
-        "role": "C"
-      },
-      {
-        "name": "Mastantuono",
-        "role": "C"
-      },
-      {
-        "name": "McTominay",
-        "role": "C"
-      },
-      {
-        "name": "Pulisic",
-        "role": "C"
-      },
-      {
-        "name": "Vergara",
-        "role": "C"
-      },
-      {
-        "name": "Adams C.",
-        "role": "A"
-      },
-      {
-        "name": "Douvikas",
-        "role": "A"
-      },
-      {
-        "name": "Kvernadze",
-        "role": "A"
-      },
-      {
-        "name": "Raspadori",
-        "role": "A"
-      },
-      {
-        "name": "Scamacca",
-        "role": "A"
-      },
-      {
-        "name": "Yildiz",
-        "role": "A"
-      }
-    ],
-    "Ultimo": [
-      {
-        "name": "De Marzi",
-        "role": "P"
-      },
-      {
-        "name": "Gollini",
-        "role": "P"
-      },
-      {
-        "name": "Svilar",
-        "role": "P"
-      },
-      {
-        "name": "De Winter",
-        "role": "D"
-      },
-      {
-        "name": "Di Lorenzo",
-        "role": "D"
-      },
-      {
-        "name": "Hainaut",
-        "role": "D"
-      },
-      {
-        "name": "Lucumì",
-        "role": "D"
-      },
-      {
-        "name": "Spinazzola",
-        "role": "D"
-      },
-      {
-        "name": "Tiago Gabriel",
-        "role": "D"
-      },
-      {
-        "name": "Wesley",
-        "role": "D"
-      },
-      {
-        "name": "Zappacosta",
-        "role": "D"
-      },
-      {
-        "name": "Calhanoglu",
-        "role": "C"
-      },
-      {
-        "name": "Ederson D.S.",
-        "role": "C"
-      },
-      {
-        "name": "Ekkelenkamp",
-        "role": "C"
-      },
-      {
-        "name": "Jashari",
-        "role": "C"
-      },
-      {
-        "name": "Modric",
-        "role": "C"
-      },
-      {
-        "name": "Perrone",
-        "role": "C"
-      },
-      {
-        "name": "Zalewski",
-        "role": "C"
-      },
-      {
-        "name": "Zielinski",
-        "role": "C"
-      },
-      {
-        "name": "Bonny",
-        "role": "A"
-      },
-      {
-        "name": "Esposito Se.",
-        "role": "A"
-      },
-      {
-        "name": "Lucca",
-        "role": "A"
-      },
-      {
-        "name": "Martinez L.",
-        "role": "A"
-      },
-      {
-        "name": "Yeboah J.",
-        "role": "A"
-      },
-      {
-        "name": "Zapata D.",
-        "role": "A"
-      }
-    ],
-    "Team24": [
-      {
-        "name": "Contini",
-        "role": "P"
-      },
-      {
-        "name": "Meret",
-        "role": "P"
-      },
-      {
-        "name": "Milinkovic-Savic V.",
-        "role": "P"
-      },
-      {
-        "name": "Abankwah",
-        "role": "D"
-      },
-      {
-        "name": "Bracaglia",
-        "role": "D"
-      },
-      {
-        "name": "Carboni A.",
-        "role": "D"
-      },
-      {
-        "name": "Coco",
-        "role": "D"
-      },
-      {
-        "name": "Comuzzo",
-        "role": "D"
-      },
-      {
-        "name": "Doig",
-        "role": "D"
-      },
-      {
-        "name": "Lucchesi",
-        "role": "D"
-      },
-      {
-        "name": "Valle",
-        "role": "D"
-      },
-      {
-        "name": "Coulibaly L.",
-        "role": "C"
-      },
-      {
-        "name": "Fagioli",
-        "role": "C"
-      },
-      {
-        "name": "Mandragora",
-        "role": "C"
-      },
-      {
-        "name": "Matic",
-        "role": "C"
-      },
-      {
-        "name": "Moreira",
-        "role": "C"
-      },
-      {
-        "name": "Rabiot",
-        "role": "C"
-      },
-      {
-        "name": "Vlasic",
-        "role": "C"
-      },
-      {
-        "name": "Zaniolo",
-        "role": "C"
-      },
-      {
-        "name": "Berardi",
-        "role": "A"
-      },
-      {
-        "name": "Hojlund",
-        "role": "A"
-      },
-      {
-        "name": "Krstovic",
-        "role": "A"
-      },
-      {
-        "name": "Laurientè",
-        "role": "A"
-      },
-      {
-        "name": "Maldini",
-        "role": "A"
-      },
-      {
-        "name": "Simeone",
-        "role": "A"
-      }
-    ],
-    "Cusiana": [
-      {
-        "name": "Butez",
-        "role": "P"
-      },
-      {
-        "name": "Carnesecchi",
-        "role": "P"
-      },
-      {
-        "name": "Skorupski",
-        "role": "P"
-      },
-      {
-        "name": "Birindelli",
-        "role": "D"
-      },
-      {
-        "name": "Ehizibue",
-        "role": "D"
-      },
-      {
-        "name": "Kalulu",
-        "role": "D"
-      },
-      {
-        "name": "Kamara H.",
-        "role": "D"
-      },
-      {
-        "name": "Mancini",
-        "role": "D"
-      },
-      {
-        "name": "Solet",
-        "role": "D"
-      },
-      {
-        "name": "Valeri",
-        "role": "D"
-      },
-      {
-        "name": "Vasquez",
-        "role": "D"
-      },
-      {
-        "name": "Adzic",
-        "role": "C"
-      },
-      {
-        "name": "Conceicao",
-        "role": "C"
-      },
-      {
-        "name": "Douglas Luiz",
-        "role": "C"
-      },
-      {
-        "name": "Gilmour",
-        "role": "C"
-      },
-      {
-        "name": "Konè M.",
-        "role": "C"
-      },
-      {
-        "name": "Lobotka",
-        "role": "C"
-      },
-      {
-        "name": "McKennie",
-        "role": "C"
-      },
-      {
-        "name": "Thorstvedt",
-        "role": "C"
-      },
-      {
-        "name": "Boga",
-        "role": "A"
-      },
-      {
-        "name": "Malen",
-        "role": "A"
-      },
-      {
-        "name": "Mendy P.",
-        "role": "A"
-      },
-      {
-        "name": "Osmajic",
-        "role": "A"
-      },
-      {
-        "name": "Stulic",
-        "role": "A"
-      },
-      {
-        "name": "Woltemade",
-        "role": "A"
-      }
-    ],
-    "SM Frattese": [
-      {
-        "name": "Caprile",
-        "role": "P"
-      },
-      {
-        "name": "Sanchez Ro.",
-        "role": "P"
-      },
-      {
-        "name": "Vicario",
-        "role": "P"
-      },
-      {
-        "name": "Bellanova",
-        "role": "D"
-      },
-      {
-        "name": "Bremer",
-        "role": "D"
-      },
-      {
-        "name": "Cambiaso",
-        "role": "D"
-      },
-      {
-        "name": "Jimenez A.",
-        "role": "D"
-      },
-      {
-        "name": "N'Dicka",
-        "role": "D"
-      },
-      {
-        "name": "Pavlovic",
-        "role": "D"
-      },
-      {
-        "name": "Ramon",
-        "role": "D"
-      },
-      {
-        "name": "Theate",
-        "role": "D"
-      },
-      {
-        "name": "Alajbegovic",
-        "role": "C"
-      },
-      {
-        "name": "Atta",
-        "role": "C"
-      },
-      {
-        "name": "Chukwueze",
-        "role": "C"
-      },
-      {
-        "name": "De Bruyne",
-        "role": "C"
-      },
-      {
-        "name": "Mora",
-        "role": "C"
-      },
-      {
-        "name": "Orsolini",
-        "role": "C"
-      },
-      {
-        "name": "Rowe",
-        "role": "C"
-      },
-      {
-        "name": "Zaccagni",
-        "role": "C"
-      },
-      {
-        "name": "Beto",
-        "role": "A"
-      },
-      {
-        "name": "Diao",
-        "role": "A"
-      },
-      {
-        "name": "Esposito F.P.",
-        "role": "A"
-      },
-      {
-        "name": "Kolo Muani",
-        "role": "A"
-      },
-      {
-        "name": "Ramos G.",
-        "role": "A"
-      },
-      {
-        "name": "Santos A.",
-        "role": "A"
-      }
-    ],
-    "Shakhtar Donuts": [
-      {
-        "name": "De Gea",
-        "role": "P"
-      },
-      {
-        "name": "Muric",
-        "role": "P"
-      },
-      {
-        "name": "Okoye",
-        "role": "P"
-      },
-      {
-        "name": "Couto",
-        "role": "D"
-      },
-      {
-        "name": "Delprato",
-        "role": "D"
-      },
-      {
-        "name": "Kristensen T.",
-        "role": "D"
-      },
-      {
-        "name": "Lulli",
-        "role": "D"
-      },
-      {
-        "name": "Monterisi",
-        "role": "D"
-      },
-      {
-        "name": "Rrahmani",
-        "role": "D"
-      },
-      {
-        "name": "Tavares N.",
-        "role": "D"
-      },
-      {
-        "name": "Valdepenas",
-        "role": "D"
-      },
-      {
-        "name": "Barella",
-        "role": "C"
-      },
-      {
-        "name": "Busio",
-        "role": "C"
-      },
-      {
-        "name": "Calò",
-        "role": "C"
-      },
-      {
-        "name": "Colpani",
-        "role": "C"
-      },
-      {
-        "name": "Diouf",
-        "role": "C"
-      },
-      {
-        "name": "Ilic",
-        "role": "C"
-      },
-      {
-        "name": "Romano",
-        "role": "C"
-      },
-      {
-        "name": "Schmid",
-        "role": "C"
-      },
-      {
-        "name": "Adams A.",
-        "role": "A"
-      },
-      {
-        "name": "Castro S.",
-        "role": "A"
-      },
-      {
-        "name": "Davis K.",
-        "role": "A"
-      },
-      {
-        "name": "Pellegrino M.",
-        "role": "A"
-      },
-      {
-        "name": "Robinson J.",
-        "role": "A"
-      },
-      {
-        "name": "Thuram",
-        "role": "A"
-      }
-    ],
-    "Real Pattagghiu": [
-      {
-        "name": "Mandas",
-        "role": "P"
-      },
-      {
-        "name": "Motta",
-        "role": "P"
-      },
-      {
-        "name": "Renzetti",
-        "role": "P"
-      },
-      {
-        "name": "Akanji",
-        "role": "D"
-      },
-      {
-        "name": "Bisseck",
-        "role": "D"
-      },
-      {
-        "name": "Dragusin",
-        "role": "D"
-      },
-      {
-        "name": "Gatti",
-        "role": "D"
-      },
-      {
-        "name": "Juan Jesus",
-        "role": "D"
-      },
-      {
-        "name": "Kabasele",
-        "role": "D"
-      },
-      {
-        "name": "Miranda J.",
-        "role": "D"
-      },
-      {
-        "name": "Ostigard",
-        "role": "D"
-      },
-      {
-        "name": "Adopo",
-        "role": "C"
-      },
-      {
-        "name": "Baldanzi",
-        "role": "C"
-      },
-      {
-        "name": "Da Cunha",
-        "role": "C"
-      },
-      {
-        "name": "Fabbian",
-        "role": "C"
-      },
-      {
-        "name": "Fazzini",
-        "role": "C"
-      },
-      {
-        "name": "Isaksen",
-        "role": "C"
-      },
-      {
-        "name": "Kessiè",
-        "role": "C"
-      },
-      {
-        "name": "Mbangula",
-        "role": "C"
-      },
-      {
-        "name": "De Ketelaere",
-        "role": "A"
-      },
-      {
-        "name": "Dovbyk",
-        "role": "A"
-      },
-      {
-        "name": "Dybala",
-        "role": "A"
-      },
-      {
-        "name": "Piccoli",
-        "role": "A"
-      },
-      {
-        "name": "Soulè",
-        "role": "A"
-      },
-      {
-        "name": "Varela G.",
-        "role": "A"
-      }
-    ]
+  "players": {
+    "133": {
+      "name": "Skorupski",
+      "role": "P",
+      "serieA": "Bologna"
+    },
+    "152": {
+      "name": "Zielinski",
+      "role": "C",
+      "serieA": "Inter"
+    },
+    "184": {
+      "name": "Bernardeschi",
+      "role": "C",
+      "serieA": "Bologna"
+    },
+    "254": {
+      "name": "Dimarco",
+      "role": "D",
+      "serieA": "Inter"
+    },
+    "256": {
+      "name": "Juan Jesus",
+      "role": "D",
+      "serieA": "Venezia"
+    },
+    "309": {
+      "name": "Dybala",
+      "role": "A",
+      "serieA": "Roma"
+    },
+    "531": {
+      "name": "Berardi",
+      "role": "A",
+      "serieA": "Sassuolo"
+    },
+    "536": {
+      "name": "Politano",
+      "role": "C",
+      "serieA": "Napoli"
+    },
+    "554": {
+      "name": "Zappacosta",
+      "role": "D",
+      "serieA": "Atalanta"
+    },
+    "572": {
+      "name": "Meret",
+      "role": "P",
+      "serieA": "Napoli"
+    },
+    "608": {
+      "name": "Zapata D.",
+      "role": "A",
+      "serieA": "Torino"
+    },
+    "610": {
+      "name": "Gollini",
+      "role": "P",
+      "serieA": "Roma"
+    },
+    "632": {
+      "name": "Zaccagni",
+      "role": "C",
+      "serieA": "Lazio"
+    },
+    "1850": {
+      "name": "Kessiè",
+      "role": "C",
+      "serieA": "Atalanta"
+    },
+    "1852": {
+      "name": "Spinazzola",
+      "role": "D",
+      "serieA": "Napoli"
+    },
+    "1870": {
+      "name": "Barella",
+      "role": "C",
+      "serieA": "Inter"
+    },
+    "1926": {
+      "name": "Di Gennaro",
+      "role": "P",
+      "serieA": "Inter"
+    },
+    "1933": {
+      "name": "Mandragora",
+      "role": "C",
+      "serieA": "Torino"
+    },
+    "2038": {
+      "name": "Pinamonti",
+      "role": "A",
+      "serieA": "Lazio"
+    },
+    "2061": {
+      "name": "Simeone",
+      "role": "A",
+      "serieA": "Torino"
+    },
+    "2097": {
+      "name": "Kean",
+      "role": "A",
+      "serieA": "Como"
+    },
+    "2120": {
+      "name": "Bastoni",
+      "role": "D",
+      "serieA": "Inter"
+    },
+    "2137": {
+      "name": "Scamacca",
+      "role": "A",
+      "serieA": "Atalanta"
+    },
+    "2167": {
+      "name": "Orsolini",
+      "role": "C",
+      "serieA": "Bologna"
+    },
+    "2170": {
+      "name": "Milinkovic-Savic V.",
+      "role": "P",
+      "serieA": "Napoli"
+    },
+    "2194": {
+      "name": "Calhanoglu",
+      "role": "C",
+      "serieA": "Inter"
+    },
+    "2296": {
+      "name": "Mancini",
+      "role": "D",
+      "serieA": "Roma"
+    },
+    "2379": {
+      "name": "Rabiot",
+      "role": "C",
+      "serieA": "Milan"
+    },
+    "2423": {
+      "name": "Pulisic",
+      "role": "C",
+      "serieA": "Milan"
+    },
+    "2514": {
+      "name": "Stones",
+      "role": "D",
+      "serieA": "Inter"
+    },
+    "2517": {
+      "name": "De Bruyne",
+      "role": "C",
+      "serieA": "Napoli"
+    },
+    "2521": {
+      "name": "De Gea",
+      "role": "P",
+      "serieA": "Fiorentina"
+    },
+    "2528": {
+      "name": "Matic",
+      "role": "C",
+      "serieA": "Sassuolo"
+    },
+    "2606": {
+      "name": "Modric",
+      "role": "C",
+      "serieA": "Milan"
+    },
+    "2764": {
+      "name": "Martinez L.",
+      "role": "A",
+      "serieA": "Inter"
+    },
+    "2766": {
+      "name": "Zaniolo",
+      "role": "C",
+      "serieA": "Udinese"
+    },
+    "2788": {
+      "name": "Bremer",
+      "role": "D",
+      "serieA": "Juventus"
+    },
+    "2814": {
+      "name": "Provedel",
+      "role": "P",
+      "serieA": "Inter"
+    },
+    "2815": {
+      "name": "Terracciano",
+      "role": "P",
+      "serieA": "Milan"
+    },
+    "2816": {
+      "name": "Di Lorenzo",
+      "role": "D",
+      "serieA": "Napoli"
+    },
+    "2832": {
+      "name": "Boga",
+      "role": "A",
+      "serieA": "Juventus"
+    },
+    "2845": {
+      "name": "Contini",
+      "role": "P",
+      "serieA": "Napoli"
+    },
+    "2848": {
+      "name": "Frattesi",
+      "role": "C",
+      "serieA": "Lazio"
+    },
+    "4137": {
+      "name": "Diego Carlos",
+      "role": "D",
+      "serieA": "Parma"
+    },
+    "4159": {
+      "name": "Akanji",
+      "role": "D",
+      "serieA": "Inter"
+    },
+    "4179": {
+      "name": "Gonzalez N.",
+      "role": "C",
+      "serieA": "Juventus"
+    },
+    "4236": {
+      "name": "Muric",
+      "role": "P",
+      "serieA": "Sassuolo"
+    },
+    "4263": {
+      "name": "Kabasele",
+      "role": "D",
+      "serieA": "Udinese"
+    },
+    "4287": {
+      "name": "Lobotka",
+      "role": "C",
+      "serieA": "Napoli"
+    },
+    "4312": {
+      "name": "Maignan",
+      "role": "P",
+      "serieA": "Milan"
+    },
+    "4317": {
+      "name": "N'Dicka",
+      "role": "D",
+      "serieA": "Roma"
+    },
+    "4359": {
+      "name": "Piccoli",
+      "role": "A",
+      "serieA": "Bologna"
+    },
+    "4360": {
+      "name": "Caprile",
+      "role": "P",
+      "serieA": "Cagliari"
+    },
+    "4371": {
+      "name": "Raspadori",
+      "role": "A",
+      "serieA": "Atalanta"
+    },
+    "4378": {
+      "name": "Ranieri L.",
+      "role": "D",
+      "serieA": "Fiorentina"
+    },
+    "4401": {
+      "name": "Gabbia",
+      "role": "D",
+      "serieA": "Milan"
+    },
+    "4409": {
+      "name": "Rrahmani",
+      "role": "D",
+      "serieA": "Napoli"
+    },
+    "4431": {
+      "name": "Carnesecchi",
+      "role": "P",
+      "serieA": "Atalanta"
+    },
+    "4463": {
+      "name": "Esposito Se.",
+      "role": "A",
+      "serieA": "Sassuolo"
+    },
+    "4465": {
+      "name": "Fagioli",
+      "role": "C",
+      "serieA": "Fiorentina"
+    },
+    "4657": {
+      "name": "Celik",
+      "role": "D",
+      "serieA": "Juventus"
+    },
+    "4734": {
+      "name": "Miranda J.",
+      "role": "D",
+      "serieA": "Bologna"
+    },
+    "4777": {
+      "name": "McTominay",
+      "role": "C",
+      "serieA": "Napoli"
+    },
+    "4807": {
+      "name": "Hermoso",
+      "role": "D",
+      "serieA": "Roma"
+    },
+    "4856": {
+      "name": "Chukwueze",
+      "role": "C",
+      "serieA": "Milan"
+    },
+    "4870": {
+      "name": "Adopo",
+      "role": "C",
+      "serieA": "Cagliari"
+    },
+    "4871": {
+      "name": "Thuram",
+      "role": "A",
+      "serieA": "Inter"
+    },
+    "4887": {
+      "name": "Bellanova",
+      "role": "D",
+      "serieA": "Atalanta"
+    },
+    "4896": {
+      "name": "Maldini",
+      "role": "A",
+      "serieA": "Cagliari"
+    },
+    "4911": {
+      "name": "Douglas Luiz",
+      "role": "C",
+      "serieA": "Juventus"
+    },
+    "4923": {
+      "name": "Colombo",
+      "role": "A",
+      "serieA": "Genoa"
+    },
+    "4925": {
+      "name": "Carboni A.",
+      "role": "D",
+      "serieA": "Monza"
+    },
+    "4952": {
+      "name": "Monterisi",
+      "role": "D",
+      "serieA": "Frosinone"
+    },
+    "4964": {
+      "name": "Vicario",
+      "role": "P",
+      "serieA": "Juventus"
+    },
+    "4973": {
+      "name": "McKennie",
+      "role": "C",
+      "serieA": "Juventus"
+    },
+    "4976": {
+      "name": "Kalulu",
+      "role": "D",
+      "serieA": "Juventus"
+    },
+    "4994": {
+      "name": "Vojvoda",
+      "role": "D",
+      "serieA": "Udinese"
+    },
+    "4998": {
+      "name": "Molina N.",
+      "role": "D",
+      "serieA": "Roma"
+    },
+    "5007": {
+      "name": "Ilic",
+      "role": "C",
+      "serieA": "Lecce"
+    },
+    "5022": {
+      "name": "Pavlovic",
+      "role": "D",
+      "serieA": "Milan"
+    },
+    "5116": {
+      "name": "Martinez Jo.",
+      "role": "P",
+      "serieA": "Inter"
+    },
+    "5131": {
+      "name": "Gilmour",
+      "role": "C",
+      "serieA": "Napoli"
+    },
+    "5365": {
+      "name": "Dragusin",
+      "role": "D",
+      "serieA": "Fiorentina"
+    },
+    "5422": {
+      "name": "Zalewski",
+      "role": "C",
+      "serieA": "Atalanta"
+    },
+    "5436": {
+      "name": "Raimondo",
+      "role": "A",
+      "serieA": "Frosinone"
+    },
+    "5504": {
+      "name": "Coulibaly L.",
+      "role": "C",
+      "serieA": "Lecce"
+    },
+    "5507": {
+      "name": "Busio",
+      "role": "C",
+      "serieA": "Venezia"
+    },
+    "5514": {
+      "name": "Vasquez",
+      "role": "D",
+      "serieA": "Genoa"
+    },
+    "5520": {
+      "name": "Cambiaso",
+      "role": "D",
+      "serieA": "Juventus"
+    },
+    "5526": {
+      "name": "Scalvini",
+      "role": "D",
+      "serieA": "Atalanta"
+    },
+    "5555": {
+      "name": "Kamara H.",
+      "role": "D",
+      "serieA": "Udinese"
+    },
+    "5559": {
+      "name": "Da Cunha",
+      "role": "C",
+      "serieA": "Como"
+    },
+    "5585": {
+      "name": "Malen",
+      "role": "A",
+      "serieA": "Roma"
+    },
+    "5589": {
+      "name": "Konè M.",
+      "role": "C",
+      "serieA": "Roma"
+    },
+    "5620": {
+      "name": "Tavares N.",
+      "role": "D",
+      "serieA": "Lazio"
+    },
+    "5637": {
+      "name": "Davis K.",
+      "role": "A",
+      "serieA": "Udinese"
+    },
+    "5641": {
+      "name": "Chalobah T.",
+      "role": "D",
+      "serieA": "Como"
+    },
+    "5675": {
+      "name": "Theate",
+      "role": "D",
+      "serieA": "Bologna"
+    },
+    "5685": {
+      "name": "Koopmeiners",
+      "role": "C",
+      "serieA": "Juventus"
+    },
+    "5687": {
+      "name": "Vlasic",
+      "role": "C",
+      "serieA": "Torino"
+    },
+    "5694": {
+      "name": "Beto",
+      "role": "A",
+      "serieA": "Fiorentina"
+    },
+    "5734": {
+      "name": "Soulè",
+      "role": "A",
+      "serieA": "Roma"
+    },
+    "5739": {
+      "name": "De Winter",
+      "role": "D",
+      "serieA": "Milan"
+    },
+    "5750": {
+      "name": "Ostigard",
+      "role": "D",
+      "serieA": "Genoa"
+    },
+    "5761": {
+      "name": "Zhegrova",
+      "role": "C",
+      "serieA": "Juventus"
+    },
+    "5791": {
+      "name": "Frendrup",
+      "role": "C",
+      "serieA": "Genoa"
+    },
+    "5792": {
+      "name": "Ederson D.S.",
+      "role": "C",
+      "serieA": "Atalanta"
+    },
+    "5800": {
+      "name": "Gudmundsson A.",
+      "role": "C",
+      "serieA": "Lazio"
+    },
+    "5823": {
+      "name": "Baldanzi",
+      "role": "C",
+      "serieA": "Genoa"
+    },
+    "5831": {
+      "name": "Gatti",
+      "role": "D",
+      "serieA": "Juventus"
+    },
+    "5833": {
+      "name": "Gila",
+      "role": "D",
+      "serieA": "Milan"
+    },
+    "5838": {
+      "name": "Birindelli",
+      "role": "D",
+      "serieA": "Monza"
+    },
+    "5841": {
+      "name": "Svilar",
+      "role": "P",
+      "serieA": "Roma"
+    },
+    "5844": {
+      "name": "Thorstvedt",
+      "role": "C",
+      "serieA": "Sassuolo"
+    },
+    "5851": {
+      "name": "Doig",
+      "role": "D",
+      "serieA": "Sassuolo"
+    },
+    "5862": {
+      "name": "Valeri",
+      "role": "D",
+      "serieA": "Parma"
+    },
+    "5877": {
+      "name": "Carlos Augusto",
+      "role": "D",
+      "serieA": "Inter"
+    },
+    "5878": {
+      "name": "Colpani",
+      "role": "C",
+      "serieA": "Monza"
+    },
+    "5951": {
+      "name": "Kolo Muani",
+      "role": "A",
+      "serieA": "Juventus"
+    },
+    "5995": {
+      "name": "De Ketelaere",
+      "role": "A",
+      "serieA": "Atalanta"
+    },
+    "6010": {
+      "name": "Fazzini",
+      "role": "C",
+      "serieA": "Cagliari"
+    },
+    "6021": {
+      "name": "Abankwah",
+      "role": "D",
+      "serieA": "Udinese"
+    },
+    "6042": {
+      "name": "Lucumì",
+      "role": "D",
+      "serieA": "Juventus"
+    },
+    "6047": {
+      "name": "Ehizibue",
+      "role": "D",
+      "serieA": "Genoa"
+    },
+    "6052": {
+      "name": "Hojlund",
+      "role": "A",
+      "serieA": "Napoli"
+    },
+    "6060": {
+      "name": "Laurientè",
+      "role": "A",
+      "serieA": "Sassuolo"
+    },
+    "6151": {
+      "name": "Perrone",
+      "role": "C",
+      "serieA": "Como"
+    },
+    "6204": {
+      "name": "Kvernadze",
+      "role": "A",
+      "serieA": "Frosinone"
+    },
+    "6206": {
+      "name": "Fabbian",
+      "role": "C",
+      "serieA": "Parma"
+    },
+    "6215": {
+      "name": "Lucca",
+      "role": "A",
+      "serieA": "Napoli"
+    },
+    "6217": {
+      "name": "Bisseck",
+      "role": "D",
+      "serieA": "Inter"
+    },
+    "6274": {
+      "name": "Diouf",
+      "role": "C",
+      "serieA": "Inter"
+    },
+    "6344": {
+      "name": "Sanchez Ro.",
+      "role": "P",
+      "serieA": "Como"
+    },
+    "6372": {
+      "name": "Moreira",
+      "role": "C",
+      "serieA": "Milan"
+    },
+    "6397": {
+      "name": "Ramos G.",
+      "role": "A",
+      "serieA": "Milan"
+    },
+    "6398": {
+      "name": "Isaksen",
+      "role": "C",
+      "serieA": "Lazio"
+    },
+    "6434": {
+      "name": "Yildiz",
+      "role": "A",
+      "serieA": "Juventus"
+    },
+    "6435": {
+      "name": "Krstovic",
+      "role": "A",
+      "serieA": "Atalanta"
+    },
+    "6462": {
+      "name": "Okoye",
+      "role": "P",
+      "serieA": "Udinese"
+    },
+    "6482": {
+      "name": "Mandas",
+      "role": "P",
+      "serieA": "Lazio"
+    },
+    "6485": {
+      "name": "Kristensen T.",
+      "role": "D",
+      "serieA": "Atalanta"
+    },
+    "6495": {
+      "name": "Comuzzo",
+      "role": "D",
+      "serieA": "Torino"
+    },
+    "6531": {
+      "name": "Jimenez A.",
+      "role": "D",
+      "serieA": "Fiorentina"
+    },
+    "6572": {
+      "name": "Castro S.",
+      "role": "A",
+      "serieA": "Roma"
+    },
+    "6618": {
+      "name": "Cissè A.",
+      "role": "C",
+      "serieA": "Milan"
+    },
+    "6642": {
+      "name": "Coco",
+      "role": "D",
+      "serieA": "Torino"
+    },
+    "6646": {
+      "name": "Adams C.",
+      "role": "A",
+      "serieA": "Torino"
+    },
+    "6659": {
+      "name": "Lucchesi",
+      "role": "D",
+      "serieA": "Monza"
+    },
+    "6660": {
+      "name": "Marcandalli",
+      "role": "D",
+      "serieA": "Genoa"
+    },
+    "6664": {
+      "name": "Delprato",
+      "role": "D",
+      "serieA": "Parma"
+    },
+    "6669": {
+      "name": "Bonny",
+      "role": "A",
+      "serieA": "Inter"
+    },
+    "6675": {
+      "name": "Dovbyk",
+      "role": "A",
+      "serieA": "Bologna"
+    },
+    "6677": {
+      "name": "Adzic",
+      "role": "C",
+      "serieA": "Sassuolo"
+    },
+    "6684": {
+      "name": "Ekkelenkamp",
+      "role": "C",
+      "serieA": "Udinese"
+    },
+    "6727": {
+      "name": "Couto",
+      "role": "D",
+      "serieA": "Como"
+    },
+    "6752": {
+      "name": "Woltemade",
+      "role": "A",
+      "serieA": "Juventus"
+    },
+    "6813": {
+      "name": "Torriani",
+      "role": "P",
+      "serieA": "Milan"
+    },
+    "6821": {
+      "name": "Hainaut",
+      "role": "D",
+      "serieA": "Venezia"
+    },
+    "6833": {
+      "name": "Mbangula",
+      "role": "C",
+      "serieA": "Bologna"
+    },
+    "6844": {
+      "name": "Rowe",
+      "role": "C",
+      "serieA": "Atalanta"
+    },
+    "6867": {
+      "name": "Valle",
+      "role": "D",
+      "serieA": "Como"
+    },
+    "6869": {
+      "name": "Ramon",
+      "role": "D",
+      "serieA": "Como"
+    },
+    "6875": {
+      "name": "Paz N.",
+      "role": "C",
+      "serieA": "Como"
+    },
+    "6884": {
+      "name": "Conceicao",
+      "role": "C",
+      "serieA": "Juventus"
+    },
+    "6904": {
+      "name": "Yeboah J.",
+      "role": "A",
+      "serieA": "Venezia"
+    },
+    "6908": {
+      "name": "Atta",
+      "role": "C",
+      "serieA": "Fiorentina"
+    },
+    "6956": {
+      "name": "Solet",
+      "role": "D",
+      "serieA": "Udinese"
+    },
+    "6966": {
+      "name": "Butez",
+      "role": "P",
+      "serieA": "Como"
+    },
+    "6967": {
+      "name": "Diao",
+      "role": "A",
+      "serieA": "Como"
+    },
+    "6989": {
+      "name": "Tiago Gabriel",
+      "role": "D",
+      "serieA": "Lecce"
+    },
+    "7017": {
+      "name": "Douvikas",
+      "role": "A",
+      "serieA": "Como"
+    },
+    "7023": {
+      "name": "Pellegrino M.",
+      "role": "A",
+      "serieA": "Fiorentina"
+    },
+    "7048": {
+      "name": "De Marzi",
+      "role": "P",
+      "serieA": "Roma"
+    },
+    "7071": {
+      "name": "Esposito F.P.",
+      "role": "A",
+      "serieA": "Inter"
+    },
+    "7078": {
+      "name": "Mastantuono",
+      "role": "C",
+      "serieA": "Fiorentina"
+    },
+    "7120": {
+      "name": "Lang",
+      "role": "A",
+      "serieA": "Napoli"
+    },
+    "7126": {
+      "name": "Baturina",
+      "role": "C",
+      "serieA": "Como"
+    },
+    "7181": {
+      "name": "Wesley",
+      "role": "D",
+      "serieA": "Roma"
+    },
+    "7203": {
+      "name": "Jashari",
+      "role": "C",
+      "serieA": "Milan"
+    },
+    "7223": {
+      "name": "Vergara",
+      "role": "C",
+      "serieA": "Napoli"
+    },
+    "7252": {
+      "name": "Stulic",
+      "role": "A",
+      "serieA": "Lecce"
+    },
+    "7294": {
+      "name": "Valdepenas",
+      "role": "D",
+      "serieA": "Fiorentina"
+    },
+    "7311": {
+      "name": "Romano",
+      "role": "C",
+      "serieA": "Cagliari"
+    },
+    "7314": {
+      "name": "Taylor K.",
+      "role": "C",
+      "serieA": "Lazio"
+    },
+    "7337": {
+      "name": "Motta",
+      "role": "P",
+      "serieA": "Lazio"
+    },
+    "7347": {
+      "name": "Bowie",
+      "role": "A",
+      "serieA": "Sassuolo"
+    },
+    "7351": {
+      "name": "Santos A.",
+      "role": "A",
+      "serieA": "Napoli"
+    },
+    "7374": {
+      "name": "Mendy P.",
+      "role": "A",
+      "serieA": "Cagliari"
+    },
+    "7436": {
+      "name": "Alajbegovic",
+      "role": "C",
+      "serieA": "Juventus"
+    },
+    "7469": {
+      "name": "Bracaglia",
+      "role": "D",
+      "serieA": "Frosinone"
+    },
+    "7472": {
+      "name": "Calò",
+      "role": "C",
+      "serieA": "Frosinone"
+    },
+    "7484": {
+      "name": "Adams A.",
+      "role": "A",
+      "serieA": "Venezia"
+    },
+    "7485": {
+      "name": "Mangas",
+      "role": "D",
+      "serieA": "Monza"
+    },
+    "7523": {
+      "name": "Varela G.",
+      "role": "A",
+      "serieA": "Monza"
+    },
+    "7534": {
+      "name": "Renzetti",
+      "role": "P",
+      "serieA": "Lazio"
+    },
+    "7546": {
+      "name": "Robinson J.",
+      "role": "A",
+      "serieA": "Monza"
+    },
+    "7551": {
+      "name": "Schmid",
+      "role": "C",
+      "serieA": "Frosinone"
+    },
+    "7556": {
+      "name": "Mora",
+      "role": "C",
+      "serieA": "Roma"
+    },
+    "7599": {
+      "name": "Lulli",
+      "role": "D",
+      "serieA": "Roma"
+    },
+    "7600": {
+      "name": "Osmajic",
+      "role": "A",
+      "serieA": "Genoa"
+    }
   },
+  "rosterHistory": [
+    {
+      "fromRound": 1,
+      "teams": {
+        "Partizan Tirana": [
+          1926,
+          5116,
+          2814,
+          4657,
+          5641,
+          4137,
+          254,
+          4401,
+          4807,
+          4378,
+          4994,
+          184,
+          6618,
+          4179,
+          5800,
+          6875,
+          536,
+          7314,
+          5761,
+          7347,
+          4923,
+          2097,
+          7120,
+          2038,
+          5436
+        ],
+        "Real Ichnusa": [
+          4312,
+          2815,
+          6813,
+          2120,
+          5877,
+          5833,
+          7485,
+          6660,
+          4998,
+          5526,
+          2514,
+          7126,
+          2848,
+          5791,
+          5685,
+          7078,
+          4777,
+          2423,
+          7223,
+          6646,
+          7017,
+          6204,
+          4371,
+          2137,
+          6434
+        ],
+        "Ultimo": [
+          7048,
+          610,
+          5841,
+          5739,
+          2816,
+          6821,
+          6042,
+          1852,
+          6989,
+          7181,
+          554,
+          2194,
+          5792,
+          6684,
+          7203,
+          2606,
+          6151,
+          5422,
+          152,
+          6669,
+          4463,
+          6215,
+          2764,
+          6904,
+          608
+        ],
+        "Team24": [
+          2845,
+          572,
+          2170,
+          6021,
+          7469,
+          4925,
+          6642,
+          6495,
+          5851,
+          6659,
+          6867,
+          5504,
+          4465,
+          1933,
+          2528,
+          6372,
+          2379,
+          5687,
+          2766,
+          531,
+          6052,
+          6435,
+          6060,
+          4896,
+          2061
+        ],
+        "Cusiana": [
+          6966,
+          4431,
+          133,
+          5838,
+          6047,
+          4976,
+          5555,
+          2296,
+          6956,
+          5862,
+          5514,
+          6677,
+          6884,
+          4911,
+          5131,
+          5589,
+          4287,
+          4973,
+          5844,
+          2832,
+          5585,
+          7374,
+          7600,
+          7252,
+          6752
+        ],
+        "SM Frattese": [
+          4360,
+          6344,
+          4964,
+          4887,
+          2788,
+          5520,
+          6531,
+          4317,
+          5022,
+          6869,
+          5675,
+          7436,
+          6908,
+          4856,
+          2517,
+          7556,
+          2167,
+          6844,
+          632,
+          5694,
+          6967,
+          7071,
+          5951,
+          6397,
+          7351
+        ],
+        "Shakhtar Donuts": [
+          2521,
+          4236,
+          6462,
+          6727,
+          6664,
+          6485,
+          7599,
+          4952,
+          4409,
+          5620,
+          7294,
+          1870,
+          5507,
+          7472,
+          5878,
+          6274,
+          5007,
+          7311,
+          7551,
+          7484,
+          6572,
+          5637,
+          7023,
+          7546,
+          4871
+        ],
+        "Real Pattagghiu": [
+          6482,
+          7337,
+          7534,
+          4159,
+          6217,
+          5365,
+          5831,
+          256,
+          4263,
+          4734,
+          5750,
+          4870,
+          5823,
+          5559,
+          6206,
+          6010,
+          6398,
+          1850,
+          6833,
+          5995,
+          6675,
+          309,
+          4359,
+          5734,
+          7523
+        ]
+      }
+    }
+  ],
   "rounds": [
     {
       "round": 1,
@@ -877,6 +1284,316 @@
           "commentary": {
             "caressa": "Parte col piede giusto il Real Pattagghiu! 2-1 al Real Ichnusa, 75.5 punti contro 70. E il nome sulla copertina è quello di Varela G., 13 punti da solo: un esordio così se lo sognava!",
             "bergomi": "Vittoria meritata, Fabio, ma il Real Ichnusa può recriminare. Pulisic ha fatto la sua parte con 10.5, il problema è dietro: Marcandalli a 4.5 pesa. Curiosità: con le formazioni ideali finirebbe 3-2, stesso verdetto. Andre ha lasciato in panchina solo 4.5 punti, gestione già da veterano."
+          },
+          "lineups": {
+            "home": [
+              {
+                "p": 6482,
+                "t": "s",
+                "v": 7.5,
+                "b": 10.5,
+                "e": {
+                  "rigParato": 1
+                }
+              },
+              {
+                "p": 6217,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 4263,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 4159,
+                "t": "s",
+                "v": 6,
+                "b": 5.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 5559,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 5823,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 4870,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 6010,
+                "t": "out"
+              },
+              {
+                "p": 7523,
+                "t": "s",
+                "v": 7.5,
+                "b": 13,
+                "e": {
+                  "amm": 1,
+                  "gol": 2
+                }
+              },
+              {
+                "p": 309,
+                "t": "s",
+                "v": 7,
+                "b": 7
+              },
+              {
+                "p": 5995,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4359,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6833,
+                "t": "b"
+              },
+              {
+                "p": 6398,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 5734,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 4734,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5750,
+                "t": "b",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 1850,
+                "t": "in",
+                "v": 5.5,
+                "b": 5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 5365,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 6206,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5831,
+                "t": "b"
+              },
+              {
+                "p": 256,
+                "t": "b",
+                "v": 5.5,
+                "b": 5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 7337,
+                "t": "b"
+              },
+              {
+                "p": 7534,
+                "t": "b"
+              }
+            ],
+            "away": [
+              {
+                "p": 4312,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 2120,
+                "t": "s",
+                "v": 5.5,
+                "b": 5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 6660,
+                "t": "s",
+                "v": 5,
+                "b": 4.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 5833,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5526,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 7078,
+                "t": "s",
+                "v": 6,
+                "b": 5.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 2848,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 7126,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 2423,
+                "t": "s",
+                "v": 7.5,
+                "b": 10.5,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 7017,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 6204,
+                "t": "s",
+                "v": 7,
+                "b": 9.5,
+                "e": {
+                  "amm": 1,
+                  "gol": 1
+                }
+              },
+              {
+                "p": 2815,
+                "t": "b"
+              },
+              {
+                "p": 5877,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 6813,
+                "t": "b"
+              },
+              {
+                "p": 7485,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4998,
+                "t": "b",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 5791,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5685,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 7223,
+                "t": "b"
+              },
+              {
+                "p": 2137,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 4371,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6434,
+                "t": "b"
+              },
+              {
+                "p": 2514,
+                "t": "b"
+              },
+              {
+                "p": 6646,
+                "t": "b"
+              },
+              {
+                "p": 4777,
+                "t": "b"
+              }
+            ]
           }
         },
         {
@@ -890,6 +1607,349 @@
           "commentary": {
             "caressa": "TEAM24 SI PRESENTA COSÌ! 3-1 allo Shakhtar Donuts e 78.5 punti! Moreira, Rabiot e Maldini tutti e tre a quota 10: il centrocampo ha deciso la partita!",
             "bergomi": "Tre giocatori in doppia cifra sono tanta roba, Fabio. Ma guarda la panchina dello Shakhtar: Calò a 10, lasciato fuori. Con le formazioni ideali sarebbe 3-3, e Marco Fedele si mangia le mani: 8 punti buttati via."
+          },
+          "lineups": {
+            "home": [
+              {
+                "p": 2170,
+                "t": "s",
+                "v": 7,
+                "b": 6,
+                "e": {
+                  "golSubiti": 1
+                }
+              },
+              {
+                "p": 5851,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6495,
+                "t": "out"
+              },
+              {
+                "p": 6021,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5504,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 1933,
+                "t": "s",
+                "v": 6,
+                "b": 7,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 6372,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 2379,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 4896,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 531,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6052,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 572,
+                "t": "b"
+              },
+              {
+                "p": 2845,
+                "t": "b"
+              },
+              {
+                "p": 7469,
+                "t": "in",
+                "v": 6.5,
+                "b": 6,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 6867,
+                "t": "b",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 6642,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4925,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 6659,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 2528,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 2766,
+                "t": "b",
+                "v": 5.5,
+                "b": 5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 4465,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5687,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6060,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 2061,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6435,
+                "t": "b",
+                "v": 5,
+                "b": 5
+              }
+            ],
+            "away": [
+              {
+                "p": 6462,
+                "t": "s",
+                "v": 6,
+                "b": 5,
+                "e": {
+                  "golSubiti": 1
+                }
+              },
+              {
+                "p": 6664,
+                "t": "s",
+                "v": 6,
+                "b": 5.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 5620,
+                "t": "s",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 6727,
+                "t": "s",
+                "v": 5.5,
+                "b": 5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 5878,
+                "t": "out"
+              },
+              {
+                "p": 7551,
+                "t": "s",
+                "v": 7.5,
+                "b": 9.5,
+                "e": {
+                  "assist": 2
+                }
+              },
+              {
+                "p": 6274,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 1870,
+                "t": "s",
+                "v": 5.5,
+                "b": 5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 7546,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5637,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4871,
+                "t": "s",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 4236,
+                "t": "b",
+                "v": 4.5,
+                "b": 2.5,
+                "e": {
+                  "golSubiti": 2
+                }
+              },
+              {
+                "p": 2521,
+                "t": "b",
+                "v": 7,
+                "b": 5.5,
+                "e": {
+                  "amm": 1,
+                  "golSubiti": 1
+                }
+              },
+              {
+                "p": 4409,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 7294,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4952,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 7599,
+                "t": "b"
+              },
+              {
+                "p": 6485,
+                "t": "b",
+                "v": 5.5,
+                "b": 5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 7311,
+                "t": "in",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5007,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 7472,
+                "t": "b",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 7484,
+                "t": "b",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 6572,
+                "t": "b"
+              },
+              {
+                "p": 7023,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              }
+            ]
           }
         },
         {
@@ -903,6 +1963,312 @@
           "commentary": {
             "caressa": "Non si fanno male Ultimo e Partizan Tirana: 1-1 e tanta fatica! 69.5 a 67. Martinez L. fa il fenomeno con 14 punti, ma dall'altra parte Yeboah J. ne combina di tutti i colori: 1.5!",
             "bergomi": "Partita da dimenticare per entrambe, Fabio. Beppe si salva solo grazie al Toro. E il Partizan? Bernardeschi a 10 rimasto in panchina, roba da non credere. Con le formazioni ideali sarebbe 2-2: qui hanno sbagliato in due."
+          },
+          "lineups": {
+            "home": [
+              {
+                "p": 5841,
+                "t": "s",
+                "v": 7,
+                "b": 5,
+                "e": {
+                  "golSubiti": 2
+                }
+              },
+              {
+                "p": 6042,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 7181,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 2816,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 6684,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 152,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 2606,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5792,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6904,
+                "t": "s",
+                "v": 4.5,
+                "b": 1.5,
+                "e": {
+                  "rigSbagliato": 1
+                }
+              },
+              {
+                "p": 2764,
+                "t": "s",
+                "v": 8,
+                "b": 14,
+                "e": {
+                  "gol": 2
+                }
+              },
+              {
+                "p": 4463,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 610,
+                "t": "b"
+              },
+              {
+                "p": 7048,
+                "t": "b"
+              },
+              {
+                "p": 5739,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 6989,
+                "t": "b"
+              },
+              {
+                "p": 1852,
+                "t": "b"
+              },
+              {
+                "p": 6821,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 554,
+                "t": "b"
+              },
+              {
+                "p": 6151,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 7203,
+                "t": "b"
+              },
+              {
+                "p": 5422,
+                "t": "b"
+              },
+              {
+                "p": 6669,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 6215,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 608,
+                "t": "b"
+              }
+            ],
+            "away": [
+              {
+                "p": 5116,
+                "t": "s",
+                "v": 6.5,
+                "b": 4.5,
+                "e": {
+                  "golSubiti": 2
+                }
+              },
+              {
+                "p": 254,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 5641,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 4994,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 536,
+                "t": "s",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 6875,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5761,
+                "t": "s",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 6618,
+                "t": "out"
+              },
+              {
+                "p": 4923,
+                "t": "s",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 5436,
+                "t": "s",
+                "v": 6,
+                "b": 5.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 2097,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 2814,
+                "t": "b"
+              },
+              {
+                "p": 1926,
+                "t": "b"
+              },
+              {
+                "p": 4137,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 4657,
+                "t": "b",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 4378,
+                "t": "b",
+                "v": 6,
+                "b": 5.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 4807,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 4179,
+                "t": "in",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 184,
+                "t": "b",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 5800,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 7314,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 2038,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 7120,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 7347,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4401,
+                "t": "b"
+              }
+            ]
           }
         },
         {
@@ -916,6 +2282,346 @@
           "commentary": {
             "caressa": "CHE SPETTACOLO! Cusiana espugna il campo della SM Frattese 4-3, 84 punti a 78! Konè M. a 14, Adzic e Osmajic a 10, Conceicao a 9.5: un attacco devastante!",
             "bergomi": "Il miglior punteggio di giornata, Fabio, e non per caso. Ma attenzione alla SM Frattese: Bremer e Zaccagni a 10, però Jimenez A. a 10 è rimasto fuori. Con le formazioni ideali sarebbe 4-5, quindi Roby e Gaiuz avrebbero vinto comunque. Pezant però lascia per strada 7 punti pieni."
+          },
+          "lineups": {
+            "home": [
+              {
+                "p": 4964,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 6869,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 5022,
+                "t": "s",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 2788,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 632,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 2517,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 2167,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4856,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5951,
+                "t": "s",
+                "v": 7,
+                "b": 7
+              },
+              {
+                "p": 6397,
+                "t": "s",
+                "v": 7,
+                "b": 8,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 6967,
+                "t": "s",
+                "v": 5.5,
+                "b": 5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 6344,
+                "t": "b"
+              },
+              {
+                "p": 4360,
+                "t": "b",
+                "v": 7,
+                "b": 7
+              },
+              {
+                "p": 5675,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 6531,
+                "t": "b",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 5520,
+                "t": "b"
+              },
+              {
+                "p": 4887,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4317,
+                "t": "b",
+                "v": 6,
+                "b": 5.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 7436,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 7556,
+                "t": "b"
+              },
+              {
+                "p": 6908,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6844,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 7071,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 5694,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 7351,
+                "t": "b"
+              }
+            ],
+            "away": [
+              {
+                "p": 133,
+                "t": "s",
+                "v": 5,
+                "b": 4,
+                "e": {
+                  "golSubiti": 1
+                }
+              },
+              {
+                "p": 5555,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 5862,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 2296,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5589,
+                "t": "s",
+                "v": 8,
+                "b": 14,
+                "e": {
+                  "gol": 2
+                }
+              },
+              {
+                "p": 4287,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 6884,
+                "t": "s",
+                "v": 7,
+                "b": 9.5,
+                "e": {
+                  "amm": 1,
+                  "gol": 1
+                }
+              },
+              {
+                "p": 6677,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 7374,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5585,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 7600,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 6966,
+                "t": "b",
+                "v": 6,
+                "b": 4,
+                "e": {
+                  "golSubiti": 2
+                }
+              },
+              {
+                "p": 4431,
+                "t": "b",
+                "v": 6.5,
+                "b": 4.5,
+                "e": {
+                  "golSubiti": 2
+                }
+              },
+              {
+                "p": 5514,
+                "t": "b"
+              },
+              {
+                "p": 4976,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5838,
+                "t": "b",
+                "v": 6.5,
+                "b": 7,
+                "e": {
+                  "amm": 1,
+                  "assist": 1
+                }
+              },
+              {
+                "p": 6956,
+                "t": "b"
+              },
+              {
+                "p": 6047,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 4973,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5131,
+                "t": "b",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 4911,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5844,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6752,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 7252,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 2832,
+                "t": "b"
+              }
+            ]
           }
         }
       ],
