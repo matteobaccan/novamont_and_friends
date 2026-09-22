@@ -2107,10 +2107,19 @@ function miglioreFormazione(candidati) {
 
     if (!migliore) return null;
 
+    // La panchina va letta come ordine di sostituzione: prima per ruolo, poi
+    // per chi ha più probabilità di scendere in campo, perché un cambio serve
+    // solo se il giocatore gioca davvero
     const titolari = new Set(migliore.undici.map(g => g.pid));
     migliore.panchina = candidati
         .filter(c => !titolari.has(c.pid))
-        .sort((a, b) => b.atteso - a.atteso);
+        .sort((a, b) => {
+            const ruoloA = ORDINE_RUOLI[anagraficaGiocatore(a.pid).role] ?? 9;
+            const ruoloB = ORDINE_RUOLI[anagraficaGiocatore(b.pid).role] ?? 9;
+            if (ruoloA !== ruoloB) return ruoloA - ruoloB;
+            if (b.probabilita !== a.probabilita) return b.probabilita - a.probabilita;
+            return b.atteso - a.atteso;
+        });
 
     return migliore;
 }
@@ -2361,7 +2370,7 @@ function displayFormazione() {
                     </div>
                     ${f.undici.map(g => rigaConsiglio(g, true)).join('')}
                     <div class="consiglio-separatore">
-                        Panchina, in ordine di preferenza (${f.panchina.length} giocatori)
+                        Panchina, per ruolo e probabilità di giocare (${f.panchina.length} giocatori)
                     </div>
                     ${f.panchina.map(g => rigaConsiglio(g, false)).join('')}
                 </div>
