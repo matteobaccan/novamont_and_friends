@@ -1,7 +1,515 @@
 {
-  "aggiornato": "2026-09-22T17:09:46.365Z",
+  "aggiornato": "2026-09-22T22:21:53.281Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
+  "prossimoTurno": {
+    "numero": 6,
+    "partite": [
+      {
+        "casa": "Genoa",
+        "fuori": "Fiorentina",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Inter",
+        "fuori": "Parma",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Napoli",
+        "fuori": "Frosinone",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Como",
+        "fuori": "Roma",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Lazio",
+        "fuori": "Monza",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Lecce",
+        "fuori": "Bologna",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Sassuolo",
+        "fuori": "Milan",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Cagliari",
+        "fuori": "Juventus",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Atalanta",
+        "fuori": "Venezia",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Torino",
+        "fuori": "Udinese",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      }
+    ]
+  },
+  "classificaSerieA": {
+    "Roma": 1,
+    "Inter": 2,
+    "Lazio": 3,
+    "Cagliari": 4,
+    "Milan": 5,
+    "Frosinone": 6,
+    "Juventus": 7,
+    "Como": 8,
+    "Napoli": 9,
+    "Sassuolo": 10,
+    "Atalanta": 11,
+    "Lecce": 12,
+    "Udinese": 13,
+    "Torino": 14,
+    "Parma": 15,
+    "Monza": 16,
+    "Fiorentina": 17,
+    "Bologna": 18,
+    "Genoa": 19,
+    "Venezia": 20
+  },
+  "formaSerieA": {
+    "Genoa": {
+      "punti": 1,
+      "partite": 3,
+      "esiti": "PNP"
+    },
+    "Como": {
+      "punti": 6,
+      "partite": 3,
+      "esiti": "VVP"
+    },
+    "Fiorentina": {
+      "punti": 4,
+      "partite": 3,
+      "esiti": "PVN"
+    },
+    "Torino": {
+      "punti": 4,
+      "partite": 3,
+      "esiti": "VPN"
+    },
+    "Inter": {
+      "punti": 7,
+      "partite": 3,
+      "esiti": "VVN"
+    },
+    "Napoli": {
+      "punti": 4,
+      "partite": 3,
+      "esiti": "PVN"
+    },
+    "Roma": {
+      "punti": 7,
+      "partite": 3,
+      "esiti": "VVN"
+    },
+    "Atalanta": {
+      "punti": 0,
+      "partite": 3,
+      "esiti": "PPP"
+    },
+    "Frosinone": {
+      "punti": 7,
+      "partite": 3,
+      "esiti": "VNV"
+    },
+    "Venezia": {
+      "punti": 0,
+      "partite": 3,
+      "esiti": "PPP"
+    },
+    "Parma": {
+      "punti": 4,
+      "partite": 3,
+      "esiti": "NPV"
+    },
+    "Monza": {
+      "punti": 4,
+      "partite": 3,
+      "esiti": "NPV"
+    },
+    "Bologna": {
+      "punti": 2,
+      "partite": 3,
+      "esiti": "NPN"
+    },
+    "Sassuolo": {
+      "punti": 4,
+      "partite": 3,
+      "esiti": "NVP"
+    },
+    "Juventus": {
+      "punti": 4,
+      "partite": 3,
+      "esiti": "NPV"
+    },
+    "Milan": {
+      "punti": 5,
+      "partite": 3,
+      "esiti": "NNV"
+    },
+    "Cagliari": {
+      "punti": 9,
+      "partite": 3,
+      "esiti": "VVV"
+    },
+    "Lecce": {
+      "punti": 3,
+      "partite": 3,
+      "esiti": "PVP"
+    },
+    "Udinese": {
+      "punti": 0,
+      "partite": 3,
+      "esiti": "PPP"
+    },
+    "Lazio": {
+      "punti": 7,
+      "partite": 3,
+      "esiti": "VNV"
+    }
+  },
+  "rigoristi": {
+    "152": 2,
+    "184": 2,
+    "309": 2,
+    "531": 1,
+    "536": 3,
+    "632": 1,
+    "1933": 3,
+    "2038": 2,
+    "2061": 2,
+    "2097": 2,
+    "2137": 1,
+    "2155": 1,
+    "2167": 1,
+    "2194": 1,
+    "2423": 2,
+    "2517": 1,
+    "2606": 3,
+    "2764": 3,
+    "2766": 3,
+    "4179": 3,
+    "4210": 3,
+    "4387": 3,
+    "4463": 2,
+    "4923": 1,
+    "5029": 1,
+    "5119": 3,
+    "5336": 1,
+    "5507": 1,
+    "5559": 1,
+    "5585": 1,
+    "5637": 1,
+    "5687": 1,
+    "5694": 3,
+    "5750": 2,
+    "5800": 3,
+    "5862": 2,
+    "5951": 1,
+    "6015": 3,
+    "6052": 2,
+    "6060": 3,
+    "6145": 3,
+    "6229": 1,
+    "6397": 1,
+    "6435": 2,
+    "6572": 3,
+    "6666": 3,
+    "6675": 3,
+    "6752": 2,
+    "6956": 2,
+    "7017": 3,
+    "7078": 2,
+    "7252": 2,
+    "7472": 1,
+    "7484": 2,
+    "7523": 2,
+    "7547": 2,
+    "7551": 2,
+    "7600": 3,
+    "7612": 3,
+    "7625": 1
+  },
+  "infortunati": [
+    {
+      "nome": "Kossounou",
+      "squadra": "Atalanta",
+      "nota": "Il difensore frenato da una lesione muscolare di medio-alto grado del bicipite femorale della coscia sinistra alla vigilia della sfida di campionato contro la Juventus (del 20 settembre). Lungo stop, ipotizziamo un rientro dalla fine di novembre."
+    },
+    {
+      "nome": "Hien",
+      "squadra": "Atalanta",
+      "nota": "il difensore operato a fine giugno per una lesione del tendine prossimale del muscolo semimembranoso della coscia sinistra, in recupero e pronto a tornare in campo dalla metà di ottobre."
+    },
+    {
+      "nome": "Sulemana K.",
+      "squadra": "Atalanta",
+      "nota": "L'attaccante KO in amichevole l'8 agosto vittima di una lesione del collaterale mediale di secondo grado del ginocchio sinistro. Recuperabile da inizio ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Venezia."
+    },
+    {
+      "nome": "Idrissi R.",
+      "squadra": "Cagliari",
+      "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla fine di ottobre."
+    },
+    {
+      "nome": "Trepy",
+      "squadra": "Cagliari",
+      "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla metà di ottobre."
+    },
+    {
+      "nome": "Felici",
+      "squadra": "Cagliari",
+      "nota": "il centrocampista KO il 7 settembre contro il Lecce in casa vittima della rottura del legamento crociato anteriore. Verrà operato e costretto a un lungo stop (ipotizziamo un rientro da marzo)."
+    },
+    {
+      "nome": "Parisi",
+      "squadra": "Fiorentina",
+      "nota": "il cursore di fascia della Viola sta svolgendo l'iter di recupero dall'infortunio al legamento crociato al ginocchio, punta a tornare convocabile da novembre."
+    },
+    {
+      "nome": "Grillitsch",
+      "squadra": "Frosinone",
+      "nota": "il centrocampista non convocato per Genova (12 settembre) a causa di una sindrome retto-adduttoria. Out anche nella sfida successiva contro il Como, da valutare nei prossimi allenamenti le possibilità di convocazione già nella trasferta di Napoli alla ripresa del campionato."
+    },
+    {
+      "nome": "Terzic",
+      "squadra": "Frosinone",
+      "nota": "Il terzino dei ciociari ai box per una lesione di basso grado del bicipite femorale della coscia sinistra, da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Napoli."
+    },
+    {
+      "nome": "Havel",
+      "squadra": "Genoa",
+      "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dalla metà di ottobre."
+    },
+    {
+      "nome": "Venturino",
+      "squadra": "Genoa",
+      "nota": "il calciatore operato al tendine rotuleo e ora in fase di recupero. Di certo assente nel prossimo turno di campionato, ipotesi di rientro da fine ottobre."
+    },
+    {
+      "nome": "Boga",
+      "squadra": "Juventus",
+      "nota": "l'ala offensiva dei bianconeri fermo dopo il match contro il Milan (6 settembre) per una lesione di medio grado del bicipite femorale, ipotizziamo un possibile rientro dalla metà di ottobre."
+    },
+    {
+      "nome": "Locatelli",
+      "squadra": "Juventus",
+      "nota": "il metronomo del centrocampo bianconero ha rimediato la rottura del menisco esterno del ginocchio. Verrà operato a Lione a stretto giro. Lungo stop e possibilità di rivederlo in campo da gennaio."
+    },
+    {
+      "nome": "Grabara",
+      "squadra": "Juventus",
+      "nota": "Il portiere out dal 20 settembre per una lesione al crociato anteriore del ginocchio destro. Operazione chirurgica e lungo stop, rientro da aprile."
+    },
+    {
+      "nome": "Thuram K.",
+      "squadra": "Juventus",
+      "nota": "il centrocampista condizionato da una sindrome femoro-rotulea e, dopo un consulto medico a fine agosto, è stato sottoposto il 3 settembre a operazione chirurgica. Lungo stop, ipotizziamo un rientro da gennaio."
+    },
+    {
+      "nome": "Ekhator",
+      "squadra": "Juventus",
+      "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, ipotizziamo un possibile rientro dalla fine di ottobre."
+    },
+    {
+      "nome": "Yildiz",
+      "squadra": "Juventus",
+      "nota": "l'attaccante turco, dopo la gara di Frosinone (23 agosto), ha lamentato un problema al piede. Operato il 31 agosto di osteosintesi della frattura della base del V metatarso del piede sinistro, stop di circa tre mesi. Ipotesi di rientro in campo da fine novembre."
+    },
+    {
+      "nome": "Marusic",
+      "squadra": "Lazio",
+      "nota": "il terzino dei biancocelesti KO il 24 agosto a Bologna vittima di una lesione muscolare alla coscia. Proverà a recuperare a pieno durante la sosta, da valutare nei prossimi allenamenti le possibilità di convocazione già contro il Monza nel prossimo turno."
+    },
+    {
+      "nome": "Rovella",
+      "squadra": "Lazio",
+      "nota": "il regista dei biancocelesti KO il 30 agosto contro il Genoa vittima di una lesione muscolare al polpaccio che lo terrà ai box fino alla metà di ottobre."
+    },
+    {
+      "nome": "Gandelman",
+      "squadra": "Lecce",
+      "nota": "Il centrocampista fuori causa da metà settembre per noie fisiche, da valutare convocazione per la prossima giornata di campionato contro il Bologna."
+    },
+    {
+      "nome": "Berisha M.",
+      "squadra": "Lecce",
+      "nota": "Il centrocampista ha lamentato un sovraccarico muscolare alla gamba e non ha preso parte alle sfide contro Monza e Milan. Recuperabile da inizio ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Bologna."
+    },
+    {
+      "nome": "Ciurria",
+      "squadra": "Monza",
+      "nota": "il centrocampista non al meglio per noie fisiche, forfait anche nel prossimo turno contro la Lazio. Da valutare."
+    },
+    {
+      "nome": "Pessina",
+      "squadra": "Monza",
+      "nota": "Il centrocampista costretto a saltare l'inizio di campionato per una lussazione della rotula del ginocchio destro rimediata nella prima metà di agosto in allenamento. Tempi di recupero da monitorare, ma proverà a tornare arruolabile dall'inizio di novembre."
+    },
+    {
+      "nome": "Ziolkowski",
+      "squadra": "Monza",
+      "nota": "Il difensore condizionato da una fastidiosa fascite plantare, di certo assente nel prossimo turno di campionato. Tempi di recupero da valutare."
+    },
+    {
+      "nome": "Buongiorno",
+      "squadra": "Napoli",
+      "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
+    },
+    {
+      "nome": "Giovane",
+      "squadra": "Napoli",
+      "nota": "L'attaccante operato il 3 settembre a causa di un'ernia inguinale e recuperabile dall'inizio di ottobre, ma rimane da valutare quotidianamente in vista della ripresa del campionato e capire se ci sono possibilità di convocazione già contro il Frosinone."
+    },
+    {
+      "nome": "Santos A.",
+      "squadra": "Napoli",
+      "nota": "Il brasiliano costretto al cambio il 9 settembre in Champions League vittima di una lesione muscolare di medio grado al bicipite femorale sinistro. Proverà a tornare arruolabile dalla seconda metà di ottobre."
+    },
+    {
+      "nome": "Zambo Anguissa",
+      "squadra": "Napoli",
+      "nota": "il centrocampista subentrato a gara in corso il 20 settembre a Firenze, ma ha lamentato una lesione miofasciale di basso grado dell'adduttore lungo e rimane da valutare nei prossimi allenamenti in vista della gara contro il Frosinone alla ripresa del campionato."
+    },
+    {
+      "nome": "Marianucci",
+      "squadra": "Napoli",
+      "nota": "Il difensore KO in amichevole l'8 agosto vittima di una lesione di alto grado del collaterale mediale del ginocchio sinistro. Stop di circa due mesi, rientro dalla seconda metà di ottobre."
+    },
+    {
+      "nome": "Bernabè",
+      "squadra": "Parma",
+      "nota": "niente da fare per il centrocampista, ancora condizionato da noie fisiche ed escluso il 20 settembre dai convocati contro il Genoa. Da valutare nella sosta in vista della 6a giornata di campionato, a rischio la sua presenza a San Siro contro l'Inter."
+    },
+    {
+      "nome": "Nicolussi Caviglia",
+      "squadra": "Parma",
+      "nota": "il centrocampista alle prese dalla seconda metà di luglio con una lesione di medio grado alla coscia destra, ma a fine agosto ha deciso, assieme allo staff medico ducale, di operarsi. Lungo stop e ipotesi di ritorno in campo da novembre."
+    },
+    {
+      "nome": "Idzes",
+      "squadra": "Sassuolo",
+      "nota": "Il difensore ai box per una lesione di grado moderato al quadricipite della gamba sinistra, proverà a tornerà arruolabile dalla seconda metà di ottobre."
+    },
+    {
+      "nome": "Volpato",
+      "squadra": "Sassuolo",
+      "nota": "l'esterno offensivo dei neroverdi KO il 6 settembre a Bologna vittima di una lesione di grado moderato al flessore della gamba destra. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Milan."
+    },
+    {
+      "nome": "Konè I.",
+      "squadra": "Sassuolo",
+      "nota": "il centrocampista canadese vittima a giugno nella gara dei Mondiali di una rottura di tibia e perone. Operato, punta a tornare in campo da dicembre."
+    },
+    {
+      "nome": "Pieragnolo",
+      "squadra": "Sassuolo",
+      "nota": "il difensore sta proseguendo la fase di recupero dalla lesione legamento crociato anteriore gamba destra e ipotizziamo possa tornare convocabile da fine ottobre."
+    },
+    {
+      "nome": "Walukiewicz",
+      "squadra": "Sassuolo",
+      "nota": "Il difensore alle prese con un forte trauma contusivo alla gamba destra, da valutare il rientro dalla metà di ottobre."
+    },
+    {
+      "nome": "Candè",
+      "squadra": "Sassuolo",
+      "nota": "il difensore a gennaio vittima della rottura legamento crociato anteriore ginocchio destro, punta a tornare convocabile dalla metà di ottobre."
+    },
+    {
+      "nome": "Boloca",
+      "squadra": "Sassuolo",
+      "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da metà ottobre."
+    },
+    {
+      "nome": "Adams C.",
+      "squadra": "Torino",
+      "nota": "L'attaccante frenato a metà settembre da una lesione distrattiva di basso grado all'adduttore, forfait contro Roma e Bologna. Punta a recuperare nella sosta, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro l'Udinese."
+    },
+    {
+      "nome": "Piotrowski",
+      "squadra": "Udinese",
+      "nota": "Il centrocampista ha ravvisato il 7 settembre contro la Lazio una lieve aritmia cardiaca benigna e si sottoporrà nei prossimi giorni ad un intervento di ablazione cardiaca. Osservato un periodo di riposo, potrà tornare alla regolare attività agonistica (ipotizziamo da fine ottobre)."
+    },
+    {
+      "nome": "Dagasso",
+      "squadra": "Venezia",
+      "nota": "Il centrocampista non convocato dalla gara dell'11 settembre contro la Fiorentina per un problema fisico. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno a Bergamo."
+    },
+    {
+      "nome": "Adorante",
+      "squadra": "Venezia",
+      "nota": "l'attaccante a fine luglio ha deciso di operarsi per un problema alla schiena, che lo costringerà a stare ai box per buona parte del girone d'andata del campionato. Tentativo di rientro da metà ottobre."
+    },
+    {
+      "nome": "Bella-Kotchap",
+      "squadra": "Venezia",
+      "nota": "il difensore costretto al cambio a Frosinone il 6 settembre per un risentimento muscolare mio-fasciale all'adduttore della gamba destra. Recuperabile dall'inizio di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro l'Atalanta."
+    },
+    {
+      "nome": "Sverko",
+      "squadra": "Venezia",
+      "nota": "il difensore operato in estate per il perdurare di un problema all'anca e recuperabile da fine ottobre."
+    },
+    {
+      "nome": "Franjic",
+      "squadra": "Venezia",
+      "nota": "il difensore costretto al cambio a Milano contro i rossoneri a fine agosto per un guaio alla spalla che ha richiesto l'intervento chirurgico. Lungo stop e rientro dalla metà di dicembre."
+    },
+    {
+      "nome": "Basic",
+      "squadra": "Venezia",
+      "nota": "Il centrocampista out contro Lazio, Frosinone e Fiorentina per noie fisiche, rimane da valutare quotidianamente in vista della 6a giornata di campionato contro l'Atalanta."
+    },
+    {
+      "nome": "Busio",
+      "squadra": "Venezia",
+      "nota": "il regista dei veneti KO l'11 settembre contro la Fiorentina vittima di una distrazione intratendinea del bicipite femorale destro. Rientro dalla seconda metà di ottobre."
+    }
+  ],
   "giocatori": {
     "3": {
       "nome": "Radunovic",
@@ -214,7 +722,7 @@
       "titolare": false
     },
     "1850": {
-      "nome": "Kessi&#xE8;",
+      "nome": "Kessiè",
       "squadra": "Atalanta",
       "ruolo": "C",
       "probabilita": 70,
@@ -501,7 +1009,7 @@
       "titolare": true
     },
     "2857": {
-      "nome": "Traor&#xE8; Hj.",
+      "nome": "Traorè Hj.",
       "squadra": "Genoa",
       "ruolo": "C",
       "probabilita": 40,
@@ -599,7 +1107,7 @@
       "titolare": true
     },
     "4317": {
-      "nome": "N&#x27;Dicka",
+      "nome": "N'Dicka",
       "squadra": "Roma",
       "ruolo": "D",
       "probabilita": 60,
@@ -872,7 +1380,7 @@
       "titolare": true
     },
     "4957": {
-      "nome": "Montip&#xF2;",
+      "nome": "Montipò",
       "squadra": "Venezia",
       "ruolo": "P",
       "probabilita": 5,
@@ -1166,7 +1674,7 @@
       "titolare": true
     },
     "5589": {
-      "nome": "Kon&#xE8; M.",
+      "nome": "Konè M.",
       "squadra": "Roma",
       "ruolo": "C",
       "probabilita": 90,
@@ -1250,7 +1758,7 @@
       "titolare": true
     },
     "5734": {
-      "nome": "Soul&#xE8;",
+      "nome": "Soulè",
       "squadra": "Roma",
       "ruolo": "A",
       "probabilita": 70,
@@ -1439,7 +1947,7 @@
       "titolare": false
     },
     "5885": {
-      "nome": "Dod&#xF2;",
+      "nome": "Dodò",
       "squadra": "Fiorentina",
       "ruolo": "D",
       "probabilita": 20,
@@ -1477,8 +1985,8 @@
       "nome": "Ebosse",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 70,
-      "titolare": true
+      "probabilita": 40,
+      "titolare": false
     },
     "5995": {
       "nome": "De Ketelaere",
@@ -1519,7 +2027,7 @@
       "nome": "Abankwah",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 80,
+      "probabilita": 70,
       "titolare": true
     },
     "6024": {
@@ -1537,7 +2045,7 @@
       "titolare": false
     },
     "6042": {
-      "nome": "Lucum&#xEC;",
+      "nome": "Lucumì",
       "squadra": "Juventus",
       "ruolo": "D",
       "probabilita": 80,
@@ -1565,7 +2073,7 @@
       "titolare": false
     },
     "6060": {
-      "nome": "Laurient&#xE8;",
+      "nome": "Laurientè",
       "squadra": "Sassuolo",
       "ruolo": "A",
       "probabilita": 90,
@@ -1684,7 +2192,7 @@
       "titolare": false
     },
     "6229": {
-      "nome": "Tour&#xE8; E.",
+      "nome": "Tourè E.",
       "squadra": "Parma",
       "ruolo": "A",
       "probabilita": 80,
@@ -1943,7 +2451,7 @@
       "titolare": false
     },
     "6618": {
-      "nome": "Ciss&#xE8; A.",
+      "nome": "Cissè A.",
       "squadra": "Milan",
       "ruolo": "C",
       "probabilita": 55,
@@ -2125,7 +2633,7 @@
       "titolare": true
     },
     "6826": {
-      "nome": "Dembel&#xE8; A.",
+      "nome": "Dembelè A.",
       "squadra": "Lecce",
       "ruolo": "D",
       "probabilita": 30,
@@ -2275,8 +2783,8 @@
       "nome": "Solet",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 50,
-      "titolare": false
+      "probabilita": 75,
+      "titolare": true
     },
     "6966": {
       "nome": "Butez",
@@ -2328,7 +2836,7 @@
       "titolare": true
     },
     "7001": {
-      "nome": "N&#x27;Dri",
+      "nome": "N'Dri",
       "squadra": "Lecce",
       "ruolo": "A",
       "probabilita": 60,
@@ -2468,7 +2976,7 @@
       "titolare": false
     },
     "7146": {
-      "nome": "Tour&#xE8; I.",
+      "nome": "Tourè I.",
       "squadra": "Monza",
       "ruolo": "C",
       "probabilita": 20,
@@ -2657,7 +3165,7 @@
       "titolare": false
     },
     "7274": {
-      "nome": "Z&#xE8; Pedro",
+      "nome": "Zè Pedro",
       "squadra": "Cagliari",
       "ruolo": "D",
       "probabilita": 80,
@@ -2909,7 +3417,7 @@
       "titolare": true
     },
     "7472": {
-      "nome": "Cal&#xF2;",
+      "nome": "Calò",
       "squadra": "Frosinone",
       "ruolo": "C",
       "probabilita": 90,
