@@ -962,8 +962,8 @@ function showTeamMatches(teamName, clickedRow, modo = 'reale') {
                 </div>
                 ${espandibile ? `
                     <div class="team-match-lineups" id="${idDettaglio}" hidden>
-                        ${colonnaFormazione(m.homeTeam, m.lineups.home)}
-                        ${colonnaFormazione(m.awayTeam, m.lineups.away)}
+                        ${ideale ? colonnaFormazioneIdeale(m.homeTeam, m.lineups.home) : colonnaFormazione(m.homeTeam, m.lineups.home)}
+                        ${ideale ? colonnaFormazioneIdeale(m.awayTeam, m.lineups.away) : colonnaFormazione(m.awayTeam, m.lineups.away)}
                     </div>
                 ` : ''}
             `;
@@ -1808,7 +1808,7 @@ function badgeEventi(eventi) {
         .join('');
 }
 
-function rigaGiocatore(giocatore) {
+function rigaGiocatore(giocatore, marcatore = '') {
     const info = anagraficaGiocatore(giocatore.p);
     const senzaVoto = giocatore.b === undefined;
     const voto = senzaVoto ? (giocatore.sv ? 's.v.' : '—') : giocatore.b;
@@ -1824,7 +1824,7 @@ function rigaGiocatore(giocatore) {
     return `
         <div class="lineup-row">
             <span class="lineup-ruolo ruolo-${info.role}">${info.role}</span>
-            <span class="lineup-nome">${info.name} ${stato}</span>
+            <span class="lineup-nome">${info.name} ${stato}${marcatore}</span>
             <span class="lineup-serieA">${info.serieA || ''}</span>
             <span class="lineup-eventi">${badgeEventi(giocatore.e)}</span>
             <span class="lineup-voto ${classeVoto}">${voto}</span>
@@ -1839,9 +1839,72 @@ function colonnaFormazione(titolo, lineup) {
     return `
         <div class="lineup-team">
             <h5 class="lineup-team-name">${titolo}</h5>
-            <div class="lineup-group">${titolari.map(rigaGiocatore).join('')}</div>
+            <div class="lineup-group">${titolari.map(g => rigaGiocatore(g)).join('')}</div>
             <div class="lineup-group-title">Panchina</div>
-            <div class="lineup-group panchina">${panchina.map(rigaGiocatore).join('')}</div>
+            <div class="lineup-group panchina">${panchina.map(g => rigaGiocatore(g)).join('')}</div>
+        </div>
+    `;
+}
+
+// Miglior undici possibile fra chi ha preso un voto, senza guardare chi il
+// fantallenatore avesse schierato: è la formazione che spiega il punteggio
+// ideale. Stesso algoritmo di calcola-giornata.mjs, che ha prodotto i punteggi
+// scritti nel JSON — se divergesse, la pagina mostrerebbe un undici che non
+// somma il numero che le sta accanto.
+function formazioneIdeale(lineup) {
+    const perRuolo = { P: [], D: [], C: [], A: [] };
+    for (const g of lineup) {
+        if (g.b === undefined) continue; // senza voto non è selezionabile
+        const ruolo = anagraficaGiocatore(g.p).role;
+        if (perRuolo[ruolo]) perRuolo[ruolo].push(g);
+    }
+    for (const ruolo of Object.keys(perRuolo)) perRuolo[ruolo].sort((a, b) => b.b - a.b);
+
+    if (perRuolo.P.length === 0) return null;
+
+    let migliore = null;
+    for (const [d, c, a] of MODULI) {
+        if (perRuolo.D.length < d || perRuolo.C.length < c || perRuolo.A.length < a) continue;
+
+        const undici = [
+            perRuolo.P[0],
+            ...perRuolo.D.slice(0, d),
+            ...perRuolo.C.slice(0, c),
+            ...perRuolo.A.slice(0, a)
+        ];
+        const punti = undici.reduce((somma, g) => somma + g.b, 0);
+
+        if (!migliore || punti > migliore.punti) {
+            migliore = { modulo: `${d}-${c}-${a}`, undici, punti: Math.round(punti * 10) / 10 };
+        }
+    }
+    return migliore;
+}
+
+// La stessa colonna, ma con l'undici che si sarebbe dovuto schierare. Chi era
+// in panchina ed entra nell'ideale è il rimpianto della giornata, e va marcato:
+// è l'unica informazione che la classifica ideale non dà già come numero.
+function colonnaFormazioneIdeale(titolo, lineup) {
+    const ideale = formazioneIdeale(lineup);
+    if (!ideale) return colonnaFormazione(titolo, lineup);
+
+    const scelti = new Set(ideale.undici.map(g => g.p));
+    const esclusi = lineup.filter(g => !scelti.has(g.p));
+
+    const marcatore = (g) => g.t === 'b'
+        ? ' <i class="fas fa-circle-exclamation mancato" title="Era in panchina: punti che il fantallenatore non ha preso"></i>'
+        : '';
+
+    return `
+        <div class="lineup-team">
+            <h5 class="lineup-team-name">
+                ${titolo}
+                <span class="lineup-modulo" title="Modulo dell'undici ideale">${ideale.modulo}</span>
+                <span class="lineup-ideale-somma">${ideale.punti}</span>
+            </h5>
+            <div class="lineup-group">${ideale.undici.map(g => rigaGiocatore(g, marcatore(g))).join('')}</div>
+            <div class="lineup-group-title">Fuori dall'undici ideale</div>
+            <div class="lineup-group panchina">${esclusi.map(g => rigaGiocatore(g)).join('')}</div>
         </div>
     `;
 }
