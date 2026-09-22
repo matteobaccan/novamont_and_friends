@@ -2315,7 +2315,7 @@ function displayFormazione() {
     contenitore.innerHTML = `
         <div class="consiglio-barra">
             <label for="squadra-select">Squadra</label>
-            <select id="squadra-select" class="season-select">
+            <select id="squadra-select" class="squadra-select">
                 ${squadre.map(s => `<option value="${s}" ${s === scelta ? 'selected' : ''}>${s}</option>`).join('')}
             </select>
             <span class="consiglio-giornata">Giornata ${giornate + 1}</span>
