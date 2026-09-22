@@ -162,6 +162,9 @@ function calculateStandingsFromResults() {
         standings[team.name] = {
             id: team.id,
             name: team.name,
+            // Il risultato di questa funzione sostituisce fantacalcioData.teams:
+            // senza riportare owner, il proprietario andrebbe perso
+            owner: team.owner,
             points: 0,
             wins: 0,
             draws: 0,
@@ -479,6 +482,8 @@ function renderAllSections() {
         if (roundSelect && roundSelect.value) {
             displayRoundResults(parseInt(roundSelect.value));
         }
+    } else if (activeTab && activeTab.id === 'rose') {
+        displayRosters();
     }
 }
 
@@ -670,6 +675,8 @@ function setupNavigationTabs() {
                 displayIdealStandings();
             } else if (targetTab === 'classifica') {
                 displayStandings();
+            } else if (targetTab === 'rose') {
+                displayRosters();
             }
         });
     });
@@ -863,16 +870,16 @@ function displayStandings() {
 
 // Mostra dettaglio partite per una squadra (toggle)
 // showTeamMatches: create a table row inserted after the clicked row with match-only data
-function showTeamMatches(teamName, clickedRow) {
-    // Remove existing detail row if present
-    const existingRow = document.querySelector('.team-details-row');
+function showTeamMatches(teamName, clickedRow, modo = 'reale') {
+    const tabella = clickedRow.closest('table');
+
+    // Il pannello aperto va cercato nella stessa tabella: classifica e
+    // classifica ideale ne hanno una ciascuna e non devono interferire
+    const existingRow = (tabella || document).querySelector('.team-details-row');
     if (existingRow) {
         const existingTeam = existingRow.getAttribute('data-team');
-        if (existingTeam === teamName) {
-            existingRow.remove();
-            return; // toggle off
-        }
         existingRow.remove();
+        if (existingTeam === teamName) return; // toggle off
     }
 
     // Collect matches for the team
@@ -886,7 +893,7 @@ function showTeamMatches(teamName, clickedRow) {
     });
 
     // Build a details table row to insert after clickedRow
-    const table = clickedRow.closest('table');
+    const table = tabella;
     const colCount = table ? table.querySelectorAll('thead th').length : 11;
     const detailsRow = document.createElement('tr');
     detailsRow.className = 'team-details-row';
@@ -900,7 +907,7 @@ function showTeamMatches(teamName, clickedRow) {
     let content = `
         <div class="team-details-panel">
             <div class="team-details-header">
-                <strong>Partite di ${teamName}</strong>
+                <strong>Partite di ${teamName}${modo === "ideale" ? " — formazioni ideali" : ""}</strong>
                 <button class="team-details-close" title="Chiudi">✖</button>
             </div>
             <div class="team-matches-list">
@@ -913,21 +920,42 @@ function showTeamMatches(teamName, clickedRow) {
             const m = item.match;
             const isHome = m.homeTeam === teamName;
             const opponent = isHome ? m.awayTeam : m.homeTeam;
-            const teamPoints = isHome ? m.homeScore : m.awayScore;
-            const oppPoints = isHome ? m.awayScore : m.homeScore;
-            
-            // Calcola i gol con la regola del bonus
-            const goals = calculateMatchGoals(m.homeScore, m.awayScore);
-            const teamGoals = isHome ? goals.homeGoals : goals.awayGoals;
-            const oppGoals = isHome ? goals.awayGoals : goals.homeGoals;
 
-            // Show: TeamName vs Opponent — Risultato: teamGoals - oppGoals (teamPoints pt - oppPoints pt)
+            // In modalità ideale si usano i punteggi delle formazioni perfette;
+            // il bonus casa +1 va applicato qui, perché nel JSON non c'è
+            const ideale = modo === 'ideale' && m.homeIdealScore !== undefined;
+            const puntiCasa = ideale ? m.homeIdealScore + 1 : m.homeScore;
+            const puntiFuori = ideale ? m.awayIdealScore : m.awayScore;
+
+            const teamPoints = isHome ? puntiCasa : puntiFuori;
+            const oppPoints = isHome ? puntiFuori : puntiCasa;
+
+            const golCasa = calculateGoalsFromScore(puntiCasa);
+            const golFuori = calculateGoalsFromScore(puntiFuori);
+            const teamGoals = isHome ? golCasa : golFuori;
+            const oppGoals = isHome ? golFuori : golCasa;
+
+            const esito = teamGoals > oppGoals ? 'vinta' : teamGoals < oppGoals ? 'persa' : 'pari';
+            const espandibile = Boolean(m.lineups);
+            const idDettaglio = `tm-${modo}-${item.round}`;
+
+            // Una riga sola: giornata, avversario, risultato e punti
             content += `
-                <div class="team-match-item">
-                    <div class="match-meta">Giornata ${item.round} — ${item.date}</div>
-                    <div class="match-teams">${teamName} <span class="match-score">${teamGoals}</span> - <span class="match-score">${oppGoals}</span> ${opponent}</div>
-                    <div class="match-points">(${teamPoints} pt - ${oppPoints} pt)</div>
+                <div class="team-match-item ${espandibile ? 'espandibile' : ''}"
+                     ${espandibile ? `data-dettaglio="${idDettaglio}" role="button" tabindex="0"` : ''}>
+                    <span class="tmi-giornata">G${item.round}</span>
+                    <span class="tmi-casa">${isHome ? '<i class="fas fa-house" title="In casa"></i>' : '<i class="fas fa-plane" title="In trasferta"></i>'}</span>
+                    <span class="tmi-avversario">${opponent}</span>
+                    <span class="tmi-risultato ${esito}">${teamGoals}-${oppGoals}</span>
+                    <span class="tmi-punti">${teamPoints} - ${oppPoints}</span>
+                    ${espandibile ? '<i class="fas fa-chevron-down tmi-chevron"></i>' : ''}
                 </div>
+                ${espandibile ? `
+                    <div class="team-match-lineups" id="${idDettaglio}" hidden>
+                        ${colonnaFormazione(m.homeTeam, m.lineups.home)}
+                        ${colonnaFormazione(m.awayTeam, m.lineups.away)}
+                    </div>
+                ` : ''}
             `;
         });
     }
@@ -942,6 +970,21 @@ function showTeamMatches(teamName, clickedRow) {
     // Wire up close button
     const closeBtn = detailsRow.querySelector('.team-details-close');
     if (closeBtn) closeBtn.addEventListener('click', () => detailsRow.remove());
+
+    // Ogni partita apre il dettaglio con tutti i giocatori
+    detailsRow.querySelectorAll('.team-match-item.espandibile').forEach(riga => {
+        const apri = () => {
+            const dettaglio = detailsRow.querySelector(`#${riga.dataset.dettaglio}`);
+            if (!dettaglio) return;
+            const apriamo = dettaglio.hidden;
+            dettaglio.hidden = !apriamo;
+            riga.classList.toggle('aperta', apriamo);
+        };
+        riga.addEventListener('click', apri);
+        riga.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); apri(); }
+        });
+    });
 }
 
 // Funzione per calcolare le statistiche complessive degli allenatori
@@ -1209,9 +1252,18 @@ function displayIdealStandings() {
     `;
 
     idealStandingsTable.innerHTML = html;
-    
+
     // Aggiungi event listeners per l'ordinamento
     setupSortableHeaders('ideal');
+
+    // Come nella classifica reale, ma con i punteggi delle formazioni ideali
+    idealStandingsTable.querySelectorAll('.team-row').forEach(row => {
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', () => {
+            const teamName = row.querySelector('.team-name').innerText;
+            showTeamMatches(teamName, row, 'ideale');
+        });
+    });
 }
 
 // Setup event listeners per le colonne ordinabili
@@ -1574,77 +1626,33 @@ function displayRoundResults(roundNumber) {
             idealSection = `
                 <div class="ideal-scores">
                     <div class="ideal-header">
-                        <h4><i class="fas fa-star"></i> Formazioni Ideali vs Reali</h4>
+                        <h4><i class="fas fa-star"></i> Reale vs Ideale</h4>
                         <div class="match-comparison-status ${sameResult ? 'same-result' : 'different-result'}">
-                            ${sameResult ? '✓ Stesso risultato' : '⚠️ Risultato diverso'}
+                            ${sameResult ? 'Stesso risultato' : 'Risultato diverso'}
                         </div>
                     </div>
-                    
-                    <div class="ideal-comparison-grid">
-                        <div class="comparison-team">
-                            <div class="team-name-ideal">${match.homeTeam}</div>
-                            <div class="scores-comparison">
-                                <div class="score-real">
-                                    <span class="label">Reale:</span>
-                                    <span class="value">${homeGoals} gol (${match.homeScore} pt)</span>
-                                </div>
-                                <div class="score-ideal">
-                                    <span class="label">Ideale:</span>
-                                    <span class="value">${homeIdealGoals} gol (${homeIdealScoreWithBonus} pt)</span>
-                                    <span class="bonus-indicator">+1</span>
-                                </div>
-                                <div class="score-difference ${homeDifference >= 0 ? 'positive' : 'negative'}">
-                                    <span class="label">Differenza:</span>
-                                    <span class="value">
-                                        ${homeDifference >= 0 ? '+' : ''}${homeDifference.toFixed(1)} pt
-                                        ${homeGoalsDiff !== 0 ? `(${homeGoalsDiff >= 0 ? '+' : ''}${homeGoalsDiff} gol)` : ''}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="vs-ideal-section">
-                            <div class="vs-label">VS</div>
-                            <div class="result-comparison">
-                                <div class="real-result">Reale: ${goalScore}</div>
-                                <div class="ideal-result">Ideale: ${idealGoalScore}</div>
-                            </div>
-                        </div>
-                        
-                        <div class="comparison-team">
-                            <div class="team-name-ideal">${match.awayTeam}</div>
-                            <div class="scores-comparison">
-                                <div class="score-real">
-                                    <span class="label">Reale:</span>
-                                    <span class="value">${awayGoals} gol (${match.awayScore} pt)</span>
-                                </div>
-                                <div class="score-ideal">
-                                    <span class="label">Ideale:</span>
-                                    <span class="value">${awayIdealGoals} gol (${awayIdealScoreWithBonus} pt)</span>
-                                </div>
-                                <div class="score-difference ${awayDifference >= 0 ? 'positive' : 'negative'}">
-                                    <span class="label">Differenza:</span>
-                                    <span class="value">
-                                        ${awayDifference >= 0 ? '+' : ''}${awayDifference.toFixed(1)} pt
-                                        ${awayGoalsDiff !== 0 ? `(${awayGoalsDiff >= 0 ? '+' : ''}${awayGoalsDiff} gol)` : ''}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="confronto-griglia">
+                        <span class="confronto-etichetta"></span>
+                        <span class="confronto-squadra">${match.homeTeam}</span>
+                        <span class="confronto-squadra">${match.awayTeam}</span>
+
+                        <span class="confronto-etichetta">Reale</span>
+                        <span class="confronto-valore">${homeGoals} <small>(${match.homeScore})</small></span>
+                        <span class="confronto-valore">${awayGoals} <small>(${match.awayScore})</small></span>
+
+                        <span class="confronto-etichetta">
+                            Ideale <i class="fas fa-house bonus-casa" title="Bonus casa +1"></i>
+                        </span>
+                        <span class="confronto-valore ideale">${homeIdealGoals} <small>(${homeIdealScoreWithBonus})</small></span>
+                        <span class="confronto-valore ideale">${awayIdealGoals} <small>(${match.awayIdealScore})</small></span>
+
+                        <span class="confronto-etichetta">Persi</span>
+                        <span class="confronto-valore ${homeDifference > 0 ? 'persi' : 'nessun-perso'}">${homeDifference > 0 ? '-' + homeDifference.toFixed(1) : '0'}</span>
+                        <span class="confronto-valore ${awayDifference > 0 ? 'persi' : 'nessun-perso'}">${awayDifference > 0 ? '-' + awayDifference.toFixed(1) : '0'}</span>
                     </div>
-                    
-                    <div class="ideal-insights">
-                        <div class="insight-item">
-                            <i class="fas fa-lightbulb"></i>
-                            <span>${insightText}</span>
-                        </div>
-                        ${!sameResult ? `
-                        <div class="insight-item alert">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <span>Con le formazioni ideali il risultato sarebbe stato: <strong>${idealResult === 'Pareggio' ? 'Pareggio' : 'Vittoria ' + idealResult}</strong></span>
-                        </div>
-                        ` : ''}
-                    </div>
+
+                    <p class="ideal-insight">${insightText}</p>
                 </div>
             `;
         }
@@ -1732,11 +1740,357 @@ function displayRoundResults(roundNumber) {
                 </div>
                 ${idealSection}
                 ${commentarySection}
+                ${generateLineupSection(match, index)}
             </div>
         `;
     });
 
     roundResults.innerHTML = html;
+    setupLineupToggles();
+}
+
+// ============================================================
+// Formazioni: dettaglio di una singola partita
+// ============================================================
+
+// Un giocatore è "sceso in campo" se titolare o subentrato
+const SCHIERATO = new Set(['s', 'in']);
+
+const EVENTI_UI = {
+    gol: { icona: 'fa-futbol', label: 'gol', classe: 'evento-gol' },
+    assist: { icona: 'fa-shoe-prints', label: 'assist', classe: 'evento-assist' },
+    amm: { icona: 'fa-square', label: 'ammonizione', classe: 'evento-amm' },
+    esp: { icona: 'fa-square', label: 'espulsione', classe: 'evento-esp' },
+    rigParato: { icona: 'fa-hand-paper', label: 'rigore parato', classe: 'evento-rigparato' },
+    rigSbagliato: { icona: 'fa-times-circle', label: 'rigore sbagliato', classe: 'evento-rigsbagliato' },
+    autogol: { icona: 'fa-futbol', label: 'autogol', classe: 'evento-autogol' },
+    golSubiti: { icona: 'fa-hands', label: 'gol subito', classe: 'evento-golsubiti' }
+};
+
+// Anagrafica di un giocatore dal dizionario globale della stagione
+function anagraficaGiocatore(pid) {
+    const players = (fantacalcioData && fantacalcioData.players) || {};
+    return players[pid] || { name: `#${pid}`, role: '?', serieA: '' };
+}
+
+function badgeEventi(eventi) {
+    if (!eventi) return '';
+    return Object.entries(eventi)
+        .filter(([chiave]) => EVENTI_UI[chiave])
+        .map(([chiave, quante]) => {
+            const def = EVENTI_UI[chiave];
+            const titolo = quante > 1 ? `${quante} ${def.label}` : def.label;
+            const conteggio = quante > 1 ? `<span class="evento-conteggio">${quante}</span>` : '';
+            return `<span class="evento ${def.classe}" title="${titolo}"><i class="fas ${def.icona}"></i>${conteggio}</span>`;
+        })
+        .join('');
+}
+
+function rigaGiocatore(giocatore) {
+    const info = anagraficaGiocatore(giocatore.p);
+    const senzaVoto = giocatore.b === undefined;
+    const voto = senzaVoto ? (giocatore.sv ? 's.v.' : '—') : giocatore.b;
+    const scarto = senzaVoto ? '' : giocatore.b - giocatore.v;
+
+    let classeVoto = 'voto-neutro';
+    if (!senzaVoto) classeVoto = scarto > 0 ? 'voto-bonus' : scarto < 0 ? 'voto-malus' : 'voto-neutro';
+
+    const stato = giocatore.t === 'in' ? '<i class="fas fa-arrow-up entrato" title="Entrato"></i>'
+        : giocatore.t === 'out' ? '<i class="fas fa-arrow-down uscito" title="Sostituito"></i>'
+        : '';
+
+    return `
+        <div class="lineup-row">
+            <span class="lineup-ruolo ruolo-${info.role}">${info.role}</span>
+            <span class="lineup-nome">${info.name} ${stato}</span>
+            <span class="lineup-serieA">${info.serieA || ''}</span>
+            <span class="lineup-eventi">${badgeEventi(giocatore.e)}</span>
+            <span class="lineup-voto ${classeVoto}">${voto}</span>
+        </div>
+    `;
+}
+
+function colonnaFormazione(titolo, lineup) {
+    const titolari = lineup.filter(g => g.t !== 'b');
+    const panchina = lineup.filter(g => g.t === 'b');
+
+    return `
+        <div class="lineup-team">
+            <h5 class="lineup-team-name">${titolo}</h5>
+            <div class="lineup-group">${titolari.map(rigaGiocatore).join('')}</div>
+            <div class="lineup-group-title">Panchina</div>
+            <div class="lineup-group panchina">${panchina.map(rigaGiocatore).join('')}</div>
+        </div>
+    `;
+}
+
+function generateLineupSection(match, index) {
+    if (!match.lineups) return '';
+
+    return `
+        <div class="lineup-section">
+            <button class="lineup-toggle" data-lineup="${index}" aria-expanded="false">
+                <i class="fas fa-users"></i> Formazioni e voti
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="lineup-detail" id="lineup-${index}" hidden>
+                ${colonnaFormazione(match.homeTeam, match.lineups.home)}
+                ${colonnaFormazione(match.awayTeam, match.lineups.away)}
+            </div>
+        </div>
+    `;
+}
+
+function setupLineupToggles() {
+    document.querySelectorAll('.lineup-toggle').forEach(bottone => {
+        bottone.addEventListener('click', () => {
+            const detail = document.getElementById(`lineup-${bottone.dataset.lineup}`);
+            if (!detail) return;
+            const apriamo = detail.hidden;
+            detail.hidden = !apriamo;
+            bottone.setAttribute('aria-expanded', String(apriamo));
+            bottone.classList.toggle('aperto', apriamo);
+        });
+    });
+}
+
+// ============================================================
+// Statistiche giocatore sulla stagione
+// ============================================================
+
+// Aggrega tutte le formazioni della stagione per giocatore.
+// Gol, assist e cartellini contano SOLO quando il giocatore è sceso in campo:
+// quello che combina mentre è in panchina non è del suo fantallenatore.
+function calcolaStatisticheGiocatori() {
+    const stats = {};
+
+    const nuovo = (pid, team) => ({
+        pid: Number(pid),
+        team,
+        presenze: 0,
+        panchine: 0,
+        sv: 0,
+        sommaVoto: 0,
+        sommaBonus: 0,
+        puntiInPanchina: 0,
+        gol: 0,
+        assist: 0,
+        amm: 0,
+        esp: 0,
+        rigParato: 0,
+        rigSbagliato: 0,
+        autogol: 0,
+        golSubiti: 0
+    });
+
+    for (const round of (fantacalcioData.rounds || [])) {
+        for (const match of round.matches) {
+            if (!match.lineups) continue;
+
+            for (const [lato, team] of [['home', match.homeTeam], ['away', match.awayTeam]]) {
+                for (const g of match.lineups[lato]) {
+                    // L'ultima squadra vista vince: segue i trasferimenti di stagione
+                    const s = (stats[g.p] ||= nuovo(g.p, team));
+                    s.team = team;
+
+                    if (g.sv) s.sv += 1;
+
+                    if (SCHIERATO.has(g.t)) {
+                        if (g.b === undefined) continue; // schierato ma senza voto
+                        s.presenze += 1;
+                        s.sommaVoto += g.v;
+                        s.sommaBonus += g.b;
+                        for (const chiave of ['gol', 'assist', 'amm', 'esp', 'rigParato', 'rigSbagliato', 'autogol', 'golSubiti']) {
+                            if (g.e && g.e[chiave]) s[chiave] += g.e[chiave];
+                        }
+                    } else if (g.t === 'b') {
+                        s.panchine += 1;
+                        if (g.b !== undefined) s.puntiInPanchina += g.b;
+                    }
+                }
+            }
+        }
+    }
+
+    for (const s of Object.values(stats)) {
+        s.mediaVoto = s.presenze > 0 ? s.sommaVoto / s.presenze : null;
+        s.mediaFanta = s.presenze > 0 ? s.sommaBonus / s.presenze : null;
+        s.puntiInPanchina = Math.round(s.puntiInPanchina * 10) / 10;
+    }
+
+    return stats;
+}
+
+// Rosa di una squadra alla giornata indicata (default: l'ultima disponibile)
+function rosaDellaSquadra(team, round = Infinity) {
+    const storico = (fantacalcioData.rosterHistory || []).filter(s => s.fromRound <= round);
+    const ultimo = storico[storico.length - 1];
+    return (ultimo && ultimo.teams && ultimo.teams[team]) || [];
+}
+
+// ============================================================
+// Sezione Rose
+// ============================================================
+
+const ORDINE_RUOLI = { P: 0, D: 1, C: 2, A: 3 };
+
+function numero(valore, decimali = 2) {
+    return valore === null || valore === undefined ? '—' : valore.toFixed(decimali);
+}
+
+function cellaConteggio(valore, classe = '') {
+    return `<span class="rosa-cella ${classe} ${valore ? '' : 'zero'}">${valore || '—'}</span>`;
+}
+
+// Le sigle tengono stretta la colonna Serie A: il nome intero resta nel title
+function siglaSerieA(nome) {
+    return nome ? nome.slice(0, 3).toUpperCase() : '';
+}
+
+function rigaRosa(pid, stats) {
+    const info = anagraficaGiocatore(pid);
+    const s = stats[pid];
+
+    if (!s) {
+        return `
+            <div class="rosa-row mai-visto">
+                <span class="rosa-ruolo ruolo-${info.role}">${info.role}</span>
+                <span class="rosa-nome">${info.name}</span>
+                <span class="rosa-serieA" title="${info.serieA || ''}">${siglaSerieA(info.serieA)}</span>
+                <span class="rosa-cella zero">—</span><span class="rosa-cella zero">—</span>
+                <span class="rosa-cella zero">—</span><span class="rosa-cella zero">—</span>
+                <span class="rosa-cella zero">—</span><span class="rosa-cella zero">—</span>
+                <span class="rosa-cella zero">—</span><span class="rosa-cella zero">—</span>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="rosa-row">
+            <span class="rosa-ruolo ruolo-${info.role}">${info.role}</span>
+            <span class="rosa-nome">${info.name}</span>
+            <span class="rosa-serieA" title="${info.serieA || ''}">${siglaSerieA(info.serieA)}</span>
+            <span class="rosa-cella">${s.presenze || '—'}</span>
+            <span class="rosa-cella panchina-cella">${s.panchine || '—'}</span>
+            <span class="rosa-cella">${numero(s.mediaVoto)}</span>
+            <span class="rosa-cella forte">${numero(s.mediaFanta)}</span>
+            ${cellaConteggio(s.gol, 'gol-cella')}
+            ${cellaConteggio(s.assist, 'assist-cella')}
+            ${cellaConteggio(s.amm + s.esp, 'cartellini-cella')}
+            <span class="rosa-cella panchina-persi ${s.puntiInPanchina ? '' : 'zero'}">${s.puntiInPanchina || '—'}</span>
+        </div>
+    `;
+}
+
+function schedaRosa(team, stats) {
+    const squadra = fantacalcioData.teams.find(t => t.name === team);
+    const pids = rosaDellaSquadra(team).slice().sort((a, b) => {
+        const ia = anagraficaGiocatore(a), ib = anagraficaGiocatore(b);
+        const diff = (ORDINE_RUOLI[ia.role] ?? 9) - (ORDINE_RUOLI[ib.role] ?? 9);
+        return diff !== 0 ? diff : ia.name.localeCompare(ib.name);
+    });
+
+    const inPanchina = pids.reduce((somma, pid) => somma + (stats[pid]?.puntiInPanchina || 0), 0);
+
+    return `
+        <div class="rosa-card">
+            <div class="rosa-card-header">
+                <h3>${team}</h3>
+                <span class="rosa-owner">${squadra ? squadra.owner : ''}</span>
+                <span class="rosa-panchina-totale" title="Punti totali presi dai giocatori lasciati in panchina">
+                    <i class="fas fa-chair"></i> ${Math.round(inPanchina * 10) / 10} pt in panchina
+                </span>
+            </div>
+            <div class="rosa-table">
+                <div class="rosa-row rosa-header">
+                    <span>R</span><span>Giocatore</span><span>Team</span>
+                    <span title="Presenze da schierato">Pres</span>
+                    <span title="Volte in panchina">Panc</span>
+                    <span title="Media voto">MV</span>
+                    <span title="Media fantavoto">MF</span>
+                    <span title="Gol">G</span>
+                    <span title="Assist">A</span>
+                    <span title="Cartellini">Cart</span>
+                    <span title="Punti presi mentre era in panchina">Panca</span>
+                </div>
+                ${pids.map(pid => rigaRosa(pid, stats)).join('')}
+            </div>
+        </div>
+    `;
+}
+
+// Classifiche individuali: contano solo i giocatori realmente schierati
+function classificaIndividuale(stats, chiave, titolo, icona, limite = 10) {
+    const righe = Object.values(stats)
+        .filter(s => s[chiave] > 0)
+        .sort((a, b) => b[chiave] - a[chiave] || (b.mediaFanta || 0) - (a.mediaFanta || 0))
+        .slice(0, limite);
+
+    if (righe.length === 0) {
+        return `
+            <div class="classifica-individuale">
+                <h4><i class="fas ${icona}"></i> ${titolo}</h4>
+                <p class="nessun-dato">Nessun dato ancora.</p>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="classifica-individuale">
+            <h4><i class="fas ${icona}"></i> ${titolo}</h4>
+            <ol class="classifica-lista">
+                ${righe.map((s, i) => {
+                    const info = anagraficaGiocatore(s.pid);
+                    return `
+                        <li class="${i === 0 ? 'primo' : ''}">
+                            <span class="pos">${i + 1}</span>
+                            <span class="nome">${info.name}</span>
+                            <span class="squadra">${s.team}</span>
+                            <span class="valore">${s[chiave]}</span>
+                        </li>
+                    `;
+                }).join('')}
+            </ol>
+        </div>
+    `;
+}
+
+function displayRosters() {
+    const contenitore = document.getElementById('rose-container');
+    if (!contenitore) return;
+
+    if (!fantacalcioData || !fantacalcioData.players || !fantacalcioData.rosterHistory) {
+        contenitore.innerHTML = `
+            <div class="empty-season">
+                <i class="fas fa-users-slash"></i>
+                <h3>Rose non disponibili</h3>
+                <p>Questa stagione non ha i dati delle rose. Sono disponibili dalla stagione 2026-2027.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const stats = calcolaStatisticheGiocatori();
+    const cartellini = { ...stats };
+    for (const s of Object.values(cartellini)) s.cartellini = s.amm + s.esp;
+
+    const classifiche = `
+        <div class="classifiche-individuali">
+            ${classificaIndividuale(stats, 'gol', 'Marcatori', 'fa-futbol')}
+            ${classificaIndividuale(stats, 'assist', 'Assist', 'fa-shoe-prints')}
+            ${classificaIndividuale(cartellini, 'cartellini', 'Cartellini', 'fa-square')}
+        </div>
+    `;
+
+    const squadre = fantacalcioData.teams
+        .map(t => t.name)
+        .filter(nome => rosaDellaSquadra(nome).length > 0);
+
+    contenitore.innerHTML = classifiche + `
+        <div class="rose-griglia">
+            ${squadre.map(team => schedaRosa(team, stats)).join('')}
+        </div>
+    `;
 }
 
 // Funzione per generare la classifica del miglior allenatore
@@ -1980,96 +2334,81 @@ window.FantacalcioApp = {
 };
 
 // Theme Management
+// Due soli stati: chiaro e scuro. Senza una scelta salvata si segue il sistema,
+// e lo si continua a seguire dal vivo; al primo click la scelta dell'utente vince.
 class ThemeManager {
     constructor() {
-        this.themes = ['auto', 'light', 'dark'];
-        this.currentTheme = this.getStoredTheme() || 'auto';
+        this.storedTheme = this.getStoredTheme();
         this.themeToggle = document.getElementById('theme-toggle');
-        
+
         this.init();
     }
-    
+
     init() {
-        this.setTheme(this.currentTheme);
-        this.updateToggleIcon();
+        this.applyTheme();
         this.addEventListeners();
-        
-        // Listen for system theme changes
+
+        // Finché l'utente non sceglie, il tema segue il sistema anche a pagina aperta
         if (window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-                if (this.currentTheme === 'auto') {
-                    this.applyTheme();
-                }
+                if (!this.storedTheme) this.applyTheme();
             });
         }
     }
-    
+
     addEventListeners() {
-        this.themeToggle.addEventListener('click', () => {
-            this.cycleTheme();
-        });
+        this.themeToggle.addEventListener('click', () => this.toggleTheme());
     }
-    
-    cycleTheme() {
-        const currentIndex = this.themes.indexOf(this.currentTheme);
-        const nextIndex = (currentIndex + 1) % this.themes.length;
-        const nextTheme = this.themes[nextIndex];
-        
-        this.setTheme(nextTheme);
-        this.storeTheme(nextTheme);
+
+    // Tema del sistema, usato finché non c'è una scelta esplicita
+    systemTheme() {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return prefersDark ? 'dark' : 'light';
     }
-    
-    setTheme(theme) {
-        this.currentTheme = theme;
+
+    // Tema effettivamente a video
+    currentTheme() {
+        return this.storedTheme || this.systemTheme();
+    }
+
+    toggleTheme() {
+        this.storedTheme = this.currentTheme() === 'dark' ? 'light' : 'dark';
+        this.storeTheme(this.storedTheme);
         this.applyTheme();
-        this.updateToggleIcon();
     }
-    
+
     applyTheme() {
         const html = document.documentElement;
-        
-        if (this.currentTheme === 'auto') {
-            // Use system preference
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-        } else {
-            html.setAttribute('data-theme', this.currentTheme);
-        }
-        
+        html.setAttribute('data-theme', this.currentTheme());
+        this.updateToggleIcon();
+
         // Add animation class
         html.classList.add('theme-transition');
         setTimeout(() => {
             html.classList.remove('theme-transition');
         }, 300);
     }
-    
+
+    // L'icona mostra dove porta il click, non il tema corrente
     updateToggleIcon() {
         const icon = this.themeToggle.querySelector('i');
-        
-        switch (this.currentTheme) {
-            case 'light':
-                icon.className = 'fas fa-sun';
-                this.themeToggle.title = 'Tema: Chiaro (click per Scuro)';
-                break;
-            case 'dark':
-                icon.className = 'fas fa-moon';
-                this.themeToggle.title = 'Tema: Scuro (click per Auto)';
-                break;
-            case 'auto':
-                icon.className = 'fas fa-adjust';
-                this.themeToggle.title = 'Tema: Auto (click per Chiaro)';
-                break;
-        }
+        const vaAScuro = this.currentTheme() === 'light';
+
+        icon.className = vaAScuro ? 'fas fa-moon' : 'fas fa-sun';
+        this.themeToggle.title = vaAScuro ? 'Passa al tema scuro' : 'Passa al tema chiaro';
     }
-    
+
     getStoredTheme() {
         try {
-            return localStorage.getItem('fantacalcio-theme');
+            const stored = localStorage.getItem('fantacalcio-theme');
+            // 'auto' è il vecchio terzo stato: va letto come "nessuna scelta",
+            // altrimenti chi ce l'ha salvato resta bloccato su un tema inesistente
+            return stored === 'light' || stored === 'dark' ? stored : null;
         } catch (e) {
             return null;
         }
     }
-    
+
     storeTheme(theme) {
         try {
             localStorage.setItem('fantacalcio-theme', theme);

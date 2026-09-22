@@ -1,13 +1,19 @@
 ---
 name: aggiorna-giornata
-description: Use when adding a new matchday (giornata) to the Novamont & Friends fantacalcio site, updating results, or recomputing ideal scores - triggers on "aggiungi la giornata N", "aggiorna il sito col risultato", "inserisci i risultati", "ricalcola gli ideali".
+description: Use when adding a new matchday (giornata) to the Novamont & Friends fantacalcio site, updating results, recomputing ideal scores, or refreshing rosters - triggers on "aggiungi la giornata N", "aggiorna il sito col risultato", "inserisci i risultati", "ricalcola gli ideali".
 ---
 
 # Aggiornare una giornata del sito fantacalcio
 
-Legge una giornata dal sito della lega, calcola i punteggi ideali e la scrive in
-`data/<stagione>.json`. Classifica, classifica ideale e statistiche allenatori sono
-derivate dai risultati: **non vanno mai scritte a mano**.
+Scarica una giornata dall'API della lega, calcola i punteggi ideali e la scrive in
+`data/<stagione>.json`. Classifica, classifica ideale, statistiche allenatori, rose e
+classifiche marcatori sono tutte **derivate** dai risultati: non vanno mai scritte a mano.
+
+## Prima di iniziare
+
+Serve il token della lega in `FANTA_TOKEN`. **Non va messo in un file del repo**, che è
+pubblico: passalo da variabile d'ambiente. Si ricava dall'header `authorization` di una
+qualsiasi chiamata a `apileague.fantacalcio.it` fatta dal browser loggato, e dura un anno.
 
 ## Procedura
 
@@ -17,106 +23,114 @@ derivate dai risultati: **non vanno mai scritte a mano**.
 node -e "const i=require('./data/seasons.json');const d=require('./'+i.seasons.find(s=>s.id===i.currentSeason).file);console.log(i.currentSeason,'- ultima giornata:',d.rounds.at(-1)?.round ?? 0)"
 ```
 
-La prossima giornata è quella successiva. Gli URL della lega stanno in
-`data/seasons.json` sotto `seasons[].source`.
+Gli URL della lega stanno in `data/seasons.json` sotto `seasons[].source`.
 
-### 2. Leggere le partite dalla lega
+### 2. Leggere gli accoppiamenti dal calendario
 
-Servono le **quattro** pagine partita, con il browser (`mcp__claude-in-chrome`):
-`roundUrl` con `{round}` = numero giornata e `{match}` = `0`, `1`, `2`, `3`.
+Il calendario non è esposto via API: va letto dalla pagina `calendario` della lega con il
+browser (`mcp__claude-in-chrome`). Serve sapere, per la giornata, **chi gioca in casa con
+chi** e a quale **giornata di Serie A** corrisponde (il calendario la indica fra parentesi:
+"1ª GIORNATA (5ª giornata di Serie A)").
 
-`get_page_text` su ognuna. Ogni pagina dà, in ordine:
+### 3. Scaricare la giornata
 
-1. squadra di casa, allenatore, modulo, gol, punteggio — poi gli stessi dati della trasferta
-2. **11 titolari di casa**, poi **11 titolari di trasferta**
-3. dopo la riga `Panchina`, le due panchine (mescolate)
-4. in fondo: `Totale parziali`, `solo voti`, `fattore campo`, `con bonus/malus`
-
-Per ogni giocatore ci sono **due numeri**: il voto puro e il **voto con bonus/malus**.
-Usa **sempre il secondo**. Chi non ha giocato non ha numeri, chi è `s.v.` non ha
-punteggio: in entrambi i casi **omettilo**.
-
-> Non serve distinguere casa da trasferta nelle panchine: lo script separa i
-> giocatori confrontandoli con le rose, e si ferma se un nome non torna.
-
-### 3. Scrivere l'estratto
-
-Un file JSON temporaneo (mettilo nella scratchpad, non nel repo):
+Prepara un input nella scratchpad — non nel repo:
 
 ```json
 {
+  "competizione": 805779,
   "round": 2,
+  "roundSerieA": 6,
   "date": "Settembre 2026",
   "lastUpdate": "29 Settembre 2026, 12:00",
-  "golAttesi": [[2,1],[3,1],[1,1],[3,4]],
-  "generalComment": "...",
-  "matches": [
-    {
-      "homeTeam": "Real Pattagghiu",
-      "awayTeam": "Real Ichnusa",
-      "homeScore": 75.5,
-      "awayScore": 70,
-      "players": [
-        { "name": "Mandas", "score": 10.5 },
-        { "name": "Maignan", "score": 6 }
-      ],
-      "commentary": { "caressa": "...", "bergomi": "..." }
-    }
+  "partite": [
+    ["Real Ichnusa", "SM Frattese"],
+    ["Cusiana", "Ultimo"],
+    ["PARTIZAN TIRANA", "Team24"],
+    ["Shakhtar Donuts", "Real Pattagghiu"]
   ]
 }
 ```
 
-| Campo | Da dove arriva |
-|---|---|
-| `homeScore` / `awayScore` | riga `con bonus/malus` — per la squadra di casa **include già** il fattore campo |
-| `players[].score` | il **secondo** numero di ogni giocatore (voto con bonus/malus) |
-| `golAttesi` | i gol mostrati dalla lega, `[[casa,trasferta], ...]`; servono come controllo |
-| `date` | mese e anno, nello stile delle giornate già presenti |
+I nomi possono essere scritti come li scrive la lega: vengono normalizzati sul nome
+canonico della stagione. Gli id squadra si risolvono da soli via API.
 
-`season` è facoltativo: senza, si usa `currentSeason`.
+```bash
+FANTA_TOKEN=... node .claude/skills/aggiorna-giornata/scarica-giornata.mjs <input.json> > <estratto.json>
+```
 
-### 4. Calcolare e scrivere
+Se stampa `ATTENZIONE, decodifica eventi non pulita`, **fermati**: significa che un
+evento non è spiegato dalla tabella dei pesi (vedi sotto). Marcatori e cartellini
+sarebbero sbagliati.
+
+### 4. Scrivere i commenti
+
+Aggiungi all'estratto `generalComment` e, per ogni match, `commentary`. Vedi più sotto.
+
+### 5. Calcolare e scrivere
 
 ```bash
 node .claude/skills/aggiorna-giornata/calcola-giornata.mjs <estratto.json> --dry-run
 ```
 
-Lo script stampa gol, punteggi reali e ideali, e il modulo scelto per l'ideale.
-**Controlla l'output prima di scrivere.** Poi rilancia senza `--dry-run`.
+Stampa gol, punteggi reali e ideali, il modulo scelto per l'ideale e gli eventuali
+cambi di rosa. **Controlla l'output**, poi rilancia senza `--dry-run`.
 
-### 5. Verificare
+### 6. Verificare
 
-```bash
-node -e "const d=require('./data/2026-2027.json');const r=d.rounds.at(-1);console.log('g'+r.round,r.matches.length+' match',r.matches.every(m=>m.commentary)?'commenti ok':'COMMENTI MANCANTI')"
-```
-
-Poi confronta la classifica del sito con quella della lega (`standingsUrl`):
-punti e punti totali devono coincidere per tutte le squadre.
+Confronta la classifica del sito con quella della lega (`standingsUrl`): punti e punti
+totali devono coincidere per tutte le squadre.
 
 ## Come si calcola il punteggio ideale
 
 Miglior 11 possibile **da tutta la rosa** (titolari + panchina), scegliendo anche il
-modulo migliore fra `3-4-3 3-5-2 4-3-3 4-4-2 4-5-1 5-3-2 5-4-1`. Solo i giocatori con
-un voto sono selezionabili.
+modulo migliore fra `3-4-3 3-5-2 4-3-3 4-4-2 4-5-1 5-3-2 5-4-1`. Solo i giocatori con un
+voto sono selezionabili.
 
-**Il punteggio ideale va nel JSON senza fattore campo.** Il `+1` di casa lo aggiunge
-`script.js` quando calcola gol e punti persi — vedi `BONUS_CASA.md`. Sommarlo qui lo
-conterebbe due volte.
+**Nel JSON va senza fattore campo.** Il `+1` di casa lo aggiunge `script.js` quando
+calcola gol e punti persi (vedi `BONUS_CASA.md`). Sommarlo qui lo conterebbe due volte.
 
-I ruoli vengono dalla chiave `rosters` di `data/<stagione>.json`. Dopo il mercato vanno
-riallineati dalla pagina Rose (`rosterUrl`), altrimenti lo script si ferma sui nomi
-sconosciuti.
+## Il campo `b` delle formazioni
+
+L'API restituisce per ogni giocatore `scr` (voto), `cscr` (voto con bonus) e `b`, una
+stringa di 16 slot con gli eventi. I pesi sono in `EVENTI` dentro `scarica-giornata.mjs`,
+ricavati dai dati isolando i giocatori con un solo slot attivo.
+
+Lo script **verifica ogni giocatore**: la somma dei pesi deve spiegare esattamente
+`cscr - scr`. Se un giorno comparisse un evento mai visto (espulsione, autogol), la
+verifica fallisce e lo segnala invece di inventare un risultato. Quando succede: isola i
+giocatori con quello slot da solo, ricava il peso dividendo il delta per il conteggio,
+aggiorna `EVENTI` e rilancia.
+
+Due sentinelle, entrambe con `cscr = 100`: `scr 55` = senza voto (s.v.), `scr 56` = non
+ha giocato.
+
+## Rose che cambiano
+
+Le rose cambiano durante la stagione. `data/<stagione>.json` tiene:
+
+- `players`: dizionario globale `pid → nome, ruolo, squadra di Serie A`
+- `rosterHistory`: snapshot con `fromRound`, scritti **solo quando la rosa cambia**
+
+`calcola-giornata.mjs` confronta la rosa della giornata con l'ultimo snapshot e ne
+aggiunge uno nuovo se serve. Le formazioni non coprono sempre l'intera rosa (una squadra
+può lasciarne fuori uno), quindi conta solo chi **compare** e non risultava presente.
+
+Se un `pid` non è in `players`, lo script si ferma: è un acquisto nuovo e va aggiunto
+leggendo la pagina Rose della lega, dove ogni riga ha il `pid` come attributo `data-id`.
 
 ## Commenti Caressa / Bergomi
 
 Uno per partita, più un `generalComment` di giornata. Stile delle giornate già presenti:
 
-- **Caressa**: entusiasta, presente, esclamazioni; cita il risultato e il protagonista di giornata
-- **Bergomi**: analitico, si rivolge a "Fabio", guarda ai dettagli — un voto basso, un big lasciato in panchina — e cita quasi sempre *"con le formazioni ideali sarebbe finita X-Y"*
+- **Caressa**: entusiasta, presente, esclamazioni; cita il risultato e il protagonista
+- **Bergomi**: analitico, si rivolge a "Fabio", guarda ai dettagli — un voto basso, un
+  big lasciato in panchina — e cita quasi sempre *"con le formazioni ideali sarebbe
+  finita X-Y"*
 
-Per quel dato servono i gol ideali, con il bonus casa applicato:
-`Math.floor((punteggio - 60) / 6)`, a zero sotto 66. Se il risultato ideale è di parità
-ma i punti distano ≥ 4, chi ha più punti prende un gol in più.
+Per i gol ideali: `Math.floor((punteggio - 60) / 6)`, zero sotto 66, col bonus casa
+applicato. Se il risultato ideale è di parità ma i punti distano ≥ 4, chi ha più punti
+prende un gol in più.
 
 Cita solo numeri che hai davvero letto. Un voto inventato è indistinguibile da uno vero.
 
@@ -124,14 +138,16 @@ Cita solo numeri che hai davvero letto. Un voto inventato è indistinguibile da 
 
 | Sintomo | Causa |
 |---|---|
-| `non in rosa né di X né di Y` | refuso nel nome, o `rosters` da riallineare dopo il mercato |
-| `i gol non coincidono` | hai preso `solo voti` invece di `con bonus/malus` |
-| Ideale più basso del reale | hai usato il primo numero (voto puro) invece del secondo |
-| Ideale di casa troppo alto di 1 | hai sommato il fattore campo, che va lasciato a `script.js` |
+| `manca la variabile d'ambiente FANTA_TOKEN` | token non passato, o scaduto (dura un anno) |
+| `ATTENZIONE, decodifica eventi non pulita` | evento nuovo non in `EVENTI`: va aggiunto il peso |
+| `pid non presenti nel dizionario "players"` | acquisto nuovo: aggiorna `players` dalla pagina Rose |
+| `squadra "X" non presente fra le squadre` | nome che non esiste nella stagione, o squadra fuori competizione |
+| `i gol non coincidono` | `roundSerieA` sbagliato: hai scaricato un'altra giornata |
 | `la giornata N esiste già` | rimuovila dal JSON prima di reinserirla |
-| Classifica diversa da quella della lega | `homeScore` senza il fattore campo incluso |
+| Classifica diversa da quella della lega | `homeScore` deve includere il fattore campo, come lo dà l'API |
 
 ## Dopo la scrittura
 
-Serve un `git add` dei file in `data/`. Il sito è statico: nessun build, nessun deploy
-manuale — il push su `main` basta.
+`git add` dei file in `data/`. Il sito è statico: nessun build, il push su `main` basta.
+Se hai cambiato `script.js`, `styles.css` o `config.js`, alza la versione nel query
+string di `index.html` e in `sw.js`, altrimenti chi torna sul sito riceve i file vecchi.
