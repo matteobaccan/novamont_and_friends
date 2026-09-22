@@ -3150,6 +3150,33 @@ html.theme-transition *:after {
     text-align: center;
 }
 
+/* Modulo e somma dell'undici ideale, accanto al nome della squadra */
+.lineup-modulo,
+.lineup-ideale-somma {
+    display: inline-block;
+    margin-left: 0.35rem;
+    padding: 0.05rem 0.4rem;
+    border-radius: 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    background: rgba(127, 127, 127, 0.14);
+    opacity: 0.8;
+}
+
+.lineup-ideale-somma { background: rgba(22, 163, 74, 0.16); color: #16a34a; }
+
+[data-theme="dark"] .lineup-ideale-somma { color: #4ade80; }
+
+/* Chi era in panchina ed entra nell'undici ideale: il rimpianto della giornata */
+.lineup-row .mancato {
+    margin-left: 0.25rem;
+    font-size: 0.62rem;
+    color: #dc2626;
+}
+
+[data-theme="dark"] .lineup-row .mancato { color: #f87171; }
+
 .lineup-group-title {
     margin: 0.6rem 0 0.3rem;
     font-size: 0.7rem;
