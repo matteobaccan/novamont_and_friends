@@ -40,7 +40,8 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 - **Locale**: Apri `index.html` in un browser web o avvia un server locale
 
 ### 🧭 **Navigazione**
-1. **🏆 Classifica**: Visualizza la classifica attuale con tutti i dettagli
+1. **🏆 Classifica**: Visualizza la classifica attuale con tutti i dettagli, e sotto la
+   heatmap dei punteggi giornata per giornata — chi tiene lo stesso passo e chi alterna
 2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette e statistiche allenatori
 3. **⏱️ Merito**: La classifica meritocratica. Ogni giornata si guarda solo il punteggio e si
    assegnano i punti come in Formula 1, così l'avversario capitato in sorte non pesa. La
@@ -378,6 +379,9 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
       sei classifiche individuali
 - [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
       è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
+- [x] **Heatmap giornata × squadra** — [spec](spec/04-heatmap-punteggi.md). In coda alla
+      Classifica: una casella per punteggio, scala divergente sulla mediana della stagione,
+      ordinabile per punteggio o per costanza. CSS grid, zero librerie
 - [x] **Test automatici** — [spec](spec/07-test-automatici.md). 26 casi con `node --test`,
       nessuna dipendenza: le regole di calcolo e i parser dello scraper, questi ultimi su
       frammenti reali di pagina salvati in `test/fixture/`. Girano su ogni push e pull
@@ -404,8 +408,6 @@ il controllo che dice quando è finita.
 - [ ] **[Andamento per giornata](spec/03-andamento-per-giornata.md)** — spezzata di punti e
       posizione per squadra. Meglio in SVG inline che con Chart.js: il grafico è semplice e
       il peso della libreria non si giustifica
-- [ ] **[Heatmap giornata × squadra](spec/04-heatmap-punteggi.md)** dei punteggi — una CSS
-      grid con scala di colore, zero librerie
 - [ ] **[Export CSV](spec/05-export-csv.md)** delle classifiche — `Blob` più `<a download>`.
       L'export PDF invece richiederebbe una dipendenza vera: lasciato cadere
 - [ ] **[Achievement](spec/06-achievement.md)** derivati dai dati: miglior punteggio di

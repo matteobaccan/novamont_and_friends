@@ -471,6 +471,7 @@ function renderAllSections() {
     displayStandings();
     displayIdealStandings();
     displayMeritStandings();
+    displayHeatmap();
     displayStatistics();
     setupRoundSelector();
     updateLastUpdate();
@@ -675,6 +676,7 @@ function setupNavigationTabs() {
                 displayMeritStandings();
             } else if (targetTab === 'classifica') {
                 displayStandings();
+                displayHeatmap();
             } else if (targetTab === 'rose') {
                 displayRosters();
             } else if (targetTab === 'formazione') {
@@ -884,6 +886,174 @@ function calculateMeritStandings() {
     // A pari punti di merito decide chi ha fatto più punteggio: è la stessa
     // grandezza che la classifica misura, solo senza la scala a gradini
     return Object.values(merito).sort((a, b) => b.meritPoints - a.meritPoints || b.totalScore - a.totalScore);
+}
+
+// ============================================================
+// Heatmap giornata x squadra
+// ============================================================
+
+// La media di una squadra nasconde tutto quello che conta: chi fa 70 ogni
+// domenica e chi alterna 90 e 50 hanno la stessa media e due stagioni opposte.
+// La heatmap mostra la costanza, che nessuna tabella del sito racconta.
+
+// Le soglie sono percentili della stagione mostrata, non valori assoluti: i
+// punteggi reali stanno quasi sempre fra 55 e 90, e una scala fissa 0-100 li
+// schiaccerebbe tutti nella stessa tinta. La banda centrale contiene la
+// mediana, che e' il punto in cui la scala diverge.
+function percentile(ordinati, q) {
+    if (ordinati.length === 0) return null;
+    const posizione = (ordinati.length - 1) * q;
+    const sotto = Math.floor(posizione);
+    const sopra = Math.ceil(posizione);
+    if (sotto === sopra) return ordinati[sotto];
+    return ordinati[sotto] + (ordinati[sopra] - ordinati[sotto]) * (posizione - sotto);
+}
+
+function calcolaHeatmap() {
+    if (!fantacalcioData || !fantacalcioData.teams || !fantacalcioData.rounds) return null;
+
+    const giornate = [];
+    const perSquadra = {};
+    fantacalcioData.teams.forEach(t => { perSquadra[t.name] = new Map(); });
+
+    const tutti = [];
+    fantacalcioData.rounds.forEach(round => {
+        const punteggi = punteggiDiGiornata(round);
+        if (punteggi.length === 0) return;
+        giornate.push(round.round);
+        punteggi.forEach(({ team, score }) => {
+            if (!perSquadra[team]) perSquadra[team] = new Map();
+            perSquadra[team].set(round.round, score);
+            tutti.push(score);
+        });
+    });
+
+    if (giornate.length === 0) return null;
+
+    const ordinati = tutti.slice().sort((a, b) => a - b);
+    const soglie = [0.2, 0.4, 0.6, 0.8].map(q => percentile(ordinati, q));
+    // Con tutti i punteggi uguali le soglie coincidono e non c'e' niente da
+    // distinguere: le caselle restano neutre invece di dividersi a caso
+    const piatta = soglie[0] === soglie[3];
+
+    const livello = (score) => {
+        if (piatta) return 'neutro';
+        if (score < soglie[0]) return 'bassa-2';
+        if (score < soglie[1]) return 'bassa-1';
+        if (score < soglie[2]) return 'neutro';
+        if (score < soglie[3]) return 'alta-1';
+        return 'alta-2';
+    };
+
+    const squadre = Object.entries(perSquadra)
+        .filter(([, punteggi]) => punteggi.size > 0)
+        .map(([nome, punteggi]) => {
+            const valori = [...punteggi.values()];
+            const media = valori.reduce((a, b) => a + b, 0) / valori.length;
+            // Deviazione standard di popolazione: e' la classifica della
+            // costanza, e non esiste da nessun'altra parte nel sito
+            const varianza = valori.reduce((somma, v) => somma + (v - media) ** 2, 0) / valori.length;
+            return {
+                nome,
+                media: Math.round(media * 100) / 100,
+                totale: Math.round(valori.reduce((a, b) => a + b, 0) * 10) / 10,
+                deviazione: valori.length > 1 ? Math.round(Math.sqrt(varianza) * 100) / 100 : null,
+                celle: giornate.map(g => {
+                    const score = punteggi.has(g) ? punteggi.get(g) : null;
+                    return { round: g, score, livello: score === null ? null : livello(score) };
+                })
+            };
+        });
+
+    return { giornate, squadre, soglie, piatta, minimo: ordinati[0], massimo: ordinati[ordinati.length - 1] };
+}
+
+// Come sono ordinate le righe: per punteggio totale, o per costanza
+let ordineHeatmap = 'totale';
+
+function displayHeatmap() {
+    const contenitore = document.getElementById('heatmap-punteggi');
+    if (!contenitore) return;
+
+    const dati = calcolaHeatmap();
+    if (!dati || dati.squadre.length === 0) {
+        contenitore.innerHTML = '';
+        return;
+    }
+
+    // Sotto le due giornate non c'e' un andamento da guardare
+    if (dati.giornate.length < 2) {
+        contenitore.innerHTML = `
+            <div class="heatmap-blocco">
+                <p class="nessun-dato">La heatmap parte dalla seconda giornata: con una sola non c'è un andamento da mostrare.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const righe = dati.squadre.slice().sort((a, b) => {
+        // Deviazione bassa vuol dire piu' costante, quindi in cima
+        if (ordineHeatmap === 'costanza') return (a.deviazione ?? Infinity) - (b.deviazione ?? Infinity);
+        return b.totale - a.totale;
+    });
+
+    const intestazione = dati.giornate
+        .map(g => `<span class="hm-giornata" title="Giornata ${g}">${g}</span>`)
+        .join('');
+
+    const corpo = righe.map(sq => `
+        <span class="hm-squadra" title="${sq.nome}: ${sq.totale} punti in ${dati.giornate.length} giornate, media ${sq.media}${sq.deviazione !== null ? `, scarto tipico ${sq.deviazione}` : ''}">${sq.nome}</span>
+        ${sq.celle.map(c => c.score === null
+            ? `<span class="hm-cella vuota" title="Giornata ${c.round}: ${sq.nome} non ha giocato"></span>`
+            : `<span class="hm-cella ${c.livello}" title="Giornata ${c.round} — ${sq.nome}: ${c.score} punti">${c.score}</span>`
+        ).join('')}
+    `).join('');
+
+    const legenda = dati.piatta
+        ? '<span class="hm-nota">Tutti i punteggi sono uguali: non c\'è una scala da mostrare.</span>'
+        : `
+            <span class="hm-nota">Fasce di punteggio della stagione, dalla più bassa alla più alta. La banda centrale contiene la mediana.</span>
+            <span class="hm-scala">
+                <span class="hm-estremo">${dati.minimo}</span>
+                <span class="hm-cella bassa-2" title="Sotto ${Math.round(dati.soglie[0] * 10) / 10} punti"></span>
+                <span class="hm-cella bassa-1" title="Fra ${Math.round(dati.soglie[0] * 10) / 10} e ${Math.round(dati.soglie[1] * 10) / 10}"></span>
+                <span class="hm-cella neutro" title="Fra ${Math.round(dati.soglie[1] * 10) / 10} e ${Math.round(dati.soglie[2] * 10) / 10}: la fascia della mediana"></span>
+                <span class="hm-cella alta-1" title="Fra ${Math.round(dati.soglie[2] * 10) / 10} e ${Math.round(dati.soglie[3] * 10) / 10}"></span>
+                <span class="hm-cella alta-2" title="Sopra ${Math.round(dati.soglie[3] * 10) / 10} punti"></span>
+                <span class="hm-estremo">${dati.massimo}</span>
+            </span>
+        `;
+
+    contenitore.innerHTML = `
+        <div class="heatmap-blocco">
+            <div class="heatmap-testa">
+                <h3><i class="fas fa-table-cells"></i> Punteggi giornata per giornata</h3>
+                <div class="heatmap-ordine">
+                    <button type="button" class="hm-ordine-btn ${ordineHeatmap === 'totale' ? 'attivo' : ''}" data-ordine="totale">Per punteggio</button>
+                    <button type="button" class="hm-ordine-btn ${ordineHeatmap === 'costanza' ? 'attivo' : ''}" data-ordine="costanza">Per costanza</button>
+                </div>
+            </div>
+            <p class="heatmap-nota">
+                La media dice dove sei arrivato, non come: qui si vede chi tiene lo stesso passo
+                tutte le domeniche e chi alterna exploit e tonfi${ordineHeatmap === 'costanza' ? '. In cima i più regolari' : ''}.
+            </p>
+            <div class="heatmap-scroll">
+                <div class="heatmap-griglia" style="--giornate: ${dati.giornate.length}">
+                    <span class="hm-angolo"></span>
+                    ${intestazione}
+                    ${corpo}
+                </div>
+            </div>
+            <div class="heatmap-legenda">${legenda}</div>
+        </div>
+    `;
+
+    contenitore.querySelectorAll('.hm-ordine-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            ordineHeatmap = btn.dataset.ordine;
+            displayHeatmap();
+        });
+    });
 }
 
 // Visualizzazione della classifica con ordinamento
