@@ -638,17 +638,11 @@ async function initializeApp() {
         console.log('Teams:', fantacalcioData.teams);
         console.log('Rounds:', fantacalcioData.rounds);
 
-        // Calcola la classifica automaticamente dai risultati
-        if (fantacalcioData && fantacalcioData.teams && fantacalcioData.rounds) {
-            fantacalcioData.teams = calculateStandingsFromResults();
-            console.log('Classifica calcolata:', fantacalcioData.teams);
-        }
-
-        displayStandings();
-        displayStatistics();
-        setupRoundSelector();
-        updateLastUpdate();
-        updateSeasonLabels();
+        // Lo stesso disegno di un cambio stagione o di un ricarico dati: una
+        // lista sola. Quando stava scritta due volte, la copia qui dentro
+        // restava indietro a ogni sezione nuova — la heatmap non compariva al
+        // primo caricamento ma solo tornando sulla scheda.
+        renderAllSections();
 
     } catch (error) {
         console.error('Errore durante l\'inizializzazione:', error);
