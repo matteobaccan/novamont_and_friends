@@ -277,7 +277,7 @@ Modifica il file `script.js` per aggiungere:
 ```
 novamont_and_friends/
 ├── index.html              # Pagina principale, 6 sezioni
-├── manifest.webmanifest    # Manifest PWA (non .json: vedi spec/01)
+├── manifest.webmanifest    # Manifest PWA, non .json: sw.js e .htaccess trattano i .json a parte
 ├── styles.css              # Stili responsive
 ├── script.js               # Tutta la logica: classifiche, rose, suggeritore
 ├── config.js               # Impostazioni di presentazione
@@ -288,7 +288,6 @@ novamont_and_friends/
 │   ├── icona.svg           # Sorgente delle icone della app
 │   ├── icona-maskable.svg  # Variante dentro la safe zone di Android
 │   └── icona-*.png         # 192, 512, 180 e maskable-512, generate dagli SVG
-├── spec/                   # Una scheda per ogni casella aperta della roadmap
 ├── data/
 │   ├── seasons.json        # Indice delle stagioni disponibili
 │   ├── 2026-2027.json      # Stagione corrente
@@ -382,32 +381,26 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
       sei classifiche individuali
 - [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
       è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
-- [x] **Andamento della stagione** — [spec](spec/03-andamento-per-giornata.md). La spezzata
-      di posizione e punti giornata per giornata, in SVG inline. Le otto linee restano grigie
-      e una sola si accende: otto colori nessuno riesce ad associarli, e così sparisce anche
-      la legenda
-- [x] **Albo d'oro** — [spec](spec/06-achievement.md). Dieci premi ricavati dai dati, in
-      coda alle Rose: la bomba, il tonfo, la striscia di vittorie, il regolarista, lo
-      sfortunato. Quelli che dipendono dalle formazioni spariscono dove non ci sono, invece
-      di mostrarsi vuoti
-- [x] **Export CSV** — [spec](spec/05-export-csv.md). Un pulsante per le tre classifiche,
-      i risultati per giornata e le statistiche dei giocatori. Le classifiche escono nello
-      stesso ordine che si ha sotto gli occhi, e il file si apre in Excel italiano con un
-      doppio clic
-- [x] **Scontri diretti** — [spec](spec/02-scontri-diretti.md). Matrice 8×8 in coda alla
-      Classifica, vinte-pari-perse dal punto di vista della riga; una casella apre l'elenco
-      delle sfide con andata, ritorno e punteggi
-- [x] **Heatmap giornata × squadra** — [spec](spec/04-heatmap-punteggi.md). In coda alla
-      Classifica: una casella per punteggio, scala divergente sulla mediana della stagione,
-      ordinabile per punteggio o per costanza. CSS grid, zero librerie
-- [x] **Test automatici** — [spec](spec/07-test-automatici.md). 26 casi con `node --test`,
-      nessuna dipendenza: le regole di calcolo e i parser dello scraper, questi ultimi su
-      frammenti reali di pagina salvati in `test/fixture/`. Girano su ogni push e pull
-      request, e non toccano la rete
-- [x] **App installabile (PWA)** — [spec](spec/01-pwa-manifest.md). Manifest e icone ci
-      sono, il service worker le tiene in cache: dal telefono si aggiunge alla schermata
-      Home e si apre senza barra degli indirizzi, con i dati dell'ultima visita anche
-      offline
+- [x] **Andamento della stagione** — la spezzata di posizione e punti giornata per giornata,
+      in SVG inline. Le otto linee restano grigie e una sola si accende: otto colori nessuno
+      riesce ad associarli, e così sparisce anche la legenda
+- [x] **Albo d'oro** — dieci premi ricavati dai dati, in coda alle Rose: la bomba, il tonfo,
+      la striscia di vittorie, il regolarista, lo sfortunato. Quelli che dipendono dalle
+      formazioni spariscono dove non ci sono, invece di mostrarsi vuoti
+- [x] **Export CSV** — un pulsante per le tre classifiche, i risultati per giornata e le
+      statistiche dei giocatori. Le classifiche escono nello stesso ordine che si ha sotto
+      gli occhi, e il file si apre in Excel italiano con un doppio clic
+- [x] **Scontri diretti** — matrice 8×8 in coda alla Classifica, vinte-pari-perse dal punto
+      di vista della riga; una casella apre l'elenco delle sfide con andata, ritorno e punteggi
+- [x] **Heatmap giornata × squadra** — in coda alla Classifica: una casella per punteggio,
+      scala divergente sulla mediana della stagione, ordinabile per punteggio o per costanza.
+      CSS grid, zero librerie
+- [x] **Test automatici** — 49 casi con `node --test`, nessuna dipendenza: le regole di
+      calcolo e i parser dello scraper, questi ultimi su frammenti reali di pagina salvati in
+      `test/fixture/`. Girano su ogni push e pull request, e non toccano la rete
+- [x] **App installabile (PWA)** — manifest e icone ci sono, il service worker le tiene in
+      cache: dal telefono si aggiunge alla schermata Home e si apre senza barra degli
+      indirizzi, con i dati dell'ultima visita anche offline
 - [x] **Classifica di merito** — ogni giornata vale come una gara, punti con la scala della
       Formula 1. È la risposta alla domanda che si fa ogni lega: chi meritava davvero
 - [x] **Dati di Serie A aggiornati da soli** — il workflow rigenera `probabili.json` due
@@ -416,9 +409,11 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
 
 ### 📈 **Da fare**
 
-Niente, per ora: le sette caselle che c'erano sono tutte chiuse. Le loro schede restano
-in [`spec/`](spec/) — dati, comportamento, casi limite e il controllo che dice quando è
-finita — perché documentano com'è fatto quello che c'è, non solo com'era da fare.
+Niente, per ora: le sette caselle che c'erano sono tutte chiuse. Ognuna aveva la sua
+scheda in `spec/`, tolte una volta fatte: quello che spiegavano — perché una scelta è
+stata fatta così, cosa non deve rompersi, dove sono i casi limite — è finito nei commenti
+del codice e nei messaggi di commit, che è dove lo si cerca quando serve. Le schede
+restano comunque nella storia di git.
 
 ### 🚫 **Fuori portata, e perché**
 
