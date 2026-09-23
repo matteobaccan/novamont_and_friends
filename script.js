@@ -473,6 +473,7 @@ function renderAllSections() {
     displayMeritStandings();
     displayHeatmap();
     displayScontriDiretti();
+    displayAchievement();
     collegaPulsantiCsv();
     displayStatistics();
     setupRoundSelector();
@@ -681,6 +682,7 @@ function setupNavigationTabs() {
                 displayHeatmap();
                 displayScontriDiretti();
             } else if (targetTab === 'rose') {
+                displayAchievement();
                 displayRosters();
             } else if (targetTab === 'formazione') {
                 displayFormazione();
@@ -889,6 +891,262 @@ function calculateMeritStandings() {
     // A pari punti di merito decide chi ha fatto più punteggio: è la stessa
     // grandezza che la classifica misura, solo senza la scala a gradini
     return Object.values(merito).sort((a, b) => b.meritPoints - a.meritPoints || b.totalScore - a.totalScore);
+}
+
+// ============================================================
+// Achievement
+// ============================================================
+
+// Le classifiche premiano una cosa sola: chi ha fatto piu' punti. Tutto il
+// resto della stagione — la partita da 95, le sei vittorie di fila, il
+// pomeriggio in cui hai lasciato in panchina mezza squadra ideale — non lascia
+// traccia da nessuna parte, anche se e' quello di cui si parla nel gruppo.
+
+// Il contesto che tutti gli achievement leggono: una passata sola sui dati,
+// invece di dieci funzioni che riscorrono le stesse giornate
+function contestoAchievement() {
+    if (!fantacalcioData || !fantacalcioData.rounds) return null;
+
+    const perSquadra = {};
+    const giornate = [];
+    let conFormazioni = false;
+    let conIdeali = false;
+
+    (fantacalcioData.rounds || []).forEach(round => {
+        const punteggi = punteggiDiGiornata(round);
+        if (punteggi.length === 0) return;
+        giornate.push(round.round);
+
+        const mediaGiornata = punteggi.reduce((a, p) => a + p.score, 0) / punteggi.length;
+
+        (round.matches || []).forEach(m => {
+            if (typeof m.homeScore !== 'number' || typeof m.awayScore !== 'number') return;
+            const { homeGoals, awayGoals } = calculateMatchGoals(m.homeScore, m.awayScore);
+            if (m.lineups) conFormazioni = true;
+            if (m.homeIdealScore !== undefined) conIdeali = true;
+
+            const voce = (squadra, score, gol, golSubiti, ideale, formazione) => {
+                (perSquadra[squadra] ||= []).push({
+                    round: round.round,
+                    score,
+                    gol,
+                    golSubiti,
+                    esito: gol > golSubiti ? 'vinta' : gol < golSubiti ? 'persa' : 'pari',
+                    sopraMedia: score > mediaGiornata,
+                    ideale: ideale !== undefined ? ideale : null,
+                    formazione: formazione || null,
+                    avversario: squadra === m.homeTeam ? m.awayTeam : m.homeTeam
+                });
+            };
+
+            voce(m.homeTeam, m.homeScore, homeGoals, awayGoals, m.homeIdealScore, m.lineups && m.lineups.home);
+            voce(m.awayTeam, m.awayScore, awayGoals, homeGoals, m.awayIdealScore, m.lineups && m.lineups.away);
+        });
+    });
+
+    return { giornate, perSquadra, conFormazioni, conIdeali };
+}
+
+// Piu' squadre possono pareggiare un primato: si mostrano tutte, invece di
+// sceglierne una per ordine di array
+function migliori(voci, meglioDi) {
+    const valide = voci.filter(v => v && v.valore !== null && Number.isFinite(v.valore));
+    if (valide.length === 0) return [];
+    const primo = valide.reduce((a, b) => (meglioDi(b.valore, a.valore) ? b : a));
+    return valide.filter(v => v.valore === primo.valore);
+}
+
+const massimo = (a, b) => a > b;
+const minimo = (a, b) => a < b;
+
+// La striscia piu' lunga che soddisfa una condizione. Una giornata mancante
+// interrompe la striscia invece di saltarla: altrimenti si premierebbero
+// sequenze che non sono mai avvenute.
+function strisciaPiuLunga(partite, giornate, condizione) {
+    const perRound = new Map(partite.map(p => [p.round, p]));
+    let corrente = 0;
+    let massima = 0;
+    let fineMassima = null;
+    for (const g of giornate) {
+        const p = perRound.get(g);
+        if (p && condizione(p)) {
+            corrente += 1;
+            if (corrente > massima) { massima = corrente; fineMassima = g; }
+        } else {
+            corrente = 0;
+        }
+    }
+    return { lunghezza: massima, fine: fineMassima };
+}
+
+function deviazione(valori) {
+    if (valori.length < 2) return null;
+    const media = valori.reduce((a, b) => a + b, 0) / valori.length;
+    const varianza = valori.reduce((somma, v) => somma + (v - media) ** 2, 0) / valori.length;
+    return Math.round(Math.sqrt(varianza) * 100) / 100;
+}
+
+const ACHIEVEMENT = [
+    {
+        id: 'bomba', titolo: 'La bomba', icona: 'fa-rocket', minGiornate: 1,
+        descrizione: 'Il punteggio di giornata più alto della stagione',
+        calcola: (c) => migliori(Object.entries(c.perSquadra).flatMap(([nome, partite]) =>
+            partite.map(p => ({ chi: nome, valore: p.score, round: p.round, nota: `contro ${p.avversario}` }))), massimo)
+    },
+    {
+        id: 'tonfo', titolo: 'Il tonfo', icona: 'fa-anchor', minGiornate: 1,
+        descrizione: 'Il punteggio di giornata più basso della stagione',
+        calcola: (c) => migliori(Object.entries(c.perSquadra).flatMap(([nome, partite]) =>
+            partite.map(p => ({ chi: nome, valore: p.score, round: p.round, nota: `contro ${p.avversario}` }))), minimo)
+    },
+    {
+        id: 'rullo', titolo: 'Rullo compressore', icona: 'fa-fire', minGiornate: 3,
+        descrizione: 'La striscia più lunga di vittorie di fila',
+        calcola: (c) => migliori(Object.entries(c.perSquadra).map(([nome, partite]) => {
+            const s = strisciaPiuLunga(partite, c.giornate, p => p.esito === 'vinta');
+            return s.lunghezza >= 2
+                ? { chi: nome, valore: s.lunghezza, nota: `fino alla ${s.fine}ª`, suffisso: 'vittorie' }
+                : null;
+        }), massimo)
+    },
+    {
+        id: 'traversata', titolo: 'La traversata', icona: 'fa-person-walking', minGiornate: 3,
+        descrizione: 'La striscia più lunga senza vincere',
+        calcola: (c) => migliori(Object.entries(c.perSquadra).map(([nome, partite]) => {
+            const s = strisciaPiuLunga(partite, c.giornate, p => p.esito !== 'vinta');
+            return s.lunghezza >= 2
+                ? { chi: nome, valore: s.lunghezza, nota: `fino alla ${s.fine}ª`, suffisso: 'giornate' }
+                : null;
+        }), massimo)
+    },
+    {
+        id: 'regolarista', titolo: 'Il regolarista', icona: 'fa-ruler', minGiornate: 5,
+        descrizione: 'Lo stesso passo tutte le domeniche: lo scarto tipico più basso',
+        calcola: (c) => migliori(Object.entries(c.perSquadra).map(([nome, partite]) => {
+            const d = deviazione(partite.map(p => p.score));
+            return d === null ? null : { chi: nome, valore: d, suffisso: 'di scarto' };
+        }), minimo)
+    },
+    {
+        id: 'montagne', titolo: 'Montagne russe', icona: 'fa-chart-line', minGiornate: 5,
+        descrizione: 'Exploit e tonfi: lo scarto tipico più alto',
+        calcola: (c) => migliori(Object.entries(c.perSquadra).map(([nome, partite]) => {
+            const d = deviazione(partite.map(p => p.score));
+            return d === null ? null : { chi: nome, valore: d, suffisso: 'di scarto' };
+        }), massimo)
+    },
+    {
+        id: 'sfortunato', titolo: 'Lo sfortunato', icona: 'fa-cloud-bolt', minGiornate: 3,
+        descrizione: 'Più sconfitte pur avendo fatto un punteggio sopra la media di giornata',
+        calcola: (c) => migliori(Object.entries(c.perSquadra).map(([nome, partite]) => {
+            const quante = partite.filter(p => p.esito === 'persa' && p.sopraMedia).length;
+            return quante > 0 ? { chi: nome, valore: quante, suffisso: 'volte' } : null;
+        }), massimo)
+    },
+
+    // Questi tre vivono solo dove le formazioni sono state raccolte
+    {
+        id: 'occasione', titolo: 'Occasione persa', icona: 'fa-face-grimace', minGiornate: 1,
+        richiedeIdeali: true,
+        descrizione: 'Il divario più ampio in una giornata fra il punteggio fatto e quello della formazione perfetta',
+        calcola: (c) => migliori(Object.entries(c.perSquadra).flatMap(([nome, partite]) =>
+            partite.filter(p => p.ideale !== null).map(p => ({
+                chi: nome,
+                valore: Math.round((p.ideale - p.score) * 10) / 10,
+                round: p.round,
+                suffisso: 'punti'
+            }))), massimo)
+    },
+    {
+        id: 'panchina', titolo: "Panchina d'oro", icona: 'fa-chair', minGiornate: 1,
+        richiedeFormazioni: true,
+        descrizione: 'Il bottino di bonus più ricco lasciato in panchina in una sola giornata',
+        calcola: (c) => migliori(Object.entries(c.perSquadra).flatMap(([nome, partite]) =>
+            partite.filter(p => p.formazione).map(p => {
+                const saldo = p.formazione
+                    .filter(g => g.t === 'b' && g.b !== undefined && g.v !== undefined)
+                    .reduce((somma, g) => somma + (g.b - g.v), 0);
+                return saldo > 0
+                    ? { chi: nome, valore: Math.round(saldo * 10) / 10, round: p.round, suffisso: 'di bonus' }
+                    : null;
+            })), massimo)
+    },
+    {
+        id: 'uomogiusto', titolo: "L'uomo giusto", icona: 'fa-star', minGiornate: 1,
+        richiedeFormazioni: true,
+        descrizione: 'Il fantavoto più alto di un giocatore schierato',
+        calcola: (c) => migliori(Object.entries(c.perSquadra).flatMap(([nome, partite]) =>
+            partite.filter(p => p.formazione).flatMap(p => p.formazione
+                .filter(g => SCHIERATO.has(g.t) && g.b !== undefined)
+                .map(g => ({
+                    chi: nome,
+                    valore: g.b,
+                    round: p.round,
+                    nota: anagraficaGiocatore(g.p).name
+                })))), massimo)
+    }
+];
+
+function displayAchievement() {
+    const contenitore = document.getElementById('achievement');
+    if (!contenitore) return;
+
+    const c = contestoAchievement();
+    if (!c || c.giornate.length === 0) {
+        contenitore.innerHTML = '';
+        return;
+    }
+
+    const assegnati = [];
+    let nascostiPerFormazioni = 0;
+
+    for (const a of ACHIEVEMENT) {
+        if (c.giornate.length < a.minGiornate) continue;
+        // Un achievement che dipende dalle formazioni non si mostra vuoto:
+        // sparisce, e la sezione dice quanti e perche'
+        if (a.richiedeFormazioni && !c.conFormazioni) { nascostiPerFormazioni += 1; continue; }
+        if (a.richiedeIdeali && !c.conIdeali) { nascostiPerFormazioni += 1; continue; }
+
+        const vincitori = a.calcola(c);
+        if (vincitori.length > 0) assegnati.push({ a, vincitori });
+    }
+
+    if (assegnati.length === 0) {
+        contenitore.innerHTML = '';
+        return;
+    }
+
+    const tessere = assegnati.map(({ a, vincitori }) => {
+        const v = vincitori[0];
+        const chi = vincitori.map(x => x.chi).join(', ');
+        const valore = vincitori.length === 1 && v.round
+            ? `${v.valore}${v.suffisso ? ' ' + v.suffisso : ''} · G${v.round}`
+            : `${v.valore}${v.suffisso ? ' ' + v.suffisso : ''}`;
+        const nota = vincitori.length === 1 && v.nota ? v.nota : (vincitori.length > 1 ? 'a pari merito' : '');
+
+        return `
+            <div class="ach-tessera" title="${a.descrizione}">
+                <i class="fas ${a.icona}"></i>
+                <span class="ach-titolo">${a.titolo}</span>
+                <span class="ach-chi">${chi}</span>
+                <span class="ach-valore">${valore}</span>
+                ${nota ? `<span class="ach-nota">${nota}</span>` : ''}
+            </div>
+        `;
+    }).join('');
+
+    contenitore.innerHTML = `
+        <div class="ach-blocco">
+            <h3><i class="fas fa-medal"></i> Albo d'oro</h3>
+            <p class="ach-intro">
+                Quello che le classifiche non dicono. Passa sopra una tessera per la regola.
+                ${nascostiPerFormazioni > 0
+                    ? `<em>${nascostiPerFormazioni} premi non compaiono: questa stagione non ha le formazioni salvate.</em>`
+                    : ''}
+            </p>
+            <div class="ach-griglia">${tessere}</div>
+        </div>
+    `;
 }
 
 // ============================================================

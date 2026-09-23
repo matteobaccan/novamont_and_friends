@@ -4702,3 +4702,105 @@ html.theme-transition *:after {
 }
 
 .csv-btn i { font-size: 0.7rem; }
+
+/* ==================================================================
+   Albo d'oro
+   ------------------------------------------------------------------
+   Tessere, non una schermata di premiazione: sono dati, e non hanno
+   bisogno di entrare in scena. La regola di ogni premio sta nel title,
+   perche' un achievement di cui non si capisce il criterio e' solo un
+   adesivo.
+   ================================================================== */
+
+.ach-blocco {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.25rem 1.4rem 1.3rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 16px var(--shadow);
+}
+
+.ach-blocco h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ach-blocco h3 i { color: var(--accent-warning); font-size: 0.95rem; }
+
+.ach-intro {
+    margin: 0.35rem 0 1rem;
+    font-size: 0.8rem;
+    opacity: 0.65;
+}
+
+.ach-intro em { opacity: 0.9; }
+
+.ach-griglia {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: 0.7rem;
+}
+
+.ach-tessera {
+    display: grid;
+    grid-template-columns: 1.6rem minmax(0, 1fr);
+    grid-template-areas:
+        'icona titolo'
+        'icona chi'
+        'icona valore'
+        'icona nota';
+    column-gap: 0.6rem;
+    align-content: start;
+    padding: 0.7rem 0.8rem;
+    border-radius: 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    cursor: help;
+}
+
+.ach-tessera i {
+    grid-area: icona;
+    align-self: center;
+    font-size: 1.05rem;
+    color: var(--accent-warning);
+    text-align: center;
+}
+
+.ach-titolo {
+    grid-area: titolo;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: none;
+    opacity: 0.6;
+}
+
+.ach-chi {
+    grid-area: chi;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.ach-valore {
+    grid-area: valore;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--primary-color);
+}
+
+.ach-nota {
+    grid-area: nota;
+    font-size: 0.7rem;
+    opacity: 0.55;
+}
+
+@media (max-width: 700px) {
+    .ach-blocco { padding: 1rem 0.9rem; }
+    .ach-griglia { grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 0.5rem; }
+}

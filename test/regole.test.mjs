@@ -448,3 +448,72 @@ test('vuoto e nullo diventano una cella vuota, non la parola null', () => {
     assert.equal(app.cellaCsv(undefined), '');
     assert.equal(app.cellaCsv(''), '');
 });
+
+// ------------------------------------------------------------------
+// Albo d'oro
+// ------------------------------------------------------------------
+
+test('una giornata mancante interrompe la striscia, non la salta', () => {
+    // Il bug facile: saltare il buco e premiare una sequenza che non c'è mai
+    // stata. Qui la squadra ha vinto le giornate 1, 2, 4 e 5: la striscia più
+    // lunga è 2, non 4, perché la 3 non l'ha giocata.
+    const partite = [
+        { round: 1, esito: 'vinta' },
+        { round: 2, esito: 'vinta' },
+        { round: 4, esito: 'vinta' },
+        { round: 5, esito: 'vinta' }
+    ];
+    const s = app.strisciaPiuLunga(partite, [1, 2, 3, 4, 5], p => p.esito === 'vinta');
+    assert.equal(s.lunghezza, 2);
+});
+
+test('la striscia riporta la giornata in cui si è chiusa', () => {
+    const partite = [
+        { round: 1, esito: 'persa' },
+        { round: 2, esito: 'vinta' },
+        { round: 3, esito: 'vinta' },
+        { round: 4, esito: 'vinta' },
+        { round: 5, esito: 'pari' }
+    ];
+    const s = app.strisciaPiuLunga(partite, [1, 2, 3, 4, 5], p => p.esito === 'vinta');
+    assert.equal(s.lunghezza, 3);
+    assert.equal(s.fine, 4);
+});
+
+test('senza nessuna vittoria la striscia è zero, non uno', () => {
+    const partite = [{ round: 1, esito: 'persa' }, { round: 2, esito: 'pari' }];
+    const s = app.strisciaPiuLunga(partite, [1, 2], p => p.esito === 'vinta');
+    assert.equal(s.lunghezza, 0);
+    assert.equal(s.fine, null);
+});
+
+test('a pari merito si mostrano tutti, non il primo dell\'array', () => {
+    const voci = [
+        { chi: 'A', valore: 10 },
+        { chi: 'B', valore: 12 },
+        { chi: 'C', valore: 12 },
+        { chi: 'D', valore: 3 }
+    ];
+    const vincitori = app.migliori(voci, (a, b) => a > b);
+    assert.deepEqual(vincitori.map(v => v.chi), ['B', 'C']);
+
+    const peggiori = app.migliori(voci, (a, b) => a < b);
+    assert.deepEqual(peggiori.map(v => v.chi), ['D']);
+});
+
+test('le voci nulle o non numeriche non vincono niente', () => {
+    // .length invece di deepEqual: l'array arriva dal contesto vm e ha un
+    // Array.prototype diverso da quello dell'host
+    assert.equal(app.migliori([null, undefined, { chi: 'A', valore: null }], (a, b) => a > b).length, 0);
+    assert.deepEqual(
+        app.migliori([null, { chi: 'A', valore: 5 }], (a, b) => a > b).map(v => v.chi),
+        ['A']
+    );
+});
+
+test('lo scarto tipico non esiste con una giornata sola', () => {
+    assert.equal(app.deviazione([70]), null);
+    assert.equal(app.deviazione([]), null);
+    assert.equal(app.deviazione([70, 70, 70]), 0, 'tre punteggi uguali fanno scarto zero, non nullo');
+    assert.equal(app.deviazione([60, 80]), 10);
+});
