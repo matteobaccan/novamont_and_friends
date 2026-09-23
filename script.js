@@ -2890,14 +2890,20 @@ function siglaSerieA(nome) {
     return nome ? nome.slice(0, 3).toUpperCase() : '';
 }
 
-function rigaRosa(pid, stats) {
+function rigaRosa(pid, stats, peggiori) {
     const info = anagraficaGiocatore(pid);
     const s = stats[pid];
+
+    // La pastiglia del ruolo si borda quando il giocatore e' fra i due peggiori
+    // del suo reparto: il motivo sta nel title, perche' un bordo da solo non
+    // spiega se e' per le presenze o per la fantamedia
+    const motivo = peggiori && peggiori.get(pid);
+    const pastiglia = `<span class="rosa-ruolo ruolo-${info.role}${motivo ? ' peggiore' : ''}"${motivo ? ` title="${motivo}"` : ''}>${info.role}</span>`;
 
     if (!s) {
         return `
             <div class="rosa-row mai-visto">
-                <span class="rosa-ruolo ruolo-${info.role}">${info.role}</span>
+                ${pastiglia}
                 <span class="rosa-nome">${info.name}</span>
                 <span class="rosa-serieA" title="${info.serieA || ''}">${siglaSerieA(info.serieA)}</span>
                 <span class="rosa-cella zero">—</span><span class="rosa-cella zero">—</span>
@@ -2910,7 +2916,7 @@ function rigaRosa(pid, stats) {
 
     return `
         <div class="rosa-row">
-            <span class="rosa-ruolo ruolo-${info.role}">${info.role}</span>
+            ${pastiglia}
             <span class="rosa-nome">${info.name}</span>
             <span class="rosa-serieA" title="${info.serieA || ''}">${siglaSerieA(info.serieA)}</span>
             <span class="rosa-cella">${s.presenze || '—'}</span>
@@ -2925,6 +2931,64 @@ function rigaRosa(pid, stats) {
     `;
 }
 
+// Quante giornate sono state effettivamente giocate: serve come base per la
+// soglia di presenze, che altrimenti non vorrebbe dire niente
+function giornateGiocate() {
+    return (fantacalcioData.rounds || []).filter(r => punteggiDiGiornata(r).length > 0).length;
+}
+
+// I due peggiori di ogni reparto, secondo la regola della lega: chi sta sotto
+// meta' delle giornate e' peggiore comunque, perche' una fantamedia costruita
+// su tre partite non dice niente; fra chi ha giocato abbastanza decide la
+// fantamedia. I portieri restano fuori: in rosa sono tre e il confronto fra
+// loro e' un'altra cosa.
+const RUOLI_DA_GIUDICARE = ['D', 'C', 'A'];
+const SOGLIA_PRESENZE = 0.5;
+
+function peggioriPerRuolo(pids, stats) {
+    const giornate = giornateGiocate();
+    const peggiori = new Map();
+    if (giornate === 0) return peggiori;
+
+    for (const ruolo of RUOLI_DA_GIUDICARE) {
+        const delReparto = pids.filter(pid => anagraficaGiocatore(pid).role === ruolo);
+
+        // Con due soli giocatori in un reparto, dire "i due peggiori" non
+        // aggiunge niente: sono tutti
+        if (delReparto.length <= 2) continue;
+
+        const voci = delReparto.map(pid => {
+            const s = stats[pid];
+            const presenze = s ? s.presenze : 0;
+            const quota = presenze / giornate;
+            return {
+                pid,
+                presenze,
+                quota,
+                scarso: quota < SOGLIA_PRESENZE,
+                // Chi non ha mai giocato non ha fantamedia: vale meno di
+                // qualunque voto vero, non piu' di tutti
+                fanta: s && s.mediaFanta !== null ? s.mediaFanta : -Infinity
+            };
+        });
+
+        voci.sort((a, b) => {
+            if (a.scarso !== b.scarso) return a.scarso ? -1 : 1;
+            if (a.scarso) return a.presenze - b.presenze || a.fanta - b.fanta;
+            return a.fanta - b.fanta;
+        });
+
+        voci.slice(0, 2).forEach(v => {
+            const percentuale = Math.round(v.quota * 100);
+            peggiori.set(v.pid, v.scarso
+                ? `Fra i due peggiori ${ruolo === 'D' ? 'difensori' : ruolo === 'C' ? 'centrocampisti' : 'attaccanti'}: ${v.presenze} presenze su ${giornate} (${percentuale}%), sotto la meta' delle giornate`
+                : `Fra i due peggiori ${ruolo === 'D' ? 'difensori' : ruolo === 'C' ? 'centrocampisti' : 'attaccanti'}: fantamedia ${numero(v.fanta)} con ${v.presenze} presenze su ${giornate}`);
+        });
+    }
+
+    return peggiori;
+}
+
 function schedaRosa(team, stats) {
     const squadra = fantacalcioData.teams.find(t => t.name === team);
     const pids = rosaDellaSquadra(team).slice().sort((a, b) => {
@@ -2934,6 +2998,7 @@ function schedaRosa(team, stats) {
     });
 
     const inPanchina = pids.reduce((somma, pid) => somma + (stats[pid]?.puntiInPanchina || 0), 0);
+    const peggiori = peggioriPerRuolo(pids, stats);
 
     return `
         <div class="rosa-card">
@@ -2956,7 +3021,7 @@ function schedaRosa(team, stats) {
                     <span title="Cartellini">Cart</span>
                     <span title="Punti presi mentre era in panchina">Panca</span>
                 </div>
-                ${pids.map(pid => rigaRosa(pid, stats)).join('')}
+                ${pids.map(pid => rigaRosa(pid, stats, peggiori)).join('')}
             </div>
         </div>
     `;

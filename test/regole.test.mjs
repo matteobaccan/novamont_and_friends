@@ -218,3 +218,95 @@ test('i gol subiti dal portiere non contano come malus', () => {
     ));
     assert.equal(s[1].malus, 0, 'i gol subiti sono il mestiere del portiere');
 });
+
+// ------------------------------------------------------------------
+// I due peggiori di ogni reparto
+// ------------------------------------------------------------------
+
+// La regola ha una sottigliezza: chi ha giocato meno di metà giornate è
+// peggiore comunque, anche con una fantamedia altissima, perché quella media
+// sta su troppe poche partite per voler dire qualcosa.
+function scenarioReparto(giornateTotali, giocatori) {
+    const players = {};
+    const pids = [];
+    const stats = {};
+    giocatori.forEach((g, i) => {
+        const pid = 100 + i;
+        pids.push(pid);
+        players[pid] = { name: g.nome, role: g.ruolo, serieA: '' };
+        stats[pid] = { presenze: g.presenze, mediaFanta: g.fanta, mediaVoto: g.fanta };
+    });
+
+    // Giornate finte, solo per far contare giornateGiocate()
+    const rounds = Array.from({ length: giornateTotali }, (_, i) => ({
+        round: i + 1,
+        matches: [{ homeTeam: 'A', awayTeam: 'B', homeScore: 70, awayScore: 70 }]
+    }));
+
+    esegui(app, `fantacalcioData = ${JSON.stringify({ teams: [], players, rounds, rosterHistory: [] })};`);
+    return { pids, stats };
+}
+
+test('sotto metà delle giornate si è peggiori comunque, anche giocando bene', () => {
+    const { pids, stats } = scenarioReparto(10, [
+        { nome: 'Fenomeno assente', ruolo: 'D', presenze: 2, fanta: 9.5 },  // 20%: peggiore
+        { nome: 'Mediocre presente', ruolo: 'D', presenze: 9, fanta: 5.2 },
+        { nome: 'Discreto', ruolo: 'D', presenze: 10, fanta: 6.4 },
+        { nome: 'Buono', ruolo: 'D', presenze: 8, fanta: 7.1 }
+    ]);
+
+    const peggiori = app.peggioriPerRuolo(pids, stats);
+    const segnati = pids.filter(p => peggiori.has(p));
+
+    assert.equal(segnati.length, 2);
+    assert.ok(peggiori.has(pids[0]), 'chi ha giocato il 20% è peggiore anche con 9,5 di media');
+    assert.ok(peggiori.has(pids[1]), 'fra chi ha giocato abbastanza, il peggiore è quello con la fantamedia più bassa');
+    assert.ok(!peggiori.has(pids[2]));
+});
+
+test('il motivo scritto nel title distingue le presenze dalla fantamedia', () => {
+    const { pids, stats } = scenarioReparto(10, [
+        { nome: 'Assente', ruolo: 'C', presenze: 1, fanta: 8 },
+        { nome: 'Scarso', ruolo: 'C', presenze: 10, fanta: 4.9 },
+        { nome: 'Normale', ruolo: 'C', presenze: 10, fanta: 6.5 }
+    ]);
+    const peggiori = app.peggioriPerRuolo(pids, stats);
+
+    assert.match(peggiori.get(pids[0]), /sotto la met/, 'chi gioca poco va segnato per le presenze');
+    assert.match(peggiori.get(pids[1]), /fantamedia/, 'chi gioca va segnato per la fantamedia');
+});
+
+test('con due soli giocatori in un reparto non si segna nessuno', () => {
+    // "I due peggiori di due" non dice niente
+    const { pids, stats } = scenarioReparto(10, [
+        { nome: 'Uno', ruolo: 'A', presenze: 2, fanta: 5 },
+        { nome: 'Due', ruolo: 'A', presenze: 9, fanta: 6 }
+    ]);
+    assert.equal(app.peggioriPerRuolo(pids, stats).size, 0);
+});
+
+test('i portieri restano fuori dal giudizio', () => {
+    const { pids, stats } = scenarioReparto(10, [
+        { nome: 'P1', ruolo: 'P', presenze: 0, fanta: null },
+        { nome: 'P2', ruolo: 'P', presenze: 1, fanta: 4 },
+        { nome: 'P3', ruolo: 'P', presenze: 10, fanta: 6 }
+    ]);
+    assert.equal(app.peggioriPerRuolo(pids, stats).size, 0,
+        'in rosa i portieri sono tre e il confronto fra loro è un altro discorso');
+});
+
+test('chi non ha mai giocato sta in fondo, non in cima', () => {
+    const { pids, stats } = scenarioReparto(10, [
+        { nome: 'Mai visto', ruolo: 'A', presenze: 0, fanta: null },
+        { nome: 'Poco e male', ruolo: 'A', presenze: 3, fanta: 4.5 },
+        { nome: 'Titolare', ruolo: 'A', presenze: 10, fanta: 7 },
+        { nome: 'Titolare 2', ruolo: 'A', presenze: 9, fanta: 6.8 }
+    ]);
+    const peggiori = app.peggioriPerRuolo(pids, stats);
+
+    // mediaFanta null non deve valere piu' di qualunque voto vero
+    assert.ok(peggiori.has(pids[0]), 'chi non ha mai giocato è il peggiore');
+    assert.ok(peggiori.has(pids[1]));
+    assert.ok(!peggiori.has(pids[2]));
+    assert.ok(!peggiori.has(pids[3]));
+});
