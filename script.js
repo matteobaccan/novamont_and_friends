@@ -928,7 +928,7 @@ function displayStandings() {
                         DR <i class="fas fa-sort ${sortState.column === 'goalDifference' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
                     <th class="sortable-header mobile-hide" data-column="totalScore" data-table="main">
-                        Pt <i class="fas fa-sort ${sortState.column === 'totalScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                        Totale <i class="fas fa-sort ${sortState.column === 'totalScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
                     <th class="sortable-header mobile-hide" data-column="avgScore" data-table="main">
                         Media <i class="fas fa-sort ${sortState.column === 'avgScore' ? (sortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
@@ -1333,7 +1333,7 @@ function displayIdealStandings() {
                         DR <i class="fas fa-sort ${idealSortState.column === 'goalDifference' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
                     <th class="sortable-header mobile-hide" data-column="totalScore" data-table="ideal">
-                        Pt <i class="fas fa-sort ${idealSortState.column === 'totalScore' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                        Totale <i class="fas fa-sort ${idealSortState.column === 'totalScore' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
                     </th>
                     <th class="sortable-header mobile-hide" data-column="avgScore" data-table="ideal">
                         Media <i class="fas fa-sort ${idealSortState.column === 'avgScore' ? (idealSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
