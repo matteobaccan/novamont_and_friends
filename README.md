@@ -1,4 +1,6 @@
-# 🏆 Fantacalcio Novamont & Friends
+<p align="center">
+  <img src="assets/logo.svg" alt="Novamont &amp; Friends" width="430">
+</p>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b010ff6f-b676-4765-9d71-1fb72eee96cf/deploy-status)](https://app.netlify.com/projects/novamontfriends/deploys)
 
@@ -9,6 +11,7 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 ### 🏆 **Classifiche Complete**
 - **Classifica Reale**: Posizioni, punti campionato, gol fatti/subiti, differenza reti, totale punti fantacalcio
 - **Classifica Ideale**: Simulazione con le migliori formazioni possibili, confronto con la classifica reale e statistiche allenatori
+- **Classifica di Merito**: Ogni giornata è una gara a sé e i punti si distribuiscono con la scala della Formula 1 (25-18-15-12-10-8-6-4). Toglie di mezzo il calendario: conta solo il punteggio
 - **Statistiche Allenatori**: Podio con ranking basato su efficienza e punti persi medi
 - **Ordinamento Dinamico**: Clicca su qualsiasi colonna per ordinare i dati
 - **Algoritmo Gol**: Sistema preciso di calcolo gol (66pt = 1 gol, poi ogni 6 punti)
@@ -27,7 +30,7 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 - **Animazioni Fluide**: Effetti float, pulse e spin per un'esperienza dinamica
 - **100% Responsive**: Layout 2 colonne su desktop, 1 colonna su mobile (max 450px per colonna)
 - **Tema Personalizzabile**: Supporto per dark mode e light mode
-- **Navigazione Pulita**: 5 sezioni (Classifica, Classifica Ideale, Giornate, Rose, Formazione)
+- **Navigazione Pulita**: 6 sezioni (Classifica, Classifica Ideale, Merito, Giornate, Rose, Formazione)
 - **Font Awesome Icons**: Iconografie professionali in tutto il sito
 
 ## 🚀 Come utilizzare
@@ -39,12 +42,15 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 ### 🧭 **Navigazione**
 1. **🏆 Classifica**: Visualizza la classifica attuale con tutti i dettagli
 2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette e statistiche allenatori
-3. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti inline
-4. **👥 Rose**: Rendimento di ogni giocatore e sei classifiche — marcatori, assist,
-   ammonizioni, espulsioni, malus e incompresi
-5. **🪄 Formazione**: Undici consigliato per la prossima giornata
+3. **⏱️ Merito**: La classifica meritocratica. Ogni giornata si guarda solo il punteggio e si
+   assegnano i punti come in Formula 1, così l'avversario capitato in sorte non pesa. La
+   colonna Δ Pos dice di quante posizioni il campionato ti tratta meglio o peggio del merito
+4. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti inline
+5. **👥 Rose**: Rendimento di ogni giocatore e sei classifiche — marcatori, assist,
+   ammonizioni, espulsioni, malus e incompresi (bonus e malus raccolti in panchina)
+6. **🪄 Formazione**: Undici consigliato per la prossima giornata
 
-In Classifica e Classifica Ideale, un clic sulla squadra apre l'elenco delle sue partite;
+In Classifica, Classifica Ideale e Merito, un clic sulla squadra apre l'elenco delle sue partite;
 un clic sulla partita mostra le formazioni con voti ed eventi di tutti i giocatori.
 
 ### 💡 **Funzionalità Interattive**
@@ -263,12 +269,15 @@ Modifica il file `script.js` per aggiungere:
 
 ```
 novamont_and_friends/
-├── index.html              # Pagina principale, 5 sezioni
+├── index.html              # Pagina principale, 6 sezioni
 ├── styles.css              # Stili responsive
 ├── script.js               # Tutta la logica: classifiche, rose, suggeritore
 ├── config.js               # Impostazioni di presentazione
 ├── sw.js                   # Service worker, cache versionata
 ├── .htaccess               # Header di cache e whitelist dei file dati
+├── assets/
+│   └── logo.svg            # Marchio animato, autonomo (usato dal README)
+├── spec/                   # Una scheda per ogni casella aperta della roadmap
 ├── data/
 │   ├── seasons.json        # Indice delle stagioni disponibili
 │   ├── 2026-2027.json      # Stagione corrente
@@ -280,14 +289,14 @@ novamont_and_friends/
 │   ├── calcola-giornata.mjs   # Punteggi ideali
 │   └── scarica-probabili.mjs  # Probabili, rigoristi, infortunati, contesto
 ├── .github/workflows/
-│   └── probabili.yml       # Rigenera probabili.json tre volte a settimana
+│   └── probabili.yml       # Rigenera probabili.json due volte al giorno
 ├── BONUS_CASA.md           # Il bonus casa nei gol ideali
 ├── CACHE_MANAGEMENT.md     # Come è gestita la cache
 └── README.md               # Questo file
 ```
 
 ### 🗂️ **Dettaglio File**
-- **`index.html`**: Interfaccia con 5 sezioni (Classifica, Classifica Ideale, Giornate, Rose, Formazione) e selettore stagione
+- **`index.html`**: Interfaccia con 6 sezioni (Classifica, Classifica Ideale, Merito, Giornate, Rose, Formazione) e selettore stagione
 - **`styles.css`**: ~4000 righe di CSS responsive con glassmorphism e animazioni
 - **`script.js`**: ~3200 righe di JavaScript: calcolo classifiche, rose e suggeritore di formazione
 - **`data/seasons.json`**: Indice delle stagioni: id, etichetta, file e stato
@@ -356,30 +365,37 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
       sei classifiche individuali
 - [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
       è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
-- [x] **Dati di Serie A aggiornati da soli** — il workflow rigenera `probabili.json` tre
-      volte a settimana. Il *real-time dal browser* resta impossibile: fantacalcio.it non
+- [x] **Classifica di merito** — ogni giornata vale come una gara, punti con la scala della
+      Formula 1. È la risposta alla domanda che si fa ogni lega: chi meritava davvero
+- [x] **Dati di Serie A aggiornati da soli** — il workflow rigenera `probabili.json` due
+      volte al giorno, fino al 1° giugno 2027. Il *real-time dal browser* resta impossibile: fantacalcio.it non
       manda header CORS e il sito è statico, quindi non c'è un proxy che possa chiamarlo
 
 ### 📈 **Da fare, in ordine di resa**
 
-Le prime cinque non richiedono dati nuovi né dipendenze: tutto è già in `data/<stagione>.json`.
+Nessuna richiede dati nuovi né dipendenze: tutto è già in `data/<stagione>.json`.
+**Ognuna ha la sua scheda in [`spec/`](spec/)**, con dati, comportamento, casi limite e
+il controllo che dice quando è finita.
 
-- [ ] **`manifest.json` e icone** — il service worker c'è già e funziona, manca solo il
-      manifest perché il sito diventi installabile. È la casella "App mobile PWA" a un passo
-      dall'essere chiusa
-- [ ] **Scontri diretti** — tabella 8×8 fra le squadre della lega, ricavata da
-      `rounds[].matches`. In una lega che gioca da anni è la statistica che si chiede sempre
-- [ ] **Andamento per giornata** — spezzata di punti e posizione per squadra. Meglio in SVG
-      inline che con Chart.js: il grafico è semplice e il peso della libreria non si giustifica
-- [ ] **Heatmap giornata × squadra** dei punteggi — una CSS grid con scala di colore, zero librerie
-- [ ] **Export CSV** delle classifiche — `Blob` più `<a download>`. L'export PDF invece
-      richiederebbe una dipendenza vera: lasciato cadere
-- [ ] **Achievement** derivati dai dati: miglior punteggio di giornata, striscia di vittorie,
-      peggior scarto dall'ideale
-- [ ] **Qualche test automatico** — ~3200 righe di JavaScript e i parser dello scraper non ne
-      hanno nessuno, e lo scraper ora gira in una Action senza che nessuno guardi. Bastano
-      `node --test` e pochi casi su `calculateGoalsFromScore`, sul bonus casa e sui parser
-      HTML, con un frammento di pagina salvato come fixture
+- [ ] **[`manifest.json` e icone](spec/01-pwa-manifest.md)** — il service worker c'è già e
+      funziona, manca solo il manifest perché il sito diventi installabile. È la casella
+      "App mobile PWA" a un passo dall'essere chiusa
+- [ ] **[Scontri diretti](spec/02-scontri-diretti.md)** — tabella 8×8 fra le squadre della
+      lega, ricavata da `rounds[].matches`. In una lega che gioca da anni è la statistica
+      che si chiede sempre
+- [ ] **[Andamento per giornata](spec/03-andamento-per-giornata.md)** — spezzata di punti e
+      posizione per squadra. Meglio in SVG inline che con Chart.js: il grafico è semplice e
+      il peso della libreria non si giustifica
+- [ ] **[Heatmap giornata × squadra](spec/04-heatmap-punteggi.md)** dei punteggi — una CSS
+      grid con scala di colore, zero librerie
+- [ ] **[Export CSV](spec/05-export-csv.md)** delle classifiche — `Blob` più `<a download>`.
+      L'export PDF invece richiederebbe una dipendenza vera: lasciato cadere
+- [ ] **[Achievement](spec/06-achievement.md)** derivati dai dati: miglior punteggio di
+      giornata, striscia di vittorie, peggior scarto dall'ideale
+- [ ] **[Qualche test automatico](spec/07-test-automatici.md)** — ~3300 righe di JavaScript e
+      i parser dello scraper non ne hanno nessuno, e lo scraper ora gira in una Action senza
+      che nessuno guardi. Bastano `node --test` e pochi casi su `calculateGoalsFromScore`,
+      sul bonus casa e sui parser HTML, con un frammento di pagina salvato come fixture
 
 ### 🚫 **Fuori portata, e perché**
 
