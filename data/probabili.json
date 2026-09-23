@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-09-22T23:04:12.575Z",
+  "aggiornato": "2026-09-23T20:02:34.670Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -344,12 +344,12 @@
         "nome": "Zaccagni"
       },
       {
-        "pid": 2038,
-        "nome": "Pinamonti"
+        "pid": 7314,
+        "nome": "Taylor K."
       },
       {
-        "pid": 5800,
-        "nome": "Gudmundsson A."
+        "pid": 2038,
+        "nome": "Pinamonti"
       }
     ],
     "Lecce": [
@@ -502,7 +502,7 @@
     {
       "nome": "Hien",
       "squadra": "Atalanta",
-      "nota": "il difensore operato a fine giugno per una lesione del tendine prossimale del muscolo semimembranoso della coscia sinistra, in recupero e pronto a tornare in campo dalla metà di ottobre."
+      "nota": "il difensore operato a fine giugno per una lesione del tendine prossimale del muscolo semimembranoso della coscia sinistra, in recupero e pronto a tornare in campo dalla fine di ottobre."
     },
     {
       "nome": "Sulemana K.",
@@ -510,19 +510,24 @@
       "nota": "L'attaccante KO in amichevole l'8 agosto vittima di una lesione del collaterale mediale di secondo grado del ginocchio sinistro. Recuperabile da inizio ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Venezia."
     },
     {
+      "nome": "Odgaard",
+      "squadra": "Bologna",
+      "nota": "Il calciatore frenato dopo il match col Toro da una lesione ai flessori della coscia destra, recuperabile dalla seconda metà di ottobre."
+    },
+    {
       "nome": "Idrissi R.",
       "squadra": "Cagliari",
       "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla fine di ottobre."
     },
     {
-      "nome": "Trepy",
-      "squadra": "Cagliari",
-      "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla metà di ottobre."
-    },
-    {
       "nome": "Felici",
       "squadra": "Cagliari",
       "nota": "il centrocampista KO il 7 settembre contro il Lecce in casa vittima della rottura del legamento crociato anteriore. Verrà operato e costretto a un lungo stop (ipotizziamo un rientro da marzo)."
+    },
+    {
+      "nome": "Trepy",
+      "squadra": "Cagliari",
+      "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla metà di ottobre."
     },
     {
       "nome": "Parisi",
@@ -540,14 +545,14 @@
       "nota": "Il terzino dei ciociari ai box per una lesione di basso grado del bicipite femorale della coscia sinistra, da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Napoli."
     },
     {
-      "nome": "Havel",
-      "squadra": "Genoa",
-      "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dalla metà di ottobre."
-    },
-    {
       "nome": "Venturino",
       "squadra": "Genoa",
       "nota": "il calciatore operato al tendine rotuleo e ora in fase di recupero. Di certo assente nel prossimo turno di campionato, ipotesi di rientro da fine ottobre."
+    },
+    {
+      "nome": "Havel",
+      "squadra": "Genoa",
+      "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dalla metà di ottobre."
     },
     {
       "nome": "Boga",
@@ -590,14 +595,14 @@
       "nota": "il regista dei biancocelesti KO il 30 agosto contro il Genoa vittima di una lesione muscolare al polpaccio che lo terrà ai box fino alla metà di ottobre."
     },
     {
-      "nome": "Gandelman",
-      "squadra": "Lecce",
-      "nota": "Il centrocampista fuori causa da metà settembre per noie fisiche, da valutare convocazione per la prossima giornata di campionato contro il Bologna."
-    },
-    {
       "nome": "Berisha M.",
       "squadra": "Lecce",
       "nota": "Il centrocampista ha lamentato un sovraccarico muscolare alla gamba e non ha preso parte alle sfide contro Monza e Milan. Recuperabile da inizio ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Bologna."
+    },
+    {
+      "nome": "Gandelman",
+      "squadra": "Lecce",
+      "nota": "Il centrocampista fuori causa da metà settembre per noie fisiche, da valutare convocazione per la prossima giornata di campionato contro il Bologna."
     },
     {
       "nome": "Ciurria",
@@ -640,14 +645,14 @@
       "nota": "Il difensore KO in amichevole l'8 agosto vittima di una lesione di alto grado del collaterale mediale del ginocchio sinistro. Stop di circa due mesi, rientro dalla seconda metà di ottobre."
     },
     {
+      "nome": "Nicolussi Caviglia",
+      "squadra": "Parma",
+      "nota": "il centrocampista alle prese dalla seconda metà di luglio con una lesione di medio grado alla coscia destra, ma a fine agosto ha deciso, assieme allo staff medico ducale, di operarsi. Lungo stop e ipotesi di ritorno in campo da dicembre."
+    },
+    {
       "nome": "Bernabè",
       "squadra": "Parma",
       "nota": "niente da fare per il centrocampista, ancora condizionato da noie fisiche ed escluso il 20 settembre dai convocati contro il Genoa. Da valutare nella sosta in vista della 6a giornata di campionato, a rischio la sua presenza a San Siro contro l'Inter."
-    },
-    {
-      "nome": "Nicolussi Caviglia",
-      "squadra": "Parma",
-      "nota": "il centrocampista alle prese dalla seconda metà di luglio con una lesione di medio grado alla coscia destra, ma a fine agosto ha deciso, assieme allo staff medico ducale, di operarsi. Lungo stop e ipotesi di ritorno in campo da novembre."
     },
     {
       "nome": "Idzes",
@@ -695,6 +700,11 @@
       "nota": "Il centrocampista ha ravvisato il 7 settembre contro la Lazio una lieve aritmia cardiaca benigna e si sottoporrà nei prossimi giorni ad un intervento di ablazione cardiaca. Osservato un periodo di riposo, potrà tornare alla regolare attività agonistica (ipotizziamo da fine ottobre)."
     },
     {
+      "nome": "Busio",
+      "squadra": "Venezia",
+      "nota": "il regista dei veneti KO l'11 settembre contro la Fiorentina vittima di una distrazione intratendinea del bicipite femorale destro. Rientro dalla seconda metà di ottobre."
+    },
+    {
       "nome": "Dagasso",
       "squadra": "Venezia",
       "nota": "Il centrocampista non convocato dalla gara dell'11 settembre contro la Fiorentina per un problema fisico. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno a Bergamo."
@@ -723,11 +733,6 @@
       "nome": "Basic",
       "squadra": "Venezia",
       "nota": "Il centrocampista out contro Lazio, Frosinone e Fiorentina per noie fisiche, rimane da valutare quotidianamente in vista della 6a giornata di campionato contro l'Atalanta."
-    },
-    {
-      "nome": "Busio",
-      "squadra": "Venezia",
-      "nota": "il regista dei veneti KO l'11 settembre contro la Fiorentina vittima di una distrazione intratendinea del bicipite femorale destro. Rientro dalla seconda metà di ottobre."
     }
   ],
   "giocatori": {
@@ -1164,13 +1169,6 @@
       "ruolo": "A",
       "probabilita": 90,
       "titolare": true
-    },
-    "2765": {
-      "nome": "Odgaard",
-      "squadra": "Bologna",
-      "ruolo": "C",
-      "probabilita": 55,
-      "titolare": false
     },
     "2766": {
       "nome": "Zaniolo",
@@ -2877,7 +2875,7 @@
       "nome": "Mbangula",
       "squadra": "Bologna",
       "ruolo": "C",
-      "probabilita": 40,
+      "probabilita": 55,
       "titolare": false
     },
     "6844": {
@@ -3367,8 +3365,8 @@
       "nome": "Britschgi",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 70,
+      "titolare": true
     },
     "7268": {
       "nome": "Rodriguez Ju.",
@@ -3997,8 +3995,8 @@
       "nome": "Drobnic",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 70,
-      "titolare": true
+      "probabilita": 50,
+      "titolare": false
     },
     "7618": {
       "nome": "Hutchinson",
