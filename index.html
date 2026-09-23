@@ -7,10 +7,26 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Fantacalcio Novamont & Friends</title>
-    <link rel="stylesheet" href="styles.css?v=8.8">
+    <!-- Il manifest si chiama .webmanifest e non .json per due motivi, non per
+         gusto: sw.js manda in network-first tutto quello che finisce per .json,
+         e .htaccess nega l'accesso ai .json fuori da una whitelist. Con
+         l'estensione giusta il problema non si pone, ed e' anche il tipo MIME
+         corretto. -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#0f0c29">
+
+    <!-- iOS ignora quasi tutto il manifest: icona e titolo della app installata
+         li prende solo da qui -->
+    <link rel="apple-touch-icon" href="assets/icona-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Novamont FC">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="stylesheet" href="styles.css?v=8.9">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <script src="config.js?v=8.8"></script>
+    <script src="config.js?v=8.9"></script>
 </head>
 <body>
     <header class="header">
@@ -225,6 +241,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=8.8"></script>
+    <script src="script.js?v=8.9"></script>
 </body>
 </html>

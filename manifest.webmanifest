@@ -1,0 +1,35 @@
+{
+  "name": "Fantacalcio Novamont & Friends",
+  "short_name": "Novamont FC",
+  "description": "Classifiche, giornate, rose e formazione consigliata della lega Novamont & Friends",
+  "lang": "it",
+  "dir": "ltr",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0c29",
+  "theme_color": "#0f0c29",
+  "categories": ["sports", "entertainment"],
+  "icons": [
+    {
+      "src": "assets/icona-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icona-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icona-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
