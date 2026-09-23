@@ -472,6 +472,7 @@ function renderAllSections() {
     displayIdealStandings();
     displayMeritStandings();
     displayHeatmap();
+    displayScontriDiretti();
     displayStatistics();
     setupRoundSelector();
     updateLastUpdate();
@@ -677,6 +678,7 @@ function setupNavigationTabs() {
             } else if (targetTab === 'classifica') {
                 displayStandings();
                 displayHeatmap();
+                displayScontriDiretti();
             } else if (targetTab === 'rose') {
                 displayRosters();
             } else if (targetTab === 'formazione') {
@@ -886,6 +888,183 @@ function calculateMeritStandings() {
     // A pari punti di merito decide chi ha fatto più punteggio: è la stessa
     // grandezza che la classifica misura, solo senza la scala a gradini
     return Object.values(merito).sort((a, b) => b.meritPoints - a.meritPoints || b.totalScore - a.totalScore);
+}
+
+// ============================================================
+// Scontri diretti
+// ============================================================
+
+// In una lega che gioca da anni la domanda ricorrente e' sempre quella: con lui
+// come siamo messi? Oggi si risponde solo scorrendo le giornate a mano.
+//
+// Le due meta' della matrice si riempiono nello stesso passaggio invece di
+// calcolarne una e specchiare l'altra: cosi' non possono contraddirsi per un
+// errore di segno, che e' il modo in cui queste tabelle sbagliano.
+function calcolaScontriDiretti() {
+    if (!fantacalcioData || !fantacalcioData.teams || !fantacalcioData.rounds) return null;
+
+    const squadre = fantacalcioData.teams.map(t => t.name);
+    const matrice = {};
+    squadre.forEach(a => {
+        matrice[a] = {};
+        squadre.forEach(b => {
+            if (a === b) return;
+            matrice[a][b] = { sfide: 0, vinte: 0, pari: 0, perse: 0, golFatti: 0, golSubiti: 0, punteggio: 0, incontri: [] };
+        });
+    });
+
+    fantacalcioData.rounds.forEach(round => {
+        (round.matches || []).forEach(match => {
+            if (typeof match.homeScore !== 'number' || typeof match.awayScore !== 'number') return;
+            const casa = match.homeTeam;
+            const fuori = match.awayTeam;
+            if (!matrice[casa] || !matrice[casa][fuori]) return;
+
+            // calculateMatchGoals gia' applica la regola del pareggio con
+            // scarto >= 4, e non applica il bonus casa: quello vive solo nel
+            // calcolo ideale. Rimetterlo qui a mano farebbe uscire gol diversi
+            // da quelli mostrati nelle Giornate.
+            const { homeGoals, awayGoals } = calculateMatchGoals(match.homeScore, match.awayScore);
+
+            const aggiorna = (mio, suo, golMiei, golSuoi, punteggioMio) => {
+                const c = matrice[mio][suo];
+                c.sfide += 1;
+                c.golFatti += golMiei;
+                c.golSubiti += golSuoi;
+                c.punteggio += punteggioMio;
+                if (golMiei > golSuoi) c.vinte += 1;
+                else if (golMiei < golSuoi) c.perse += 1;
+                else c.pari += 1;
+                c.incontri.push({ round: round.round, inCasa: mio === casa, golMiei, golSuoi, match });
+            };
+
+            aggiorna(casa, fuori, homeGoals, awayGoals, match.homeScore);
+            aggiorna(fuori, casa, awayGoals, homeGoals, match.awayScore);
+        });
+    });
+
+    squadre.forEach(a => squadre.forEach(b => {
+        if (a === b) return;
+        const c = matrice[a][b];
+        c.punteggio = Math.round(c.punteggio * 10) / 10;
+        c.media = c.sfide > 0 ? Math.round((c.punteggio / c.sfide) * 100) / 100 : null;
+    }));
+
+    const giocate = squadre.some(a => squadre.some(b => a !== b && matrice[a][b].sfide > 0));
+    return giocate ? { squadre, matrice } : null;
+}
+
+// Sigla corta per l'intestazione di colonna: il nome intero non ci sta in una
+// matrice 8x8, ma resta nel title di ogni cella
+function siglaSquadra(nome) {
+    const parole = nome.split(/\s+/).filter(Boolean);
+    if (parole.length === 1) return parole[0].slice(0, 3).toUpperCase();
+    return parole.map(x => x[0]).join('').slice(0, 3).toUpperCase();
+}
+
+function displayScontriDiretti() {
+    const contenitore = document.getElementById('scontri-diretti');
+    if (!contenitore) return;
+
+    const dati = calcolaScontriDiretti();
+    if (!dati) {
+        contenitore.innerHTML = '';
+        return;
+    }
+
+    const { squadre, matrice } = dati;
+
+    const intestazione = squadre
+        .map(b => `<span class="sd-sigla" title="${b}">${siglaSquadra(b)}</span>`)
+        .join('');
+
+    const righe = squadre.map(a => {
+        const celle = squadre.map(b => {
+            if (a === b) return '<span class="sd-cella diagonale">—</span>';
+            const c = matrice[a][b];
+            if (c.sfide === 0) return `<span class="sd-cella vuota" title="${a} e ${b} non si sono mai incontrate">—</span>`;
+
+            // L'esito prevalente colora la cella; a parità di vinte e perse
+            // resta neutra, perché non c'è un prevalente da mostrare
+            const esito = c.vinte > c.perse ? 'bene' : c.vinte < c.perse ? 'male' : 'pari';
+            const titolo = `${a} contro ${b}: ${c.vinte} vinte, ${c.pari} pari, ${c.perse} perse`
+                + ` in ${c.sfide} sfid${c.sfide === 1 ? 'a' : 'e'}`
+                + ` — gol ${c.golFatti}-${c.golSubiti}, media punteggio ${c.media}`;
+            return `<span class="sd-cella ${esito}" role="button" tabindex="0"
+                          data-casa="${a}" data-ospite="${b}" title="${titolo}">${c.vinte}-${c.pari}-${c.perse}</span>`;
+        }).join('');
+
+        return `<span class="sd-squadra" title="${a}">${a}</span>${celle}`;
+    }).join('');
+
+    contenitore.innerHTML = `
+        <div class="scontri-blocco">
+            <div class="scontri-testa">
+                <h3><i class="fas fa-people-arrows"></i> Scontri diretti</h3>
+            </div>
+            <p class="scontri-nota">
+                Vinte-pari-perse dal punto di vista della squadra sulla riga, sul risultato in gol.
+                Tocca una casella per vedere le sfide.
+            </p>
+            <div class="scontri-scroll">
+                <div class="scontri-griglia" style="--squadre: ${squadre.length}">
+                    <span class="sd-angolo"></span>
+                    ${intestazione}
+                    ${righe}
+                </div>
+            </div>
+            <div class="scontri-dettaglio" hidden></div>
+        </div>
+    `;
+
+    const dettaglio = contenitore.querySelector('.scontri-dettaglio');
+    contenitore.querySelectorAll('.sd-cella[data-casa]').forEach(cella => {
+        const apri = () => mostraScontro(dettaglio, matrice, cella.dataset.casa, cella.dataset.ospite);
+        cella.addEventListener('click', apri);
+        cella.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); apri(); }
+        });
+    });
+}
+
+function mostraScontro(dettaglio, matrice, a, b) {
+    // Ritoccando la stessa cella il pannello si chiude, come fa l'elenco
+    // partite in classifica
+    if (!dettaglio.hidden && dettaglio.dataset.coppia === `${a}|${b}`) {
+        dettaglio.hidden = true;
+        return;
+    }
+
+    const c = matrice[a][b];
+    const righe = c.incontri
+        .slice()
+        .sort((x, y) => x.round - y.round)
+        .map(i => {
+            const esito = i.golMiei > i.golSuoi ? 'vinta' : i.golMiei < i.golSuoi ? 'persa' : 'pari';
+            const m = i.match;
+            const puntiMiei = i.inCasa ? m.homeScore : m.awayScore;
+            const puntiSuoi = i.inCasa ? m.awayScore : m.homeScore;
+            return `
+                <div class="sd-incontro">
+                    <span class="tmi-giornata">G${i.round}</span>
+                    <span class="sd-dove">${i.inCasa ? 'in casa' : 'fuori'}</span>
+                    <span class="tmi-risultato ${esito}">${i.golMiei}-${i.golSuoi}</span>
+                    <span class="tmi-punti">${puntiMiei} - ${puntiSuoi}</span>
+                </div>
+            `;
+        }).join('');
+
+    dettaglio.dataset.coppia = `${a}|${b}`;
+    dettaglio.innerHTML = `
+        <div class="sd-dettaglio-testa">
+            <strong>${a} contro ${b}</strong>
+            <span class="team-details-conto">${c.vinte} vinte, ${c.pari} pari, ${c.perse} perse — gol ${c.golFatti}-${c.golSubiti}</span>
+            <button type="button" class="team-details-close" title="Chiudi">✖</button>
+        </div>
+        <div class="sd-incontri">${righe}</div>
+    `;
+    dettaglio.hidden = false;
+    dettaglio.querySelector('.team-details-close').addEventListener('click', () => { dettaglio.hidden = true; });
 }
 
 // ============================================================

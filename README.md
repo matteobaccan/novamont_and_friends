@@ -40,8 +40,9 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 - **Locale**: Apri `index.html` in un browser web o avvia un server locale
 
 ### 🧭 **Navigazione**
-1. **🏆 Classifica**: Visualizza la classifica attuale con tutti i dettagli, e sotto la
-   heatmap dei punteggi giornata per giornata — chi tiene lo stesso passo e chi alterna
+1. **🏆 Classifica**: La classifica attuale con tutti i dettagli, e sotto due letture della
+   stagione: la heatmap dei punteggi giornata per giornata — chi tiene lo stesso passo e chi
+   alterna — e la matrice degli scontri diretti
 2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette e statistiche allenatori
 3. **⏱️ Merito**: La classifica meritocratica. Ogni giornata si guarda solo il punteggio e si
    assegnano i punti come in Formula 1, così l'avversario capitato in sorte non pesa. La
@@ -379,6 +380,9 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
       sei classifiche individuali
 - [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
       è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
+- [x] **Scontri diretti** — [spec](spec/02-scontri-diretti.md). Matrice 8×8 in coda alla
+      Classifica, vinte-pari-perse dal punto di vista della riga; una casella apre l'elenco
+      delle sfide con andata, ritorno e punteggi
 - [x] **Heatmap giornata × squadra** — [spec](spec/04-heatmap-punteggi.md). In coda alla
       Classifica: una casella per punteggio, scala divergente sulla mediana della stagione,
       ordinabile per punteggio o per costanza. CSS grid, zero librerie
@@ -402,9 +406,6 @@ Nessuna richiede dati nuovi né dipendenze: tutto è già in `data/<stagione>.js
 **Ognuna ha la sua scheda in [`spec/`](spec/)**, con dati, comportamento, casi limite e
 il controllo che dice quando è finita.
 
-- [ ] **[Scontri diretti](spec/02-scontri-diretti.md)** — tabella 8×8 fra le squadre della
-      lega, ricavata da `rounds[].matches`. In una lega che gioca da anni è la statistica
-      che si chiede sempre
 - [ ] **[Andamento per giornata](spec/03-andamento-per-giornata.md)** — spezzata di punti e
       posizione per squadra. Meglio in SVG inline che con Chart.js: il grafico è semplice e
       il peso della libreria non si giustifica
