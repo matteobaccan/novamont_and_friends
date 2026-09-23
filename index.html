@@ -23,10 +23,10 @@
     <meta name="apple-mobile-web-app-title" content="Novamont FC">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <link rel="stylesheet" href="styles.css?v=9.7">
+    <link rel="stylesheet" href="styles.css?v=9.8">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <script src="config.js?v=9.7"></script>
+    <script src="config.js?v=9.8"></script>
 </head>
 <body>
     <header class="header">
@@ -259,15 +259,27 @@
 
     <footer class="footer">
         <div class="container">
-            <p><span id="footer-season">2026/2027</span> Fantacalcio Novamont & Friends. MIT license.</p>
-            <p>
-                <a href="https://github.com/matteobaccan/novamont_and_friends" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-github"></i> Progetto su GitHub
+            <div class="footer-lega">
+                <span class="footer-nome">Novamont &amp; Friends</span>
+                <span class="footer-dati" id="footer-dati">Caricamento…</span>
+            </div>
+            <nav class="footer-link" aria-label="Collegamenti">
+                <a id="footer-lega-link" href="https://leghe.fantacalcio.it/novamont-8-friends/classifica"
+                   target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-futbol"></i> La lega su fantacalcio.it
                 </a>
-            </p>
+                <a href="https://github.com/matteobaccan/novamont_and_friends"
+                   target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i> Codice
+                </a>
+                <a href="https://github.com/matteobaccan/novamont_and_friends/blob/main/LICENSE"
+                   target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-scale-balanced"></i> MIT
+                </a>
+            </nav>
         </div>
     </footer>
 
-    <script src="script.js?v=9.7"></script>
+    <script src="script.js?v=9.8"></script>
 </body>
 </html>

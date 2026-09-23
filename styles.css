@@ -2221,11 +2221,10 @@ html.theme-transition *:after {
 
 /* Footer */
 .footer {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 1.5rem 0;
-    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    padding: 1.4rem 0 1.8rem;
+    margin-top: 2.5rem;
+    color: var(--text-light);
 }
 
 .footer .container {
@@ -2236,9 +2235,67 @@ html.theme-transition *:after {
     gap: 1rem;
 }
 
-.footer p {
-    color: white;
+.footer-lega {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+.footer-nome {
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+/* Le tre cose che uno cerca in fondo a una pagina di dati: quanto e' grande
+   la stagione, quanto sono freschi i numeri, da dove arrivano */
+.footer-dati {
+    font-size: 0.76rem;
+    opacity: 0.6;
+    font-variant-numeric: tabular-nums;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.1rem;
+}
+
+/* Il link era blu da browser e sottolineato: l'unica cosa nella pagina che non
+   seguisse il disegno. Prende il colore del testo e si accende al passaggio. */
+.footer-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    opacity: 0.65;
+    transition: opacity 0.2s ease;
+}
+
+.footer-link a:hover,
+.footer-link a:focus-visible {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.footer-link a i {
+    font-size: 0.8rem;
     opacity: 0.8;
+}
+
+@media (max-width: 700px) {
+    .footer .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.9rem;
+    }
+
+    .footer-link { gap: 0.3rem 0.9rem; }
 }
 
 .social-links {
@@ -2514,10 +2571,9 @@ html.theme-transition *:after {
         margin: 0;
     }
     
-    .footer .container {
-        flex-direction: column;
-        text-align: center;
-    }
+    /* Il footer si impila da solo nel suo blocco a 700px, allineato a
+       sinistra: qui centrarlo rimetterebbe il testo al centro di un blocco
+       allineato a sinistra, che e' il disallineamento che si vedeva */
 }
 
 @media (max-width: 480px) {
