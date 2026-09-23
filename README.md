@@ -270,13 +270,17 @@ Modifica il file `script.js` per aggiungere:
 ```
 novamont_and_friends/
 ├── index.html              # Pagina principale, 6 sezioni
+├── manifest.webmanifest    # Manifest PWA (non .json: vedi spec/01)
 ├── styles.css              # Stili responsive
 ├── script.js               # Tutta la logica: classifiche, rose, suggeritore
 ├── config.js               # Impostazioni di presentazione
 ├── sw.js                   # Service worker, cache versionata
 ├── .htaccess               # Header di cache e whitelist dei file dati
 ├── assets/
-│   └── logo.svg            # Marchio animato, autonomo (usato dal README)
+│   ├── logo.svg            # Marchio animato, autonomo (usato dal README)
+│   ├── icona.svg           # Sorgente delle icone della app
+│   ├── icona-maskable.svg  # Variante dentro la safe zone di Android
+│   └── icona-*.png         # 192, 512, 180 e maskable-512, generate dagli SVG
 ├── spec/                   # Una scheda per ogni casella aperta della roadmap
 ├── data/
 │   ├── seasons.json        # Indice delle stagioni disponibili
@@ -365,6 +369,10 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
       sei classifiche individuali
 - [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
       è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
+- [x] **App installabile (PWA)** — [spec](spec/01-pwa-manifest.md). Manifest e icone ci
+      sono, il service worker le tiene in cache: dal telefono si aggiunge alla schermata
+      Home e si apre senza barra degli indirizzi, con i dati dell'ultima visita anche
+      offline
 - [x] **Classifica di merito** — ogni giornata vale come una gara, punti con la scala della
       Formula 1. È la risposta alla domanda che si fa ogni lega: chi meritava davvero
 - [x] **Dati di Serie A aggiornati da soli** — il workflow rigenera `probabili.json` due
@@ -377,9 +385,6 @@ Nessuna richiede dati nuovi né dipendenze: tutto è già in `data/<stagione>.js
 **Ognuna ha la sua scheda in [`spec/`](spec/)**, con dati, comportamento, casi limite e
 il controllo che dice quando è finita.
 
-- [ ] **[`manifest.json` e icone](spec/01-pwa-manifest.md)** — il service worker c'è già e
-      funziona, manca solo il manifest perché il sito diventi installabile. È la casella
-      "App mobile PWA" a un passo dall'essere chiusa
 - [ ] **[Scontri diretti](spec/02-scontri-diretti.md)** — tabella 8×8 fra le squadre della
       lega, ricavata da `rounds[].matches`. In una lega che gioca da anni è la statistica
       che si chiede sempre

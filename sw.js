@@ -1,14 +1,21 @@
 // Service Worker per gestione cache intelligente
-const CACHE_VERSION = 'v8.8';
+const CACHE_VERSION = 'v8.9';
 const CACHE_NAME = `fantacalcio-cache-${CACHE_VERSION}`;
 
 // File da cachare (escludiamo i dati dinamici)
 const urlsToCache = [
   '/',
   '/index.html',
-  '/styles.css?v=8.8',
-  '/script.js?v=8.8',
-  '/config.js?v=8.8',
+  '/styles.css?v=8.9',
+  '/script.js?v=8.9',
+  '/config.js?v=8.9',
+  // Manifest e icone: senza queste in cache la app installata si apre offline
+  // senza identita', con l'icona rotta nello switcher
+  '/manifest.webmanifest',
+  '/assets/icona-192.png',
+  '/assets/icona-512.png',
+  '/assets/icona-180.png',
+  '/assets/icona-maskable-512.png',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap',
   // La versione deve restare in passo con quella del <link> in index.html:
   // un URL diverso non viene mai richiesto, quindi resterebbe in cache per
@@ -18,6 +25,9 @@ const urlsToCache = [
 
 // File che devono essere sempre aggiornati (network-first)
 // Usa un pattern per gestire anche le query string con timestamp
+// Attenzione a cosa si aggiunge qui: /\.json$/ e' una rete larga, e il
+// manifest si chiama .webmanifest proprio per non finirci dentro. Un file
+// statico in network-first verrebbe riscaricato a ogni avvio.
 const networkFirstPatterns = [
   /\/data\/.*\.json/,
   /\.json$/

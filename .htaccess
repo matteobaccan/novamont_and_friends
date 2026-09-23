@@ -93,7 +93,7 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{HTTP_REFERER} !^$
-    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?tuodominio\.com [NC]
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?%{HTTP_HOST} [NC]
     RewriteRule \.(jpg|jpeg|png|gif|svg|webp)$ - [F,NC]
 </IfModule>
 
@@ -120,6 +120,7 @@
     AddType application/javascript js
     AddType text/css css
     AddType application/json json
+    AddType application/manifest+json webmanifest
     AddType image/svg+xml svg
     AddType image/webp webp
     AddType font/woff woff
