@@ -295,6 +295,7 @@ novamont_and_friends/
 │   └── probabili.json      # Dati di Serie A per il suggeritore
 ├── .claude/skills/aggiorna-giornata/
 │   ├── SKILL.md            # Istruzioni della skill
+│   ├── giornate-mancanti.mjs  # Quali giornate mancano e da quale ricominciare
 │   ├── scarica-giornata.mjs   # Giornata dall'API della lega
 │   ├── calcola-giornata.mjs   # Punteggi ideali
 │   └── scarica-probabili.mjs  # Probabili, rigoristi, infortunati, contesto

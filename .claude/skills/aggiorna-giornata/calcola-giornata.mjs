@@ -190,8 +190,9 @@ function aggiornaRose(data, round, matches) {
 function main() {
     const args = process.argv.slice(2);
     const dryRun = args.includes('--dry-run');
+    const forza = args.includes('--forza');
     const inputPath = args.find(a => !a.startsWith('--'));
-    if (!inputPath) fail('uso: node calcola-giornata.mjs <estratto.json> [--dry-run]');
+    if (!inputPath) fail('uso: node calcola-giornata.mjs <estratto.json> [--dry-run] [--forza]');
 
     const input = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
     for (const campo of ['round', 'date', 'matches']) {
@@ -209,6 +210,26 @@ function main() {
 
     if (data.rounds.some(r => r.round === input.round)) {
         fail(`la giornata ${input.round} esiste già in ${season.file}. Rimuovila prima di reinserirla.`);
+    }
+
+    // Le giornate si recuperano in ordine, una alla volta. Non e' pignoleria:
+    // aggiornaRose costruisce ogni snapshot delle rose su quello precedente,
+    // quindi inserire la 5 quando manca la 3 lascerebbe fuori dallo snapshot
+    // della 5 chi e' arrivato alla 3 e alla 5 non ha giocato.
+    // Con --forza si passa lo stesso, per il caso vero in cui serve: una
+    // partita rinviata e recuperata dopo le giornate successive.
+    const buchiPrima = [];
+    for (let r = 1; r < input.round; r += 1) {
+        if (!data.rounds.some(x => x.round === r)) buchiPrima.push(r);
+    }
+    if (buchiPrima.length > 0 && !forza) {
+        fail(`prima della giornata ${input.round} `
+            + (buchiPrima.length === 1 ? `manca la giornata ${buchiPrima[0]}` : `mancano le giornate ${buchiPrima.join(', ')}`)
+            + `.
+`
+            + `Inseriscile in ordine crescente, una alla volta: la prossima da fare e' la ${buchiPrima[0]}.
+`
+            + `Se e' un recupero fuori ordine e sai quello che fai, rilancia con --forza.`);
     }
 
     const elaborati = input.matches.map((m, i) => elaboraMatch(m, data.players || {}, data.teams, i));

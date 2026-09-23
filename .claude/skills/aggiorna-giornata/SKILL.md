@@ -9,6 +9,11 @@ Scarica una giornata dall'API della lega, calcola i punteggi ideali e la scrive 
 `data/<stagione>.json`. Classifica, classifica ideale, statistiche allenatori, rose e
 classifiche marcatori sono tutte **derivate** dai risultati: non vanno mai scritte a mano.
 
+**Se il sito è rimasto indietro di più giornate, si recuperano una alla volta e in ordine
+crescente.** Con la lega alla 5 e il sito alla 2: prima si porta a casa la 3 tutta intera,
+poi la 4, poi la 5. Non è pignoleria — `calcola-giornata.mjs` si rifiuta di scrivere una
+giornata se ne manca una prima, e il perché sta in *Rose che cambiano*.
+
 ## Prima di iniziare
 
 Serve il token della lega in `FANTA_TOKEN`. **Non va messo in un file del repo**, che è
@@ -17,13 +22,38 @@ qualsiasi chiamata a `apileague.fantacalcio.it` fatta dal browser loggato, e dur
 
 ## Procedura
 
-### 1. Capire quale giornata inserire
+### 0. Capire quante giornate mancano
+
+Prima di tutto, guarda sul calendario della lega **a che giornata è arrivata** (l'ultima
+con i risultati), poi:
 
 ```bash
-node -e "const i=require('./data/seasons.json');const d=require('./'+i.seasons.find(s=>s.id===i.currentSeason).file);console.log(i.currentSeason,'- ultima giornata:',d.rounds.at(-1)?.round ?? 0)"
+node .claude/skills/aggiorna-giornata/giornate-mancanti.mjs --fino-a <giornata della lega>
 ```
 
+Stampa quelle presenti, quelle che mancano e da quale ricominciare. Senza `--fino-a`
+guarda solo i buchi fra quelle che ci sono già.
+
+```
+Stagione 2026-2027 (data/2026-2027.json)
+  presenti: 1, 2
+  mancanti: 3, 4, 5
+
+  Si fanno UNA ALLA VOLTA e IN ORDINE CRESCENTE: prima la 3.
+```
+
+**Da qui in avanti i passi da 1 a 6 sono un ciclo**: si ripetono per intero su una
+giornata sola, la più bassa fra quelle mancanti. Si passa alla successiva **solo dopo**
+che il passo 6 ha confermato che quella è scritta e torna. Niente scorciatoie tipo
+scaricare tutte le giornate e poi calcolarle in blocco: ogni giornata legge lo stato
+lasciato dalla precedente.
+
 Gli URL della lega stanno in `data/seasons.json` sotto `seasons[].source`.
+
+### 1. La giornata di questo giro
+
+È la più bassa fra le mancanti del passo 0. Tienila a mente: serve in tutti i passi
+seguenti, e nell'input del passo 3 è il campo `round`.
 
 ### 2. Leggere gli accoppiamenti dal calendario
 
@@ -76,10 +106,22 @@ node .claude/skills/aggiorna-giornata/calcola-giornata.mjs <estratto.json> --dry
 Stampa gol, punteggi reali e ideali, il modulo scelto per l'ideale e gli eventuali
 cambi di rosa. **Controlla l'output**, poi rilancia senza `--dry-run`.
 
-### 6. Verificare
+### 6. Verificare, poi passare alla prossima
 
 Confronta la classifica del sito con quella della lega (`standingsUrl`): punti e punti
 totali devono coincidere per tutte le squadre.
+
+Se stai recuperando più giornate, la classifica della lega è quella di **oggi**, cioè
+dopo l'ultima giocata: coinciderà solo quando le avrai inserite tutte. Nel frattempo il
+controllo utile è un altro:
+
+```bash
+node .claude/skills/aggiorna-giornata/giornate-mancanti.mjs --fino-a <giornata della lega>
+```
+
+La giornata appena fatta deve essere sparita dalle mancanti. Se ne restano, si ricomincia
+dal passo 1 con la più bassa. Quando non ne resta nessuna, allora si confronta la
+classifica con quella della lega.
 
 ## Come si calcola il punteggio ideale
 
@@ -115,6 +157,15 @@ Le rose cambiano durante la stagione. `data/<stagione>.json` tiene:
 `calcola-giornata.mjs` confronta la rosa della giornata con l'ultimo snapshot e ne
 aggiunge uno nuovo se serve. Le formazioni non coprono sempre l'intera rosa (una squadra
 può lasciarne fuori uno), quindi conta solo chi **compare** e non risultava presente.
+
+**Ed è per questo che le giornate si inseriscono in ordine.** Ogni snapshot è costruito
+sopra il precedente: scrivendo la 5 quando manca ancora la 3, lo snapshot della 5 nasce
+da quello della 2 e resta senza chi è arrivato alla 3 e alla 5 non ha giocato. Lo script
+si ferma da solo se trova un buco prima della giornata che gli stai passando.
+
+L'unico caso in cui ha senso forzare è un recupero vero — una partita rinviata e giocata
+dopo le giornate successive. Lì si passa `--forza`, e si controlla a mano che le rose
+siano rimaste giuste.
 
 Se un `pid` non è in `players`, lo script si ferma: è un acquisto nuovo e va aggiunto
 leggendo la pagina Rose della lega, dove ogni riga ha il `pid` come attributo `data-id`.
