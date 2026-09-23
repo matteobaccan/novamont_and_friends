@@ -1,14 +1,14 @@
 // Service Worker per gestione cache intelligente
-const CACHE_VERSION = 'v9.1';
+const CACHE_VERSION = 'v9.2';
 const CACHE_NAME = `fantacalcio-cache-${CACHE_VERSION}`;
 
 // File da cachare (escludiamo i dati dinamici)
 const urlsToCache = [
   '/',
   '/index.html',
-  '/styles.css?v=9.1',
-  '/script.js?v=9.1',
-  '/config.js?v=9.1',
+  '/styles.css?v=9.2',
+  '/script.js?v=9.2',
+  '/config.js?v=9.2',
   // Manifest e icone: senza queste in cache la app installata si apre offline
   // senza identita', con l'icona rotta nello switcher
   '/manifest.webmanifest',

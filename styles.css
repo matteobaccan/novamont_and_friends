@@ -4285,3 +4285,217 @@ html.theme-transition *:after {
     .consiglio-row { grid-template-columns: 1.15rem minmax(0, 1fr) 2.4rem 2.5rem 2.8rem; }
     .consiglio-serieA, .consiglio-nota, .consiglio-forma, .consiglio-qualita { display: none; }
 }
+
+/* ==================================================================
+   Heatmap giornata x squadra
+   ------------------------------------------------------------------
+   Scala divergente: due poli e un grigio nel mezzo, con la banda
+   centrale sulla mediana della stagione. Blu per i punteggi alti,
+   rosso per i bassi — non verde/rosso, che e' la coppia che un
+   daltonico non distingue, ed e' proprio qui che servirebbe.
+   Il colore comunque non e' l'unico canale: il punteggio e' scritto
+   nella cella e ripetuto nel title, quindi la griglia si legge anche
+   senza vedere le tinte. Tutte e dieci le tinte superano il 4.5:1
+   con il testo del loro tema (misurato, non stimato).
+   ================================================================== */
+
+.heatmap-blocco {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.25rem 1.4rem 1.1rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 16px var(--shadow);
+
+    --hm-bassa-2: #e0827e;
+    --hm-bassa-1: #f6cecb;
+    --hm-neutro:  #f0efec;
+    --hm-alta-1:  #bcd8f8;
+    --hm-alta-2:  #6da7ec;
+    --hm-testo:   #0f172a;
+    --hm-vuota:   rgba(0, 0, 0, 0.04);
+}
+
+/* Il tema scuro ha i suoi passi, scelti per quel fondo: non e' un
+   ribaltamento automatico dei chiari */
+[data-theme="dark"] .heatmap-blocco {
+    --hm-bassa-2: #8f3b39;
+    --hm-bassa-1: #5d2b2a;
+    --hm-neutro:  #383835;
+    --hm-alta-1:  #2b4a74;
+    --hm-alta-2:  #2f6bb0;
+    --hm-testo:   #f8fafc;
+    --hm-vuota:   rgba(255, 255, 255, 0.05);
+}
+
+.heatmap-testa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+}
+
+.heatmap-testa h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.heatmap-testa h3 i {
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.heatmap-ordine {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.hm-ordine-btn {
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.hm-ordine-btn:hover { background: var(--bg-secondary); }
+
+.hm-ordine-btn.attivo {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Il viola del tema scuro e' schiarito per reggere sul fondo: sopra ci va
+   testo scuro, che da' 6.9:1 contro i 2.6:1 del bianco */
+[data-theme="dark"] .hm-ordine-btn.attivo {
+    color: #0f172a;
+}
+
+.heatmap-nota {
+    margin: 0 0 0.8rem;
+    font-size: 0.8rem;
+    opacity: 0.65;
+}
+
+/* Su schermo stretto 34 colonne non ci stanno: si scorre in orizzontale
+   e il nome della squadra resta agganciato a sinistra */
+.heatmap-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.3rem;
+}
+
+.heatmap-griglia {
+    display: grid;
+    grid-template-columns: max-content repeat(var(--giornate), minmax(2rem, 1fr));
+    gap: 2px;
+    min-width: max-content;
+}
+
+.hm-angolo,
+.hm-squadra {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--bg-card);
+    padding-right: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    max-width: 9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hm-giornata {
+    font-size: 0.6rem;
+    font-weight: 600;
+    opacity: 0.45;
+    text-align: center;
+    padding-bottom: 0.2rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.hm-cella {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.6rem;
+    border-radius: 4px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--hm-testo);
+    background: var(--hm-neutro);
+}
+
+.hm-cella.bassa-2 { background: var(--hm-bassa-2); }
+.hm-cella.bassa-1 { background: var(--hm-bassa-1); }
+.hm-cella.neutro  { background: var(--hm-neutro); }
+.hm-cella.alta-1  { background: var(--hm-alta-1); }
+.hm-cella.alta-2  { background: var(--hm-alta-2); }
+
+/* Una giornata non giocata non e' uno zero: e' un buco, e si vede che
+   lo e' invece di prendere il colore del minimo */
+.hm-cella.vuota {
+    background: repeating-linear-gradient(
+        45deg,
+        var(--hm-vuota),
+        var(--hm-vuota) 3px,
+        transparent 3px,
+        transparent 6px
+    );
+}
+
+.heatmap-legenda {
+    margin-top: 0.9rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.9rem;
+}
+
+.hm-nota {
+    font-size: 0.72rem;
+    opacity: 0.6;
+}
+
+.hm-scala {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.hm-scala .hm-cella {
+    width: 2rem;
+    min-height: 1.1rem;
+}
+
+.hm-estremo {
+    font-size: 0.68rem;
+    opacity: 0.6;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 700px) {
+    .heatmap-blocco { padding: 1rem 0.9rem; }
+    .heatmap-griglia { grid-template-columns: max-content repeat(var(--giornate), 1.9rem); }
+    .hm-squadra { font-size: 0.7rem; max-width: 6.5rem; }
+    /* A 30 pixel il punteggio non ci sta: resta il colore, e il numero
+       nel title per chi tocca la cella */
+    .hm-cella { font-size: 0; min-height: 1.5rem; }
+    .hm-scala .hm-cella { width: 1.6rem; }
+}
