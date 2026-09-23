@@ -4499,3 +4499,178 @@ html.theme-transition *:after {
     .hm-cella { font-size: 0; min-height: 1.5rem; }
     .hm-scala .hm-cella { width: 1.6rem; }
 }
+
+/* ==================================================================
+   Scontri diretti
+   ------------------------------------------------------------------
+   Matrice squadra contro squadra. La cella dice vinte-pari-perse dal
+   punto di vista della riga; il colore segna solo chi prevale, e a
+   parita' resta neutra, perche' non c'e' un prevalente da mostrare.
+   Il colore non e' l'unico canale: il bilancio e' scritto nella cella
+   e il conto per esteso sta nel title.
+   ================================================================== */
+
+.scontri-blocco {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.25rem 1.4rem 1.1rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 16px var(--shadow);
+
+    --sd-bene:   rgba(22, 163, 74, 0.16);
+    --sd-male:   rgba(220, 38, 38, 0.14);
+    --sd-pari:   rgba(0, 0, 0, 0.05);
+    --sd-vuota:  rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .scontri-blocco {
+    --sd-bene:  rgba(74, 222, 128, 0.16);
+    --sd-male:  rgba(248, 113, 113, 0.16);
+    --sd-pari:  rgba(255, 255, 255, 0.07);
+    --sd-vuota: rgba(255, 255, 255, 0.03);
+}
+
+.scontri-testa h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.scontri-testa h3 i {
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.scontri-nota {
+    margin: 0.35rem 0 0.8rem;
+    font-size: 0.8rem;
+    opacity: 0.65;
+}
+
+/* Otto colonne da 3,4rem piu' la colonna dei nomi non stanno in 390px:
+   si scorre, e il nome della squadra resta agganciato a sinistra */
+.scontri-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.3rem;
+}
+
+.scontri-griglia {
+    display: grid;
+    grid-template-columns: max-content repeat(var(--squadre), minmax(3.4rem, 1fr));
+    gap: 2px;
+    min-width: max-content;
+}
+
+.sd-angolo,
+.sd-squadra {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--bg-card);
+    padding-right: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    max-width: 9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sd-sigla {
+    font-size: 0.66rem;
+    font-weight: 700;
+    opacity: 0.5;
+    text-align: center;
+    padding-bottom: 0.25rem;
+    letter-spacing: 0.03em;
+}
+
+.sd-cella {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.9rem;
+    border-radius: 5px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    background: var(--sd-pari);
+    cursor: pointer;
+    transition: outline-color 0.15s ease;
+    outline: 2px solid transparent;
+}
+
+.sd-cella.bene { background: var(--sd-bene); }
+.sd-cella.male { background: var(--sd-male); }
+.sd-cella.pari { background: var(--sd-pari); }
+
+.sd-cella:hover,
+.sd-cella:focus-visible {
+    outline-color: var(--primary-color);
+}
+
+/* La diagonale e le coppie mai incontrate non si cliccano */
+.sd-cella.diagonale,
+.sd-cella.vuota {
+    background: var(--sd-vuota);
+    opacity: 0.45;
+    cursor: default;
+}
+
+.scontri-dettaglio {
+    margin-top: 0.9rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+}
+
+.sd-dettaglio-testa {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.sd-dettaglio-testa .team-details-conto {
+    margin-right: auto;
+}
+
+.sd-incontri {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.sd-incontro {
+    display: grid;
+    grid-template-columns: 2rem 4.2rem 3.2rem minmax(0, 1fr);
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.03);
+    font-size: 0.78rem;
+}
+
+[data-theme="dark"] .sd-incontro { background: rgba(255, 255, 255, 0.05); }
+
+.sd-dove {
+    font-size: 0.7rem;
+    opacity: 0.55;
+}
+
+@media (max-width: 700px) {
+    .scontri-blocco { padding: 1rem 0.9rem; }
+    .scontri-griglia { grid-template-columns: max-content repeat(var(--squadre), 3.2rem); }
+    .sd-squadra { font-size: 0.7rem; max-width: 6.5rem; }
+    .sd-cella { font-size: 0.64rem; }
+    .sd-incontro { grid-template-columns: 1.8rem 3.6rem 2.9rem minmax(0, 1fr); font-size: 0.72rem; }
+}

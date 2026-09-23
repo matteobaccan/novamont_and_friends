@@ -337,3 +337,82 @@ test('chi gioca sempre ma non viene mai schierato non è un peggiore', () => {
     assert.ok(peggiori.has(pids[2]), 'chi ha il voto solo in 2 giornate su 10 è sotto la soglia');
     assert.ok(peggiori.has(pids[1]), 'fra chi gioca, il peggiore è quello con la fantamedia più bassa');
 });
+
+// ------------------------------------------------------------------
+// Scontri diretti
+// ------------------------------------------------------------------
+
+// Le due metà della matrice si riempiono nello stesso passaggio invece di
+// calcolarne una e specchiare l'altra. Questi test verificano che restino
+// coerenti: è il modo in cui queste tabelle sbagliano, un segno invertito da
+// qualche parte che nessuno nota finché non conta i gol a mano.
+function scenarioIncontri(partite) {
+    const rounds = partite.map((p, i) => ({
+        round: i + 1,
+        matches: [{ homeTeam: p[0], awayTeam: p[1], homeScore: p[2], awayScore: p[3] }]
+    }));
+    const squadre = [...new Set(partite.flatMap(p => [p[0], p[1]]))];
+    esegui(app, `fantacalcioData = ${JSON.stringify({
+        teams: squadre.map(n => ({ name: n })), players: {}, rounds, rosterHistory: []
+    })};`);
+    return app.calcolaScontriDiretti();
+}
+
+test('le due metà della matrice non si contraddicono mai', () => {
+    const { squadre, matrice } = scenarioIncontri([
+        ['A', 'B', 84, 66],   // A vince
+        ['B', 'A', 72, 72],   // pari
+        ['A', 'B', 66, 84],   // B vince
+        ['A', 'C', 78, 70]
+    ]);
+
+    for (const a of squadre) {
+        for (const b of squadre) {
+            if (a === b) continue;
+            const x = matrice[a][b];
+            const y = matrice[b][a];
+            assert.equal(x.sfide, y.sfide, `sfide ${a}/${b}`);
+            assert.equal(x.vinte, y.perse, `le vinte di ${a} sono le perse di ${b}`);
+            assert.equal(x.perse, y.vinte, `le perse di ${a} sono le vinte di ${b}`);
+            assert.equal(x.pari, y.pari, `i pari sono gli stessi per ${a} e ${b}`);
+            assert.equal(x.golFatti, y.golSubiti, `i gol di ${a} sono i gol subiti da ${b}`);
+        }
+    }
+});
+
+test('il bilancio è letto dal punto di vista della riga', () => {
+    const { matrice } = scenarioIncontri([
+        ['A', 'B', 84, 66],
+        ['B', 'A', 72, 72],
+        ['A', 'B', 66, 84]
+    ]);
+
+    assert.equal(matrice.A.B.sfide, 3);
+    assert.equal(matrice.A.B.vinte, 1);
+    assert.equal(matrice.A.B.pari, 1);
+    assert.equal(matrice.A.B.perse, 1);
+    assert.equal(matrice.B.A.vinte, 1);
+});
+
+test('due squadre che non si sono mai incontrate non hanno sfide', () => {
+    const { matrice } = scenarioIncontri([
+        ['A', 'B', 70, 70],
+        ['A', 'C', 70, 70]
+    ]);
+    assert.equal(matrice.B.C.sfide, 0);
+    assert.equal(matrice.B.C.incontri.length, 0);
+});
+
+test('una giornata non ancora giocata non entra negli scontri', () => {
+    esegui(app, `fantacalcioData = ${JSON.stringify({
+        teams: [{ name: 'A' }, { name: 'B' }],
+        players: {},
+        rosterHistory: [],
+        rounds: [
+            { round: 1, matches: [{ homeTeam: 'A', awayTeam: 'B', homeScore: 84, awayScore: 66 }] },
+            { round: 2, matches: [{ homeTeam: 'A', awayTeam: 'B' }] }
+        ]
+    })};`);
+    const { matrice } = app.calcolaScontriDiretti();
+    assert.equal(matrice.A.B.sfide, 1, 'la giornata senza punteggi non si conta');
+});
