@@ -661,6 +661,7 @@ async function initializeApp() {
         await loadProbabiliFormazioni();
 
         setupNavigationTabs();
+        setupMenuMobile();
         setupSeasonSelector();
 
         // Verifica che i dati siano caricati correttamente
@@ -737,6 +738,53 @@ function attivaTab(nome, { ricorda = true } = {}) {
 function tabDallIndirizzo() {
     const nome = decodeURIComponent((window.location.hash || '').replace(/^#/, ''));
     return Object.prototype.hasOwnProperty.call(DISEGNO_SCHEDE, nome) ? nome : null;
+}
+
+// Su mobile le sei voci stanno dietro un hamburger. Il pannello si chiude da
+// solo scegliendo una voce, toccando fuori o con Esc: un menu che resta aperto
+// dopo aver scelto e' un tocco in piu' ogni volta.
+function setupMenuMobile() {
+    const burger = document.getElementById('nav-burger');
+    const nav = document.getElementById('nav-principale');
+    if (!burger || !nav) return;
+
+    const chiudi = () => {
+        nav.classList.remove('aperto');
+        burger.classList.remove('aperto');
+        burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Apri il menu');
+    };
+
+    const apri = () => {
+        nav.classList.add('aperto');
+        burger.classList.add('aperto');
+        burger.setAttribute('aria-expanded', 'true');
+        burger.setAttribute('aria-label', 'Chiudi il menu');
+    };
+
+    burger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (nav.classList.contains('aperto')) chiudi(); else apri();
+    });
+
+    nav.addEventListener('click', (e) => {
+        if (e.target.closest('.nav-btn')) chiudi();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && !burger.contains(e.target)) chiudi();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') chiudi();
+    });
+
+    // Allargando la finestra il pannello torna a essere la fila di sempre, ma
+    // la classe resterebbe addosso: senza questo, tornando stretti si
+    // riaprirebbe da solo
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) chiudi();
+    });
 }
 
 function setupNavigationTabs() {

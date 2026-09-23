@@ -20,6 +20,9 @@
        punti in classifica perdevano il colore su mobile. Il valore e' lo
        stesso gia' scritto a mano in .points e nel gradiente di sfondo. */
     --primary-color: #667eea;
+    /* Fondo pieno per i pannelli che coprono il contenuto: --bg-card e' quasi
+       trasparente, e sotto un menu si leggerebbe la pagina */
+    --bg-pannello: #ffffff;
     --border-color: rgba(255, 255, 255, 0.3);
     --shadow: rgba(0, 0, 0, 0.15);
     --shadow-lg: rgba(0, 0, 0, 0.25);
@@ -40,6 +43,7 @@
     --text-light: #ffffff;
     /* Lo stesso viola schiarito: su fondo scuro il #667eea affonda */
     --primary-color: #8b9bf5;
+    --bg-pannello: #1c1840;
     --border-color: rgba(255, 255, 255, 0.15);
     --shadow: rgba(0, 0, 0, 0.5);
     --shadow-lg: rgba(0, 0, 0, 0.8);
@@ -60,6 +64,7 @@
     --text-light: #0f172a;
     /* Su fondo chiaro il viola va scurito per reggere il contrasto del testo */
     --primary-color: #5566d8;
+    --bg-pannello: #ffffff;
     --border-color: rgba(0, 0, 0, 0.12);
     --shadow: rgba(0, 0, 0, 0.08);
     --shadow-lg: rgba(0, 0, 0, 0.15);
@@ -5259,4 +5264,171 @@ body.sipario-aperto { overflow: hidden; }
 
     .sipario { transition: opacity 0.2s ease; }
     .sipario.via { transform: none; }
+}
+
+/* ==================================================================
+   Menu a hamburger (solo mobile)
+   ------------------------------------------------------------------
+   Sei voci piu' il tema andavano a capo tre volte e si mangiavano
+   duecentocinquanta pixel prima di arrivare a un dato. Su mobile le
+   voci vanno dietro un hamburger; il tema resta fuori, perche' e' un
+   interruttore e non una destinazione.
+   ================================================================== */
+
+.header-azioni {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Su desktop l'hamburger non esiste e la nav e' la fila di sempre */
+.nav-burger { display: none; }
+
+/* Il tema e' uscito dalla nav per stare accanto all'hamburger su mobile. Su
+   desktop deve pero' restare attaccato ai pulsanti come prima, non volare
+   all'altro capo dell'intestazione: margin-left auto sulla nav spinge lei e
+   tutto quello che la segue verso destra, in un gruppo solo. */
+@media (min-width: 769px) {
+    .nav { margin-left: auto; }
+    .header-azioni { margin-left: 0.5rem; }
+}
+
+@media (max-width: 768px) {
+    /* Logo a sinistra, tema e hamburger a destra: una riga sola */
+    .header .container {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .header .logo {
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    .header .subtitle {
+        min-width: 0;
+        flex: none;
+    }
+
+    /* La parola "Fantacalcio" se ne va: il sito e' quello, e quei centodieci
+       pixel servono al menu a tendina delle stagioni, che altrimenti viene
+       tagliato. Resta leggibile agli screen reader, che la label serve al select. */
+    .header .subtitle label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    .header-azioni { flex: none; }
+
+    .nav-burger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        padding: 0 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        background: var(--bg-secondary);
+        cursor: pointer;
+    }
+
+    .nav-burger span {
+        display: block;
+        height: 2px;
+        border-radius: 2px;
+        background: currentColor;
+        transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    /* Le tre righe diventano una X: l'icona dice anche come si chiude */
+    .nav-burger.aperto span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger.aperto span:nth-child(2) { opacity: 0; }
+    .nav-burger.aperto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 120;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0.4rem;
+        background: var(--bg-pannello);
+        color: var(--text-primary);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 12px 28px var(--shadow-lg);
+
+        /* Chiuso non deve essere raggiungibile col tab, quindi visibility e
+           non solo opacita' */
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+
+    .nav.aperto {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Nel pannello le voci sono righe, non pastiglie */
+    .nav .nav-btn {
+        flex: none;
+        width: 100%;
+        max-width: none;
+        justify-content: flex-start;
+        gap: 0.8rem;
+        border: none;
+        border-radius: 10px;
+        background: transparent;
+        padding: 0.85rem 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    .nav .nav-btn i {
+        width: 1.2rem;
+        text-align: center;
+        opacity: 0.75;
+    }
+
+    .nav .nav-btn.active {
+        background: var(--bg-secondary);
+        font-weight: 700;
+    }
+
+    /* Una barretta segna dove sei, che su sfondo pieno il solo grassetto
+       si legge poco */
+    .nav .nav-btn.active::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 3px;
+        height: 1.4rem;
+        border-radius: 0 3px 3px 0;
+        background: var(--primary-color);
+    }
+
+    .nav .nav-btn { position: relative; }
+
+    .theme-toggle { margin: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav,
+    .nav-burger span { transition: none; }
 }
