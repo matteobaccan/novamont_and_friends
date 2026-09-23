@@ -565,9 +565,38 @@ function updateSeasonLabels() {
 
     document.title = `Fantacalcio Novamont & Friends ${season.label}`;
 
-    const footerSeason = document.getElementById('footer-season');
-    if (footerSeason) {
-        footerSeason.textContent = season.label.replace('-', '/');
+    aggiornaFooter(season);
+}
+
+// Il footer diceva solo stagione e licenza. Ora porta le tre cose che uno
+// cerca davvero in fondo a una pagina di dati: quanto e' grande la stagione,
+// quanto sono freschi i numeri e da dove arrivano. Il link alla lega vera esce
+// da seasons.json, quindi punta sempre alla stagione che si sta guardando.
+function aggiornaFooter(season) {
+    const dati = document.getElementById('footer-dati');
+    if (dati) {
+        const squadre = (fantacalcioData && fantacalcioData.teams) ? fantacalcioData.teams.length : 0;
+        const giocate = (fantacalcioData && fantacalcioData.rounds)
+            ? fantacalcioData.rounds.filter(r => punteggiDiGiornata(r).length > 0).length
+            : 0;
+
+        const pezzi = [`Stagione ${season.label}`];
+        if (squadre > 0) pezzi.push(`${squadre} squadre`);
+        pezzi.push(giocate === 0
+            ? 'nessuna giornata giocata'
+            : `${giocate} giornat${giocate === 1 ? 'a' : 'e'} giocat${giocate === 1 ? 'a' : 'e'}`);
+        if (fantacalcioData && fantacalcioData.lastUpdate) pezzi.push(`aggiornata il ${fantacalcioData.lastUpdate}`);
+
+        dati.textContent = pezzi.join(' · ');
+    }
+
+    // Le stagioni archiviate non hanno i link alla lega: il collegamento
+    // sparisce invece di portare da un'altra parte
+    const link = document.getElementById('footer-lega-link');
+    if (link) {
+        const url = season.source && season.source.standingsUrl;
+        link.hidden = !url;
+        if (url) link.href = url;
     }
 }
 
