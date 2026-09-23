@@ -3370,6 +3370,19 @@ html.theme-transition *:after {
     color: #fff;
 }
 
+/* I due peggiori del reparto: un bordo sulla pastiglia del ruolo. Sta fuori
+   dal riquadro con un outline invece che con un border, cosi' non allarga la
+   pastiglia e non sposta la colonna accanto. */
+.rosa-ruolo.peggiore {
+    outline: 2px solid #dc2626;
+    outline-offset: 1px;
+    cursor: help;
+}
+
+[data-theme="dark"] .rosa-ruolo.peggiore {
+    outline-color: #f87171;
+}
+
 .ruolo-P { background: #f59e0b; }
 .ruolo-D { background: #10b981; }
 .ruolo-C { background: #3b82f6; }
@@ -3522,7 +3535,9 @@ html.theme-transition *:after {
     grid-template-columns: 1.15rem minmax(0, 1fr) 2rem 1.6rem 1.6rem 2rem 2rem 1.25rem 1.25rem 1.4rem 2rem;
     align-items: center;
     gap: 0.22rem;
-    padding: 0.14rem 0.15rem;
+    /* Il padding laterale lascia spazio all'outline dei due peggiori del
+       reparto, che altrimenti .rosa-table taglierebbe con il suo overflow */
+    padding: 0.14rem 0.32rem;
     font-size: 0.71rem;
     min-width: 0;
 }
