@@ -678,6 +678,11 @@ async function initializeApp() {
         // primo caricamento ma solo tornando sulla scheda.
         renderAllSections();
 
+        // Se l'indirizzo indica una scheda, si riapre quella: ricaricando la
+        // pagina da Merito ci si aspetta di restare su Merito
+        const scheda = tabDallIndirizzo();
+        if (scheda && scheda !== 'classifica') attivaTab(scheda, { ricorda: false });
+
     } catch (error) {
         console.error('Errore durante l\'inizializzazione:', error);
         // Mostra un messaggio di errore visibile all'utente
@@ -686,39 +691,63 @@ async function initializeApp() {
 }
 
 // Gestione delle tab di navigazione
+// Cosa ridisegnare quando si apre una scheda. Le sezioni si disegnano al
+// bisogno e non tutte all'avvio, quindi l'elenco deve stare da qualche parte:
+// meglio una tabella che una catena di else if, che e' il posto dove si
+// dimentica di aggiungere il pezzo nuovo.
+const DISEGNO_SCHEDE = {
+    'classifica': () => {
+        displayStandings();
+        displayAndamento();
+        displayHeatmap();
+        displayScontriDiretti();
+    },
+    'classifica-ideale': () => displayIdealStandings(),
+    'classifica-merito': () => displayMeritStandings(),
+    'rose': () => { displayAchievement(); displayRosters(); },
+    'formazione': () => displayFormazione()
+};
+
+function attivaTab(nome, { ricorda = true } = {}) {
+    const sezione = document.getElementById(nome);
+    const bottone = document.querySelector(`.nav-btn[data-tab="${nome}"]`);
+    if (!sezione || !bottone) return false;
+
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    bottone.classList.add('active');
+    sezione.classList.add('active');
+
+    // La scheda finisce nell'indirizzo, cosi' un ricarico riapre dov'eri e il
+    // link si puo' passare a qualcuno gia' aperto sulla scheda giusta.
+    // replaceState e non pushState: il tasto indietro deve uscire dal sito,
+    // non ripercorrere le schede una a una.
+    if (ricorda && typeof history.replaceState === 'function') {
+        const url = new URL(window.location.href);
+        url.hash = nome;
+        history.replaceState(null, '', url);
+    }
+
+    const disegna = DISEGNO_SCHEDE[nome];
+    if (disegna) disegna();
+    return true;
+}
+
+// La scheda scritta nell'indirizzo, se e' una di quelle che esistono
+function tabDallIndirizzo() {
+    const nome = decodeURIComponent((window.location.hash || '').replace(/^#/, ''));
+    return Object.prototype.hasOwnProperty.call(DISEGNO_SCHEDE, nome) ? nome : null;
+}
+
 function setupNavigationTabs() {
-    const navButtons = document.querySelectorAll('.nav-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
+    document.querySelectorAll('.nav-btn').forEach(button => {
+        button.addEventListener('click', () => attivaTab(button.getAttribute('data-tab')));
+    });
 
-    navButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetTab = button.getAttribute('data-tab');
-
-            // Rimuovi active da tutti i bottoni e contenuti
-            navButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-
-            // Aggiungi active al bottone cliccato e al contenuto corrispondente
-            button.classList.add('active');
-            document.getElementById(targetTab).classList.add('active');
-            
-            // Aggiorna contenuti specifici dei tab
-            if (targetTab === 'classifica-ideale') {
-                displayIdealStandings();
-            } else if (targetTab === 'classifica-merito') {
-                displayMeritStandings();
-            } else if (targetTab === 'classifica') {
-                displayStandings();
-                displayAndamento();
-                displayHeatmap();
-                displayScontriDiretti();
-            } else if (targetTab === 'rose') {
-                displayAchievement();
-                displayRosters();
-            } else if (targetTab === 'formazione') {
-                displayFormazione();
-            }
-        });
+    // Indietro e avanti del browser, e i link con l'ancora incollati a mano
+    window.addEventListener('hashchange', () => {
+        const nome = tabDallIndirizzo();
+        if (nome) attivaTab(nome, { ricorda: false });
     });
 }
 
