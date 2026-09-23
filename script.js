@@ -470,6 +470,7 @@ function renderAllSections() {
 
     displayStandings();
     displayIdealStandings();
+    displayMeritStandings();
     displayStatistics();
     setupRoundSelector();
     updateLastUpdate();
@@ -676,6 +677,8 @@ function setupNavigationTabs() {
             // Aggiorna contenuti specifici dei tab
             if (targetTab === 'classifica-ideale') {
                 displayIdealStandings();
+            } else if (targetTab === 'classifica-merito') {
+                displayMeritStandings();
             } else if (targetTab === 'classifica') {
                 displayStandings();
             } else if (targetTab === 'rose') {
@@ -722,6 +725,10 @@ function sortTeams(teams, column, direction) {
             case 'positionDifference':
             case 'pointsDifference':
             case 'scoreDifference':
+            case 'meritPoints':
+            case 'primi':
+            case 'podi':
+            case 'avgPosition':
                 valueA = a[column] || 0;
                 valueB = b[column] || 0;
                 break;
@@ -733,7 +740,7 @@ function sortTeams(teams, column, direction) {
         }
         
         if (valueA === valueB) {
-            if (column === 'points') {
+            if (column === 'points' || column === 'meritPoints') {
                 return direction === 'asc' ? a.totalScore - b.totalScore : b.totalScore - a.totalScore;
             }
             return 0;
@@ -745,6 +752,115 @@ function sortTeams(teams, column, direction) {
             return valueA < valueB ? 1 : -1;
         }
     });
+}
+
+// ============================================================
+// Classifica di merito
+// ============================================================
+
+// La scala della Formula 1 dal 2010 in poi. Premia il vertice senza azzerare
+// chi arriva in fondo, e su otto squadre arriva fino a 4 punti: ogni giornata
+// muove la classifica anche per chi non è salito sul podio. Oltre la decima
+// piazza si prende zero, così la scala regge anche leghe più numerose.
+const PUNTI_MERITO = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+
+// Quante piazze del podio contano come podio
+const PIAZZE_PODIO = 3;
+
+// Assegna i punti di una singola giornata. Il punteggio è il voto grezzo della
+// squadra, quello che il JSON già riporta: il bonus casa non c'entra, perché
+// entra solo nella conversione in gol ed è un vantaggio del calendario, non un
+// merito di chi ha schierato la formazione.
+//
+// A pari punteggio le piazze contese valgono la loro media: due squadre
+// appaiate al secondo posto prendono (18 + 15) / 2 = 16,5 a testa. Così il
+// monte punti della giornata è sempre lo stesso, comunque finisca, e nessuno
+// guadagna dal fatto che un'altra squadra lo abbia raggiunto.
+function puntiMeritoDiGiornata(punteggi) {
+    const ordinati = punteggi.slice().sort((a, b) => b.score - a.score);
+    const assegnati = new Map();
+
+    let i = 0;
+    while (i < ordinati.length) {
+        let ultimo = i;
+        while (ultimo + 1 < ordinati.length && ordinati[ultimo + 1].score === ordinati[i].score) ultimo += 1;
+
+        let monte = 0;
+        for (let k = i; k <= ultimo; k += 1) monte += PUNTI_MERITO[k] || 0;
+        const quota = monte / (ultimo - i + 1);
+
+        for (let k = i; k <= ultimo; k += 1) {
+            assegnati.set(ordinati[k].team, { punti: quota, posizione: i + 1 });
+        }
+        i = ultimo + 1;
+    }
+
+    return assegnati;
+}
+
+// Classifica meritocratica: ogni giornata è una gara a sé, si guarda solo il
+// voto e si distribuiscono i punti come in Formula 1. Chi fa il punteggio più
+// alto vince la giornata anche se in campionato ha pescato l'avversario che
+// quel giorno ha fatto ancora meglio.
+function calculateMeritStandings() {
+    if (!fantacalcioData || !fantacalcioData.teams || !fantacalcioData.rounds) {
+        console.error('Dati mancanti per il calcolo della classifica di merito');
+        return [];
+    }
+
+    const merito = {};
+    fantacalcioData.teams.forEach(team => {
+        merito[team.name] = {
+            name: team.name,
+            meritPoints: 0,
+            primi: 0,
+            podi: 0,
+            giornate: 0,
+            sommaPosizioni: 0,
+            avgPosition: 0,
+            miglioreGiornata: null,
+            totalScore: 0,
+            avgScore: 0
+        };
+    });
+
+    fantacalcioData.rounds.forEach(round => {
+        const punteggi = [];
+        (round.matches || []).forEach(match => {
+            // Una giornata non ancora giocata non è una gara: va saltata, non
+            // contata come uno zero che affosserebbe tutti allo stesso modo
+            if (typeof match.homeScore !== 'number' || typeof match.awayScore !== 'number') return;
+            punteggi.push({ team: match.homeTeam, score: match.homeScore });
+            punteggi.push({ team: match.awayTeam, score: match.awayScore });
+        });
+
+        if (punteggi.length === 0) return;
+
+        const assegnati = puntiMeritoDiGiornata(punteggi);
+        punteggi.forEach(({ team, score }) => {
+            const s = merito[team];
+            if (!s) return;
+            const esito = assegnati.get(team);
+            s.meritPoints += esito.punti;
+            s.giornate += 1;
+            s.sommaPosizioni += esito.posizione;
+            s.totalScore += score;
+            if (esito.posizione === 1) s.primi += 1;
+            if (esito.posizione <= PIAZZE_PODIO) s.podi += 1;
+            if (s.miglioreGiornata === null || score > s.miglioreGiornata) s.miglioreGiornata = score;
+        });
+    });
+
+    Object.values(merito).forEach(s => {
+        s.meritPoints = Math.round(s.meritPoints * 10) / 10;
+        s.avgPosition = s.giornate > 0 ? Math.round((s.sommaPosizioni / s.giornate) * 100) / 100 : 0;
+        s.avgScore = s.giornate > 0 ? Math.round((s.totalScore / s.giornate) * 100) / 100 : 0;
+        s.totalScore = Math.round(s.totalScore * 10) / 10;
+    });
+
+    // A pari punti di merito decide chi ha fatto più punteggio: è la stessa
+    // grandezza che la classifica misura, solo senza la scala a gradini
+    return Object.values(merito).sort((a, b) => b.meritPoints - a.meritPoints || b.totalScore - a.totalScore);
 }
 
 // Visualizzazione della classifica con ordinamento
@@ -1291,17 +1407,157 @@ function displayIdealStandings() {
 
 // Setup event listeners per le colonne ordinabili
 // Imposta i listener per gli header sortabili
+// Stato dell'ordinamento classifica di merito
+let meritSortState = {
+    column: 'meritPoints',
+    direction: 'desc'
+};
+
+// Visualizzazione della classifica di merito
+function displayMeritStandings() {
+    const container = document.getElementById('merit-standings-table');
+    if (!container) return;
+
+    if (!fantacalcioData || !fantacalcioData.teams || fantacalcioData.teams.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: #666;">
+                <p>Nessuna squadra trovata. Caricamento in corso...</p>
+            </div>
+        `;
+        return;
+    }
+
+    const merito = calculateMeritStandings();
+    if (merito.length === 0 || merito.every(t => t.giornate === 0)) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: #666;">
+                <p>Nessuna giornata giocata: la classifica di merito parte dalla prima.</p>
+            </div>
+        `;
+        return;
+    }
+
+    // La posizione di merito va confrontata con quella vera del campionato:
+    // è lo scarto che dice chi ha raccolto meno di quanto ha seminato
+    const reale = calculateStandingsFromResults();
+    const ordineReale = sortTeams(reale, 'points', 'desc');
+    merito.forEach((squadra, indiceMerito) => {
+        const indiceReale = ordineReale.findIndex(t => t.name === squadra.name);
+        squadra.positionDifference = indiceReale >= 0 ? (indiceReale + 1) - (indiceMerito + 1) : 0;
+    });
+
+    const ordinate = sortTeams(merito, meritSortState.column, meritSortState.direction);
+
+    let html = `
+        <table class="standings-table" id="merit-table">
+            <thead>
+                <tr class="table-header">
+                    <th class="sortable-header" data-column="position" data-table="merito">
+                        Pos. <i class="fas fa-sort ${meritSortState.column === 'position' ? (meritSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header" data-column="name" data-table="merito">
+                        Squadra <i class="fas fa-sort ${meritSortState.column === 'name' ? (meritSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header" data-column="meritPoints" data-table="merito">
+                        Pt <i class="fas fa-sort ${meritSortState.column === 'meritPoints' ? (meritSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="primi" data-table="merito">
+                        1° <i class="fas fa-sort ${meritSortState.column === 'primi' ? (meritSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="podi" data-table="merito">
+                        Podi <i class="fas fa-sort ${meritSortState.column === 'podi' ? (meritSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="avgPosition" data-table="merito">
+                        Media Pos <i class="fas fa-sort ${meritSortState.column === 'avgPosition' ? (meritSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="totalScore" data-table="merito">
+                        Punteggio <i class="fas fa-sort ${meritSortState.column === 'totalScore' ? (meritSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="avgScore" data-table="merito">
+                        Media <i class="fas fa-sort ${meritSortState.column === 'avgScore' ? (meritSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                    <th class="sortable-header mobile-hide" data-column="positionDifference" data-table="merito">
+                        Δ Pos <i class="fas fa-sort ${meritSortState.column === 'positionDifference' ? (meritSortState.direction === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : ''}"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    ordinate.forEach((team, index) => {
+        const position = index + 1;
+        let positionClass = 'other';
+        if (position === 1) positionClass = 'first';
+        else if (position === 2) positionClass = 'second';
+        else if (position === 3) positionClass = 'third';
+
+        const delta = team.positionDifference || 0;
+        const deltaTesto = delta > 0 ? `+${delta}` : `${delta}`;
+        const deltaClasse = delta > 0 ? 'positive' : delta < 0 ? 'negative' : '';
+        const deltaTitolo = delta > 0
+            ? `In campionato sta ${delta} ${delta === 1 ? 'posizione' : 'posizioni'} più in basso di quanto meriti`
+            : delta < 0
+                ? `In campionato sta ${-delta} ${delta === -1 ? 'posizione' : 'posizioni'} più in alto di quanto meriti`
+                : 'Il campionato lo mette dove merita';
+
+        html += `
+            <tr class="team-row ${positionClass}">
+                <td class="position">${position}</td>
+                <td class="team-name">${team.name}</td>
+                <td class="points">${team.meritPoints}</td>
+                <td class="wins mobile-hide">${team.primi}</td>
+                <td class="draws mobile-hide">${team.podi}</td>
+                <td class="avg-score mobile-hide">${team.avgPosition}</td>
+                <td class="total-score mobile-hide">${team.totalScore}</td>
+                <td class="avg-score mobile-hide">${team.avgScore}</td>
+                <td class="position-difference mobile-hide ${deltaClasse}" title="${deltaTitolo}">${deltaTesto}</td>
+            </tr>
+        `;
+    });
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+    container.innerHTML = html;
+    setupSortableHeaders('merito');
+
+    container.querySelectorAll('.team-row').forEach(row => {
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', () => {
+            showTeamMatches(row.querySelector('.team-name').innerText, row);
+        });
+    });
+}
+
 function setupSortableHeaders(tableType = 'main') {
-    const selector = tableType === 'main' 
-        ? '#main-standings-table .sortable-header' 
-        : '#ideal-standings-table .sortable-header';
-        
+    const tabelle = {
+        main: '#main-standings-table .sortable-header',
+        ideale: '#ideal-standings-table .sortable-header',
+        merito: '#merit-standings-table .sortable-header'
+    };
+    const selector = tabelle[tableType] || tabelle.ideale;
+
     const headers = document.querySelectorAll(selector);
     
     headers.forEach(header => {
         header.addEventListener('click', () => {
             const column = header.getAttribute('data-column');
-            
+
+            if (tableType === 'merito') {
+                if (meritSortState.column === column) {
+                    meritSortState.direction = meritSortState.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    meritSortState.column = column;
+                    // Nella media posizione il numero piccolo è il risultato
+                    // migliore, quindi si parte dal basso e non dall'alto
+                    meritSortState.direction = (column === 'name' || column === 'avgPosition') ? 'asc' : 'desc';
+                }
+                displayMeritStandings();
+                return;
+            }
+
             if (tableType === 'main') {
                 // Se è la stessa colonna, inverti la direzione
                 if (sortState.column === column) {
