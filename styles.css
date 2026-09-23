@@ -5017,3 +5017,38 @@ html.theme-transition *:after {
     .andamento-comandi { width: 100%; }
     .an-squadra-select { flex: 1; max-width: none; }
 }
+
+/* Un blocco che aspetta ancora dati: una riga tratteggiata invece del vuoto.
+   Sparire in silenzio lascia chi guarda a chiedersi dove sia finita una
+   sezione; dire "non c'e' ancora, arriva dalla seconda giornata" e' una
+   informazione. Stesso trattamento per tutti, cosi' si riconosce. */
+.blocco-attesa {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.6rem;
+    margin-top: 1.5rem;
+    padding: 0.85rem 1.1rem;
+    border: 1px dashed var(--border-color);
+    border-radius: 14px;
+    background: transparent;
+    font-size: 0.82rem;
+}
+
+.blocco-attesa i {
+    font-size: 0.85rem;
+    opacity: 0.4;
+}
+
+.attesa-titolo {
+    font-weight: 700;
+    opacity: 0.6;
+}
+
+.attesa-motivo {
+    opacity: 0.5;
+}
+
+@media (max-width: 700px) {
+    .blocco-attesa { padding: 0.75rem 0.9rem; }
+}
