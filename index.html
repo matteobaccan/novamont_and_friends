@@ -16,8 +16,47 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <i class="fas fa-trophy trophy-reload" id="trophy-reload" title="Ricarica pagina"></i>
-                <h1>Novamont & Friends</h1>
+                <h1 class="logo-titolo">
+                    <button type="button" id="trophy-reload" class="logo-marchio" title="Ricarica i dati">
+                        <svg class="logo-svg" viewBox="0 0 172 56" role="img" aria-label="Novamont &amp; Friends">
+                            <defs>
+                                <linearGradient id="oro-coppa" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0" stop-color="#ffe994"/>
+                                    <stop offset="0.45" stop-color="#f4b60a"/>
+                                    <stop offset="1" stop-color="#c8870a"/>
+                                </linearGradient>
+                                <linearGradient id="oro-livello" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0" stop-color="#ffe071"/>
+                                    <stop offset="1" stop-color="#f0a500"/>
+                                </linearGradient>
+                                <!-- La vaschetta: il livello che sale viene ritagliato qui dentro -->
+                                <clipPath id="vasca-coppa">
+                                    <path d="M14 9 H34 V15 C34 25 30 31 24 31 C18 31 14 25 14 15 Z"/>
+                                </clipPath>
+                            </defs>
+
+                            <g class="logo-coppa">
+                                <!-- Manici -->
+                                <path class="coppa-manico" d="M14 12 C7.5 12 5.5 14.5 5.5 17.5 C5.5 21.5 9 23.5 14.5 24"/>
+                                <path class="coppa-manico" d="M34 12 C40.5 12 42.5 14.5 42.5 17.5 C42.5 21.5 39 23.5 33.5 24"/>
+                                <!-- Coppa vuota: il contorno resta sempre visibile -->
+                                <path class="coppa-guscio" d="M14 9 H34 V15 C34 25 30 31 24 31 C18 31 14 25 14 15 Z"/>
+                                <!-- Il livello sale da sotto: un campionato che si riempie di punti -->
+                                <g clip-path="url(#vasca-coppa)">
+                                    <rect class="coppa-livello" x="12" y="8" width="24" height="24"/>
+                                    <rect class="coppa-lampo" x="-16" y="4" width="9" height="32"/>
+                                </g>
+                                <!-- Stelo e base -->
+                                <path class="coppa-corpo" d="M22.4 31 h3.2 v5.4 h-3.2 z"/>
+                                <path class="coppa-corpo" d="M17.5 41 C17.5 37.8 20 36.4 24 36.4 C28 36.4 30.5 37.8 30.5 41 Z"/>
+                                <rect class="coppa-corpo" x="13.5" y="41" width="21" height="4.4" rx="1.6"/>
+                            </g>
+
+                            <text class="logo-nome" x="58" y="27">Novamont</text>
+                            <text class="logo-coda" x="58.5" y="45">&amp; Friends</text>
+                        </svg>
+                    </button>
+                </h1>
                 <div class="subtitle">
                     <label for="season-select">Fantacalcio</label>
                     <span class="season-picker">
