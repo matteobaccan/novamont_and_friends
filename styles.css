@@ -3667,6 +3667,54 @@ html.theme-transition *:after {
     font-variant-numeric: tabular-nums;
 }
 
+/* La griglia dei punti di merito: una casella per giornata, in fila.
+   auto-fill riempie la larghezza disponibile, cosi' su desktop si vede tutta
+   la stagione in tre righe e sul telefono in sei, senza scorrimenti laterali. */
+.merito-griglia {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(3.1rem, 1fr));
+    gap: 0.35rem;
+}
+
+.merito-casella {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.05rem;
+    padding: 0.3rem 0.2rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid transparent;
+}
+
+.mc-giornata {
+    font-size: 0.62rem;
+    font-weight: 600;
+    opacity: 0.5;
+    letter-spacing: 0.02em;
+}
+
+.mc-punti {
+    font-size: 1rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+}
+
+/* Il livello segue la piazza di giornata, non il punteggio: vinta, podio,
+   meta' classifica, resto. Il colore dice com'e' andata prima del numero. */
+.merito-casella.liv1 { background: rgba(255, 193, 7, 0.28); border-color: rgba(212, 160, 23, 0.5); }
+.merito-casella.liv2 { background: rgba(22, 163, 74, 0.16); }
+.merito-casella.liv3 { background: rgba(0, 0, 0, 0.05); }
+.merito-casella.liv4 { background: rgba(220, 38, 38, 0.1); }
+.merito-casella.liv4 .mc-punti { opacity: 0.75; }
+
+[data-theme="dark"] .merito-casella { background: rgba(255, 255, 255, 0.06); }
+[data-theme="dark"] .merito-casella.liv1 { background: rgba(255, 193, 7, 0.22); border-color: rgba(255, 193, 7, 0.45); }
+[data-theme="dark"] .merito-casella.liv2 { background: rgba(74, 222, 128, 0.16); }
+[data-theme="dark"] .merito-casella.liv3 { background: rgba(255, 255, 255, 0.06); }
+[data-theme="dark"] .merito-casella.liv4 { background: rgba(248, 113, 113, 0.14); }
+
 .tmi-chevron {
     font-size: 0.6rem;
     opacity: 0.4;
@@ -3689,6 +3737,9 @@ html.theme-transition *:after {
     .team-match-lineups { grid-template-columns: 1fr; }
     .team-match-item { grid-template-columns: 1.8rem minmax(0, 1fr) 2.9rem 1rem; }
     .tmi-punti { display: none; }
+
+    .merito-griglia { grid-template-columns: repeat(auto-fill, minmax(2.7rem, 1fr)); gap: 0.25rem; }
+    .mc-punti { font-size: 0.9rem; }
 }
 
 /* ============================================================

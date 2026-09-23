@@ -802,6 +802,43 @@ function puntiMeritoDiGiornata(punteggi) {
 // voto e si distribuiscono i punti come in Formula 1. Chi fa il punteggio più
 // alto vince la giornata anche se in campionato ha pescato l'avversario che
 // quel giorno ha fatto ancora meglio.
+// I punteggi di una giornata, pronti per essere ordinati. Una partita non
+// ancora giocata non e' una gara: va saltata, non contata come uno zero che
+// affosserebbe tutti allo stesso modo.
+function punteggiDiGiornata(round) {
+    const punteggi = [];
+    (round.matches || []).forEach(match => {
+        if (typeof match.homeScore !== 'number' || typeof match.awayScore !== 'number') return;
+        punteggi.push({ team: match.homeTeam, score: match.homeScore });
+        punteggi.push({ team: match.awayTeam, score: match.awayScore });
+    });
+    return punteggi;
+}
+
+// Giornata per giornata, com'e' andata a una squadra nella gara di quel turno.
+// I punti persi sono la distanza dal massimo in palio: chi vince la giornata
+// non perde niente, chi arriva ottavo lascia sul piatto 21 dei 25 punti.
+function meritoPerGiornata(teamName) {
+    const perGiornata = new Map();
+    (fantacalcioData.rounds || []).forEach(round => {
+        const punteggi = punteggiDiGiornata(round);
+        if (punteggi.length === 0) return;
+        const mio = punteggi.find(p => p.team === teamName);
+        if (!mio) return;
+
+        const esito = puntiMeritoDiGiornata(punteggi).get(teamName);
+        const massimo = PUNTI_MERITO[0] || 0;
+        perGiornata.set(round.round, {
+            punti: Math.round(esito.punti * 10) / 10,
+            posizione: esito.posizione,
+            persi: Math.round((massimo - esito.punti) * 10) / 10,
+            inGara: punteggi.length,
+            punteggio: mio.score
+        });
+    });
+    return perGiornata;
+}
+
 function calculateMeritStandings() {
     if (!fantacalcioData || !fantacalcioData.teams || !fantacalcioData.rounds) {
         console.error('Dati mancanti per il calcolo della classifica di merito');
@@ -825,15 +862,7 @@ function calculateMeritStandings() {
     });
 
     fantacalcioData.rounds.forEach(round => {
-        const punteggi = [];
-        (round.matches || []).forEach(match => {
-            // Una giornata non ancora giocata non è una gara: va saltata, non
-            // contata come uno zero che affosserebbe tutti allo stesso modo
-            if (typeof match.homeScore !== 'number' || typeof match.awayScore !== 'number') return;
-            punteggi.push({ team: match.homeTeam, score: match.homeScore });
-            punteggi.push({ team: match.awayTeam, score: match.awayScore });
-        });
-
+        const punteggi = punteggiDiGiornata(round);
         if (punteggi.length === 0) return;
 
         const assegnati = puntiMeritoDiGiornata(punteggi);
@@ -1002,6 +1031,43 @@ function chiudiPannelloPartite(pannello, rigaDiRiferimento) {
     if (dopoY !== primaY) window.scrollBy(0, dopoY - primaY);
 }
 
+// La griglia dei punti di merito, una casella per giornata. In classifica di
+// merito la domanda non e' com'e' finita la singola partita ma come e' andata
+// la stagione a colpo d'occhio: 25 10 3 25 si legge in un istante, un elenco
+// di trentaquattro righe no. L'avversario e il punteggio restano nel title.
+function grigliaMerito(teamName, matches) {
+    const perGiornata = meritoPerGiornata(teamName);
+    if (perGiornata.size === 0) {
+        return '<div class="team-match-item">Nessuna giornata giocata.</div>';
+    }
+
+    const avversari = new Map();
+    matches.forEach(item => {
+        const m = item.match;
+        avversari.set(item.round, m.homeTeam === teamName ? m.awayTeam : m.homeTeam);
+    });
+
+    const caselle = [...perGiornata.entries()]
+        .sort((a, b) => a[0] - b[0])
+        .map(([round, g]) => {
+            // Il livello segue la piazza, non il punteggio: cosi' la scala di
+            // colore resta la stessa anche se un domani cambia la scala dei punti
+            const livello = g.posizione === 1 ? 1 : g.posizione <= 3 ? 2 : g.posizione <= 5 ? 3 : 4;
+            const avversario = avversari.get(round);
+            const titolo = `Giornata ${round}`
+                + (avversario ? ` contro ${avversario}` : '')
+                + ` — ${g.punteggio} punti, ${g.posizione}º su ${g.inGara}, ${g.punti} punti di merito`;
+            return `
+                <div class="merito-casella liv${livello}" title="${titolo}">
+                    <span class="mc-giornata">G${round}</span>
+                    <span class="mc-punti">${g.punti}</span>
+                </div>
+            `;
+        }).join('');
+
+    return `<div class="merito-griglia">${caselle}</div>`;
+}
+
 // Mostra dettaglio partite per una squadra (toggle)
 // showTeamMatches: create a table row inserted after the clicked row with match-only data
 function showTeamMatches(teamName, clickedRow, modo = 'reale') {
@@ -1037,18 +1103,34 @@ function showTeamMatches(teamName, clickedRow, modo = 'reale') {
     td.setAttribute('colspan', colCount);
     td.style.padding = '0';
 
+    // In classifica di merito il conto in testa riassume la stagione, perche'
+    // la griglia sotto e' fatta per essere guardata, non sommata a mente
+    let sottotitolo = `${matches.length} giornat${matches.length === 1 ? 'a' : 'e'}`;
+    if (modo === 'merito') {
+        const perGiornata = meritoPerGiornata(teamName);
+        const giocate = perGiornata.size;
+        const totale = Math.round([...perGiornata.values()].reduce((somma, g) => somma + g.punti, 0) * 10) / 10;
+        const vinte = [...perGiornata.values()].filter(g => g.posizione === 1).length;
+        sottotitolo = giocate === 0
+            ? 'nessuna giornata giocata'
+            : `${totale} punti in ${giocate} giornat${giocate === 1 ? 'a' : 'e'}`
+              + (vinte > 0 ? ` — ${vinte} vint${vinte === 1 ? 'a' : 'e'}` : '');
+    }
+
     // Panel content (only real match data, team vs opponent and realtime score)
     let content = `
         <div class="team-details-panel">
             <div class="team-details-header">
-                <strong>Partite di ${teamName}${modo === "ideale" ? " — formazioni ideali" : ""}</strong>
-                <span class="team-details-conto">${matches.length} giornat${matches.length === 1 ? 'a' : 'e'}</span>
+                <strong>Partite di ${teamName}${modo === "ideale" ? " — formazioni ideali" : modo === "merito" ? " — merito di giornata" : ""}</strong>
+                <span class="team-details-conto">${sottotitolo}</span>
                 <button class="team-details-close" title="Chiudi">✖</button>
             </div>
             <div class="team-matches-list">
     `;
 
-    if (matches.length === 0) {
+    if (modo === 'merito') {
+        content += grigliaMerito(teamName, matches);
+    } else if (matches.length === 0) {
         content += `<div class="team-match-item">Nessuna partita trovata.</div>`;
     } else {
         matches.forEach(item => {
@@ -1526,7 +1608,7 @@ function displayMeritStandings() {
     container.querySelectorAll('.team-row').forEach(row => {
         row.style.cursor = 'pointer';
         row.addEventListener('click', () => {
-            showTeamMatches(row.querySelector('.team-name').innerText, row);
+            showTeamMatches(row.querySelector('.team-name').innerText, row, 'merito');
         });
     });
 }
