@@ -2469,6 +2469,12 @@ function calcolaStatisticheGiocatori() {
         team,
         presenze: 0,
         panchine: 0,
+        // Quante volte ha preso un voto in Serie A, schierato o no. E' cosa
+        // diversa dalle presenze, che contano solo quando lo schiera il
+        // fantallenatore: un giocatore puo' essere ottimo e restare in panchina
+        votiSerieA: 0,
+        sommaFantaSerieA: 0,
+        mediaFantaSerieA: null,
         sv: 0,
         sommaVoto: 0,
         sommaBonus: 0,
@@ -2498,6 +2504,14 @@ function calcolaStatisticheGiocatori() {
 
                     if (g.sv) s.sv += 1;
 
+                    // Il voto c'e' o non c'e': e' quello che dice se e' sceso
+                    // in campo. Vale per i titolari, per chi e' entrato e per
+                    // chi ha giocato mentre il fantallenatore lo teneva fuori.
+                    if (g.b !== undefined) {
+                        s.votiSerieA += 1;
+                        s.sommaFantaSerieA += g.b;
+                    }
+
                     if (SCHIERATO.has(g.t)) {
                         if (g.b === undefined) continue; // schierato ma senza voto
                         s.presenze += 1;
@@ -2526,6 +2540,7 @@ function calcolaStatisticheGiocatori() {
     for (const s of Object.values(stats)) {
         s.mediaVoto = s.presenze > 0 ? s.sommaVoto / s.presenze : null;
         s.mediaFanta = s.presenze > 0 ? s.sommaBonus / s.presenze : null;
+        s.mediaFantaSerieA = s.votiSerieA > 0 ? s.sommaFantaSerieA / s.votiSerieA : null;
         s.puntiInPanchina = Math.round(s.puntiInPanchina * 10) / 10;
         s.incompreso = Math.round(s.bonusPanchina * 10) / 10;
 
@@ -3101,10 +3116,16 @@ function giornateGiocate() {
     return (fantacalcioData.rounds || []).filter(r => punteggiDiGiornata(r).length > 0).length;
 }
 
-// I due peggiori di ogni reparto, secondo la regola della lega: chi sta sotto
-// meta' delle giornate e' peggiore comunque, perche' una fantamedia costruita
-// su tre partite non dice niente; fra chi ha giocato abbastanza decide la
-// fantamedia. I portieri restano fuori: in rosa sono tre e il confronto fra
+// I due peggiori di ogni reparto. Il discriminante e' il voto: se un giocatore
+// non ha voto vuol dire che in Serie A non e' sceso in campo, e questo e' un
+// problema suo. Che il fantallenatore lo schieri o lo lasci in panchina non
+// c'entra: un giocatore puo' essere ottimo e restare fuori per scelta, e non
+// va punito per una decisione che non ha preso lui.
+//
+// Sotto meta' delle giornate con il voto si e' peggiori comunque, perche' una
+// media costruita su tre partite non dice niente. Fra chi gioca abbastanza
+// decide la fantamedia, quella di Serie A e non quella da schierato, per lo
+// stesso motivo. I portieri restano fuori: in rosa sono tre e il confronto fra
 // loro e' un'altra cosa.
 const RUOLI_DA_GIUDICARE = ['D', 'C', 'A'];
 const SOGLIA_PRESENZE = 0.5;
@@ -3123,30 +3144,31 @@ function peggioriPerRuolo(pids, stats) {
 
         const voci = delReparto.map(pid => {
             const s = stats[pid];
-            const presenze = s ? s.presenze : 0;
-            const quota = presenze / giornate;
+            const giocate = s ? s.votiSerieA : 0;
+            const quota = giocate / giornate;
             return {
                 pid,
-                presenze,
+                giocate,
                 quota,
                 scarso: quota < SOGLIA_PRESENZE,
-                // Chi non ha mai giocato non ha fantamedia: vale meno di
+                // Chi non ha mai preso un voto non ha fantamedia: vale meno di
                 // qualunque voto vero, non piu' di tutti
-                fanta: s && s.mediaFanta !== null ? s.mediaFanta : -Infinity
+                fanta: s && s.mediaFantaSerieA !== null ? s.mediaFantaSerieA : -Infinity
             };
         });
 
         voci.sort((a, b) => {
             if (a.scarso !== b.scarso) return a.scarso ? -1 : 1;
-            if (a.scarso) return a.presenze - b.presenze || a.fanta - b.fanta;
+            if (a.scarso) return a.giocate - b.giocate || a.fanta - b.fanta;
             return a.fanta - b.fanta;
         });
 
         voci.slice(0, 2).forEach(v => {
             const percentuale = Math.round(v.quota * 100);
+            const reparto = ruolo === 'D' ? 'difensori' : ruolo === 'C' ? 'centrocampisti' : 'attaccanti';
             peggiori.set(v.pid, v.scarso
-                ? `Fra i due peggiori ${ruolo === 'D' ? 'difensori' : ruolo === 'C' ? 'centrocampisti' : 'attaccanti'}: ${v.presenze} presenze su ${giornate} (${percentuale}%), sotto la meta' delle giornate`
-                : `Fra i due peggiori ${ruolo === 'D' ? 'difensori' : ruolo === 'C' ? 'centrocampisti' : 'attaccanti'}: fantamedia ${numero(v.fanta)} con ${v.presenze} presenze su ${giornate}`);
+                ? `Fra i due peggiori ${reparto}: ha preso un voto in ${v.giocate} giornat${v.giocate === 1 ? 'a' : 'e'} su ${giornate} (${percentuale}%), sotto la meta'`
+                : `Fra i due peggiori ${reparto}: fantamedia ${numero(v.fanta)} in ${v.giocate} giornat${v.giocate === 1 ? 'a' : 'e'} con il voto`);
         });
     }
 

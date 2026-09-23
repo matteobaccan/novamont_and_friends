@@ -223,9 +223,11 @@ test('i gol subiti dal portiere non contano come malus', () => {
 // I due peggiori di ogni reparto
 // ------------------------------------------------------------------
 
-// La regola ha una sottigliezza: chi ha giocato meno di metà giornate è
-// peggiore comunque, anche con una fantamedia altissima, perché quella media
-// sta su troppe poche partite per voler dire qualcosa.
+// Il discriminante è il voto, non le presenze: se un giocatore non ha voto in
+// Serie A non è sceso in campo, ed è un problema suo. Che il fantallenatore lo
+// schieri o no è una decisione che non ha preso lui, e non deve pesargli.
+// Sopra quella soglia, chi gioca poco è peggiore comunque: una media costruita
+// su tre partite non dice niente.
 function scenarioReparto(giornateTotali, giocatori) {
     const players = {};
     const pids = [];
@@ -234,7 +236,15 @@ function scenarioReparto(giornateTotali, giocatori) {
         const pid = 100 + i;
         pids.push(pid);
         players[pid] = { name: g.nome, role: g.ruolo, serieA: '' };
-        stats[pid] = { presenze: g.presenze, mediaFanta: g.fanta, mediaVoto: g.fanta };
+        stats[pid] = {
+            votiSerieA: g.voti,
+            mediaFantaSerieA: g.fanta,
+            // Le presenze da schierato sono un'altra cosa e non devono contare:
+            // qui sono di proposito l'opposto dei voti, così se la regola
+            // tornasse a guardarle il test se ne accorge
+            presenze: g.schierato !== undefined ? g.schierato : 0,
+            mediaFanta: g.fanta
+        };
     });
 
     // Giornate finte, solo per far contare giornateGiocate()
@@ -247,12 +257,12 @@ function scenarioReparto(giornateTotali, giocatori) {
     return { pids, stats };
 }
 
-test('sotto metà delle giornate si è peggiori comunque, anche giocando bene', () => {
+test('sotto metà delle giornate con il voto si è peggiori comunque, anche giocando bene', () => {
     const { pids, stats } = scenarioReparto(10, [
-        { nome: 'Fenomeno assente', ruolo: 'D', presenze: 2, fanta: 9.5 },  // 20%: peggiore
-        { nome: 'Mediocre presente', ruolo: 'D', presenze: 9, fanta: 5.2 },
-        { nome: 'Discreto', ruolo: 'D', presenze: 10, fanta: 6.4 },
-        { nome: 'Buono', ruolo: 'D', presenze: 8, fanta: 7.1 }
+        { nome: 'Fenomeno assente', ruolo: 'D', voti: 2, fanta: 9.5 },   // 20%: peggiore
+        { nome: 'Mediocre presente', ruolo: 'D', voti: 9, fanta: 5.2 },
+        { nome: 'Discreto', ruolo: 'D', voti: 10, fanta: 6.4 },
+        { nome: 'Buono', ruolo: 'D', voti: 8, fanta: 7.1 }
     ]);
 
     const peggiori = app.peggioriPerRuolo(pids, stats);
@@ -266,47 +276,64 @@ test('sotto metà delle giornate si è peggiori comunque, anche giocando bene', 
 
 test('il motivo scritto nel title distingue le presenze dalla fantamedia', () => {
     const { pids, stats } = scenarioReparto(10, [
-        { nome: 'Assente', ruolo: 'C', presenze: 1, fanta: 8 },
-        { nome: 'Scarso', ruolo: 'C', presenze: 10, fanta: 4.9 },
-        { nome: 'Normale', ruolo: 'C', presenze: 10, fanta: 6.5 }
+        { nome: 'Assente', ruolo: 'C', voti: 1, fanta: 8 },
+        { nome: 'Scarso', ruolo: 'C', voti: 10, fanta: 4.9 },
+        { nome: 'Normale', ruolo: 'C', voti: 10, fanta: 6.5 }
     ]);
     const peggiori = app.peggioriPerRuolo(pids, stats);
 
-    assert.match(peggiori.get(pids[0]), /sotto la met/, 'chi gioca poco va segnato per le presenze');
+    assert.match(peggiori.get(pids[0]), /sotto la met/, 'chi gioca poco va segnato per i voti');
     assert.match(peggiori.get(pids[1]), /fantamedia/, 'chi gioca va segnato per la fantamedia');
 });
 
 test('con due soli giocatori in un reparto non si segna nessuno', () => {
     // "I due peggiori di due" non dice niente
     const { pids, stats } = scenarioReparto(10, [
-        { nome: 'Uno', ruolo: 'A', presenze: 2, fanta: 5 },
-        { nome: 'Due', ruolo: 'A', presenze: 9, fanta: 6 }
+        { nome: 'Uno', ruolo: 'A', voti: 2, fanta: 5 },
+        { nome: 'Due', ruolo: 'A', voti: 9, fanta: 6 }
     ]);
     assert.equal(app.peggioriPerRuolo(pids, stats).size, 0);
 });
 
 test('i portieri restano fuori dal giudizio', () => {
     const { pids, stats } = scenarioReparto(10, [
-        { nome: 'P1', ruolo: 'P', presenze: 0, fanta: null },
-        { nome: 'P2', ruolo: 'P', presenze: 1, fanta: 4 },
-        { nome: 'P3', ruolo: 'P', presenze: 10, fanta: 6 }
+        { nome: 'P1', ruolo: 'P', voti: 0, fanta: null },
+        { nome: 'P2', ruolo: 'P', voti: 1, fanta: 4 },
+        { nome: 'P3', ruolo: 'P', voti: 10, fanta: 6 }
     ]);
     assert.equal(app.peggioriPerRuolo(pids, stats).size, 0,
         'in rosa i portieri sono tre e il confronto fra loro è un altro discorso');
 });
 
-test('chi non ha mai giocato sta in fondo, non in cima', () => {
+test('chi non ha mai preso un voto sta in fondo, non in cima', () => {
     const { pids, stats } = scenarioReparto(10, [
-        { nome: 'Mai visto', ruolo: 'A', presenze: 0, fanta: null },
-        { nome: 'Poco e male', ruolo: 'A', presenze: 3, fanta: 4.5 },
-        { nome: 'Titolare', ruolo: 'A', presenze: 10, fanta: 7 },
-        { nome: 'Titolare 2', ruolo: 'A', presenze: 9, fanta: 6.8 }
+        { nome: 'Mai visto', ruolo: 'A', voti: 0, fanta: null },
+        { nome: 'Poco e male', ruolo: 'A', voti: 3, fanta: 4.5 },
+        { nome: 'Titolare', ruolo: 'A', voti: 10, fanta: 7 },
+        { nome: 'Titolare 2', ruolo: 'A', voti: 9, fanta: 6.8 }
     ]);
     const peggiori = app.peggioriPerRuolo(pids, stats);
 
-    // mediaFanta null non deve valere piu' di qualunque voto vero
-    assert.ok(peggiori.has(pids[0]), 'chi non ha mai giocato è il peggiore');
+    // una fantamedia nulla non deve valere piu' di qualunque voto vero
+    assert.ok(peggiori.has(pids[0]), 'chi non ha mai preso un voto è il peggiore');
     assert.ok(peggiori.has(pids[1]));
     assert.ok(!peggiori.has(pids[2]));
     assert.ok(!peggiori.has(pids[3]));
+});
+
+test('chi gioca sempre ma non viene mai schierato non è un peggiore', () => {
+    // Il caso che la regola sbagliata prendeva al contrario: un giocatore
+    // valido tenuto in panchina per scelta del fantallenatore. Ha il voto tutte
+    // le giornate, quindi in Serie A c'è; le presenze da schierato sono zero.
+    const { pids, stats } = scenarioReparto(10, [
+        { nome: 'Panchinaro bravo', ruolo: 'D', voti: 10, fanta: 7.2, schierato: 0 },
+        { nome: 'Titolare scarso', ruolo: 'D', voti: 10, fanta: 5.1, schierato: 10 },
+        { nome: 'Infortunato', ruolo: 'D', voti: 2, fanta: 6.5, schierato: 2 },
+        { nome: 'Normale', ruolo: 'D', voti: 9, fanta: 6.4, schierato: 9 }
+    ]);
+    const peggiori = app.peggioriPerRuolo(pids, stats);
+
+    assert.ok(!peggiori.has(pids[0]), 'non schierarlo è una scelta del fantallenatore, non una sua colpa');
+    assert.ok(peggiori.has(pids[2]), 'chi ha il voto solo in 2 giornate su 10 è sotto la soglia');
+    assert.ok(peggiori.has(pids[1]), 'fra chi gioca, il peggiore è quello con la fantamedia più bassa');
 });
