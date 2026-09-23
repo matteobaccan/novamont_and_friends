@@ -403,17 +403,6 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
 { id: 1, name: "Cusiana", owner: "Roby, Gaiuz" }
 ```
 
-## 🚫 Cosa non fa, e perché
-
-Login personalizzato, dashboard privato, chat fra squadre, notifiche push e prediction game
-richiedono **autenticazione e un backend con stato**. Il sito è statico su Netlify e il repo è
-pubblico: servirebbero un servizio esterno e delle credenziali da custodire, che qui non
-avrebbero un posto sicuro dove stare.
-
-Il **real-time dal browser** resta impossibile per un motivo diverso: fantacalcio.it non manda
-header CORS, e senza un backend non c'è un proxy che possa chiamarlo. I dati di Serie A
-arrivano per questo da un workflow che gira su GitHub, non dalla pagina.
-
 ## 🤝 Contribuire
 
 1. Fai un fork del progetto
