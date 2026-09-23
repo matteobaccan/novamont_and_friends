@@ -49,7 +49,7 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
    colonna Δ Pos dice di quante posizioni il campionato ti tratta meglio o peggio del merito.
    Un clic sulla squadra apre la griglia dei punti giornata per giornata, colorata per piazza
 4. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti inline
-5. **👥 Rose**: Rendimento di ogni giocatore e sei classifiche — marcatori, assist,
+5. **👥 Rose**: L'albo d'oro della stagione, il rendimento di ogni giocatore e sei classifiche — marcatori, assist,
    ammonizioni, espulsioni, malus e incompresi (bonus e malus raccolti in panchina).
    La pastiglia del ruolo è bordata di rosso sui due peggiori di ogni reparto: conta se
    ha preso il voto in Serie A, non se il fantallenatore lo ha schierato
@@ -380,6 +380,10 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
       sei classifiche individuali
 - [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
       è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
+- [x] **Albo d'oro** — [spec](spec/06-achievement.md). Dieci premi ricavati dai dati, in
+      coda alle Rose: la bomba, il tonfo, la striscia di vittorie, il regolarista, lo
+      sfortunato. Quelli che dipendono dalle formazioni spariscono dove non ci sono, invece
+      di mostrarsi vuoti
 - [x] **Export CSV** — [spec](spec/05-export-csv.md). Un pulsante per le tre classifiche,
       i risultati per giornata e le statistiche dei giocatori. Le classifiche escono nello
       stesso ordine che si ha sotto gli occhi, e il file si apre in Excel italiano con un
@@ -413,8 +417,6 @@ il controllo che dice quando è finita.
 - [ ] **[Andamento per giornata](spec/03-andamento-per-giornata.md)** — spezzata di punti e
       posizione per squadra. Meglio in SVG inline che con Chart.js: il grafico è semplice e
       il peso della libreria non si giustifica
-- [ ] **[Achievement](spec/06-achievement.md)** derivati dai dati: miglior punteggio di
-      giornata, striscia di vittorie, peggior scarto dall'ideale
 
 ### 🚫 **Fuori portata, e perché**
 
