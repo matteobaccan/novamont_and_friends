@@ -40,9 +40,11 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 - **Locale**: Apri `index.html` in un browser web o avvia un server locale
 
 ### 🧭 **Navigazione**
-1. **🏆 Classifica**: La classifica attuale con tutti i dettagli, e sotto due letture della
-   stagione: la heatmap dei punteggi giornata per giornata — chi tiene lo stesso passo e chi
-   alterna — e la matrice degli scontri diretti
+1. **🏆 Classifica**: La classifica attuale con tutti i dettagli, e sotto tre letture della
+   stagione: l'andamento giornata per giornata, la heatmap dei punteggi — chi tiene lo stesso
+   passo e chi alterna — e la matrice degli scontri diretti. Andamento e heatmap arrivano
+   dalla seconda giornata; prima di allora lo dicono con una riga, invece di non esserci e
+   basta
 2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette e statistiche allenatori
 3. **⏱️ Merito**: La classifica meritocratica. Ogni giornata si guarda solo il punteggio e si
    assegnano i punti come in Formula 1, così l'avversario capitato in sorte non pesa. La

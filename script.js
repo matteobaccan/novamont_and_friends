@@ -1490,6 +1490,25 @@ function mostraScontro(dettaglio, matrice, a, b) {
 }
 
 // ============================================================
+// Blocchi che aspettano dati
+// ============================================================
+
+// Un blocco che non ha ancora abbastanza giornate non deve sparire in
+// silenzio: chi apre la Classifica a inizio stagione resta a chiedersi dove
+// sia finito, e la risposta "non c'e' ancora" e' un'informazione, non un
+// errore. Una riga sola, tratteggiata, che dice cosa manca e da quando
+// arriva — la stessa per tutti i blocchi, cosi' si riconosce a colpo d'occhio.
+function bloccoInAttesa(icona, titolo, motivo) {
+    return `
+        <div class="blocco-attesa">
+            <i class="fas ${icona}"></i>
+            <span class="attesa-titolo">${titolo}</span>
+            <span class="attesa-motivo">${motivo}</span>
+        </div>
+    `;
+}
+
+// ============================================================
 // Andamento per giornata
 // ============================================================
 
@@ -1559,7 +1578,11 @@ function displayAndamento() {
     // Con una giornata sola la spezzata e' un punto: non c'e' un andamento da
     // guardare che la classifica non dica gia'
     if (storia.length < 2) {
-        contenitore.innerHTML = '';
+        contenitore.innerHTML = bloccoInAttesa(
+            'fa-chart-line',
+            'Andamento della stagione',
+            'Arriva dalla seconda giornata: con una sola la spezzata è un punto.'
+        );
         return;
     }
 
@@ -1775,13 +1798,13 @@ function displayHeatmap() {
         return;
     }
 
-    // Sotto le due giornate non c'e' un andamento da guardare
+    // Sotto le due giornate una colonna sola non si confronta con niente
     if (dati.giornate.length < 2) {
-        contenitore.innerHTML = `
-            <div class="heatmap-blocco">
-                <p class="nessun-dato">La heatmap parte dalla seconda giornata: con una sola non c'è un andamento da mostrare.</p>
-            </div>
-        `;
+        contenitore.innerHTML = bloccoInAttesa(
+            'fa-table-cells',
+            'Punteggi giornata per giornata',
+            'Arriva dalla seconda giornata: con una colonna sola non c\'è niente da confrontare.'
+        );
         return;
     }
 
