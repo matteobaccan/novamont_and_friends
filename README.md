@@ -50,8 +50,8 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 4. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti inline
 5. **👥 Rose**: Rendimento di ogni giocatore e sei classifiche — marcatori, assist,
    ammonizioni, espulsioni, malus e incompresi (bonus e malus raccolti in panchina).
-   La pastiglia del ruolo è bordata di rosso sui due peggiori di ogni reparto: chi sta
-   sotto metà delle giornate lo è per le presenze, gli altri per la fantamedia
+   La pastiglia del ruolo è bordata di rosso sui due peggiori di ogni reparto: conta se
+   ha preso il voto in Serie A, non se il fantallenatore lo ha schierato
 6. **🪄 Formazione**: Undici consigliato per la prossima giornata
 
 In Classifica, Classifica Ideale e Merito, un clic sulla squadra apre l'elenco delle sue partite;
