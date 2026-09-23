@@ -1,13 +1,14 @@
 name: Probabili formazioni
 
-# Le probabili di Serie A si consolidano nei giorni prima della giornata: tre
-# passaggi fra giovedì e sabato seguono il consolidamento e arrivano prima del
-# blocco delle formazioni del sabato pomeriggio. Gli orari sono UTC, quindi le
-# 10:00 italiane d'estate e le 09:00 d'inverno. Per i turni infrasettimanali
-# c'è l'avvio a mano.
+# Due passaggi al giorno, tutti i giorni: le probabili si muovono di continuo e
+# i turni infrasettimanali non stanno nel giovedì-sabato. Il giro del mattino
+# raccoglie le notizie della notte, quello del tardo pomeriggio arriva dopo
+# allenamenti e conferenze, ed entrambi cadono prima del blocco delle formazioni.
+# Gli orari del cron sono UTC: le 09:00 e le 19:00 italiane d'estate, le 08:00 e
+# le 18:00 d'inverno.
 on:
   schedule:
-    - cron: '0 8 * * 4,5,6'
+    - cron: '0 7,17 * * *'
   workflow_dispatch:
 
 permissions:
@@ -18,7 +19,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # GitHub non sa far scadere un cron: se non lo si ferma, questo workflow
+  # continuerebbe a scaricare probabili a stagione finita e a committare ogni
+  # giorno un file che non guarda più nessuno. La scadenza sta qui.
+  finestra:
+    runs-on: ubuntu-latest
+    outputs:
+      attiva: ${{ steps.calendario.outputs.attiva }}
+    steps:
+      - name: Siamo ancora dentro la stagione?
+        id: calendario
+        env:
+          ULTIMO_GIORNO: '2027-06-01'
+        run: |
+          # L'avvio a mano passa sempre, anche fuori stagione: serve per provare
+          # lo scraper o per rifare il file dopo un cambio di impaginazione.
+          if [[ "${{ github.event_name }}" != 'schedule' ]]; then
+            echo 'attiva=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          oggi=$(date -u +%F)
+          if [[ "$oggi" > "$ULTIMO_GIORNO" ]]; then
+            echo 'attiva=false' >> "$GITHUB_OUTPUT"
+            echo "::notice::Stagione chiusa il $ULTIMO_GIORNO, oggi è $oggi: nessun aggiornamento."
+          else
+            echo 'attiva=true' >> "$GITHUB_OUTPUT"
+          fi
+
   aggiorna:
+    needs: finestra
+    if: needs.finestra.outputs.attiva == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
