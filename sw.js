@@ -10,7 +10,10 @@ const urlsToCache = [
   '/script.js?v=8.5',
   '/config.js?v=8.5',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css'
+  // La versione deve restare in passo con quella del <link> in index.html:
+  // un URL diverso non viene mai richiesto, quindi resterebbe in cache per
+  // sempre senza servire a nulla e il sito offline si troverebbe senza icone
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css'
 ];
 
 // File che devono essere sempre aggiornati (network-first)
