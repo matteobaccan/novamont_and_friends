@@ -4804,3 +4804,160 @@ html.theme-transition *:after {
     .ach-blocco { padding: 1rem 0.9rem; }
     .ach-griglia { grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 0.5rem; }
 }
+
+/* ==================================================================
+   Andamento della stagione
+   ------------------------------------------------------------------
+   SVG inline, niente librerie: la spezzata e' semplice e Chart.js
+   peserebbe piu' di tutto il resto della pagina messo insieme. Otto
+   colori nessuno riesce ad associarli a otto squadre, quindi le linee
+   restano grigie e una sola si accende: e' piu' utile di una legenda,
+   e la toglie del tutto.
+   ================================================================== */
+
+.andamento-blocco {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.25rem 1.4rem 1.1rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 16px var(--shadow);
+}
+
+.andamento-testa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.andamento-testa h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.andamento-testa h3 i { color: var(--primary-color); font-size: 0.95rem; }
+
+.andamento-comandi {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.andamento-vista { display: flex; gap: 0.35rem; }
+
+.an-vista-btn {
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.an-vista-btn:hover { background: var(--bg-secondary); }
+
+.an-vista-btn.attivo {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+}
+
+[data-theme="dark"] .an-vista-btn.attivo { color: #0f172a; }
+
+.an-squadra-select {
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: inherit;
+    font: inherit;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    max-width: 11rem;
+}
+
+.andamento-nota {
+    margin: 0.35rem 0 0.7rem;
+    font-size: 0.8rem;
+    opacity: 0.65;
+}
+
+.andamento-scroll { overflow-x: auto; }
+
+.andamento-svg {
+    display: block;
+    width: 100%;
+    min-width: 30rem;
+    height: auto;
+    overflow: visible;
+}
+
+.an-griglia {
+    stroke: currentColor;
+    stroke-width: 1;
+    opacity: 0.1;
+}
+
+.an-tacca {
+    fill: currentColor;
+    opacity: 0.45;
+    font-size: 9px;
+    text-anchor: end;
+}
+
+/* Le linee non hanno un colore proprio: prendono quello del testo e si
+   distinguono per opacita'. Funziona identico nei due temi senza duplicare
+   niente, e nessuno deve ricordare quale tinta e' quale squadra. */
+.an-linea {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    opacity: 0.16;
+    transition: opacity 0.15s ease;
+}
+
+.an-etichetta {
+    fill: currentColor;
+    font-size: 9.5px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.an-punto {
+    fill: var(--primary-color);
+    stroke: var(--bg-card);
+    stroke-width: 1.5;
+}
+
+.an-serie.accesa .an-linea {
+    stroke: var(--primary-color);
+    opacity: 1;
+}
+
+.an-serie.accesa .an-etichetta { opacity: 1; }
+
+.an-serie:hover .an-linea { opacity: 0.7; }
+.an-serie:hover .an-etichetta { opacity: 0.85; }
+
+@media (prefers-reduced-motion: reduce) {
+    .an-linea, .an-etichetta { transition: none; }
+}
+
+@media (max-width: 700px) {
+    .andamento-blocco { padding: 1rem 0.9rem; }
+    .andamento-comandi { width: 100%; }
+    .an-squadra-select { flex: 1; max-width: none; }
+}

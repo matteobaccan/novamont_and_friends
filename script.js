@@ -471,6 +471,7 @@ function renderAllSections() {
     displayStandings();
     displayIdealStandings();
     displayMeritStandings();
+    displayAndamento();
     displayHeatmap();
     displayScontriDiretti();
     displayAchievement();
@@ -679,6 +680,7 @@ function setupNavigationTabs() {
                 displayMeritStandings();
             } else if (targetTab === 'classifica') {
                 displayStandings();
+                displayAndamento();
                 displayHeatmap();
                 displayScontriDiretti();
             } else if (targetTab === 'rose') {
@@ -1456,6 +1458,199 @@ function mostraScontro(dettaglio, matrice, a, b) {
     `;
     dettaglio.hidden = false;
     dettaglio.querySelector('.team-details-close').addEventListener('click', () => { dettaglio.hidden = true; });
+}
+
+// ============================================================
+// Andamento per giornata
+// ============================================================
+
+// Le classifiche dicono dove sei arrivato, non come ci sei arrivato. Chi ha
+// guidato per venti giornate e si e' sciolto alla fine, e chi ha rimontato da
+// ultimo, in una riga di tabella sono indistinguibili.
+
+// La classifica com'era dopo ogni giornata. Si accumula sullo stato parziale e
+// si riordina con gli stessi criteri della classifica vera — punti, poi
+// punteggio totale — cosi' l'ultimo punto della spezzata coincide con la riga
+// della tabella. Se non coincide, e' un bug.
+function calculateSeasonProgression() {
+    if (!fantacalcioData || !fantacalcioData.teams || !fantacalcioData.rounds) return [];
+
+    const parziale = {};
+    fantacalcioData.teams.forEach(t => {
+        parziale[t.name] = { name: t.name, points: 0, totalScore: 0 };
+    });
+
+    const storia = [];
+
+    fantacalcioData.rounds.forEach(round => {
+        let giocata = false;
+
+        (round.matches || []).forEach(m => {
+            if (typeof m.homeScore !== 'number' || typeof m.awayScore !== 'number') return;
+            giocata = true;
+            const { homeGoals, awayGoals } = calculateMatchGoals(m.homeScore, m.awayScore);
+            const casa = parziale[m.homeTeam];
+            const fuori = parziale[m.awayTeam];
+            if (!casa || !fuori) return;
+
+            casa.totalScore += m.homeScore;
+            fuori.totalScore += m.awayScore;
+
+            if (homeGoals > awayGoals) casa.points += 3;
+            else if (awayGoals > homeGoals) fuori.points += 3;
+            else { casa.points += 1; fuori.points += 1; }
+        });
+
+        if (!giocata) return;
+
+        const ordinata = sortTeams(Object.values(parziale), 'points', 'desc');
+        storia.push({
+            round: round.round,
+            classifica: ordinata.map((t, i) => ({
+                name: t.name,
+                punti: t.points,
+                posizione: i + 1,
+                punteggio: Math.round(t.totalScore * 10) / 10
+            }))
+        });
+    });
+
+    return storia;
+}
+
+// Cosa si guarda: la posizione o i punti
+let vistaAndamento = 'posizione';
+
+function displayAndamento() {
+    const contenitore = document.getElementById('andamento-stagione');
+    if (!contenitore) return;
+
+    const storia = calculateSeasonProgression();
+
+    // Con una giornata sola la spezzata e' un punto: non c'e' un andamento da
+    // guardare che la classifica non dica gia'
+    if (storia.length < 2) {
+        contenitore.innerHTML = '';
+        return;
+    }
+
+    const squadre = storia[storia.length - 1].classifica.map(t => t.name);
+    const evidenziata = squadre.includes(squadraRicordata()) ? squadraRicordata() : squadre[0];
+
+    const perSquadra = {};
+    squadre.forEach(n => { perSquadra[n] = []; });
+    storia.forEach(g => g.classifica.forEach(t => {
+        if (perSquadra[t.name]) perSquadra[t.name].push({ round: g.round, ...t });
+    }));
+
+    const posizioni = squadre.length;
+    const puntiMax = Math.max(...storia[storia.length - 1].classifica.map(t => t.punti), 1);
+
+    // Coordinate calcolate a mano nel viewBox: niente preserveAspectRatio="none",
+    // che deformerebbe tratti e testo
+    const margine = { su: 14, giu: 26, sinistra: 34, destra: 96 };
+    const larghezzaTracciato = Math.max(storia.length * 26, 220);
+    const altezzaTracciato = 220;
+    const W = margine.sinistra + larghezzaTracciato + margine.destra;
+    const H = margine.su + altezzaTracciato + margine.giu;
+
+    const x = (i) => margine.sinistra + (storia.length === 1 ? larghezzaTracciato / 2 : (i / (storia.length - 1)) * larghezzaTracciato);
+    const y = (v) => vistaAndamento === 'posizione'
+        // La prima posizione sta in alto: l'asse e' rovesciato
+        ? margine.su + ((v - 1) / Math.max(posizioni - 1, 1)) * altezzaTracciato
+        : margine.su + altezzaTracciato - (v / puntiMax) * altezzaTracciato;
+
+    const valore = (t) => (vistaAndamento === 'posizione' ? t.posizione : t.punti);
+
+    // Griglia leggera: le posizioni una per riga, i punti a passo tondo
+    const livelli = vistaAndamento === 'posizione'
+        ? Array.from({ length: posizioni }, (_, i) => i + 1)
+        : (() => {
+            const passo = puntiMax <= 20 ? 5 : puntiMax <= 60 ? 10 : 20;
+            const out = [];
+            for (let v = 0; v <= puntiMax; v += passo) out.push(v);
+            return out;
+        })();
+
+    const griglia = livelli.map(v => `
+        <line class="an-griglia" x1="${margine.sinistra}" x2="${margine.sinistra + larghezzaTracciato}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}"/>
+        <text class="an-tacca" x="${margine.sinistra - 6}" y="${(y(v) + 3).toFixed(1)}">${v}</text>
+    `).join('');
+
+    // Su trentaquattro giornate le etichette non ci stanno tutte
+    const passoEtichette = Math.ceil(storia.length / 12);
+    const asseX = storia.map((g, i) => (i % passoEtichette === 0 || i === storia.length - 1)
+        ? `<text class="an-tacca" x="${x(i).toFixed(1)}" y="${H - 8}" text-anchor="middle">${g.round}</text>`
+        : '').join('');
+
+    const linea = (nome) => perSquadra[nome]
+        .map((t, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(valore(t)).toFixed(1)}`)
+        .join(' ');
+
+    // Otto colori nessuno riesce ad associarli: tutte le linee restano in
+    // grigio e una sola si accende. Piu' utile di una legenda, e la toglie.
+    const linee = squadre.map(nome => {
+        const acceso = nome === evidenziata;
+        const ultima = perSquadra[nome][perSquadra[nome].length - 1];
+        return `
+            <g class="an-serie ${acceso ? 'accesa' : ''}" data-squadra="${nome}">
+                <title>${nome}</title>
+                <path class="an-linea" d="${linea(nome)}" vector-effect="non-scaling-stroke"/>
+                ${acceso ? perSquadra[nome].map((t, i) =>
+                    `<circle class="an-punto" cx="${x(i).toFixed(1)}" cy="${y(valore(t)).toFixed(1)}" r="3">
+                        <title>Giornata ${t.round}: ${t.posizione}º con ${t.punti} punti</title>
+                     </circle>`).join('') : ''}
+                <text class="an-etichetta" x="${(margine.sinistra + larghezzaTracciato + 6).toFixed(1)}"
+                      y="${(y(valore(ultima)) + 3.5).toFixed(1)}">${nome}</text>
+            </g>
+        `;
+    }).join('');
+
+    const opzioni = squadre.map(n => `<option value="${n}"${n === evidenziata ? ' selected' : ''}>${n}</option>`).join('');
+
+    contenitore.innerHTML = `
+        <div class="andamento-blocco">
+            <div class="andamento-testa">
+                <h3><i class="fas fa-chart-line"></i> Andamento della stagione</h3>
+                <div class="andamento-comandi">
+                    <div class="andamento-vista">
+                        <button type="button" class="an-vista-btn ${vistaAndamento === 'posizione' ? 'attivo' : ''}" data-vista="posizione">Posizione</button>
+                        <button type="button" class="an-vista-btn ${vistaAndamento === 'punti' ? 'attivo' : ''}" data-vista="punti">Punti</button>
+                    </div>
+                    <select class="an-squadra-select" id="an-squadra" title="Quale squadra seguire">${opzioni}</select>
+                </div>
+            </div>
+            <p class="andamento-nota">
+                ${vistaAndamento === 'posizione'
+                    ? 'La posizione in classifica dopo ogni giornata, il primo posto in alto.'
+                    : 'I punti accumulati giornata dopo giornata.'}
+                Le altre squadre restano sullo sfondo: passaci sopra per accenderle.
+            </p>
+            <div class="andamento-scroll">
+                <svg class="andamento-svg" viewBox="0 0 ${W} ${H}" role="img"
+                     aria-label="Andamento di ${evidenziata} per ${vistaAndamento === 'posizione' ? 'posizione' : 'punti'}">
+                    ${griglia}
+                    ${asseX}
+                    ${linee}
+                </svg>
+            </div>
+        </div>
+    `;
+
+    contenitore.querySelectorAll('.an-vista-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            vistaAndamento = btn.dataset.vista;
+            displayAndamento();
+        });
+    });
+
+    const select = contenitore.querySelector('#an-squadra');
+    if (select) {
+        select.addEventListener('change', () => {
+            ricordaSquadra(select.value);
+            displayAndamento();
+        });
+    }
 }
 
 // ============================================================
@@ -3830,6 +4025,17 @@ function classificaIndividuale(stats, chiave, titolo, icona, opzioni = {}) {
 
 const SQUADRA_STORAGE_KEY = 'fantacalcio-squadra';
 
+// La squadra che il visitatore segue. localStorage puo' non esserci — finestra
+// anonima, dati del sito bloccati — quindi ogni accesso va protetto: qui una
+// volta sola, invece di un try/catch a ogni chiamante.
+function squadraRicordata() {
+    try { return localStorage.getItem(SQUADRA_STORAGE_KEY); } catch (e) { return null; }
+}
+
+function ricordaSquadra(nome) {
+    try { localStorage.setItem(SQUADRA_STORAGE_KEY, nome); } catch (e) { /* non disponibile */ }
+}
+
 function frecciaForma(g) {
     if (g.forma === null || g.media === null) return '';
     const delta = g.forma - g.media;
@@ -3943,8 +4149,7 @@ function displayFormazione() {
         return;
     }
 
-    let scelta = null;
-    try { scelta = localStorage.getItem(SQUADRA_STORAGE_KEY); } catch (e) { /* non disponibile */ }
+    let scelta = squadraRicordata();
     if (!squadre.includes(scelta)) scelta = squadre[0];
 
     const f = suggerisciFormazione(scelta);
@@ -4093,7 +4298,7 @@ function displayFormazione() {
     const select = document.getElementById('squadra-select');
     if (select) {
         select.addEventListener('change', () => {
-            try { localStorage.setItem(SQUADRA_STORAGE_KEY, select.value); } catch (e) { /* non disponibile */ }
+            ricordaSquadra(select.value);
             displayFormazione();
         });
     }

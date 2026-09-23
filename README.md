@@ -380,6 +380,10 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
       sei classifiche individuali
 - [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
       è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
+- [x] **Andamento della stagione** — [spec](spec/03-andamento-per-giornata.md). La spezzata
+      di posizione e punti giornata per giornata, in SVG inline. Le otto linee restano grigie
+      e una sola si accende: otto colori nessuno riesce ad associarli, e così sparisce anche
+      la legenda
 - [x] **Albo d'oro** — [spec](spec/06-achievement.md). Dieci premi ricavati dai dati, in
       coda alle Rose: la bomba, il tonfo, la striscia di vittorie, il regolarista, lo
       sfortunato. Quelli che dipendono dalle formazioni spariscono dove non ci sono, invece
@@ -408,15 +412,11 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
       volte al giorno, fino al 1° giugno 2027. Il *real-time dal browser* resta impossibile: fantacalcio.it non
       manda header CORS e il sito è statico, quindi non c'è un proxy che possa chiamarlo
 
-### 📈 **Da fare, in ordine di resa**
+### 📈 **Da fare**
 
-Nessuna richiede dati nuovi né dipendenze: tutto è già in `data/<stagione>.json`.
-**Ognuna ha la sua scheda in [`spec/`](spec/)**, con dati, comportamento, casi limite e
-il controllo che dice quando è finita.
-
-- [ ] **[Andamento per giornata](spec/03-andamento-per-giornata.md)** — spezzata di punti e
-      posizione per squadra. Meglio in SVG inline che con Chart.js: il grafico è semplice e
-      il peso della libreria non si giustifica
+Niente, per ora: le sette caselle che c'erano sono tutte chiuse. Le loro schede restano
+in [`spec/`](spec/) — dati, comportamento, casi limite e il controllo che dice quando è
+finita — perché documentano com'è fatto quello che c'è, non solo com'era da fare.
 
 ### 🚫 **Fuori portata, e perché**
 

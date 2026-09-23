@@ -517,3 +517,70 @@ test('lo scarto tipico non esiste con una giornata sola', () => {
     assert.equal(app.deviazione([70, 70, 70]), 0, 'tre punteggi uguali fanno scarto zero, non nullo');
     assert.equal(app.deviazione([60, 80]), 10);
 });
+
+// ------------------------------------------------------------------
+// Andamento della stagione
+// ------------------------------------------------------------------
+
+test('la spezzata finisce dove finisce la classifica', () => {
+    // Se l'ultimo punto non coincide con la tabella, uno dei due sbaglia: è
+    // l'unico controllo che serve davvero su questa funzione.
+    esegui(app, `fantacalcioData = ${JSON.stringify({
+        teams: [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }],
+        players: {}, rosterHistory: [],
+        rounds: [
+            { round: 1, matches: [
+                { homeTeam: 'A', awayTeam: 'B', homeScore: 84, awayScore: 66 },
+                { homeTeam: 'C', awayTeam: 'D', homeScore: 70, awayScore: 70 }
+            ] },
+            { round: 2, matches: [
+                { homeTeam: 'A', awayTeam: 'C', homeScore: 90, awayScore: 60 },
+                { homeTeam: 'B', awayTeam: 'D', homeScore: 72, awayScore: 66 }
+            ] }
+        ]
+    })};`);
+
+    const storia = app.calculateSeasonProgression();
+    assert.equal(storia.length, 2);
+
+    const finale = storia[storia.length - 1].classifica;
+    const classifica = app.sortTeams(app.calculateStandingsFromResults(), 'points', 'desc');
+
+    assert.deepEqual(finale.map(t => t.name), classifica.map(t => t.name), 'stesso ordine');
+    finale.forEach((t, i) => {
+        assert.equal(t.punti, classifica[i].points, `punti di ${t.name}`);
+        assert.equal(t.posizione, i + 1);
+    });
+});
+
+test('ogni giornata assegna i punti che le partite mettono in palio', () => {
+    esegui(app, `fantacalcioData = ${JSON.stringify({
+        teams: [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }],
+        players: {}, rosterHistory: [],
+        rounds: [
+            { round: 1, matches: [
+                { homeTeam: 'A', awayTeam: 'B', homeScore: 84, awayScore: 66 },   // 3 punti
+                { homeTeam: 'C', awayTeam: 'D', homeScore: 70, awayScore: 70 }    // 1 + 1
+            ] }
+        ]
+    })};`);
+
+    const storia = app.calculateSeasonProgression();
+    const totale = storia[0].classifica.reduce((somma, t) => somma + t.punti, 0);
+    assert.equal(totale, 5, 'una vittoria (3) più un pareggio (1+1)');
+});
+
+test('una giornata non giocata non entra nella spezzata', () => {
+    esegui(app, `fantacalcioData = ${JSON.stringify({
+        teams: [{ name: 'A' }, { name: 'B' }],
+        players: {}, rosterHistory: [],
+        rounds: [
+            { round: 1, matches: [{ homeTeam: 'A', awayTeam: 'B', homeScore: 84, awayScore: 66 }] },
+            { round: 2, matches: [{ homeTeam: 'A', awayTeam: 'B' }] }
+        ]
+    })};`);
+
+    const storia = app.calculateSeasonProgression();
+    assert.equal(storia.length, 1, 'la serie si ferma all\'ultima giocata, non prosegue a zero');
+    assert.equal(storia[0].round, 1);
+});
