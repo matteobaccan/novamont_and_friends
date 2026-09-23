@@ -3313,16 +3313,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (trophyReload) {
         trophyReload.addEventListener('click', async (e) => {
             e.preventDefault();
-            // Aggiungi animazione di rotazione
-            trophyReload.style.animation = 'rotate 1s linear';
-            
-            // Ricarica solo i dati
+            // La coppa si svuota e si riempie di nuovo mentre arrivano i dati.
+            // Va tolta e rimessa la classe, altrimenti al secondo clic
+            // l'animazione è già in corso e il browser non la fa ripartire.
+            trophyReload.classList.remove('ricarica');
+            void trophyReload.offsetWidth;
+            trophyReload.classList.add('ricarica');
+
             await reloadDataOnly();
-            
-            // Rimuovi animazione
-            setTimeout(() => {
-                trophyReload.style.animation = '';
-            }, 1000);
         });
         
         // Tooltip migliorato
