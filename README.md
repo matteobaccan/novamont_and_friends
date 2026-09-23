@@ -44,7 +44,8 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette e statistiche allenatori
 3. **⏱️ Merito**: La classifica meritocratica. Ogni giornata si guarda solo il punteggio e si
    assegnano i punti come in Formula 1, così l'avversario capitato in sorte non pesa. La
-   colonna Δ Pos dice di quante posizioni il campionato ti tratta meglio o peggio del merito
+   colonna Δ Pos dice di quante posizioni il campionato ti tratta meglio o peggio del merito.
+   Un clic sulla squadra apre la griglia dei punti giornata per giornata, colorata per piazza
 4. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti inline
 5. **👥 Rose**: Rendimento di ogni giocatore e sei classifiche — marcatori, assist,
    ammonizioni, espulsioni, malus e incompresi (bonus e malus raccolti in panchina)
