@@ -30,9 +30,12 @@ rendono la situazione peggiore di quanto sembri:
 | 78 | 3 |
 | 84 | 4 |
 
-Il confine a 66 è quello che vale davvero: `Math.floor((66 - 60) / 6)` dà 1, ma
-`Math.floor((65 - 60) / 6)` dà 0 anche senza la guardia esplicita. Il test deve
-coprire 60, 65.5, 66 perché è lì che una riscrittura sbaglia.
+Attenzione a cosa protegge davvero la guardia `if (score < 66) return 0`. Non il
+confine dei 66: lì ci arriva la formula da sola, perché `Math.floor((65.9 - 60) / 6)`
+fa già 0. Quello che impedisce sono i **gol negativi** sotto i 60 punti, dove
+`Math.floor((0 - 60) / 6)` darebbe −10. Quindi il test deve coprire 0 e 59,5
+oltre a 65,9 e 66: cambiare la soglia da 66 a 65 non rompe niente (provato), ma
+togliere la guardia sì.
 
 `calculateMatchGoals` — la regola del pareggio con scarto ≥ 4:
 
@@ -40,8 +43,14 @@ coprire 60, 65.5, 66 perché è lì che una riscrittura sbaglia.
 |------|-------|--------|--------|
 | 70 | 70 | 1-1 | pari, scarto 0 |
 | 71 | 68 | 1-1 | pari, scarto 3, sotto soglia |
-| 72 | 68 | 3-1 → verificare | pari in gol, scarto 4, +1 alla casa |
+| 72 | 75 | 2-2 | pari, scarto 3, sotto soglia |
+| 76 | 72 | 3-2 | pari in gol, scarto 4, +1 alla casa |
+| 72 | 68 | 2-1 | scarto 4 ma i gol non pareggiano: la soglia non c'entra |
 | 84 | 66 | 4-1 | gol già diversi, nessun aggiustamento |
+
+L'ultima coppia è la trappola: 72 e 68 distano esattamente 4 punti, ma valgono
+2 gol e 1, quindi la regola del pareggio non si applica. Chi legge il
+regolamento in fretta si aspetta un 3-1.
 
 `calcolaStatisticheGiocatori` — il saldo `b - v` in panchina, che è la base
 della classifica Incompresi: una formazione finta con un panchinaro da `v: 6`,
@@ -119,11 +128,12 @@ E una Action che gira `node --test test/` su ogni push e su ogni pull request.
 
 ## Come si verifica
 
-- `node --test test/` passa in locale e in CI.
-- Rompendo di proposito la soglia in `calculateGoalsFromScore` (66 → 65) almeno
-  un test fallisce.
-- Cambiando una percentuale nella fixture delle probabili, il test del parser
-  fallisce con un messaggio che dice quale giocatore.
+- `node --test "test/**/*.test.mjs"` passa in locale e in CI.
+- Togliendo la guardia in `calculateGoalsFromScore` almeno un test fallisce
+  (cambiarne solo la soglia da 66 a 65 invece non rompe niente: la formula dà
+  comunque 0 in quell'intervallo).
+- Cambiando un nome nella fixture dei rigoristi, il test del parser fallisce e
+  dice quale nome si aspettava.
 
 ## Fuori scope
 

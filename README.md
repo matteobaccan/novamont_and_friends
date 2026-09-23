@@ -292,8 +292,14 @@ novamont_and_friends/
 │   ├── scarica-giornata.mjs   # Giornata dall'API della lega
 │   ├── calcola-giornata.mjs   # Punteggi ideali
 │   └── scarica-probabili.mjs  # Probabili, rigoristi, infortunati, contesto
+├── test/
+│   ├── regole.test.mjs     # Gol, bonus casa, malus, punti di merito
+│   ├── parser.test.mjs     # I parser dello scraper, su fixture reali
+│   ├── aiuto/              # Carica script.js in un contesto vm
+│   └── fixture/            # Frammenti di pagina datati, niente rete nei test
 ├── .github/workflows/
-│   └── probabili.yml       # Rigenera probabili.json due volte al giorno
+│   ├── probabili.yml       # Rigenera probabili.json due volte al giorno
+│   └── test.yml            # node --test su ogni push e pull request
 ├── BONUS_CASA.md           # Il bonus casa nei gol ideali
 ├── CACHE_MANAGEMENT.md     # Come è gestita la cache
 └── README.md               # Questo file
@@ -369,6 +375,10 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
       sei classifiche individuali
 - [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
       è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
+- [x] **Test automatici** — [spec](spec/07-test-automatici.md). 26 casi con `node --test`,
+      nessuna dipendenza: le regole di calcolo e i parser dello scraper, questi ultimi su
+      frammenti reali di pagina salvati in `test/fixture/`. Girano su ogni push e pull
+      request, e non toccano la rete
 - [x] **App installabile (PWA)** — [spec](spec/01-pwa-manifest.md). Manifest e icone ci
       sono, il service worker le tiene in cache: dal telefono si aggiunge alla schermata
       Home e si apre senza barra degli indirizzi, con i dati dell'ultima visita anche
@@ -397,10 +407,6 @@ il controllo che dice quando è finita.
       L'export PDF invece richiederebbe una dipendenza vera: lasciato cadere
 - [ ] **[Achievement](spec/06-achievement.md)** derivati dai dati: miglior punteggio di
       giornata, striscia di vittorie, peggior scarto dall'ideale
-- [ ] **[Qualche test automatico](spec/07-test-automatici.md)** — ~3300 righe di JavaScript e
-      i parser dello scraper non ne hanno nessuno, e lo scraper ora gira in una Action senza
-      che nessuno guardi. Bastano `node --test` e pochi casi su `calculateGoalsFromScore`,
-      sul bonus casa e sui parser HTML, con un frammento di pagina salvato come fixture
 
 ### 🚫 **Fuori portata, e perché**
 

@@ -1,0 +1,31 @@
+name: Test
+
+# Le regole della lega sono aritmetica e i parser dello scraper girano da soli
+# in un'altra Action: qui si controlla che nessuna delle due si sia rotta.
+# I test non vanno in rete — le pagine di fantacalcio.it stanno in test/fixture
+# come frammenti salvati — quindi questo workflow non dipende da nessun sito.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prova:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: node --test
+        run: node --test "test/**/*.test.mjs"

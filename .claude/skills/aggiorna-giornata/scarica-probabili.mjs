@@ -51,14 +51,14 @@ const ENTITA = {
     Agrave: 'À', Egrave: 'È', Eacute: 'É', Igrave: 'Ì', Ograve: 'Ò', Ugrave: 'Ù'
 };
 
-function decodificaEntita(testo) {
+export function decodificaEntita(testo) {
     return testo
         .replace(/&#x([0-9a-fA-F]+);/g, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
         .replace(/&#(\d+);/g, (_, dec) => String.fromCodePoint(Number(dec)))
         .replace(/&([a-zA-Z]+);/g, (tutto, nome) => (nome in ENTITA ? ENTITA[nome] : tutto));
 }
 
-function testoPulito(html) {
+export function testoPulito(html) {
     return decodificaEntita(html.replace(/<[^>]*>/g, ' ')).replace(/\s+/g, ' ').trim();
 }
 
@@ -67,7 +67,7 @@ function testoPulito(html) {
 // ============================================================
 
 // Estrae i blocchi di una squadra: nome, modulo, titolari e riserve
-function dividiPerSquadra(html) {
+export function dividiPerSquadra(html) {
     const blocchi = [];
     const regexCard = /<h3 class="h6 team-name">([^<]+)<\/h3>\s*<div class="h6 team-formation">([^<]*)<\/div>([\s\S]*?)(?=<h3 class="h6 team-name">|$)/g;
 
@@ -79,7 +79,7 @@ function dividiPerSquadra(html) {
 }
 
 // Una voce giocatore: ruolo, id, nome e percentuale di titolarità
-function estraiGiocatori(htmlLista, titolari) {
+export function estraiGiocatori(htmlLista, titolari) {
     const giocatori = [];
     const regexItem = /<li class="player-item pill"[^>]*>([\s\S]*?)<\/li>/g;
 
@@ -105,7 +105,7 @@ function estraiGiocatori(htmlLista, titolari) {
     return giocatori;
 }
 
-function analizza(html) {
+export function analizza(html) {
     const squadre = [];
     const giocatori = {};
 
@@ -141,7 +141,7 @@ function analizza(html) {
 // ============================================================
 
 // Le pagine rigoristi e infortunati sono fatte di una card per squadra
-function dividiCardSquadra(html) {
+export function dividiCardSquadra(html) {
     const blocchi = [];
     const regexCard = /<div id="team-\d+" class="card team-card">([\s\S]*?)(?=<div id="team-\d+" class="card team-card">|<\/main>|$)/g;
 
@@ -159,7 +159,7 @@ function dividiCardSquadra(html) {
 // gioca, quindi per pesarlo bisogna sapere chi ha davanti e quanto è probabile
 // che scenda in campo. Interessa solo la colonna "Rigori": i calci piazzati
 // sono un'altra cosa e non danno bonus diretto.
-function analizzaRigoristi(html) {
+export function analizzaRigoristi(html) {
     const rigoristi = {};
 
     for (const blocco of dividiCardSquadra(html)) {
@@ -178,7 +178,7 @@ function analizzaRigoristi(html) {
 
 // La pagina non espone gli id: si tiene nome e squadra, l'abbinamento alla rosa
 // lo fa il browser che ha già l'anagrafica dei giocatori della lega.
-function analizzaInfortunati(html) {
+export function analizzaInfortunati(html) {
     const infortunati = [];
 
     for (const blocco of dividiCardSquadra(html)) {
@@ -201,7 +201,7 @@ function analizzaInfortunati(html) {
 // ============================================================
 
 // squadra -> posizione, dal widget di classifica presente nelle pagine di contorno
-function analizzaClassifica(html) {
+export function analizzaClassifica(html) {
     const classifica = {};
     const regexRiga = /<tr data-name="([^"]+)"[^>]*data-team-position="(\d+)"/g;
 
@@ -215,7 +215,7 @@ function analizzaClassifica(html) {
 // Le partite di un turno. Le pagine mostrano anche pill di altri turni nei
 // widget laterali e ripetono lo stesso incontro più volte, quindi si filtra per
 // numero di turno e si tengono gli accoppiamenti una volta sola.
-function analizzaPartite(html, turno) {
+export function analizzaPartite(html, turno) {
     const partite = [];
     const viste = new Set();
     const regexPill = /class="match-pill[^"]*" data-match-status="(\d+)"([\s\S]*?)(?=class="match-pill|<\/main>|$)/g;
@@ -256,7 +256,7 @@ function analizzaPartite(html, turno) {
     return partite;
 }
 
-function numeroProssimoTurno(html) {
+export function numeroProssimoTurno(html) {
     const numeri = [...html.matchAll(/<div class="matchweek">\s*(\d+)\s*<\/div>/g)].map(m => Number(m[1]));
     if (numeri.length === 0) return null;
     // Le probabili sono sempre del turno che sta per cominciare: se la pagina ne
