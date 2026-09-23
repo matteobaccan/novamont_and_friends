@@ -23,10 +23,10 @@
     <meta name="apple-mobile-web-app-title" content="Novamont FC">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <link rel="stylesheet" href="styles.css?v=10.1">
+    <link rel="stylesheet" href="styles.css?v=10.2">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <script src="config.js?v=10.1"></script>
+    <script src="config.js?v=10.2"></script>
 </head>
 <body>
     <!-- Sipario d'apertura. Sta nell'HTML e non lo crea il JavaScript, perche'
@@ -177,7 +177,7 @@
                     </span>
                 </div>
             </div>
-            <nav class="nav">
+            <nav class="nav" id="nav-principale">
                 <button class="nav-btn active" data-tab="classifica">
                     <i class="fas fa-medal"></i>
                     Classifica
@@ -202,10 +202,16 @@
                     <i class="fas fa-wand-magic-sparkles"></i>
                     Formazione
                 </button>
+            </nav>
+            <div class="header-azioni">
                 <button class="theme-toggle" id="theme-toggle" title="Cambia Tema">
                     <i class="fas fa-sun"></i>
                 </button>
-            </nav>
+                <button type="button" class="nav-burger" id="nav-burger"
+                        aria-expanded="false" aria-controls="nav-principale" aria-label="Apri il menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -375,6 +381,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=10.1"></script>
+    <script src="script.js?v=10.2"></script>
 </body>
 </html>
