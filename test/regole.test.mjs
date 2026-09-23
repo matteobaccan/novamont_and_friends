@@ -416,3 +416,35 @@ test('una giornata non ancora giocata non entra negli scontri', () => {
     const { matrice } = app.calcolaScontriDiretti();
     assert.equal(matrice.A.B.sfide, 1, 'la giornata senza punteggi non si conta');
 });
+
+// ------------------------------------------------------------------
+// Celle CSV
+// ------------------------------------------------------------------
+
+// Il file deve aprirsi in Excel italiano con un doppio clic: separatore punto
+// e virgola, decimali con la virgola, e le virgolette gestite come vuole il
+// formato. Sono tre dettagli che sembrano pedanteria finché il file non si apre.
+test('i decimali escono con la virgola, come vuole Excel italiano', () => {
+    assert.equal(app.cellaCsv('72.38'), '72,38');
+    assert.equal(app.cellaCsv('-9.5'), '-9,5');
+    assert.equal(app.cellaCsv('+13'), '+13', 'un intero col segno resta com\'è');
+    assert.equal(app.cellaCsv('56'), '56');
+});
+
+test('quello che non è un numero non viene toccato', () => {
+    assert.equal(app.cellaCsv('SM Frattese'), 'SM Frattese');
+    assert.equal(app.cellaCsv('Jimenez A.'), 'Jimenez A.', 'il punto di un\'abbreviazione non è un decimale');
+    assert.equal(app.cellaCsv('2026-2027'), '2026-2027');
+});
+
+test('il punto e virgola dentro una cella la fa racchiudere fra virgolette', () => {
+    assert.equal(app.cellaCsv('Rossi; Bianchi'), '"Rossi; Bianchi"');
+    assert.equal(app.cellaCsv('detto "il lungo"'), '"detto ""il lungo"""');
+    assert.equal(app.cellaCsv('prima\nseconda'), '"prima\nseconda"');
+});
+
+test('vuoto e nullo diventano una cella vuota, non la parola null', () => {
+    assert.equal(app.cellaCsv(null), '');
+    assert.equal(app.cellaCsv(undefined), '');
+    assert.equal(app.cellaCsv(''), '');
+});

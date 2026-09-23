@@ -473,6 +473,7 @@ function renderAllSections() {
     displayMeritStandings();
     displayHeatmap();
     displayScontriDiretti();
+    collegaPulsantiCsv();
     displayStatistics();
     setupRoundSelector();
     updateLastUpdate();
@@ -888,6 +889,138 @@ function calculateMeritStandings() {
     // A pari punti di merito decide chi ha fatto più punteggio: è la stessa
     // grandezza che la classifica misura, solo senza la scala a gradini
     return Object.values(merito).sort((a, b) => b.meritPoints - a.meritPoints || b.totalScore - a.totalScore);
+}
+
+// ============================================================
+// Export CSV
+// ============================================================
+
+// Chi vuole farsi i suoi conti oggi ricopia a mano dalla pagina. I numeri
+// sono gia' tutti qui: basta darglieli.
+//
+// Tre dettagli non sono opzionali, se il file deve aprirsi in Excel italiano:
+// il separatore e' il punto e virgola (con la virgola Excel mette tutta la riga
+// in una cella), in testa ci va il BOM (senza, legge il file come ANSI e gli
+// accenti dei nomi squadra diventano caratteri strani) e i decimali vogliono la
+// virgola (col punto li tratta come testo e non li somma).
+
+function cellaCsv(valore) {
+    if (valore === null || valore === undefined) return '';
+    let testo = String(valore).trim();
+
+    // I decimali in formato italiano, coerenti col separatore punto e virgola
+    if (/^[+-]?\d+\.\d+$/.test(testo)) testo = testo.replace('.', ',');
+
+    // Le virgolette si raddoppiano, e si racchiude solo quando serve. I nomi
+    // squadra oggi sono innocui, ma arrivano da un JSON modificabile a mano:
+    // l'escape va fatto comunque, non verificato caso per caso.
+    if (/[;"\n\r]/.test(testo)) return '"' + testo.replace(/"/g, '""') + '"';
+    return testo;
+}
+
+function scaricaCsv(nomeFile, intestazioni, righe) {
+    const contenuto = [intestazioni, ...righe]
+        .map(r => r.map(cellaCsv).join(';'))
+        .join('\r\n');
+
+    const blob = new Blob(['﻿' + contenuto], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nomeFile;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    // Senza questo il blob resta in memoria per tutta la sessione
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function nomeFileCsv(tabella) {
+    const stagione = currentSeasonId || 'stagione';
+    return `novamont-${tabella}-${stagione}.csv`;
+}
+
+// Le tre classifiche si leggono dalla tabella disegnata invece che dai dati:
+// cosi' il CSV esce con le stesse colonne e nello stesso ordine che si ha
+// sotto gli occhi. Esportare un ordine diverso da quello a schermo e' un
+// piccolo tradimento che costa fiducia.
+//
+// Le colonne nascoste su mobile restano nel DOM e finiscono nel file: chi
+// scarica vuole i dati, non la vista ridotta del telefono.
+function csvDaTabella(idTabella, nomeFile) {
+    const tabella = document.getElementById(idTabella);
+    if (!tabella) return false;
+
+    const pulisci = (el) => el.textContent.replace(/[▲▼]/g, '').replace(/\s+/g, ' ').trim();
+
+    const intestazioni = [...tabella.querySelectorAll('thead th')].map(pulisci);
+    const righe = [...tabella.querySelectorAll('tbody tr.team-row')]
+        .map(tr => [...tr.querySelectorAll('td')].map(pulisci));
+
+    scaricaCsv(nomeFile, intestazioni, righe);
+    return true;
+}
+
+function csvGiocatori() {
+    const stats = calcolaStatisticheGiocatori();
+    const intestazioni = [
+        'Squadra', 'Giocatore', 'Ruolo', 'Serie A', 'Presenze', 'Panchine',
+        'Giornate con voto', 'Media voto', 'Media fantavoto', 'Media fantavoto Serie A',
+        'Gol', 'Assist', 'Ammonizioni', 'Espulsioni', 'Malus', 'Punti in panchina', 'Incompreso'
+    ];
+
+    const numero2 = (v) => (v === null || v === undefined ? '' : String(Math.round(v * 100) / 100));
+
+    const righe = Object.values(stats)
+        .map(s => {
+            const info = anagraficaGiocatore(s.pid);
+            return [
+                s.team, info.name, info.role, info.serieA || '',
+                s.presenze, s.panchine, s.votiSerieA,
+                numero2(s.mediaVoto), numero2(s.mediaFanta), numero2(s.mediaFantaSerieA),
+                s.gol, s.assist, s.amm, s.esp, s.malus, s.puntiInPanchina, s.incompreso
+            ];
+        })
+        .sort((a, b) => String(a[0]).localeCompare(String(b[0])) || String(a[1]).localeCompare(String(b[1])));
+
+    scaricaCsv(nomeFileCsv('giocatori'), intestazioni, righe);
+}
+
+function csvGiornate() {
+    const intestazioni = ['Giornata', 'Casa', 'Trasferta', 'Punti casa', 'Punti trasferta', 'Gol casa', 'Gol trasferta'];
+    const righe = [];
+
+    (fantacalcioData.rounds || []).forEach(round => {
+        (round.matches || []).forEach(m => {
+            if (typeof m.homeScore !== 'number' || typeof m.awayScore !== 'number') return;
+            const { homeGoals, awayGoals } = calculateMatchGoals(m.homeScore, m.awayScore);
+            righe.push([round.round, m.homeTeam, m.awayTeam, m.homeScore, m.awayScore, homeGoals, awayGoals]);
+        });
+    });
+
+    scaricaCsv(nomeFileCsv('giornate'), intestazioni, righe);
+}
+
+// Un pulsante di servizio nell'intestazione di sezione: dice cosa succede
+// ("Scarica CSV", non "Esporta") e non si prende un blocco tutto suo
+function collegaPulsantiCsv() {
+    const azioni = {
+        'csv-classifica': () => csvDaTabella('main-standings-table', nomeFileCsv('classifica')),
+        'csv-ideale': () => csvDaTabella('ideal-table', nomeFileCsv('classifica-ideale')),
+        'csv-merito': () => csvDaTabella('merit-table', nomeFileCsv('merito')),
+        'csv-giocatori': csvGiocatori,
+        'csv-giornate': csvGiornate
+    };
+
+    for (const [id, azione] of Object.entries(azioni)) {
+        const btn = document.getElementById(id);
+        if (btn && !btn.dataset.collegato) {
+            btn.dataset.collegato = '1';
+            btn.addEventListener('click', azione);
+        }
+    }
 }
 
 // ============================================================
@@ -1727,7 +1860,7 @@ function displayIdealStandings() {
     }
 
     let html = coachStatsHtml + `
-          <table class="standings-table ideal-standings-table" id="ideal-standings-table">
+          <table class="standings-table ideal-standings-table" id="ideal-table">
             <thead>
                 <tr class="table-header">
                     <th class="sortable-header" data-column="position" data-table="ideal">
@@ -1959,7 +2092,7 @@ function displayMeritStandings() {
 function setupSortableHeaders(tableType = 'main') {
     const tabelle = {
         main: '#main-standings-table .sortable-header',
-        ideale: '#ideal-standings-table .sortable-header',
+        ideale: '#ideal-table .sortable-header',
         merito: '#merit-standings-table .sortable-header'
     };
     const selector = tabelle[tableType] || tabelle.ideale;

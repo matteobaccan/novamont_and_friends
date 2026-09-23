@@ -380,6 +380,10 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
       sei classifiche individuali
 - [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
       è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
+- [x] **Export CSV** — [spec](spec/05-export-csv.md). Un pulsante per le tre classifiche,
+      i risultati per giornata e le statistiche dei giocatori. Le classifiche escono nello
+      stesso ordine che si ha sotto gli occhi, e il file si apre in Excel italiano con un
+      doppio clic
 - [x] **Scontri diretti** — [spec](spec/02-scontri-diretti.md). Matrice 8×8 in coda alla
       Classifica, vinte-pari-perse dal punto di vista della riga; una casella apre l'elenco
       delle sfide con andata, ritorno e punteggi
@@ -409,8 +413,6 @@ il controllo che dice quando è finita.
 - [ ] **[Andamento per giornata](spec/03-andamento-per-giornata.md)** — spezzata di punti e
       posizione per squadra. Meglio in SVG inline che con Chart.js: il grafico è semplice e
       il peso della libreria non si giustifica
-- [ ] **[Export CSV](spec/05-export-csv.md)** delle classifiche — `Blob` più `<a download>`.
-      L'export PDF invece richiederebbe una dipendenza vera: lasciato cadere
 - [ ] **[Achievement](spec/06-achievement.md)** derivati dai dati: miglior punteggio di
       giornata, striscia di vittorie, peggior scarto dall'ideale
 
