@@ -1975,6 +1975,7 @@ function calcolaStatisticheGiocatori() {
         assist: 0,
         golPanchina: 0,
         assistPanchina: 0,
+        bonusPanchina: 0,
         amm: 0,
         esp: 0,
         rigParato: 0,
@@ -2007,8 +2008,11 @@ function calcolaStatisticheGiocatori() {
                         s.panchine += 1;
                         if (g.b !== undefined) s.puntiInPanchina += g.b;
                         // Quel che ha combinato in Serie A mentre il fantallenatore
-                        // lo teneva fuori: non entra nelle classifiche di gol e
-                        // assist, ma è il rimpianto che vale la sua classifica
+                        // lo teneva fuori. Il rimpianto si misura in punti, non in
+                        // episodi: b è il fantavoto e v il voto puro, quindi b - v
+                        // è il saldo di bonus e malus, che mette sullo stesso piano
+                        // un gol, un assist e un rigore parato e sconta le ammonizioni.
+                        if (g.b !== undefined && g.v !== undefined) s.bonusPanchina += g.b - g.v;
                         if (g.e && g.e.gol) s.golPanchina += g.e.gol;
                         if (g.e && g.e.assist) s.assistPanchina += g.e.assist;
                     }
@@ -2021,7 +2025,7 @@ function calcolaStatisticheGiocatori() {
         s.mediaVoto = s.presenze > 0 ? s.sommaVoto / s.presenze : null;
         s.mediaFanta = s.presenze > 0 ? s.sommaBonus / s.presenze : null;
         s.puntiInPanchina = Math.round(s.puntiInPanchina * 10) / 10;
-        s.incompreso = s.golPanchina + s.assistPanchina;
+        s.incompreso = Math.round(s.bonusPanchina * 10) / 10;
 
         // Punti persi in malus stando in campo: un'espulsione non vale come
         // un'ammonizione, quindi si sommano i punti e non gli episodi
@@ -2971,7 +2975,7 @@ function displayRosters() {
                     .join(', ')
             })}
             ${classificaIndividuale(stats, 'incompreso', 'Incompresi', 'fa-face-frown', {
-                sottotitolo: 'Gol e assist fatti mentre erano in panchina',
+                sottotitolo: 'Bonus e malus accumulati mentre erano in panchina',
                 dettaglio: (s) => [
                     s.golPanchina ? plurale(s.golPanchina, 'gol', 'gol') : '',
                     s.assistPanchina ? plurale(s.assistPanchina, 'assist', 'assist') : ''
