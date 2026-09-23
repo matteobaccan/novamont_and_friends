@@ -23,12 +23,107 @@
     <meta name="apple-mobile-web-app-title" content="Novamont FC">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <link rel="stylesheet" href="styles.css?v=9.9">
+    <link rel="stylesheet" href="styles.css?v=10.1">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <script src="config.js?v=9.9"></script>
+    <script src="config.js?v=10.1"></script>
 </head>
 <body>
+    <!-- Sipario d'apertura. Sta nell'HTML e non lo crea il JavaScript, perche'
+         altrimenti si vedrebbe prima la pagina e poi il sipario che ci cade
+         sopra. Il fondo e' sempre lo stesso indaco, anche in tema chiaro: e' un
+         momento a se', e cosi' non eredita il lampo di tema che si avrebbe
+         aspettando che ThemeManager scriva data-theme. -->
+    <div class="sipario" id="sipario" role="presentation">
+        <button type="button" class="sipario-salta" id="sipario-salta">Salta</button>
+        <svg class="sipario-svg" viewBox="0 0 240 268" role="img" aria-label="Novamont &amp; Friends">
+            <defs>
+                <linearGradient id="sip-oro" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#ffe994"/>
+                    <stop offset="0.45" stop-color="#f4b60a"/>
+                    <stop offset="1" stop-color="#c8870a"/>
+                </linearGradient>
+                <linearGradient id="sip-livello" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#ffe071"/>
+                    <stop offset="1" stop-color="#f0a500"/>
+                </linearGradient>
+                <radialGradient id="sip-bagliore">
+                    <stop offset="0" stop-color="#f4b60a" stop-opacity="0.55"/>
+                    <stop offset="0.55" stop-color="#f4b60a" stop-opacity="0.12"/>
+                    <stop offset="1" stop-color="#f4b60a" stop-opacity="0"/>
+                </radialGradient>
+                <clipPath id="sip-vasca">
+                    <path d="M14 9 H34 V15 C34 25 30 31 24 31 C18 31 14 25 14 15 Z"
+                          transform="translate(43.2, 9.6) scale(3.2)"/>
+                </clipPath>
+            </defs>
+
+            <circle class="sip-bagliore" cx="120" cy="95" r="105" fill="url(#sip-bagliore)"/>
+            <circle class="sip-onda" cx="120" cy="95" r="52"/>
+
+            <g transform="translate(43.2, 9.6) scale(3.2)">
+                <path class="sip-manico" pathLength="100" d="M14 12 C7.5 12 5.5 14.5 5.5 17.5 C5.5 21.5 9 23.5 14.5 24"/>
+                <path class="sip-manico ritardo" pathLength="100" d="M34 12 C40.5 12 42.5 14.5 42.5 17.5 C42.5 21.5 39 23.5 33.5 24"/>
+                <path class="sip-guscio" pathLength="100" d="M14 9 H34 V15 C34 25 30 31 24 31 C18 31 14 25 14 15 Z"/>
+                <g class="sip-base">
+                    <path d="M22.4 31 h3.2 v5.4 h-3.2 z"/>
+                    <path d="M17.5 41 C17.5 37.8 20 36.4 24 36.4 C28 36.4 30.5 37.8 30.5 41 Z"/>
+                    <rect x="13.5" y="41" width="21" height="4.4" rx="1.6"/>
+                </g>
+            </g>
+
+            <g clip-path="url(#sip-vasca)">
+                <rect class="sip-livello" x="80" y="30" width="80" height="80"/>
+                <rect class="sip-lampo" x="-40" y="25" width="26" height="140"/>
+            </g>
+
+            <g class="sip-scintille">
+                <circle cx="120" cy="40" r="3.2" style="--dx: -58px; --dy: -46px; --t: 0ms"/>
+                <circle cx="120" cy="40" r="2.4" style="--dx: -34px; --dy: -64px; --t: 60ms"/>
+                <circle cx="120" cy="40" r="2.8" style="--dx: -8px;  --dy: -72px; --t: 30ms"/>
+                <circle cx="120" cy="40" r="2.2" style="--dx: 20px;  --dy: -68px; --t: 90ms"/>
+                <circle cx="120" cy="40" r="3"   style="--dx: 44px;  --dy: -52px; --t: 45ms"/>
+                <circle cx="120" cy="40" r="2.3" style="--dx: 64px;  --dy: -30px; --t: 105ms"/>
+            </g>
+
+            <g class="sip-nome">
+                <text class="sip-titolo" x="120" y="216">Novamont</text>
+                <text class="sip-coda" x="120" y="244">&amp; Friends</text>
+            </g>
+        </svg>
+    </div>
+
+    <script>
+        // Il sipario si toglie da solo. Se questa riga vivesse in script.js e
+        // quel file non arrivasse, resterebbe steso sul sito per sempre.
+        (function () {
+            var sipario = document.getElementById('sipario');
+            if (!sipario) return;
+
+            var pochiMovimenti = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var durata = pochiMovimenti ? 500 : 2200;
+            var chiuso = false;
+
+            function chiudi() {
+                if (chiuso) return;
+                chiuso = true;
+                sipario.classList.add('via');
+                document.body.classList.remove('sipario-aperto');
+                setTimeout(function () { sipario.remove(); }, 520);
+            }
+
+            document.body.classList.add('sipario-aperto');
+            setTimeout(chiudi, durata);
+
+            // Dalla seconda volta in poi uno vuole arrivare ai dati: un sipario
+            // che non si puo' saltare diventa un pedaggio
+            sipario.addEventListener('click', chiudi);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') chiudi();
+            });
+        })();
+    </script>
+
     <header class="header">
         <div class="container">
             <div class="logo">
@@ -280,6 +375,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=9.9"></script>
+    <script src="script.js?v=10.1"></script>
 </body>
 </html>

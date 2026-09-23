@@ -5052,3 +5052,211 @@ html.theme-transition *:after {
 @media (max-width: 700px) {
     .blocco-attesa { padding: 0.75rem 0.9rem; }
 }
+
+/* ==================================================================
+   Sipario d'apertura
+   ------------------------------------------------------------------
+   Due secondi, una sequenza sola: la coppa si incide, l'oro sale, le
+   scintille schizzano, un riflesso passa sul metallo e il nome si
+   scopre da sinistra. Poi tutto si alza e svanisce.
+   Niente parte per conto suo: ogni pezzo ha il suo ritardo, ed e' la
+   catena a fare l'effetto. Un fade-in generale al posto di questo
+   sarebbe la stessa cosa di non metterlo.
+   ================================================================== */
+
+.sipario {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    /* Sempre indaco, anche in tema chiaro: il sipario e' un momento a se',
+       e cosi' non eredita il lampo di tema del primo paint */
+    background: radial-gradient(circle at 50% 42%, #2a2560 0%, #14103a 55%, #0b0920 100%);
+    cursor: pointer;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.sipario.via {
+    opacity: 0;
+    transform: scale(1.04);
+    pointer-events: none;
+}
+
+/* La pagina sotto non si scorre finche' il sipario e' steso */
+body.sipario-aperto { overflow: hidden; }
+
+.sipario-salta {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    font: inherit;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    cursor: pointer;
+    opacity: 0;
+    animation: sip-salta 0.4s ease 1s forwards;
+}
+
+.sipario-salta:hover { color: #fff; border-color: rgba(255, 255, 255, 0.5); }
+
+@keyframes sip-salta { to { opacity: 1; } }
+
+.sipario-svg {
+    width: min(78vw, 400px);
+    height: auto;
+    overflow: visible;
+}
+
+/* --- Il bagliore dietro, che sboccia quando la coppa e' piena --- */
+.sip-bagliore {
+    transform-origin: 120px 95px;
+    transform: scale(0.4);
+    opacity: 0;
+    animation: sip-bagliore 1.5s cubic-bezier(0.22, 0.7, 0.3, 1) 0.75s forwards;
+}
+
+@keyframes sip-bagliore {
+    0%   { transform: scale(0.4); opacity: 0; }
+    45%  { transform: scale(1.12); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* --- L'onda d'urto: un anello solo, che parte e sparisce --- */
+.sip-onda {
+    fill: none;
+    stroke: #f4b60a;
+    stroke-width: 2;
+    transform-origin: 120px 95px;
+    transform: scale(0.5);
+    opacity: 0;
+    animation: sip-onda 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) 1.05s forwards;
+}
+
+@keyframes sip-onda {
+    0%   { transform: scale(0.5); opacity: 0.8; stroke-width: 3; }
+    100% { transform: scale(1.9); opacity: 0; stroke-width: 0.5; }
+}
+
+/* --- La coppa che si incide, tratto dopo tratto --- */
+.sip-guscio,
+.sip-manico {
+    fill: none;
+    stroke: url(#sip-oro);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: sip-incidi 0.75s cubic-bezier(0.5, 0, 0.2, 1) forwards;
+}
+
+.sip-manico { animation-delay: 0.45s; }
+.sip-manico.ritardo { animation-delay: 0.55s; }
+
+@keyframes sip-incidi { to { stroke-dashoffset: 0; } }
+
+/* Stelo e base arrivano dopo, spuntando dal basso */
+.sip-base {
+    fill: url(#sip-oro);
+    transform-origin: 24px 45px;
+    transform: scaleY(0);
+    opacity: 0;
+    animation: sip-base 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) 0.6s forwards;
+}
+
+@keyframes sip-base {
+    to { transform: scaleY(1); opacity: 1; }
+}
+
+/* --- L'oro che sale, con un filo di rimbalzo al pelo --- */
+.sip-livello {
+    fill: url(#sip-livello);
+    transform: translateY(85px);
+    animation: sip-riempi 1s cubic-bezier(0.25, 1.35, 0.4, 1) 0.6s forwards;
+}
+
+@keyframes sip-riempi {
+    to { transform: translateY(0); }
+}
+
+/* --- Il riflesso che attraversa il metallo, una volta sola --- */
+.sip-lampo {
+    fill: rgba(255, 255, 255, 0.6);
+    transform: translateX(0) skewX(-16deg);
+    animation: sip-lampo 0.7s ease-out 1.45s forwards;
+}
+
+@keyframes sip-lampo {
+    from { transform: translateX(0) skewX(-16deg); }
+    to   { transform: translateX(230px) skewX(-16deg); }
+}
+
+/* --- Le scintille: poche, e ognuna con la sua traiettoria --- */
+.sip-scintille circle {
+    fill: #ffe071;
+    filter: drop-shadow(0 0 3px rgba(255, 214, 74, 0.9));
+    opacity: 0;
+    animation: sip-scintilla 0.85s cubic-bezier(0.15, 0.7, 0.35, 1) forwards;
+    animation-delay: calc(1.15s + var(--t));
+}
+
+@keyframes sip-scintilla {
+    0%   { transform: translate(0, 0) scale(0.4); opacity: 0; }
+    25%  { opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; }
+}
+
+/* --- Il nome si scopre da sinistra, non sale sfumando --- */
+.sip-nome {
+    clip-path: inset(0 100% 0 0);
+    animation: sip-scopri 0.75s cubic-bezier(0.35, 0, 0.15, 1) 1.3s forwards;
+}
+
+@keyframes sip-scopri {
+    to { clip-path: inset(0 0 0 0); }
+}
+
+.sip-titolo,
+.sip-coda {
+    text-anchor: middle;
+    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    fill: #fff;
+}
+
+.sip-titolo {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+}
+
+.sip-coda {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    opacity: 0.6;
+}
+
+/* Chi ha chiesto meno movimento vede il marchio fermo e il sipario si alza
+   quasi subito: mezzo secondo invece di due, senza niente che si muove */
+@media (prefers-reduced-motion: reduce) {
+    .sipario-salta { animation: none; opacity: 1; }
+
+    .sip-guscio,
+    .sip-manico { stroke-dashoffset: 0; animation: none; }
+
+    .sip-base { transform: none; opacity: 1; animation: none; }
+    .sip-livello { transform: translateY(0); animation: none; }
+    .sip-bagliore { transform: scale(1); opacity: 0.8; animation: none; }
+    .sip-nome { clip-path: none; animation: none; }
+    .sip-onda,
+    .sip-lampo,
+    .sip-scintille { display: none; }
+
+    .sipario { transition: opacity 0.2s ease; }
+    .sipario.via { transform: none; }
+}
