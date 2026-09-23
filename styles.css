@@ -15,6 +15,11 @@
     --text-primary: #1a1a2e;
     --text-secondary: #4a5568;
     --text-light: white;
+    /* Il viola del marchio. Era usato dodici volte senza essere mai definito,
+       quindi quelle dichiarazioni non facevano niente: fra le altre cose i
+       punti in classifica perdevano il colore su mobile. Il valore e' lo
+       stesso gia' scritto a mano in .points e nel gradiente di sfondo. */
+    --primary-color: #667eea;
     --border-color: rgba(255, 255, 255, 0.3);
     --shadow: rgba(0, 0, 0, 0.15);
     --shadow-lg: rgba(0, 0, 0, 0.25);
@@ -33,6 +38,8 @@
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --text-light: #ffffff;
+    /* Lo stesso viola schiarito: su fondo scuro il #667eea affonda */
+    --primary-color: #8b9bf5;
     --border-color: rgba(255, 255, 255, 0.15);
     --shadow: rgba(0, 0, 0, 0.5);
     --shadow-lg: rgba(0, 0, 0, 0.8);
@@ -51,6 +58,8 @@
     --text-primary: #0f172a;
     --text-secondary: #475569;
     --text-light: #0f172a;
+    /* Su fondo chiaro il viola va scurito per reggere il contrasto del testo */
+    --primary-color: #5566d8;
     --border-color: rgba(0, 0, 0, 0.12);
     --shadow: rgba(0, 0, 0, 0.08);
     --shadow-lg: rgba(0, 0, 0, 0.15);
