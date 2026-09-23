@@ -6,32 +6,84 @@
 
 Sito web moderno e completo per la gestione e visualizzazione della classifica del Fantacalcio Novamont & Friends. Una piattaforma interattiva che trasforma il tuo campionato di fantacalcio in un'esperienza coinvolgente e professionale.
 
-## ✨ Caratteristiche Principali
+## ✨ Cosa fa
 
-### 🏆 **Classifiche Complete**
-- **Classifica Reale**: Posizioni, punti campionato, gol fatti/subiti, differenza reti, totale punti fantacalcio
-- **Classifica Ideale**: Simulazione con le migliori formazioni possibili, confronto con la classifica reale e statistiche allenatori
-- **Classifica di Merito**: Ogni giornata è una gara a sé e i punti si distribuiscono con la scala della Formula 1 (25-18-15-12-10-8-6-4). Toglie di mezzo il calendario: conta solo il punteggio
-- **Statistiche Allenatori**: Podio con ranking basato su efficienza e punti persi medi
-- **Ordinamento Dinamico**: Clicca su qualsiasi colonna per ordinare i dati
-- **Algoritmo Gol**: Sistema preciso di calcolo gol (66pt = 1 gol, poi ogni 6 punti)
-- **Tie-Breaker Intelligente**: Nelle partite ideali pareggiate, se la differenza punti è ≥4, vince chi ha il punteggio più alto
+### 🏆 Classifiche
 
-### 📅 **Gestione Giornate Avanzata**
-- **Risultati Dettagliati**: Punteggi reali e ideali per ogni match
-- **Confronto Intelligente**: Analisi automatica reale vs ideale per ogni giornata
-- **Commenti Inline**: Analisi in stile Caressa-Bergomi direttamente sotto ogni partita
-- **Commenti in JSON**: Tutti i commenti gestiti in formato JSON per facile manutenzione
-- **Selezione Dinamica**: Naviga facilmente tra le diverse giornate
-- **Bonus Casa**: Sistema automatico di bonus +1 punto per la squadra di casa nei calcoli ideali
+- **Classifica generale** — punti, vittorie, gol fatti e subiti, differenza reti, punteggio
+  totale e media. Ogni colonna è ordinabile
+- **Classifica ideale** — come sarebbe andata con la formazione perfetta di ogni giornata,
+  con lo scarto di posizioni e di punti rispetto a quella vera
+- **Classifica di merito** — ogni giornata è una gara a sé: conta solo il punteggio e i punti
+  si distribuiscono con la scala della Formula 1 (25-18-15-12-10-8-6-4). Toglie di mezzo il
+  calendario, e la colonna Δ Pos dice di quante posizioni il campionato ti tratta meglio o
+  peggio di quanto meriti
+- **Statistiche allenatori** — podio per efficienza e punti medi persi rispetto all'ideale
+- **Elenco partite** — un clic su una squadra apre le sue giornate; un clic sulla partita
+  mostra le formazioni con voti ed eventi. In Merito, al posto dell'elenco c'è la griglia dei
+  punti giornata per giornata, colorata per piazza
 
-### 🎨 **Design e Usabilità**
-- **Glassmorphism Design**: Effetti blur, trasparenze e gradienti moderni
-- **Animazioni Fluide**: Effetti float, pulse e spin per un'esperienza dinamica
-- **100% Responsive**: Layout 2 colonne su desktop, 1 colonna su mobile (max 450px per colonna)
-- **Tema Personalizzabile**: Supporto per dark mode e light mode
-- **Navigazione Pulita**: 6 sezioni (Classifica, Classifica Ideale, Merito, Giornate, Rose, Formazione)
-- **Font Awesome Icons**: Iconografie professionali in tutto il sito
+### 📈 Letture della stagione
+
+In coda alla Classifica, tre viste che una tabella non può dare:
+
+- **Andamento** — la spezzata di posizione e punti giornata per giornata, in SVG inline. Le
+  otto linee restano grigie e una sola si accende, così non serve una legenda di otto colori
+- **Heatmap punteggi** — una casella per ogni punteggio, scala divergente centrata sulla
+  mediana della stagione. Si ordina per punteggio o **per costanza**, che è la classifica di
+  chi tiene lo stesso passo tutte le domeniche
+- **Scontri diretti** — matrice 8×8 con vinte-pari-perse dal punto di vista della riga; una
+  casella apre l'elenco delle sfide con casa, trasferta, gol e punteggi
+
+Andamento e heatmap arrivano dalla seconda giornata: prima lo dicono con una riga, invece di
+non esserci e basta.
+
+### 👥 Rose e giocatori
+
+- **Rendimento per giocatore** — presenze, panchine, medie, gol, assist, cartellini e punti
+  raccolti stando in panchina
+- **Sei classifiche individuali** — marcatori, assist, ammonizioni, espulsioni, malus e
+  **incompresi**, cioè i bonus accumulati mentre il fantallenatore li teneva fuori
+- **I due peggiori di ogni reparto** — la pastiglia del ruolo si borda di rosso. Conta se ha
+  preso il voto in Serie A, non se il fantallenatore lo ha schierato: un giocatore può essere
+  ottimo e restare in panchina per scelta
+- **Albo d'oro** — dieci premi ricavati dai dati: la bomba, il tonfo, la striscia di vittorie,
+  la traversata, il regolarista, le montagne russe, lo sfortunato, e tre che leggono le
+  formazioni. Quelli che non hanno i dati spariscono invece di mostrarsi vuoti
+
+### 🪄 Formazione consigliata
+
+L'undici migliore per la prossima giornata, provando tutti i moduli. Non è "AI": è un modello
+dichiarato, e la pagina spiega riga per riga come arriva al numero — resa, forma, contesto
+della partita, probabilità di giocare, rigori. I dati di Serie A si aggiornano da soli.
+
+### 📅 Giornate
+
+Risultati reali e ideali per ogni partita, confronto automatico fra i due e commenti inline
+in stile Caressa-Bergomi, uno per partita più uno di giornata.
+
+### 🧰 Cose di servizio
+
+- **Più stagioni** — selettore in alto, la scelta finisce nell'URL e il link è condivisibile
+- **La scheda resta dov'era** — ricaricando da Merito si riapre Merito, e il link con l'ancora
+  si può passare già aperto sulla scheda giusta
+- **Export CSV** — le tre classifiche, i risultati per giornata e le statistiche dei giocatori.
+  Escono nello stesso ordine che si ha sotto gli occhi, e il file si apre in Excel italiano
+  con un doppio clic
+- **App installabile** — manifest e icone: dal telefono si aggiunge alla schermata Home e si
+  apre senza barra degli indirizzi, con i dati dell'ultima visita anche offline
+- **Tema chiaro e scuro**, e tutto responsive fino a 390px
+- **Sipario d'apertura** — due secondi di marchio animato, saltabile con un clic o con Esc
+
+### ⚙️ Sotto il cofano
+
+- **Niente si scrive a mano** — classifiche, rose e statistiche sono tutte derivate dai
+  risultati. Nel JSON si inseriscono solo i punteggi
+- **Algoritmo gol** — primo gol a 66 punti, poi uno ogni 6. A parità di gol con almeno 4 punti
+  di scarto, chi ha fatto di più ne prende uno in più
+- **Bonus casa** — +1 alla squadra di casa nel calcolo dei gol ideali, non nel punteggio
+- **49 test** senza dipendenze, su ogni push e pull request
+- **Nessuna libreria** — grafici, heatmap e marchio sono SVG e CSS grid scritti a mano
 
 ## 🚀 Come utilizzare
 
@@ -39,32 +91,20 @@ Sito web moderno e completo per la gestione e visualizzazione della classifica d
 - **Online**: Visita il sito su Netlify (vedi badge stato)
 - **Locale**: Apri `index.html` in un browser web o avvia un server locale
 
-### 🧭 **Navigazione**
-1. **🏆 Classifica**: La classifica attuale con tutti i dettagli, e sotto tre letture della
-   stagione: l'andamento giornata per giornata, la heatmap dei punteggi — chi tiene lo stesso
-   passo e chi alterna — e la matrice degli scontri diretti. Andamento e heatmap arrivano
-   dalla seconda giornata; prima di allora lo dicono con una riga, invece di non esserci e
-   basta
-2. **⭐ Classifica Ideale**: Scopri come sarebbe la classifica con le formazioni perfette e statistiche allenatori
-3. **⏱️ Merito**: La classifica meritocratica. Ogni giornata si guarda solo il punteggio e si
-   assegnano i punti come in Formula 1, così l'avversario capitato in sorte non pesa. La
-   colonna Δ Pos dice di quante posizioni il campionato ti tratta meglio o peggio del merito.
-   Un clic sulla squadra apre la griglia dei punti giornata per giornata, colorata per piazza
-4. **📅 Giornate**: Esplora i risultati di ogni giornata con confronti e commenti inline
-5. **👥 Rose**: L'albo d'oro della stagione, il rendimento di ogni giocatore e sei classifiche — marcatori, assist,
-   ammonizioni, espulsioni, malus e incompresi (bonus e malus raccolti in panchina).
-   La pastiglia del ruolo è bordata di rosso sui due peggiori di ogni reparto: conta se
-   ha preso il voto in Serie A, non se il fantallenatore lo ha schierato
-6. **🪄 Formazione**: Undici consigliato per la prossima giornata
+### 🧭 Le sei sezioni
 
-In Classifica, Classifica Ideale e Merito, un clic sulla squadra apre l'elenco delle sue partite;
-un clic sulla partita mostra le formazioni con voti ed eventi di tutti i giocatori.
+| | Sezione | Cosa ci trovi |
+|---|---|---|
+| 🏆 | **Classifica** | la classifica vera, e sotto andamento, heatmap e scontri diretti |
+| ⭐ | **Classifica Ideale** | come sarebbe andata con le formazioni perfette, più il podio allenatori |
+| ⏱️ | **Merito** | ogni giornata una gara, punti alla Formula 1 |
+| 📅 | **Giornate** | risultati, confronto reale contro ideale e commenti |
+| 👥 | **Rose** | albo d'oro, rendimento per giocatore e sei classifiche individuali |
+| 🪄 | **Formazione** | l'undici consigliato per la prossima giornata |
 
-### 💡 **Funzionalità Interattive**
-- **Clicca** sulle colonne delle tabelle per ordinare i dati
-- **Seleziona** la giornata dal dropdown per vedere risultati specifici
-- **Scorri** per vedere il confronto reale vs ideale
-- **Leggi** i commenti esclusivi in stile telecronaca
+In Classifica, Classifica Ideale e Merito un clic sulla squadra apre il suo dettaglio; un clic
+sulla partita mostra le formazioni con voti ed eventi di tutti i giocatori. Le colonne delle
+tabelle si ordinano cliccando sull'intestazione.
 
 ## 📅 Stagioni
 
@@ -138,8 +178,11 @@ riempirebbero la classifica di portieri.
 ## 🤖 Aggiornamento automatico
 
 `data/probabili.json` non dipende più dalla memoria di nessuno: il workflow
-`.github/workflows/probabili.yml` rilancia `scarica-probabili.mjs` **giovedì, venerdì e
-sabato mattina** e committa il risultato, così Netlify ridispiega il sito da sé. Le pagine
+`.github/workflows/probabili.yml` rilancia `scarica-probabili.mjs` **due volte al giorno,
+tutti i giorni**, e committa il risultato, così Netlify ridispiega il sito da sé. Il giro del
+mattino raccoglie le notizie della notte, quello del pomeriggio arriva dopo allenamenti e
+conferenze, ed entrambi cadono prima del blocco delle formazioni. Un job di controllo ferma
+tutto dopo il 1° giugno 2027: GitHub non sa far scadere un cron da solo. Le pagine
 di fantacalcio.it sono pubbliche e lo script non usa token, quindi il workflow non ha
 bisogno di nessun segreto.
 
@@ -239,7 +282,7 @@ difensori.
 
 Tutto quello che il suggeritore legge da fuori sta in `data/probabili.json`: percentuali,
 rigoristi, infortunati, classifica di Serie A, partite del turno e forma recente. Lo scrive
-`scarica-probabili.mjs` della skill, che lo rigenera anche **da solo tre volte a settimana**
+`scarica-probabili.mjs` della skill, che lo rigenera anche **da solo due volte al giorno**
 (vedi [Aggiornamento automatico](#-aggiornamento-automatico)). La pagina mostra sempre la
 data dell'ultimo aggiornamento e avvisa quando il file ha più di due giorni o manca del
 tutto: senza quella riga, un file vecchio continuerebbe a produrre percentuali dall'aria
@@ -252,25 +295,10 @@ debole e la pagina lo dichiara.
 
 ## 📱 Compatibilità
 
-- ✅ Chrome, Firefox, Safari, Edge
-- ✅ Dispositivi desktop, tablet e mobile
-- ✅ Design responsive per tutte le dimensioni dello schermo
-
-## 🎨 Personalizzazione
-
-### Colori e stili:
-Modifica il file `styles.css` per personalizzare:
-- Colori del tema
-- Font e dimensioni
-- Animazioni
-- Layout responsive
-
-### Funzionalità:
-Modifica il file `script.js` per aggiungere:
-- Nuove statistiche
-- Grafici interattivi
-- Filtri avanzati
-- Export dei dati
+Chrome, Firefox, Safari ed Edge, da desktop, tablet e telefono. Il layout regge fino a 390px
+di larghezza, e dove una tabella non ci sta — heatmap, scontri diretti, andamento — si scorre
+in orizzontale nel suo riquadro, con la prima colonna agganciata. Installata come app, si apre
+anche senza rete con i dati dell'ultima visita.
 
 ## 📂 Struttura del progetto
 
@@ -314,8 +342,8 @@ novamont_and_friends/
 
 ### 🗂️ **Dettaglio File**
 - **`index.html`**: Interfaccia con 6 sezioni (Classifica, Classifica Ideale, Merito, Giornate, Rose, Formazione) e selettore stagione
-- **`styles.css`**: ~4000 righe di CSS responsive con glassmorphism e animazioni
-- **`script.js`**: ~3200 righe di JavaScript: calcolo classifiche, rose e suggeritore di formazione
+- **`styles.css`**: ~5300 righe di CSS responsive con glassmorphism e animazioni
+- **`script.js`**: ~4800 righe di JavaScript: calcolo classifiche, rose e suggeritore di formazione
 - **`data/seasons.json`**: Indice delle stagioni: id, etichetta, file e stato
 - **`data/<stagione>.json`**: Database JSON con teams, players, rosterHistory, rounds e settings
 - **`data/probabili.json`**: Istantanea di Serie A rigenerata dal workflow, non scritta a mano
@@ -375,54 +403,16 @@ calcola `calcolaClassifica()` dai risultati a ogni caricamento.
 { id: 1, name: "Cusiana", owner: "Roby, Gaiuz" }
 ```
 
-## 🎯 Prossimi Sviluppi
-
-### ✅ **Fatto**
-- [x] **Analisi dettagliate rosa squadre** — sezione Rose con rendimento per giocatore e
-      sei classifiche individuali
-- [x] **Previsioni per la prossima giornata** — il suggeritore di formazione. Non è "AI":
-      è un modello dichiarato, e la pagina spiega riga per riga come arriva al numero
-- [x] **Andamento della stagione** — la spezzata di posizione e punti giornata per giornata,
-      in SVG inline. Le otto linee restano grigie e una sola si accende: otto colori nessuno
-      riesce ad associarli, e così sparisce anche la legenda
-- [x] **Albo d'oro** — dieci premi ricavati dai dati, in coda alle Rose: la bomba, il tonfo,
-      la striscia di vittorie, il regolarista, lo sfortunato. Quelli che dipendono dalle
-      formazioni spariscono dove non ci sono, invece di mostrarsi vuoti
-- [x] **Export CSV** — un pulsante per le tre classifiche, i risultati per giornata e le
-      statistiche dei giocatori. Le classifiche escono nello stesso ordine che si ha sotto
-      gli occhi, e il file si apre in Excel italiano con un doppio clic
-- [x] **Scontri diretti** — matrice 8×8 in coda alla Classifica, vinte-pari-perse dal punto
-      di vista della riga; una casella apre l'elenco delle sfide con andata, ritorno e punteggi
-- [x] **Heatmap giornata × squadra** — in coda alla Classifica: una casella per punteggio,
-      scala divergente sulla mediana della stagione, ordinabile per punteggio o per costanza.
-      CSS grid, zero librerie
-- [x] **Test automatici** — 49 casi con `node --test`, nessuna dipendenza: le regole di
-      calcolo e i parser dello scraper, questi ultimi su frammenti reali di pagina salvati in
-      `test/fixture/`. Girano su ogni push e pull request, e non toccano la rete
-- [x] **App installabile (PWA)** — manifest e icone ci sono, il service worker le tiene in
-      cache: dal telefono si aggiunge alla schermata Home e si apre senza barra degli
-      indirizzi, con i dati dell'ultima visita anche offline
-- [x] **Classifica di merito** — ogni giornata vale come una gara, punti con la scala della
-      Formula 1. È la risposta alla domanda che si fa ogni lega: chi meritava davvero
-- [x] **Dati di Serie A aggiornati da soli** — il workflow rigenera `probabili.json` due
-      volte al giorno, fino al 1° giugno 2027. Il *real-time dal browser* resta impossibile: fantacalcio.it non
-      manda header CORS e il sito è statico, quindi non c'è un proxy che possa chiamarlo
-
-### 📈 **Da fare**
-
-Niente, per ora: le sette caselle che c'erano sono tutte chiuse. Ognuna aveva la sua
-scheda in `spec/`, tolte una volta fatte: quello che spiegavano — perché una scelta è
-stata fatta così, cosa non deve rompersi, dove sono i casi limite — è finito nei commenti
-del codice e nei messaggi di commit, che è dove lo si cerca quando serve. Le schede
-restano comunque nella storia di git.
-
-### 🚫 **Fuori portata, e perché**
+## 🚫 Cosa non fa, e perché
 
 Login personalizzato, dashboard privato, chat fra squadre, notifiche push e prediction game
-richiedono **autenticazione e un backend con stato**. Il sito è statico su Netlify e il repo
-è pubblico: servirebbero un servizio esterno e delle credenziali da custodire, che qui non
-avrebbero un posto sicuro dove stare. Meglio dirlo che lasciare caselle destinate a non
-essere mai spuntate.
+richiedono **autenticazione e un backend con stato**. Il sito è statico su Netlify e il repo è
+pubblico: servirebbero un servizio esterno e delle credenziali da custodire, che qui non
+avrebbero un posto sicuro dove stare.
+
+Il **real-time dal browser** resta impossibile per un motivo diverso: fantacalcio.it non manda
+header CORS, e senza un backend non c'è un proxy che possa chiamarlo. I dati di Serie A
+arrivano per questo da un workflow che gira su GitHub, non dalla pagina.
 
 ## 🤝 Contribuire
 
@@ -436,10 +426,6 @@ essere mai spuntate.
 
 Questo progetto è sotto licenza MIT. Vedi il file `LICENSE` per i dettagli.
 
-## 👥 Team
-
-Sviluppato con ❤️ per il Fantacalcio Novamont & Friends
-
 ---
 
-**Ultimo aggiornamento**: Ottobre 2025 🚀
+Sviluppato con ❤️ per il Fantacalcio Novamont & Friends.
