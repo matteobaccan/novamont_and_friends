@@ -873,6 +873,19 @@ function displayStandings() {
     });
 }
 
+// Toglie il pannello tenendo ferma sotto gli occhi la riga da cui è nato.
+// Il pannello è alto quanto un paio di schermate: se sparisce e basta la pagina
+// si accorcia di colpo, il browser tronca lo scroll a fondo pagina e si finisce
+// in un punto a caso, con l'aria di un layout andato in pezzi.
+function chiudiPannelloPartite(pannello, rigaDiRiferimento) {
+    const riga = rigaDiRiferimento || pannello.previousElementSibling;
+    const primaY = riga ? riga.getBoundingClientRect().top : null;
+    pannello.remove();
+    if (primaY === null) return;
+    const dopoY = riga.getBoundingClientRect().top;
+    if (dopoY !== primaY) window.scrollBy(0, dopoY - primaY);
+}
+
 // Mostra dettaglio partite per una squadra (toggle)
 // showTeamMatches: create a table row inserted after the clicked row with match-only data
 function showTeamMatches(teamName, clickedRow, modo = 'reale') {
@@ -883,7 +896,7 @@ function showTeamMatches(teamName, clickedRow, modo = 'reale') {
     const existingRow = (tabella || document).querySelector('.team-details-row');
     if (existingRow) {
         const existingTeam = existingRow.getAttribute('data-team');
-        existingRow.remove();
+        chiudiPannelloPartite(existingRow);
         if (existingTeam === teamName) return; // toggle off
     }
 
@@ -979,7 +992,7 @@ function showTeamMatches(teamName, clickedRow, modo = 'reale') {
 
     // Wire up close button
     const closeBtn = detailsRow.querySelector('.team-details-close');
-    if (closeBtn) closeBtn.addEventListener('click', () => detailsRow.remove());
+    if (closeBtn) closeBtn.addEventListener('click', () => chiudiPannelloPartite(detailsRow, clickedRow));
 
     // Ogni partita apre il dettaglio con tutti i giocatori
     detailsRow.querySelectorAll('.team-match-item.espandibile').forEach(riga => {
@@ -3148,29 +3161,13 @@ window.addEventListener('load', () => {
     setTimeout(animateOnLoad, 500);
 });
 
-// Gestione responsive per mobile
-function handleResponsive() {
-    const isMobile = window.innerWidth <= 768;
-    const tableHeaders = document.querySelectorAll('.table-header div');
-    const teamRows = document.querySelectorAll('.team-row div');
-
-    if (isMobile) {
-        // Nascondi la colonna "Media" su mobile
-        tableHeaders[4].style.display = 'none';
-        teamRows.forEach((row, index) => {
-            if ((index + 1) % 5 === 0) {
-                row.style.display = 'none';
-            }
-        });
-    } else {
-        // Mostra tutte le colonne su desktop
-        tableHeaders.forEach(header => header.style.display = 'block');
-        teamRows.forEach(row => row.style.display = 'block');
-    }
-}
-
-// Event listener per il ridimensionamento della finestra
-window.addEventListener('resize', handleResponsive);
+// Il responsive della classifica è tutto nei media query di styles.css: la
+// colonna Media e le altre di contorno spariscono con .avg-score { display: none }.
+// Qui c'era una handleResponsive() agganciata a resize che cercava .table-header div
+// e .team-row div, selettori che non pescano nulla perché le righe sono th e td:
+// su desktop non faceva niente e su mobile moriva subito su tableHeaders[4].style.
+// Sul telefono il resize scatta a ogni comparsa della barra URL, cioè in continuazione
+// mentre si scorre l'elenco partite aperto, riempiendo la console di TypeError.
 
 // Funzione di test per l'algoritmo dei gol
 function testGoalCalculation() {
