@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-09-23T20:02:34.670Z",
+  "aggiornato": "2026-09-24T12:37:50.557Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -1503,7 +1503,7 @@
       "nome": "Correia T.",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 70,
+      "probabilita": 75,
       "titolare": true
     },
     "4856": {
@@ -1776,7 +1776,7 @@
       "nome": "Zalewski",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 40,
+      "probabilita": 35,
       "titolare": false
     },
     "5424": {
