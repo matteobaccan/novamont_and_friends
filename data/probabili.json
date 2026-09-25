@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-09-25T12:39:43.382Z",
+  "aggiornato": "2026-09-25T20:20:08.192Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -1107,6 +1107,13 @@
       "probabilita": 90,
       "titolare": true
     },
+    "2404": {
+      "nome": "Alaba",
+      "squadra": "Udinese",
+      "ruolo": "D",
+      "probabilita": 35,
+      "titolare": false
+    },
     "2423": {
       "nome": "Pulisic",
       "squadra": "Milan",
@@ -2056,7 +2063,7 @@
       "nome": "Bertola",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 30,
+      "probabilita": 25,
       "titolare": false
     },
     "5823": {
@@ -2994,7 +3001,7 @@
       "nome": "Palma",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 40,
+      "probabilita": 30,
       "titolare": false
     },
     "6956": {
