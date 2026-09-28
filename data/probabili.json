@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-09-27T19:59:20.065Z",
+  "aggiornato": "2026-09-28T15:08:35.538Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -520,11 +520,6 @@
       "nota": "Lo svedese KO in Nazionale il 26 settembre vittima di un problema muscolare alla coscia. Da valutare, ma non ci sarà alla ripresa del campionato."
     },
     {
-      "nome": "Idrissi R.",
-      "squadra": "Cagliari",
-      "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla fine di ottobre."
-    },
-    {
       "nome": "Trepy",
       "squadra": "Cagliari",
       "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla metà di ottobre."
@@ -533,6 +528,11 @@
       "nome": "Felici",
       "squadra": "Cagliari",
       "nota": "il centrocampista KO il 7 settembre contro il Lecce in casa vittima della rottura del legamento crociato anteriore. Verrà operato e costretto a un lungo stop (ipotizziamo un rientro da marzo)."
+    },
+    {
+      "nome": "Idrissi R.",
+      "squadra": "Cagliari",
+      "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla fine di ottobre."
     },
     {
       "nome": "Parisi",
@@ -560,9 +560,9 @@
       "nota": "il calciatore operato al tendine rotuleo e ora in fase di recupero. Di certo assente nel prossimo turno di campionato, ipotesi di rientro da fine ottobre."
     },
     {
-      "nome": "Boga",
-      "squadra": "Juventus",
-      "nota": "l'ala offensiva dei bianconeri fermo dopo il match contro il Milan (6 settembre) per una lesione di medio grado del bicipite femorale, ipotizziamo un possibile rientro dalla metà di ottobre."
+      "nome": "Meichtry",
+      "squadra": "Genoa",
+      "nota": "Il calciatore ai box per noie fisiche che restano da valutare, di certo out nel prossimo turno di campionato."
     },
     {
       "nome": "Locatelli",
@@ -575,14 +575,19 @@
       "nota": "Il portiere out dal 20 settembre per una lesione al crociato anteriore del ginocchio destro. Operazione chirurgica e lungo stop, rientro da aprile."
     },
     {
+      "nome": "Ekhator",
+      "squadra": "Juventus",
+      "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, ipotizziamo un possibile rientro dalla fine di ottobre."
+    },
+    {
       "nome": "Thuram K.",
       "squadra": "Juventus",
       "nota": "il centrocampista condizionato da una sindrome femoro-rotulea e, dopo un consulto medico a fine agosto, è stato sottoposto il 3 settembre a operazione chirurgica. Lungo stop, ipotizziamo un rientro da gennaio."
     },
     {
-      "nome": "Ekhator",
+      "nome": "Boga",
       "squadra": "Juventus",
-      "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, ipotizziamo un possibile rientro dalla fine di ottobre."
+      "nota": "l'ala offensiva dei bianconeri fermo dopo il match contro il Milan (6 settembre) per una lesione di medio grado del bicipite femorale, ipotizziamo un possibile rientro dalla metà di ottobre."
     },
     {
       "nome": "Yildiz",
@@ -625,11 +630,6 @@
       "nota": "Il difensore condizionato da una fastidiosa fascite plantare, di certo assente nel prossimo turno di campionato. Tempi di recupero da valutare."
     },
     {
-      "nome": "Marianucci",
-      "squadra": "Napoli",
-      "nota": "Il difensore KO in amichevole l'8 agosto vittima di una lesione di alto grado del collaterale mediale del ginocchio sinistro. Stop di circa due mesi, rientro dalla seconda metà di ottobre."
-    },
-    {
       "nome": "Giovane",
       "squadra": "Napoli",
       "nota": "L'attaccante operato il 3 settembre a causa di un'ernia inguinale e recuperabile dall'inizio di ottobre, ma rimane da valutare quotidianamente in vista della ripresa del campionato e capire se ci sono possibilità di convocazione già contro il Frosinone."
@@ -648,6 +648,11 @@
       "nome": "Buongiorno",
       "squadra": "Napoli",
       "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
+    },
+    {
+      "nome": "Marianucci",
+      "squadra": "Napoli",
+      "nota": "Il difensore KO in amichevole l'8 agosto vittima di una lesione di alto grado del collaterale mediale del ginocchio sinistro. Stop di circa due mesi, rientro dalla seconda metà di ottobre."
     },
     {
       "nome": "Nicolussi Caviglia",
@@ -695,9 +700,24 @@
       "nota": "L'attaccante frenato a metà settembre da una lesione distrattiva di basso grado all'adduttore, forfait contro Roma e Bologna. Punta a recuperare nella sosta, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro l'Udinese."
     },
     {
+      "nome": "Gueye",
+      "squadra": "Udinese",
+      "nota": "L'attaccante vittima di un problema alla caviglia a fine settembre, condizioni da valutare. Assente nel prossimo turno di campionato."
+    },
+    {
       "nome": "Piotrowski",
       "squadra": "Udinese",
       "nota": "Il centrocampista ha ravvisato il 7 settembre contro la Lazio una lieve aritmia cardiaca benigna e si sottoporrà nei prossimi giorni ad un intervento di ablazione cardiaca. Osservato un periodo di riposo, potrà tornare alla regolare attività agonistica (ipotizziamo da fine ottobre)."
+    },
+    {
+      "nome": "Dagasso",
+      "squadra": "Venezia",
+      "nota": "Il centrocampista non convocato dalla gara dell'11 settembre contro la Fiorentina per un problema fisico. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno a Bergamo."
+    },
+    {
+      "nome": "Adorante",
+      "squadra": "Venezia",
+      "nota": "l'attaccante a fine luglio ha deciso di operarsi per un problema alla schiena, che lo costringerà a stare ai box per buona parte del girone d'andata del campionato. Tentativo di rientro da metà ottobre."
     },
     {
       "nome": "Bella-Kotchap",
@@ -723,16 +743,6 @@
       "nome": "Busio",
       "squadra": "Venezia",
       "nota": "il regista dei veneti KO l'11 settembre contro la Fiorentina vittima di una distrazione intratendinea del bicipite femorale destro. Rientro dalla seconda metà di ottobre."
-    },
-    {
-      "nome": "Dagasso",
-      "squadra": "Venezia",
-      "nota": "Il centrocampista non convocato dalla gara dell'11 settembre contro la Fiorentina per un problema fisico. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno a Bergamo."
-    },
-    {
-      "nome": "Adorante",
-      "squadra": "Venezia",
-      "nota": "l'attaccante a fine luglio ha deciso di operarsi per un problema alla schiena, che lo costringerà a stare ai box per buona parte del girone d'andata del campionato. Tentativo di rientro da metà ottobre."
     }
   ],
   "giocatori": {
@@ -812,6 +822,13 @@
       "ruolo": "D",
       "probabilita": 90,
       "titolare": true
+    },
+    "283": {
+      "nome": "Neto",
+      "squadra": "Juventus",
+      "ruolo": "P",
+      "probabilita": 5,
+      "titolare": false
     },
     "294": {
       "nome": "Rugani",
@@ -978,7 +995,7 @@
       "nome": "Pinsoglio",
       "squadra": "Juventus",
       "ruolo": "P",
-      "probabilita": 5,
+      "probabilita": 1,
       "titolare": false
     },
     "1933": {
@@ -1125,7 +1142,7 @@
       "nome": "De Bruyne",
       "squadra": "Napoli",
       "ruolo": "C",
-      "probabilita": 85,
+      "probabilita": 90,
       "titolare": true
     },
     "2521": {
@@ -1699,7 +1716,7 @@
       "nome": "Gilmour",
       "squadra": "Napoli",
       "ruolo": "C",
-      "probabilita": 70,
+      "probabilita": 80,
       "titolare": true
     },
     "5172": {
@@ -1790,7 +1807,7 @@
       "nome": "Raimondo",
       "squadra": "Frosinone",
       "ruolo": "A",
-      "probabilita": 90,
+      "probabilita": 70,
       "titolare": true
     },
     "5453": {
@@ -3218,7 +3235,7 @@
       "nome": "Bayo V.",
       "squadra": "Udinese",
       "ruolo": "A",
-      "probabilita": 40,
+      "probabilita": 60,
       "titolare": false
     },
     "7165": {
@@ -3375,13 +3392,6 @@
       "probabilita": 90,
       "titolare": true
     },
-    "7272": {
-      "nome": "Gueye",
-      "squadra": "Udinese",
-      "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
-    },
     "7274": {
       "nome": "Zè Pedro",
       "squadra": "Cagliari",
@@ -3527,13 +3537,6 @@
       "squadra": "Venezia",
       "ruolo": "A",
       "probabilita": 15,
-      "titolare": false
-    },
-    "7409": {
-      "nome": "Meichtry",
-      "squadra": "Genoa",
-      "ruolo": "C",
-      "probabilita": 55,
       "titolare": false
     },
     "7410": {
@@ -3778,7 +3781,7 @@
       "nome": "Mitaj",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "7538": {
