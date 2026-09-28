@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-09-28T15:08:35.538Z",
+  "aggiornato": "2026-09-28T22:27:21.174Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -520,14 +520,14 @@
       "nota": "Lo svedese KO in Nazionale il 26 settembre vittima di un problema muscolare alla coscia. Da valutare, ma non ci sarà alla ripresa del campionato."
     },
     {
-      "nome": "Trepy",
-      "squadra": "Cagliari",
-      "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla metà di ottobre."
-    },
-    {
       "nome": "Felici",
       "squadra": "Cagliari",
       "nota": "il centrocampista KO il 7 settembre contro il Lecce in casa vittima della rottura del legamento crociato anteriore. Verrà operato e costretto a un lungo stop (ipotizziamo un rientro da marzo)."
+    },
+    {
+      "nome": "Deiola",
+      "squadra": "Cagliari",
+      "nota": "Il centrocampista operato a fine settembre vittima di una lesione del menisco laterale del ginocchio sinistro. Ipotesi di rientro in campo dalla metà di novembre."
     },
     {
       "nome": "Idrissi R.",
@@ -535,14 +535,14 @@
       "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla fine di ottobre."
     },
     {
+      "nome": "Trepy",
+      "squadra": "Cagliari",
+      "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla metà di ottobre."
+    },
+    {
       "nome": "Parisi",
       "squadra": "Fiorentina",
       "nota": "il cursore di fascia della Viola sta svolgendo l'iter di recupero dall'infortunio al legamento crociato al ginocchio, punta a tornare convocabile da novembre."
-    },
-    {
-      "nome": "Grillitsch",
-      "squadra": "Frosinone",
-      "nota": "il centrocampista non convocato dalla gara di Genova (12 settembre) a causa di una sindrome retto-adduttoria, ha poi deciso di operarsi. Stop di circa sei settimane, può tornare convocabile da inizio novembre."
     },
     {
       "nome": "Terzic",
@@ -550,9 +550,9 @@
       "nota": "Il terzino dei ciociari ai box per una lesione di basso grado del bicipite femorale della coscia sinistra, da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Napoli."
     },
     {
-      "nome": "Havel",
-      "squadra": "Genoa",
-      "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dalla metà di ottobre."
+      "nome": "Grillitsch",
+      "squadra": "Frosinone",
+      "nota": "il centrocampista non convocato dalla gara di Genova (12 settembre) a causa di una sindrome retto-adduttoria, ha poi deciso di operarsi. Stop di circa sei settimane, può tornare convocabile da inizio novembre."
     },
     {
       "nome": "Venturino",
@@ -565,9 +565,9 @@
       "nota": "Il calciatore ai box per noie fisiche che restano da valutare, di certo out nel prossimo turno di campionato."
     },
     {
-      "nome": "Locatelli",
-      "squadra": "Juventus",
-      "nota": "il metronomo del centrocampo bianconero ha rimediato la rottura del menisco esterno del ginocchio. Verrà operato a Lione a stretto giro. Lungo stop e possibilità di rivederlo in campo da gennaio."
+      "nome": "Havel",
+      "squadra": "Genoa",
+      "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dalla metà di ottobre."
     },
     {
       "nome": "Grabara",
@@ -577,7 +577,12 @@
     {
       "nome": "Ekhator",
       "squadra": "Juventus",
-      "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, ipotizziamo un possibile rientro dalla fine di ottobre."
+      "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, rientro dalla metà di novembre."
+    },
+    {
+      "nome": "Locatelli",
+      "squadra": "Juventus",
+      "nota": "il metronomo del centrocampo bianconero ha rimediato la rottura del menisco esterno del ginocchio. Verrà operato a Lione a stretto giro. Lungo stop e possibilità di rivederlo in campo da gennaio."
     },
     {
       "nome": "Thuram K.",
@@ -587,17 +592,12 @@
     {
       "nome": "Boga",
       "squadra": "Juventus",
-      "nota": "l'ala offensiva dei bianconeri fermo dopo il match contro il Milan (6 settembre) per una lesione di medio grado del bicipite femorale, ipotizziamo un possibile rientro dalla metà di ottobre."
+      "nota": "l'ala offensiva dei bianconeri fermo dopo il match contro il Milan (6 settembre) per una lesione di medio grado del bicipite femorale, ipotizziamo un possibile rientro dalla metà di novembre."
     },
     {
       "nome": "Yildiz",
       "squadra": "Juventus",
       "nota": "l'attaccante turco, dopo la gara di Frosinone (23 agosto), ha lamentato un problema al piede. Operato il 31 agosto di osteosintesi della frattura della base del V metatarso del piede sinistro, stop di circa tre mesi. Ipotesi di rientro in campo da fine novembre."
-    },
-    {
-      "nome": "Marusic",
-      "squadra": "Lazio",
-      "nota": "il terzino dei biancocelesti KO il 24 agosto a Bologna vittima di una lesione muscolare alla coscia. Proverà a recuperare a pieno durante la sosta, da valutare nei prossimi allenamenti le possibilità di convocazione già contro il Monza nel prossimo turno."
     },
     {
       "nome": "Cataldi",
@@ -608,6 +608,11 @@
       "nome": "Rovella",
       "squadra": "Lazio",
       "nota": "il regista dei biancocelesti KO il 30 agosto contro il Genoa vittima di una lesione muscolare al polpaccio che lo terrà ai box fino alla metà di ottobre."
+    },
+    {
+      "nome": "Gudmundsson A.",
+      "squadra": "Lazio",
+      "nota": "L'islandese in Nazionale il 26 settembre vittima di un problema alla spalla sinistra dopo una caduta fortuita in partita. Condizioni da valutare, a forte rischio la sua presenza alla ripresa del campionato contro il Monza."
     },
     {
       "nome": "Berisha M.",
@@ -710,6 +715,11 @@
       "nota": "Il centrocampista ha ravvisato il 7 settembre contro la Lazio una lieve aritmia cardiaca benigna e si sottoporrà nei prossimi giorni ad un intervento di ablazione cardiaca. Osservato un periodo di riposo, potrà tornare alla regolare attività agonistica (ipotizziamo da fine ottobre)."
     },
     {
+      "nome": "Busio",
+      "squadra": "Venezia",
+      "nota": "il regista dei veneti KO l'11 settembre contro la Fiorentina vittima di una distrazione intratendinea del bicipite femorale destro. Rientro dalla seconda metà di ottobre."
+    },
+    {
       "nome": "Dagasso",
       "squadra": "Venezia",
       "nota": "Il centrocampista non convocato dalla gara dell'11 settembre contro la Fiorentina per un problema fisico. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno a Bergamo."
@@ -738,11 +748,6 @@
       "nome": "Basic",
       "squadra": "Venezia",
       "nota": "Il centrocampista out contro Lazio, Frosinone e Fiorentina per noie fisiche, rimane da valutare quotidianamente in vista della 6a giornata di campionato contro l'Atalanta."
-    },
-    {
-      "nome": "Busio",
-      "squadra": "Venezia",
-      "nota": "il regista dei veneti KO l'11 settembre contro la Fiorentina vittima di una distrazione intratendinea del bicipite femorale destro. Rientro dalla seconda metà di ottobre."
     }
   ],
   "giocatori": {
@@ -977,13 +982,6 @@
       "probabilita": 90,
       "titolare": true
     },
-    "1871": {
-      "nome": "Deiola",
-      "squadra": "Cagliari",
-      "ruolo": "C",
-      "probabilita": 70,
-      "titolare": true
-    },
     "1926": {
       "nome": "Di Gennaro",
       "squadra": "Inter",
@@ -1087,6 +1085,13 @@
       "squadra": "Napoli",
       "ruolo": "P",
       "probabilita": 5,
+      "titolare": false
+    },
+    "2188": {
+      "nome": "Marusic",
+      "squadra": "Lazio",
+      "ruolo": "D",
+      "probabilita": 20,
       "titolare": false
     },
     "2194": {
@@ -1828,7 +1833,7 @@
       "nome": "Ciervo",
       "squadra": "Cagliari",
       "ruolo": "C",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "5481": {
@@ -2048,13 +2053,6 @@
       "probabilita": 90,
       "titolare": true
     },
-    "5800": {
-      "nome": "Gudmundsson A.",
-      "squadra": "Lazio",
-      "ruolo": "C",
-      "probabilita": 50,
-      "titolare": false
-    },
     "5812": {
       "nome": "Terracciano F.",
       "squadra": "Milan",
@@ -2241,8 +2239,8 @@
       "nome": "Fazzini",
       "squadra": "Cagliari",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 75,
+      "titolare": true
     },
     "6020": {
       "nome": "Ellertsson",
