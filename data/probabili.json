@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-09-29T13:52:50.055Z",
+  "aggiornato": "2026-09-29T21:18:44.031Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -520,9 +520,14 @@
       "nota": "Il calciatore frenato dopo il match col Toro da una lesione ai flessori della coscia destra, recuperabile dalla seconda metà di ottobre."
     },
     {
+      "nome": "Idrissi R.",
+      "squadra": "Cagliari",
+      "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla fine di ottobre."
+    },
+    {
       "nome": "Deiola",
       "squadra": "Cagliari",
-      "nota": "Il centrocampista operato a fine settembre vittima di una lesione del menisco laterale del ginocchio sinistro. Ipotesi di rientro in campo dalla metà di novembre."
+      "nota": "Il centrocampista operato a fine settembre vittima di una lesione del menisco laterale del ginocchio sinistro. Ipotesi di rientro in campo dalla fine di ottobre."
     },
     {
       "nome": "Felici",
@@ -535,19 +540,9 @@
       "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla metà di ottobre."
     },
     {
-      "nome": "Idrissi R.",
-      "squadra": "Cagliari",
-      "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla fine di ottobre."
-    },
-    {
       "nome": "Parisi",
       "squadra": "Fiorentina",
-      "nota": "il cursore di fascia della Viola sta svolgendo l'iter di recupero dall'infortunio al legamento crociato al ginocchio, punta a tornare convocabile da novembre."
-    },
-    {
-      "nome": "Terzic",
-      "squadra": "Frosinone",
-      "nota": "Il terzino dei ciociari ai box per una lesione di basso grado del bicipite femorale della coscia sinistra, da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Napoli."
+      "nota": "il cursore di fascia della Viola sta svolgendo l'iter di recupero dall'infortunio al legamento crociato al ginocchio, punta a tornare convocabile da dicembre."
     },
     {
       "nome": "Grillitsch",
@@ -555,14 +550,9 @@
       "nota": "il centrocampista non convocato dalla gara di Genova (12 settembre) a causa di una sindrome retto-adduttoria, ha poi deciso di operarsi. Stop di circa sei settimane, può tornare convocabile da inizio novembre."
     },
     {
-      "nome": "Havel",
-      "squadra": "Genoa",
-      "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dalla metà di ottobre."
-    },
-    {
-      "nome": "Venturino",
-      "squadra": "Genoa",
-      "nota": "il calciatore operato al tendine rotuleo e ora in fase di recupero. Di certo assente nel prossimo turno di campionato, ipotesi di rientro da fine ottobre."
+      "nome": "Terzic",
+      "squadra": "Frosinone",
+      "nota": "Il terzino dei ciociari ai box per una lesione di basso grado del bicipite femorale della coscia sinistra, da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Napoli."
     },
     {
       "nome": "Meichtry",
@@ -570,24 +560,14 @@
       "nota": "Il calciatore ai box per noie fisiche che restano da valutare, di certo out nel prossimo turno di campionato."
     },
     {
-      "nome": "Grabara",
-      "squadra": "Juventus",
-      "nota": "Il portiere out dal 20 settembre per una lesione al crociato anteriore del ginocchio destro. Operazione chirurgica e lungo stop, rientro da aprile."
+      "nome": "Venturino",
+      "squadra": "Genoa",
+      "nota": "il calciatore operato al tendine rotuleo e ora in fase di recupero. Di certo assente nel prossimo turno di campionato, ipotesi di rientro da fine ottobre."
     },
     {
-      "nome": "Yildiz",
-      "squadra": "Juventus",
-      "nota": "l'attaccante turco, dopo la gara di Frosinone (23 agosto), ha lamentato un problema al piede. Operato il 31 agosto di osteosintesi della frattura della base del V metatarso del piede sinistro, stop di circa tre mesi. Ipotesi di rientro in campo da fine novembre."
-    },
-    {
-      "nome": "Boga",
-      "squadra": "Juventus",
-      "nota": "l'ala offensiva dei bianconeri fermo dopo il match contro il Milan (6 settembre) per una lesione di medio grado del bicipite femorale, ipotizziamo un possibile rientro dalla metà di novembre."
-    },
-    {
-      "nome": "Locatelli",
-      "squadra": "Juventus",
-      "nota": "il metronomo del centrocampo bianconero ha rimediato la rottura del menisco esterno del ginocchio. Verrà operato a Lione a stretto giro. Lungo stop e possibilità di rivederlo in campo da gennaio."
+      "nome": "Havel",
+      "squadra": "Genoa",
+      "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dalla metà di ottobre."
     },
     {
       "nome": "Thuram K.",
@@ -595,9 +575,29 @@
       "nota": "il centrocampista condizionato da una sindrome femoro-rotulea e, dopo un consulto medico a fine agosto, è stato sottoposto il 3 settembre a operazione chirurgica. Lungo stop, ipotizziamo un rientro da gennaio."
     },
     {
+      "nome": "Grabara",
+      "squadra": "Juventus",
+      "nota": "Il portiere out dal 20 settembre per una lesione al crociato anteriore del ginocchio destro. Operazione chirurgica e lungo stop, rientro da aprile."
+    },
+    {
       "nome": "Ekhator",
       "squadra": "Juventus",
       "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, rientro dalla metà di novembre."
+    },
+    {
+      "nome": "Locatelli",
+      "squadra": "Juventus",
+      "nota": "il metronomo del centrocampo bianconero ha rimediato la rottura del menisco esterno del ginocchio. Verrà operato a Lione a stretto giro. Lungo stop e possibilità di rivederlo in campo da gennaio."
+    },
+    {
+      "nome": "Boga",
+      "squadra": "Juventus",
+      "nota": "l'ala offensiva dei bianconeri fermo dopo il match contro il Milan (6 settembre) per una lesione di medio grado del bicipite femorale, ipotizziamo un possibile rientro dalla metà di novembre."
+    },
+    {
+      "nome": "Yildiz",
+      "squadra": "Juventus",
+      "nota": "l'attaccante turco, dopo la gara di Frosinone (23 agosto), ha lamentato un problema al piede. Operato il 31 agosto di osteosintesi della frattura della base del V metatarso del piede sinistro, stop di circa tre mesi. Ipotesi di rientro in campo da fine novembre."
     },
     {
       "nome": "Rovella",
@@ -680,19 +680,14 @@
       "nota": "il centrocampista canadese vittima a giugno nella gara dei Mondiali di una rottura di tibia e perone. Operato, punta a tornare in campo da dicembre."
     },
     {
-      "nome": "Pieragnolo",
-      "squadra": "Sassuolo",
-      "nota": "il difensore sta proseguendo la fase di recupero dalla lesione legamento crociato anteriore gamba destra e ipotizziamo possa tornare convocabile da fine ottobre."
-    },
-    {
-      "nome": "Walukiewicz",
-      "squadra": "Sassuolo",
-      "nota": "Il difensore alle prese con un forte trauma contusivo alla gamba destra, da valutare il rientro dalla metà di ottobre."
-    },
-    {
       "nome": "Candè",
       "squadra": "Sassuolo",
       "nota": "il difensore a gennaio vittima della rottura legamento crociato anteriore ginocchio destro, punta a tornare convocabile dalla metà di ottobre."
+    },
+    {
+      "nome": "Pieragnolo",
+      "squadra": "Sassuolo",
+      "nota": "il difensore sta proseguendo la fase di recupero dalla lesione legamento crociato anteriore gamba destra e ipotizziamo possa tornare convocabile da fine ottobre."
     },
     {
       "nome": "Boloca",
@@ -700,14 +695,14 @@
       "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da metà ottobre."
     },
     {
+      "nome": "Walukiewicz",
+      "squadra": "Sassuolo",
+      "nota": "Il difensore alle prese con un forte trauma contusivo alla gamba destra, da valutare il rientro dalla metà di ottobre."
+    },
+    {
       "nome": "Adams C.",
       "squadra": "Torino",
       "nota": "L'attaccante frenato a metà settembre da una lesione distrattiva di basso grado all'adduttore, forfait contro Roma e Bologna. Punta a recuperare nella sosta, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro l'Udinese."
-    },
-    {
-      "nome": "Zaniolo",
-      "squadra": "Udinese",
-      "nota": "Il calciatore alle prese con una lesione muscolare al bicipite femorale destro, rientro previsto dalla seconda metà di ottobre."
     },
     {
       "nome": "Gueye",
@@ -718,6 +713,11 @@
       "nome": "Piotrowski",
       "squadra": "Udinese",
       "nota": "Il centrocampista ha ravvisato il 7 settembre contro la Lazio una lieve aritmia cardiaca benigna e si sottoporrà nei prossimi giorni ad un intervento di ablazione cardiaca. Osservato un periodo di riposo, potrà tornare alla regolare attività agonistica (ipotizziamo da fine ottobre)."
+    },
+    {
+      "nome": "Zaniolo",
+      "squadra": "Udinese",
+      "nota": "Il calciatore alle prese con una lesione muscolare al bicipite femorale destro, rientro previsto dalla seconda metà di ottobre."
     },
     {
       "nome": "Bella-Kotchap",
@@ -1376,7 +1376,7 @@
       "nome": "Raspadori",
       "squadra": "Atalanta",
       "ruolo": "A",
-      "probabilita": 55,
+      "probabilita": 50,
       "titolare": false
     },
     "4378": {
@@ -1446,7 +1446,7 @@
       "nome": "Elmas",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "4485": {
@@ -1810,8 +1810,8 @@
       "nome": "Raimondo",
       "squadra": "Frosinone",
       "ruolo": "A",
-      "probabilita": 70,
-      "titolare": true
+      "probabilita": 50,
+      "titolare": false
     },
     "5453": {
       "nome": "Ricci S.",
@@ -3973,7 +3973,7 @@
       "nome": "Birligea",
       "squadra": "Frosinone",
       "ruolo": "A",
-      "probabilita": 40,
+      "probabilita": 60,
       "titolare": false
     },
     "7611": {
@@ -3987,8 +3987,8 @@
       "nome": "Bobcek",
       "squadra": "Frosinone",
       "ruolo": "A",
-      "probabilita": 55,
-      "titolare": false
+      "probabilita": 70,
+      "titolare": true
     },
     "7615": {
       "nome": "Drobnic",
