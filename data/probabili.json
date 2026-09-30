@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-09-30T13:27:38.865Z",
+  "aggiornato": "2026-09-30T21:19:43.820Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -495,19 +495,24 @@
   },
   "infortunati": [
     {
-      "nome": "Sulemana K.",
-      "squadra": "Atalanta",
-      "nota": "L'attaccante KO in amichevole l'8 agosto vittima di una lesione del collaterale mediale di secondo grado del ginocchio sinistro. Recuperabile da inizio ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Venezia."
-    },
-    {
       "nome": "Kossounou",
       "squadra": "Atalanta",
       "nota": "Il difensore frenato da una lesione muscolare di medio-alto grado del bicipite femorale della coscia sinistra alla vigilia della sfida di campionato contro la Juventus (del 20 settembre). Lungo stop, ipotizziamo un rientro dalla fine di novembre."
     },
     {
+      "nome": "Sulemana K.",
+      "squadra": "Atalanta",
+      "nota": "L'attaccante KO in amichevole l'8 agosto vittima di una lesione del collaterale mediale di secondo grado del ginocchio sinistro. Recuperabile da inizio ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Venezia."
+    },
+    {
       "nome": "Hien",
       "squadra": "Atalanta",
       "nota": "il difensore operato a fine giugno per una lesione del tendine prossimale del muscolo semimembranoso della coscia sinistra, in recupero e pronto a tornare in campo dalla fine di ottobre."
+    },
+    {
+      "nome": "Raspadori",
+      "squadra": "Atalanta",
+      "nota": "L'attaccante frenato a fine settembre in Nazionale azzurra da una distrazione di basso grado al bicipite femorale, rientro tra i convocati con la Dea in campionato dalla seconda metà di ottobre."
     },
     {
       "nome": "Holm",
@@ -557,7 +562,7 @@
     {
       "nome": "Meichtry",
       "squadra": "Genoa",
-      "nota": "Il calciatore ai box per noie fisiche che restano da valutare, di certo out nel prossimo turno di campionato."
+      "nota": "Il calciatore ai box per una distrazione della muscolatura di un'anca, il cui grado rimane da valutare con ulteriori accertamenti medici. Di certo out nel prossimo turno di campionato contro la Fiorentina."
     },
     {
       "nome": "Venturino",
@@ -607,12 +612,12 @@
     {
       "nome": "Gudmundsson A.",
       "squadra": "Lazio",
-      "nota": "L'islandese in Nazionale il 26 settembre vittima di un problema alla spalla sinistra dopo una caduta fortuita in partita. Condizioni da monitorare, si confida di riaverlo a disposizione dalla fine di ottobre."
+      "nota": "L'islandese in Nazionale il 26 settembre vittima di un problema alla spalla destra dopo una caduta fortuita in partita. Condizioni da monitorare, si confida di riaverlo a disposizione dalla seconda metà di ottobre."
     },
     {
       "nome": "Cataldi",
       "squadra": "Lazio",
-      "nota": "Nuovo stop muscolare per il regista dei biancocelesti, vittima di un problema al quadricipite. Tempi di recupero da valutare, di certo out nel prossimo turno di campionato contro il Monza."
+      "nota": "Nuovo stop muscolare per il regista dei biancocelesti, vittima di un problema al quadricipite. Out nel prossimo turno di campionato contro il Monza, tentativo di rientro dalla seconda metà di ottobre."
     },
     {
       "nome": "Berisha M.",
@@ -680,9 +685,9 @@
       "nota": "il centrocampista canadese vittima a giugno nella gara dei Mondiali di una rottura di tibia e perone. Operato, punta a tornare in campo da dicembre."
     },
     {
-      "nome": "Candè",
+      "nome": "Walukiewicz",
       "squadra": "Sassuolo",
-      "nota": "il difensore a gennaio vittima della rottura legamento crociato anteriore ginocchio destro, punta a tornare convocabile dalla metà di ottobre."
+      "nota": "Il difensore alle prese con un forte trauma contusivo alla gamba destra, da valutare il rientro dalla metà di ottobre."
     },
     {
       "nome": "Pieragnolo",
@@ -695,9 +700,9 @@
       "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da metà ottobre."
     },
     {
-      "nome": "Walukiewicz",
+      "nome": "Candè",
       "squadra": "Sassuolo",
-      "nota": "Il difensore alle prese con un forte trauma contusivo alla gamba destra, da valutare il rientro dalla metà di ottobre."
+      "nota": "il difensore a gennaio vittima della rottura legamento crociato anteriore ginocchio destro, punta a tornare convocabile dalla metà di ottobre."
     },
     {
       "nome": "Adams C.",
@@ -1026,7 +1031,7 @@
       "nome": "Pasalic",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "2097": {
@@ -1370,13 +1375,6 @@
       "squadra": "Atalanta",
       "ruolo": "C",
       "probabilita": 60,
-      "titolare": false
-    },
-    "4371": {
-      "nome": "Raspadori",
-      "squadra": "Atalanta",
-      "ruolo": "A",
-      "probabilita": 50,
       "titolare": false
     },
     "4378": {
@@ -1796,7 +1794,7 @@
       "nome": "Zalewski",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 35,
+      "probabilita": 40,
       "titolare": false
     },
     "5424": {
@@ -2286,7 +2284,7 @@
       "nome": "Hojlund",
       "squadra": "Napoli",
       "ruolo": "A",
-      "probabilita": 90,
+      "probabilita": 80,
       "titolare": true
     },
     "6054": {
@@ -2419,7 +2417,7 @@
       "nome": "Tourè E.",
       "squadra": "Parma",
       "ruolo": "A",
-      "probabilita": 80,
+      "probabilita": 70,
       "titolare": true
     },
     "6230": {
@@ -2755,8 +2753,8 @@
       "nome": "Bernabè",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 50,
-      "titolare": false
+      "probabilita": 75,
+      "titolare": true
     },
     "6669": {
       "nome": "Bonny",
@@ -3833,7 +3831,7 @@
       "nome": "Romero D.",
       "squadra": "Parma",
       "ruolo": "A",
-      "probabilita": 85,
+      "probabilita": 70,
       "titolare": true
     },
     "7556": {
@@ -3861,8 +3859,8 @@
       "nome": "Lontani",
       "squadra": "Parma",
       "ruolo": "A",
-      "probabilita": 80,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7563": {
       "nome": "Favasuli",
