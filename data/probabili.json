@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-09-30T21:19:43.820Z",
+  "aggiornato": "2026-10-01T14:19:42.055Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -517,7 +517,7 @@
     {
       "nome": "Holm",
       "squadra": "Bologna",
-      "nota": "Lo svedese KO in Nazionale il 26 settembre vittima di un problema muscolare alla coscia. Ha deciso di operarsi e rimangono da valutare i tempi di rientro, non ci sarà di certo alla ripresa del campionato."
+      "nota": "Lo svedese KO in Nazionale il 26 settembre vittima di un problema al tendine della coscia destra. Ha deciso di operarsi e affronterà un lungo stop. Ipotesi di rientro in campo da fine febbraio."
     },
     {
       "nome": "Odgaard",
@@ -592,7 +592,7 @@
     {
       "nome": "Locatelli",
       "squadra": "Juventus",
-      "nota": "il metronomo del centrocampo bianconero ha rimediato la rottura del menisco esterno del ginocchio. Verrà operato a Lione a stretto giro. Lungo stop e possibilità di rivederlo in campo da gennaio."
+      "nota": "il metronomo del centrocampo bianconero ha rimediato la rottura del menisco esterno del ginocchio. Verrà operato a Lione a stretto giro. Lungo stop e possibilità di rivederlo in campo da febbraio."
     },
     {
       "nome": "Boga",
@@ -602,7 +602,7 @@
     {
       "nome": "Yildiz",
       "squadra": "Juventus",
-      "nota": "l'attaccante turco, dopo la gara di Frosinone (23 agosto), ha lamentato un problema al piede. Operato il 31 agosto di osteosintesi della frattura della base del V metatarso del piede sinistro, stop di circa tre mesi. Ipotesi di rientro in campo da fine novembre."
+      "nota": "l'attaccante turco, dopo la gara di Frosinone (23 agosto), ha lamentato un problema al piede. Operato il 31 agosto di osteosintesi della frattura della base del V metatarso del piede sinistro, stop di circa tre mesi. Rientro in campo da inizio dicembre."
     },
     {
       "nome": "Rovella",
@@ -645,9 +645,9 @@
       "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
     },
     {
-      "nome": "Giovane",
+      "nome": "McTominay",
       "squadra": "Napoli",
-      "nota": "L'attaccante operato il 3 settembre a causa di un'ernia inguinale e recuperabile dall'inizio di ottobre, ma rimane da valutare quotidianamente in vista della ripresa del campionato e capire se ci sono possibilità di convocazione già contro il Frosinone."
+      "nota": "Il centrocampista l'1 settembre a causa di una lieve aritmia benigna ha deciso di sottoporsi a un intervento di correzione tramite ablazione. Si confida di rivederlo in campo dalla seconda metà ottobre."
     },
     {
       "nome": "Marianucci",
@@ -1496,13 +1496,6 @@
       "probabilita": 25,
       "titolare": false
     },
-    "4777": {
-      "nome": "McTominay",
-      "squadra": "Napoli",
-      "ruolo": "C",
-      "probabilita": 50,
-      "titolare": false
-    },
     "4807": {
       "nome": "Hermoso",
       "squadra": "Roma",
@@ -1759,7 +1752,7 @@
       "nome": "Valenti",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 20,
+      "probabilita": 40,
       "titolare": false
     },
     "5319": {
@@ -2375,7 +2368,7 @@
       "nome": "Almqvist",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "6212": {
@@ -2753,7 +2746,7 @@
       "nome": "Bernabè",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 75,
+      "probabilita": 80,
       "titolare": true
     },
     "6669": {
@@ -3201,7 +3194,7 @@
       "nome": "Ordonez C.",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "7146": {
@@ -3230,6 +3223,13 @@
       "squadra": "Udinese",
       "ruolo": "A",
       "probabilita": 60,
+      "titolare": false
+    },
+    "7162": {
+      "nome": "Giovane",
+      "squadra": "Napoli",
+      "ruolo": "A",
+      "probabilita": 25,
       "titolare": false
     },
     "7165": {
@@ -3992,7 +3992,7 @@
       "nome": "Drobnic",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 35,
+      "probabilita": 25,
       "titolare": false
     },
     "7618": {
