@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-01T14:19:42.055Z",
+  "aggiornato": "2026-10-01T21:40:57.498Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -1108,8 +1108,8 @@
       "nome": "Calhanoglu",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 50,
-      "titolare": false
+      "probabilita": 70,
+      "titolare": true
     },
     "2263": {
       "nome": "Lazzari",
@@ -1150,7 +1150,7 @@
       "nome": "Stones",
       "squadra": "Inter",
       "ruolo": "D",
-      "probabilita": 20,
+      "probabilita": 15,
       "titolare": false
     },
     "2517": {
@@ -1717,8 +1717,8 @@
       "nome": "Jones C.",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 70,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "5273": {
       "nome": "Estupinan",
@@ -1745,7 +1745,7 @@
       "nome": "Luis Henrique",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 40,
       "titolare": false
     },
     "5307": {
@@ -2389,7 +2389,7 @@
       "nome": "Bisseck",
       "squadra": "Inter",
       "ruolo": "D",
-      "probabilita": 80,
+      "probabilita": 85,
       "titolare": true
     },
     "6218": {
@@ -3131,7 +3131,7 @@
       "nome": "Sucic P.",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "7071": {
