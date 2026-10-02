@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-01T21:40:57.498Z",
+  "aggiornato": "2026-10-02T13:41:45.748Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -940,7 +940,7 @@
       "nome": "Cristante",
       "squadra": "Roma",
       "ruolo": "C",
-      "probabilita": 80,
+      "probabilita": 75,
       "titolare": true
     },
     "791": {
@@ -1416,7 +1416,7 @@
       "nome": "Cambiaghi",
       "squadra": "Bologna",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "4463": {
@@ -1899,7 +1899,7 @@
       "nome": "Malen",
       "squadra": "Roma",
       "ruolo": "A",
-      "probabilita": 80,
+      "probabilita": 75,
       "titolare": true
     },
     "5589": {
