@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-02T21:13:41.903Z",
+  "aggiornato": "2026-10-03T12:20:56.012Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -530,6 +530,11 @@
       "nota": "Lo svedese KO in Nazionale il 26 settembre vittima di un problema al tendine della coscia destra. Ha deciso di operarsi e affronterà un lungo stop. Ipotesi di rientro in campo da fine febbraio."
     },
     {
+      "nome": "Idrissi R.",
+      "squadra": "Cagliari",
+      "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla fine di ottobre."
+    },
+    {
       "nome": "Deiola",
       "squadra": "Cagliari",
       "nota": "Il centrocampista operato a fine settembre vittima di una lesione del menisco laterale del ginocchio sinistro. Ipotesi di rientro in campo dalla fine di ottobre."
@@ -543,11 +548,6 @@
       "nome": "Trepy",
       "squadra": "Cagliari",
       "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla metà di ottobre."
-    },
-    {
-      "nome": "Idrissi R.",
-      "squadra": "Cagliari",
-      "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla fine di ottobre."
     },
     {
       "nome": "Parisi",
@@ -573,6 +573,11 @@
       "nome": "Havel",
       "squadra": "Genoa",
       "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dalla metà di ottobre."
+    },
+    {
+      "nome": "Colombo",
+      "squadra": "Genoa",
+      "nota": "L'attaccante non al meglio per un problema alla caviglia rimediato venerdì scorso in amichevole e ora a forte rischio la sua presenza nel prossimo turno di campionato contro la Fiorentina."
     },
     {
       "nome": "Meichtry",
@@ -630,11 +635,6 @@
       "nota": "Il centrocampista ha lamentato un sovraccarico muscolare alla gamba e non ha preso parte alle sfide contro Monza e Milan. Recuperabile da inizio ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Bologna."
     },
     {
-      "nome": "Ciurria",
-      "squadra": "Monza",
-      "nota": "il centrocampista non al meglio per noie fisiche, forfait anche nel prossimo turno contro la Lazio. Da valutare."
-    },
-    {
       "nome": "Pessina",
       "squadra": "Monza",
       "nota": "Il centrocampista costretto a saltare l'inizio di campionato per una lussazione della rotula del ginocchio destro rimediata nella prima metà di agosto in allenamento. Tempi di recupero da monitorare, ma proverà a tornare arruolabile dall'inizio di novembre."
@@ -643,6 +643,16 @@
       "nome": "Ziolkowski",
       "squadra": "Monza",
       "nota": "Il difensore condizionato da una fastidiosa fascite plantare, di certo assente nel prossimo turno di campionato. Tempi di recupero da valutare."
+    },
+    {
+      "nome": "Ciurria",
+      "squadra": "Monza",
+      "nota": "il centrocampista non al meglio per noie fisiche, forfait anche nel prossimo turno contro la Lazio. Da valutare."
+    },
+    {
+      "nome": "Marianucci",
+      "squadra": "Napoli",
+      "nota": "Il difensore KO in amichevole l'8 agosto vittima di una lesione di alto grado del collaterale mediale del ginocchio sinistro. Stop di circa due mesi, rientro dalla seconda metà di ottobre."
     },
     {
       "nome": "Favasuli",
@@ -665,11 +675,6 @@
       "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
     },
     {
-      "nome": "Marianucci",
-      "squadra": "Napoli",
-      "nota": "Il difensore KO in amichevole l'8 agosto vittima di una lesione di alto grado del collaterale mediale del ginocchio sinistro. Stop di circa due mesi, rientro dalla seconda metà di ottobre."
-    },
-    {
       "nome": "McTominay",
       "squadra": "Napoli",
       "nota": "Il centrocampista l'1 settembre a causa di una lieve aritmia benigna ha deciso di sottoporsi a un intervento di correzione tramite ablazione. Si confida di rivederlo in campo dalla seconda metà ottobre."
@@ -690,6 +695,11 @@
       "nota": "l'esterno offensivo dei neroverdi KO il 6 settembre a Bologna vittima di una lesione di grado moderato al flessore della gamba destra. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Milan."
     },
     {
+      "nome": "Candè",
+      "squadra": "Sassuolo",
+      "nota": "il difensore a gennaio vittima della rottura legamento crociato anteriore ginocchio destro, punta a tornare convocabile dalla metà di ottobre."
+    },
+    {
       "nome": "Konè I.",
       "squadra": "Sassuolo",
       "nota": "il centrocampista canadese vittima a giugno nella gara dei Mondiali di una rottura di tibia e perone. Operato, punta a tornare in campo da dicembre."
@@ -698,11 +708,6 @@
       "nome": "Walukiewicz",
       "squadra": "Sassuolo",
       "nota": "Il difensore alle prese con un forte trauma contusivo alla gamba destra, da valutare il rientro dalla metà di ottobre."
-    },
-    {
-      "nome": "Candè",
-      "squadra": "Sassuolo",
-      "nota": "il difensore a gennaio vittima della rottura legamento crociato anteriore ginocchio destro, punta a tornare convocabile dalla metà di ottobre."
     },
     {
       "nome": "Pieragnolo",
@@ -1263,7 +1268,7 @@
       "nome": "Traorè Hj.",
       "squadra": "Genoa",
       "ruolo": "C",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "2874": {
@@ -1581,13 +1586,6 @@
       "probabilita": 90,
       "titolare": true
     },
-    "4923": {
-      "nome": "Colombo",
-      "squadra": "Genoa",
-      "ruolo": "A",
-      "probabilita": 70,
-      "titolare": true
-    },
     "4925": {
       "nome": "Carboni A.",
       "squadra": "Monza",
@@ -1690,7 +1688,7 @@
       "nome": "Geubbels",
       "squadra": "Lecce",
       "ruolo": "A",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "5036": {
@@ -1704,7 +1702,7 @@
       "nome": "Martinez Jo.",
       "squadra": "Inter",
       "ruolo": "P",
-      "probabilita": 90,
+      "probabilita": 80,
       "titolare": true
     },
     "5119": {
@@ -2327,8 +2325,8 @@
       "nome": "Vitinha O.",
       "squadra": "Genoa",
       "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 70,
+      "titolare": true
     },
     "6170": {
       "nome": "Gineitis",
@@ -2684,7 +2682,7 @@
       "nome": "Dele-Bashiru",
       "squadra": "Lazio",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "6631": {
@@ -2698,8 +2696,8 @@
       "nome": "Gaspar K.",
       "squadra": "Lecce",
       "ruolo": "D",
-      "probabilita": 70,
-      "titolare": true
+      "probabilita": 50,
+      "titolare": false
     },
     "6638": {
       "nome": "Marin R.",
@@ -3048,8 +3046,8 @@
       "nome": "Tiago Gabriel",
       "squadra": "Lecce",
       "ruolo": "D",
-      "probabilita": 50,
-      "titolare": false
+      "probabilita": 80,
+      "titolare": true
     },
     "6990": {
       "nome": "Veiga D.",
@@ -3132,7 +3130,7 @@
       "nome": "Fortini",
       "squadra": "Torino",
       "ruolo": "D",
-      "probabilita": 60,
+      "probabilita": 25,
       "titolare": false
     },
     "7070": {
@@ -3328,7 +3326,7 @@
       "nome": "Belghali",
       "squadra": "Torino",
       "ruolo": "D",
-      "probabilita": 70,
+      "probabilita": 85,
       "titolare": true
     },
     "7223": {
@@ -3363,7 +3361,7 @@
       "nome": "Siebert",
       "squadra": "Lecce",
       "ruolo": "D",
-      "probabilita": 80,
+      "probabilita": 70,
       "titolare": true
     },
     "7248": {
@@ -3496,7 +3494,7 @@
       "nome": "Amorim",
       "squadra": "Genoa",
       "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "7342": {
@@ -3783,7 +3781,7 @@
       "nome": "Mitaj",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "7538": {
