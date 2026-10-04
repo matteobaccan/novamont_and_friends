@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-04T13:05:38.761Z",
+  "aggiornato": "2026-10-04T19:57:22.945Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -550,6 +550,11 @@
       "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla metà di ottobre."
     },
     {
+      "nome": "Kevin Carlos",
+      "squadra": "Cagliari",
+      "nota": "L'attaccante non al meglio per un problema muscolare alla coscia che andrà valutato. Verso il forfait nel prossimo turno di campionato."
+    },
+    {
       "nome": "Parisi",
       "squadra": "Fiorentina",
       "nota": "il cursore di fascia della Viola sta svolgendo l'iter di recupero dall'infortunio al legamento crociato al ginocchio, punta a tornare convocabile da dicembre."
@@ -635,6 +640,11 @@
       "nota": "Il centrocampista ha lamentato un sovraccarico muscolare alla gamba e non ha preso parte alle sfide contro Monza e Milan. Recuperabile da inizio ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Bologna."
     },
     {
+      "nome": "Ciurria",
+      "squadra": "Monza",
+      "nota": "il centrocampista non al meglio per noie fisiche, forfait anche nel prossimo turno contro la Lazio. Da valutare."
+    },
+    {
       "nome": "Pessina",
       "squadra": "Monza",
       "nota": "Il centrocampista costretto a saltare l'inizio di campionato per una lussazione della rotula del ginocchio destro rimediata nella prima metà di agosto in allenamento. Tempi di recupero da monitorare, ma proverà a tornare arruolabile dall'inizio di novembre."
@@ -643,11 +653,6 @@
       "nome": "Ziolkowski",
       "squadra": "Monza",
       "nota": "Il difensore condizionato da una fastidiosa fascite plantare, di certo assente nel prossimo turno di campionato. Tempi di recupero da valutare."
-    },
-    {
-      "nome": "Ciurria",
-      "squadra": "Monza",
-      "nota": "il centrocampista non al meglio per noie fisiche, forfait anche nel prossimo turno contro la Lazio. Da valutare."
     },
     {
       "nome": "Marianucci",
@@ -695,11 +700,6 @@
       "nota": "l'esterno offensivo dei neroverdi KO il 6 settembre a Bologna vittima di una lesione di grado moderato al flessore della gamba destra. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Milan."
     },
     {
-      "nome": "Candè",
-      "squadra": "Sassuolo",
-      "nota": "il difensore a gennaio vittima della rottura legamento crociato anteriore ginocchio destro, punta a tornare convocabile dalla metà di ottobre."
-    },
-    {
       "nome": "Konè I.",
       "squadra": "Sassuolo",
       "nota": "il centrocampista canadese vittima a giugno nella gara dei Mondiali di una rottura di tibia e perone. Operato, punta a tornare in campo da dicembre."
@@ -708,6 +708,11 @@
       "nome": "Walukiewicz",
       "squadra": "Sassuolo",
       "nota": "Il difensore alle prese con un forte trauma contusivo alla gamba destra, da valutare il rientro dalla metà di ottobre."
+    },
+    {
+      "nome": "Candè",
+      "squadra": "Sassuolo",
+      "nota": "il difensore a gennaio vittima della rottura legamento crociato anteriore ginocchio destro, punta a tornare convocabile dalla metà di ottobre."
     },
     {
       "nome": "Pieragnolo",
@@ -1051,8 +1056,8 @@
       "nome": "Kean",
       "squadra": "Como",
       "ruolo": "A",
-      "probabilita": 70,
-      "titolare": true
+      "probabilita": 55,
+      "titolare": false
     },
     "2120": {
       "nome": "Bastoni",
@@ -1772,7 +1777,7 @@
       "nome": "Nzola",
       "squadra": "Cagliari",
       "ruolo": "A",
-      "probabilita": 30,
+      "probabilita": 55,
       "titolare": false
     },
     "5365": {
@@ -3088,8 +3093,8 @@
       "nome": "Douvikas",
       "squadra": "Como",
       "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 75,
+      "titolare": true
     },
     "7023": {
       "nome": "Pellegrino M.",
@@ -3804,13 +3809,6 @@
       "ruolo": "A",
       "probabilita": 80,
       "titolare": true
-    },
-    "7547": {
-      "nome": "Kevin Carlos",
-      "squadra": "Cagliari",
-      "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
     },
     "7548": {
       "nome": "Aurelio",
