@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-04T19:57:22.945Z",
+  "aggiornato": "2026-10-05T15:42:21.442Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -625,11 +625,6 @@
       "nota": "L'islandese in Nazionale il 26 settembre vittima di un problema alla spalla destra dopo una caduta fortuita in partita. Condizioni da monitorare, si confida di riaverlo a disposizione dalla fine metà di ottobre/inizio di novembre."
     },
     {
-      "nome": "Rovella",
-      "squadra": "Lazio",
-      "nota": "il regista dei biancocelesti KO il 30 agosto contro il Genoa vittima di una lesione muscolare al polpaccio che lo terrà ai box fino alla metà di ottobre."
-    },
-    {
       "nome": "Cataldi",
       "squadra": "Lazio",
       "nota": "Nuovo stop muscolare per il regista dei biancocelesti, vittima di un problema al quadricipite. Out nel prossimo turno di campionato contro il Monza, tentativo di rientro dalla seconda metà di ottobre."
@@ -638,6 +633,11 @@
       "nome": "Berisha M.",
       "squadra": "Lecce",
       "nota": "Il centrocampista ha lamentato un sovraccarico muscolare alla gamba e non ha preso parte alle sfide contro Monza e Milan. Recuperabile da inizio ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Bologna."
+    },
+    {
+      "nome": "Estupinan",
+      "squadra": "Milan",
+      "nota": "Il difensore condizionato da una distorsione al ginocchio e rimane da valutare a Milanello in vista del prossimo impegno di campionato contro il Sassuolo."
     },
     {
       "nome": "Ciurria",
@@ -655,9 +655,9 @@
       "nota": "Il difensore condizionato da una fastidiosa fascite plantare, di certo assente nel prossimo turno di campionato. Tempi di recupero da valutare."
     },
     {
-      "nome": "Marianucci",
+      "nome": "Buongiorno",
       "squadra": "Napoli",
-      "nota": "Il difensore KO in amichevole l'8 agosto vittima di una lesione di alto grado del collaterale mediale del ginocchio sinistro. Stop di circa due mesi, rientro dalla seconda metà di ottobre."
+      "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
     },
     {
       "nome": "Favasuli",
@@ -675,14 +675,19 @@
       "nota": "il centrocampista subentrato a gara in corso il 20 settembre a Firenze, ma ha lamentato una lesione miofasciale di basso grado dell'adduttore lungo e rimane da valutare nei prossimi allenamenti in vista della gara contro il Frosinone alla ripresa del campionato."
     },
     {
-      "nome": "Buongiorno",
+      "nome": "Marianucci",
       "squadra": "Napoli",
-      "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
+      "nota": "Il difensore KO in amichevole l'8 agosto vittima di una lesione di alto grado del collaterale mediale del ginocchio sinistro. Stop di circa due mesi, rientro dalla metà di ottobre."
     },
     {
       "nome": "McTominay",
       "squadra": "Napoli",
       "nota": "Il centrocampista l'1 settembre a causa di una lieve aritmia benigna ha deciso di sottoporsi a un intervento di correzione tramite ablazione. Si confida di rivederlo in campo dalla seconda metà ottobre."
+    },
+    {
+      "nome": "Olivera",
+      "squadra": "Napoli",
+      "nota": "L'uruguaiano a inizio ottobre in Nazionale ha rimediato un problema muscolare alla gamba destra e salterà l'impegno di campionato contro il Frosinone. Ipotesi rientro da fine ottobre."
     },
     {
       "nome": "Nicolussi Caviglia",
@@ -747,7 +752,7 @@
     {
       "nome": "Gueye",
       "squadra": "Udinese",
-      "nota": "L'attaccante vittima di un problema alla caviglia a fine settembre. Assente nel prossimo turno di campionato contro il Torino, da valutare rientro dalla seconda metà di ottobre."
+      "nota": "L'attaccante vittima di un problema alla caviglia a fine settembre. Ha deciso di operarsi, lungo stop di circa tre mesi e possibile ritorno in campo da fine gennaio."
     },
     {
       "nome": "Bella-Kotchap",
@@ -1000,8 +1005,8 @@
       "nome": "Spinazzola",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 55,
-      "titolare": false
+      "probabilita": 75,
+      "titolare": true
     },
     "1870": {
       "nome": "Barella",
@@ -1119,7 +1124,7 @@
       "nome": "Marusic",
       "squadra": "Lazio",
       "ruolo": "D",
-      "probabilita": 20,
+      "probabilita": 50,
       "titolare": false
     },
     "2194": {
@@ -1154,7 +1159,7 @@
       "nome": "Alaba",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 35,
+      "probabilita": 50,
       "titolare": false
     },
     "2423": {
@@ -1322,7 +1327,7 @@
       "nome": "Loftus-Cheek",
       "squadra": "Milan",
       "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "4210": {
@@ -1437,6 +1442,13 @@
       "probabilita": 55,
       "titolare": false
     },
+    "4459": {
+      "nome": "Rovella",
+      "squadra": "Lazio",
+      "ruolo": "C",
+      "probabilita": 20,
+      "titolare": false
+    },
     "4463": {
       "nome": "Esposito Se.",
       "squadra": "Sassuolo",
@@ -1490,7 +1502,7 @@
       "nome": "Badiashile",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 35,
+      "probabilita": 40,
       "titolare": false
     },
     "4705": {
@@ -1731,13 +1743,6 @@
       "probabilita": 60,
       "titolare": false
     },
-    "5273": {
-      "nome": "Estupinan",
-      "squadra": "Milan",
-      "ruolo": "D",
-      "probabilita": 70,
-      "titolare": true
-    },
     "5295": {
       "nome": "Musah",
       "squadra": "Milan",
@@ -1938,7 +1943,7 @@
       "nome": "Davis K.",
       "squadra": "Udinese",
       "ruolo": "A",
-      "probabilita": 70,
+      "probabilita": 80,
       "titolare": true
     },
     "5641": {
@@ -2095,13 +2100,6 @@
       "probabilita": 90,
       "titolare": true
     },
-    "5840": {
-      "nome": "Olivera",
-      "squadra": "Napoli",
-      "ruolo": "D",
-      "probabilita": 70,
-      "titolare": true
-    },
     "5841": {
       "nome": "Svilar",
       "squadra": "Roma",
@@ -2211,7 +2209,7 @@
       "nome": "Ebosse",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "5995": {
@@ -2386,7 +2384,7 @@
       "nome": "Zarraga",
       "squadra": "Udinese",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "6215": {
@@ -2484,7 +2482,7 @@
       "nome": "Doekhi",
       "squadra": "Lazio",
       "ruolo": "D",
-      "probabilita": 50,
+      "probabilita": 35,
       "titolare": false
     },
     "6344": {
@@ -2498,7 +2496,7 @@
       "nome": "Moreira",
       "squadra": "Milan",
       "ruolo": "C",
-      "probabilita": 80,
+      "probabilita": 85,
       "titolare": true
     },
     "6397": {
@@ -2575,7 +2573,7 @@
       "nome": "Bartesaghi",
       "squadra": "Milan",
       "ruolo": "D",
-      "probabilita": 40,
+      "probabilita": 60,
       "titolare": false
     },
     "6503": {
@@ -2680,8 +2678,8 @@
       "nome": "Cissè A.",
       "squadra": "Milan",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 70,
+      "titolare": true
     },
     "6629": {
       "nome": "Dele-Bashiru",
@@ -3240,7 +3238,7 @@
       "nome": "Giovane",
       "squadra": "Napoli",
       "ruolo": "A",
-      "probabilita": 25,
+      "probabilita": 50,
       "titolare": false
     },
     "7165": {
