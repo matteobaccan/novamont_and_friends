@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-05T15:42:21.442Z",
+  "aggiornato": "2026-10-05T23:05:04.202Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -560,6 +560,11 @@
       "nota": "il cursore di fascia della Viola sta svolgendo l'iter di recupero dall'infortunio al legamento crociato al ginocchio, punta a tornare convocabile da dicembre."
     },
     {
+      "nome": "Birligea",
+      "squadra": "Frosinone",
+      "nota": "L'attaccante sta recuperando da una lesione muscolare al quadricipite sinistro, tentativo di rientro dalla fine di ottobre."
+    },
+    {
       "nome": "Terzic",
       "squadra": "Frosinone",
       "nota": "Il terzino dei ciociari ai box per una lesione di basso grado del bicipite femorale della coscia sinistra, da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Napoli."
@@ -582,7 +587,7 @@
     {
       "nome": "Colombo",
       "squadra": "Genoa",
-      "nota": "L'attaccante non al meglio per un problema alla caviglia rimediato venerdì scorso in amichevole e ora a forte rischio la sua presenza nel prossimo turno di campionato contro la Fiorentina."
+      "nota": "L'attaccante non al meglio per un problema alla caviglia rimediato venerdì scorso in amichevole e darà forfait nel prossimo turno di campionato contro la Fiorentina. Ipotesi di rientro da fine ottobre."
     },
     {
       "nome": "Meichtry",
@@ -640,6 +645,11 @@
       "nota": "Il difensore condizionato da una distorsione al ginocchio e rimane da valutare a Milanello in vista del prossimo impegno di campionato contro il Sassuolo."
     },
     {
+      "nome": "Saelemaekers",
+      "squadra": "Milan",
+      "nota": "Il belga fermo da inizio ottobre per un problema alla caviglia, concreta ora la possibilità di operarsi. Saranno poi da stabilire i tempi di recupero, ma lo stop sarà lungo e lo rivedremo in campo nel 2027 inoltrato."
+    },
+    {
       "nome": "Ciurria",
       "squadra": "Monza",
       "nota": "il centrocampista non al meglio per noie fisiche, forfait anche nel prossimo turno contro la Lazio. Da valutare."
@@ -670,16 +680,6 @@
       "nota": "Il brasiliano costretto al cambio il 9 settembre in Champions League vittima di una lesione muscolare di medio grado al bicipite femorale sinistro. Proverà a tornare arruolabile dalla seconda metà di ottobre."
     },
     {
-      "nome": "Zambo Anguissa",
-      "squadra": "Napoli",
-      "nota": "il centrocampista subentrato a gara in corso il 20 settembre a Firenze, ma ha lamentato una lesione miofasciale di basso grado dell'adduttore lungo e rimane da valutare nei prossimi allenamenti in vista della gara contro il Frosinone alla ripresa del campionato."
-    },
-    {
-      "nome": "Marianucci",
-      "squadra": "Napoli",
-      "nota": "Il difensore KO in amichevole l'8 agosto vittima di una lesione di alto grado del collaterale mediale del ginocchio sinistro. Stop di circa due mesi, rientro dalla metà di ottobre."
-    },
-    {
       "nome": "McTominay",
       "squadra": "Napoli",
       "nota": "Il centrocampista l'1 settembre a causa di una lieve aritmia benigna ha deciso di sottoporsi a un intervento di correzione tramite ablazione. Si confida di rivederlo in campo dalla seconda metà ottobre."
@@ -688,6 +688,11 @@
       "nome": "Olivera",
       "squadra": "Napoli",
       "nota": "L'uruguaiano a inizio ottobre in Nazionale ha rimediato un problema muscolare alla gamba destra e salterà l'impegno di campionato contro il Frosinone. Ipotesi rientro da fine ottobre."
+    },
+    {
+      "nome": "Zambo Anguissa",
+      "squadra": "Napoli",
+      "nota": "il centrocampista subentrato a gara in corso il 20 settembre a Firenze, ma ha lamentato una lesione miofasciale di basso grado dell'adduttore lungo e rimane da valutare nei prossimi allenamenti in vista della gara contro il Frosinone alla ripresa del campionato."
     },
     {
       "nome": "Nicolussi Caviglia",
@@ -705,14 +710,14 @@
       "nota": "l'esterno offensivo dei neroverdi KO il 6 settembre a Bologna vittima di una lesione di grado moderato al flessore della gamba destra. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Milan."
     },
     {
-      "nome": "Konè I.",
-      "squadra": "Sassuolo",
-      "nota": "il centrocampista canadese vittima a giugno nella gara dei Mondiali di una rottura di tibia e perone. Operato, punta a tornare in campo da dicembre."
-    },
-    {
       "nome": "Walukiewicz",
       "squadra": "Sassuolo",
       "nota": "Il difensore alle prese con un forte trauma contusivo alla gamba destra, da valutare il rientro dalla metà di ottobre."
+    },
+    {
+      "nome": "Boloca",
+      "squadra": "Sassuolo",
+      "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da metà ottobre."
     },
     {
       "nome": "Candè",
@@ -725,14 +730,14 @@
       "nota": "il difensore sta proseguendo la fase di recupero dalla lesione legamento crociato anteriore gamba destra e ipotizziamo possa tornare convocabile da fine ottobre."
     },
     {
+      "nome": "Konè I.",
+      "squadra": "Sassuolo",
+      "nota": "il centrocampista canadese vittima a giugno nella gara dei Mondiali di una rottura di tibia e perone. Operato, punta a tornare in campo da dicembre."
+    },
+    {
       "nome": "Idzes",
       "squadra": "Sassuolo",
       "nota": "Il difensore ai box per una lesione di grado moderato al quadricipite della gamba sinistra, proverà a tornerà arruolabile dalla seconda metà di ottobre."
-    },
-    {
-      "nome": "Boloca",
-      "squadra": "Sassuolo",
-      "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da metà ottobre."
     },
     {
       "nome": "Adams C.",
@@ -755,9 +760,19 @@
       "nota": "L'attaccante vittima di un problema alla caviglia a fine settembre. Ha deciso di operarsi, lungo stop di circa tre mesi e possibile ritorno in campo da fine gennaio."
     },
     {
+      "nome": "Adorante",
+      "squadra": "Venezia",
+      "nota": "l'attaccante a fine luglio ha deciso di operarsi per un problema alla schiena, che lo costringerà a stare ai box per buona parte del girone d'andata del campionato. Tentativo di rientro da metà ottobre."
+    },
+    {
       "nome": "Bella-Kotchap",
       "squadra": "Venezia",
       "nota": "il difensore costretto al cambio a Frosinone il 6 settembre per un risentimento muscolare mio-fasciale all'adduttore della gamba destra. Recuperabile dall'inizio di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro l'Atalanta."
+    },
+    {
+      "nome": "Schingtienne",
+      "squadra": "Venezia",
+      "nota": "Il difensore non al meglio per noie fisiche e a rischio forfait nel prossimo turno di campionato contro l'Atalanta."
     },
     {
       "nome": "Sverko",
@@ -772,7 +787,7 @@
     {
       "nome": "Basic",
       "squadra": "Venezia",
-      "nota": "Il centrocampista out contro Lazio, Frosinone e Fiorentina per noie fisiche, rimane da valutare quotidianamente in vista della 6a giornata di campionato contro l'Atalanta."
+      "nota": "Il centrocampista out contro Lazio, Frosinone e Fiorentina per una fascite plantare, rimane da valutare quotidianamente in vista della 6a giornata di campionato contro l'Atalanta."
     },
     {
       "nome": "Busio",
@@ -783,11 +798,6 @@
       "nome": "Dagasso",
       "squadra": "Venezia",
       "nota": "Il centrocampista non convocato dalla gara dell'11 settembre contro la Fiorentina per un problema fisico. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno a Bergamo."
-    },
-    {
-      "nome": "Adorante",
-      "squadra": "Venezia",
-      "nota": "l'attaccante a fine luglio ha deciso di operarsi per un problema alla schiena, che lo costringerà a stare ai box per buona parte del girone d'andata del campionato. Tentativo di rientro da metà ottobre."
     }
   ],
   "giocatori": {
@@ -1582,13 +1592,6 @@
       "probabilita": 85,
       "titolare": true
     },
-    "4892": {
-      "nome": "Saelemaekers",
-      "squadra": "Milan",
-      "ruolo": "C",
-      "probabilita": 50,
-      "titolare": false
-    },
     "4896": {
       "nome": "Maldini",
       "squadra": "Cagliari",
@@ -2356,7 +2359,7 @@
       "nome": "Beukema",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "6204": {
@@ -2587,7 +2590,7 @@
       "nome": "Fini",
       "squadra": "Frosinone",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "6519": {
@@ -2842,6 +2845,13 @@
       "probabilita": 70,
       "titolare": true
     },
+    "6809": {
+      "nome": "Marianucci",
+      "squadra": "Napoli",
+      "ruolo": "D",
+      "probabilita": 30,
+      "titolare": false
+    },
     "6813": {
       "nome": "Torriani",
       "squadra": "Milan",
@@ -2937,14 +2947,7 @@
       "nome": "Moreno M.",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 70,
-      "titolare": true
-    },
-    "6892": {
-      "nome": "Schingtienne",
-      "squadra": "Venezia",
-      "ruolo": "D",
-      "probabilita": 90,
+      "probabilita": 80,
       "titolare": true
     },
     "6893": {
@@ -2979,7 +2982,7 @@
       "nome": "Hasa",
       "squadra": "Frosinone",
       "ruolo": "C",
-      "probabilita": 35,
+      "probabilita": 50,
       "titolare": false
     },
     "6904": {
@@ -3336,7 +3339,7 @@
       "nome": "Vergara",
       "squadra": "Napoli",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 50,
       "titolare": false
     },
     "7232": {
@@ -3539,7 +3542,7 @@
       "nome": "Lisman",
       "squadra": "Venezia",
       "ruolo": "A",
-      "probabilita": 15,
+      "probabilita": 25,
       "titolare": false
     },
     "7410": {
@@ -3686,7 +3689,7 @@
       "nome": "Lauberbach",
       "squadra": "Venezia",
       "ruolo": "A",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "7483": {
@@ -3791,8 +3794,8 @@
       "nome": "Halhal",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 50,
-      "titolare": false
+      "probabilita": 80,
+      "titolare": true
     },
     "7540": {
       "nome": "Akpoguma",
@@ -3960,13 +3963,6 @@
       "squadra": "Genoa",
       "ruolo": "C",
       "probabilita": 15,
-      "titolare": false
-    },
-    "7610": {
-      "nome": "Birligea",
-      "squadra": "Frosinone",
-      "ruolo": "A",
-      "probabilita": 60,
       "titolare": false
     },
     "7611": {
