@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-06T14:01:54.512Z",
+  "aggiornato": "2026-10-06T21:29:24.380Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -552,7 +552,7 @@
     {
       "nome": "Kevin Carlos",
       "squadra": "Cagliari",
-      "nota": "L'attaccante non al meglio per un problema muscolare alla coscia che andrà valutato. Verso il forfait nel prossimo turno di campionato."
+      "nota": "L'attaccante non al meglio per un problema muscolare alla coscia sinistra, va verso il forfait nel prossimo turno di campionato contro la Juve."
     },
     {
       "nome": "Parisi",
@@ -580,9 +580,9 @@
       "nota": "il calciatore operato al tendine rotuleo e ora in fase di recupero. Di certo assente nel prossimo turno di campionato, ipotesi di rientro da fine ottobre."
     },
     {
-      "nome": "Havel",
+      "nome": "Sow",
       "squadra": "Genoa",
-      "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dalla metà di ottobre."
+      "nota": "Il centrocampista svizzero KO martedì sera in Nazionale vittima di un guaio muscolare che andrà valutato. Forfait nel prossimo turno di campionato sabato contro la Fiorentina."
     },
     {
       "nome": "Colombo",
@@ -595,9 +595,14 @@
       "nota": "Il calciatore ai box per una distrazione della muscolatura di un'anca, il cui grado rimane da valutare con ulteriori accertamenti medici. Di certo out nel prossimo turno di campionato contro la Fiorentina."
     },
     {
-      "nome": "Thuram K.",
-      "squadra": "Juventus",
-      "nota": "il centrocampista condizionato da una sindrome femoro-rotulea e, dopo un consulto medico a fine agosto, è stato sottoposto il 3 settembre a operazione chirurgica. Lungo stop, ipotizziamo un rientro da gennaio."
+      "nome": "Havel",
+      "squadra": "Genoa",
+      "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dalla metà di ottobre."
+    },
+    {
+      "nome": "Stones",
+      "squadra": "Inter",
+      "nota": "il difensore alle prese con un risentimento ai flessori della coscia sinistra, recuperabile dalla prima metà di ottobre. Tuttavia, da valutare la sua convocazione contro il Parma nella 6a di A."
     },
     {
       "nome": "Grabara",
@@ -620,19 +625,24 @@
       "nota": "il metronomo del centrocampo bianconero ha rimediato la rottura del menisco esterno del ginocchio. Verrà operato a Lione a stretto giro. Lungo stop e possibilità di rivederlo in campo da febbraio."
     },
     {
+      "nome": "Thuram K.",
+      "squadra": "Juventus",
+      "nota": "il centrocampista condizionato da una sindrome femoro-rotulea e, dopo un consulto medico a fine agosto, è stato sottoposto il 3 settembre a operazione chirurgica. Lungo stop, ipotizziamo un rientro da gennaio."
+    },
+    {
       "nome": "Ekhator",
       "squadra": "Juventus",
       "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, rientro dalla metà di novembre."
     },
     {
-      "nome": "Cataldi",
-      "squadra": "Lazio",
-      "nota": "Nuovo stop muscolare per il regista dei biancocelesti, vittima di un problema al quadricipite. Out nel prossimo turno di campionato contro il Monza, tentativo di rientro dalla seconda metà di ottobre."
-    },
-    {
       "nome": "Gudmundsson A.",
       "squadra": "Lazio",
       "nota": "L'islandese in Nazionale il 26 settembre vittima di un problema alla spalla destra dopo una caduta fortuita in partita. Condizioni da monitorare, si confida di riaverlo a disposizione dalla fine metà di ottobre/inizio di novembre."
+    },
+    {
+      "nome": "Cataldi",
+      "squadra": "Lazio",
+      "nota": "Nuovo stop muscolare per il regista dei biancocelesti, vittima di un problema al quadricipite. Out nel prossimo turno di campionato contro il Monza, tentativo di rientro dalla seconda metà di ottobre."
     },
     {
       "nome": "Berisha M.",
@@ -665,9 +675,9 @@
       "nota": "Il difensore condizionato da una fastidiosa fascite plantare, di certo assente nel prossimo turno di campionato. Tempi di recupero da valutare."
     },
     {
-      "nome": "Buongiorno",
+      "nome": "Olivera",
       "squadra": "Napoli",
-      "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
+      "nota": "L'uruguaiano a inizio ottobre in Nazionale ha rimediato un problema muscolare alla gamba destra e salterà l'impegno di campionato contro il Frosinone. Ipotesi rientro da fine ottobre."
     },
     {
       "nome": "Favasuli",
@@ -685,9 +695,14 @@
       "nota": "Il centrocampista l'1 settembre a causa di una lieve aritmia benigna ha deciso di sottoporsi a un intervento di correzione tramite ablazione. Si confida di rivederlo in campo dalla seconda metà ottobre."
     },
     {
-      "nome": "Olivera",
+      "nome": "Buongiorno",
       "squadra": "Napoli",
-      "nota": "L'uruguaiano a inizio ottobre in Nazionale ha rimediato un problema muscolare alla gamba destra e salterà l'impegno di campionato contro il Frosinone. Ipotesi rientro da fine ottobre."
+      "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
+    },
+    {
+      "nome": "Vergara",
+      "squadra": "Napoli",
+      "nota": "Il centrocampista sostituito il 5 ottobre con la Nazionale italiana a causa di una lesione distrattiva al polpaccio destro. Recuperabile da inizio novembre."
     },
     {
       "nome": "Zambo Anguissa",
@@ -698,6 +713,11 @@
       "nome": "Nicolussi Caviglia",
       "squadra": "Parma",
       "nota": "il centrocampista alle prese dalla seconda metà di luglio con una lesione di medio grado alla coscia destra, ma a fine agosto ha deciso, assieme allo staff medico ducale, di operarsi. Lungo stop e ipotesi di ritorno in campo da dicembre."
+    },
+    {
+      "nome": "Almqvist",
+      "squadra": "Parma",
+      "nota": "L'ala offensiva dei ducali KO dal 6 ottobre per una lesione muscolare al polpaccio sinistro, recuperabile dalla fine di ottobre."
     },
     {
       "nome": "Cristante",
@@ -715,6 +735,16 @@
       "nota": "Il difensore ai box per una lesione di grado moderato al quadricipite della gamba sinistra, proverà a tornerà arruolabile dalla seconda metà di ottobre."
     },
     {
+      "nome": "Boloca",
+      "squadra": "Sassuolo",
+      "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da metà ottobre."
+    },
+    {
+      "nome": "Pieragnolo",
+      "squadra": "Sassuolo",
+      "nota": "il difensore sta proseguendo la fase di recupero dalla lesione legamento crociato anteriore gamba destra e ipotizziamo possa tornare convocabile da fine ottobre."
+    },
+    {
       "nome": "Volpato",
       "squadra": "Sassuolo",
       "nota": "l'esterno offensivo dei neroverdi KO il 6 settembre a Bologna vittima di una lesione di grado moderato al flessore della gamba destra. Recuperabile dalla prima metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Milan."
@@ -725,19 +755,9 @@
       "nota": "Il difensore alle prese con un forte trauma contusivo alla gamba destra, da valutare il rientro dalla metà di ottobre."
     },
     {
-      "nome": "Pieragnolo",
-      "squadra": "Sassuolo",
-      "nota": "il difensore sta proseguendo la fase di recupero dalla lesione legamento crociato anteriore gamba destra e ipotizziamo possa tornare convocabile da fine ottobre."
-    },
-    {
       "nome": "Candè",
       "squadra": "Sassuolo",
       "nota": "il difensore a gennaio vittima della rottura legamento crociato anteriore ginocchio destro, punta a tornare convocabile dalla metà di ottobre."
-    },
-    {
-      "nome": "Boloca",
-      "squadra": "Sassuolo",
-      "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da metà ottobre."
     },
     {
       "nome": "Adams C.",
@@ -768,11 +788,6 @@
       "nome": "Adorante",
       "squadra": "Venezia",
       "nota": "l'attaccante a fine luglio ha deciso di operarsi per un problema alla schiena, che lo costringerà a stare ai box per buona parte del girone d'andata del campionato. Tentativo di rientro da metà ottobre."
-    },
-    {
-      "nome": "Bella-Kotchap",
-      "squadra": "Venezia",
-      "nota": "il difensore costretto al cambio a Frosinone il 6 settembre per un risentimento muscolare mio-fasciale all'adduttore della gamba destra. Recuperabile dall'inizio di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro l'Atalanta."
     },
     {
       "nome": "Schingtienne",
@@ -957,7 +972,7 @@
       "nome": "Meret",
       "squadra": "Napoli",
       "ruolo": "P",
-      "probabilita": 60,
+      "probabilita": 75,
       "titolare": true
     },
     "608": {
@@ -1132,7 +1147,7 @@
       "nome": "Milinkovic-Savic V.",
       "squadra": "Napoli",
       "ruolo": "P",
-      "probabilita": 40,
+      "probabilita": 5,
       "titolare": false
     },
     "2188": {
@@ -1183,13 +1198,6 @@
       "ruolo": "C",
       "probabilita": 90,
       "titolare": true
-    },
-    "2514": {
-      "nome": "Stones",
-      "squadra": "Inter",
-      "ruolo": "D",
-      "probabilita": 15,
-      "titolare": false
     },
     "2517": {
       "nome": "De Bruyne",
@@ -1293,7 +1301,7 @@
       "nome": "Traorè Hj.",
       "squadra": "Genoa",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "2874": {
@@ -1517,7 +1525,7 @@
       "nome": "Badiashile",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "4705": {
@@ -1741,7 +1749,7 @@
       "nome": "Gilmour",
       "squadra": "Napoli",
       "ruolo": "C",
-      "probabilita": 85,
+      "probabilita": 90,
       "titolare": true
     },
     "5172": {
@@ -2028,7 +2036,7 @@
       "nome": "Drameh",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 30,
+      "probabilita": 50,
       "titolare": false
     },
     "5750": {
@@ -2197,13 +2205,6 @@
       "squadra": "Torino",
       "ruolo": "C",
       "probabilita": 55,
-      "titolare": true
-    },
-    "5946": {
-      "nome": "Sow",
-      "squadra": "Genoa",
-      "ruolo": "C",
-      "probabilita": 90,
       "titolare": true
     },
     "5951": {
@@ -2386,13 +2387,6 @@
       "squadra": "Parma",
       "ruolo": "C",
       "probabilita": 60,
-      "titolare": false
-    },
-    "6207": {
-      "nome": "Almqvist",
-      "squadra": "Parma",
-      "ruolo": "C",
-      "probabilita": 55,
       "titolare": false
     },
     "6212": {
@@ -2959,7 +2953,7 @@
       "nome": "Moreno M.",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 80,
+      "probabilita": 60,
       "titolare": true
     },
     "6893": {
@@ -3246,7 +3240,7 @@
       "nome": "Giovane",
       "squadra": "Napoli",
       "ruolo": "A",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "7165": {
@@ -3295,7 +3289,7 @@
       "nome": "Ndiaye",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "7203": {
@@ -3323,7 +3317,7 @@
       "nome": "Frigan",
       "squadra": "Parma",
       "ruolo": "A",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "7219": {
@@ -3339,13 +3333,6 @@
       "ruolo": "D",
       "probabilita": 90,
       "titolare": true
-    },
-    "7223": {
-      "nome": "Vergara",
-      "squadra": "Napoli",
-      "ruolo": "C",
-      "probabilita": 50,
-      "titolare": false
     },
     "7232": {
       "nome": "Fernandez T.",
@@ -3388,6 +3375,13 @@
       "ruolo": "A",
       "probabilita": 60,
       "titolare": false
+    },
+    "7253": {
+      "nome": "Bella-Kotchap",
+      "squadra": "Venezia",
+      "ruolo": "D",
+      "probabilita": 75,
+      "titolare": true
     },
     "7255": {
       "nome": "Britschgi",
@@ -3505,8 +3499,8 @@
       "nome": "Amorim",
       "squadra": "Genoa",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 85,
+      "titolare": true
     },
     "7342": {
       "nome": "Elphege",
@@ -3799,8 +3793,8 @@
       "nome": "Halhal",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 80,
-      "titolare": true
+      "probabilita": 50,
+      "titolare": false
     },
     "7540": {
       "nome": "Akpoguma",
@@ -3878,6 +3872,13 @@
       "ruolo": "D",
       "probabilita": 90,
       "titolare": true
+    },
+    "7568": {
+      "nome": "De Martis",
+      "squadra": "Parma",
+      "ruolo": "A",
+      "probabilita": 15,
+      "titolare": false
     },
     "7572": {
       "nome": "Comotto",
