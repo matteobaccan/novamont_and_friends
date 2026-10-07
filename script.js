@@ -3715,6 +3715,14 @@ const BONUS_RIGORE_PARTITA = 0.35;
 // riordina due giocatori quasi pari senza ribaltare uno scarto vero.
 const PESO_CONTESTO = 0.03;
 
+// Quanto pesa la stanchezza: chi ha giocato da tre giorni o meno (una coppa a
+// metà settimana, un turno infrasettimanale) contro chi ha riposato una
+// settimana. Conta la differenza fra le due squadre: se hanno giocato tutte e
+// due, nessuno ha un vantaggio. Con quattro giorni di riposo vale la metà.
+// Va sommato agli altri tre: in tutto si resta entro ±12%.
+const PESO_STANCHEZZA = 0.03;
+const GIORNI_STANCHEZZA = 3;
+
 // Probabili formazioni di Serie A, caricate a parte perché cambiano ogni
 // settimana e non fanno parte dello storico della stagione
 let probabiliFormazioni = null;
@@ -3883,6 +3891,31 @@ function contestoPartita(squadraSerieA) {
     return contesto;
 }
 
+// 1 se ha giocato da GIORNI_STANCHEZZA giorni o meno, 0,5 con un giorno in
+// più, 0 altrimenti o se il calendario non si conosce
+function livelloStanchezza(calendario) {
+    if (!calendario || calendario.giorniRiposo === null || calendario.giorniRiposo === undefined) return 0;
+    if (calendario.giorniRiposo <= GIORNI_STANCHEZZA) return 1;
+    if (calendario.giorniRiposo === GIORNI_STANCHEZZA + 1) return 0.5;
+    return 0;
+}
+
+// Il racconto del calendario di una squadra, per i title: da quando non gioca
+// e cosa la aspetta dopo
+function testoCalendario(squadra, calendario) {
+    if (!calendario) return '';
+    const pezzi = [];
+    const giorno = (data) => new Date(data).toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'numeric' });
+    if (calendario.precedente) {
+        pezzi.push(`${squadra} ha giocato ${giorno(calendario.precedente.data)} (${calendario.precedente.competizione}`
+            + ` con ${calendario.precedente.avversario}): ${calendario.giorniRiposo} giorni di riposo`);
+    }
+    if (calendario.dopo && calendario.giorniAllaSuccessiva !== null && calendario.giorniAllaSuccessiva <= 4) {
+        pezzi.push(`Fra ${calendario.giorniAllaSuccessiva} giorni ${calendario.dopo.competizione} con ${calendario.dopo.avversario}: rischio turnover`);
+    }
+    return pezzi.join('. ');
+}
+
 function calcolaContestoPartita(squadraSerieA) {
     const neutro = { fattore: 1, noto: false };
     if (!squadraSerieA || !probabiliFormazioni) return neutro;
@@ -3904,6 +3937,12 @@ function calcolaContestoPartita(squadraSerieA) {
 
     const campo = casa ? PESO_CONTESTO : -PESO_CONTESTO;
 
+    // Stanchezza: positivo se l'avversario è più stanco
+    const calendario = probabiliFormazioni.calendarioSquadre || {};
+    const mio = calendario[squadraSerieA] || null;
+    const suo = calendario[avversario] || null;
+    const stanchezza = PESO_STANCHEZZA * (livelloStanchezza(suo) - livelloStanchezza(mio));
+
     // Proporzionale alla distanza in classifica: fra squadre vicine tende a zero
     // da sé, che è giusto anche a inizio stagione quando la classifica dice poco
     const graduatoria = posizione && posizioneAvversario
@@ -3917,8 +3956,11 @@ function calcolaContestoPartita(squadraSerieA) {
         : 0;
 
     return {
-        fattore: 1 + campo + graduatoria + andamento,
+        fattore: 1 + campo + graduatoria + andamento + stanchezza,
         noto: true,
+        stanchezza,
+        calendario: mio,
+        calendarioAvversario: suo,
         squadra: squadraSerieA,
         casa,
         avversario,
@@ -4448,6 +4490,9 @@ function glifoContesto(contesto) {
     if (contesto.posizione) pezzi.push(`${contesto.posizione}° in classifica`);
     if (contesto.posizioneAvversario) pezzi.push(`avversario ${contesto.posizioneAvversario}°`);
     if (contesto.partite) pezzi.push(`${contesto.punti} punti nelle ultime ${contesto.partite} (${contesto.esiti})`);
+    if (contesto.stanchezza) {
+        pezzi.push(`stanchezza ${contesto.stanchezza > 0 ? '+' : ''}${Math.round(contesto.stanchezza * 1000) / 10}%`);
+    }
     pezzi.push(`contesto ${scarto > 0 ? '+' : ''}${Math.round(scarto * 100)}%`);
 
     const su = scarto > 0.005;
@@ -4456,6 +4501,58 @@ function glifoContesto(contesto) {
     const glifo = su ? '↑' : (giu ? '↓' : '=');
 
     return `<span class="consiglio-contesto ${classe}" title="${pezzi.join(' · ')}">${glifo}</span>`;
+}
+
+// Freccia di forma di una squadra di Serie A, dai punti delle ultime giornate:
+// su da 2 punti a partita (due vittorie su tre), giù sotto 1, uguale nel mezzo
+function formaSquadraSerieA(squadra) {
+    const forma = probabiliFormazioni && (probabiliFormazioni.formaSerieA || {})[squadra];
+    if (!forma || !forma.partite) return { glifo: '', classe: '', testo: '' };
+
+    const media = forma.punti / forma.partite;
+    const su = media >= 2;
+    const giu = media < 1;
+    return {
+        glifo: su ? '↑' : (giu ? '↓' : '='),
+        classe: su ? 'contesto-su' : (giu ? 'contesto-giu' : 'contesto-pari'),
+        testo: `ultime ${forma.partite} ${forma.esiti || ''} (${forma.punti} punti)`.replace('  ', ' ')
+    };
+}
+
+// La partita di Serie A del giocatore, sotto il nome: casa prima, la sua
+// squadra in grassetto, e per entrambe posizione in classifica e forma
+function htmlPartitaSerieA(contesto) {
+    if (!contesto || !contesto.noto) return '';
+
+    const casa = contesto.casa ? contesto.squadra : contesto.avversario;
+    const fuori = contesto.casa ? contesto.avversario : contesto.squadra;
+    const classifica = (probabiliFormazioni && probabiliFormazioni.classificaSerieA) || {};
+
+    const calendari = (probabiliFormazioni && probabiliFormazioni.calendarioSquadre) || {};
+
+    const lato = (nome) => {
+        const posizione = classifica[nome];
+        const forma = formaSquadraSerieA(nome);
+        const calendario = calendari[nome] || null;
+        const stanca = livelloStanchezza(calendario) > 0;
+        const turnover = calendario && calendario.giorniAllaSuccessiva !== null && calendario.giorniAllaSuccessiva <= 4;
+        // Un segno solo quando c'è qualcosa da dire: i giorni di riposo se sono
+        // pochi, una freccia avanti se fra pochi giorni c'è un'altra partita
+        const segni = (stanca ? `<span class="partita-riposo">${calendario.giorniRiposo}g</span>` : '')
+            + (turnover ? '<span class="partita-turnover">»</span>' : '');
+        return {
+            html: `<span class="partita-squadra${nome === contesto.squadra ? ' sua' : ''}">`
+                + `${siglaSerieA(nome)}${posizione ? ` ${posizione}°` : ''}`
+                + `${forma.glifo ? `<span class="${forma.classe}">${forma.glifo}</span>` : ''}${segni}</span>`,
+            titolo: [nome, posizione ? `${posizione}° in classifica` : '', forma.testo].filter(Boolean).join(', ')
+                + (calendario ? `. ${testoCalendario(nome, calendario)}` : '')
+        };
+    };
+
+    const a = lato(casa);
+    const b = lato(fuori);
+    const titolo = `${casa}-${fuori} · ${a.titolo} · ${b.titolo}`;
+    return `<span class="consiglio-partita" title="${titolo.replace(/"/g, '&quot;')}">${a.html}<span class="partita-trattino">–</span>${b.html}</span>`;
 }
 
 // Il pallone accanto al nome dice anche quanto pesa: un secondo rigorista con il
@@ -4504,7 +4601,10 @@ function rigaConsiglio(g, titolare) {
     return `
         <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}${g.infortunio ? ' infortunato' : ''}">
             <span class="ruolo-${info.role}">${info.role}</span>
-            <span class="consiglio-nome">${info.name}${rigori}</span>
+            <span class="consiglio-nome">
+                <span class="consiglio-nome-testo">${info.name}${rigori}</span>
+                ${htmlPartitaSerieA(g.contesto)}
+            </span>
             <span class="consiglio-serieA">${siglaSerieA(g.squadraSerieA)}${glifoContesto(g.contesto)}</span>
             <span class="consiglio-forma">${frecciaForma(g)}</span>
             <span class="consiglio-nota"${titoloNota ? ` title="${titoloNota.replace(/"/g, '&quot;')}"` : ''}>${nota}</span>
@@ -4639,11 +4739,19 @@ function displayFormazione() {
                     <dt>Contesto della partita</dt>
                     <dd>
                         Prima di stimare cosa farà il giocatore si guarda la partita che lo aspetta.
-                        Tre leggeri vantaggi correggono la resa, fino a un massimo del 9% in tutto:
+                        Quattro leggeri vantaggi correggono la resa, fino a un massimo del 12% in tutto:
                         giocare <strong>in casa</strong>, affrontare un avversario <strong>più in
-                        basso in classifica</strong> (tanto più quanto è distante), e arrivarci con
-                        <strong>punti nelle ultime tre giornate</strong>. La freccia accanto alla
-                        sigla di Serie A riassume il conto, con il dettaglio nel suggerimento.
+                        basso in classifica</strong> (tanto più quanto è distante), arrivarci con
+                        <strong>punti nelle ultime tre giornate</strong>, e arrivarci <strong>più
+                        riposati</strong>: chi ha giocato da tre giorni o meno (coppa o turno
+                        infrasettimanale) perde fino al 3% contro chi ha riposato, metà con quattro
+                        giorni. Se hanno giocato tutte e due, non cambia niente. La freccia accanto alla
+                        sigla di Serie A riassume il conto, con il dettaglio nel suggerimento. Sotto il nome
+                        del giocatore c'è la partita: casa prima, la sua squadra in grassetto, e per
+                        tutte e due la posizione in classifica e la forma — ↑ da due punti a partita
+                        nelle ultime tre, ↓ sotto uno. «3g» dice che la squadra ha avuto solo tre
+                        giorni di riposo, «»» che fra pochi giorni ha un'altra partita e potrebbe
+                        far ruotare i titolari: il dettaglio è nel suggerimento al passaggio del mouse.
                     </dd>
                     <dt>Gioca</dt>
                     <dd>

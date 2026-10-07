@@ -211,3 +211,23 @@ test('senza la valutazione di una delle due squadre non si inventa niente', () =
     const s = valuta(app, `scenariSito(${JSON.stringify(partita)}, new Map([['A', { schierata: 1, consigliata: 2, inComune: 5 }]]))`);
     assert.equal(s, null);
 });
+
+// ------------------------------------------------------------------
+// La partita di Serie A sotto il nome
+// ------------------------------------------------------------------
+
+test('la partita mette la casa prima, la squadra del giocatore in grassetto, posizione e forma di tutte e due', () => {
+    esegui(app, `probabiliFormazioni = ${JSON.stringify({
+        classificaSerieA: { Inter: 2, Parma: 15 },
+        formaSerieA: { Inter: { punti: 7, partite: 3, esiti: 'VVP' }, Parma: { punti: 1, partite: 3, esiti: 'PNP' } }
+    })};`);
+    const html = valuta(app, `htmlPartitaSerieA({ noto: true, squadra: 'Parma', avversario: 'Inter', casa: false })`);
+    assert.ok(html.indexOf('INT') < html.indexOf('PAR'), 'la squadra di casa va prima');
+    assert.match(html, /<span class="partita-squadra">INT 2°<span class="contesto-su">↑<\/span>/);
+    assert.match(html, /<span class="partita-squadra sua">PAR 15°<span class="contesto-giu">↓<\/span>/);
+    assert.match(html, /title="Inter-Parma · Inter, 2° in classifica, ultime 3 VVP \(7 punti\) · Parma/);
+});
+
+test('senza partita nota non si scrive niente sotto il nome', () => {
+    assert.equal(valuta(app, 'htmlPartitaSerieA({ noto: false })'), '');
+});
