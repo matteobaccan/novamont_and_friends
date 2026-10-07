@@ -1,8 +1,8 @@
 {
   "stagione": "2026-2027",
   "giornata": 2,
-  "generato": "2026-10-07T20:13:52.290Z",
-  "probabiliDel": "2026-10-07T20:13:52.148Z",
+  "generato": "2026-10-07T20:16:50.455Z",
+  "probabiliDel": "2026-10-07T20:16:50.338Z",
   "turnoSerieA": 6,
   "parametri": {"GIORNATE_PRIOR": 4, "PESO_FORMA": 0.4, "EPS_MODULO": 1, "VOTO_RIPIEGO": 4.5, "PESO_CONTESTO": 0.03, "PESO_STANCHEZZA": 0.03, "BONUS_RIGORE_PARTITA": 0.35, "PROB_FUORI_LISTA": 0.15, "PROB_INFORTUNATO": 0.03},
   "squadre": {

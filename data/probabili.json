@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-07T20:13:52.148Z",
+  "aggiornato": "2026-10-07T20:16:50.338Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -211,7 +211,308 @@
       "esiti": "VNV"
     }
   },
-  "calendarioSquadre": {},
+  "calendarioSquadre": {
+    "Roma": {
+      "prossima": {
+        "data": "2026-10-11T10:30Z",
+        "avversario": "Como"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-14T19:00Z",
+        "competizione": "Champions League",
+        "avversario": "Real Madrid"
+      },
+      "giorniAllaSuccessiva": 3
+    },
+    "Inter": {
+      "prossima": {
+        "data": "2026-10-10T16:00Z",
+        "avversario": "Parma"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-13T19:00Z",
+        "competizione": "Champions League",
+        "avversario": "Club Brugge"
+      },
+      "giorniAllaSuccessiva": 3
+    },
+    "Lazio": {
+      "prossima": {
+        "data": "2026-10-11T13:00Z",
+        "avversario": "Monza"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-18T18:45Z",
+        "competizione": "Serie A",
+        "avversario": "Juventus"
+      },
+      "giorniAllaSuccessiva": 7
+    },
+    "Cagliari": {
+      "prossima": {
+        "data": "2026-10-11T18:45Z",
+        "avversario": "Juventus"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-19T16:30Z",
+        "competizione": "Serie A",
+        "avversario": "Monza"
+      },
+      "giorniAllaSuccessiva": 8
+    },
+    "Milan": {
+      "prossima": {
+        "data": "2026-10-11T16:00Z",
+        "avversario": "Sassuolo"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-15T16:45Z",
+        "competizione": "Europa League",
+        "avversario": "RB Salzburg"
+      },
+      "giorniAllaSuccessiva": 4
+    },
+    "Frosinone": {
+      "prossima": {
+        "data": "2026-10-10T18:45Z",
+        "avversario": "Napoli"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-16T18:45Z",
+        "competizione": "Serie A",
+        "avversario": "Sassuolo"
+      },
+      "giorniAllaSuccessiva": 6
+    },
+    "Juventus": {
+      "prossima": {
+        "data": "2026-10-11T18:45Z",
+        "avversario": "Cagliari"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-15T19:00Z",
+        "competizione": "Europa League",
+        "avversario": "Celta Vigo"
+      },
+      "giorniAllaSuccessiva": 4
+    },
+    "Como": {
+      "prossima": {
+        "data": "2026-10-11T10:30Z",
+        "avversario": "Roma"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-14T16:45Z",
+        "competizione": "Champions League",
+        "avversario": "Feyenoord Rotterdam"
+      },
+      "giorniAllaSuccessiva": 3
+    },
+    "Napoli": {
+      "prossima": {
+        "data": "2026-10-10T18:45Z",
+        "avversario": "Frosinone"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-13T19:00Z",
+        "competizione": "Champions League",
+        "avversario": "Villarreal"
+      },
+      "giorniAllaSuccessiva": 3
+    },
+    "Sassuolo": {
+      "prossima": {
+        "data": "2026-10-11T16:00Z",
+        "avversario": "Milan"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-16T18:45Z",
+        "competizione": "Serie A",
+        "avversario": "Frosinone"
+      },
+      "giorniAllaSuccessiva": 5
+    },
+    "Atalanta": {
+      "prossima": {
+        "data": "2026-10-12T16:30Z",
+        "avversario": "Venezia"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-15T19:00Z",
+        "competizione": "Conference League",
+        "avversario": "Pafos"
+      },
+      "giorniAllaSuccessiva": 3
+    },
+    "Lecce": {
+      "prossima": {
+        "data": "2026-10-11T13:00Z",
+        "avversario": "Bologna"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-18T10:30Z",
+        "competizione": "Serie A",
+        "avversario": "Udinese"
+      },
+      "giorniAllaSuccessiva": 7
+    },
+    "Udinese": {
+      "prossima": {
+        "data": "2026-10-12T18:45Z",
+        "avversario": "Torino"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-18T10:30Z",
+        "competizione": "Serie A",
+        "avversario": "Lecce"
+      },
+      "giorniAllaSuccessiva": 6
+    },
+    "Torino": {
+      "prossima": {
+        "data": "2026-10-12T18:45Z",
+        "avversario": "Udinese"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-19T18:45Z",
+        "competizione": "Serie A",
+        "avversario": "Parma"
+      },
+      "giorniAllaSuccessiva": 7
+    },
+    "Parma": {
+      "prossima": {
+        "data": "2026-10-10T16:00Z",
+        "avversario": "Inter"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-19T18:45Z",
+        "competizione": "Serie A",
+        "avversario": "Torino"
+      },
+      "giorniAllaSuccessiva": 9
+    },
+    "Monza": {
+      "prossima": {
+        "data": "2026-10-11T13:00Z",
+        "avversario": "Lazio"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-19T16:30Z",
+        "competizione": "Serie A",
+        "avversario": "Cagliari"
+      },
+      "giorniAllaSuccessiva": 8
+    },
+    "Fiorentina": {
+      "prossima": {
+        "data": "2026-10-10T13:00Z",
+        "avversario": "Genoa"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-18T13:00Z",
+        "competizione": "Serie A",
+        "avversario": "Como"
+      },
+      "giorniAllaSuccessiva": 8
+    },
+    "Bologna": {
+      "prossima": {
+        "data": "2026-10-11T13:00Z",
+        "avversario": "Lecce"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-17T16:00Z",
+        "competizione": "Serie A",
+        "avversario": "Internazionale"
+      },
+      "giorniAllaSuccessiva": 6
+    },
+    "Genoa": {
+      "prossima": {
+        "data": "2026-10-10T13:00Z",
+        "avversario": "Fiorentina"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-17T18:45Z",
+        "competizione": "Serie A",
+        "avversario": "AS Roma"
+      },
+      "giorniAllaSuccessiva": 7
+    },
+    "Venezia": {
+      "prossima": {
+        "data": "2026-10-12T16:30Z",
+        "avversario": "Atalanta"
+      },
+      "precedente": null,
+      "giorniRiposo": null,
+      "partiteUltimaSettimana": 0,
+      "dopo": {
+        "data": "2026-10-17T13:00Z",
+        "competizione": "Serie A",
+        "avversario": "Napoli"
+      },
+      "giorniAllaSuccessiva": 5
+    }
+  },
   "rigoristi": {
     "Atalanta": [
       {
