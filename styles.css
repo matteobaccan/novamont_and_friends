@@ -5519,3 +5519,13 @@ body.sipario-aperto { overflow: hidden; }
 .consiglio-partita .contesto-giu,
 .consiglio-partita .contesto-pari { margin-left: 0.1rem; font-weight: 700; }
 
+/* Riposo corto e partita ravvicinata, accanto alla squadra */
+.consiglio-partita .partita-riposo,
+.consiglio-partita .partita-turnover {
+    margin-left: 0.2rem;
+    font-weight: 700;
+    color: #b45309;
+}
+[data-theme="dark"] .consiglio-partita .partita-riposo,
+[data-theme="dark"] .consiglio-partita .partita-turnover { color: #fbbf24; }
+
