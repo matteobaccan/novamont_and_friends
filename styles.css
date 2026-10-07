@@ -4292,7 +4292,7 @@ html.theme-transition *:after {
 [data-theme="dark"] .contesto-su { color: #4ade80; }
 [data-theme="dark"] .contesto-giu { color: #f87171; }
 
-.consiglio-row.infortunato .consiglio-nome { text-decoration: line-through; opacity: 0.7; }
+.consiglio-row.infortunato .consiglio-nome-testo { text-decoration: line-through; opacity: 0.7; }
 .consiglio-row.infortunato .consiglio-nota { color: #dc2626; opacity: 0.9; }
 
 [data-theme="dark"] .consiglio-row.infortunato .consiglio-nota { color: #f87171; }
@@ -5496,4 +5496,26 @@ body.sipario-aperto { overflow: hidden; }
 }
 .confronto-valore.sito { color: #0f766e; font-weight: 700; }
 [data-theme="dark"] .confronto-valore.sito { color: #5eead4; }
+
+/* La partita di Serie A sotto il nome, nella formazione consigliata */
+.consiglio-nome-testo,
+.consiglio-partita {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.consiglio-partita {
+    font-size: 0.64rem;
+    opacity: 0.75;
+    margin-top: 0.05rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.consiglio-partita .partita-squadra.sua { font-weight: 700; }
+.consiglio-partita .partita-trattino { margin: 0 0.25rem; opacity: 0.6; }
+.consiglio-partita .contesto-su,
+.consiglio-partita .contesto-giu,
+.consiglio-partita .contesto-pari { margin-left: 0.1rem; font-weight: 700; }
 
