@@ -4420,6 +4420,7 @@ function displayFormazione() {
         ${avvisoDati}
         ${avvisoProbabili}
         ${corpo}
+        <div id="consiglio-bilancio"></div>
         <details class="consiglio-spiegazione">
             <summary><i class="fas fa-circle-info"></i> Come nasce questo suggerimento</summary>
             <div class="spiegazione-corpo">
@@ -4503,6 +4504,91 @@ function displayFormazione() {
             displayFormazione();
         });
     }
+
+    // Il bilancio arriva da un file a parte e dopo: la formazione non lo aspetta
+    const stagione = currentSeasonId;
+    caricaValutazioneConsigli(stagione).then(valutazione => {
+        const posto = document.getElementById('consiglio-bilancio');
+        if (posto && stagione === currentSeasonId) posto.innerHTML = htmlBilancioAllenatori(valutazione, scelta);
+    });
+}
+
+// Valutazione dei consigli passati, scritta da valuta-consigli.mjs dopo ogni
+// giornata. Una stagione senza consigli salvati non ha il file, e va bene così:
+// la sezione semplicemente non compare.
+const valutazioniConsigli = new Map();
+
+async function caricaValutazioneConsigli(stagione) {
+    if (!stagione) return null;
+    if (!valutazioniConsigli.has(stagione)) {
+        valutazioniConsigli.set(stagione, fetchJsonNoCache(`data/consigli/${stagione}/valutazione.json`)
+            .catch(() => null));
+    }
+    return valutazioniConsigli.get(stagione);
+}
+
+function segnoDecimale(valore, decimali = 1) {
+    const testo = Math.abs(valore).toFixed(decimali).replace('.', ',');
+    return valore > 0 ? `+${testo}` : (valore < 0 ? `−${testo}` : testo);
+}
+
+// Ogni fantallenatore contro il consiglio del sito: i punti che ha fatto con la
+// formazione schierata meno quelli che avrebbe fatto con quella consigliata,
+// contati allo stesso modo. Positivo vuol dire che ha visto meglio del modello.
+function htmlBilancioAllenatori(valutazione, squadraScelta) {
+    if (!valutazione || !valutazione.allenatori || valutazione.allenatori.length === 0) return '';
+
+    const giornate = valutazione.giornate.length;
+    const righe = valutazione.allenatori.map(b => {
+        const classe = b.differenza > 0 ? 'bilancio-meglio' : (b.differenza < 0 ? 'bilancio-peggio' : '');
+        return `
+            <tr class="${b.squadra === squadraScelta ? 'bilancio-scelta' : ''}">
+                <td>${b.squadra}</td>
+                <td class="num">${b.schierata.toFixed(1).replace('.', ',')}</td>
+                <td class="num">${b.consigliata.toFixed(1).replace('.', ',')}</td>
+                <td class="num ${classe}">${segnoDecimale(b.differenza)}</td>
+                <td class="num" title="Giornate in cui ha fatto meglio, uguale o peggio del consiglio">${b.meglio}-${b.pari}-${b.peggio}</td>
+                <td class="num" title="Titolari in comune con il consiglio, in media">${String(b.inComune).replace('.', ',')}/11</td>
+            </tr>
+        `;
+    }).join('');
+
+    const modello = valutazione.modello;
+    const resa = modello && modello.resa.tutti.voti ? modello.resa.tutti : null;
+    const gioca = modello && modello.gioca.giocatori ? modello.gioca : null;
+    const rigaModello = resa || gioca
+        ? `<p class="bilancio-modello">
+               ${resa ? `La resa prevista sbaglia in media di <strong>${resa.erroreMedio.toFixed(2).replace('.', ',')}</strong>
+               punti a giocatore (${resa.voti} voti), ${resa.distorsione >= 0 ? 'per difetto' : 'per eccesso'}
+               di ${Math.abs(resa.distorsione).toFixed(2).replace('.', ',')} in media.` : ''}
+               ${gioca ? `Dei giocatori in rosa ne attendeva in campo ${String(gioca.attesiInCampo).replace('.', ',')},
+               ne sono scesi ${gioca.inCampo} (Brier ${String(gioca.brier).replace('.', ',')}: zero è perfetto, 0,25 è tirare a indovinare).` : ''}
+           </p>`
+        : '';
+
+    return `
+        <section class="consiglio-bilancio">
+            <h4><i class="fas fa-scale-balanced"></i> Allenatori contro il consiglio</h4>
+            <p class="bilancio-nota">
+                Su ${giornate} giornat${giornate === 1 ? 'a' : 'e'}: i punti della formazione schierata e di quella che
+                il sito consigliava prima del fischio, contati allo stesso modo (fantavoto e al massimo tre cambi
+                pari ruolo, senza bonus casa né modificatori). Δ positivo: il fantallenatore ha visto meglio del modello.
+            </p>
+            <div class="bilancio-scorri">
+                <table class="bilancio-tabella">
+                    <thead>
+                        <tr>
+                            <th>Squadra</th><th class="num">Schierata</th><th class="num">Consigliata</th>
+                            <th class="num">Δ</th><th class="num" title="Meglio-pari-peggio del consiglio">M-P-P</th>
+                            <th class="num">In comune</th>
+                        </tr>
+                    </thead>
+                    <tbody>${righe}</tbody>
+                </table>
+            </div>
+            ${rigaModello}
+        </section>
+    `;
 }
 
 function displayRosters() {

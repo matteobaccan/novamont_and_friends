@@ -5,8 +5,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { caricaScript, valuta, esegui } from './aiuto/carica-script.mjs';
-import { sovrascrivibile } from '../.claude/skills/aggiorna-giornata/salva-consigli.mjs';
-import { punteggioConCambi, punteggioIdeale } from '../.claude/skills/aggiorna-giornata/valuta-consigli.mjs';
+import { sovrascrivibile, jsonCompatto } from '../.claude/skills/aggiorna-giornata/salva-consigli.mjs';
+import { punteggioConCambi, punteggioIdeale, erroreModello, riassumiErrore, bilancioAllenatori } from '../.claude/skills/aggiorna-giornata/valuta-consigli.mjs';
+import { combinazioni, datiPrimaDi } from '../.claude/skills/aggiorna-giornata/rigioca-consigli.mjs';
 
 const app = caricaScript();
 
@@ -105,4 +106,72 @@ test('la formazione ideale prova i moduli e tiene il migliore', () => {
     const voti = Object.fromEntries(rosa.map(pid => [pid, r(pid) === 'A' ? 10 : 6]));
     // Tre attaccanti da 10 battono qualunque modulo con meno attaccanti
     assert.equal(punteggioIdeale(rosa, voti, r), 6 + 3 * 6 + 4 * 6 + 3 * 10);
+});
+
+// ------------------------------------------------------------------
+// Precisione del modello e bilancio degli allenatori
+// ------------------------------------------------------------------
+
+test('la resa si giudica su chi ha preso il voto, la probabilità su tutti', () => {
+    const rosa = [
+        { pid: 1, ruolo: 'C', resa: 6, rigori: 0.5, probabilita: 1 },   // gioca, fa 8: +1,5
+        { pid: 2, ruolo: 'A', resa: 7, rigori: 0, probabilita: 0.5 },   // gioca, fa 5: −2
+        { pid: 3, ruolo: 'D', resa: 6, rigori: 0, probabilita: 0.5 }    // non gioca
+    ];
+    const r = riassumiErrore([erroreModello(rosa, { 1: 8, 2: 5 })]);
+    assert.equal(r.resa.tutti.voti, 2);
+    assert.equal(r.resa.tutti.erroreMedio, 1.75);
+    assert.equal(r.resa.tutti.distorsione, -0.25);
+    assert.equal(r.resa.D.voti, 0);
+    // (1−1)² + (0,5−1)² + (0,5−0)² = 0,5 su tre giocatori
+    assert.equal(r.gioca.brier, 0.167);
+    assert.equal(r.gioca.inCampo, 2);
+});
+
+test('il bilancio degli allenatori somma le giornate e mette in cima chi ha battuto il consiglio', () => {
+    const giornate = [
+        { squadre: [
+            { squadra: 'A', schierata: 70, consigliata: 66, ideale: 80, inComune: 9 },
+            { squadra: 'B', schierata: 60, consigliata: 65, ideale: 75, inComune: 7 }
+        ] },
+        { squadre: [
+            { squadra: 'A', schierata: 68, consigliata: 68, ideale: 74, inComune: 11 },
+            { squadra: 'B', schierata: 72, consigliata: 70, ideale: 78, inComune: 8 }
+        ] }
+    ];
+    const [primo, secondo] = bilancioAllenatori(giornate);
+    assert.equal(primo.squadra, 'A');
+    assert.equal(primo.differenza, 4);
+    assert.deepEqual([primo.meglio, primo.pari, primo.peggio], [1, 1, 0]);
+    assert.equal(primo.inComune, 10);
+    assert.equal(secondo.differenza, -3);
+    assert.deepEqual([secondo.meglio, secondo.pari, secondo.peggio], [1, 0, 1]);
+});
+
+test('rigiocare una giornata usa solo le giornate precedenti e la rosa di quella giornata', () => {
+    const dati = {
+        rounds: [{ round: 1 }, { round: 2 }, { round: 3 }],
+        rosterHistory: [{ fromRound: 1 }, { fromRound: 3 }, { fromRound: 4 }]
+    };
+    const prima = datiPrimaDi(dati, 3);
+    assert.deepEqual(prima.rounds.map(r => r.round), [1, 2]);
+    assert.deepEqual(prima.rosterHistory.map(s => s.fromRound), [1, 3]);
+});
+
+test('la griglia dei pesi prova tutte le combinazioni', () => {
+    const c = combinazioni({ A: [1, 2], B: [3, 4, 5] });
+    assert.equal(c.length, 6);
+    assert.deepEqual(c[0], { A: 1, B: 3 });
+    assert.deepEqual(combinazioni({}), [{}]);
+});
+
+test('una costante sostituita cambia il modello, una inesistente è un errore', () => {
+    const prova = caricaScript({ costanti: { GIORNATE_PRIOR: 0 } });
+    assert.equal(valuta(prova, 'GIORNATE_PRIOR'), 0);
+    assert.throws(() => caricaScript({ costanti: { NON_ESISTE: 1 } }), /NON_ESISTE/);
+});
+
+test('il JSON compatto resta JSON valido anche con virgole dentro le stringhe', () => {
+    const valore = { a: [1, 2], b: { nome: 'Rossi, M.', n: null }, c: [{ x: 'y,z' }] };
+    assert.deepEqual(JSON.parse(jsonCompatto(valore)), valore);
 });

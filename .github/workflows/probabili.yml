@@ -103,6 +103,11 @@ jobs:
       - name: Salva la formazione consigliata
         run: node .claude/skills/aggiorna-giornata/salva-consigli.mjs
 
+      # Rifà ogni volta il conto dei consigli passati: quando una giornata viene
+      # inserita, al giro dopo la sua valutazione è già nel file che il sito legge
+      - name: Valuta i consigli delle giornate giocate
+        run: node .claude/skills/aggiorna-giornata/valuta-consigli.mjs --scrivi
+
       # Si committa a ogni giro, anche quando le percentuali non cambiano: lo
       # scarto sarebbe il solo campo 'aggiornato', ed è proprio quello che la
       # pagina mostra per dire quanto sono fresche le probabili. Saltare il

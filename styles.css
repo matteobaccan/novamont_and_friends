@@ -5432,3 +5432,50 @@ body.sipario-aperto { overflow: hidden; }
     .nav,
     .nav-burger span { transition: none; }
 }
+
+/* Allenatori contro il consiglio, sotto la formazione consigliata */
+.consiglio-bilancio {
+    margin-top: 1.2rem;
+    background: var(--glass-bg, rgba(255, 255, 255, 0.6));
+    border: 1px solid rgba(127, 127, 127, 0.18);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+}
+
+.consiglio-bilancio h4 { margin: 0 0 0.4rem; font-size: 0.95rem; }
+.consiglio-bilancio h4 i { opacity: 0.55; margin-right: 0.3rem; }
+
+.bilancio-nota,
+.bilancio-modello {
+    font-size: 0.75rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+    margin: 0 0 0.7rem;
+}
+
+.bilancio-modello { margin: 0.7rem 0 0; }
+
+.bilancio-scorri { overflow-x: auto; }
+
+.bilancio-tabella {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+}
+
+.bilancio-tabella th,
+.bilancio-tabella td {
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid rgba(127, 127, 127, 0.15);
+    text-align: left;
+    white-space: nowrap;
+}
+
+.bilancio-tabella th { font-size: 0.7rem; font-weight: 600; opacity: 0.7; }
+.bilancio-tabella .num { text-align: right; font-variant-numeric: tabular-nums; }
+.bilancio-tabella tr.bilancio-scelta td { font-weight: 700; background: rgba(127, 127, 127, 0.08); }
+
+.bilancio-meglio { color: #16a34a; }
+.bilancio-peggio { color: #dc2626; }
+[data-theme="dark"] .bilancio-meglio { color: #4ade80; }
+[data-theme="dark"] .bilancio-peggio { color: #f87171; }

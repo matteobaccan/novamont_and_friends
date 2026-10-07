@@ -235,16 +235,37 @@ consigliata di ogni squadra per la prossima giornata in
 probabili riguardano lo stesso turno di Serie A e nessuna partita è cominciata, poi resta
 congelato: è il consiglio che il sito dava prima del fischio.
 
-Quando la giornata è stata inserita, il confronto con la realtà è:
+Ogni consiglio salva anche la previsione per **tutta la rosa** (atteso, resa, media di
+ruolo, probabilità di giocare) e i pesi del modello con cui è stato dato.
+
+Il confronto con la realtà lo fa `valuta-consigli.mjs`, che il workflow lancia a ogni giro
+con `--scrivi`: la valutazione finisce in `data/consigli/<stagione>/valutazione.json` e
+il sito la mostra sotto la formazione consigliata. A mano:
 
 ```bash
-node .claude/skills/aggiorna-giornata/valuta-consigli.mjs [stagione]
+node .claude/skills/aggiorna-giornata/valuta-consigli.mjs [stagione] [--scrivi]
 ```
 
-Per ogni squadra stampa i punti della formazione schierata, di quella consigliata e di
-quella ideale, contati tutti allo stesso modo (fantavoto, massimo tre cambi pari ruolo,
-niente bonus casa né modificatori). È il numero da guardare prima di toccare i pesi in
-`script.js`.
+Misura due cose:
+
+- **il modello**: errore medio e distorsione della resa prevista, per ruolo, su chi ha
+  preso il voto; e il punteggio di Brier della probabilità di giocare (0 perfetto, 0,25
+  tirare a indovinare)
+- **i fantallenatori**: punti della formazione schierata contro quella consigliata,
+  giornate meglio/pari/peggio e titolari in comune. Le formazioni si contano tutte allo
+  stesso modo (fantavoto, massimo tre cambi pari ruolo, niente bonus casa né modificatori)
+
+Per scegliere i pesi, `rigioca-consigli.mjs` rifà le giornate valutate con i dati di
+allora (giornate precedenti e probabili ripescate dalla storia git) per ogni combinazione
+di pesi, e le ordina per punti della formazione consigliata:
+
+```bash
+git fetch --unshallow   # serve la storia di data/probabili.json
+node .claude/skills/aggiorna-giornata/rigioca-consigli.mjs GIORNATE_PRIOR=2,4,6 PESO_FORMA=0.2,0.4
+```
+
+Su poche giornate le differenze sono rumore: aspettare almeno 5-6 giornate valutate prima
+di cambiare un peso in `script.js`.
 
 ## Dopo la scrittura
 
