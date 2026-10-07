@@ -227,6 +227,25 @@ Se si ferma con `nessuna squadra trovata`, la pagina ha cambiato struttura e van
 le espressioni regolari in `scarica-probabili.mjs`. Se invece a mancare è una delle altre
 chiavi, lo script si limita a un warning: sono rifiniture, e il suggeritore regge lo stesso.
 
+## Il suggeritore ha avuto ragione?
+
+Lo stesso workflow, dopo le probabili, lancia `salva-consigli.mjs`: salva la formazione
+consigliata di ogni squadra per la prossima giornata in
+`data/consigli/<stagione>/giornata-<N>.json`. Il file si riscrive a ogni giro finché le
+probabili riguardano lo stesso turno di Serie A e nessuna partita è cominciata, poi resta
+congelato: è il consiglio che il sito dava prima del fischio.
+
+Quando la giornata è stata inserita, il confronto con la realtà è:
+
+```bash
+node .claude/skills/aggiorna-giornata/valuta-consigli.mjs [stagione]
+```
+
+Per ogni squadra stampa i punti della formazione schierata, di quella consigliata e di
+quella ideale, contati tutti allo stesso modo (fantavoto, massimo tre cambi pari ruolo,
+niente bonus casa né modificatori). È il numero da guardare prima di toccare i pesi in
+`script.js`.
+
 ## Dopo la scrittura
 
 `git add` dei file in `data/`. Il sito è statico: nessun build, il push su `main` basta.
