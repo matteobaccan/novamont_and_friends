@@ -216,6 +216,7 @@ un'istantanea della **prossima** giornata e non storico, con:
 | `rigoristi` | pagina rigoristi | spareggio a parità di punteggio atteso |
 | `infortunati` | pagina infortunati | chi non schierare, con il motivo |
 | `classificaSerieA`, `prossimoTurno`, `formaSerieA` | widget e calendario | il contesto della partita |
+| `calendarioSquadre` | API pubblica ESPN (Serie A, Coppa Italia, coppe europee) | giorni di riposo prima del turno e partita successiva: stanchezza e rischio turnover |
 
 Giocatori e rigoristi portano il pid nell'href, quindi combaciano esattamente con
 `data/<stagione>.json`. Gli **infortunati no**: quella pagina non espone id, quindi si
@@ -223,6 +224,11 @@ salvano nome e squadra e l'abbinamento alla rosa lo fa il browser, che ha già l
 
 Se stampa `ATTENZIONE, squadre senza 11 titolari` le probabili non sono ancora complete
 (succede a inizio settimana): il file resta valido ma il suggerimento è più debole.
+Se stampa `squadre di Serie A non riconosciute`, ESPN chiama una squadra in un modo che
+`nomeSerieA()` in `calendario-squadre.mjs` non riporta al nome di fantacalcio.it: va
+aggiunta in `ALIAS`. Finché manca, quella squadra non ha calendario e la stanchezza la
+ignora.
+
 Se si ferma con `nessuna squadra trovata`, la pagina ha cambiato struttura e vanno riviste
 le espressioni regolari in `scarica-probabili.mjs`. Se invece a mancare è una delle altre
 chiavi, lo script si limita a un warning: sono rifiniture, e il suggeritore regge lo stesso.

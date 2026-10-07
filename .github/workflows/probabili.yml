@@ -87,6 +87,7 @@ jobs:
               infortunati: (p.infortunati || []).length,
               classifica: Object.keys(p.classificaSerieA || {}).length,
               forma: Object.keys(p.formaSerieA || {}).length,
+              calendario: Object.keys(p.calendarioSquadre || {}).length,
               partite: ((p.prossimoTurno || {}).partite || []).length
             };
             for (const [nome, quanti] of Object.entries(rifiniture)) {

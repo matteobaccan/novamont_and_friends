@@ -6,6 +6,9 @@
 //   - rigoristi: chi batte i rigori, in ordine di gerarchia
 //   - infortunati: chi non schierare, con il motivo
 //   - contesto: classifica di Serie A, partite del prossimo turno, forma recente
+//   - calendario: partite di coppa e di campionato a ridosso del turno, per la
+//     stanchezza di chi ha giocato a metà settimana (da ESPN, vedi
+//     calendario-squadre.mjs)
 //
 //   node scarica-probabili.mjs [--dry-run]
 //
@@ -17,6 +20,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { scaricaCalendario } from './calendario-squadre.mjs';
 
 const URL_PROBABILI = 'https://www.fantacalcio.it/probabili-formazioni-serie-a';
 const URL_RIGORISTI = 'https://www.fantacalcio.it/rigoristi-serie-a';
@@ -30,6 +34,12 @@ const TURNI_FORMA = 3;
 function fail(message) {
     console.error(`ERRORE: ${message}`);
     process.exit(1);
+}
+
+async function scaricaJson(url) {
+    const res = await fetch(url, { headers: { accept: 'application/json' } });
+    if (!res.ok) throw new Error(`${url} ha risposto ${res.status}`);
+    return res.json();
 }
 
 async function scarica(url) {
@@ -357,6 +367,28 @@ async function main() {
     const forma = turno ? await scaricaForma(turno) : {};
     console.log(`Forma recente: ${Object.keys(forma).length} squadre`);
 
+    // Le squadre di Serie A si prendono da tutte le fonti già lette: se una
+    // manca dalla classifica, c'è comunque nelle probabili o nel calendario
+    const squadreSerieA = [...new Set([
+        ...Object.keys(classifica),
+        ...squadre.map(s => s.nome),
+        ...partite.flatMap(p => [p.casa, p.fuori])
+    ])];
+    let calendario = {};
+    try {
+        console.log('Calendario di tutte le competizioni:');
+        const risultato = await scaricaCalendario(squadreSerieA, scaricaJson);
+        calendario = risultato.calendario;
+        const stanche = Object.entries(calendario).filter(([, c]) => c.giorniRiposo !== null && c.giorniRiposo <= 4);
+        console.log(`  ${Object.keys(calendario).length} squadre con la prossima di Serie A, ${stanche.length} con 4 giorni di riposo o meno`
+            + (stanche.length ? `: ${stanche.map(([s, c]) => `${s} ${c.giorniRiposo}g`).join(', ')}` : ''));
+        if (risultato.sconosciute.length) {
+            console.warn(`  ATTENZIONE, squadre di Serie A non riconosciute: ${risultato.sconosciute.join(', ')}`);
+        }
+    } catch (error) {
+        console.warn(`Calendario non disponibile: ${error.message}`);
+    }
+
     if (dryRun) {
         console.log('\n--dry-run: nessuna scrittura.');
         return;
@@ -369,6 +401,7 @@ async function main() {
         prossimoTurno: turno ? { numero: turno, partite } : null,
         classificaSerieA: classifica,
         formaSerieA: forma,
+        calendarioSquadre: calendario,
         rigoristi,
         infortunati,
         giocatori
