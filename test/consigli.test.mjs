@@ -175,3 +175,39 @@ test('il JSON compatto resta JSON valido anche con virgole dentro le stringhe', 
     const valore = { a: [1, 2], b: { nome: 'Rossi, M.', n: null }, c: [{ x: 'y,z' }] };
     assert.deepEqual(JSON.parse(jsonCompatto(valore)), valore);
 });
+
+// ------------------------------------------------------------------
+// E se avesse giocato il sito?
+// ------------------------------------------------------------------
+
+const partita = { homeTeam: 'A', awayTeam: 'B', homeScore: 70, awayScore: 72.5 };
+const perSquadra = (casa, fuori) => new Map([
+    ['A', { squadra: 'A', inComune: 8, ...casa }],
+    ['B', { squadra: 'B', inComune: 9, ...fuori }]
+]);
+
+test('il punteggio col sito è quello vero più lo scarto fra consigliata e schierata', () => {
+    const s = valuta(app, `scenariSito(${JSON.stringify(partita)}, new Map(${JSON.stringify([...perSquadra({ schierata: 68, consigliata: 75 }, { schierata: 70, consigliata: 70 })])}))`);
+    assert.equal(s.reale.casa, 70);
+    assert.equal(s.sitoCasa.casa, 77);
+    assert.equal(s.sitoFuori.fuori, 72.5);
+    // 70-72,5 è 1-2; 77-72,5 fa 2-2 per gol, e lo scarto di 4,5 dà il terzo
+    assert.equal(`${s.reale.golCasa}-${s.reale.golFuori}`, '1-2');
+    assert.equal(`${s.sitoCasa.golCasa}-${s.sitoCasa.golFuori}`, '3-2');
+});
+
+test('Caressa racconta il risultato che cambia, Bergomi fa i conti dal lato del fantallenatore', () => {
+    const mappa = `new Map(${JSON.stringify([...perSquadra({ schierata: 68, consigliata: 75 }, { schierata: 70, consigliata: 67 })])})`;
+    const c = valuta(app, `commentoSito(${JSON.stringify(partita)}, scenariSito(${JSON.stringify(partita)}, ${mappa}))`);
+    // A passa da sconfitta a vittoria, B solo da vittoria a pari: vince il cambio più grosso
+    assert.match(c.caressa, /Con la formazione del sito A l'avrebbe vinta 3-2/);
+    // A ha fatto 7 punti meno del sito, B 3 punti più del sito
+    assert.match(c.bergomi, /A −7,0 sul sito/);
+    assert.match(c.bergomi, /B \+3,0 sul sito/);
+    assert.match(c.bergomi, /Uno a uno/);
+});
+
+test('senza la valutazione di una delle due squadre non si inventa niente', () => {
+    const s = valuta(app, `scenariSito(${JSON.stringify(partita)}, new Map([['A', { schierata: 1, consigliata: 2, inComune: 5 }]]))`);
+    assert.equal(s, null);
+});

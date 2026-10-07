@@ -2944,7 +2944,9 @@ function displayRoundResults(roundNumber) {
         }
 
         const coachRankingHtml = generateCoachRanking(round);
-        coachRankingContainer.innerHTML = generalHtml + (coachRankingHtml || '');
+        coachRankingContainer.innerHTML = generalHtml
+            + `<div class="se-sito-giornata" data-giornata="${round.round}"></div>`
+            + (coachRankingHtml || '');
     }
     round.matches.forEach((match, index) => {
         let resultClass = '';
@@ -3159,6 +3161,7 @@ function displayRoundResults(roundNumber) {
                 </div>
                 ${idealSection}
                 ${commentarySection}
+                <div class="se-sito" data-giornata="${round.round}" data-partita="${index}"></div>
                 ${generateLineupSection(match, index)}
             </div>
         `;
@@ -3166,6 +3169,196 @@ function displayRoundResults(roundNumber) {
 
     roundResults.innerHTML = html;
     setupLineupToggles();
+    riempiSeGiocavaIlSito(round);
+}
+
+// ============================================================
+// E se avesse giocato il sito?
+// ============================================================
+
+// La valutazione dei consigli arriva dopo e da un file a parte: le caselle
+// vuote lasciate nella giornata si riempiono quando c'è, e restano vuote (e
+// invisibili) per le giornate senza un consiglio salvato prima del fischio.
+function riempiSeGiocavaIlSito(round) {
+    const stagione = currentSeasonId;
+    caricaValutazioneConsigli(stagione).then(valutazione => {
+        if (stagione !== currentSeasonId) return;
+        const giornata = valutazione && (valutazione.giornate || []).find(g => g.giornata === round.round);
+        if (!giornata) return;
+
+        const perSquadra = new Map(giornata.squadre.map(r => [r.squadra, r]));
+
+        document.querySelectorAll(`.se-sito[data-giornata="${round.round}"]`).forEach(posto => {
+            const match = round.matches[Number(posto.dataset.partita)];
+            const scenari = match && scenariSito(match, perSquadra);
+            if (scenari) posto.innerHTML = htmlSeGiocavaIlSito(match, scenari);
+        });
+
+        const riepilogo = document.querySelector(`.se-sito-giornata[data-giornata="${round.round}"]`);
+        if (riepilogo) riepilogo.innerHTML = htmlSitoDiGiornata(round, perSquadra);
+    });
+}
+
+const mezzoPunto = (x) => Math.round(x * 2) / 2;
+
+// I tre risultati alternativi di una partita: il sito in panchina da una parte
+// sola, e da tutte e due. Il punteggio col sito è quello vero più la differenza
+// fra la formazione consigliata e quella schierata, contate allo stesso modo:
+// così bonus casa e modificatori restano quelli che la partita ha avuto davvero.
+function scenariSito(match, perSquadra) {
+    const casa = perSquadra.get(match.homeTeam);
+    const fuori = perSquadra.get(match.awayTeam);
+    if (!casa || !fuori) return null;
+
+    const sitoCasa = mezzoPunto(match.homeScore + casa.consigliata - casa.schierata);
+    const sitoFuori = mezzoPunto(match.awayScore + fuori.consigliata - fuori.schierata);
+
+    const scenario = (punteggioCasa, punteggioFuori) => {
+        const gol = calculateMatchGoals(punteggioCasa, punteggioFuori);
+        return { casa: punteggioCasa, fuori: punteggioFuori, golCasa: gol.homeGoals, golFuori: gol.awayGoals };
+    };
+
+    return {
+        reale: scenario(match.homeScore, match.awayScore),
+        sitoCasa: scenario(sitoCasa, match.awayScore),
+        sitoFuori: scenario(match.homeScore, sitoFuori),
+        sitoEntrambe: scenario(sitoCasa, sitoFuori),
+        casa,
+        fuori
+    };
+}
+
+function esitoPer(lato, s) {
+    const mie = lato === 'casa' ? s.golCasa : s.golFuori;
+    const loro = lato === 'casa' ? s.golFuori : s.golCasa;
+    return mie > loro ? 'vittoria' : (mie < loro ? 'sconfitta' : 'pareggio');
+}
+
+const risultatoGol = (s) => `${s.golCasa}-${s.golFuori}`;
+
+// Caressa racconta il cambio di risultato più clamoroso, Bergomi fa i conti
+function commentoSito(match, scenari) {
+    const casi = [
+        { squadra: match.homeTeam, lato: 'casa', alternativo: scenari.sitoCasa, r: scenari.casa },
+        { squadra: match.awayTeam, lato: 'fuori', alternativo: scenari.sitoFuori, r: scenari.fuori }
+    ].map(c => ({
+        ...c,
+        reale: esitoPer(c.lato, scenari.reale),
+        col: esitoPer(c.lato, c.alternativo),
+        scarto: c.r.consigliata - c.r.schierata
+    }));
+
+    const PESO_ESITO = { vittoria: 3, pareggio: 1, sconfitta: 0 };
+    const cambiati = casi
+        .filter(c => c.reale !== c.col)
+        .sort((a, b) => Math.abs(PESO_ESITO[b.col] - PESO_ESITO[b.reale]) - Math.abs(PESO_ESITO[a.col] - PESO_ESITO[a.reale]));
+
+    let caressa;
+    if (cambiati.length > 0) {
+        const c = cambiati[0];
+        const ris = risultatoGol(c.alternativo);
+        const frasi = {
+            'sconfitta>vittoria': `Clamoroso! Con la formazione del sito ${c.squadra} l'avrebbe vinta ${ris}! Questa il fantallenatore se la sogna stanotte!`,
+            'sconfitta>pareggio': `Con l'undici del sito ${c.squadra} avrebbe strappato almeno il pari, ${ris}: un punto rimasto in panchina!`,
+            'pareggio>vittoria': `${c.squadra} col sito l'avrebbe portata a casa, ${ris}: due punti buttati via!`,
+            'vittoria>sconfitta': `Uomo batte macchina! Con la formazione del sito ${c.squadra} l'avrebbe persa ${ris}: il fantallenatore ha visto più lungo dell'algoritmo!`,
+            'vittoria>pareggio': `${c.squadra} ha fatto meglio del sito: con il suo consiglio sarebbe finita ${ris} e la vittoria sarebbe sfumata!`,
+            'pareggio>sconfitta': `${c.squadra} si tiene stretto il pari: col sito in panchina sarebbe finita ${ris}, sconfitta!`
+        };
+        caressa = frasi[`${c.reale}>${c.col}`];
+    } else {
+        const entrambe = scenari.sitoEntrambe;
+        caressa = risultatoGol(entrambe) === risultatoGol(scenari.reale)
+            ? `Anche con il sito in panchina da tutte e due le parti sarebbe finita ${risultatoGol(entrambe)}: verdetto confermato, l'algoritmo non sposta niente!`
+            : `Da sola nessuna delle due formazioni del sito cambia il verdetto, ma con tutte e due sarebbe finita ${risultatoGol(entrambe)}!`;
+    }
+
+    // Dal punto di vista del fantallenatore: positivo vuol dire meglio del sito
+    const conto = (c) => `${c.squadra} ${segnoDecimale(-c.scarto)} sul sito con ${c.r.inComune}/11 titolari in comune`;
+    const meglio = casi.filter(c => c.scarto < 0).length;
+    const peggio = casi.filter(c => c.scarto > 0).length;
+    const giudizio = meglio === 2
+        ? 'Stavolta tutti e due gli allenatori hanno battuto l\'algoritmo.'
+        : (peggio === 2
+            ? 'Il sito avrebbe fatto meglio a tutti e due, e questo deve far riflettere.'
+            : (meglio === 1 && peggio === 1 ? 'Uno a uno, palla al centro.' : 'Scelte quasi identiche a quelle del sito.'));
+    const bergomi = `Numeri alla mano, Fabio: ${conto(casi[0])}, ${conto(casi[1])}. ${giudizio}`;
+
+    return { caressa, bergomi };
+}
+
+function htmlSeGiocavaIlSito(match, scenari) {
+    const { caressa, bergomi } = commentoSito(match, scenari);
+    const riga = (etichetta, s, evidenzia) => `
+        <span class="confronto-etichetta">${etichetta}</span>
+        <span class="confronto-valore${evidenzia === 'casa' ? ' sito' : ''}">${s.golCasa} <small>(${String(s.casa).replace('.', ',')})</small></span>
+        <span class="confronto-valore${evidenzia === 'fuori' ? ' sito' : ''}">${s.golFuori} <small>(${String(s.fuori).replace('.', ',')})</small></span>
+    `;
+
+    return `
+        <div class="se-sito-blocco">
+            <div class="commentary-title">
+                <i class="fas fa-robot"></i> E se avesse giocato il sito?
+            </div>
+            <div class="confronto-griglia">
+                <span class="confronto-etichetta"></span>
+                <span class="confronto-squadra">${match.homeTeam}</span>
+                <span class="confronto-squadra">${match.awayTeam}</span>
+                ${riga('Reale', scenari.reale)}
+                ${riga('Sito casa', scenari.sitoCasa, 'casa')}
+                ${riga('Sito ospiti', scenari.sitoFuori, 'fuori')}
+                <span class="confronto-etichetta">Sito entrambe</span>
+                <span class="confronto-valore sito">${scenari.sitoEntrambe.golCasa} <small>(${String(scenari.sitoEntrambe.casa).replace('.', ',')})</small></span>
+                <span class="confronto-valore sito">${scenari.sitoEntrambe.golFuori} <small>(${String(scenari.sitoEntrambe.fuori).replace('.', ',')})</small></span>
+            </div>
+            <div class="commentary-dialogue-inline">
+                <span class="speaker">Caressa:</span> "${caressa}"
+            </div>
+            <div class="commentary-dialogue-inline">
+                <span class="speaker bergomi">Bergomi:</span> "${bergomi}"
+            </div>
+        </div>
+    `;
+}
+
+// Una riga nel commento di giornata: quanti fantallenatori hanno battuto il
+// sito, chi meglio di tutti, e in quante partite il sito avrebbe cambiato il
+// risultato giocando per tutte e due
+function htmlSitoDiGiornata(round, perSquadra) {
+    const squadre = [...perSquadra.values()];
+    if (squadre.length === 0) return '';
+
+    const battuto = squadre.filter(r => r.schierata > r.consigliata).length;
+    const ordinate = [...squadre].sort((a, b) => (b.schierata - b.consigliata) - (a.schierata - a.consigliata));
+    const primo = ordinate[0];
+    const ultimo = ordinate.at(-1);
+
+    let cambiate = 0;
+    let partite = 0;
+    for (const match of round.matches) {
+        const scenari = scenariSito(match, perSquadra);
+        if (!scenari) continue;
+        partite++;
+        if (risultatoGol(scenari.sitoEntrambe) !== risultatoGol(scenari.reale)) cambiate++;
+    }
+
+    const estremi = primo.schierata - primo.consigliata > 0
+        ? ` Il più bravo contro l'algoritmo: <strong>${primo.squadra}</strong> (${segnoDecimale(primo.schierata - primo.consigliata)}).`
+        : '';
+    const punito = ultimo.schierata - ultimo.consigliata < 0
+        ? ` Il più punito per non averlo ascoltato: <strong>${ultimo.squadra}</strong> (${segnoDecimale(ultimo.schierata - ultimo.consigliata)}).`
+        : '';
+
+    return `
+        <div class="round-general-comment se-sito-riepilogo">
+            <h4><i class="fas fa-robot"></i> E se avesse giocato il sito?</h4>
+            <p>
+                ${battuto} fantallenator${battuto === 1 ? 'e su' : 'i su'} ${squadre.length} ${battuto === 1 ? 'ha' : 'hanno'} fatto meglio della formazione consigliata.${estremi}${punito}
+                Con le formazioni del sito da tutte e due le parti, il risultato sarebbe cambiato in
+                ${cambiate} partit${cambiate === 1 ? 'a' : 'e'} su ${partite}.
+            </p>
+        </div>
+    `;
 }
 
 // ============================================================
