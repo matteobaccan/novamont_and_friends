@@ -8,6 +8,13 @@
 // ("Internazionale", "AS Roma"): nomeSerieA() le riporta ai nomi di
 // fantacalcio.it, e chi non si riconosce finisce nel log invece di sparire.
 //
+// ESPN dà solo le partite da oggi in avanti, non quelle già giocate: la
+// partita di coppa di mercoledì, che serve per il riposo del weekend, sparisce
+// appena giocata. Per questo le partite viste si ricordano da un giro all'altro
+// (in probabili.json, `partiteCalendario`): il workflow gira due volte al giorno
+// e guarda dodici giorni avanti, quindi ogni partita viene vista prima di essere
+// giocata. Si tengono quindici giorni indietro, poi si buttano.
+//
 // Nulla qui è bloccante: senza calendario il suggeritore ignora la stanchezza.
 
 const URL_ESPN = 'https://site.api.espn.com/apis/site/v2/sports/soccer';
@@ -23,6 +30,9 @@ export const COMPETIZIONI = {
 // Quanti giorni guardare indietro e avanti rispetto a oggi
 const GIORNI_INDIETRO = 10;
 const GIORNI_AVANTI = 12;
+
+// Quanti giorni di partite passate ricordare
+const GIORNI_MEMORIA = 15;
 
 const GIORNO = 86400000;
 
@@ -168,7 +178,20 @@ async function partiteDellaCompetizione(lega, nome, da, a, scaricaJson) {
     return [...viste.values()];
 }
 
-export async function scaricaCalendario(squadreNote, scaricaJson) {
+// Unisce le partite ricordate a quelle appena scaricate. Una partita appena
+// scaricata vince su quella ricordata (orario spostato, rinvio), e si tengono
+// solo quelle degli ultimi GIORNI_MEMORIA giorni.
+export function unisciPartite(ricordate, nuove, adesso = Date.now()) {
+    const chiave = (p) => `${p.competizione}|${p.casa}|${p.fuori}`;
+    const unite = new Map();
+    for (const p of [...(ricordate || []), ...nuove]) unite.set(chiave(p), p);
+    const limite = adesso - GIORNI_MEMORIA * GIORNO;
+    return [...unite.values()]
+        .filter(p => Date.parse(p.data) >= limite)
+        .sort((a, b) => Date.parse(a.data) - Date.parse(b.data));
+}
+
+export async function scaricaCalendario(squadreNote, scaricaJson, ricordate = []) {
     const adesso = Date.now();
     const da = adesso - GIORNI_INDIETRO * GIORNO;
     const a = adesso + GIORNI_AVANTI * GIORNO;
@@ -186,5 +209,9 @@ export async function scaricaCalendario(squadreNote, scaricaJson) {
             console.warn(`  ${nome} non disponibile: ${errore.message}`);
         }
     }
-    return calcolaCalendario(partite, squadreNote, new Date(adesso).toISOString());
+    // Se una competizione non ha risposto, le sue partite ricordate restano
+    const unite = unisciPartite(ricordate, partite, adesso);
+    const ricordatePassate = unite.filter(p => Date.parse(p.data) < adesso).length;
+    console.log(`  ${unite.length} partite in memoria, ${ricordatePassate} già giocate`);
+    return { ...calcolaCalendario(unite, squadreNote, new Date(adesso).toISOString()), partite: unite };
 }

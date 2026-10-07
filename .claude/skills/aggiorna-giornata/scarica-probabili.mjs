@@ -369,6 +369,15 @@ async function main() {
         console.warn(`Infortunati e classifica non disponibili: ${error.message}`);
     }
 
+    // Il file del giro prima: serve per le partite di coppa già giocate, che
+    // la fonte del calendario non dà più
+    let precedenti = {};
+    try {
+        precedenti = JSON.parse(fs.readFileSync(path.join(process.cwd(), DESTINAZIONE), 'utf8'));
+    } catch {
+        // primo giro, o file rotto: si riparte senza memoria
+    }
+
     const turno = numeroProssimoTurno(htmlProbabili);
     const partite = turno ? analizzaPartite(htmlProbabili, turno) : [];
     console.log(`Prossimo turno: ${turno ?? 'ignoto'}, ${partite.length} partite`);
@@ -384,10 +393,12 @@ async function main() {
         ...partite.flatMap(p => [p.casa, p.fuori])
     ])];
     let calendario = {};
+    let partiteCalendario = precedenti.partiteCalendario || [];
     try {
         console.log('Calendario di tutte le competizioni:');
-        const risultato = await scaricaCalendario(squadreSerieA, scaricaJson);
+        const risultato = await scaricaCalendario(squadreSerieA, scaricaJson, partiteCalendario);
         calendario = risultato.calendario;
+        partiteCalendario = risultato.partite;
         const stanche = Object.entries(calendario).filter(([, c]) => c.giorniRiposo !== null && c.giorniRiposo <= 4);
         console.log(`  ${Object.keys(calendario).length} squadre con la prossima di Serie A, ${stanche.length} con 4 giorni di riposo o meno`
             + (stanche.length ? `: ${stanche.map(([s, c]) => `${s} ${c.giorniRiposo}g`).join(', ')}` : ''));
@@ -411,6 +422,7 @@ async function main() {
         classificaSerieA: classifica,
         formaSerieA: forma,
         calendarioSquadre: calendario,
+        partiteCalendario,
         rigoristi,
         infortunati,
         giocatori

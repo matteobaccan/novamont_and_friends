@@ -7,7 +7,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { nomeSerieA, analizzaScoreboard, calcolaCalendario, scaricaCalendario } from '../.claude/skills/aggiorna-giornata/calendario-squadre.mjs';
+import { nomeSerieA, analizzaScoreboard, calcolaCalendario, scaricaCalendario, unisciPartite } from '../.claude/skills/aggiorna-giornata/calendario-squadre.mjs';
 import { caricaScript, valuta, esegui } from './aiuto/carica-script.mjs';
 
 const SERIE_A = ['Atalanta', 'Bologna', 'Como', 'Inter', 'Juventus', 'Milan', 'Napoli', 'Roma', 'Udinese', 'Verona'];
@@ -171,4 +171,40 @@ test('se l\'intervallo funziona basta una richiesta per competizione', async () 
     }
     assert.equal(richieste.length, 5);
     assert.ok(richieste.every(u => !u.includes('limit=')));
+});
+
+// ------------------------------------------------------------------
+// Memoria delle partite già viste
+// ------------------------------------------------------------------
+
+
+test('le partite ricordate restano, quelle nuove le aggiornano, le vecchie si buttano', () => {
+    const adesso = Date.parse('2026-10-10T12:00Z');
+    const ricordate = [
+        { data: '2026-10-07T19:00Z', competizione: 'Champions League', casa: 'Internazionale', fuori: 'Bayern Munich' },
+        { data: '2026-10-11T16:00Z', competizione: 'Serie A', casa: 'AC Milan', fuori: 'Sassuolo' },
+        { data: '2026-09-20T19:00Z', competizione: 'Serie A', casa: 'AS Roma', fuori: 'Como' }
+    ];
+    // Milan-Sassuolo spostata di un giorno
+    const nuove = [{ data: '2026-10-12T16:00Z', competizione: 'Serie A', casa: 'AC Milan', fuori: 'Sassuolo' }];
+    const unite = unisciPartite(ricordate, nuove, adesso);
+    assert.deepEqual(unite.map(p => `${p.casa} ${p.data.slice(5, 10)}`), ['Internazionale 10-07', 'AC Milan 10-12']);
+});
+
+test('con la memoria la coppa di mercoledì dà il riposo del weekend anche se la fonte non la dà più', async () => {
+    const ricordate = [{ data: new Date(Date.now() - 3 * 86400000).toISOString(), competizione: 'Champions League', casa: 'Internazionale', fuori: 'Bayern Munich' }];
+    // La fonte dà solo il futuro: la partita di domenica, non la coppa di mercoledì
+    const finto = async (url) => (url.includes('ita.1')
+        ? { events: [evento(new Date(Date.now() + 86400000).toISOString(), 'Internazionale', 'AS Roma')] }
+        : { events: [] });
+    const ripristina = silenzio();
+    let risultato;
+    try {
+        risultato = await scaricaCalendario(SERIE_A, finto, ricordate);
+    } finally {
+        ripristina();
+    }
+    assert.equal(risultato.calendario.Inter.giorniRiposo, 4);
+    assert.equal(risultato.calendario.Inter.precedente.competizione, 'Champions League');
+    assert.equal(risultato.partite.length, 2);
 });
