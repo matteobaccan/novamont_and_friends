@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-07T14:19:46.144Z",
+  "aggiornato": "2026-10-07T20:13:52.148Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -211,6 +211,7 @@
       "esiti": "VNV"
     }
   },
+  "calendarioSquadre": {},
   "rigoristi": {
     "Atalanta": [
       {
@@ -1256,7 +1257,7 @@
       "nome": "Provedel",
       "squadra": "Inter",
       "ruolo": "P",
-      "probabilita": 5,
+      "probabilita": 30,
       "titolare": false
     },
     "2815": {
@@ -1333,8 +1334,8 @@
       "nome": "Gonzalez N.",
       "squadra": "Juventus",
       "ruolo": "C",
-      "probabilita": 90,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "4199": {
       "nome": "Loftus-Cheek",
@@ -1508,8 +1509,8 @@
       "nome": "Celik",
       "squadra": "Juventus",
       "ruolo": "D",
-      "probabilita": 80,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "4664": {
       "nome": "Badiashile",
@@ -1732,7 +1733,7 @@
       "nome": "Martinez Jo.",
       "squadra": "Inter",
       "ruolo": "P",
-      "probabilita": 80,
+      "probabilita": 70,
       "titolare": true
     },
     "5119": {
@@ -1893,8 +1894,8 @@
       "nome": "Cambiaso",
       "squadra": "Juventus",
       "ruolo": "D",
-      "probabilita": 50,
-      "titolare": false
+      "probabilita": 70,
+      "titolare": true
     },
     "5526": {
       "nome": "Scalvini",
@@ -1977,14 +1978,14 @@
       "nome": "Sarr P.",
       "squadra": "Juventus",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 80,
+      "titolare": true
     },
     "5685": {
       "nome": "Koopmeiners",
       "squadra": "Juventus",
       "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 40,
       "titolare": false
     },
     "5687": {
@@ -2061,8 +2062,8 @@
       "nome": "Zhegrova",
       "squadra": "Juventus",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 55,
+      "titolare": true
     },
     "5791": {
       "nome": "Frendrup",
@@ -2208,7 +2209,7 @@
       "nome": "Kolo Muani",
       "squadra": "Juventus",
       "ruolo": "A",
-      "probabilita": 80,
+      "probabilita": 85,
       "titolare": true
     },
     "5982": {
@@ -2286,7 +2287,7 @@
       "squadra": "Juventus",
       "ruolo": "D",
       "probabilita": 55,
-      "titolare": true
+      "titolare": false
     },
     "6047": {
       "nome": "Ehizibue",
@@ -2845,8 +2846,8 @@
       "nome": "Kelly L.",
       "squadra": "Juventus",
       "ruolo": "D",
-      "probabilita": 50,
-      "titolare": false
+      "probabilita": 60,
+      "titolare": true
     },
     "6783": {
       "nome": "Unai Gomez",
@@ -2951,7 +2952,7 @@
       "squadra": "Juventus",
       "ruolo": "C",
       "probabilita": 60,
-      "titolare": true
+      "titolare": false
     },
     "6890": {
       "nome": "Moreno M.",
@@ -3160,7 +3161,7 @@
       "nome": "Mastantuono",
       "squadra": "Fiorentina",
       "ruolo": "C",
-      "probabilita": 90,
+      "probabilita": 65,
       "titolare": true
     },
     "7092": {
