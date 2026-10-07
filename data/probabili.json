@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-07T20:18:54.264Z",
+  "aggiornato": "2026-10-07T20:21:16.931Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -513,6 +513,526 @@
       "giorniAllaSuccessiva": 5
     }
   },
+  "partiteCalendario": [
+    {
+      "data": "2026-10-10T13:00Z",
+      "competizione": "Serie A",
+      "casa": "Genoa",
+      "fuori": "Fiorentina",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-10T16:00Z",
+      "competizione": "Serie A",
+      "casa": "Internazionale",
+      "fuori": "Parma",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-10T18:45Z",
+      "competizione": "Serie A",
+      "casa": "Napoli",
+      "fuori": "Frosinone",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-11T10:30Z",
+      "competizione": "Serie A",
+      "casa": "Como",
+      "fuori": "AS Roma",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-11T13:00Z",
+      "competizione": "Serie A",
+      "casa": "Lazio",
+      "fuori": "Monza",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-11T13:00Z",
+      "competizione": "Serie A",
+      "casa": "Lecce",
+      "fuori": "Bologna",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-11T16:00Z",
+      "competizione": "Serie A",
+      "casa": "Sassuolo",
+      "fuori": "AC Milan",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-11T18:45Z",
+      "competizione": "Serie A",
+      "casa": "Cagliari",
+      "fuori": "Juventus",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-12T16:30Z",
+      "competizione": "Serie A",
+      "casa": "Atalanta",
+      "fuori": "Venezia",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-12T18:45Z",
+      "competizione": "Serie A",
+      "casa": "Torino",
+      "fuori": "Udinese",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-13T16:45Z",
+      "competizione": "Champions League",
+      "casa": "Lens",
+      "fuori": "Sporting CP",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-13T16:45Z",
+      "competizione": "Champions League",
+      "casa": "Sabah FK",
+      "fuori": "Slavia Prague",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-13T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Arsenal",
+      "fuori": "Lille",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-13T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Atlético Madrid",
+      "fuori": "Manchester United",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-13T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Galatasaray",
+      "fuori": "Barcelona",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-13T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Internazionale",
+      "fuori": "Club Brugge",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-13T19:00Z",
+      "competizione": "Champions League",
+      "casa": "RB Leipzig",
+      "fuori": "PSV Eindhoven",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-13T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Viking FK",
+      "fuori": "Bayern Munich",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-13T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Villarreal",
+      "fuori": "Napoli",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-14T16:45Z",
+      "competizione": "Champions League",
+      "casa": "Feyenoord Rotterdam",
+      "fuori": "Como",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-14T16:45Z",
+      "competizione": "Champions League",
+      "casa": "LASK Linz",
+      "fuori": "Liverpool",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-14T19:00Z",
+      "competizione": "Champions League",
+      "casa": "AS Roma",
+      "fuori": "Real Madrid",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-14T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Aston Villa",
+      "fuori": "Fenerbahce",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-14T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Bodo/Glimt",
+      "fuori": "Borussia Dortmund",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-14T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Manchester City",
+      "fuori": "Paris Saint-Germain",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-14T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Real Betis",
+      "fuori": "FC Porto",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-14T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Shakhtar Donetsk",
+      "fuori": "AEK Athens",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-14T19:00Z",
+      "competizione": "Champions League",
+      "casa": "Slovan Bratislava",
+      "fuori": "VfB Stuttgart",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Europa League",
+      "casa": "AZ Alkmaar",
+      "fuori": "Hapoel Be'er",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Europa League",
+      "casa": "Lech Poznan",
+      "fuori": "Bayer Leverkusen",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Europa League",
+      "casa": "Lyon",
+      "fuori": "Crystal Palace",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Europa League",
+      "casa": "NK Celje",
+      "fuori": "Omonia Nicosia",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Europa League",
+      "casa": "RB Salzburg",
+      "fuori": "AC Milan",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Europa League",
+      "casa": "Sparta Prague",
+      "fuori": "Lillestrom",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Europa League",
+      "casa": "Torreense",
+      "fuori": "Sunderland",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Europa League",
+      "casa": "Union St.-Gilloise",
+      "fuori": "Real Sociedad",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Conference League",
+      "casa": "CSKA Sofia",
+      "fuori": "AS Monaco",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Conference League",
+      "casa": "CSU Craiova",
+      "fuori": "Getafe",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Conference League",
+      "casa": "Egnatia",
+      "fuori": "FC Midtjylland",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Conference League",
+      "casa": "FC Lugano",
+      "fuori": "Red Star Belgrade",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Conference League",
+      "casa": "Hajduk Split",
+      "fuori": "Ajax Amsterdam",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Conference League",
+      "casa": "KAA Gent",
+      "fuori": "AGF",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Conference League",
+      "casa": "KuPS Kuopio",
+      "fuori": "Trabzonspor",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Conference League",
+      "casa": "Mjällby AIF",
+      "fuori": "Inter D'Escaldes",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Conference League",
+      "casa": "Panathinaikos",
+      "fuori": "Borac Banja Luka",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T16:45Z",
+      "competizione": "Conference League",
+      "casa": "Riga FC",
+      "fuori": "Kairat Almaty",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Europa League",
+      "casa": "AFC Bournemouth",
+      "fuori": "SK Sturm Graz",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Europa League",
+      "casa": "Benfica",
+      "fuori": "Celtic",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Europa League",
+      "casa": "Celta Vigo",
+      "fuori": "Juventus",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Europa League",
+      "casa": "Dinamo Zagreb",
+      "fuori": "Anderlecht",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Europa League",
+      "casa": "Ferencvaros",
+      "fuori": "Viktoria Plzen",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Europa League",
+      "casa": "Jagiellonia Bialystok",
+      "fuori": "Ararat-Armenia",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Europa League",
+      "casa": "Marseille",
+      "fuori": "Olympiacos",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Europa League",
+      "casa": "NEC Nijmegen",
+      "fuori": "Levski Sofia",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Europa League",
+      "casa": "Stade Rennais",
+      "fuori": "OFI Crete",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Europa League",
+      "casa": "TSG Hoffenheim",
+      "fuori": "Besiktas",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Conference League",
+      "casa": "Atalanta",
+      "fuori": "Pafos",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Conference League",
+      "casa": "Brighton & Hove Albion",
+      "fuori": "Kauno Zalgiris",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Conference League",
+      "casa": "F.C. København",
+      "fuori": "Braga",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Conference League",
+      "casa": "FC Twente",
+      "fuori": "FC Thun",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Conference League",
+      "casa": "Heart of Midlothian",
+      "fuori": "FC Nordsjælland",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Conference League",
+      "casa": "SC Freiburg",
+      "fuori": "Jablonec",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Conference League",
+      "casa": "Sint-Truidense",
+      "fuori": "Iberia 1999",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-15T19:00Z",
+      "competizione": "Conference League",
+      "casa": "SK Brann",
+      "fuori": "Lincoln Red Imps",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-16T18:45Z",
+      "competizione": "Serie A",
+      "casa": "Frosinone",
+      "fuori": "Sassuolo",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-17T13:00Z",
+      "competizione": "Serie A",
+      "casa": "Venezia",
+      "fuori": "Napoli",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-17T16:00Z",
+      "competizione": "Serie A",
+      "casa": "Bologna",
+      "fuori": "Internazionale",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-17T18:45Z",
+      "competizione": "Serie A",
+      "casa": "AS Roma",
+      "fuori": "Genoa",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-18T10:30Z",
+      "competizione": "Serie A",
+      "casa": "Udinese",
+      "fuori": "Lecce",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-18T13:00Z",
+      "competizione": "Serie A",
+      "casa": "Fiorentina",
+      "fuori": "Como",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-18T16:00Z",
+      "competizione": "Serie A",
+      "casa": "AC Milan",
+      "fuori": "Atalanta",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-18T18:45Z",
+      "competizione": "Serie A",
+      "casa": "Juventus",
+      "fuori": "Lazio",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-19T16:30Z",
+      "competizione": "Serie A",
+      "casa": "Monza",
+      "fuori": "Cagliari",
+      "annullata": false
+    },
+    {
+      "data": "2026-10-19T18:45Z",
+      "competizione": "Serie A",
+      "casa": "Parma",
+      "fuori": "Torino",
+      "annullata": false
+    }
+  ],
   "rigoristi": {
     "Atalanta": [
       {
