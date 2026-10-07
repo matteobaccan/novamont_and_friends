@@ -4458,6 +4458,48 @@ function glifoContesto(contesto) {
     return `<span class="consiglio-contesto ${classe}" title="${pezzi.join(' · ')}">${glifo}</span>`;
 }
 
+// Freccia di forma di una squadra di Serie A, dai punti delle ultime giornate:
+// su da 2 punti a partita (due vittorie su tre), giù sotto 1, uguale nel mezzo
+function formaSquadraSerieA(squadra) {
+    const forma = probabiliFormazioni && (probabiliFormazioni.formaSerieA || {})[squadra];
+    if (!forma || !forma.partite) return { glifo: '', classe: '', testo: '' };
+
+    const media = forma.punti / forma.partite;
+    const su = media >= 2;
+    const giu = media < 1;
+    return {
+        glifo: su ? '↑' : (giu ? '↓' : '='),
+        classe: su ? 'contesto-su' : (giu ? 'contesto-giu' : 'contesto-pari'),
+        testo: `ultime ${forma.partite} ${forma.esiti || ''} (${forma.punti} punti)`.replace('  ', ' ')
+    };
+}
+
+// La partita di Serie A del giocatore, sotto il nome: casa prima, la sua
+// squadra in grassetto, e per entrambe posizione in classifica e forma
+function htmlPartitaSerieA(contesto) {
+    if (!contesto || !contesto.noto) return '';
+
+    const casa = contesto.casa ? contesto.squadra : contesto.avversario;
+    const fuori = contesto.casa ? contesto.avversario : contesto.squadra;
+    const classifica = (probabiliFormazioni && probabiliFormazioni.classificaSerieA) || {};
+
+    const lato = (nome) => {
+        const posizione = classifica[nome];
+        const forma = formaSquadraSerieA(nome);
+        return {
+            html: `<span class="partita-squadra${nome === contesto.squadra ? ' sua' : ''}">`
+                + `${siglaSerieA(nome)}${posizione ? ` ${posizione}°` : ''}`
+                + `${forma.glifo ? `<span class="${forma.classe}">${forma.glifo}</span>` : ''}</span>`,
+            titolo: [nome, posizione ? `${posizione}° in classifica` : '', forma.testo].filter(Boolean).join(', ')
+        };
+    };
+
+    const a = lato(casa);
+    const b = lato(fuori);
+    const titolo = `${casa}-${fuori} · ${a.titolo} · ${b.titolo}`;
+    return `<span class="consiglio-partita" title="${titolo}">${a.html}<span class="partita-trattino">–</span>${b.html}</span>`;
+}
+
 // Il pallone accanto al nome dice anche quanto pesa: un secondo rigorista con il
 // titolare sano vale quasi nulla, lo stesso con il titolare infortunato vale
 // quanto un primo. Il title mostra il conto, l'opacità lo fa vedere da lontano.
@@ -4504,7 +4546,10 @@ function rigaConsiglio(g, titolare) {
     return `
         <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}${g.infortunio ? ' infortunato' : ''}">
             <span class="ruolo-${info.role}">${info.role}</span>
-            <span class="consiglio-nome">${info.name}${rigori}</span>
+            <span class="consiglio-nome">
+                <span class="consiglio-nome-testo">${info.name}${rigori}</span>
+                ${htmlPartitaSerieA(g.contesto)}
+            </span>
             <span class="consiglio-serieA">${siglaSerieA(g.squadraSerieA)}${glifoContesto(g.contesto)}</span>
             <span class="consiglio-forma">${frecciaForma(g)}</span>
             <span class="consiglio-nota"${titoloNota ? ` title="${titoloNota.replace(/"/g, '&quot;')}"` : ''}>${nota}</span>
@@ -4643,7 +4688,10 @@ function displayFormazione() {
                         giocare <strong>in casa</strong>, affrontare un avversario <strong>più in
                         basso in classifica</strong> (tanto più quanto è distante), e arrivarci con
                         <strong>punti nelle ultime tre giornate</strong>. La freccia accanto alla
-                        sigla di Serie A riassume il conto, con il dettaglio nel suggerimento.
+                        sigla di Serie A riassume il conto, con il dettaglio nel suggerimento. Sotto il nome
+                        del giocatore c'è la partita: casa prima, la sua squadra in grassetto, e per
+                        tutte e due la posizione in classifica e la forma — ↑ da due punti a partita
+                        nelle ultime tre, ↓ sotto uno.
                     </dd>
                     <dt>Gioca</dt>
                     <dd>
