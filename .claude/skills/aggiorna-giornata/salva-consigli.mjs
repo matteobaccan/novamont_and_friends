@@ -30,29 +30,72 @@ export function sovrascrivibile(esistente, probabili) {
     return esistente.turnoSerieA === turno && !turnoCominciato(probabili);
 }
 
-export function calcolaConsigli(dati, probabili) {
-    const app = caricaScript();
+// I pesi del modello che si possono far variare quando si rigiocano le giornate.
+// Si salvano con ogni consiglio, così si sa con quali pesi era stato dato.
+export const PARAMETRI = [
+    'GIORNATE_PRIOR', 'PESO_FORMA', 'EPS_MODULO', 'VOTO_RIPIEGO',
+    'PESO_CONTESTO', 'BONUS_RIGORE_PARTITA', 'PROB_FUORI_LISTA', 'PROB_INFORTUNATO'
+];
+
+// JSON leggibile in un diff ma senza una riga per numero: un oggetto o un
+// array fatto solo di valori semplici sta su una riga, il resto va a capo.
+export function jsonCompatto(valore, rientro = '') {
+    const semplice = (v) => v === null || typeof v !== 'object';
+    if (semplice(valore)) return JSON.stringify(valore);
+    const voci = Array.isArray(valore) ? valore : Object.values(valore);
+    if (voci.every(semplice)) {
+        return Array.isArray(valore)
+            ? `[${valore.map(v => JSON.stringify(v)).join(', ')}]`
+            : `{${Object.entries(valore).map(([k, v]) => `${JSON.stringify(k)}: ${JSON.stringify(v)}`).join(', ')}}`;
+    }
+    const dentro = rientro + '  ';
+    const righe = Array.isArray(valore)
+        ? valore.map(v => dentro + jsonCompatto(v, dentro))
+        : Object.entries(valore).map(([k, v]) => `${dentro}${JSON.stringify(k)}: ${jsonCompatto(v, dentro)}`);
+    const [apri, chiudi] = Array.isArray(valore) ? ['[', ']'] : ['{', '}'];
+    return righe.length === 0 ? apri + chiudi : `${apri}\n${righe.join(',\n')}\n${rientro}${chiudi}`;
+}
+
+const arrotonda = (x) => (x === null || x === undefined ? null : Math.round(x * 1000) / 1000);
+
+// La formazione consigliata di ogni squadra, più la previsione per ogni
+// giocatore della rosa: chi è rimasto fuori serve tanto quanto chi è stato
+// scelto, sia per misurare l'errore del modello sia per dare un valore atteso
+// alla formazione che il fantallenatore ha schierato davvero.
+export function calcolaConsigli(dati, probabili, { costanti = {} } = {}) {
+    const app = caricaScript({ costanti });
     app.__dati = dati;
     app.__probabili = probabili;
     esegui(app, 'fantacalcioData = __dati; probabiliFormazioni = __probabili;');
+
+    const parametri = Object.fromEntries(PARAMETRI.map(nome => [nome, valuta(app, nome)]));
 
     const squadre = {};
     const ultima = (dati.rosterHistory || []).at(-1);
     for (const team of Object.keys((ultima && ultima.teams) || {})) {
         const f = valuta(app, `suggerisciFormazione(${JSON.stringify(team)})`);
         if (!f) continue;
+        const tutti = [...f.undici, ...f.panchina];
         squadre[team] = {
             modulo: f.modulo,
-            totale: Math.round(f.totale * 100) / 100,
-            titolari: f.undici.map(g => ({
+            totale: arrotonda(f.totale),
+            titolari: f.undici.map(g => g.pid),
+            panchina: f.panchina.map(g => g.pid),
+            rosa: tutti.map(g => ({
                 pid: g.pid,
-                atteso: Math.round(g.atteso * 100) / 100,
-                probabilita: g.probabilita
-            })),
-            panchina: f.panchina.map(g => g.pid)
+                ruolo: valuta(app, `anagraficaGiocatore(${g.pid}).role`),
+                atteso: arrotonda(g.atteso),
+                resa: arrotonda(g.qualita),
+                rigori: arrotonda(g.rigori ? g.rigori.bonus : 0),
+                grezza: arrotonda(g.qualitaGrezza),
+                mediaRuolo: arrotonda(g.mediaRuolo),
+                presenze: g.presenze,
+                probabilita: arrotonda(g.probabilita),
+                fonte: g.fonteProbabilita
+            }))
         };
     }
-    return squadre;
+    return { parametri, squadre };
 }
 
 function main() {
@@ -77,15 +120,15 @@ function main() {
         generato: new Date().toISOString(),
         probabiliDel: probabili.aggiornato || null,
         turnoSerieA: probabili.prossimoTurno ? probabili.prossimoTurno.numero : null,
-        squadre: calcolaConsigli(dati, probabili)
+        ...calcolaConsigli(dati, probabili)
     };
 
     if (dryRun) {
-        console.log(JSON.stringify(consiglio, null, 2));
+        console.log(jsonCompatto(consiglio));
         return;
     }
     fs.mkdirSync(path.dirname(destinazione), { recursive: true });
-    fs.writeFileSync(destinazione, JSON.stringify(consiglio, null, 2) + '\n');
+    fs.writeFileSync(destinazione, jsonCompatto(consiglio) + '\n');
     console.log(`Salvato ${path.relative(radiceProgetto, destinazione)}: ${Object.keys(consiglio.squadre).length} squadre`);
 }
 

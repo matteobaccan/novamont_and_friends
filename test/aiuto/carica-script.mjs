@@ -33,8 +33,17 @@ function stubIndulgente(nome) {
     return stub;
 }
 
-export function caricaScript() {
-    const sorgente = fs.readFileSync(path.join(RADICE, 'script.js'), 'utf8');
+// `costanti` sostituisce il valore di qualche costante di una riga sola, per
+// esempio { GIORNATE_PRIOR: 2 }: serve a rigiocare le giornate passate con pesi
+// diversi senza toccare il file. Una costante che non c'è è un errore, non un
+// silenzio: altrimenti un refuso farebbe credere di aver provato un peso.
+export function caricaScript({ costanti = {} } = {}) {
+    let sorgente = fs.readFileSync(path.join(RADICE, 'script.js'), 'utf8');
+    for (const [nome, valore] of Object.entries(costanti)) {
+        const riga = new RegExp(`^const ${nome} = .*;$`, 'm');
+        if (!riga.test(sorgente)) throw new Error(`Costante ${nome} non trovata in script.js`);
+        sorgente = sorgente.replace(riga, `const ${nome} = ${JSON.stringify(valore)};`);
+    }
 
     const contesto = {
         console: { log() {}, warn() {}, error() {}, info() {} },
