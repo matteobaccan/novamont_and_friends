@@ -177,7 +177,10 @@ export async function scaricaCalendario(squadreNote, scaricaJson) {
     for (const [lega, nome] of Object.entries(COMPETIZIONI)) {
         try {
             const trovate = await partiteDellaCompetizione(lega, nome, da, a, scaricaJson);
-            console.log(`  ${nome}: ${trovate.length} partite`);
+            // I giorni con almeno una partita: se mancano tutti quelli passati,
+            // la fonte non dà lo storico e il riposo non si può calcolare
+            const giorni = [...new Set(trovate.map(p => p.data.slice(5, 10)))].sort();
+            console.log(`  ${nome}: ${trovate.length} partite${giorni.length ? ` (${giorni.join(' ')})` : ''}`);
             partite.push(...trovate);
         } catch (errore) {
             console.warn(`  ${nome} non disponibile: ${errore.message}`);
