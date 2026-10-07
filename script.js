@@ -2944,7 +2944,9 @@ function displayRoundResults(roundNumber) {
         }
 
         const coachRankingHtml = generateCoachRanking(round);
-        coachRankingContainer.innerHTML = generalHtml + (coachRankingHtml || '');
+        coachRankingContainer.innerHTML = generalHtml
+            + `<div class="se-sito-giornata" data-giornata="${round.round}"></div>`
+            + (coachRankingHtml || '');
     }
     round.matches.forEach((match, index) => {
         let resultClass = '';
@@ -3159,6 +3161,7 @@ function displayRoundResults(roundNumber) {
                 </div>
                 ${idealSection}
                 ${commentarySection}
+                <div class="se-sito" data-giornata="${round.round}" data-partita="${index}"></div>
                 ${generateLineupSection(match, index)}
             </div>
         `;
@@ -3166,6 +3169,196 @@ function displayRoundResults(roundNumber) {
 
     roundResults.innerHTML = html;
     setupLineupToggles();
+    riempiSeGiocavaIlSito(round);
+}
+
+// ============================================================
+// E se avesse giocato il sito?
+// ============================================================
+
+// La valutazione dei consigli arriva dopo e da un file a parte: le caselle
+// vuote lasciate nella giornata si riempiono quando c'è, e restano vuote (e
+// invisibili) per le giornate senza un consiglio salvato prima del fischio.
+function riempiSeGiocavaIlSito(round) {
+    const stagione = currentSeasonId;
+    caricaValutazioneConsigli(stagione).then(valutazione => {
+        if (stagione !== currentSeasonId) return;
+        const giornata = valutazione && (valutazione.giornate || []).find(g => g.giornata === round.round);
+        if (!giornata) return;
+
+        const perSquadra = new Map(giornata.squadre.map(r => [r.squadra, r]));
+
+        document.querySelectorAll(`.se-sito[data-giornata="${round.round}"]`).forEach(posto => {
+            const match = round.matches[Number(posto.dataset.partita)];
+            const scenari = match && scenariSito(match, perSquadra);
+            if (scenari) posto.innerHTML = htmlSeGiocavaIlSito(match, scenari);
+        });
+
+        const riepilogo = document.querySelector(`.se-sito-giornata[data-giornata="${round.round}"]`);
+        if (riepilogo) riepilogo.innerHTML = htmlSitoDiGiornata(round, perSquadra);
+    });
+}
+
+const mezzoPunto = (x) => Math.round(x * 2) / 2;
+
+// I tre risultati alternativi di una partita: il sito in panchina da una parte
+// sola, e da tutte e due. Il punteggio col sito è quello vero più la differenza
+// fra la formazione consigliata e quella schierata, contate allo stesso modo:
+// così bonus casa e modificatori restano quelli che la partita ha avuto davvero.
+function scenariSito(match, perSquadra) {
+    const casa = perSquadra.get(match.homeTeam);
+    const fuori = perSquadra.get(match.awayTeam);
+    if (!casa || !fuori) return null;
+
+    const sitoCasa = mezzoPunto(match.homeScore + casa.consigliata - casa.schierata);
+    const sitoFuori = mezzoPunto(match.awayScore + fuori.consigliata - fuori.schierata);
+
+    const scenario = (punteggioCasa, punteggioFuori) => {
+        const gol = calculateMatchGoals(punteggioCasa, punteggioFuori);
+        return { casa: punteggioCasa, fuori: punteggioFuori, golCasa: gol.homeGoals, golFuori: gol.awayGoals };
+    };
+
+    return {
+        reale: scenario(match.homeScore, match.awayScore),
+        sitoCasa: scenario(sitoCasa, match.awayScore),
+        sitoFuori: scenario(match.homeScore, sitoFuori),
+        sitoEntrambe: scenario(sitoCasa, sitoFuori),
+        casa,
+        fuori
+    };
+}
+
+function esitoPer(lato, s) {
+    const mie = lato === 'casa' ? s.golCasa : s.golFuori;
+    const loro = lato === 'casa' ? s.golFuori : s.golCasa;
+    return mie > loro ? 'vittoria' : (mie < loro ? 'sconfitta' : 'pareggio');
+}
+
+const risultatoGol = (s) => `${s.golCasa}-${s.golFuori}`;
+
+// Caressa racconta il cambio di risultato più clamoroso, Bergomi fa i conti
+function commentoSito(match, scenari) {
+    const casi = [
+        { squadra: match.homeTeam, lato: 'casa', alternativo: scenari.sitoCasa, r: scenari.casa },
+        { squadra: match.awayTeam, lato: 'fuori', alternativo: scenari.sitoFuori, r: scenari.fuori }
+    ].map(c => ({
+        ...c,
+        reale: esitoPer(c.lato, scenari.reale),
+        col: esitoPer(c.lato, c.alternativo),
+        scarto: c.r.consigliata - c.r.schierata
+    }));
+
+    const PESO_ESITO = { vittoria: 3, pareggio: 1, sconfitta: 0 };
+    const cambiati = casi
+        .filter(c => c.reale !== c.col)
+        .sort((a, b) => Math.abs(PESO_ESITO[b.col] - PESO_ESITO[b.reale]) - Math.abs(PESO_ESITO[a.col] - PESO_ESITO[a.reale]));
+
+    let caressa;
+    if (cambiati.length > 0) {
+        const c = cambiati[0];
+        const ris = risultatoGol(c.alternativo);
+        const frasi = {
+            'sconfitta>vittoria': `Clamoroso! Con la formazione del sito ${c.squadra} l'avrebbe vinta ${ris}! Questa il fantallenatore se la sogna stanotte!`,
+            'sconfitta>pareggio': `Con l'undici del sito ${c.squadra} avrebbe strappato almeno il pari, ${ris}: un punto rimasto in panchina!`,
+            'pareggio>vittoria': `${c.squadra} col sito l'avrebbe portata a casa, ${ris}: due punti buttati via!`,
+            'vittoria>sconfitta': `Uomo batte macchina! Con la formazione del sito ${c.squadra} l'avrebbe persa ${ris}: il fantallenatore ha visto più lungo dell'algoritmo!`,
+            'vittoria>pareggio': `${c.squadra} ha fatto meglio del sito: con il suo consiglio sarebbe finita ${ris} e la vittoria sarebbe sfumata!`,
+            'pareggio>sconfitta': `${c.squadra} si tiene stretto il pari: col sito in panchina sarebbe finita ${ris}, sconfitta!`
+        };
+        caressa = frasi[`${c.reale}>${c.col}`];
+    } else {
+        const entrambe = scenari.sitoEntrambe;
+        caressa = risultatoGol(entrambe) === risultatoGol(scenari.reale)
+            ? `Anche con il sito in panchina da tutte e due le parti sarebbe finita ${risultatoGol(entrambe)}: verdetto confermato, l'algoritmo non sposta niente!`
+            : `Da sola nessuna delle due formazioni del sito cambia il verdetto, ma con tutte e due sarebbe finita ${risultatoGol(entrambe)}!`;
+    }
+
+    // Dal punto di vista del fantallenatore: positivo vuol dire meglio del sito
+    const conto = (c) => `${c.squadra} ${segnoDecimale(-c.scarto)} sul sito con ${c.r.inComune}/11 titolari in comune`;
+    const meglio = casi.filter(c => c.scarto < 0).length;
+    const peggio = casi.filter(c => c.scarto > 0).length;
+    const giudizio = meglio === 2
+        ? 'Stavolta tutti e due gli allenatori hanno battuto l\'algoritmo.'
+        : (peggio === 2
+            ? 'Il sito avrebbe fatto meglio a tutti e due, e questo deve far riflettere.'
+            : (meglio === 1 && peggio === 1 ? 'Uno a uno, palla al centro.' : 'Scelte quasi identiche a quelle del sito.'));
+    const bergomi = `Numeri alla mano, Fabio: ${conto(casi[0])}, ${conto(casi[1])}. ${giudizio}`;
+
+    return { caressa, bergomi };
+}
+
+function htmlSeGiocavaIlSito(match, scenari) {
+    const { caressa, bergomi } = commentoSito(match, scenari);
+    const riga = (etichetta, s, evidenzia) => `
+        <span class="confronto-etichetta">${etichetta}</span>
+        <span class="confronto-valore${evidenzia === 'casa' ? ' sito' : ''}">${s.golCasa} <small>(${String(s.casa).replace('.', ',')})</small></span>
+        <span class="confronto-valore${evidenzia === 'fuori' ? ' sito' : ''}">${s.golFuori} <small>(${String(s.fuori).replace('.', ',')})</small></span>
+    `;
+
+    return `
+        <div class="se-sito-blocco">
+            <div class="commentary-title">
+                <i class="fas fa-robot"></i> E se avesse giocato il sito?
+            </div>
+            <div class="confronto-griglia">
+                <span class="confronto-etichetta"></span>
+                <span class="confronto-squadra">${match.homeTeam}</span>
+                <span class="confronto-squadra">${match.awayTeam}</span>
+                ${riga('Reale', scenari.reale)}
+                ${riga('Sito casa', scenari.sitoCasa, 'casa')}
+                ${riga('Sito ospiti', scenari.sitoFuori, 'fuori')}
+                <span class="confronto-etichetta">Sito entrambe</span>
+                <span class="confronto-valore sito">${scenari.sitoEntrambe.golCasa} <small>(${String(scenari.sitoEntrambe.casa).replace('.', ',')})</small></span>
+                <span class="confronto-valore sito">${scenari.sitoEntrambe.golFuori} <small>(${String(scenari.sitoEntrambe.fuori).replace('.', ',')})</small></span>
+            </div>
+            <div class="commentary-dialogue-inline">
+                <span class="speaker">Caressa:</span> "${caressa}"
+            </div>
+            <div class="commentary-dialogue-inline">
+                <span class="speaker bergomi">Bergomi:</span> "${bergomi}"
+            </div>
+        </div>
+    `;
+}
+
+// Una riga nel commento di giornata: quanti fantallenatori hanno battuto il
+// sito, chi meglio di tutti, e in quante partite il sito avrebbe cambiato il
+// risultato giocando per tutte e due
+function htmlSitoDiGiornata(round, perSquadra) {
+    const squadre = [...perSquadra.values()];
+    if (squadre.length === 0) return '';
+
+    const battuto = squadre.filter(r => r.schierata > r.consigliata).length;
+    const ordinate = [...squadre].sort((a, b) => (b.schierata - b.consigliata) - (a.schierata - a.consigliata));
+    const primo = ordinate[0];
+    const ultimo = ordinate.at(-1);
+
+    let cambiate = 0;
+    let partite = 0;
+    for (const match of round.matches) {
+        const scenari = scenariSito(match, perSquadra);
+        if (!scenari) continue;
+        partite++;
+        if (risultatoGol(scenari.sitoEntrambe) !== risultatoGol(scenari.reale)) cambiate++;
+    }
+
+    const estremi = primo.schierata - primo.consigliata > 0
+        ? ` Il più bravo contro l'algoritmo: <strong>${primo.squadra}</strong> (${segnoDecimale(primo.schierata - primo.consigliata)}).`
+        : '';
+    const punito = ultimo.schierata - ultimo.consigliata < 0
+        ? ` Il più punito per non averlo ascoltato: <strong>${ultimo.squadra}</strong> (${segnoDecimale(ultimo.schierata - ultimo.consigliata)}).`
+        : '';
+
+    return `
+        <div class="round-general-comment se-sito-riepilogo">
+            <h4><i class="fas fa-robot"></i> E se avesse giocato il sito?</h4>
+            <p>
+                ${battuto} fantallenator${battuto === 1 ? 'e su' : 'i su'} ${squadre.length} ${battuto === 1 ? 'ha' : 'hanno'} fatto meglio della formazione consigliata.${estremi}${punito}
+                Con le formazioni del sito da tutte e due le parti, il risultato sarebbe cambiato in
+                ${cambiate} partit${cambiate === 1 ? 'a' : 'e'} su ${partite}.
+            </p>
+        </div>
+    `;
 }
 
 // ============================================================
@@ -3475,9 +3668,21 @@ const EPS_MODULO = 1.0;
 // Quanto pesa la forma recente rispetto alla media di stagione
 const PESO_FORMA = 0.4;
 
-// Resa presunta di chi non ha ancora un voto: leggermente sotto la media,
-// perché un giocatore ignoto è una scommessa, non una certezza
-const ATTESO_SENZA_DATI = { P: 5, D: 5, C: 5, A: 5 };
+// Media di ruolo di ripiego, per quando la lega non ha ancora abbastanza voti
+// per calcolarla: il portiere sta sotto perché ogni gol subito gli toglie un
+// punto, centrocampisti e attaccanti sopra perché bonus e gol stanno lì
+const MEDIA_RUOLO_RIPIEGO = { P: 5, D: 6, C: 6.2, A: 6.4 };
+
+// Sotto quanti voti la media di ruolo della lega non è ancora affidabile e si
+// usa quella di ripiego
+const VOTI_MINIMI_RUOLO = 10;
+
+// Quante giornate "virtuali" alla media di ruolo si sommano ai voti veri di un
+// giocatore. Un fantavoto da solo è quasi tutto rumore: un gol vale +3 e un
+// 14 alla prima giornata non dice che il giocatore farà 14 anche alla seconda.
+// Con 4, dopo una giornata il voto vero pesa un quinto, dopo otto due terzi:
+// la stagione prende il sopravvento da sola, senza soglie da scegliere.
+const GIORNATE_PRIOR = 4;
 
 // Quanto vale uno slot occupato da chi non scende in campo. Non è zero — un
 // cambio dalla panchina lo rimpiazza — ma deve restare sotto una prestazione
@@ -3545,7 +3750,7 @@ let indiceInfortunati = null;
 let indiceInfortunatiPer = null;
 
 function costruisciIndiceInfortunati() {
-    if (indiceInfortunatiPer === probabiliFormazioni) return indiceInfortunati;
+    if (indiceInfortunati && indiceInfortunatiPer === probabiliFormazioni) return indiceInfortunati;
 
     indiceInfortunatiPer = probabiliFormazioni;
     indiceInfortunati = new Map();
@@ -3613,7 +3818,7 @@ let indiceRigoristi = null;
 let indiceRigoristiPer = null;
 
 function costruisciIndiceRigoristi() {
-    if (indiceRigoristiPer === probabiliFormazioni) return indiceRigoristi;
+    if (indiceRigoristi && indiceRigoristiPer === probabiliFormazioni) return indiceRigoristi;
 
     indiceRigoristiPer = probabiliFormazioni;
     indiceRigoristi = new Map();
@@ -3773,6 +3978,41 @@ function storicoVoti(pid) {
     return voti.sort((a, b) => a.round - b.round);
 }
 
+// Media dei fantavoto per ruolo su tutta la lega, contando ogni voto preso in
+// Serie A dai giocatori in rosa. È il punto verso cui si tira la media di chi ha
+// giocato poco: "un difensore qualsiasi di questa lega", non uno zero.
+let medieRuoloCache = null;
+let medieRuoloPer = null;
+
+function medieDiRuolo() {
+    if (medieRuoloPer === fantacalcioData && medieRuoloCache) return medieRuoloCache;
+
+    const voti = { P: [], D: [], C: [], A: [] };
+    for (const round of (fantacalcioData.rounds || [])) {
+        for (const match of round.matches) {
+            if (!match.lineups) continue;
+            for (const lato of ['home', 'away']) {
+                for (const g of match.lineups[lato]) {
+                    if (g.b === undefined) continue;
+                    const ruolo = anagraficaGiocatore(g.p).role;
+                    if (voti[ruolo]) voti[ruolo].push(g.b);
+                }
+            }
+        }
+    }
+
+    const medie = {};
+    for (const [ruolo, elenco] of Object.entries(voti)) {
+        medie[ruolo] = elenco.length >= VOTI_MINIMI_RUOLO
+            ? elenco.reduce((somma, v) => somma + v, 0) / elenco.length
+            : MEDIA_RUOLO_RIPIEGO[ruolo];
+    }
+
+    medieRuoloPer = fantacalcioData;
+    medieRuoloCache = medie;
+    return medie;
+}
+
 // Media pesata delle ultime giornate: più recente, più pesa
 function mediaForma(voti, quante = 5) {
     const ultimi = voti.slice(-quante);
@@ -3805,9 +4045,17 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
     // Qualità = quanto rende QUANDO gioca, senza ancora considerare se giocherà
     const media = senzaDati ? null : voti.reduce((somma, v) => somma + v.voto, 0) / votiPresi;
     const forma = senzaDati ? null : mediaForma(voti);
-    const qualita = senzaDati
-        ? ATTESO_SENZA_DATI[info.role]
+    const grezza = senzaDati
+        ? null
         : (forma === null ? media : media * (1 - PESO_FORMA) + forma * PESO_FORMA);
+
+    // La qualità grezza si tira verso la media del ruolo, tanto più quanto
+    // meno voti ci sono: chi ne ha uno solo vale quasi la media di ruolo, chi
+    // ne ha venti vale quasi la sua media. Senza voti è la media di ruolo.
+    const prior = medieDiRuolo()[info.role] ?? MEDIA_RUOLO_RIPIEGO.C;
+    const qualita = senzaDati
+        ? prior
+        : (votiPresi * grezza + GIORNATE_PRIOR * prior) / (votiPresi + GIORNATE_PRIOR);
 
     const { p, fonte, voce, infortunio } = probabilitaDiGiocare(pid, affidabilita);
 
@@ -3831,6 +4079,8 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
         atteso,
         qualita: resa,
         qualitaBase: qualita,
+        qualitaGrezza: grezza,
+        mediaRuolo: prior,
         contesto,
         media,
         forma,
@@ -4173,6 +4423,17 @@ function frecciaForma(g) {
     return '<i class="fas fa-minus forma-stabile" title="Stabile"></i>';
 }
 
+// Il conto della resa nel title: quanto viene dai voti del giocatore e quanto
+// dalla media del ruolo, che con poche giornate pesa più dei voti stessi
+function titoloQualita(g) {
+    const ruolo = `media di ruolo ${g.mediaRuolo.toFixed(2)}`;
+    const base = g.senzaDati
+        ? `Nessun voto finora: vale la ${ruolo}`
+        : `Sua media ${g.qualitaGrezza.toFixed(2)} su ${g.presenze} ${g.presenze === 1 ? 'voto' : 'voti'}, `
+            + `tirata verso la ${ruolo} come se avesse ${GIORNATE_PRIOR} giornate in più`;
+    return `${base}. Corretta per il contesto della partita.`;
+}
+
 // Come la partita di Serie A pesa sulla resa: una freccia con il conto intero
 // nel title, perché la tabella non ha spazio per un'altra colonna
 function glifoContesto(contesto) {
@@ -4236,7 +4497,7 @@ function rigaConsiglio(g, titolare) {
     else if (g.senzaDati) nota = 'nessun voto finora';
     else if (titolare && g.schierato === 0) nota = 'era in panchina';
 
-    const qualita = g.senzaDati ? '—' : g.qualita.toFixed(2);
+    const qualita = g.qualita.toFixed(2);
 
     const rigori = g.rigori ? badgeRigorista(g.rigori) : '';
 
@@ -4247,7 +4508,7 @@ function rigaConsiglio(g, titolare) {
             <span class="consiglio-serieA">${siglaSerieA(g.squadraSerieA)}${glifoContesto(g.contesto)}</span>
             <span class="consiglio-forma">${frecciaForma(g)}</span>
             <span class="consiglio-nota"${titoloNota ? ` title="${titoloNota.replace(/"/g, '&quot;')}"` : ''}>${nota}</span>
-            <span class="consiglio-qualita" title="Rendimento medio quando gioca, corretto per il contesto della partita">${qualita}</span>
+            <span class="consiglio-qualita" title="${titoloQualita(g)}">${qualita}</span>
             <span class="consiglio-prob ${classeProb}" title="Probabilità di scendere in campo">${perc}%</span>
             <span class="consiglio-atteso" title="Valore atteso: probabilità x rendimento">${g.atteso.toFixed(2)}</span>
         </div>
@@ -4352,6 +4613,7 @@ function displayFormazione() {
         ${avvisoDati}
         ${avvisoProbabili}
         ${corpo}
+        <div id="consiglio-bilancio"></div>
         <details class="consiglio-spiegazione">
             <summary><i class="fas fa-circle-info"></i> Come nasce questo suggerimento</summary>
             <div class="spiegazione-corpo">
@@ -4369,6 +4631,10 @@ function displayFormazione() {
                         delle ultime 5 giornate (40%), pesata verso le più recenti. Contano anche i voti
                         presi stando in panchina — per prevedere il rendimento conta che il giocatore
                         abbia giocato in Serie A, non che il fantallenatore lo avesse schierato.
+                        Poi il numero si tira verso la <strong>media del suo ruolo</strong> nella lega,
+                        come se avesse ${GIORNATE_PRIOR} giornate in più giocate da giocatore medio:
+                        un 14 alla prima giornata è un gol, non un fuoriclasse, e pesa un quinto.
+                        Con il passare delle giornate conta sempre più la sua stagione.
                     </dd>
                     <dt>Contesto della partita</dt>
                     <dd>
@@ -4431,6 +4697,91 @@ function displayFormazione() {
             displayFormazione();
         });
     }
+
+    // Il bilancio arriva da un file a parte e dopo: la formazione non lo aspetta
+    const stagione = currentSeasonId;
+    caricaValutazioneConsigli(stagione).then(valutazione => {
+        const posto = document.getElementById('consiglio-bilancio');
+        if (posto && stagione === currentSeasonId) posto.innerHTML = htmlBilancioAllenatori(valutazione, scelta);
+    });
+}
+
+// Valutazione dei consigli passati, scritta da valuta-consigli.mjs dopo ogni
+// giornata. Una stagione senza consigli salvati non ha il file, e va bene così:
+// la sezione semplicemente non compare.
+const valutazioniConsigli = new Map();
+
+async function caricaValutazioneConsigli(stagione) {
+    if (!stagione) return null;
+    if (!valutazioniConsigli.has(stagione)) {
+        valutazioniConsigli.set(stagione, fetchJsonNoCache(`data/consigli/${stagione}/valutazione.json`)
+            .catch(() => null));
+    }
+    return valutazioniConsigli.get(stagione);
+}
+
+function segnoDecimale(valore, decimali = 1) {
+    const testo = Math.abs(valore).toFixed(decimali).replace('.', ',');
+    return valore > 0 ? `+${testo}` : (valore < 0 ? `−${testo}` : testo);
+}
+
+// Ogni fantallenatore contro il consiglio del sito: i punti che ha fatto con la
+// formazione schierata meno quelli che avrebbe fatto con quella consigliata,
+// contati allo stesso modo. Positivo vuol dire che ha visto meglio del modello.
+function htmlBilancioAllenatori(valutazione, squadraScelta) {
+    if (!valutazione || !valutazione.allenatori || valutazione.allenatori.length === 0) return '';
+
+    const giornate = valutazione.giornate.length;
+    const righe = valutazione.allenatori.map(b => {
+        const classe = b.differenza > 0 ? 'bilancio-meglio' : (b.differenza < 0 ? 'bilancio-peggio' : '');
+        return `
+            <tr class="${b.squadra === squadraScelta ? 'bilancio-scelta' : ''}">
+                <td>${b.squadra}</td>
+                <td class="num">${b.schierata.toFixed(1).replace('.', ',')}</td>
+                <td class="num">${b.consigliata.toFixed(1).replace('.', ',')}</td>
+                <td class="num ${classe}">${segnoDecimale(b.differenza)}</td>
+                <td class="num" title="Giornate in cui ha fatto meglio, uguale o peggio del consiglio">${b.meglio}-${b.pari}-${b.peggio}</td>
+                <td class="num" title="Titolari in comune con il consiglio, in media">${String(b.inComune).replace('.', ',')}/11</td>
+            </tr>
+        `;
+    }).join('');
+
+    const modello = valutazione.modello;
+    const resa = modello && modello.resa.tutti.voti ? modello.resa.tutti : null;
+    const gioca = modello && modello.gioca.giocatori ? modello.gioca : null;
+    const rigaModello = resa || gioca
+        ? `<p class="bilancio-modello">
+               ${resa ? `La resa prevista sbaglia in media di <strong>${resa.erroreMedio.toFixed(2).replace('.', ',')}</strong>
+               punti a giocatore (${resa.voti} voti), ${resa.distorsione >= 0 ? 'per difetto' : 'per eccesso'}
+               di ${Math.abs(resa.distorsione).toFixed(2).replace('.', ',')} in media.` : ''}
+               ${gioca ? `Dei giocatori in rosa ne attendeva in campo ${String(gioca.attesiInCampo).replace('.', ',')},
+               ne sono scesi ${gioca.inCampo} (Brier ${String(gioca.brier).replace('.', ',')}: zero è perfetto, 0,25 è tirare a indovinare).` : ''}
+           </p>`
+        : '';
+
+    return `
+        <section class="consiglio-bilancio">
+            <h4><i class="fas fa-scale-balanced"></i> Allenatori contro il consiglio</h4>
+            <p class="bilancio-nota">
+                Su ${giornate} giornat${giornate === 1 ? 'a' : 'e'}: i punti della formazione schierata e di quella che
+                il sito consigliava prima del fischio, contati allo stesso modo (fantavoto e al massimo tre cambi
+                pari ruolo, senza bonus casa né modificatori). Δ positivo: il fantallenatore ha visto meglio del modello.
+            </p>
+            <div class="bilancio-scorri">
+                <table class="bilancio-tabella">
+                    <thead>
+                        <tr>
+                            <th>Squadra</th><th class="num">Schierata</th><th class="num">Consigliata</th>
+                            <th class="num">Δ</th><th class="num" title="Meglio-pari-peggio del consiglio">M-P-P</th>
+                            <th class="num">In comune</th>
+                        </tr>
+                    </thead>
+                    <tbody>${righe}</tbody>
+                </table>
+            </div>
+            ${rigaModello}
+        </section>
+    `;
 }
 
 function displayRosters() {
