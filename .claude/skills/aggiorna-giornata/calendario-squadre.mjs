@@ -136,19 +136,51 @@ export function calcolaCalendario(partite, squadreNote, adesso = new Date().toIS
 
 const aaaammgg = (ms) => new Date(ms).toISOString().slice(0, 10).replace(/-/g, '');
 
+// Le partite di una competizione nella finestra. ESPN accetta un intervallo
+// di date, ma non sempre (la prima prova con limit=300 su 23 giorni ha avuto
+// 400 ovunque): se l'intervallo viene rifiutato si chiede un giorno alla volta.
+// Le partite si tengono una volta sola, perché due giorni possono restituire
+// la stessa partita a cavallo della mezzanotte.
+async function partiteDellaCompetizione(lega, nome, da, a, scaricaJson) {
+    const base = `${URL_ESPN}/${lega}/scoreboard`;
+    try {
+        return analizzaScoreboard(await scaricaJson(`${base}?dates=${aaaammgg(da)}-${aaaammgg(a)}`), nome);
+    } catch (errore) {
+        console.warn(`  ${nome}: intervallo rifiutato (${errore.message}), provo giorno per giorno`);
+    }
+
+    const viste = new Map();
+    let errori = 0;
+    let ultimoErrore = null;
+    for (let giorno = da; giorno <= a; giorno += GIORNO) {
+        try {
+            for (const p of analizzaScoreboard(await scaricaJson(`${base}?dates=${aaaammgg(giorno)}`), nome)) {
+                viste.set(`${p.data}|${p.casa}|${p.fuori}`, p);
+            }
+        } catch (errore) {
+            errori++;
+            ultimoErrore = errore;
+        }
+    }
+    const giorni = Math.round((a - da) / GIORNO) + 1;
+    if (errori === giorni) throw ultimoErrore;
+    if (errori > 0) console.warn(`  ${nome}: ${errori} giorni su ${giorni} non scaricati (${ultimoErrore.message})`);
+    return [...viste.values()];
+}
+
 export async function scaricaCalendario(squadreNote, scaricaJson) {
     const adesso = Date.now();
-    const intervallo = `${aaaammgg(adesso - GIORNI_INDIETRO * GIORNO)}-${aaaammgg(adesso + GIORNI_AVANTI * GIORNO)}`;
+    const da = adesso - GIORNI_INDIETRO * GIORNO;
+    const a = adesso + GIORNI_AVANTI * GIORNO;
 
     const partite = [];
     for (const [lega, nome] of Object.entries(COMPETIZIONI)) {
         try {
-            const json = await scaricaJson(`${URL_ESPN}/${lega}/scoreboard?dates=${intervallo}&limit=300`);
-            const trovate = analizzaScoreboard(json, nome);
+            const trovate = await partiteDellaCompetizione(lega, nome, da, a, scaricaJson);
             console.log(`  ${nome}: ${trovate.length} partite`);
             partite.push(...trovate);
-        } catch (error) {
-            console.warn(`  ${nome} non disponibile: ${error.message}`);
+        } catch (errore) {
+            console.warn(`  ${nome} non disponibile: ${errore.message}`);
         }
     }
     return calcolaCalendario(partite, squadreNote, new Date(adesso).toISOString());

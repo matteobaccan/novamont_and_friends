@@ -37,8 +37,17 @@ function fail(message) {
 }
 
 async function scaricaJson(url) {
-    const res = await fetch(url, { headers: { accept: 'application/json' } });
-    if (!res.ok) throw new Error(`${url} ha risposto ${res.status}`);
+    const res = await fetch(url, {
+        headers: {
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36',
+            accept: 'application/json'
+        }
+    });
+    if (!res.ok) {
+        // L'inizio della risposta dice quasi sempre il perché di un 400
+        const corpo = (await res.text().catch(() => '')).replace(/\s+/g, ' ').slice(0, 160);
+        throw new Error(`${url} ha risposto ${res.status}${corpo ? `: ${corpo}` : ''}`);
+    }
     return res.json();
 }
 

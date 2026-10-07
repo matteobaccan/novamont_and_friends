@@ -7,7 +7,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { nomeSerieA, analizzaScoreboard, calcolaCalendario } from '../.claude/skills/aggiorna-giornata/calendario-squadre.mjs';
+import { nomeSerieA, analizzaScoreboard, calcolaCalendario, scaricaCalendario } from '../.claude/skills/aggiorna-giornata/calendario-squadre.mjs';
 import { caricaScript, valuta, esegui } from './aiuto/carica-script.mjs';
 
 const SERIE_A = ['Atalanta', 'Bologna', 'Como', 'Inter', 'Juventus', 'Milan', 'Napoli', 'Roma', 'Udinese', 'Verona'];
@@ -127,4 +127,48 @@ test('sotto il nome compaiono i giorni di riposo corti e il rischio turnover', (
     assert.match(html, /ROM<span class="partita-turnover">»<\/span>/);
     assert.match(html, /Inter ha giocato .* \(Champions League con Bayern Munich\): 3 giorni di riposo/);
     assert.match(html, /Fra 3 giorni Champions League con Porto: rischio turnover/);
+});
+
+// ------------------------------------------------------------------
+// Scaricamento: intervallo, e giorno per giorno se l'intervallo è rifiutato
+// ------------------------------------------------------------------
+
+
+const silenzio = () => {
+    const originali = { log: console.log, warn: console.warn };
+    console.log = () => {};
+    console.warn = () => {};
+    return () => Object.assign(console, originali);
+};
+
+test('se l\'intervallo di date viene rifiutato si chiede un giorno alla volta, senza doppioni', async () => {
+    const richieste = [];
+    const finto = async (url) => {
+        richieste.push(url);
+        if (/dates=\d{8}-\d{8}/.test(url)) throw new Error('400');
+        // Ogni giorno restituisce la stessa partita: deve contare una volta sola
+        return url.includes('ita.1') ? { events: [evento('2099-01-01T18:00Z', 'Internazionale', 'AS Roma')] } : { events: [] };
+    };
+    const ripristina = silenzio();
+    try {
+        await scaricaCalendario(SERIE_A, finto);
+    } finally {
+        ripristina();
+    }
+    const intervalli = richieste.filter(u => /dates=\d{8}-\d{8}/.test(u));
+    const giornaliere = richieste.filter(u => /dates=\d{8}$/.test(u));
+    assert.equal(intervalli.length, 5, 'una prova con l\'intervallo per competizione');
+    assert.ok(giornaliere.length >= 5 * 22, `poi un giorno alla volta, ${giornaliere.length} richieste`);
+});
+
+test('se l\'intervallo funziona basta una richiesta per competizione', async () => {
+    const richieste = [];
+    const ripristina = silenzio();
+    try {
+        await scaricaCalendario(SERIE_A, async (url) => { richieste.push(url); return { events: [] }; });
+    } finally {
+        ripristina();
+    }
+    assert.equal(richieste.length, 5);
+    assert.ok(richieste.every(u => !u.includes('limit=')));
 });
