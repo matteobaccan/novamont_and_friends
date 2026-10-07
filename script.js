@@ -3475,9 +3475,21 @@ const EPS_MODULO = 1.0;
 // Quanto pesa la forma recente rispetto alla media di stagione
 const PESO_FORMA = 0.4;
 
-// Resa presunta di chi non ha ancora un voto: leggermente sotto la media,
-// perché un giocatore ignoto è una scommessa, non una certezza
-const ATTESO_SENZA_DATI = { P: 5, D: 5, C: 5, A: 5 };
+// Media di ruolo di ripiego, per quando la lega non ha ancora abbastanza voti
+// per calcolarla: il portiere sta sotto perché ogni gol subito gli toglie un
+// punto, centrocampisti e attaccanti sopra perché bonus e gol stanno lì
+const MEDIA_RUOLO_RIPIEGO = { P: 5, D: 6, C: 6.2, A: 6.4 };
+
+// Sotto quanti voti la media di ruolo della lega non è ancora affidabile e si
+// usa quella di ripiego
+const VOTI_MINIMI_RUOLO = 10;
+
+// Quante giornate "virtuali" alla media di ruolo si sommano ai voti veri di un
+// giocatore. Un fantavoto da solo è quasi tutto rumore: un gol vale +3 e un
+// 14 alla prima giornata non dice che il giocatore farà 14 anche alla seconda.
+// Con 4, dopo una giornata il voto vero pesa un quinto, dopo otto due terzi:
+// la stagione prende il sopravvento da sola, senza soglie da scegliere.
+const GIORNATE_PRIOR = 4;
 
 // Quanto vale uno slot occupato da chi non scende in campo. Non è zero — un
 // cambio dalla panchina lo rimpiazza — ma deve restare sotto una prestazione
@@ -3545,7 +3557,7 @@ let indiceInfortunati = null;
 let indiceInfortunatiPer = null;
 
 function costruisciIndiceInfortunati() {
-    if (indiceInfortunatiPer === probabiliFormazioni) return indiceInfortunati;
+    if (indiceInfortunati && indiceInfortunatiPer === probabiliFormazioni) return indiceInfortunati;
 
     indiceInfortunatiPer = probabiliFormazioni;
     indiceInfortunati = new Map();
@@ -3613,7 +3625,7 @@ let indiceRigoristi = null;
 let indiceRigoristiPer = null;
 
 function costruisciIndiceRigoristi() {
-    if (indiceRigoristiPer === probabiliFormazioni) return indiceRigoristi;
+    if (indiceRigoristi && indiceRigoristiPer === probabiliFormazioni) return indiceRigoristi;
 
     indiceRigoristiPer = probabiliFormazioni;
     indiceRigoristi = new Map();
@@ -3773,6 +3785,41 @@ function storicoVoti(pid) {
     return voti.sort((a, b) => a.round - b.round);
 }
 
+// Media dei fantavoto per ruolo su tutta la lega, contando ogni voto preso in
+// Serie A dai giocatori in rosa. È il punto verso cui si tira la media di chi ha
+// giocato poco: "un difensore qualsiasi di questa lega", non uno zero.
+let medieRuoloCache = null;
+let medieRuoloPer = null;
+
+function medieDiRuolo() {
+    if (medieRuoloPer === fantacalcioData && medieRuoloCache) return medieRuoloCache;
+
+    const voti = { P: [], D: [], C: [], A: [] };
+    for (const round of (fantacalcioData.rounds || [])) {
+        for (const match of round.matches) {
+            if (!match.lineups) continue;
+            for (const lato of ['home', 'away']) {
+                for (const g of match.lineups[lato]) {
+                    if (g.b === undefined) continue;
+                    const ruolo = anagraficaGiocatore(g.p).role;
+                    if (voti[ruolo]) voti[ruolo].push(g.b);
+                }
+            }
+        }
+    }
+
+    const medie = {};
+    for (const [ruolo, elenco] of Object.entries(voti)) {
+        medie[ruolo] = elenco.length >= VOTI_MINIMI_RUOLO
+            ? elenco.reduce((somma, v) => somma + v, 0) / elenco.length
+            : MEDIA_RUOLO_RIPIEGO[ruolo];
+    }
+
+    medieRuoloPer = fantacalcioData;
+    medieRuoloCache = medie;
+    return medie;
+}
+
 // Media pesata delle ultime giornate: più recente, più pesa
 function mediaForma(voti, quante = 5) {
     const ultimi = voti.slice(-quante);
@@ -3805,9 +3852,17 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
     // Qualità = quanto rende QUANDO gioca, senza ancora considerare se giocherà
     const media = senzaDati ? null : voti.reduce((somma, v) => somma + v.voto, 0) / votiPresi;
     const forma = senzaDati ? null : mediaForma(voti);
-    const qualita = senzaDati
-        ? ATTESO_SENZA_DATI[info.role]
+    const grezza = senzaDati
+        ? null
         : (forma === null ? media : media * (1 - PESO_FORMA) + forma * PESO_FORMA);
+
+    // La qualità grezza si tira verso la media del ruolo, tanto più quanto
+    // meno voti ci sono: chi ne ha uno solo vale quasi la media di ruolo, chi
+    // ne ha venti vale quasi la sua media. Senza voti è la media di ruolo.
+    const prior = medieDiRuolo()[info.role] ?? MEDIA_RUOLO_RIPIEGO.C;
+    const qualita = senzaDati
+        ? prior
+        : (votiPresi * grezza + GIORNATE_PRIOR * prior) / (votiPresi + GIORNATE_PRIOR);
 
     const { p, fonte, voce, infortunio } = probabilitaDiGiocare(pid, affidabilita);
 
@@ -3831,6 +3886,8 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
         atteso,
         qualita: resa,
         qualitaBase: qualita,
+        qualitaGrezza: grezza,
+        mediaRuolo: prior,
         contesto,
         media,
         forma,
@@ -4173,6 +4230,17 @@ function frecciaForma(g) {
     return '<i class="fas fa-minus forma-stabile" title="Stabile"></i>';
 }
 
+// Il conto della resa nel title: quanto viene dai voti del giocatore e quanto
+// dalla media del ruolo, che con poche giornate pesa più dei voti stessi
+function titoloQualita(g) {
+    const ruolo = `media di ruolo ${g.mediaRuolo.toFixed(2)}`;
+    const base = g.senzaDati
+        ? `Nessun voto finora: vale la ${ruolo}`
+        : `Sua media ${g.qualitaGrezza.toFixed(2)} su ${g.presenze} ${g.presenze === 1 ? 'voto' : 'voti'}, `
+            + `tirata verso la ${ruolo} come se avesse ${GIORNATE_PRIOR} giornate in più`;
+    return `${base}. Corretta per il contesto della partita.`;
+}
+
 // Come la partita di Serie A pesa sulla resa: una freccia con il conto intero
 // nel title, perché la tabella non ha spazio per un'altra colonna
 function glifoContesto(contesto) {
@@ -4236,7 +4304,7 @@ function rigaConsiglio(g, titolare) {
     else if (g.senzaDati) nota = 'nessun voto finora';
     else if (titolare && g.schierato === 0) nota = 'era in panchina';
 
-    const qualita = g.senzaDati ? '—' : g.qualita.toFixed(2);
+    const qualita = g.qualita.toFixed(2);
 
     const rigori = g.rigori ? badgeRigorista(g.rigori) : '';
 
@@ -4247,7 +4315,7 @@ function rigaConsiglio(g, titolare) {
             <span class="consiglio-serieA">${siglaSerieA(g.squadraSerieA)}${glifoContesto(g.contesto)}</span>
             <span class="consiglio-forma">${frecciaForma(g)}</span>
             <span class="consiglio-nota"${titoloNota ? ` title="${titoloNota.replace(/"/g, '&quot;')}"` : ''}>${nota}</span>
-            <span class="consiglio-qualita" title="Rendimento medio quando gioca, corretto per il contesto della partita">${qualita}</span>
+            <span class="consiglio-qualita" title="${titoloQualita(g)}">${qualita}</span>
             <span class="consiglio-prob ${classeProb}" title="Probabilità di scendere in campo">${perc}%</span>
             <span class="consiglio-atteso" title="Valore atteso: probabilità x rendimento">${g.atteso.toFixed(2)}</span>
         </div>
@@ -4369,6 +4437,10 @@ function displayFormazione() {
                         delle ultime 5 giornate (40%), pesata verso le più recenti. Contano anche i voti
                         presi stando in panchina — per prevedere il rendimento conta che il giocatore
                         abbia giocato in Serie A, non che il fantallenatore lo avesse schierato.
+                        Poi il numero si tira verso la <strong>media del suo ruolo</strong> nella lega,
+                        come se avesse ${GIORNATE_PRIOR} giornate in più giocate da giocatore medio:
+                        un 14 alla prima giornata è un gol, non un fuoriclasse, e pesa un quinto.
+                        Con il passare delle giornate conta sempre più la sua stagione.
                     </dd>
                     <dt>Contesto della partita</dt>
                     <dd>
