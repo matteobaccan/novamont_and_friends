@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-06T21:29:24.380Z",
+  "aggiornato": "2026-10-07T14:19:46.144Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -647,7 +647,7 @@
     {
       "nome": "Berisha M.",
       "squadra": "Lecce",
-      "nota": "Il centrocampista ha lamentato un sovraccarico muscolare alla gamba e non ha preso parte alle sfide contro Monza e Milan. Recuperabile da inizio ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Bologna."
+      "nota": "Il centrocampista ha lamentato un sovraccarico muscolare alla gamba e non ha preso parte alle sfide contro Monza e Milan. Recuperabile da metà ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Bologna."
     },
     {
       "nome": "Estupinan",
@@ -688,11 +688,6 @@
       "nome": "Santos A.",
       "squadra": "Napoli",
       "nota": "Il brasiliano costretto al cambio il 9 settembre in Champions League vittima di una lesione muscolare di medio grado al bicipite femorale sinistro. Proverà a tornare arruolabile dalla seconda metà di ottobre."
-    },
-    {
-      "nome": "McTominay",
-      "squadra": "Napoli",
-      "nota": "Il centrocampista l'1 settembre a causa di una lieve aritmia benigna ha deciso di sottoporsi a un intervento di correzione tramite ablazione. Si confida di rivederlo in campo dalla seconda metà ottobre."
     },
     {
       "nome": "Buongiorno",
@@ -758,11 +753,6 @@
       "nome": "Candè",
       "squadra": "Sassuolo",
       "nota": "il difensore a gennaio vittima della rottura legamento crociato anteriore ginocchio destro, punta a tornare convocabile dalla metà di ottobre."
-    },
-    {
-      "nome": "Adams C.",
-      "squadra": "Torino",
-      "nota": "L'attaccante frenato a metà settembre da una lesione distrattiva di basso grado all'adduttore, forfait contro Roma e Bologna. Punta a recuperare nella sosta, ma da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro l'Udinese."
     },
     {
       "nome": "Fortini",
@@ -1336,7 +1326,7 @@
       "nome": "Pavard",
       "squadra": "Inter",
       "ruolo": "D",
-      "probabilita": 40,
+      "probabilita": 30,
       "titolare": false
     },
     "4179": {
@@ -1525,7 +1515,7 @@
       "nome": "Badiashile",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "4705": {
@@ -1547,6 +1537,13 @@
       "squadra": "Milan",
       "ruolo": "D",
       "probabilita": 25,
+      "titolare": false
+    },
+    "4777": {
+      "nome": "McTominay",
+      "squadra": "Napoli",
+      "ruolo": "C",
+      "probabilita": 50,
       "titolare": false
     },
     "4807": {
@@ -2218,7 +2215,7 @@
       "nome": "Spence",
       "squadra": "Inter",
       "ruolo": "D",
-      "probabilita": 30,
+      "probabilita": 40,
       "titolare": false
     },
     "5994": {
@@ -2372,7 +2369,7 @@
       "nome": "Beukema",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 55,
+      "probabilita": 40,
       "titolare": false
     },
     "6204": {
@@ -2428,7 +2425,7 @@
       "nome": "Tourè E.",
       "squadra": "Parma",
       "ruolo": "A",
-      "probabilita": 80,
+      "probabilita": 60,
       "titolare": true
     },
     "6230": {
@@ -2470,7 +2467,7 @@
       "nome": "Diouf",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 80,
+      "probabilita": 70,
       "titolare": true
     },
     "6294": {
@@ -2715,7 +2712,7 @@
       "nome": "Marin R.",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 80,
+      "probabilita": 60,
       "titolare": true
     },
     "6642": {
@@ -2724,6 +2721,13 @@
       "ruolo": "D",
       "probabilita": 80,
       "titolare": true
+    },
+    "6646": {
+      "nome": "Adams C.",
+      "squadra": "Torino",
+      "ruolo": "A",
+      "probabilita": 25,
+      "titolare": false
     },
     "6650": {
       "nome": "Sherri",
@@ -3387,7 +3391,7 @@
       "nome": "Britschgi",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 80,
+      "probabilita": 70,
       "titolare": true
     },
     "7268": {
@@ -3864,7 +3868,7 @@
       "squadra": "Parma",
       "ruolo": "A",
       "probabilita": 60,
-      "titolare": true
+      "titolare": false
     },
     "7564": {
       "nome": "Leysen F.",
@@ -4052,8 +4056,8 @@
       "nome": "Sierro",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 85,
+      "titolare": true
     },
     "7629": {
       "nome": "Libra",
