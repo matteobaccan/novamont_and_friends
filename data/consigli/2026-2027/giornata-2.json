@@ -1,8 +1,8 @@
 {
   "stagione": "2026-2027",
   "giornata": 2,
-  "generato": "2026-10-07T20:33:23.143Z",
-  "probabiliDel": "2026-10-07T20:33:23.031Z",
+  "generato": "2026-10-07T21:49:30.781Z",
+  "probabiliDel": "2026-10-07T21:49:30.669Z",
   "turnoSerieA": 6,
   "parametri": {"GIORNATE_PRIOR": 4, "PESO_FORMA": 0.4, "EPS_MODULO": 1, "VOTO_RIPIEGO": 4.5, "PESO_CONTESTO": 0.03, "PESO_STANCHEZZA": 0.03, "BONUS_RIGORE_PARTITA": 0.35, "PROB_FUORI_LISTA": 0.15, "PROB_INFORTUNATO": 0.03},
   "squadre": {
@@ -142,7 +142,7 @@
       "modulo": "3-4-3",
       "totale": 71.586,
       "titolari": [4431, 5514, 2296, 5862, 5589, 5131, 4287, 5844, 7600, 7374, 5585],
-      "panchina": [133, 6966, 5838, 4976, 5555, 6956, 6047, 4973, 4911, 6677, 6884, 7252, 6752, 2832],
+      "panchina": [6966, 133, 5838, 4976, 5555, 6956, 6047, 4973, 4911, 6677, 6884, 7252, 6752, 2832],
       "rosa": [
         {"pid": 4431, "ruolo": "P", "atteso": 5.26, "resa": 5.344, "rigori": 0, "grezza": 4.5, "mediaRuolo": 5.462, "presenze": 1, "probabilita": 0.9, "fonte": "probabili"},
         {"pid": 5514, "ruolo": "D", "atteso": 5.946, "resa": 6.106, "rigori": 0, "grezza": null, "mediaRuolo": 6.085, "presenze": 0, "probabilita": 0.9, "fonte": "probabili"},
@@ -155,8 +155,8 @@
         {"pid": 7600, "ruolo": "A", "atteso": 7.032, "resa": 7.28, "rigori": 0.034, "grezza": 10, "mediaRuolo": 6.568, "presenze": 1, "probabilita": 0.9, "fonte": "probabili"},
         {"pid": 7374, "ruolo": "A", "atteso": 6.731, "resa": 6.978, "rigori": 0, "grezza": 6.5, "mediaRuolo": 6.568, "presenze": 1, "probabilita": 0.9, "fonte": "probabili"},
         {"pid": 5585, "ruolo": "A", "atteso": 6.56, "resa": 6.439, "rigori": 0.35, "grezza": 6, "mediaRuolo": 6.568, "presenze": 1, "probabilita": 0.9, "fonte": "probabili"},
-        {"pid": 133, "ruolo": "P", "atteso": 4.803, "resa": 4.879, "rigori": 0, "grezza": 4, "mediaRuolo": 5.462, "presenze": 1, "probabilita": 0.8, "fonte": "probabili"},
         {"pid": 6966, "ruolo": "P", "atteso": 5.114, "resa": 5.319, "rigori": 0, "grezza": 4, "mediaRuolo": 5.462, "presenze": 1, "probabilita": 0.75, "fonte": "probabili"},
+        {"pid": 133, "ruolo": "P", "atteso": 4.765, "resa": 4.879, "rigori": 0, "grezza": 4, "mediaRuolo": 5.462, "presenze": 1, "probabilita": 0.7, "fonte": "probabili"},
         {"pid": 5838, "ruolo": "D", "atteso": 5.787, "resa": 5.93, "rigori": 0, "grezza": 7, "mediaRuolo": 6.085, "presenze": 1, "probabilita": 0.9, "fonte": "probabili"},
         {"pid": 4976, "ruolo": "D", "atteso": 5.703, "resa": 5.837, "rigori": 0, "grezza": 6, "mediaRuolo": 6.085, "presenze": 1, "probabilita": 0.9, "fonte": "probabili"},
         {"pid": 5555, "ruolo": "D", "atteso": 5.507, "resa": 5.619, "rigori": 0, "grezza": 5.5, "mediaRuolo": 6.085, "presenze": 1, "probabilita": 0.9, "fonte": "probabili"},

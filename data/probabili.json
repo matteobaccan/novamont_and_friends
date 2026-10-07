@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-07T20:33:23.031Z",
+  "aggiornato": "2026-10-07T21:49:30.669Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -1658,7 +1658,7 @@
       "nome": "Skorupski",
       "squadra": "Bologna",
       "ruolo": "P",
-      "probabilita": 80,
+      "probabilita": 70,
       "titolare": true
     },
     "152": {
@@ -4080,7 +4080,7 @@
       "nome": "Pessina Mas.",
       "squadra": "Bologna",
       "ruolo": "P",
-      "probabilita": 5,
+      "probabilita": 30,
       "titolare": false
     },
     "7175": {
