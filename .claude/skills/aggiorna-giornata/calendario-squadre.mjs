@@ -105,6 +105,8 @@ export function quotaDecimale(valore) {
 
 export function quoteDellaGara(gara) {
     for (const voce of (gara && gara.odds) || []) {
+        // L'elenco a volte contiene voci nulle: si salta alla prossima
+        if (!voce || typeof voce !== 'object') continue;
         const ml = voce.moneyline || {};
         const casa = quotaDecimale(voce.homeTeamOdds) ?? quotaDecimale(ml.home);
         const fuori = quotaDecimale(voce.awayTeamOdds) ?? quotaDecimale(ml.away);
@@ -120,6 +122,16 @@ export function quoteDellaGara(gara) {
         }
     }
     return null;
+}
+
+// Le quote sono un di più: un formato inatteso deve far perdere le quote di
+// quella partita, non la partita e con lei tutto il giorno
+function quoteSicure(gara) {
+    try {
+        return quoteDellaGara(gara);
+    } catch {
+        return null;
+    }
 }
 
 // Probabilità dei tre esiti dalle quote. 1/quota somma a più di 1 — è il
@@ -150,7 +162,7 @@ export function analizzaScoreboard(json, competizione) {
             fuori: (fuori.team && (fuori.team.displayName || fuori.team.name)) || '',
             // Rinviata o annullata: non stanca nessuno
             annullata: /postponed|canceled|cancelled/i.test(((evento.status || {}).type || {}).name || ''),
-            quote: quoteDellaGara(gara)
+            quote: quoteSicure(gara)
         });
     }
     return partite;

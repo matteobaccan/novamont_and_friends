@@ -234,6 +234,17 @@ test('le quote si leggono in tutte e due le forme dello scoreboard', () => {
     // Senza il pareggio non è una quota 1X2: meglio niente che una sbagliata
     assert.equal(quoteDellaGara({ odds: [{ homeTeamOdds: { moneyLine: -150 }, awayTeamOdds: { moneyLine: 130 } }] }), null);
     assert.equal(quoteDellaGara({}), null);
+
+    // Una voce nulla nell'elenco, come succede davvero in Conference League
+    assert.deepEqual(quoteDellaGara({ odds: [null, vecchia.odds[0]] }), { casa: 1.4, pareggio: 4.8, fuori: 7, fonte: 'DraftKings' });
+});
+
+test('quote in un formato inatteso fanno perdere le quote, non la partita', () => {
+    const strana = evento('2026-10-15T19:00Z', 'AC Milan', 'Porto');
+    Object.defineProperty(strana.competitions[0], 'odds', { get() { throw new Error('formato inatteso'); } });
+    const [partita] = analizzaScoreboard({ events: [strana] }, 'Europa League');
+    assert.equal(partita.casa, 'AC Milan');
+    assert.equal(partita.quote, null);
 });
 
 test('le probabilità dalle quote tolgono il margine del bookmaker e sommano a 1', () => {
