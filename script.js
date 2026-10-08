@@ -3723,6 +3723,17 @@ const PESO_CONTESTO = 0.03;
 const PESO_STANCHEZZA = 0.03;
 const GIORNI_STANCHEZZA = 3;
 
+// Le quote dei bookmaker, quando ci sono, prendono il posto delle quattro voci
+// qui sopra: chi le fa conosce già campo, classifica, forma, stanchezza, e in
+// più assenze e motivazioni. Sommarle conterebbe le stesse cose due volte.
+//
+// Si guarda lo scarto fra probabilità di vincere e di perdere: sotto
+// SOGLIA_QUOTE la partita è equilibrata e non sposta niente; sopra, la squadra
+// favorita guadagna e l'altra perde in proporzione, fino a PESO_QUOTE quando
+// la vittoria è certa. Un 65% contro 15% (scarto 0,5) vale il 3,75%.
+const SOGLIA_QUOTE = 0.2;
+const PESO_QUOTE = 0.10;
+
 // Probabili formazioni di Serie A, caricate a parte perché cambiano ogni
 // settimana e non fanno parte dello storico della stagione
 let probabiliFormazioni = null;
@@ -3891,6 +3902,15 @@ function contestoPartita(squadraSerieA) {
     return contesto;
 }
 
+// Quanto la superiorità di una squadra secondo i bookmaker sposta la resa dei
+// suoi giocatori: zero fino a SOGLIA_QUOTE di scarto fra vittoria e sconfitta,
+// poi in proporzione fino a ±PESO_QUOTE
+function fattoreQuote(esiti) {
+    const scarto = esiti.vittoria - esiti.sconfitta;
+    const oltre = Math.max(0, Math.abs(scarto) - SOGLIA_QUOTE) / (1 - SOGLIA_QUOTE);
+    return Math.sign(scarto) * oltre * PESO_QUOTE;
+}
+
 // 1 se ha giocato da GIORNI_STANCHEZZA giorni o meno, 0,5 con un giorno in
 // più, 0 altrimenti o se il calendario non si conosce
 function livelloStanchezza(calendario) {
@@ -3943,6 +3963,10 @@ function calcolaContestoPartita(squadraSerieA) {
     const suo = calendario[avversario] || null;
     const stanchezza = PESO_STANCHEZZA * (livelloStanchezza(suo) - livelloStanchezza(mio));
 
+    // Le quote, se ci sono, riassumono tutto il resto
+    const esiti = mio && mio.prossima && mio.prossima.esiti;
+    const quote = esiti ? fattoreQuote(esiti) : null;
+
     // Proporzionale alla distanza in classifica: fra squadre vicine tende a zero
     // da sé, che è giusto anche a inizio stagione quando la classifica dice poco
     const graduatoria = posizione && posizioneAvversario
@@ -3956,9 +3980,11 @@ function calcolaContestoPartita(squadraSerieA) {
         : 0;
 
     return {
-        fattore: 1 + campo + graduatoria + andamento + stanchezza,
+        fattore: 1 + (quote !== null ? quote : campo + graduatoria + andamento + stanchezza),
         noto: true,
         stanchezza,
+        quote,
+        probabilitaEsiti: esiti || null,
         calendario: mio,
         calendarioAvversario: suo,
         squadra: squadraSerieA,
@@ -4490,7 +4516,11 @@ function glifoContesto(contesto) {
     if (contesto.posizione) pezzi.push(`${contesto.posizione}° in classifica`);
     if (contesto.posizioneAvversario) pezzi.push(`avversario ${contesto.posizioneAvversario}°`);
     if (contesto.partite) pezzi.push(`${contesto.punti} punti nelle ultime ${contesto.partite} (${contesto.esiti})`);
-    if (contesto.stanchezza) {
+    if (contesto.probabilitaEsiti) {
+        const e = contesto.probabilitaEsiti;
+        pezzi.push(`bookmaker: vittoria ${Math.round(e.vittoria * 100)}%, pari ${Math.round(e.pareggio * 100)}%, sconfitta ${Math.round(e.sconfitta * 100)}%`);
+        pezzi.push('le quote sostituiscono campo, classifica, forma e stanchezza');
+    } else if (contesto.stanchezza) {
         pezzi.push(`stanchezza ${contesto.stanchezza > 0 ? '+' : ''}${Math.round(contesto.stanchezza * 1000) / 10}%`);
     }
     pezzi.push(`contesto ${scarto > 0 ? '+' : ''}${Math.round(scarto * 100)}%`);
@@ -4545,13 +4575,28 @@ function htmlPartitaSerieA(contesto) {
                 + `${siglaSerieA(nome)}${posizione ? ` ${posizione}°` : ''}`
                 + `${forma.glifo ? `<span class="${forma.classe}">${forma.glifo}</span>` : ''}${segni}</span>`,
             titolo: [nome, posizione ? `${posizione}° in classifica` : '', forma.testo].filter(Boolean).join(', ')
-                + (calendario ? `. ${testoCalendario(nome, calendario)}` : '')
+                + (testoCalendario(nome, calendario) ? `. ${testoCalendario(nome, calendario)}` : '')
         };
     };
 
     const a = lato(casa);
     const b = lato(fuori);
-    const titolo = `${casa}-${fuori} · ${a.titolo} · ${b.titolo}`;
+
+    // Con le quote, la probabilità di vittoria accanto a ciascuna squadra
+    let titoloQuote = '';
+    if (contesto.probabilitaEsiti) {
+        const e = contesto.probabilitaEsiti;
+        const vCasa = contesto.casa ? e.vittoria : e.sconfitta;
+        const vFuori = contesto.casa ? e.sconfitta : e.vittoria;
+        const favorita = Math.abs(e.vittoria - e.sconfitta) >= SOGLIA_QUOTE;
+        const pct = (p, alta) => `<span class="partita-quota${favorita && alta ? ' favorita' : ''}">${Math.round(p * 100)}%</span>`;
+        a.html = a.html.replace(/<\/span>$/, `${pct(vCasa, vCasa > vFuori)}</span>`);
+        b.html = b.html.replace(/<\/span>$/, `${pct(vFuori, vFuori > vCasa)}</span>`);
+        const q = e.quote || {};
+        titoloQuote = ` · Quote 1 ${q.casa} · X ${q.pareggio} · 2 ${q.fuori}${q.fonte ? ` (${q.fonte})` : ''}:`
+            + ` vince ${casa} ${Math.round(vCasa * 100)}%, pari ${Math.round(e.pareggio * 100)}%, vince ${fuori} ${Math.round(vFuori * 100)}%`;
+    }
+    const titolo = `${casa}-${fuori} · ${a.titolo} · ${b.titolo}${titoloQuote}`;
     return `<span class="consiglio-partita" title="${titolo.replace(/"/g, '&quot;')}">${a.html}<span class="partita-trattino">–</span>${b.html}</span>`;
 }
 
@@ -4745,7 +4790,13 @@ function displayFormazione() {
                         <strong>punti nelle ultime tre giornate</strong>, e arrivarci <strong>più
                         riposati</strong>: chi ha giocato da tre giorni o meno (coppa o turno
                         infrasettimanale) perde fino al 3% contro chi ha riposato, metà con quattro
-                        giorni. Se hanno giocato tutte e due, non cambia niente. La freccia accanto alla
+                        giorni. Se hanno giocato tutte e due, non cambia niente.
+                        <br>Quando ci sono le <strong>quote dei bookmaker</strong>, queste quattro voci
+                        lasciano il posto a una sola: le quote sanno già di campo, classifica, forma e
+                        stanchezza, e in più di assenze e motivazioni. Se lo scarto fra probabilità di
+                        vincere e di perdere supera il 20%, la favorita guadagna e l'altra perde in
+                        proporzione, fino al 10% quando la vittoria è certa: un 65% contro 15% vale
+                        circa il 4%. Sotto quella soglia la partita è equilibrata e non sposta niente. La freccia accanto alla
                         sigla di Serie A riassume il conto, con il dettaglio nel suggerimento. Sotto il nome
                         del giocatore c'è la partita: casa prima, la sua squadra in grassetto, e per
                         tutte e due la posizione in classifica e la forma — ↑ da due punti a partita

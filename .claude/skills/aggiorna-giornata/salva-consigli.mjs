@@ -34,7 +34,7 @@ export function sovrascrivibile(esistente, probabili) {
 // Si salvano con ogni consiglio, così si sa con quali pesi era stato dato.
 export const PARAMETRI = [
     'GIORNATE_PRIOR', 'PESO_FORMA', 'EPS_MODULO', 'VOTO_RIPIEGO',
-    'PESO_CONTESTO', 'PESO_STANCHEZZA', 'BONUS_RIGORE_PARTITA', 'PROB_FUORI_LISTA', 'PROB_INFORTUNATO'
+    'PESO_CONTESTO', 'PESO_STANCHEZZA', 'PESO_QUOTE', 'SOGLIA_QUOTE', 'BONUS_RIGORE_PARTITA', 'PROB_FUORI_LISTA', 'PROB_INFORTUNATO'
 ];
 
 // JSON leggibile in un diff ma senza una riga per numero: un oggetto o un

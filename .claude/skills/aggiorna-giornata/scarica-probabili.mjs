@@ -402,6 +402,9 @@ async function main() {
         const stanche = Object.entries(calendario).filter(([, c]) => c.giorniRiposo !== null && c.giorniRiposo <= 4);
         console.log(`  ${Object.keys(calendario).length} squadre con la prossima di Serie A, ${stanche.length} con 4 giorni di riposo o meno`
             + (stanche.length ? `: ${stanche.map(([s, c]) => `${s} ${c.giorniRiposo}g`).join(', ')}` : ''));
+        const conQuote = Object.entries(calendario).filter(([, c]) => c.prossima.esiti);
+        console.log(`  ${conQuote.length} squadre con le quote della prossima`
+            + (conQuote.length ? `: ${conQuote.map(([s, c]) => `${s} ${Math.round(c.prossima.esiti.vittoria * 100)}%`).join(', ')}` : ''));
         if (risultato.sconosciute.length) {
             console.warn(`  ATTENZIONE, squadre di Serie A non riconosciute: ${risultato.sconosciute.join(', ')}`);
         }

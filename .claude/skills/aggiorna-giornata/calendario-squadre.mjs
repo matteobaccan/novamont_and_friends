@@ -69,7 +69,71 @@ export function nomeSerieA(nomeEsterno, squadreNote, { approssimato = true } = {
     return null;
 }
 
-// Le partite di uno scoreboard ESPN: data, casa, fuori, competizione
+// ------------------------------------------------------------------
+// Quote dei bookmaker
+// ------------------------------------------------------------------
+//
+// Lo scoreboard ESPN allega a molte partite le quote di un bookmaker per
+// l'esito finale. Il formato è cambiato nel tempo e non è lo stesso per tutte
+// le leghe, quindi si accettano le forme note:
+//
+//   odds[0].homeTeamOdds.moneyLine = -250        (americana, numero)
+//   odds[0].moneyline.home.close.odds = "-250"   (americana, stringa)
+//   odds[0].homeTeamOdds.current.moneyLine.american = "+150"
+//   ... e le stesse con una quota decimale (1.45) al posto dell'americana
+//
+// Tutto finisce in quota decimale: 1.45 vuol dire che un euro ne rende 1,45.
+
+// Da una quota americana o decimale, in qualunque forma, alla decimale
+export function quotaDecimale(valore) {
+    if (valore === null || valore === undefined) return null;
+    if (typeof valore === 'object') {
+        for (const campo of ['decimal', 'american', 'moneyLine', 'odds', 'value', 'close', 'current', 'open']) {
+            const q = quotaDecimale(valore[campo]);
+            if (q !== null) return q;
+        }
+        return null;
+    }
+    const testo = String(valore).trim().toUpperCase();
+    if (testo === 'EVEN' || testo === 'EV') return 2;
+    const n = Number(testo.replace(/^\+/, ''));
+    if (!Number.isFinite(n) || n === 0) return null;
+    // Le americane stanno da 100 in su in valore assoluto, le decimali sotto
+    if (Math.abs(n) >= 100) return n > 0 ? 1 + n / 100 : 1 + 100 / Math.abs(n);
+    return n > 1 ? n : null;
+}
+
+export function quoteDellaGara(gara) {
+    for (const voce of (gara && gara.odds) || []) {
+        const ml = voce.moneyline || {};
+        const casa = quotaDecimale(voce.homeTeamOdds) ?? quotaDecimale(ml.home);
+        const fuori = quotaDecimale(voce.awayTeamOdds) ?? quotaDecimale(ml.away);
+        const pareggio = quotaDecimale(voce.drawOdds) ?? quotaDecimale(ml.draw);
+        if (casa && fuori && pareggio) {
+            const arrotonda = (x) => Math.round(x * 100) / 100;
+            return {
+                casa: arrotonda(casa),
+                pareggio: arrotonda(pareggio),
+                fuori: arrotonda(fuori),
+                fonte: (voce.provider && voce.provider.name) || null
+            };
+        }
+    }
+    return null;
+}
+
+// Probabilità dei tre esiti dalle quote. 1/quota somma a più di 1 — è il
+// margine del bookmaker — e si riporta a 1 dividendo per la somma.
+export function probabilitaDaQuote(quote) {
+    if (!quote) return null;
+    const grezze = [1 / quote.casa, 1 / quote.pareggio, 1 / quote.fuori];
+    const somma = grezze.reduce((a, b) => a + b, 0);
+    const [casa, pareggio, fuori] = grezze.map(x => Math.round((x / somma) * 1000) / 1000);
+    return { casa, pareggio, fuori };
+}
+
+// Le partite di uno scoreboard ESPN: data, casa, fuori, competizione e, se ci
+// sono, le quote
 export function analizzaScoreboard(json, competizione) {
     const partite = [];
     for (const evento of (json && json.events) || []) {
@@ -85,7 +149,8 @@ export function analizzaScoreboard(json, competizione) {
             casa: (casa.team && (casa.team.displayName || casa.team.name)) || '',
             fuori: (fuori.team && (fuori.team.displayName || fuori.team.name)) || '',
             // Rinviata o annullata: non stanca nessuno
-            annullata: /postponed|canceled|cancelled/i.test(((evento.status || {}).type || {}).name || '')
+            annullata: /postponed|canceled|cancelled/i.test(((evento.status || {}).type || {}).name || ''),
+            quote: quoteDellaGara(gara)
         });
     }
     return partite;
@@ -113,7 +178,7 @@ export function calcolaCalendario(partite, squadreNote, adesso = new Date().toIS
                 if (p.competizione === 'Serie A') sconosciute.add(lato);
                 continue;
             }
-            perSquadra.get(nome).push({ data: p.data, competizione: p.competizione, avversario, casa: lato === p.casa });
+            perSquadra.get(nome).push({ data: p.data, competizione: p.competizione, avversario, casa: lato === p.casa, quote: p.quote || null });
         }
     }
 
@@ -132,8 +197,21 @@ export function calcolaCalendario(partite, squadreNote, adesso = new Date().toIS
         // Le partite in mezzo: quella del weekend prima, sette giorni esatti, non conta
         const ultimaSettimana = prima.filter(p => giorni(p.data, prossima.data) < 7).length;
 
+        // Le probabilità dal punto di vista della squadra: vittoria è la sua
+        const p = probabilitaDaQuote(prossima.quote);
+        const esiti = p && {
+            vittoria: prossima.casa ? p.casa : p.fuori,
+            pareggio: p.pareggio,
+            sconfitta: prossima.casa ? p.fuori : p.casa,
+            quote: prossima.quote
+        };
+
         calendario[squadra] = {
-            prossima: { data: prossima.data, avversario: nomeSerieA(prossima.avversario, squadreNote) || prossima.avversario },
+            prossima: {
+                data: prossima.data,
+                avversario: nomeSerieA(prossima.avversario, squadreNote) || prossima.avversario,
+                esiti: esiti || null
+            },
             precedente: precedente && { data: precedente.data, competizione: precedente.competizione, avversario: precedente.avversario },
             giorniRiposo: precedente ? giorni(precedente.data, prossima.data) : null,
             partiteUltimaSettimana: ultimaSettimana,
@@ -184,7 +262,13 @@ async function partiteDellaCompetizione(lega, nome, da, a, scaricaJson) {
 export function unisciPartite(ricordate, nuove, adesso = Date.now()) {
     const chiave = (p) => `${p.competizione}|${p.casa}|${p.fuori}`;
     const unite = new Map();
-    for (const p of [...(ricordate || []), ...nuove]) unite.set(chiave(p), p);
+    for (const p of ricordate || []) unite.set(chiave(p), p);
+    for (const p of nuove) {
+        // Una partita già cominciata può perdere le quote dalla fonte: si
+        // tengono quelle viste prima, che sono anche le più utili
+        const prima = unite.get(chiave(p));
+        unite.set(chiave(p), prima && prima.quote && !p.quote ? { ...p, quote: prima.quote } : p);
+    }
     const limite = adesso - GIORNI_MEMORIA * GIORNO;
     return [...unite.values()]
         .filter(p => Date.parse(p.data) >= limite)
@@ -203,7 +287,8 @@ export async function scaricaCalendario(squadreNote, scaricaJson, ricordate = []
             // I giorni con almeno una partita: se mancano tutti quelli passati,
             // la fonte non dà lo storico e il riposo non si può calcolare
             const giorni = [...new Set(trovate.map(p => p.data.slice(5, 10)))].sort();
-            console.log(`  ${nome}: ${trovate.length} partite${giorni.length ? ` (${giorni.join(' ')})` : ''}`);
+            const conQuote = trovate.filter(p => p.quote).length;
+            console.log(`  ${nome}: ${trovate.length} partite${giorni.length ? ` (${giorni.join(' ')})` : ''}, ${conQuote} con le quote`);
             partite.push(...trovate);
         } catch (errore) {
             console.warn(`  ${nome} non disponibile: ${errore.message}`);
