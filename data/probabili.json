@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-07T21:49:30.669Z",
+  "aggiornato": "2026-10-08T05:20:59.118Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -215,7 +215,18 @@
     "Roma": {
       "prossima": {
         "data": "2026-10-11T10:30Z",
-        "avversario": "Como"
+        "avversario": "Como",
+        "esiti": {
+          "vittoria": 0.358,
+          "pareggio": 0.269,
+          "sconfitta": 0.373,
+          "quote": {
+            "casa": 2.45,
+            "pareggio": 3.4,
+            "fuori": 2.55,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -230,7 +241,18 @@
     "Inter": {
       "prossima": {
         "data": "2026-10-10T16:00Z",
-        "avversario": "Parma"
+        "avversario": "Parma",
+        "esiti": {
+          "vittoria": 0.818,
+          "pareggio": 0.116,
+          "sconfitta": 0.066,
+          "quote": {
+            "casa": 1.13,
+            "pareggio": 8,
+            "fuori": 14,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -245,7 +267,18 @@
     "Lazio": {
       "prossima": {
         "data": "2026-10-11T13:00Z",
-        "avversario": "Monza"
+        "avversario": "Monza",
+        "esiti": {
+          "vittoria": 0.597,
+          "pareggio": 0.236,
+          "sconfitta": 0.167,
+          "quote": {
+            "casa": 1.54,
+            "pareggio": 3.9,
+            "fuori": 5.5,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -260,7 +293,18 @@
     "Cagliari": {
       "prossima": {
         "data": "2026-10-11T18:45Z",
-        "avversario": "Juventus"
+        "avversario": "Juventus",
+        "esiti": {
+          "vittoria": 0.159,
+          "pareggio": 0.237,
+          "sconfitta": 0.604,
+          "quote": {
+            "casa": 5.75,
+            "pareggio": 3.85,
+            "fuori": 1.51,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -275,7 +319,18 @@
     "Milan": {
       "prossima": {
         "data": "2026-10-11T16:00Z",
-        "avversario": "Sassuolo"
+        "avversario": "Sassuolo",
+        "esiti": {
+          "vittoria": 0.517,
+          "pareggio": 0.254,
+          "sconfitta": 0.229,
+          "quote": {
+            "casa": 4,
+            "pareggio": 3.6,
+            "fuori": 1.77,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -290,7 +345,18 @@
     "Frosinone": {
       "prossima": {
         "data": "2026-10-10T18:45Z",
-        "avversario": "Napoli"
+        "avversario": "Napoli",
+        "esiti": {
+          "vittoria": 0.155,
+          "pareggio": 0.197,
+          "sconfitta": 0.648,
+          "quote": {
+            "casa": 1.43,
+            "pareggio": 4.7,
+            "fuori": 6,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -305,7 +371,18 @@
     "Juventus": {
       "prossima": {
         "data": "2026-10-11T18:45Z",
-        "avversario": "Cagliari"
+        "avversario": "Cagliari",
+        "esiti": {
+          "vittoria": 0.604,
+          "pareggio": 0.237,
+          "sconfitta": 0.159,
+          "quote": {
+            "casa": 5.75,
+            "pareggio": 3.85,
+            "fuori": 1.51,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -320,7 +397,18 @@
     "Como": {
       "prossima": {
         "data": "2026-10-11T10:30Z",
-        "avversario": "Roma"
+        "avversario": "Roma",
+        "esiti": {
+          "vittoria": 0.373,
+          "pareggio": 0.269,
+          "sconfitta": 0.358,
+          "quote": {
+            "casa": 2.45,
+            "pareggio": 3.4,
+            "fuori": 2.55,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -335,7 +423,18 @@
     "Napoli": {
       "prossima": {
         "data": "2026-10-10T18:45Z",
-        "avversario": "Frosinone"
+        "avversario": "Frosinone",
+        "esiti": {
+          "vittoria": 0.648,
+          "pareggio": 0.197,
+          "sconfitta": 0.155,
+          "quote": {
+            "casa": 1.43,
+            "pareggio": 4.7,
+            "fuori": 6,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -350,7 +449,18 @@
     "Sassuolo": {
       "prossima": {
         "data": "2026-10-11T16:00Z",
-        "avversario": "Milan"
+        "avversario": "Milan",
+        "esiti": {
+          "vittoria": 0.229,
+          "pareggio": 0.254,
+          "sconfitta": 0.517,
+          "quote": {
+            "casa": 4,
+            "pareggio": 3.6,
+            "fuori": 1.77,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -365,7 +475,18 @@
     "Atalanta": {
       "prossima": {
         "data": "2026-10-12T16:30Z",
-        "avversario": "Venezia"
+        "avversario": "Venezia",
+        "esiti": {
+          "vittoria": 0.594,
+          "pareggio": 0.232,
+          "sconfitta": 0.174,
+          "quote": {
+            "casa": 1.54,
+            "pareggio": 3.95,
+            "fuori": 5.25,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -380,7 +501,18 @@
     "Lecce": {
       "prossima": {
         "data": "2026-10-11T13:00Z",
-        "avversario": "Bologna"
+        "avversario": "Bologna",
+        "esiti": {
+          "vittoria": 0.223,
+          "pareggio": 0.29,
+          "sconfitta": 0.488,
+          "quote": {
+            "casa": 4.1,
+            "pareggio": 3.15,
+            "fuori": 1.87,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -395,7 +527,18 @@
     "Udinese": {
       "prossima": {
         "data": "2026-10-12T18:45Z",
-        "avversario": "Torino"
+        "avversario": "Torino",
+        "esiti": {
+          "vittoria": 0.299,
+          "pareggio": 0.295,
+          "sconfitta": 0.406,
+          "quote": {
+            "casa": 2.25,
+            "pareggio": 3.1,
+            "fuori": 3.05,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -410,7 +553,18 @@
     "Torino": {
       "prossima": {
         "data": "2026-10-12T18:45Z",
-        "avversario": "Udinese"
+        "avversario": "Udinese",
+        "esiti": {
+          "vittoria": 0.406,
+          "pareggio": 0.295,
+          "sconfitta": 0.299,
+          "quote": {
+            "casa": 2.25,
+            "pareggio": 3.1,
+            "fuori": 3.05,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -425,7 +579,18 @@
     "Parma": {
       "prossima": {
         "data": "2026-10-10T16:00Z",
-        "avversario": "Inter"
+        "avversario": "Inter",
+        "esiti": {
+          "vittoria": 0.066,
+          "pareggio": 0.116,
+          "sconfitta": 0.818,
+          "quote": {
+            "casa": 1.13,
+            "pareggio": 8,
+            "fuori": 14,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -440,7 +605,18 @@
     "Monza": {
       "prossima": {
         "data": "2026-10-11T13:00Z",
-        "avversario": "Lazio"
+        "avversario": "Lazio",
+        "esiti": {
+          "vittoria": 0.167,
+          "pareggio": 0.236,
+          "sconfitta": 0.597,
+          "quote": {
+            "casa": 1.54,
+            "pareggio": 3.9,
+            "fuori": 5.5,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -455,7 +631,18 @@
     "Fiorentina": {
       "prossima": {
         "data": "2026-10-10T13:00Z",
-        "avversario": "Genoa"
+        "avversario": "Genoa",
+        "esiti": {
+          "vittoria": 0.41,
+          "pareggio": 0.293,
+          "sconfitta": 0.297,
+          "quote": {
+            "casa": 3.1,
+            "pareggio": 3.15,
+            "fuori": 2.25,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -470,7 +657,18 @@
     "Bologna": {
       "prossima": {
         "data": "2026-10-11T13:00Z",
-        "avversario": "Lecce"
+        "avversario": "Lecce",
+        "esiti": {
+          "vittoria": 0.488,
+          "pareggio": 0.29,
+          "sconfitta": 0.223,
+          "quote": {
+            "casa": 4.1,
+            "pareggio": 3.15,
+            "fuori": 1.87,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -485,7 +683,18 @@
     "Genoa": {
       "prossima": {
         "data": "2026-10-10T13:00Z",
-        "avversario": "Fiorentina"
+        "avversario": "Fiorentina",
+        "esiti": {
+          "vittoria": 0.297,
+          "pareggio": 0.293,
+          "sconfitta": 0.41,
+          "quote": {
+            "casa": 3.1,
+            "pareggio": 3.15,
+            "fuori": 2.25,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -500,7 +709,18 @@
     "Venezia": {
       "prossima": {
         "data": "2026-10-12T16:30Z",
-        "avversario": "Atalanta"
+        "avversario": "Atalanta",
+        "esiti": {
+          "vittoria": 0.174,
+          "pareggio": 0.232,
+          "sconfitta": 0.594,
+          "quote": {
+            "casa": 1.54,
+            "pareggio": 3.95,
+            "fuori": 5.25,
+            "fonte": "DraftKings"
+          }
+        }
       },
       "precedente": null,
       "giorniRiposo": null,
@@ -519,252 +739,468 @@
       "competizione": "Serie A",
       "casa": "Genoa",
       "fuori": "Fiorentina",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 3.1,
+        "pareggio": 3.15,
+        "fuori": 2.25,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-10T16:00Z",
       "competizione": "Serie A",
       "casa": "Internazionale",
       "fuori": "Parma",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.13,
+        "pareggio": 8,
+        "fuori": 14,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-10T18:45Z",
       "competizione": "Serie A",
       "casa": "Napoli",
       "fuori": "Frosinone",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.43,
+        "pareggio": 4.7,
+        "fuori": 6,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-11T10:30Z",
       "competizione": "Serie A",
       "casa": "Como",
       "fuori": "AS Roma",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.45,
+        "pareggio": 3.4,
+        "fuori": 2.55,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-11T13:00Z",
       "competizione": "Serie A",
       "casa": "Lazio",
       "fuori": "Monza",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.54,
+        "pareggio": 3.9,
+        "fuori": 5.5,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-11T13:00Z",
       "competizione": "Serie A",
       "casa": "Lecce",
       "fuori": "Bologna",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 4.1,
+        "pareggio": 3.15,
+        "fuori": 1.87,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-11T16:00Z",
       "competizione": "Serie A",
       "casa": "Sassuolo",
       "fuori": "AC Milan",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 4,
+        "pareggio": 3.6,
+        "fuori": 1.77,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-11T18:45Z",
       "competizione": "Serie A",
       "casa": "Cagliari",
       "fuori": "Juventus",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 5.75,
+        "pareggio": 3.85,
+        "fuori": 1.51,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-12T16:30Z",
       "competizione": "Serie A",
       "casa": "Atalanta",
       "fuori": "Venezia",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.54,
+        "pareggio": 3.95,
+        "fuori": 5.25,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-12T18:45Z",
       "competizione": "Serie A",
       "casa": "Torino",
       "fuori": "Udinese",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.25,
+        "pareggio": 3.1,
+        "fuori": 3.05,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-13T16:45Z",
       "competizione": "Champions League",
       "casa": "Lens",
       "fuori": "Sporting CP",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.5,
+        "pareggio": 3.75,
+        "fuori": 2.55,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-13T16:45Z",
       "competizione": "Champions League",
       "casa": "Sabah FK",
       "fuori": "Slavia Prague",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 3.5,
+        "pareggio": 3.7,
+        "fuori": 2,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-13T19:00Z",
       "competizione": "Champions League",
       "casa": "Arsenal",
       "fuori": "Lille",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.26,
+        "pareggio": 6,
+        "fuori": 10.5,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-13T19:00Z",
       "competizione": "Champions League",
       "casa": "Atlético Madrid",
       "fuori": "Manchester United",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.2,
+        "pareggio": 3.75,
+        "fuori": 3,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-13T19:00Z",
       "competizione": "Champions League",
       "casa": "Galatasaray",
       "fuori": "Barcelona",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 7.5,
+        "pareggio": 6.5,
+        "fuori": 1.29,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-13T19:00Z",
       "competizione": "Champions League",
       "casa": "Internazionale",
       "fuori": "Club Brugge",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.27,
+        "pareggio": 6,
+        "fuori": 9.5,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-13T19:00Z",
       "competizione": "Champions League",
       "casa": "RB Leipzig",
       "fuori": "PSV Eindhoven",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2,
+        "pareggio": 4.1,
+        "fuori": 3.1,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-13T19:00Z",
       "competizione": "Champions League",
       "casa": "Viking FK",
       "fuori": "Bayern Munich",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 17,
+        "pareggio": 12,
+        "fuori": 1.09,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-13T19:00Z",
       "competizione": "Champions League",
       "casa": "Villarreal",
       "fuori": "Napoli",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.2,
+        "pareggio": 3.55,
+        "fuori": 3.05,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-14T16:45Z",
       "competizione": "Champions League",
       "casa": "Feyenoord Rotterdam",
       "fuori": "Como",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 3.45,
+        "pareggio": 4.1,
+        "fuori": 1.91,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-14T16:45Z",
       "competizione": "Champions League",
       "casa": "LASK Linz",
       "fuori": "Liverpool",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 10,
+        "pareggio": 6.5,
+        "fuori": 1.24,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-14T19:00Z",
       "competizione": "Champions League",
       "casa": "AS Roma",
       "fuori": "Real Madrid",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 3.6,
+        "pareggio": 4,
+        "fuori": 1.87,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-14T19:00Z",
       "competizione": "Champions League",
       "casa": "Aston Villa",
       "fuori": "Fenerbahce",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.69,
+        "pareggio": 4,
+        "fuori": 4.6,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-14T19:00Z",
       "competizione": "Champions League",
       "casa": "Bodo/Glimt",
       "fuori": "Borussia Dortmund",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 3.1,
+        "pareggio": 4,
+        "fuori": 2.05,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-14T19:00Z",
       "competizione": "Champions League",
       "casa": "Manchester City",
       "fuori": "Paris Saint-Germain",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.3,
+        "pareggio": 3.9,
+        "fuori": 2.75,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-14T19:00Z",
       "competizione": "Champions League",
       "casa": "Real Betis",
       "fuori": "FC Porto",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.15,
+        "pareggio": 3.6,
+        "fuori": 3.1,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-14T19:00Z",
       "competizione": "Champions League",
       "casa": "Shakhtar Donetsk",
       "fuori": "AEK Athens",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.65,
+        "pareggio": 3.5,
+        "fuori": 2.55,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-14T19:00Z",
       "competizione": "Champions League",
       "casa": "Slovan Bratislava",
       "fuori": "VfB Stuttgart",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 8,
+        "pareggio": 5.75,
+        "fuori": 1.31,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T16:45Z",
       "competizione": "Europa League",
       "casa": "AZ Alkmaar",
       "fuori": "Hapoel Be'er",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.32,
+        "pareggio": 5.5,
+        "fuori": 8.5,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T16:45Z",
       "competizione": "Europa League",
       "casa": "Lech Poznan",
       "fuori": "Bayer Leverkusen",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 4.5,
+        "pareggio": 4.3,
+        "fuori": 1.67,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T16:45Z",
       "competizione": "Europa League",
       "casa": "Lyon",
       "fuori": "Crystal Palace",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.15,
+        "pareggio": 3.65,
+        "fuori": 3.1,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T16:45Z",
       "competizione": "Europa League",
       "casa": "NK Celje",
       "fuori": "Omonia Nicosia",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.45,
+        "pareggio": 3.45,
+        "fuori": 2.75,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T16:45Z",
       "competizione": "Europa League",
       "casa": "RB Salzburg",
       "fuori": "AC Milan",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 3.9,
+        "pareggio": 3.95,
+        "fuori": 1.83,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T16:45Z",
       "competizione": "Europa League",
       "casa": "Sparta Prague",
       "fuori": "Lillestrom",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.36,
+        "pareggio": 5,
+        "fuori": 8,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T16:45Z",
       "competizione": "Europa League",
       "casa": "Torreense",
       "fuori": "Sunderland",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 7,
+        "pareggio": 5,
+        "fuori": 1.4,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T16:45Z",
       "competizione": "Europa League",
       "casa": "Union St.-Gilloise",
       "fuori": "Real Sociedad",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.3,
+        "pareggio": 3.55,
+        "fuori": 2.9,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T16:45Z",
@@ -841,70 +1277,130 @@
       "competizione": "Europa League",
       "casa": "AFC Bournemouth",
       "fuori": "SK Sturm Graz",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.19,
+        "pareggio": 7,
+        "fuori": 12,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T19:00Z",
       "competizione": "Europa League",
       "casa": "Benfica",
       "fuori": "Celtic",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.26,
+        "pareggio": 6,
+        "fuori": 9.5,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T19:00Z",
       "competizione": "Europa League",
       "casa": "Celta Vigo",
       "fuori": "Juventus",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 3.55,
+        "pareggio": 3.45,
+        "fuori": 2.05,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T19:00Z",
       "competizione": "Europa League",
       "casa": "Dinamo Zagreb",
       "fuori": "Anderlecht",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.91,
+        "pareggio": 3.65,
+        "fuori": 3.9,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T19:00Z",
       "competizione": "Europa League",
       "casa": "Ferencvaros",
       "fuori": "Viktoria Plzen",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.95,
+        "pareggio": 3.9,
+        "fuori": 3.5,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T19:00Z",
       "competizione": "Europa League",
       "casa": "Jagiellonia Bialystok",
       "fuori": "Ararat-Armenia",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.41,
+        "pareggio": 4.8,
+        "fuori": 7,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T19:00Z",
       "competizione": "Europa League",
       "casa": "Marseille",
       "fuori": "Olympiacos",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.15,
+        "pareggio": 3.6,
+        "fuori": 3.15,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T19:00Z",
       "competizione": "Europa League",
       "casa": "NEC Nijmegen",
       "fuori": "Levski Sofia",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.87,
+        "pareggio": 3.75,
+        "fuori": 3.9,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T19:00Z",
       "competizione": "Europa League",
       "casa": "Stade Rennais",
       "fuori": "OFI Crete",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.27,
+        "pareggio": 6,
+        "fuori": 10,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T19:00Z",
       "competizione": "Europa League",
       "casa": "TSG Hoffenheim",
       "fuori": "Besiktas",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.95,
+        "pareggio": 4,
+        "fuori": 3.35,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-15T19:00Z",
@@ -967,70 +1463,130 @@
       "competizione": "Serie A",
       "casa": "Frosinone",
       "fuori": "Sassuolo",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.3,
+        "pareggio": 3.3,
+        "fuori": 2.7,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-17T13:00Z",
       "competizione": "Serie A",
       "casa": "Venezia",
       "fuori": "Napoli",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 4.1,
+        "pareggio": 3.8,
+        "fuori": 1.67,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-17T16:00Z",
       "competizione": "Serie A",
       "casa": "Bologna",
       "fuori": "Internazionale",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 4.9,
+        "pareggio": 3.75,
+        "fuori": 1.59,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-17T18:45Z",
       "competizione": "Serie A",
       "casa": "AS Roma",
       "fuori": "Genoa",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.3,
+        "pareggio": 4.9,
+        "fuori": 7.5,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-18T10:30Z",
       "competizione": "Serie A",
       "casa": "Udinese",
       "fuori": "Lecce",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.83,
+        "pareggio": 3.4,
+        "fuori": 3.8,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-18T13:00Z",
       "competizione": "Serie A",
       "casa": "Fiorentina",
       "fuori": "Como",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 3.1,
+        "pareggio": 3.5,
+        "fuori": 2,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-18T16:00Z",
       "competizione": "Serie A",
       "casa": "AC Milan",
       "fuori": "Atalanta",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.83,
+        "pareggio": 3.45,
+        "fuori": 3.75,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-18T18:45Z",
       "competizione": "Serie A",
       "casa": "Juventus",
       "fuori": "Lazio",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 1.59,
+        "pareggio": 3.65,
+        "fuori": 4.9,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-19T16:30Z",
       "competizione": "Serie A",
       "casa": "Monza",
       "fuori": "Cagliari",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.1,
+        "pareggio": 3.1,
+        "fuori": 3.25,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-19T18:45Z",
       "competizione": "Serie A",
       "casa": "Parma",
       "fuori": "Torino",
-      "annullata": false
+      "annullata": false,
+      "quote": {
+        "casa": 2.95,
+        "pareggio": 2.95,
+        "fuori": 2.35,
+        "fonte": "DraftKings"
+      }
     }
   ],
   "rigoristi": {
