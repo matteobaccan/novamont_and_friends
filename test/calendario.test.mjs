@@ -7,7 +7,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { nomeSerieA, analizzaScoreboard, calcolaCalendario, scaricaCalendario, unisciPartite } from '../.claude/skills/aggiorna-giornata/calendario-squadre.mjs';
+import { nomeSerieA, analizzaScoreboard, calcolaCalendario, scaricaCalendario, unisciPartite, quotaDecimale, quoteDellaGara, probabilitaDaQuote } from '../.claude/skills/aggiorna-giornata/calendario-squadre.mjs';
 import { caricaScript, valuta, esegui } from './aiuto/carica-script.mjs';
 
 const SERIE_A = ['Atalanta', 'Bologna', 'Como', 'Inter', 'Juventus', 'Milan', 'Napoli', 'Roma', 'Udinese', 'Verona'];
@@ -41,7 +41,7 @@ test('lo scoreboard dà data, squadre e competizione, e segna le partite rinviat
         evento('2026-10-02T19:00Z', 'AS Roma', 'Porto', 'STATUS_POSTPONED')
     ] }, 'Champions League');
     assert.equal(partite.length, 2);
-    assert.deepEqual(partite[0], { data: '2026-10-01T19:00Z', competizione: 'Champions League', casa: 'Internazionale', fuori: 'Bayern Munich', annullata: false });
+    assert.deepEqual(partite[0], { data: '2026-10-01T19:00Z', competizione: 'Champions League', casa: 'Internazionale', fuori: 'Bayern Munich', annullata: false, quote: null });
     assert.equal(partite[1].annullata, true);
 });
 
@@ -207,4 +207,92 @@ test('con la memoria la coppa di mercoledì dà il riposo del weekend anche se l
     assert.equal(risultato.calendario.Inter.giorniRiposo, 4);
     assert.equal(risultato.calendario.Inter.precedente.competizione, 'Champions League');
     assert.equal(risultato.partite.length, 2);
+});
+
+// ------------------------------------------------------------------
+// Quote dei bookmaker
+// ------------------------------------------------------------------
+
+test('le quote americane e decimali diventano tutte decimali', () => {
+    assert.equal(quotaDecimale(-250), 1.4);
+    assert.equal(quotaDecimale('+150'), 2.5);
+    assert.equal(quotaDecimale('EVEN'), 2);
+    assert.equal(quotaDecimale(1.45), 1.45);
+    assert.equal(quotaDecimale({ close: { odds: '-200' } }), 1.5);
+    assert.equal(quotaDecimale({ current: { moneyLine: { american: '+300' } } }), 4);
+    assert.equal(quotaDecimale('OFF'), null);
+    assert.equal(quotaDecimale(undefined), null);
+});
+
+test('le quote si leggono in tutte e due le forme dello scoreboard', () => {
+    const vecchia = { odds: [{ provider: { name: 'DraftKings' }, homeTeamOdds: { moneyLine: -250 }, awayTeamOdds: { moneyLine: 600 }, drawOdds: { moneyLine: 380 } }] };
+    assert.deepEqual(quoteDellaGara(vecchia), { casa: 1.4, pareggio: 4.8, fuori: 7, fonte: 'DraftKings' });
+
+    const nuova = { odds: [{ moneyline: { home: { close: { odds: '+120' } }, draw: { close: { odds: '+230' } }, away: { close: { odds: '+250' } } } }] };
+    assert.deepEqual(quoteDellaGara(nuova), { casa: 2.2, pareggio: 3.3, fuori: 3.5, fonte: null });
+
+    // Senza il pareggio non è una quota 1X2: meglio niente che una sbagliata
+    assert.equal(quoteDellaGara({ odds: [{ homeTeamOdds: { moneyLine: -150 }, awayTeamOdds: { moneyLine: 130 } }] }), null);
+    assert.equal(quoteDellaGara({}), null);
+
+    // Una voce nulla nell'elenco, come succede davvero in Conference League
+    assert.deepEqual(quoteDellaGara({ odds: [null, vecchia.odds[0]] }), { casa: 1.4, pareggio: 4.8, fuori: 7, fonte: 'DraftKings' });
+});
+
+test('quote in un formato inatteso fanno perdere le quote, non la partita', () => {
+    const strana = evento('2026-10-15T19:00Z', 'AC Milan', 'Porto');
+    Object.defineProperty(strana.competitions[0], 'odds', { get() { throw new Error('formato inatteso'); } });
+    const [partita] = analizzaScoreboard({ events: [strana] }, 'Europa League');
+    assert.equal(partita.casa, 'AC Milan');
+    assert.equal(partita.quote, null);
+});
+
+test('le probabilità dalle quote tolgono il margine del bookmaker e sommano a 1', () => {
+    const p = probabilitaDaQuote({ casa: 1.4, pareggio: 4.8, fuori: 7 });
+    assert.ok(Math.abs(p.casa + p.pareggio + p.fuori - 1) < 0.002);
+    assert.ok(p.casa > 0.65 && p.casa < 0.7, `casa ${p.casa}`);
+});
+
+test('nel calendario le probabilità sono dal punto di vista di ciascuna squadra', () => {
+    const json = { events: [{ ...evento('2099-10-10T16:00Z', 'Internazionale', 'Parma'),
+        competitions: [{ ...evento('2099-10-10T16:00Z', 'Internazionale', 'Parma').competitions[0],
+            odds: [{ homeTeamOdds: { moneyLine: -250 }, awayTeamOdds: { moneyLine: 600 }, drawOdds: { moneyLine: 380 } }] }] }] };
+    const { calendario } = calcolaCalendario(analizzaScoreboard(json, 'Serie A'), [...SERIE_A, 'Parma'], '2099-10-08T10:00Z');
+    assert.ok(calendario.Inter.prossima.esiti.vittoria > 0.6);
+    assert.equal(calendario.Inter.prossima.esiti.vittoria, calendario.Parma.prossima.esiti.sconfitta);
+});
+
+test('le quote viste prima restano se la fonte non le dà più', () => {
+    const adesso = Date.parse('2026-10-10T17:00Z');
+    const ricordata = { data: '2026-10-10T16:00Z', competizione: 'Serie A', casa: 'Internazionale', fuori: 'Parma', quote: { casa: 1.4, pareggio: 4.8, fuori: 7 } };
+    const [unita] = unisciPartite([ricordata], [{ ...ricordata, quote: null }], adesso);
+    assert.deepEqual(unita.quote, ricordata.quote);
+});
+
+test('con le quote una netta favorita guadagna, l\'altra perde, e campo e classifica non contano più', () => {
+    const esiti = (v, n, s) => ({ prossima: { esiti: { vittoria: v, pareggio: n, sconfitta: s, quote: {} } } });
+    const { inter, roma } = contestoCon({ Inter: esiti(0.65, 0.2, 0.15), Roma: esiti(0.15, 0.2, 0.65) });
+    const peso = valuta(app, 'PESO_QUOTE');
+    const soglia = valuta(app, 'SOGLIA_QUOTE');
+    const atteso = (0.5 - soglia) / (1 - soglia) * peso;
+    assert.ok(Math.abs(inter.quote - atteso) < 1e-9);
+    assert.ok(Math.abs(roma.quote + atteso) < 1e-9);
+    // Inter in casa, ma il fattore è solo quello delle quote
+    assert.ok(Math.abs(inter.fattore - (1 + atteso)) < 1e-9);
+});
+
+test('una partita equilibrata secondo i bookmaker non sposta niente', () => {
+    const esiti = (v, n, s) => ({ prossima: { esiti: { vittoria: v, pareggio: n, sconfitta: s, quote: {} } } });
+    const { inter } = contestoCon({ Inter: esiti(0.4, 0.3, 0.3), Roma: esiti(0.3, 0.3, 0.4) });
+    assert.equal(inter.quote, 0);
+    assert.equal(inter.fattore, 1);
+});
+
+test('sotto il nome compare la probabilità di vittoria, in evidenza per la netta favorita', () => {
+    const esiti = (v, n, s) => ({ prossima: { esiti: { vittoria: v, pareggio: n, sconfitta: s, quote: { casa: 1.4, pareggio: 4.8, fuori: 7, fonte: 'DraftKings' } } } });
+    contestoCon({ Inter: esiti(0.68, 0.18, 0.14), Roma: esiti(0.14, 0.18, 0.68) });
+    const html = valuta(app, 'htmlPartitaSerieA(calcolaContestoPartita("Roma"))');
+    assert.match(html, /INT<span class="partita-quota favorita">68%<\/span>/);
+    assert.match(html, /ROM<span class="partita-quota">14%<\/span>/);
+    assert.match(html, /Quote 1 1.4 · X 4.8 · 2 7 \(DraftKings\): vince Inter 68%, pari 18%, vince Roma 14%/);
 });
