@@ -163,8 +163,9 @@ function calculateStandingsFromResults() {
             id: team.id,
             name: team.name,
             // Il risultato di questa funzione sostituisce fantacalcioData.teams:
-            // senza riportare owner, il proprietario andrebbe perso
+            // senza riportare owner e logo, proprietario e stemma andrebbero persi
             owner: team.owner,
+            logo: team.logo,
             points: 0,
             wins: 0,
             draws: 0,
@@ -1951,6 +1952,27 @@ function displayHeatmap() {
 }
 
 // Visualizzazione della classifica con ordinamento
+// Lo stemma della squadra. Due squadre sulla lega non ne hanno uno: per loro
+// disegniamo le iniziali, che si leggono meglio del segnaposto grigio generico.
+function logoSquadra(nome) {
+    const squadra = (fantacalcioData.teams || []).find(t => t.name === nome);
+    if (squadra && squadra.logo) {
+        return `<img class="squadra-logo" src="${squadra.logo}" alt="" loading="lazy">`;
+    }
+    const iniziali = String(nome || '')
+        .split(/\s+/)
+        .map(parola => parola[0] || '')
+        .join('')
+        .slice(0, 3)
+        .toUpperCase();
+    return `<span class="squadra-iniziali" aria-hidden="true">${iniziali}</span>`;
+}
+
+function allenatoreDi(nome) {
+    const squadra = (fantacalcioData.teams || []).find(t => t.name === nome);
+    return squadra && squadra.owner ? squadra.owner : '';
+}
+
 function displayStandings() {
     const standingsTable = document.getElementById('standings-table');
     
@@ -2039,9 +2061,9 @@ function displayStandings() {
         if (team.totalScore === minTotalScore) totalScoreClass = 'worst-score';
 
         html += `
-            <tr class="team-row ${positionClass}" style="animation-delay: ${index * 0.1}s">
+            <tr class="team-row ${positionClass}" data-squadra="${team.name}" style="animation-delay: ${index * 0.1}s">
                 <td class="position">${position}</td>
-                <td class="team-name">${team.name}</td>
+                <td class="team-name">${logoSquadra(team.name)}<span class="team-name-testo">${team.name}<span class="squadra-allenatore">${allenatoreDi(team.name)}</span></span></td>
                 <td class="points">${team.points}</td>
                 <td class="wins mobile-hide">${team.wins}</td>
                 <td class="draws mobile-hide">${team.draws}</td>
@@ -2070,7 +2092,7 @@ function displayStandings() {
     rows.forEach(row => {
         row.style.cursor = 'pointer';
         row.addEventListener('click', () => {
-            const teamName = row.querySelector('.team-name').innerText;
+            const teamName = row.dataset.squadra;
             showTeamMatches(teamName, row);
         });
     });
@@ -2503,9 +2525,9 @@ function displayIdealStandings() {
         if (team.totalScore === minTotalScore) totalScoreClass = 'worst-score';
 
         html += `
-            <tr class="team-row ${positionClass}" style="animation-delay: ${index * 0.1}s">
+            <tr class="team-row ${positionClass}" data-squadra="${team.name}" style="animation-delay: ${index * 0.1}s">
                 <td class="position">${position}</td>
-                <td class="team-name">${team.name}</td>
+                <td class="team-name">${logoSquadra(team.name)}<span class="team-name-testo">${team.name}<span class="squadra-allenatore">${allenatoreDi(team.name)}</span></span></td>
                 <td class="points">${team.points}</td>
                 <td class="wins mobile-hide">${team.wins}</td>
                 <td class="draws mobile-hide">${team.draws}</td>
@@ -2539,7 +2561,7 @@ function displayIdealStandings() {
     idealStandingsTable.querySelectorAll('.team-row').forEach(row => {
         row.style.cursor = 'pointer';
         row.addEventListener('click', () => {
-            const teamName = row.querySelector('.team-name').innerText;
+            const teamName = row.dataset.squadra;
             showTeamMatches(teamName, row, 'ideale');
         });
     });
@@ -2641,9 +2663,9 @@ function displayMeritStandings() {
                 : 'Il campionato lo mette dove merita';
 
         html += `
-            <tr class="team-row ${positionClass}">
+            <tr class="team-row ${positionClass}" data-squadra="${team.name}">
                 <td class="position">${position}</td>
-                <td class="team-name">${team.name}</td>
+                <td class="team-name">${logoSquadra(team.name)}<span class="team-name-testo">${team.name}<span class="squadra-allenatore">${allenatoreDi(team.name)}</span></span></td>
                 <td class="points">${team.meritPoints}</td>
                 <td class="wins mobile-hide">${team.primi}</td>
                 <td class="draws mobile-hide">${team.podi}</td>
@@ -2666,7 +2688,7 @@ function displayMeritStandings() {
     container.querySelectorAll('.team-row').forEach(row => {
         row.style.cursor = 'pointer';
         row.addEventListener('click', () => {
-            showTeamMatches(row.querySelector('.team-name').innerText, row, 'merito');
+            showTeamMatches(row.dataset.squadra, row, 'merito');
         });
     });
 }
@@ -2915,6 +2937,26 @@ function displayNoRoundsMessage() {
 }
 
 // Visualizzazione dei risultati per giornata
+// "Rigiocala" ha senso solo dove ci sono le formazioni: su una giornata senza
+// voti non ci sarebbe niente da far vedere in campo.
+function bottoneRigiocala(match, giornata, indice, risultato) {
+    if (!window.Rigiocala || !match.lineups || !match.lineups.home || !match.lineups.away) return '';
+    return `
+                <button class="rigiocala-apri" data-giornata="${giornata}" data-partita="${indice}" data-risultato="${risultato}">
+                    <i class="fas fa-futbol"></i> Rigiocala
+                </button>`;
+}
+
+function collegaRigiocala(contenitore, round) {
+    contenitore.querySelectorAll('.rigiocala-apri').forEach(bottone => {
+        bottone.addEventListener('click', () => {
+            const match = round.matches[Number(bottone.dataset.partita)];
+            if (!match) return;
+            window.Rigiocala.apri(match, fantacalcioData.players || {}, round.round, bottone.dataset.risultato);
+        });
+    });
+}
+
 function displayRoundResults(roundNumber) {
     const roundResults = document.getElementById('giornata-results');
     const round = fantacalcioData.rounds.find(r => r.round === roundNumber);
@@ -3142,12 +3184,14 @@ function displayRoundResults(roundNumber) {
                 <div class="match-header">Match ${index + 1}</div>
                 <div class="match-teams">
                     <div class="team">
+                        ${logoSquadra(match.homeTeam)}
                         <div class="team-name-match">${match.homeTeam}</div>
                         <div class="team-score">${homeGoals}</div>
                         <div class="fantasy-score">(${match.homeScore} pt)</div>
                     </div>
                     <div class="vs">VS</div>
                     <div class="team">
+                        ${logoSquadra(match.awayTeam)}
                         <div class="team-name-match">${match.awayTeam}</div>
                         <div class="team-score">${awayGoals}</div>
                         <div class="fantasy-score">(${match.awayScore} pt)</div>
@@ -3161,6 +3205,7 @@ function displayRoundResults(roundNumber) {
                 </div>
                 ${idealSection}
                 ${commentarySection}
+                ${bottoneRigiocala(match, round.round, index, goalScore)}
                 <div class="se-sito" data-giornata="${round.round}" data-partita="${index}"></div>
                 ${generateLineupSection(match, index)}
             </div>
@@ -3169,6 +3214,7 @@ function displayRoundResults(roundNumber) {
 
     roundResults.innerHTML = html;
     setupLineupToggles();
+    collegaRigiocala(roundResults, round);
     riempiSeGiocavaIlSito(round);
 }
 
