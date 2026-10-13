@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-13T14:53:35.076Z",
+  "aggiornato": "2026-10-13T21:46:29.732Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -457,13 +457,13 @@
         "data": "2026-10-16T18:45Z",
         "avversario": "Sassuolo",
         "esiti": {
-          "vittoria": 0.379,
-          "pareggio": 0.264,
+          "vittoria": 0.378,
+          "pareggio": 0.265,
           "sconfitta": 0.357,
           "quote": {
-            "casa": 2.4,
-            "pareggio": 3.45,
-            "fuori": 2.55,
+            "casa": 2.45,
+            "pareggio": 3.5,
+            "fuori": 2.6,
             "fonte": "DraftKings"
           }
         }
@@ -518,12 +518,12 @@
         "avversario": "Frosinone",
         "esiti": {
           "vittoria": 0.357,
-          "pareggio": 0.264,
-          "sconfitta": 0.379,
+          "pareggio": 0.265,
+          "sconfitta": 0.378,
           "quote": {
-            "casa": 2.4,
-            "pareggio": 3.45,
-            "fuori": 2.55,
+            "casa": 2.45,
+            "pareggio": 3.5,
+            "fuori": 2.6,
             "fonte": "DraftKings"
           }
         }
@@ -1068,9 +1068,9 @@
       "fuori": "Como",
       "annullata": false,
       "quote": {
-        "casa": 3.4,
+        "casa": 3.5,
         "pareggio": 4.2,
-        "fuori": 1.95,
+        "fuori": 1.91,
         "fonte": "DraftKings"
       }
     },
@@ -1081,7 +1081,7 @@
       "fuori": "Liverpool",
       "annullata": false,
       "quote": {
-        "casa": 8.5,
+        "casa": 9,
         "pareggio": 6,
         "fuori": 1.29,
         "fonte": "DraftKings"
@@ -1094,9 +1094,9 @@
       "fuori": "Real Madrid",
       "annullata": false,
       "quote": {
-        "casa": 3.6,
-        "pareggio": 4,
-        "fuori": 1.91,
+        "casa": 3.55,
+        "pareggio": 3.95,
+        "fuori": 1.95,
         "fonte": "DraftKings"
       }
     },
@@ -1198,9 +1198,9 @@
       "fuori": "Bayer Leverkusen",
       "annullata": false,
       "quote": {
-        "casa": 4.5,
-        "pareggio": 4.4,
-        "fuori": 1.67,
+        "casa": 4.6,
+        "pareggio": 4.5,
+        "fuori": 1.65,
         "fonte": "DraftKings"
       }
     },
@@ -1239,7 +1239,7 @@
       "quote": {
         "casa": 4,
         "pareggio": 4,
-        "fuori": 1.8,
+        "fuori": 1.83,
         "fonte": "DraftKings"
       }
     },
@@ -1250,8 +1250,8 @@
       "fuori": "Lillestrom",
       "annullata": false,
       "quote": {
-        "casa": 1.37,
-        "pareggio": 5.25,
+        "casa": 1.36,
+        "pareggio": 5.5,
         "fuori": 8,
         "fonte": "DraftKings"
       }
@@ -1609,8 +1609,8 @@
       "fuori": "Jablonec",
       "annullata": false,
       "quote": {
-        "casa": 1.32,
-        "pareggio": 5.5,
+        "casa": 1.31,
+        "pareggio": 5.75,
         "fuori": 9,
         "fonte": "DraftKings"
       }
@@ -1648,9 +1648,9 @@
       "fuori": "Sassuolo",
       "annullata": false,
       "quote": {
-        "casa": 2.4,
-        "pareggio": 3.45,
-        "fuori": 2.55,
+        "casa": 2.45,
+        "pareggio": 3.5,
+        "fuori": 2.6,
         "fonte": "DraftKings"
       }
     },
@@ -2618,6 +2618,16 @@
       "nota": "il difensore costretto al cambio il 12 ottobre contro il Venezia in campionato per un fastidio muscolare al flessore della coscia sinistra. Condizioni da valutare con appositi esami medici."
     },
     {
+      "nome": "Hien",
+      "squadra": "Atalanta",
+      "nota": "il difensore operato a fine giugno per una lesione del tendine prossimale del muscolo semimembranoso della coscia sinistra, in recupero e pronto a tornare in campo dalla metà di novembre."
+    },
+    {
+      "nome": "Pompei",
+      "squadra": "Atalanta",
+      "nota": "Il portiere fermo da inizio ottobre per la frattura della falange della mano destra, out nel prossimo turno di campionato. Tempi di recupero da valutare."
+    },
+    {
       "nome": "Kossounou",
       "squadra": "Atalanta",
       "nota": "Il difensore frenato da una lesione muscolare di medio-alto grado del bicipite femorale della coscia sinistra alla vigilia della sfida di campionato contro la Juventus (del 20 settembre). Lungo stop, rientro dalla seconda metà di novembre."
@@ -2628,19 +2638,9 @@
       "nota": "L'attaccante KO in amichevole l'8 agosto vittima di una lesione del collaterale mediale di secondo grado del ginocchio sinistro. Recuperabile dalla seconda metà di ottobre, da valutare nei prossimi allenamenti le possibilità di convocazione già nel prossimo turno contro il Milan."
     },
     {
-      "nome": "Pompei",
-      "squadra": "Atalanta",
-      "nota": "Il portiere fermo da inizio ottobre per la frattura della falange della mano destra, out nel prossimo turno di campionato. Tempi di recupero da valutare."
-    },
-    {
-      "nome": "Hien",
-      "squadra": "Atalanta",
-      "nota": "il difensore operato a fine giugno per una lesione del tendine prossimale del muscolo semimembranoso della coscia sinistra, in recupero e pronto a tornare in campo dalla metà di novembre."
-    },
-    {
-      "nome": "Theate",
+      "nome": "Holm",
       "squadra": "Bologna",
-      "nota": "il difensore indisponibile last minute l'11 ottobre a Lecce per una contusione alla gamba. Condizioni da valutare, a rischio la sua presenza anche per sabato in casa contro l'Inter."
+      "nota": "Lo svedese KO in Nazionale il 26 settembre vittima di un problema al tendine della coscia destra. Ha deciso di operarsi e affronterà un lungo stop. Ipotesi di rientro in campo da fine febbraio."
     },
     {
       "nome": "Orsolini",
@@ -2648,9 +2648,9 @@
       "nota": "il capitano dei felsinei KO l'11 ottobre a Lecce sul finale di match per una lesione di primo grado al bicipite femorale della coscia destra, stop di circa tre settimane. Recuperabile dalla prima metà di novembre."
     },
     {
-      "nome": "Holm",
+      "nome": "Theate",
       "squadra": "Bologna",
-      "nota": "Lo svedese KO in Nazionale il 26 settembre vittima di un problema al tendine della coscia destra. Ha deciso di operarsi e affronterà un lungo stop. Ipotesi di rientro in campo da fine febbraio."
+      "nota": "il difensore indisponibile last minute l'11 ottobre a Lecce per una contusione alla gamba. Condizioni da valutare, a rischio la sua presenza anche per sabato in casa contro l'Inter."
     },
     {
       "nome": "Idrissi R.",
@@ -2705,27 +2705,17 @@
     {
       "nome": "Colombo",
       "squadra": "Genoa",
-      "nota": "L'attaccante non al meglio per un problema alla caviglia rimediato venerdì scorso in amichevole e darà forfait nel prossimo turno di campionato contro la Fiorentina. Ipotesi di rientro da fine ottobre."
-    },
-    {
-      "nome": "Venturino",
-      "squadra": "Genoa",
-      "nota": "il calciatore operato al tendine rotuleo e ora in fase di recupero. Di certo assente nel prossimo turno di campionato, ipotesi di rientro da inizio novembre."
-    },
-    {
-      "nome": "Amorim",
-      "squadra": "Genoa",
-      "nota": "Il centrocampista non ha recuperato da un problema fisico e non è stato convocato per la gara contro la Fiorentina. Ora le condizioni sono in miglioramento e proverà a esserci sabato nella 7a giornata di campionato a Roma contro i giallorossi."
-    },
-    {
-      "nome": "Otoa",
-      "squadra": "Genoa",
-      "nota": "il difensore costretto al cambio sabato scorso contro la Fiorentina al Ferraris per un fastidio muscolare alla gamba. Andrà valutato, viaggia verso il forfait per sabato contro la Roma."
+      "nota": "L'attaccante non al meglio per un problema alla caviglia, darà forfait nel prossimo turno di campionato. Rientro da inizio novembre."
     },
     {
       "nome": "Meichtry",
       "squadra": "Genoa",
       "nota": "Il calciatore in recupero da una distrazione della muscolatura di un'anca, da valutare nei prossimi allenamenti in vista della sfida di sabato a Roma contro i giallorossi."
+    },
+    {
+      "nome": "Venturino",
+      "squadra": "Genoa",
+      "nota": "il calciatore operato al tendine rotuleo e ora in fase di recupero. Di certo assente nel prossimo turno di campionato, ipotesi di rientro da inizio novembre."
     },
     {
       "nome": "Jones C.",
@@ -2738,19 +2728,9 @@
       "nota": "il metronomo del centrocampo bianconero ha rimediato la rottura del menisco esterno del ginocchio. Verrà operato a Lione a stretto giro. Lungo stop e possibilità di rivederlo in campo da febbraio."
     },
     {
-      "nome": "Thuram K.",
+      "nome": "Grabara",
       "squadra": "Juventus",
-      "nota": "il centrocampista condizionato da una sindrome femoro-rotulea e, dopo un consulto medico a fine agosto, è stato sottoposto il 3 settembre a operazione chirurgica. Lungo stop, ipotizziamo un rientro da gennaio."
-    },
-    {
-      "nome": "Boga",
-      "squadra": "Juventus",
-      "nota": "l'ala offensiva dei bianconeri fermo dopo il match contro il Milan (6 settembre) per una lesione di medio grado del bicipite femorale, ipotizziamo un possibile rientro dalla metà di novembre."
-    },
-    {
-      "nome": "Ekhator",
-      "squadra": "Juventus",
-      "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, rientro dalla metà di novembre."
+      "nota": "Il portiere out dal 20 settembre per una lesione al crociato anteriore del ginocchio destro. Operazione chirurgica e lungo stop, rientro da aprile."
     },
     {
       "nome": "Yildiz",
@@ -2758,9 +2738,19 @@
       "nota": "l'attaccante turco, dopo la gara di Frosinone (23 agosto), ha lamentato un problema al piede. Operato il 31 agosto di osteosintesi della frattura della base del V metatarso del piede sinistro, stop di circa tre mesi. Rientro in campo da inizio dicembre."
     },
     {
-      "nome": "Grabara",
+      "nome": "Ekhator",
       "squadra": "Juventus",
-      "nota": "Il portiere out dal 20 settembre per una lesione al crociato anteriore del ginocchio destro. Operazione chirurgica e lungo stop, rientro da aprile."
+      "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, rientro dalla metà di novembre."
+    },
+    {
+      "nome": "Boga",
+      "squadra": "Juventus",
+      "nota": "l'ala offensiva dei bianconeri fermo dopo il match contro il Milan (6 settembre) per una lesione di medio grado del bicipite femorale, ipotizziamo un possibile rientro dalla metà di novembre."
+    },
+    {
+      "nome": "Thuram K.",
+      "squadra": "Juventus",
+      "nota": "il centrocampista condizionato da una sindrome femoro-rotulea e, dopo un consulto medico a fine agosto, è stato sottoposto il 3 settembre a operazione chirurgica. Lungo stop, ipotizziamo un rientro da gennaio."
     },
     {
       "nome": "Gudmundsson A.",
@@ -2780,7 +2770,7 @@
     {
       "nome": "Ilic",
       "squadra": "Lecce",
-      "nota": "il regista dei salentini KO l'11 ottobre in casa contro il Bologna vittima di un guaio muscolare alla gamba che andrà valutato. Assente domenica a Udine."
+      "nota": "il regista dei salentini KO l'11 ottobre in casa contro il Bologna vittima di una lesione muscolare al retto femorale della coscia sinistra, rientro da inizio novembre."
     },
     {
       "nome": "Gabbia",
@@ -2790,7 +2780,7 @@
     {
       "nome": "Saelemaekers",
       "squadra": "Milan",
-      "nota": "Il belga fermo da inizio ottobre per un problema alla caviglia, concreta ora la possibilità di operarsi. Saranno poi da stabilire i tempi di recupero, ma lo stop sarà lungo e lo rivedremo in campo nel 2027 inoltrato."
+      "nota": "Il belga fermo da inizio ottobre per un problema alla caviglia destra e operata il 13 ottobre. Stop lungo e lo rivedremo in campo nel 2027 inoltrato (ipotesi da febbraio)."
     },
     {
       "nome": "Ciurria",
@@ -2843,14 +2833,14 @@
       "nota": "L'ala offensiva dei ducali KO dal 6 ottobre per una lesione muscolare al polpaccio sinistro, recuperabile dalla fine di ottobre."
     },
     {
-      "nome": "Svilar",
-      "squadra": "Roma",
-      "nota": "Il portiere condizionato da una frattura a un dito del piede e fuori dal match contro il Como. Ipotesi di rientro a disposizione dalla metà di novembre."
-    },
-    {
       "nome": "Cristante",
       "squadra": "Roma",
       "nota": "Il mediano giallorosso in ripresa da un'infiammazione al ginocchio e, dopo il forfait di domenica scorsa a Como, sta forzando il rientro per esserci domenica contro il Genoa nella 7a giornata di A. Da valutare nella rifinitura di venerdì a Trigoria."
+    },
+    {
+      "nome": "Svilar",
+      "squadra": "Roma",
+      "nota": "Il portiere condizionato da una frattura a un dito del piede e fuori dal match contro il Como. Ipotesi di rientro a disposizione dalla metà di novembre."
     },
     {
       "nome": "Idzes",
@@ -2900,7 +2890,7 @@
     {
       "nome": "Bayo V.",
       "squadra": "Udinese",
-      "nota": "l'attaccante assente a Torino il 12 ottobre a causa di un problema muscolare alla gamba, che rimane da valutare ma non ci sarà neppure domenica contro il Lecce in casa."
+      "nota": "l'attaccante assente a Torino il 12 ottobre a causa di una lesione al bicipite femorale della coscia destra, rientro tra i convocati da metà novembre."
     },
     {
       "nome": "Gueye",
@@ -4401,7 +4391,7 @@
       "nome": "Ehizibue",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 90,
+      "probabilita": 80,
       "titolare": true
     },
     "6052": {
@@ -4856,8 +4846,8 @@
       "nome": "Marcandalli",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 80,
-      "titolare": true
+      "probabilita": 50,
+      "titolare": false
     },
     "6662": {
       "nome": "Corvi",
@@ -5153,6 +5143,13 @@
       "probabilita": 60,
       "titolare": true
     },
+    "6977": {
+      "nome": "Otoa",
+      "squadra": "Genoa",
+      "ruolo": "D",
+      "probabilita": 55,
+      "titolare": true
+    },
     "6985": {
       "nome": "Candè",
       "squadra": "Sassuolo",
@@ -5269,7 +5266,7 @@
       "nome": "Mastantuono",
       "squadra": "Fiorentina",
       "ruolo": "C",
-      "probabilita": 90,
+      "probabilita": 70,
       "titolare": true
     },
     "7092": {
@@ -5594,6 +5591,13 @@
       "probabilita": 5,
       "titolare": false
     },
+    "7341": {
+      "nome": "Amorim",
+      "squadra": "Genoa",
+      "ruolo": "C",
+      "probabilita": 20,
+      "titolare": false
+    },
     "7345": {
       "nome": "Przyborek",
       "squadra": "Lazio",
@@ -5738,7 +5742,7 @@
       "nome": "Oulai",
       "squadra": "Fiorentina",
       "ruolo": "C",
-      "probabilita": 75,
+      "probabilita": 80,
       "titolare": true
     },
     "7467": {
@@ -5899,7 +5903,7 @@
       "nome": "Mitaj",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 55,
+      "probabilita": 40,
       "titolare": false
     },
     "7538": {
