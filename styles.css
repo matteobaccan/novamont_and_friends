@@ -5534,3 +5534,228 @@ body.sipario-aperto { overflow: hidden; }
 .consiglio-partita .partita-quota.favorita { font-weight: 700; opacity: 1; color: #1d4ed8; }
 [data-theme="dark"] .consiglio-partita .partita-quota.favorita { color: #93c5fd; }
 
+
+/* ============================================================
+   "Rigiocala": il campo stile Subbuteo che ripercorre la partita
+   ============================================================ */
+
+.rigiocala-apri {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px auto 0;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #e4572e, #2e86ab);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rigiocala-apri:hover { transform: translateY(-2px); box-shadow: 0 7px 20px var(--shadow-lg); }
+.rigiocala-apri:active { transform: translateY(0); }
+
+.rigiocala-velo {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(8, 10, 20, 0.78);
+    backdrop-filter: blur(6px);
+    animation: rigiocalaEntra 0.22s ease;
+}
+
+@keyframes rigiocalaEntra { from { opacity: 0; } to { opacity: 1; } }
+
+.rigiocala {
+    width: min(860px, 100%);
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 16px;
+    border-radius: 18px;
+    background: var(--bg-pannello);
+    color: var(--text-primary);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.rigiocala-testa { display: flex; align-items: flex-start; gap: 12px; }
+.rigiocala-squadre {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+.rigiocala-casa { color: #e4572e; }
+.rigiocala-fuori { color: #2e86ab; }
+.rigiocala-risultato { font-size: 1.35rem; }
+
+.rigiocala-chiudi {
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 1.9rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+}
+.rigiocala-chiudi:hover { color: var(--accent-danger); }
+
+.rigiocala-campo {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 12px;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.35);
+}
+
+.rigiocala-punti {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+.rigiocala-punti b { color: var(--text-primary); font-size: 0.95rem; }
+
+.rigiocala-pallino {
+    display: inline-block;
+    width: 9px; height: 9px;
+    margin-right: 6px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.rigiocala-pallino.casa { background: #e4572e; }
+.rigiocala-pallino.fuori { background: #2e86ab; }
+
+.rigiocala-barra {
+    height: 8px;
+    margin: 10px 0;
+    border-radius: 999px;
+    background: var(--bg-secondary);
+    cursor: pointer;
+    overflow: hidden;
+}
+.rigiocala-avanzamento {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #e4572e, #2e86ab);
+}
+
+.rigiocala-comandi {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+}
+.rigiocala-comandi button {
+    border: none;
+    border-radius: 10px;
+    padding: 7px 14px;
+    background: var(--primary-color);
+    color: #fff;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+.rigiocala-comandi button:hover { filter: brightness(1.1); }
+.rigiocala-minuto { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 42px; }
+.rigiocala-velocita { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.rigiocala-velocita input { width: 90px; }
+
+.rigiocala-diario {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 0.82rem;
+}
+.rigiocala-diario li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 9px;
+    border-left: 3px solid transparent;
+    border-radius: 6px;
+}
+.rigiocala-diario li:nth-child(odd) { background: var(--bg-card); }
+.rigiocala-diario li.casa { border-left-color: #e4572e; }
+.rigiocala-diario li.fuori { border-left-color: #2e86ab; }
+.rigiocala-diario .min { color: var(--text-secondary); font-variant-numeric: tabular-nums; min-width: 30px; }
+.rigiocala-diario .su { color: var(--accent); font-weight: 700; }
+.rigiocala-diario .giu { color: var(--accent-danger); font-weight: 700; }
+
+/* Il logo della squadra, con le iniziali per chi sulla lega non ce l'ha */
+.squadra-logo {
+    width: 34px; height: 34px;
+    object-fit: contain;
+    border-radius: 8px;
+    flex: 0 0 auto;
+}
+.squadra-iniziali {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex: 0 0 auto;
+}
+.squadra-allenatore { display: block; font-size: 0.72rem; color: var(--text-secondary); font-weight: 500; }
+
+@media (max-width: 600px) {
+    .rigiocala { padding: 12px; border-radius: 14px; }
+    .rigiocala-risultato { font-size: 1.15rem; }
+    .rigiocala-squadre { font-size: 0.85rem; gap: 8px; }
+    .rigiocala-velocita { margin-left: 0; }
+    .rigiocala-diario { max-height: 116px; }
+}
+
+/* La cella del nome squadra ora porta anche stemma e allenatore. Il taglio
+   con i puntini passa dalla cella al testo: su un contenitore flex non
+   funzionerebbe piu'. */
+.team-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    overflow: visible;
+    white-space: normal;
+}
+.team-name-testo {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.25;
+}
+.team-name-testo,
+.squadra-allenatore {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .squadra-logo, .squadra-iniziali { width: 26px; height: 26px; border-radius: 6px; }
+    .squadra-iniziali { font-size: 0.62rem; }
+    .team-name { gap: 7px; }
+}

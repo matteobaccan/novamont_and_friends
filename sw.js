@@ -1,14 +1,15 @@
 // Service Worker per gestione cache intelligente
-const CACHE_VERSION = 'v10.5';
+const CACHE_VERSION = 'v10.6';
 const CACHE_NAME = `fantacalcio-cache-${CACHE_VERSION}`;
 
 // File da cachare (escludiamo i dati dinamici)
 const urlsToCache = [
   '/',
   '/index.html',
-  '/styles.css?v=10.5',
-  '/script.js?v=10.5',
-  '/config.js?v=10.5',
+  '/styles.css?v=10.6',
+  '/script.js?v=10.6',
+  '/config.js?v=10.6',
+  '/rigiocala.js?v=10.6',
   // Manifest e icone: senza queste in cache la app installata si apre offline
   // senza identita', con l'icona rotta nello switcher
   '/manifest.webmanifest',
@@ -16,11 +17,17 @@ const urlsToCache = [
   '/assets/icona-512.png',
   '/assets/icona-180.png',
   '/assets/icona-maskable-512.png',
+  '/assets/loghi/cusiana.png',
+  '/assets/loghi/partizan-tirana.png',
+  '/assets/loghi/real-ichnusa.png',
+  '/assets/loghi/shakhtar-donuts.png',
+  '/assets/loghi/sm-frattese.png',
+  '/assets/loghi/team24.png',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap',
   // La versione deve restare in passo con quella del <link> in index.html:
   // un URL diverso non viene mai richiesto, quindi resterebbe in cache per
   // sempre senza servire a nulla e il sito offline si troverebbe senza icone
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css'
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css'
 ];
 
 // File che devono essere sempre aggiornati (network-first)
