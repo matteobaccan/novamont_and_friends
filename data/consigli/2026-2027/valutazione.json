@@ -1,0 +1,273 @@
+{
+  "stagione": "2026-2027",
+  "ultimaGiornata": 2,
+  "modello": {
+    "resa": {
+      "tutti": {
+        "voti": 148,
+        "erroreMedio": 1.19,
+        "distorsione": -0.19
+      },
+      "P": {
+        "voti": 12,
+        "erroreMedio": 0.82,
+        "distorsione": -0.32
+      },
+      "D": {
+        "voti": 54,
+        "erroreMedio": 0.77,
+        "distorsione": -0.24
+      },
+      "C": {
+        "voti": 46,
+        "erroreMedio": 1.5,
+        "distorsione": -0.36
+      },
+      "A": {
+        "voti": 36,
+        "erroreMedio": 1.55,
+        "distorsione": 0.14
+      }
+    },
+    "gioca": {
+      "giocatori": 200,
+      "brier": 0.058,
+      "attesiInCampo": 154.7,
+      "inCampo": 148
+    }
+  },
+  "allenatori": [
+    {
+      "squadra": "Team24",
+      "giornate": 1,
+      "schierata": 73,
+      "consigliata": 70,
+      "ideale": 84.5,
+      "meglio": 1,
+      "pari": 0,
+      "peggio": 0,
+      "inComune": 8,
+      "differenza": 3,
+      "mediaDifferenza": 3
+    },
+    {
+      "squadra": "Real Pattagghiu",
+      "giornate": 1,
+      "schierata": 71.5,
+      "consigliata": 68.5,
+      "ideale": 75.5,
+      "meglio": 1,
+      "pari": 0,
+      "peggio": 0,
+      "inComune": 8,
+      "differenza": 3,
+      "mediaDifferenza": 3
+    },
+    {
+      "squadra": "Ultimo",
+      "giornate": 1,
+      "schierata": 76,
+      "consigliata": 74,
+      "ideale": 80.5,
+      "meglio": 1,
+      "pari": 0,
+      "peggio": 0,
+      "inComune": 6,
+      "differenza": 2,
+      "mediaDifferenza": 2
+    },
+    {
+      "squadra": "Shakhtar Donuts",
+      "giornate": 1,
+      "schierata": 71,
+      "consigliata": 71,
+      "ideale": 73.5,
+      "meglio": 0,
+      "pari": 1,
+      "peggio": 0,
+      "inComune": 9,
+      "differenza": 0,
+      "mediaDifferenza": 0
+    },
+    {
+      "squadra": "Real Ichnusa",
+      "giornate": 1,
+      "schierata": 65,
+      "consigliata": 66,
+      "ideale": 67.5,
+      "meglio": 0,
+      "pari": 0,
+      "peggio": 1,
+      "inComune": 8,
+      "differenza": -1,
+      "mediaDifferenza": -1
+    },
+    {
+      "squadra": "Cusiana",
+      "giornate": 1,
+      "schierata": 66,
+      "consigliata": 67.5,
+      "ideale": 74,
+      "meglio": 0,
+      "pari": 0,
+      "peggio": 1,
+      "inComune": 7,
+      "differenza": -1.5,
+      "mediaDifferenza": -1.5
+    },
+    {
+      "squadra": "SM Frattese",
+      "giornate": 1,
+      "schierata": 76,
+      "consigliata": 79.5,
+      "ideale": 85.5,
+      "meglio": 0,
+      "pari": 0,
+      "peggio": 1,
+      "inComune": 9,
+      "differenza": -3.5,
+      "mediaDifferenza": -3.5
+    },
+    {
+      "squadra": "Partizan Tirana",
+      "giornate": 1,
+      "schierata": 63,
+      "consigliata": 68,
+      "ideale": 75.5,
+      "meglio": 0,
+      "pari": 0,
+      "peggio": 1,
+      "inComune": 6,
+      "differenza": -5,
+      "mediaDifferenza": -5
+    }
+  ],
+  "giornate": [
+    {
+      "giornata": 2,
+      "probabiliDel": "2026-10-12T23:33:07.444Z",
+      "parametri": {
+        "GIORNATE_PRIOR": 4,
+        "PESO_FORMA": 0.4,
+        "EPS_MODULO": 1,
+        "VOTO_RIPIEGO": 4.5,
+        "PESO_CONTESTO": 0.03,
+        "PESO_STANCHEZZA": 0.03,
+        "PESO_QUOTE": 0.1,
+        "SOGLIA_QUOTE": 0.2,
+        "BONUS_RIGORE_PARTITA": 0.35,
+        "PROB_FUORI_LISTA": 0.15,
+        "PROB_INFORTUNATO": 0.03
+      },
+      "squadre": [
+        {
+          "squadra": "Real Ichnusa",
+          "schierata": 65,
+          "consigliata": 66,
+          "ideale": 67.5,
+          "attesoSchierata": 70.44,
+          "attesoConsigliata": 72.41,
+          "inComune": 8
+        },
+        {
+          "squadra": "SM Frattese",
+          "schierata": 76,
+          "consigliata": 79.5,
+          "ideale": 85.5,
+          "attesoSchierata": 74.56,
+          "attesoConsigliata": 75.72,
+          "inComune": 9
+        },
+        {
+          "squadra": "Cusiana",
+          "schierata": 66,
+          "consigliata": 67.5,
+          "ideale": 74,
+          "attesoSchierata": 74.19,
+          "attesoConsigliata": 75.48,
+          "inComune": 7
+        },
+        {
+          "squadra": "Ultimo",
+          "schierata": 76,
+          "consigliata": 74,
+          "ideale": 80.5,
+          "attesoSchierata": 68.57,
+          "attesoConsigliata": 71.06,
+          "inComune": 6
+        },
+        {
+          "squadra": "Partizan Tirana",
+          "schierata": 63,
+          "consigliata": 68,
+          "ideale": 75.5,
+          "attesoSchierata": 65.69,
+          "attesoConsigliata": 69.27,
+          "inComune": 6
+        },
+        {
+          "squadra": "Team24",
+          "schierata": 73,
+          "consigliata": 70,
+          "ideale": 84.5,
+          "attesoSchierata": 72.9,
+          "attesoConsigliata": 73.4,
+          "inComune": 8
+        },
+        {
+          "squadra": "Shakhtar Donuts",
+          "schierata": 71,
+          "consigliata": 71,
+          "ideale": 73.5,
+          "attesoSchierata": 69.9,
+          "attesoConsigliata": 72.04,
+          "inComune": 9
+        },
+        {
+          "squadra": "Real Pattagghiu",
+          "schierata": 71.5,
+          "consigliata": 68.5,
+          "ideale": 75.5,
+          "attesoSchierata": 71.33,
+          "attesoConsigliata": 73.13,
+          "inComune": 8
+        }
+      ],
+      "modello": {
+        "resa": {
+          "tutti": {
+            "voti": 148,
+            "erroreMedio": 1.19,
+            "distorsione": -0.19
+          },
+          "P": {
+            "voti": 12,
+            "erroreMedio": 0.82,
+            "distorsione": -0.32
+          },
+          "D": {
+            "voti": 54,
+            "erroreMedio": 0.77,
+            "distorsione": -0.24
+          },
+          "C": {
+            "voti": 46,
+            "erroreMedio": 1.5,
+            "distorsione": -0.36
+          },
+          "A": {
+            "voti": 36,
+            "erroreMedio": 1.55,
+            "distorsione": 0.14
+          }
+        },
+        "gioca": {
+          "giocatori": 200,
+          "brier": 0.058,
+          "attesiInCampo": 154.7,
+          "inCampo": 148
+        }
+      }
+    }
+  ]
+}
