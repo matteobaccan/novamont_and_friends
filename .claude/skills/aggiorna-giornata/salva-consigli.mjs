@@ -13,6 +13,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { caricaScript, esegui, valuta, radiceProgetto } from '../../../test/aiuto/carica-script.mjs';
 
 const leggi = (file) => JSON.parse(fs.readFileSync(path.join(radiceProgetto, file), 'utf8'));
@@ -132,4 +133,4 @@ function main() {
     console.log(`Salvato ${path.relative(radiceProgetto, destinazione)}: ${Object.keys(consiglio.squadre).length} squadre`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
