@@ -4,6 +4,11 @@
 //
 //   FANTA_TOKEN=... node scarica-giornata.mjs <input.json> > estratto.json
 //
+// Con --grezzo <file> legge le formazioni gia' scaricate invece di chiamare
+// l'API, e allora il token non serve: utile quando i dati arrivano dal
+// browser loggato. Il file e' un array di partite, ognuna con casa, fuori,
+// res e i due lati nella forma che restituisce l'API (tot, starts, bench).
+//
 // L'input descrive la giornata e gli accoppiamenti, che si leggono dal
 // calendario della lega; vedi SKILL.md.
 
@@ -13,18 +18,20 @@ const API = 'https://apileague.fantacalcio.it';
 const APP_KEY = 'ICiELOObd5DF5uJEATi77CRvHiiRuMU0';
 
 // Slot del campo "b" delle formazioni, col peso che hanno sul voto.
-// I pesi marcati "verificato" sono stati ricavati dai dati della giornata 1,
-// isolando i giocatori con un solo slot attivo. Gli altri sono ipotesi: se
-// sbagliate, il controllo di quadratura più sotto le fa emergere subito.
+// I pesi marcati "verificato" sono stati ricavati dai dati, isolando i
+// giocatori con un solo slot attivo; espulsione e autogol, a lungo solo
+// ipotesi, sono comparsi nella giornata 2 e hanno quadrato. Se un giorno
+// spuntasse un evento nuovo, il controllo di quadratura più sotto lo fa
+// emergere subito, invece di inventare un risultato.
 const EVENTI = {
     0: { chiave: 'amm', peso: -0.5, label: 'ammonizione' },          // verificato, 16 campioni
-    1: { chiave: 'esp', peso: -1, label: 'espulsione' },             // ipotesi: mai osservato
+    1: { chiave: 'esp', peso: -1, label: 'espulsione' },             // verificato, 2 campioni
     2: { chiave: 'gol', peso: 3, label: 'gol' },                     // verificato, 8 campioni
     3: { chiave: 'golSubiti', peso: -1, label: 'gol subito' },       // verificato, 8 campioni
     4: { chiave: 'rigParato', peso: 3, label: 'rigore parato' },     // verificato per sottrazione
     5: { chiave: 'rigSbagliato', peso: -3, label: 'rigore sbagliato' }, // verificato, 1 campione
     6: { chiave: 'gol', peso: 3, label: 'gol (su rigore)' },         // verificato, 1 campione
-    7: { chiave: 'autogol', peso: -2, label: 'autogol' },            // ipotesi: mai osservato
+    7: { chiave: 'autogol', peso: -2, label: 'autogol' },            // verificato per sottrazione
     12: { chiave: 'assist', peso: 1, label: 'assist' },              // verificato, 3 campioni
     13: { chiave: 'assist', peso: 1, label: 'assist' },              // verificato, 8 campioni
     15: { chiave: null, peso: 0, label: 'flag senza punti' }         // verificato: non muove il voto
@@ -117,36 +124,55 @@ function convertiSquadra(lato, contesto, anomalie) {
 }
 
 async function main() {
-    const inputPath = process.argv[2];
-    if (!inputPath) fail('uso: FANTA_TOKEN=... node scarica-giornata.mjs <input.json>');
+    const argv = process.argv.slice(2);
+    const iGrezzo = argv.indexOf('--grezzo');
+    const grezzoPath = iGrezzo === -1 ? null : argv[iGrezzo + 1];
+    if (iGrezzo !== -1 && !grezzoPath) fail('--grezzo vuole il file con le formazioni');
+    const inputPath = argv.filter((a, i) => i !== iGrezzo && i !== iGrezzo + 1)[0];
+    if (!inputPath) fail('uso: FANTA_TOKEN=... node scarica-giornata.mjs <input.json> [--grezzo <file>]');
 
     const token = process.env.FANTA_TOKEN;
-    if (!token) fail('manca la variabile d\'ambiente FANTA_TOKEN');
+    if (!token && !grezzoPath) fail('manca la variabile d\'ambiente FANTA_TOKEN');
 
     const input = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
     for (const campo of ['competizione', 'round', 'roundSerieA', 'date', 'partite']) {
         if (input[campo] === undefined) fail(`l'input non ha il campo "${campo}"`);
     }
 
-    // Gli id squadra arrivano dall'API, non vanno scritti a mano
-    const partecipanti = await chiamaApi('/onboarding/v1/invitation/participants?pageNumber=1&pageSize=1000', token);
-    const idDi = {};
-    for (const t of partecipanti) idDi[t.teamName.toLowerCase()] = t.teamId;
+    // Dal file grezzo le partite si cercano per accoppiamento; dall'API
+    // servono prima gli id squadra, che non vanno scritti a mano.
+    let prendiPartita;
+    if (grezzoPath) {
+        const grezzo = JSON.parse(fs.readFileSync(grezzoPath, 'utf8'));
+        prendiPartita = (casa, trasferta) => {
+            const m = grezzo.find(g =>
+                g.casa.toLowerCase() === casa.toLowerCase() &&
+                g.fuori.toLowerCase() === trasferta.toLowerCase());
+            if (!m) fail(`${casa}-${trasferta} non e' nel file passato a --grezzo`);
+            return m;
+        };
+    } else {
+        const partecipanti = await chiamaApi('/onboarding/v1/invitation/participants?pageNumber=1&pageSize=1000', token);
+        const idDi = {};
+        for (const t of partecipanti) idDi[t.teamName.toLowerCase()] = t.teamId;
+        prendiPartita = (casa, trasferta) => {
+            const idCasa = idDi[casa.toLowerCase()];
+            const idTrasferta = idDi[trasferta.toLowerCase()];
+            if (!idCasa) fail(`squadra "${casa}" non trovata fra i partecipanti`);
+            if (!idTrasferta) fail(`squadra "${trasferta}" non trovata fra i partecipanti`);
+            return chiamaApi(
+                `/gaming/v1/teamLineup/${input.competizione}/${input.round}/${input.roundSerieA}/${idCasa}/${idTrasferta}`,
+                token
+            );
+        };
+    }
 
     const anomalie = [];
     const matches = [];
 
     for (const [i, partita] of input.partite.entries()) {
         const [casa, trasferta] = partita;
-        const idCasa = idDi[casa.toLowerCase()];
-        const idTrasferta = idDi[trasferta.toLowerCase()];
-        if (!idCasa) fail(`squadra "${casa}" non trovata fra i partecipanti`);
-        if (!idTrasferta) fail(`squadra "${trasferta}" non trovata fra i partecipanti`);
-
-        const d = await chiamaApi(
-            `/gaming/v1/teamLineup/${input.competizione}/${input.round}/${input.roundSerieA}/${idCasa}/${idTrasferta}`,
-            token
-        );
+        const d = await prendiPartita(casa, trasferta);
 
         const contesto = `${casa}-${trasferta}`;
         matches.push({

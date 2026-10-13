@@ -20,6 +20,14 @@ Serve il token della lega in `FANTA_TOKEN`. **Non va messo in un file del repo**
 pubblico: passalo da variabile d'ambiente. Si ricava dall'header `authorization` di una
 qualsiasi chiamata a `apileague.fantacalcio.it` fatta dal browser loggato, e dura un anno.
 
+**Senza token si passa dal browser**, che è loggato e il token ce l'ha già. Si incolla
+`preleva-browser.js` in una pagina della lega (le istruzioni sono in cima al file): il
+bearer resta dentro la pagina, non passa dalla chat e non finisce in nessun file. Le
+partite vengono fuori in forma compatta, una per volta, perché il canale che le riporta
+taglia i risultati lunghi; `espandi-compatto.mjs` le rimette in forma piena e
+`scarica-giornata.mjs --grezzo` le legge al posto dell'API. Il resto della procedura non
+cambia: decodifica degli eventi, quadratura e controlli sono gli stessi.
+
 ## Procedura
 
 ### 0. Capire quante giornate mancano
@@ -89,6 +97,14 @@ canonico della stagione. Gli id squadra si risolvono da soli via API.
 FANTA_TOKEN=... node .claude/skills/aggiorna-giornata/scarica-giornata.mjs <input.json> > <estratto.json>
 ```
 
+Oppure, con le formazioni già prelevate dal browser (vedi *Prima di iniziare*), senza
+token:
+
+```bash
+node .claude/skills/aggiorna-giornata/espandi-compatto.mjs <compatto.json> > <grezzo.json>
+node .claude/skills/aggiorna-giornata/scarica-giornata.mjs <input.json> --grezzo <grezzo.json> > <estratto.json>
+```
+
 Se stampa `ATTENZIONE, decodifica eventi non pulita`, **fermati**: significa che un
 evento non è spiegato dalla tabella dei pesi (vedi sotto). Marcatori e cartellini
 sarebbero sbagliati.
@@ -131,6 +147,12 @@ voto sono selezionabili.
 
 **Nel JSON va senza fattore campo.** Il `+1` di casa lo aggiunge `script.js` quando
 calcola gol e punti persi (vedi `BONUS_CASA.md`). Sommarlo qui lo conterebbe due volte.
+
+**L'ideale non comprende il modificatore di difesa.** Il punteggio reale arriva
+dall'API già modificato, l'ideale si ricostruisce dai voti e quindi no: per questo su una
+squadra con la difesa premiata l'ideale può uscire più basso del reale. Non è un errore di
+calcolo, ed è il motivo per cui la somma dei voti di una squadra a volte non torna col suo
+punteggio. Nei commenti, quindi, non citare somme di voti: cita il punteggio della lega.
 
 ## Il campo `b` delle formazioni
 
