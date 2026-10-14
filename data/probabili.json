@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-13T21:46:29.732Z",
+  "aggiornato": "2026-10-14T12:44:46.564Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -217,13 +217,13 @@
         "data": "2026-10-17T16:00Z",
         "avversario": "Bologna",
         "esiti": {
-          "vittoria": 0.592,
-          "pareggio": 0.234,
+          "vittoria": 0.596,
+          "pareggio": 0.231,
           "sconfitta": 0.174,
           "quote": {
             "casa": 5.25,
-            "pareggio": 3.9,
-            "fuori": 1.54,
+            "pareggio": 3.95,
+            "fuori": 1.53,
             "fonte": "DraftKings"
           }
         }
@@ -247,13 +247,13 @@
         "data": "2026-10-18T18:45Z",
         "avversario": "Juventus",
         "esiti": {
-          "vittoria": 0.183,
-          "pareggio": 0.248,
-          "sconfitta": 0.569,
+          "vittoria": 0.187,
+          "pareggio": 0.251,
+          "sconfitta": 0.562,
           "quote": {
-            "casa": 1.61,
-            "pareggio": 3.7,
-            "fuori": 5,
+            "casa": 1.63,
+            "pareggio": 3.65,
+            "fuori": 4.9,
             "fonte": "DraftKings"
           }
         }
@@ -367,13 +367,13 @@
         "data": "2026-10-18T18:45Z",
         "avversario": "Lazio",
         "esiti": {
-          "vittoria": 0.569,
-          "pareggio": 0.248,
-          "sconfitta": 0.183,
+          "vittoria": 0.562,
+          "pareggio": 0.251,
+          "sconfitta": 0.187,
           "quote": {
-            "casa": 1.61,
-            "pareggio": 3.7,
-            "fuori": 5,
+            "casa": 1.63,
+            "pareggio": 3.65,
+            "fuori": 4.9,
             "fonte": "DraftKings"
           }
         }
@@ -608,12 +608,12 @@
         "avversario": "Inter",
         "esiti": {
           "vittoria": 0.174,
-          "pareggio": 0.234,
-          "sconfitta": 0.592,
+          "pareggio": 0.231,
+          "sconfitta": 0.596,
           "quote": {
             "casa": 5.25,
-            "pareggio": 3.9,
-            "fuori": 1.54,
+            "pareggio": 3.95,
+            "fuori": 1.53,
             "fonte": "DraftKings"
           }
         }
@@ -1068,9 +1068,9 @@
       "fuori": "Como",
       "annullata": false,
       "quote": {
-        "casa": 3.5,
-        "pareggio": 4.2,
-        "fuori": 1.91,
+        "casa": 3.15,
+        "pareggio": 3.8,
+        "fuori": 2.15,
         "fonte": "DraftKings"
       }
     },
@@ -1081,9 +1081,9 @@
       "fuori": "Liverpool",
       "annullata": false,
       "quote": {
-        "casa": 9,
-        "pareggio": 6,
-        "fuori": 1.29,
+        "casa": 8,
+        "pareggio": 5,
+        "fuori": 1.38,
         "fonte": "DraftKings"
       }
     },
@@ -1095,7 +1095,7 @@
       "annullata": false,
       "quote": {
         "casa": 3.55,
-        "pareggio": 3.95,
+        "pareggio": 3.9,
         "fuori": 1.95,
         "fonte": "DraftKings"
       }
@@ -1107,9 +1107,9 @@
       "fuori": "Fenerbahce",
       "annullata": false,
       "quote": {
-        "casa": 1.65,
-        "pareggio": 4.2,
-        "fuori": 5,
+        "casa": 1.69,
+        "pareggio": 4,
+        "fuori": 4.9,
         "fonte": "DraftKings"
       }
     },
@@ -1120,9 +1120,9 @@
       "fuori": "Borussia Dortmund",
       "annullata": false,
       "quote": {
-        "casa": 3.15,
-        "pareggio": 4.1,
-        "fuori": 2.05,
+        "casa": 3,
+        "pareggio": 3.95,
+        "fuori": 2.2,
         "fonte": "DraftKings"
       }
     },
@@ -1133,9 +1133,9 @@
       "fuori": "Paris Saint-Germain",
       "annullata": false,
       "quote": {
-        "casa": 2.15,
+        "casa": 2.05,
         "pareggio": 4,
-        "fuori": 3,
+        "fuori": 3.2,
         "fonte": "DraftKings"
       }
     },
@@ -1146,8 +1146,8 @@
       "fuori": "FC Porto",
       "annullata": false,
       "quote": {
-        "casa": 2.05,
-        "pareggio": 3.75,
+        "casa": 2.1,
+        "pareggio": 3.65,
         "fuori": 3.4,
         "fonte": "DraftKings"
       }
@@ -1172,9 +1172,9 @@
       "fuori": "VfB Stuttgart",
       "annullata": false,
       "quote": {
-        "casa": 9,
-        "pareggio": 6,
-        "fuori": 1.29,
+        "casa": 7.5,
+        "pareggio": 5.75,
+        "fuori": 1.36,
         "fonte": "DraftKings"
       }
     },
@@ -1185,8 +1185,8 @@
       "fuori": "Hapoel Be'er",
       "annullata": false,
       "quote": {
-        "casa": 1.31,
-        "pareggio": 5.75,
+        "casa": 1.3,
+        "pareggio": 6,
         "fuori": 9,
         "fonte": "DraftKings"
       }
@@ -1237,9 +1237,9 @@
       "fuori": "AC Milan",
       "annullata": false,
       "quote": {
-        "casa": 4,
-        "pareggio": 4,
-        "fuori": 1.83,
+        "casa": 3.55,
+        "pareggio": 3.8,
+        "fuori": 2,
         "fonte": "DraftKings"
       }
     },
@@ -1263,9 +1263,9 @@
       "fuori": "Sunderland",
       "annullata": false,
       "quote": {
-        "casa": 7,
+        "casa": 7.5,
         "pareggio": 5.25,
-        "fuori": 1.39,
+        "fuori": 1.38,
         "fonte": "DraftKings"
       }
     },
@@ -1336,9 +1336,9 @@
       "fuori": "Ajax Amsterdam",
       "annullata": false,
       "quote": {
-        "casa": 6,
-        "pareggio": 4.7,
-        "fuori": 1.5,
+        "casa": 5.5,
+        "pareggio": 4.6,
+        "fuori": 1.54,
         "fonte": "DraftKings"
       }
     },
@@ -1505,9 +1505,9 @@
       "fuori": "Levski Sofia",
       "annullata": false,
       "quote": {
-        "casa": 1.83,
-        "pareggio": 3.9,
-        "fuori": 4.1,
+        "casa": 1.87,
+        "pareggio": 3.85,
+        "fuori": 3.9,
         "fonte": "DraftKings"
       }
     },
@@ -1518,9 +1518,9 @@
       "fuori": "OFI Crete",
       "annullata": false,
       "quote": {
-        "casa": 1.26,
+        "casa": 1.25,
         "pareggio": 6.5,
-        "fuori": 10.5,
+        "fuori": 11,
         "fonte": "DraftKings"
       }
     },
@@ -1531,9 +1531,9 @@
       "fuori": "Besiktas",
       "annullata": false,
       "quote": {
-        "casa": 1.95,
+        "casa": 2,
         "pareggio": 4.1,
-        "fuori": 3.45,
+        "fuori": 3.35,
         "fonte": "DraftKings"
       }
     },
@@ -1544,9 +1544,9 @@
       "fuori": "Pafos",
       "annullata": false,
       "quote": {
-        "casa": 1.39,
-        "pareggio": 5,
-        "fuori": 7.5,
+        "casa": 1.38,
+        "pareggio": 5.25,
+        "fuori": 8,
         "fonte": "DraftKings"
       }
     },
@@ -1583,8 +1583,8 @@
       "fuori": "FC Thun",
       "annullata": false,
       "quote": {
-        "casa": 1.22,
-        "pareggio": 7,
+        "casa": 1.21,
+        "pareggio": 7.5,
         "fuori": 11,
         "fonte": "DraftKings"
       }
@@ -1675,8 +1675,8 @@
       "annullata": false,
       "quote": {
         "casa": 5.25,
-        "pareggio": 3.9,
-        "fuori": 1.54,
+        "pareggio": 3.95,
+        "fuori": 1.53,
         "fonte": "DraftKings"
       }
     },
@@ -1739,9 +1739,9 @@
       "fuori": "Lazio",
       "annullata": false,
       "quote": {
-        "casa": 1.61,
-        "pareggio": 3.7,
-        "fuori": 5,
+        "casa": 1.63,
+        "pareggio": 3.65,
+        "fuori": 4.9,
         "fonte": "DraftKings"
       }
     },
@@ -2210,10 +2210,10 @@
       "fuori": "Monza",
       "annullata": false,
       "quote": {
-        "casa": 2.1,
+        "casa": 2.05,
         "pareggio": 3.3,
-        "fuori": 3.5,
-        "fonte": "Bet 365"
+        "fuori": 3.15,
+        "fonte": "DraftKings"
       }
     },
     {
@@ -2223,10 +2223,10 @@
       "fuori": "Bologna",
       "annullata": false,
       "quote": {
-        "casa": 3.1,
-        "pareggio": 3.1,
-        "fuori": 2.38,
-        "fonte": "Bet 365"
+        "casa": 3,
+        "pareggio": 2.9,
+        "fuori": 2.35,
+        "fonte": "DraftKings"
       }
     },
     {
@@ -2236,10 +2236,10 @@
       "fuori": "Sassuolo",
       "annullata": false,
       "quote": {
-        "casa": 1.44,
-        "pareggio": 4.5,
+        "casa": 1.4,
+        "pareggio": 4.3,
         "fuori": 6.5,
-        "fonte": "Bet 365"
+        "fonte": "DraftKings"
       }
     },
     {
@@ -2249,10 +2249,10 @@
       "fuori": "AS Roma",
       "annullata": false,
       "quote": {
-        "casa": 3.1,
-        "pareggio": 3.25,
-        "fuori": 2.3,
-        "fonte": "Bet 365"
+        "casa": 2.75,
+        "pareggio": 3.3,
+        "fuori": 2.25,
+        "fonte": "DraftKings"
       }
     },
     {
@@ -2262,10 +2262,10 @@
       "fuori": "Parma",
       "annullata": false,
       "quote": {
-        "casa": 1.53,
-        "pareggio": 4,
-        "fuori": 6,
-        "fonte": "Bet 365"
+        "casa": 1.49,
+        "pareggio": 3.85,
+        "fuori": 5.75,
+        "fonte": "DraftKings"
       }
     },
     {
@@ -2275,10 +2275,10 @@
       "fuori": "Fiorentina",
       "annullata": false,
       "quote": {
-        "casa": 1.38,
-        "pareggio": 4.75,
-        "fuori": 7.5,
-        "fonte": "Bet 365"
+        "casa": 1.34,
+        "pareggio": 4.9,
+        "fuori": 6.5,
+        "fonte": "DraftKings"
       }
     },
     {
@@ -2288,10 +2288,10 @@
       "fuori": "Frosinone",
       "annullata": false,
       "quote": {
-        "casa": 1.62,
-        "pareggio": 4.1,
-        "fuori": 5,
-        "fonte": "Bet 365"
+        "casa": 1.59,
+        "pareggio": 4,
+        "fuori": 4.5,
+        "fonte": "DraftKings"
       }
     },
     {
@@ -2300,7 +2300,12 @@
       "casa": "Genoa",
       "fuori": "Venezia",
       "annullata": false,
-      "quote": null
+      "quote": {
+        "casa": 2.05,
+        "pareggio": 3.1,
+        "fuori": 3.4,
+        "fonte": "DraftKings"
+      }
     },
     {
       "data": "2026-10-25T17:00Z",
@@ -2309,10 +2314,10 @@
       "fuori": "Juventus",
       "annullata": false,
       "quote": {
-        "casa": 8,
-        "pareggio": 4.2,
-        "fuori": 1.42,
-        "fonte": "Bet 365"
+        "casa": 7,
+        "pareggio": 4,
+        "fuori": 1.41,
+        "fonte": "DraftKings"
       }
     },
     {
@@ -2322,10 +2327,10 @@
       "fuori": "AC Milan",
       "annullata": false,
       "quote": {
-        "casa": 4.5,
-        "pareggio": 3.5,
-        "fuori": 1.8,
-        "fonte": "Bet 365"
+        "casa": 4,
+        "pareggio": 3.45,
+        "fuori": 1.77,
+        "fonte": "DraftKings"
       }
     }
   ],
@@ -2850,7 +2855,7 @@
     {
       "nome": "Leysen F.",
       "squadra": "Sassuolo",
-      "nota": "il difensore KO l'11 ottobre contro il Milan vittima di un problema al ginocchio che andrà valutato per stabilire i tempi di recupero. Di certo out venerdì contro il Frosinone in campionato."
+      "nota": "il difensore KO l'11 ottobre contro il Milan vittima di una lesione al crociato anteriore del ginocchio sinistro. Lungo stop, ipotesi rientro in campo da aprile."
     },
     {
       "nome": "Konè I.",
