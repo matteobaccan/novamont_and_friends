@@ -237,12 +237,18 @@ un'istantanea della **prossima** giornata e non storico, con:
 | `giocatori` | probabili formazioni | percentuale di titolarità, per pesare "gioca" |
 | `rigoristi` | pagina rigoristi | spareggio a parità di punteggio atteso |
 | `infortunati` | pagina infortunati | chi non schierare, con il motivo |
+| `squalificati` | probabili formazioni, sezione per partita | chi non può proprio giocare: probabilità zero |
 | `classificaSerieA`, `prossimoTurno`, `formaSerieA` | widget e calendario | il contesto della partita |
 | `calendarioSquadre` | API pubblica ESPN (Serie A, Coppa Italia, coppe europee) | giorni di riposo prima del turno e partita successiva: stanchezza e rischio turnover |
 
-Giocatori e rigoristi portano il pid nell'href, quindi combaciano esattamente con
-`data/<stagione>.json`. Gli **infortunati no**: quella pagina non espone id, quindi si
-salvano nome e squadra e l'abbinamento alla rosa lo fa il browser, che ha già l'anagrafica.
+Giocatori, rigoristi e squalificati portano il pid nell'href, quindi combaciano
+esattamente con `data/<stagione>.json`. Gli **infortunati no**: quella pagina non espone
+id, quindi si salvano nome e squadra e l'abbinamento alla rosa lo fa il browser, che ha
+già l'anagrafica.
+
+Gli squalificati stanno nella pagina delle probabili, una sezione per partita con un
+blocco per squadra — prima la casa, poi la trasferta. `Squalificati: 0` non è un allarme:
+un turno senza squalificati capita davvero.
 
 Se stampa `ATTENZIONE, squadre senza 11 titolari` le probabili non sono ancora complete
 (succede a inizio settimana): il file resta valido ma il suggerimento è più debole.

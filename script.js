@@ -3747,6 +3747,11 @@ const PROB_FUORI_LISTA = 0.15;
 // rientra e un recupero in extremis capita
 const PROB_INFORTUNATO = 0.03;
 
+// Chi è squalificato non può scendere in campo: qui lo zero è giusto. Non è una
+// stima come le altre due — un infortunato recupera, un fuori lista rientra,
+// uno squalificato quel turno lo salta e basta.
+const PROB_SQUALIFICATO = 0;
+
 // Quanto vale a partita battere i rigori della propria squadra. Il primo
 // rigorista ne calcia dai 5 ai 10 in una stagione: su una trentina di partite
 // giocate fanno ~0,22 rigori a partita, e ogni rigore vale in media
@@ -3850,6 +3855,21 @@ function infortunioDi(pid) {
     return infortunioPer(info.name, info.serieA);
 }
 
+// Gli squalificati arrivano con il loro id, quindi basta un insieme di id: non
+// serve l'abbinamento per nome che tocca fare con gli infortunati.
+let indiceSqualificati = null;
+let indiceSqualificatiPer = null;
+
+function squalificato(pid) {
+    if (indiceSqualificatiPer !== probabiliFormazioni) {
+        indiceSqualificatiPer = probabiliFormazioni;
+        indiceSqualificati = new Set(
+            ((probabiliFormazioni && probabiliFormazioni.squalificati) || []).map(v => Number(v.pid))
+        );
+    }
+    return indiceSqualificati.has(Number(pid));
+}
+
 // Probabilità che un giocatore scenda in campo nella prossima giornata.
 // Viene dalle probabili formazioni quando ci sono, altrimenti da quante volte
 // ha preso un voto finora.
@@ -3863,6 +3883,13 @@ function probabilitaDiGiocare(pid, continuitaStorica) {
     }
 
     const infortunio = infortunioDi(pid);
+
+    // La squalifica viene prima di tutto, anche di una percentuale alta: le
+    // altre fonti stimano, questa sa. Un nome rimasto in formazione per
+    // distrazione non deve far finire in campo chi in campo non ci va.
+    if (squalificato(pid)) {
+        return { p: PROB_SQUALIFICATO, fonte: 'squalificato', voce, infortunio };
+    }
 
     // Chi è nelle probabili con una percentuale ha già il giudizio più
     // aggiornato: l'elenco infortunati sa dell'acciacco, le probabili sanno
@@ -3903,6 +3930,7 @@ function costruisciIndiceRigoristi() {
 // della lega, quindi non ha anagrafica locale: nome e squadra vengono dalla
 // pagina dei rigoristi e servono a riconoscerlo fra gli infortunati.
 function probabilitaRigorista(voce, squadra) {
+    if (squalificato(voce.pid)) return PROB_SQUALIFICATO;
     const inProbabili = (probabiliFormazioni.giocatori || {})[voce.pid];
     if (inProbabili) return inProbabili.probabilita / 100;
     return infortunioPer(voce.nome, squadra) ? PROB_INFORTUNATO : PROB_FUORI_LISTA;
@@ -4673,11 +4701,17 @@ function rigaConsiglio(g, titolare) {
     if (perc >= 70) classeProb = 'prob-alta';
     else if (perc >= 40) classeProb = 'prob-media';
 
-    // L'infortunio viene prima di tutto: è il motivo per cui non schierarlo, e
-    // spiega da solo anche l'assenza dalle probabili
+    // La squalifica prima dell'infortunio, l'infortunio prima del resto: sono i
+    // motivi per cui non schierarlo, e spiegano da soli anche l'assenza dalle
+    // probabili
+    const fuoriCerto = g.fonteProbabilita === 'squalificato';
+
     let nota = '';
     let titoloNota = '';
-    if (g.infortunio) {
+    if (fuoriCerto) {
+        nota = 'squalificato';
+        titoloNota = 'Squalificato: questo turno non scende in campo';
+    } else if (g.infortunio) {
         nota = 'infortunato';
         titoloNota = g.infortunio;
     } else if (g.fonteProbabilita === 'fuori-lista') nota = 'fuori dalle probabili';
@@ -4690,7 +4724,7 @@ function rigaConsiglio(g, titolare) {
     const rigori = g.rigori ? badgeRigorista(g.rigori) : '';
 
     return `
-        <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}${g.infortunio ? ' infortunato' : ''}">
+        <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}${fuoriCerto ? ' squalificato' : ''}${g.infortunio ? ' infortunato' : ''}">
             <span class="ruolo-${info.role}">${info.role}</span>
             <span class="consiglio-nome">
                 <span class="consiglio-nome-testo">${info.name}${rigori}</span>
@@ -4854,11 +4888,16 @@ function displayFormazione() {
                     <dd>
                         Probabilità di scendere in campo, presa dalle
                         <a href="https://www.fantacalcio.it/probabili-formazioni-serie-a" target="_blank" rel="noopener noreferrer">probabili formazioni di Serie A</a>.
-                        Chi non compare affatto nell'elenco (squalificato, fuori lista) scende al 15%,
-                        e chi è anche fra gli
+                        Chi non compare affatto nell'elenco (fuori lista, fuori dai ventidue) scende al
+                        15%, e chi è anche fra gli
                         <a href="https://www.fantacalcio.it/infortunati-serie-a" target="_blank" rel="noopener noreferrer">infortunati</a>
                         al 3%, con il motivo scritto in riga. Chi invece è infortunato ma compare nelle
                         probabili tiene la sua percentuale: quella sa già dei rientri in dubbio.
+                        <br>Gli <strong>squalificati</strong> invece vanno a <strong>zero</strong>, e il
+                        nome è sbarrato: non è una stima prudente come le altre due, è che quel turno non
+                        possono proprio scendere in campo. La stessa pagina delle probabili li elenca
+                        partita per partita, e la squalifica batte tutto il resto — anche un 100% rimasto
+                        in formazione per distrazione.
                     </dd>
                     <dt>Il termine di ripiego</dt>
                     <dd>

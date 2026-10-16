@@ -5,6 +5,7 @@
 //   - probabili formazioni: quanto è probabile che un giocatore scenda in campo
 //   - rigoristi: chi batte i rigori, in ordine di gerarchia
 //   - infortunati: chi non schierare, con il motivo
+//   - squalificati: chi non può proprio scendere in campo questo turno
 //   - contesto: classifica di Serie A, partite del prossimo turno, forma recente
 //   - calendario: partite di coppa e di campionato a ridosso del turno, per la
 //     stanchezza di chi ha giocato a metà settimana (da ESPN, vedi
@@ -153,6 +154,47 @@ export function analizza(html) {
     }
 
     return { squadre, giocatori };
+}
+
+// Gli squalificati stanno nella pagina delle probabili, non in una loro: una
+// sezione per partita, con un blocco per squadra — prima la casa, poi la
+// trasferta — e dentro i giocatori che quel turno non possono scendere in
+// campo. A differenza degli infortunati la pagina espone gli id, quindi
+// l'abbinamento alla rosa della lega è esatto e non passa per il nome.
+//
+// Non comparire nelle probabili non basta a riconoscerli: ci finisce anche chi
+// è fuori lista o semplicemente fuori dai ventidue, che invece una chance di
+// giocare ce l'ha. Senza questa sezione uno squalificato resta un «fuori dalle
+// probabili» qualunque, e il suggeritore lo può schierare.
+export function analizzaSqualificati(html) {
+    const squalificati = [];
+
+    // Le due squadre di una partita sono le ultime due nominate prima della
+    // sezione: la pagina mette le due formazioni e poi i dettagli
+    const nomi = [...html.matchAll(/<h3 class="h6 team-name">([^<]+)<\/h3>/g)]
+        .map(m => ({ dove: m.index, nome: decodificaEntita(m[1].trim()) }));
+
+    const regexSezione = /<section class="suspendeds">([\s\S]*?)<\/section>/g;
+
+    let m;
+    while ((m = regexSezione.exec(html)) !== null) {
+        const partita = nomi.filter(n => n.dove < m.index).slice(-2);
+
+        // Un blocco per squadra: o la lista, o «Nessun calciatore»
+        const blocchi = m[1].split(/<div class="content">/).slice(1);
+
+        blocchi.forEach((blocco, i) => {
+            const voci = blocco.matchAll(/href="[^"]*\/(\d+)"[^>]*>\s*<span>([^<]+)<\/span>/g);
+            for (const voce of voci) {
+                squalificati.push({
+                    pid: Number(voce[1]),
+                    nome: decodificaEntita(voce[2].trim()),
+                    squadra: partita[i] ? partita[i].nome : null
+                });
+            }
+        });
+    }
+    return squalificati;
 }
 
 // ============================================================
@@ -346,6 +388,12 @@ async function main() {
         for (const s of incomplete) console.warn(`  ${s.nome}: ${s.titolari}`);
     }
 
+    // Dalla stessa pagina, e per questo senza un try suo: se quella è arrivata,
+    // ci sono anche gli squalificati
+    const squalificati = analizzaSqualificati(htmlProbabili);
+    console.log(`\nSqualificati: ${squalificati.length}`);
+    for (const g of squalificati) console.log(`  ${g.nome} (${g.squadra})`);
+
     // Da qui in poi nulla è bloccante: rigoristi, infortunati e contesto affinano
     // il suggerimento, ma senza di loro resta valido
     let rigoristi = {};
@@ -428,6 +476,7 @@ async function main() {
         partiteCalendario,
         rigoristi,
         infortunati,
+        squalificati,
         giocatori
     };
 

@@ -19,7 +19,8 @@ import {
     decodificaEntita,
     analizza,
     analizzaRigoristi,
-    analizzaInfortunati
+    analizzaInfortunati,
+    analizzaSqualificati
 } from '../.claude/skills/aggiorna-giornata/scarica-probabili.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
@@ -141,6 +142,32 @@ test('dei rigoristi si tiene anche il nome, non solo l\'id', () => {
             assert.ok(v.nome && v.nome.length > 0);
         }
     }
+});
+
+// ------------------------------------------------------------------
+// Squalificati
+// ------------------------------------------------------------------
+
+test('gli squalificati portano id, nome e squadra', () => {
+    const squalificati = analizzaSqualificati(fixture('squalificati.html'));
+
+    assert.equal(squalificati.length, 1, 'nella fixture ce ne sta uno solo');
+    assert.deepEqual(squalificati[0], { pid: 5585, nome: 'Malen', squadra: 'Roma' });
+});
+
+test('lo squalificato va alla squadra giusta delle due della partita', () => {
+    // La sezione sta dentro la card della partita e ha un blocco per squadra,
+    // prima la casa e poi la trasferta: sbagliare l'ordine darebbe Malen al
+    // Genoa, che nel suo blocco non ha nessuno
+    const squalificati = analizzaSqualificati(fixture('squalificati.html'));
+
+    assert.equal(squalificati.filter(s => s.squadra === 'Genoa').length, 0);
+});
+
+test('senza squalificati non esce niente, non una voce vuota', () => {
+    // La fixture delle probabili ha la sezione Squalificati con «Nessun
+    // calciatore» in tutti e due i blocchi
+    assert.deepEqual(analizzaSqualificati(fixture('probabili.html')), []);
 });
 
 // ------------------------------------------------------------------

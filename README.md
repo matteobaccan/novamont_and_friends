@@ -244,6 +244,13 @@ anche fra gli [infortunati](https://www.fantacalcio.it/infortunati-serie-a) al 3
 motivo dell'infortunio scritto nella riga. Chi invece è infortunato ma compare comunque
 nelle probabili tiene la sua percentuale: quella fonte sa già dei rientri in dubbio.
 
+Gli **squalificati** vanno invece a **zero**, con il nome sbarrato nella riga. Non è una
+stima prudente come le altre due: quel turno non possono scendere in campo, punto. Li
+elenca la pagina delle probabili stessa, partita per partita e con l'id del giocatore, e
+la squalifica batte ogni altra fonte — anche un 100% rimasto in formazione per
+distrazione. Senza questa voce uno squalificato sarebbe un "fuori dalle probabili"
+qualunque al 15%, e il suggeritore se lo poteva ritrovare in formazione.
+
 ### I rigori
 
 Chi batte i [rigori](https://www.fantacalcio.it/rigoristi-serie-a) porta punteggio che la
@@ -281,12 +288,12 @@ difensori.
 ### I dati
 
 Tutto quello che il suggeritore legge da fuori sta in `data/probabili.json`: percentuali,
-rigoristi, infortunati, classifica di Serie A, partite del turno e forma recente. Lo scrive
-`scarica-probabili.mjs` della skill, che lo rigenera anche **da solo due volte al giorno**
-(vedi [Aggiornamento automatico](#-aggiornamento-automatico)). La pagina mostra sempre la
-data dell'ultimo aggiornamento e avvisa quando il file ha più di due giorni o manca del
-tutto: senza quella riga, un file vecchio continuerebbe a produrre percentuali dall'aria
-credibile riferite a una giornata già giocata.
+rigoristi, infortunati, squalificati, classifica di Serie A, partite del turno e forma
+recente. Lo scrive `scarica-probabili.mjs` della skill, che lo rigenera anche **da solo
+due volte al giorno** (vedi [Aggiornamento automatico](#-aggiornamento-automatico)). La
+pagina mostra sempre la data dell'ultimo aggiornamento e avvisa quando il file ha più di
+due giorni o manca del tutto: senza quella riga, un file vecchio continuerebbe a produrre
+percentuali dall'aria credibile riferite a una giornata già giocata.
 
 **Cosa non considera**: i ballottaggi oltre alla percentuale, la forza reale dell'avversario
 al di là della posizione in classifica, e il fatto che i primi cambi in panchina hanno più
@@ -326,7 +333,7 @@ novamont_and_friends/
 │   ├── giornate-mancanti.mjs  # Quali giornate mancano e da quale ricominciare
 │   ├── scarica-giornata.mjs   # Giornata dall'API della lega
 │   ├── calcola-giornata.mjs   # Punteggi ideali
-│   └── scarica-probabili.mjs  # Probabili, rigoristi, infortunati, contesto
+│   └── scarica-probabili.mjs  # Probabili, rigoristi, infortunati, squalificati, contesto
 ├── test/
 │   ├── regole.test.mjs     # Gol, bonus casa, malus, punti di merito
 │   ├── parser.test.mjs     # I parser dello scraper, su fixture reali
