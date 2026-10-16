@@ -4292,10 +4292,16 @@ html.theme-transition *:after {
 [data-theme="dark"] .contesto-su { color: #4ade80; }
 [data-theme="dark"] .contesto-giu { color: #f87171; }
 
-.consiglio-row.infortunato .consiglio-nome-testo { text-decoration: line-through; opacity: 0.7; }
-.consiglio-row.infortunato .consiglio-nota { color: #dc2626; opacity: 0.9; }
+/* Lo squalificato si legge come l'infortunato: nome sbarrato e nota in rosso.
+   Che non giochi e' una certezza invece di un dubbio, ma per chi schiera la
+   formazione il senso e' lo stesso — questo non mettercelo. */
+.consiglio-row.infortunato .consiglio-nome-testo,
+.consiglio-row.squalificato .consiglio-nome-testo { text-decoration: line-through; opacity: 0.7; }
+.consiglio-row.infortunato .consiglio-nota,
+.consiglio-row.squalificato .consiglio-nota { color: #dc2626; opacity: 0.9; }
 
-[data-theme="dark"] .consiglio-row.infortunato .consiglio-nota { color: #f87171; }
+[data-theme="dark"] .consiglio-row.infortunato .consiglio-nota,
+[data-theme="dark"] .consiglio-row.squalificato .consiglio-nota { color: #f87171; }
 
 /* Spiegazione del modello, chiusa di default */
 .consiglio-spiegazione {

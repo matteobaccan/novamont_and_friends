@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-16T12:11:05.039Z",
+  "aggiornato": "2026-10-16T12:24:30.202Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -277,13 +277,13 @@
         "data": "2026-10-17T18:45Z",
         "avversario": "Genoa",
         "esiti": {
-          "vittoria": 0.613,
-          "pareggio": 0.226,
-          "sconfitta": 0.161,
+          "vittoria": 0.601,
+          "pareggio": 0.231,
+          "sconfitta": 0.168,
           "quote": {
-            "casa": 1.51,
-            "pareggio": 4.1,
-            "fuori": 5.75,
+            "casa": 1.54,
+            "pareggio": 4,
+            "fuori": 5.5,
             "fonte": "DraftKings"
           }
         }
@@ -697,13 +697,13 @@
         "data": "2026-10-17T18:45Z",
         "avversario": "Roma",
         "esiti": {
-          "vittoria": 0.161,
-          "pareggio": 0.226,
-          "sconfitta": 0.613,
+          "vittoria": 0.168,
+          "pareggio": 0.231,
+          "sconfitta": 0.601,
           "quote": {
-            "casa": 1.51,
-            "pareggio": 4.1,
-            "fuori": 5.75,
+            "casa": 1.54,
+            "pareggio": 4,
+            "fuori": 5.5,
             "fonte": "DraftKings"
           }
         }
@@ -1695,9 +1695,9 @@
       "fuori": "Genoa",
       "annullata": false,
       "quote": {
-        "casa": 1.51,
-        "pareggio": 4.1,
-        "fuori": 5.75,
+        "casa": 1.54,
+        "pareggio": 4,
+        "fuori": 5.5,
         "fonte": "DraftKings"
       }
     },
@@ -3121,6 +3121,23 @@
       "nome": "Sverko",
       "squadra": "Venezia",
       "nota": "il difensore operato in estate per il perdurare di un problema all'anca e recuperabile da fine ottobre."
+    }
+  ],
+  "squalificati": [
+    {
+      "pid": 5585,
+      "nome": "Malen",
+      "squadra": "Roma"
+    },
+    {
+      "pid": 4479,
+      "nome": "Elmas",
+      "squadra": "Atalanta"
+    },
+    {
+      "pid": 6659,
+      "nome": "Lucchesi",
+      "squadra": "Monza"
     }
   ],
   "giocatori": {

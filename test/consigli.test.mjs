@@ -213,6 +213,59 @@ test('senza la valutazione di una delle due squadre non si inventa niente', () =
 });
 
 // ------------------------------------------------------------------
+// Squalificati
+// ------------------------------------------------------------------
+
+// Lo stesso centrocampista, con le probabili che dicono quello che si vuole
+function conProbabili(probabili) {
+    const dati = lega([7, 7, 7, 7, 7, 7]);
+    esegui(app, `fantacalcioData = ${JSON.stringify(dati)};`);
+    esegui(app, `probabiliFormazioni = ${JSON.stringify(probabili)};`);
+    return valuta(app, `punteggioAtteso(1, {}, ${dati.rounds.length})`);
+}
+
+test('chi è squalificato non gioca: zero, non il 15% di chi è solo fuori dalle probabili', () => {
+    const fuori = conProbabili({ giocatori: {} });
+    const squalificato = conProbabili({ giocatori: {}, squalificati: [{ pid: 1, nome: 'Uno', squadra: 'A' }] });
+
+    assert.equal(fuori.fonteProbabilita, 'fuori-lista');
+    assert.equal(fuori.probabilita, valuta(app, 'PROB_FUORI_LISTA'));
+
+    assert.equal(squalificato.fonteProbabilita, 'squalificato');
+    assert.equal(squalificato.probabilita, 0);
+});
+
+test('lo squalificato vale esattamente il termine di ripiego, il minimo possibile', () => {
+    const g = conProbabili({ giocatori: {}, squalificati: [{ pid: 1, nome: 'Uno', squadra: 'A' }] });
+    assert.equal(g.atteso, valuta(app, 'VOTO_RIPIEGO'));
+});
+
+test('la squalifica batte le probabili: se compare lo stesso, non gioca', () => {
+    // Capita che la pagina lo lasci in formazione per distrazione. La squalifica
+    // è una certezza, una percentuale è una previsione: vince la certezza.
+    const g = conProbabili({
+        giocatori: { 1: { nome: 'Uno', squadra: 'A', ruolo: 'C', probabilita: 100, titolare: true } },
+        squalificati: [{ pid: 1, nome: 'Uno', squadra: 'A' }]
+    });
+    assert.equal(g.probabilita, 0);
+    assert.equal(g.fonteProbabilita, 'squalificato');
+});
+
+test('il rigorista squalificato lascia i rigori al suo vice, per intero', () => {
+    const dati = lega([6, 6, 6]);
+    esegui(app, `fantacalcioData = ${JSON.stringify(dati)};`);
+    esegui(app, `probabiliFormazioni = ${JSON.stringify({
+        giocatori: { 2: { nome: 'Due', squadra: 'A', ruolo: 'C', probabilita: 100, titolare: true } },
+        rigoristi: { A: [{ pid: 1, nome: 'Uno' }, { pid: 2, nome: 'Due' }] },
+        squalificati: [{ pid: 1, nome: 'Uno', squadra: 'A' }]
+    })};`);
+
+    const vice = valuta(app, 'quotaRigori(2)');
+    assert.equal(vice.ordine, 2);
+    assert.equal(vice.quota, 1, 'con il primo squalificato il secondo li calcia tutti');
+});
+
+// ------------------------------------------------------------------
 // La partita di Serie A sotto il nome
 // ------------------------------------------------------------------
 
