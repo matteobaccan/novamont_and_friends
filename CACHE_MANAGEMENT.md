@@ -9,10 +9,33 @@ Questo documento spiega come abbiamo risolto i problemi di cache del browser che
 ### 1. **Cache Busting con Versioning**
 Tutti i file CSS e JavaScript hanno un parametro di versione nell'URL:
 ```html
-<link rel="stylesheet" href="styles.css?v=2.0">
-<script src="script.js?v=2.0"></script>
+<link rel="stylesheet" href="styles.css?v=10.7">
+<script src="script.js?v=10.7"></script>
 ```
-**Come aggiornare**: Quando modifichi i file, incrementa il numero di versione in `index.html`.
+
+**Come aggiornare**: il numero sta in **due file**, e vanno cambiati tutti e due insieme.
+
+| File | Punti da cambiare |
+|---|---|
+| `index.html` | i quattro `?v=` di `styles.css`, `config.js`, `rigiocala.js`, `script.js` |
+| `sw.js` | `CACHE_VERSION` (che dà il nome alla cache) e i quattro URL precaricati |
+
+Cambiarne uno solo non lascia l'utente con i file vecchi — `caches.match()` confronta
+l'URL **query string compresa**, quindi un `?v=` nuovo non trova niente in cache e la
+richiesta va in rete. Rompe però le altre due cose che la versione tiene insieme:
+
+- **Il sito installato resta senza CSS e JS offline.** `urlsToCache` in `sw.js` precarica
+  `/script.js?v=10.7`: se `index.html` nel frattempo chiede `?v=10.8`, quel precaricamento
+  non lo richiede nessuno e offline lo script non c'è. È lo stesso motivo del commento
+  accanto all'URL di Font Awesome in `sw.js`.
+- **La notifica di aggiornamento non parte.** Il browser se ne accorge confrontando i byte
+  di `sw.js`: se quel file non cambia, per lui non c'è nessuna versione nuova, e la vecchia
+  cache non viene nemmeno ripulita (`activate` cancella solo le cache con un altro nome).
+
+In pratica una sostituzione sola su tutti e due i file:
+```bash
+sed -i 's/10\.7/10.8/g' index.html sw.js
+```
 
 ### 2. **Cache Busting per JSON con Timestamp**
 ⭐ **NUOVO**: Il file JSON viene caricato con un timestamp dinamico:
@@ -73,7 +96,7 @@ Regole di cache ottimizzate per Apache:
 
 ### Per gli Sviluppatori:
 1. Modifica i file CSS/JS
-2. Incrementa la versione in `index.html` (es: `v=2.0` → `v=2.1`)
+2. Incrementa la versione in `index.html` **e** in `sw.js` (es: `10.7` → `10.8`)
 3. Committa e pusha
 4. Il Service Worker rileva l'aggiornamento
 5. Gli utenti vedono la notifica
@@ -131,11 +154,13 @@ Il file `.htaccess` è già incluso e configurato.
 
 ## 💡 Best Practices
 
-1. **Incrementa sempre la versione** dopo modifiche a CSS/JS
+1. **Incrementa sempre la versione** dopo modifiche a CSS/JS, in tutti e due i file
 2. **Testa in incognito** per verificare il cache busting
 3. **Monitora il Service Worker** in DevTools
 4. **Non cachare mai** i file JSON con dati dinamici
-5. **Usa versioning semantico**: 2.0, 2.1, 3.0, etc.
+5. **Il numero è un contatore, non una versione semantica**: serve solo a essere diverso
+   da quello di prima, quindi si incrementa il decimale e basta (10.7 → 10.8). Non vuole
+   dire niente sulla portata della modifica
 
 ## 🔄 Workflow di Aggiornamento
 
@@ -143,8 +168,8 @@ Il file `.htaccess` è già incluso e configurato.
 # 1. Modifica i file
 vim script.js styles.css
 
-# 2. Aggiorna la versione in index.html
-# Cambia v=2.0 in v=2.1
+# 2. Aggiorna la versione in index.html e sw.js
+sed -i 's/10\.7/10.8/g' index.html sw.js
 
 # 3. Testa localmente
 python -m http.server 8000
@@ -152,7 +177,7 @@ python -m http.server 8000
 
 # 4. Committa
 git add .
-git commit -m "feat: aggiornamento calcoli + cache v2.1"
+git commit -m "feat: aggiornamento calcoli + cache 10.8"
 git push
 
 # 5. Gli utenti riceveranno la notifica automaticamente
@@ -180,5 +205,5 @@ Se gli utenti hanno problemi:
 
 ---
 
-**Versione attuale**: 2.0  
-**Ultimo aggiornamento**: Ottobre 2025
+**Versione attuale**: 10.7  
+**Ultimo aggiornamento**: Ottobre 2026
