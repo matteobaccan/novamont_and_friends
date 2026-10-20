@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-20T12:37:02.534Z",
+  "aggiornato": "2026-10-20T20:20:19.078Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -337,13 +337,13 @@
         "data": "2026-10-24T13:00Z",
         "avversario": "Sassuolo",
         "esiti": {
-          "vittoria": 0.64,
-          "pareggio": 0.208,
-          "sconfitta": 0.152,
+          "vittoria": 0.612,
+          "pareggio": 0.213,
+          "sconfitta": 0.175,
           "quote": {
-            "casa": 1.43,
-            "pareggio": 4.4,
-            "fuori": 6,
+            "casa": 1.5,
+            "pareggio": 4.3,
+            "fuori": 5.25,
             "fonte": "DraftKings"
           }
         }
@@ -487,13 +487,13 @@
         "data": "2026-10-23T18:45Z",
         "avversario": "Monza",
         "esiti": {
-          "vittoria": 0.438,
+          "vittoria": 0.45,
           "pareggio": 0.275,
-          "sconfitta": 0.287,
+          "sconfitta": 0.275,
           "quote": {
-            "casa": 2.1,
+            "casa": 2.05,
             "pareggio": 3.35,
-            "fuori": 3.2,
+            "fuori": 3.35,
             "fonte": "DraftKings"
           }
         }
@@ -577,13 +577,13 @@
         "data": "2026-10-24T13:00Z",
         "avversario": "Como",
         "esiti": {
-          "vittoria": 0.152,
-          "pareggio": 0.208,
-          "sconfitta": 0.64,
+          "vittoria": 0.175,
+          "pareggio": 0.213,
+          "sconfitta": 0.612,
           "quote": {
-            "casa": 1.43,
-            "pareggio": 4.4,
-            "fuori": 6,
+            "casa": 1.5,
+            "pareggio": 4.3,
+            "fuori": 5.25,
             "fonte": "DraftKings"
           }
         }
@@ -607,13 +607,13 @@
         "data": "2026-10-23T18:45Z",
         "avversario": "Torino",
         "esiti": {
-          "vittoria": 0.287,
+          "vittoria": 0.275,
           "pareggio": 0.275,
-          "sconfitta": 0.438,
+          "sconfitta": 0.45,
           "quote": {
-            "casa": 2.1,
+            "casa": 2.05,
             "pareggio": 3.35,
-            "fuori": 3.2,
+            "fuori": 3.35,
             "fonte": "DraftKings"
           }
         }
@@ -1813,8 +1813,8 @@
       "annullata": false,
       "quote": {
         "casa": 1.11,
-        "pareggio": 10,
-        "fuori": 21,
+        "pareggio": 9.5,
+        "fuori": 23,
         "fonte": "DraftKings"
       }
     },
@@ -1825,9 +1825,9 @@
       "fuori": "PSV Eindhoven",
       "annullata": false,
       "quote": {
-        "casa": 1.53,
-        "pareggio": 4.6,
-        "fuori": 5.75,
+        "casa": 1.49,
+        "pareggio": 4.7,
+        "fuori": 6,
         "fonte": "DraftKings"
       }
     },
@@ -1838,9 +1838,9 @@
       "fuori": "Villarreal",
       "annullata": false,
       "quote": {
-        "casa": 1.5,
-        "pareggio": 4.7,
-        "fuori": 6,
+        "casa": 1.54,
+        "pareggio": 4.5,
+        "fuori": 5.75,
         "fonte": "DraftKings"
       }
     },
@@ -1851,9 +1851,9 @@
       "fuori": "AEK Athens",
       "annullata": false,
       "quote": {
-        "casa": 1.11,
-        "pareggio": 10,
-        "fuori": 21,
+        "casa": 1.15,
+        "pareggio": 9,
+        "fuori": 15,
         "fonte": "DraftKings"
       }
     },
@@ -1864,9 +1864,9 @@
       "fuori": "Bodo/Glimt",
       "annullata": false,
       "quote": {
-        "casa": 1.77,
-        "pareggio": 4,
-        "fuori": 4.3,
+        "casa": 1.67,
+        "pareggio": 4.1,
+        "fuori": 4.8,
         "fonte": "DraftKings"
       }
     },
@@ -1877,9 +1877,9 @@
       "fuori": "Barcelona",
       "annullata": false,
       "quote": {
-        "casa": 2.45,
+        "casa": 2.35,
         "pareggio": 4.4,
-        "fuori": 2.4,
+        "fuori": 2.55,
         "fonte": "DraftKings"
       }
     },
@@ -1890,9 +1890,9 @@
       "fuori": "Atlético Madrid",
       "annullata": false,
       "quote": {
-        "casa": 3.35,
-        "pareggio": 3.8,
-        "fuori": 2.05,
+        "casa": 3.2,
+        "pareggio": 3.85,
+        "fuori": 2.1,
         "fonte": "DraftKings"
       }
     },
@@ -1903,9 +1903,9 @@
       "fuori": "Manchester United",
       "annullata": false,
       "quote": {
-        "casa": 2.2,
-        "pareggio": 3.8,
-        "fuori": 3,
+        "casa": 2.15,
+        "pareggio": 3.85,
+        "fuori": 3.1,
         "fonte": "DraftKings"
       }
     },
@@ -1929,9 +1929,9 @@
       "fuori": "Viking FK",
       "annullata": false,
       "quote": {
-        "casa": 1.24,
+        "casa": 1.22,
         "pareggio": 7,
-        "fuori": 11,
+        "fuori": 12,
         "fonte": "DraftKings"
       }
     },
@@ -1955,8 +1955,8 @@
       "fuori": "Lens",
       "annullata": false,
       "quote": {
-        "casa": 2.05,
-        "pareggio": 3.95,
+        "casa": 2,
+        "pareggio": 4.1,
         "fuori": 3.25,
         "fonte": "DraftKings"
       }
@@ -1968,7 +1968,7 @@
       "fuori": "Shakhtar Donetsk",
       "annullata": false,
       "quote": {
-        "casa": 1.2,
+        "casa": 1.21,
         "pareggio": 7.5,
         "fuori": 12,
         "fonte": "DraftKings"
@@ -1981,9 +1981,9 @@
       "fuori": "Feyenoord Rotterdam",
       "annullata": false,
       "quote": {
-        "casa": 1.57,
+        "casa": 1.56,
         "pareggio": 4.8,
-        "fuori": 5,
+        "fuori": 5.25,
         "fonte": "DraftKings"
       }
     },
@@ -2007,9 +2007,9 @@
       "fuori": "LASK Linz",
       "annullata": false,
       "quote": {
-        "casa": 1.21,
-        "pareggio": 7.5,
-        "fuori": 11,
+        "casa": 1.19,
+        "pareggio": 8,
+        "fuori": 12,
         "fonte": "DraftKings"
       }
     },
@@ -2072,8 +2072,8 @@
       "fuori": "Torreense",
       "annullata": false,
       "quote": {
-        "casa": 1.38,
-        "pareggio": 5,
+        "casa": 1.36,
+        "pareggio": 5.25,
         "fuori": 8,
         "fonte": "DraftKings"
       }
@@ -2111,8 +2111,8 @@
       "fuori": "Bayer Leverkusen",
       "annullata": false,
       "quote": {
-        "casa": 10.5,
-        "pareggio": 6.5,
+        "casa": 11,
+        "pareggio": 7,
         "fuori": 1.24,
         "fonte": "DraftKings"
       }
@@ -2150,8 +2150,8 @@
       "fuori": "CSKA Sofia",
       "annullata": false,
       "quote": {
-        "casa": 1.47,
-        "pareggio": 4.8,
+        "casa": 1.44,
+        "pareggio": 4.9,
         "fuori": 6.5,
         "fonte": "DraftKings"
       }
@@ -2228,9 +2228,9 @@
       "fuori": "Riga FC",
       "annullata": false,
       "quote": {
-        "casa": 1.69,
-        "pareggio": 4,
-        "fuori": 4.8,
+        "casa": 1.65,
+        "pareggio": 4.1,
+        "fuori": 5.25,
         "fonte": "DraftKings"
       }
     },
@@ -2241,9 +2241,9 @@
       "fuori": "F.C. København",
       "annullata": false,
       "quote": {
-        "casa": 2.3,
-        "pareggio": 3.5,
-        "fuori": 3.1,
+        "casa": 2.25,
+        "pareggio": 3.65,
+        "fuori": 3.05,
         "fonte": "DraftKings"
       }
     },
@@ -2267,9 +2267,9 @@
       "fuori": "AC Milan",
       "annullata": false,
       "quote": {
-        "casa": 2.15,
+        "casa": 2.1,
         "pareggio": 3.7,
-        "fuori": 3.25,
+        "fuori": 3.35,
         "fonte": "DraftKings"
       }
     },
@@ -2332,9 +2332,9 @@
       "fuori": "RB Salzburg",
       "annullata": false,
       "quote": {
-        "casa": 4.9,
-        "pareggio": 4.2,
-        "fuori": 1.65,
+        "casa": 5,
+        "pareggio": 4.3,
+        "fuori": 1.63,
         "fonte": "DraftKings"
       }
     },
@@ -2496,9 +2496,9 @@
       "fuori": "Monza",
       "annullata": false,
       "quote": {
-        "casa": 2.1,
+        "casa": 2.05,
         "pareggio": 3.35,
-        "fuori": 3.2,
+        "fuori": 3.35,
         "fonte": "DraftKings"
       }
     },
@@ -2522,9 +2522,9 @@
       "fuori": "Sassuolo",
       "annullata": false,
       "quote": {
-        "casa": 1.43,
-        "pareggio": 4.4,
-        "fuori": 6,
+        "casa": 1.5,
+        "pareggio": 4.3,
+        "fuori": 5.25,
         "fonte": "DraftKings"
       }
     },
@@ -2666,8 +2666,8 @@
       "annullata": false,
       "quote": {
         "casa": 1.57,
-        "pareggio": 3.85,
-        "fuori": 4.9,
+        "pareggio": 3.9,
+        "fuori": 5,
         "fonte": "DraftKings"
       }
     },
@@ -2679,7 +2679,7 @@
       "annullata": false,
       "quote": {
         "casa": 2.85,
-        "pareggio": 3.05,
+        "pareggio": 3.1,
         "fuori": 2.35,
         "fonte": "DraftKings"
       }
@@ -2700,8 +2700,8 @@
       "annullata": false,
       "quote": {
         "casa": 5,
-        "pareggio": 3.55,
-        "fuori": 1.61,
+        "pareggio": 3.65,
+        "fuori": 1.63,
         "fonte": "DraftKings"
       }
     },
@@ -2712,9 +2712,9 @@
       "fuori": "Napoli",
       "annullata": false,
       "quote": {
-        "casa": 3.8,
-        "pareggio": 3.55,
-        "fuori": 1.77,
+        "casa": 3.65,
+        "pareggio": 3.65,
+        "fuori": 1.83,
         "fonte": "DraftKings"
       }
     },
@@ -2725,9 +2725,9 @@
       "fuori": "Lecce",
       "annullata": false,
       "quote": {
-        "casa": 1.87,
+        "casa": 1.91,
         "pareggio": 3.5,
-        "fuori": 3.55,
+        "fuori": 3.45,
         "fonte": "DraftKings"
       }
     },
@@ -3115,7 +3115,7 @@
     {
       "nome": "Kolasinac",
       "squadra": "Atalanta",
-      "nota": "il difensore KO il 18 ottobre a Milano vittima di un risentimento muscolare alla gamba che andrà valutato. Forfait nel prossimo turno di campionato."
+      "nota": "il difensore KO il 18 ottobre a Milano vittima di una distrazione muscolare al retto femorale della coscia sinistra, recuperabile dalla metà di novembre."
     },
     {
       "nome": "Sulemana K.",
@@ -3143,6 +3143,11 @@
       "nota": "l'attaccante indisponibile a causa di un guaio muscolare al bicipite femorale della coscia destra. Recuperabile dalla metà di novembre."
     },
     {
+      "nome": "Trepy",
+      "squadra": "Cagliari",
+      "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla fine di ottobre."
+    },
+    {
       "nome": "Idrissi R.",
       "squadra": "Cagliari",
       "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla fine di ottobre."
@@ -3153,9 +3158,9 @@
       "nota": "il centrocampista KO il 7 settembre contro il Lecce in casa vittima della rottura del legamento crociato anteriore. Verrà operato e costretto a un lungo stop (ipotizziamo un rientro da marzo)."
     },
     {
-      "nome": "Trepy",
-      "squadra": "Cagliari",
-      "nota": "Il calciatore ricoverato il 16 agosto dopo che avrebbe rischiato di annegare in piscina. Dimesso poi il 28 agosto, ora condizioni monitorate da parte dello staff medico rossoblù. Da metà settembre ha avuto l'ok per riprendere l'attività agonistica, potrebbe ora tornare convocabile dalla fine di ottobre."
+      "nome": "Rodriguez Je.",
+      "squadra": "Como",
+      "nota": "Il calciatore si è infortunato in allenamento il 20 ottobre, rimane da valutare per stabilire i tempi di recupero. Di certo out sabato contro il Sassuolo."
     },
     {
       "nome": "Diao",
@@ -3165,7 +3170,7 @@
     {
       "nome": "Chalobah T.",
       "squadra": "Como",
-      "nota": "il difensore il 18 ottobre a Firenze costretto al cambio per un guaio muscolare alla gamba che rimane da valutare. Di certo out sabato in campionato contro il Sassuolo."
+      "nota": "il difensore il 18 ottobre a Firenze costretto al cambio per un guaio muscolare alla gamba, rientro da inizio novembre."
     },
     {
       "nome": "Parisi",
@@ -3213,14 +3218,14 @@
       "nota": "Il centrocampista fermato da un risentimento miofasciale agli adduttori della coscia destra, tentativo rientro tra i convocati dalla fine di ottobre."
     },
     {
-      "nome": "Martinez L.",
-      "squadra": "Inter",
-      "nota": "L'argentino sottoposto il 15 ottobre a controlli medici che hanno evidenziato un risentimento muscolare ai flessori della coscia sinistra. Recuperabile dalla metà di novembre."
-    },
-    {
       "nome": "Pavard",
       "squadra": "Inter",
       "nota": "il difensore out per un risentimento agli adduttori della coscia destra, recuperabile dall'inizio di novembre."
+    },
+    {
+      "nome": "Martinez L.",
+      "squadra": "Inter",
+      "nota": "L'argentino sottoposto il 15 ottobre a controlli medici che hanno evidenziato un risentimento muscolare ai flessori della coscia sinistra. Recuperabile dalla metà di novembre."
     },
     {
       "nome": "Locatelli",
@@ -3258,19 +3263,19 @@
       "nota": "il terzino dei biancocelesti KO il 24 agosto a Bologna vittima di una lesione muscolare alla coscia. Recuperabile dalla seconda metà di ottobre, ma da valutare la convocazione già sabato contro il Parma all'Olimpico."
     },
     {
-      "nome": "Gudmundsson A.",
-      "squadra": "Lazio",
-      "nota": "L'islandese in Nazionale il 26 settembre vittima di un problema alla spalla destra dopo una caduta fortuita in partita. Condizioni da monitorare, si confida di riaverlo a disposizione dalla fine metà di ottobre/inizio di novembre."
-    },
-    {
       "nome": "Rovella",
       "squadra": "Lazio",
       "nota": "il regista dei biancocelesti KO il 30 agosto contro il Genoa vittima di una lesione muscolare al polpaccio, ai box fino alla seconda metà di ottobre. Da valutare convocazione per sabato contro il Parma."
     },
     {
+      "nome": "Gudmundsson A.",
+      "squadra": "Lazio",
+      "nota": "L'islandese in Nazionale il 26 settembre vittima di un problema alla spalla destra dopo una caduta fortuita in partita. Condizioni da monitorare, si confida di riaverlo a disposizione dalla fine metà di ottobre/inizio di novembre."
+    },
+    {
       "nome": "Coulibaly L.",
       "squadra": "Lecce",
-      "nota": "il centrocampista costretto al cambio il 18 ottobre a Udine per un problema muscolare alla coscia destra, che rimane da valutare. Di certo assente domenica contro la Juventus."
+      "nota": "il centrocampista costretto al cambio il 18 ottobre a Udine per una lesione muscolare al bicipite femorale della coscia destra, recuperabile dall'inizio di novembre."
     },
     {
       "nome": "Berisha M.",
@@ -3318,6 +3323,11 @@
       "nota": "L'ala offensiva azzurra ai box per una lesione di basso grado al muscolo semimembranoso della coscia destra, tentativo di rientro tra i convocati dalla prima metà di novembre."
     },
     {
+      "nome": "Vergara",
+      "squadra": "Napoli",
+      "nota": "Il centrocampista sostituito il 5 ottobre con la Nazionale italiana a causa di una lesione distrattiva al polpaccio destro. Recuperabile da fine ottobre."
+    },
+    {
       "nome": "Santos A.",
       "squadra": "Napoli",
       "nota": "l'ala offensiva azzurra KO il 18 ottobre a Venezia, vittima di una lesione distrattiva di medio grado del bicipite femorale sinistro. Recuperabile dall'inizio di dicembre."
@@ -3328,24 +3338,19 @@
       "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
     },
     {
-      "nome": "Vergara",
-      "squadra": "Napoli",
-      "nota": "Il centrocampista sostituito il 5 ottobre con la Nazionale italiana a causa di una lesione distrattiva al polpaccio destro. Recuperabile da inizio novembre."
-    },
-    {
       "nome": "Nicolussi Caviglia",
       "squadra": "Parma",
       "nota": "il centrocampista alle prese dalla seconda metà di luglio con una lesione di medio grado alla coscia destra, ma a fine agosto ha deciso, assieme allo staff medico ducale, di operarsi. Lungo stop e ipotesi di ritorno in campo da dicembre."
     },
     {
-      "nome": "Elphege",
-      "squadra": "Parma",
-      "nota": "l'attaccante operato per una appendicite acuta l'11 ottobre, condizioni ora da valutare per stabilire i tempi di rientro in campo. Di certo assente sabato contro la Lazio."
-    },
-    {
       "nome": "Almqvist",
       "squadra": "Parma",
       "nota": "L'ala offensiva dei ducali KO dal 6 ottobre per una lesione muscolare al polpaccio sinistro, recuperabile dalla fine di ottobre."
+    },
+    {
+      "nome": "Elphege",
+      "squadra": "Parma",
+      "nota": "l'attaccante operato per una appendicite acuta l'11 ottobre, condizioni ora da valutare per stabilire i tempi di rientro in campo. Di certo assente sabato contro la Lazio."
     },
     {
       "nome": "Svilar",
@@ -3363,14 +3368,9 @@
       "nota": "L'argentino sostituito dopo un tempo il 14 ottobre in Champions League per una lesione al gemello del polpaccio destro. Recuperabile da inizio novembre."
     },
     {
-      "nome": "Idzes",
-      "squadra": "Sassuolo",
-      "nota": "Il difensore ai box per una lesione di grado moderato al quadricipite della gamba sinistra, proverà a tornerà arruolabile dalla seconda metà di ottobre."
-    },
-    {
-      "nome": "Boloca",
-      "squadra": "Sassuolo",
-      "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da fine ottobre."
+      "nome": "Pellegrini Lo.",
+      "squadra": "Roma",
+      "nota": "Il centrocampista dei giallorossi il 20 ottobre in Champions League ha lamentato un fastidio muscolare alla gamba che andrà valutato. Viaggia verso il forfait per sabato contro il Napoli."
     },
     {
       "nome": "Konè I.",
@@ -3381,6 +3381,16 @@
       "nome": "Leysen F.",
       "squadra": "Sassuolo",
       "nota": "il difensore KO l'11 ottobre contro il Milan vittima di una lesione al crociato anteriore del ginocchio sinistro. Lungo stop, ipotesi rientro in campo da aprile."
+    },
+    {
+      "nome": "Boloca",
+      "squadra": "Sassuolo",
+      "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da fine ottobre."
+    },
+    {
+      "nome": "Idzes",
+      "squadra": "Sassuolo",
+      "nota": "Il difensore ai box per una lesione di grado moderato al quadricipite della gamba sinistra, proverà a tornerà arruolabile dalla seconda metà di ottobre."
     },
     {
       "nome": "Ilkhan",
@@ -3413,9 +3423,9 @@
       "nota": "il difensore sostituito nell'intervallo della sfida contro il Lecce (18 ottobre) per un risentimento muscolare al polpaccio destro. Recuperabile dalla metà di novembre."
     },
     {
-      "nome": "Busio",
+      "nome": "Correia T.",
       "squadra": "Venezia",
-      "nota": "il regista dei veneti KO l'11 settembre contro la Fiorentina vittima di una distrazione intratendinea del bicipite femorale destro. Rientro dalla seconda metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già domenica a Genova."
+      "nota": "il cursore di fascia dei veneti KO il 12 ottobre a Bergamo vittima di un risentimento muscolare al flessore della gamba sinistra, sarà out domenica contro il Genoa."
     },
     {
       "nome": "Adorante",
@@ -3423,9 +3433,9 @@
       "nota": "l'attaccante a fine luglio ha deciso di operarsi per un problema alla schiena, che lo costringerà a stare ai box per buona parte del girone d'andata del campionato. Tentativo di rientro dalla fine di ottobre."
     },
     {
-      "nome": "Correia T.",
+      "nome": "Busio",
       "squadra": "Venezia",
-      "nota": "il cursore di fascia dei veneti KO il 12 ottobre a Bergamo vittima di un risentimento muscolare al flessore della gamba sinistra, sarà out domenica contro il Genoa."
+      "nota": "il regista dei veneti KO l'11 settembre contro la Fiorentina vittima di una distrazione intratendinea del bicipite femorale destro. Rientro dalla seconda metà di ottobre, ma da valutare nei prossimi allenamenti le possibilità di convocazione già domenica a Genova."
     },
     {
       "nome": "Franjic",
@@ -3463,7 +3473,7 @@
       "nome": "De Roon",
       "squadra": "Roma",
       "ruolo": "C",
-      "probabilita": 80,
+      "probabilita": 85,
       "titolare": true
     },
     "133": {
@@ -3555,13 +3565,6 @@
       "squadra": "Bologna",
       "ruolo": "D",
       "probabilita": 30,
-      "titolare": false
-    },
-    "530": {
-      "nome": "Pellegrini Lo.",
-      "squadra": "Roma",
-      "ruolo": "C",
-      "probabilita": 60,
       "titolare": false
     },
     "531": {
@@ -4037,7 +4040,7 @@
       "nome": "N'Dicka",
       "squadra": "Roma",
       "ruolo": "D",
-      "probabilita": 55,
+      "probabilita": 65,
       "titolare": true
     },
     "4360": {
@@ -4184,14 +4187,14 @@
       "nome": "McTominay",
       "squadra": "Napoli",
       "ruolo": "C",
-      "probabilita": 90,
+      "probabilita": 80,
       "titolare": true
     },
     "4807": {
       "nome": "Hermoso",
       "squadra": "Roma",
       "ruolo": "D",
-      "probabilita": 90,
+      "probabilita": 80,
       "titolare": true
     },
     "4817": {
@@ -4457,7 +4460,7 @@
       "nome": "Ricci S.",
       "squadra": "Como",
       "ruolo": "C",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "5457": {
@@ -4968,7 +4971,7 @@
       "nome": "Pisilli",
       "squadra": "Roma",
       "ruolo": "C",
-      "probabilita": 80,
+      "probabilita": 85,
       "titolare": true
     },
     "6191": {
@@ -5794,14 +5797,7 @@
       "nome": "Addai",
       "squadra": "Como",
       "ruolo": "C",
-      "probabilita": 40,
-      "titolare": false
-    },
-    "7129": {
-      "nome": "Rodriguez Je.",
-      "squadra": "Como",
-      "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "7131": {
