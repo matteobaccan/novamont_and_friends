@@ -44,24 +44,33 @@ export function fantavotiDellaGiornata(round) {
     return voti;
 }
 
-export function punteggioConCambi(titolari, panchina, voti, ruolo) {
-    let totale = 0;
-    let cambi = 0;
+// Chi ha preso punti in una formazione: i titolari con il voto e i cambi
+// entrati, ognuno col suo fantavoto (`al` = il titolare che ha sostituito).
+// `scoperti` sono i titolari senza voto rimasti senza cambio: valgono zero.
+export function formazioneConCambi(titolari, panchina, voti, ruolo) {
+    const punti = [];
+    const scoperti = [];
     const entrati = new Set();
     for (const pid of titolari) {
         if (voti[pid] !== undefined) {
-            totale += voti[pid];
+            punti.push({ p: pid, fv: voti[pid] });
             continue;
         }
-        if (cambi >= CAMBI_MASSIMI) continue;
-        const cambio = panchina.find(q => !entrati.has(q) && ruolo(q) === ruolo(pid) && voti[q] !== undefined);
-        if (cambio !== undefined) {
-            entrati.add(cambio);
-            cambi++;
-            totale += voti[cambio];
+        const cambio = entrati.size < CAMBI_MASSIMI
+            ? panchina.find(q => !entrati.has(q) && ruolo(q) === ruolo(pid) && voti[q] !== undefined)
+            : undefined;
+        if (cambio === undefined) {
+            scoperti.push(pid);
+            continue;
         }
+        entrati.add(cambio);
+        punti.push({ p: cambio, fv: voti[cambio], al: pid });
     }
-    return totale;
+    return { totale: punti.reduce((s, g) => s + g.fv, 0), punti, scoperti };
+}
+
+export function punteggioConCambi(titolari, panchina, voti, ruolo) {
+    return formazioneConCambi(titolari, panchina, voti, ruolo).totale;
 }
 
 export function punteggioIdeale(rosa, voti, ruolo) {
@@ -159,10 +168,20 @@ export function valutaGiornata(dati, round, consiglio) {
                 ? titolari.reduce((s, pid) => s + previsione.get(pid).atteso, 0)
                 : null;
 
+            // Le due formazioni esplose, per far vedere da chi viene la
+            // differenza; `a` è quanto il modello si aspettava dal giocatore
+            const conAtteso = (f) => ({
+                punti: f.punti.map(g => (previsione.has(g.p) ? { ...g, a: arrotonda(previsione.get(g.p).atteso, 1) } : g)),
+                scoperti: f.scoperti
+            });
+            const fSchierata = formazioneConCambi(titolari, panchina, voti, ruolo);
+            const fConsigliata = formazioneConCambi(consigliata.titolari, consigliata.panchina, voti, ruolo);
+
             squadre.push({
                 squadra: team,
-                schierata: punteggioConCambi(titolari, panchina, voti, ruolo),
-                consigliata: punteggioConCambi(consigliata.titolari, consigliata.panchina, voti, ruolo),
+                schierata: fSchierata.totale,
+                consigliata: fConsigliata.totale,
+                formazioni: { schierata: conAtteso(fSchierata), consigliata: conAtteso(fConsigliata) },
                 ideale: punteggioIdeale((rose && rose.teams[team]) || [], voti, ruolo),
                 attesoSchierata: arrotonda(attesoSchierata),
                 attesoConsigliata: arrotonda(consigliata.totale),

@@ -1,5 +1,5 @@
 // Service Worker per gestione cache intelligente
-const CACHE_VERSION = 'v10.7';
+const CACHE_VERSION = 'v10.8';
 const CACHE_NAME = `fantacalcio-cache-${CACHE_VERSION}`;
 
 // File da cachare (escludiamo i dati dinamici)

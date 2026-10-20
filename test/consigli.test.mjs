@@ -6,7 +6,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { caricaScript, valuta, esegui } from './aiuto/carica-script.mjs';
 import { sovrascrivibile, jsonCompatto } from '../.claude/skills/aggiorna-giornata/salva-consigli.mjs';
-import { punteggioConCambi, punteggioIdeale, erroreModello, riassumiErrore, bilancioAllenatori } from '../.claude/skills/aggiorna-giornata/valuta-consigli.mjs';
+import { punteggioConCambi, formazioneConCambi, punteggioIdeale, erroreModello, riassumiErrore, bilancioAllenatori } from '../.claude/skills/aggiorna-giornata/valuta-consigli.mjs';
 import { combinazioni, datiPrimaDi } from '../.claude/skills/aggiorna-giornata/rigioca-consigli.mjs';
 
 const app = caricaScript();
@@ -98,6 +98,20 @@ test('chi non prende il voto è sostituito da un pari ruolo della panchina, al m
 
 test('un cambio deve avere lo stesso ruolo', () => {
     assert.equal(punteggioConCambi([2], [1], { 1: 6 }, ruolo), 0);
+});
+
+test('il dettaglio dice chi ha portato i punti, chi è entrato al posto di chi e chi è rimasto scoperto', () => {
+    const ruoliQuattro = (pid) => (pid === 1 ? 'P' : 'D');
+    const voti = { 1: 6, 5: 7, 6: 6, 7: 5, 9: 8 };
+    const f = formazioneConCambi([1, 2, 3, 4, 8], [5, 6, 7, 9], voti, ruoliQuattro);
+    assert.equal(f.totale, 6 + 7 + 6 + 5);
+    assert.deepEqual(f.punti, [
+        { p: 1, fv: 6 },
+        { p: 5, fv: 7, al: 2 },
+        { p: 6, fv: 6, al: 3 },
+        { p: 7, fv: 5, al: 4 }
+    ]);
+    assert.deepEqual(f.scoperti, [8]);
 });
 
 test('la formazione ideale prova i moduli e tiene il migliore', () => {
@@ -283,4 +297,29 @@ test('la partita mette la casa prima, la squadra del giocatore in grassetto, pos
 
 test('senza partita nota non si scrive niente sotto il nome', () => {
     assert.equal(valuta(app, 'htmlPartitaSerieA({ noto: false })'), '');
+});
+
+test('la differenza col consiglio è tutta nei giocatori che hanno preso punti in una formazione sola', () => {
+    esegui(app, `fantacalcioData = ${JSON.stringify({
+        players: { 1: { name: 'Uno', role: 'D' }, 2: { name: 'Due', role: 'D' }, 3: { name: 'Tre', role: 'A' }, 4: { name: 'Quattro', role: 'A' } }
+    })};`);
+    // Schierata: 1 e 4. Consigliata: 1, 3 e il 2, che non gioca e resta scoperto.
+    const r = {
+        schierata: 11, consigliata: 16,
+        formazioni: {
+            schierata: { punti: [{ p: 1, fv: 6 }, { p: 4, fv: 5 }], scoperti: [] },
+            consigliata: { punti: [{ p: 1, fv: 6 }, { p: 3, fv: 10, a: 7.2 }], scoperti: [2] }
+        }
+    };
+    // Passa da JSON: gli array nati dentro lo script hanno un altro prototipo
+    const d = JSON.parse(JSON.stringify(valuta(app, `scomponiConsiglio(${JSON.stringify(r)})`)));
+    assert.deepEqual(d.soloSchierata.map(g => g.p), [4]);
+    assert.deepEqual(d.soloConsigliata.map(g => g.p), [3]);
+    assert.deepEqual(d.inComune.map(g => g.p), [1]);
+    assert.deepEqual(d.scopertiConsigliata, [2]);
+    assert.equal(d.puntiSoloSchierata - d.puntiSoloConsigliata, r.schierata - r.consigliata);
+});
+
+test('le giornate valutate prima dei dettagli non rompono il bilancio', () => {
+    assert.equal(valuta(app, 'scomponiConsiglio({ schierata: 70, consigliata: 66 })'), null);
 });

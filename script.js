@@ -4946,7 +4946,10 @@ function displayFormazione() {
     const stagione = currentSeasonId;
     caricaValutazioneConsigli(stagione).then(valutazione => {
         const posto = document.getElementById('consiglio-bilancio');
-        if (posto && stagione === currentSeasonId) posto.innerHTML = htmlBilancioAllenatori(valutazione, scelta);
+        if (posto && stagione === currentSeasonId) {
+            posto.innerHTML = htmlBilancioAllenatori(valutazione, scelta);
+            if (valutazione) collegaBilancioAllenatori(posto, valutazione);
+        }
     });
 }
 
@@ -4979,7 +4982,8 @@ function htmlBilancioAllenatori(valutazione, squadraScelta) {
     const righe = valutazione.allenatori.map(b => {
         const classe = b.differenza > 0 ? 'bilancio-meglio' : (b.differenza < 0 ? 'bilancio-peggio' : '');
         return `
-            <tr class="${b.squadra === squadraScelta ? 'bilancio-scelta' : ''}">
+            <tr class="bilancio-riga${b.squadra === squadraScelta ? ' bilancio-scelta' : ''}" data-squadra="${b.squadra}"
+                tabindex="0" title="Vedi da dove viene la differenza">
                 <td>${b.squadra}</td>
                 <td class="num">${b.schierata.toFixed(1).replace('.', ',')}</td>
                 <td class="num">${b.consigliata.toFixed(1).replace('.', ',')}</td>
@@ -5023,8 +5027,132 @@ function htmlBilancioAllenatori(valutazione, squadraScelta) {
                     <tbody>${righe}</tbody>
                 </table>
             </div>
+            <div class="bilancio-dettaglio" id="bilancio-dettaglio">${htmlDettaglioBilancio(valutazione, squadraScelta)}</div>
             ${rigaModello}
         </section>
+    `;
+}
+
+// Una riga del bilancio scelta col clic (o con Invio) porta la sua squadra nel
+// pannello sotto la tabella
+function collegaBilancioAllenatori(posto, valutazione) {
+    const scegli = (riga) => {
+        posto.querySelectorAll('.bilancio-riga').forEach(r => r.classList.toggle('bilancio-scelta', r === riga));
+        const dettaglio = posto.querySelector('#bilancio-dettaglio');
+        if (dettaglio) dettaglio.innerHTML = htmlDettaglioBilancio(valutazione, riga.dataset.squadra);
+    };
+    posto.querySelectorAll('.bilancio-riga').forEach(riga => {
+        riga.addEventListener('click', () => scegli(riga));
+        riga.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scegli(riga); }
+        });
+    });
+}
+
+// Da dove viene la differenza fra schierata e consigliata in una giornata. Chi
+// ha preso punti in tutte e due le formazioni porta lo stesso fantavoto e si
+// elide: la differenza è tutta in chi li ha presi in una sola delle due.
+// Le giornate valutate prima che il file salvasse le formazioni danno null.
+function scomponiConsiglio(r) {
+    if (!r || !r.formazioni) return null;
+    const { schierata, consigliata } = r.formazioni;
+    const inSchierata = new Set(schierata.punti.map(g => g.p));
+    const inConsigliata = new Set(consigliata.punti.map(g => g.p));
+    const perRuolo = (a, b) => (ORDINE_RUOLI[anagraficaGiocatore(a.p).role] ?? 9) - (ORDINE_RUOLI[anagraficaGiocatore(b.p).role] ?? 9)
+        || b.fv - a.fv;
+    const somma = (elenco) => elenco.reduce((s, g) => s + g.fv, 0);
+
+    const soloSchierata = schierata.punti.filter(g => !inConsigliata.has(g.p)).sort(perRuolo);
+    const soloConsigliata = consigliata.punti.filter(g => !inSchierata.has(g.p)).sort(perRuolo);
+    const inComune = schierata.punti.filter(g => inConsigliata.has(g.p)).sort(perRuolo);
+    return {
+        soloSchierata,
+        soloConsigliata,
+        inComune,
+        scopertiSchierata: schierata.scoperti,
+        scopertiConsigliata: consigliata.scoperti,
+        puntiSoloSchierata: somma(soloSchierata),
+        puntiSoloConsigliata: somma(soloConsigliata),
+        puntiInComune: somma(inComune)
+    };
+}
+
+function htmlDettaglioBilancio(valutazione, squadra) {
+    const giornate = [...(valutazione.giornate || [])]
+        .map(g => ({ giornata: g.giornata, r: (g.squadre || []).find(s => s.squadra === squadra) }))
+        .filter(g => g.r)
+        .reverse(); // la più recente in cima
+    if (!squadra || giornate.length === 0) {
+        return '<p class="bilancio-nota">Tocca una squadra per vedere da quali giocatori viene la differenza.</p>';
+    }
+
+    const virgola = (x) => x.toFixed(1).replace('.', ',');
+    const giocatore = (g) => {
+        const info = anagraficaGiocatore(g.p);
+        const entrato = g.al !== undefined
+            ? ` <span class="bilancio-entrato" title="Entrato dalla panchina">al posto di ${anagraficaGiocatore(g.al).name}</span>`
+            : '';
+        const atteso = g.a !== undefined
+            ? `<span class="bilancio-atteso" title="Quanto si aspettava il modello prima della giornata">att. ${virgola(g.a)}</span>`
+            : '<span class="bilancio-atteso"></span>';
+        return `
+            <li>
+                <span class="ruolo-${info.role}">${info.role}</span>
+                <span class="bilancio-nome">${info.name}${entrato}</span>
+                ${atteso}
+                <span class="bilancio-fv">${virgola(g.fv)}</span>
+            </li>
+        `;
+    };
+    const scoperti = (elenco) => (elenco.length
+        ? `<li class="bilancio-scoperto">${elenco.map(p => anagraficaGiocatore(p).name).join(', ')}: senza voto e senza cambio, zero punti</li>`
+        : '');
+    const colonna = (titolo, giocatori, punti, elencoScoperti) => `
+        <div class="bilancio-colonna">
+            <h5>${titolo} <span class="bilancio-totale">${virgola(punti)}</span></h5>
+            <ul>
+                ${giocatori.map(giocatore).join('') || '<li class="bilancio-vuoto">nessuno</li>'}
+                ${scoperti(elencoScoperti)}
+            </ul>
+        </div>
+    `;
+
+    const schede = giornate.map(({ giornata, r }) => {
+        const d = scomponiConsiglio(r);
+        const delta = r.schierata - r.consigliata;
+        const classe = delta > 0 ? 'bilancio-meglio' : (delta < 0 ? 'bilancio-peggio' : '');
+        const intestazione = `
+            <h5 class="bilancio-giornata">
+                Giornata ${giornata}
+                <span>schierata ${virgola(r.schierata)} · consigliata ${virgola(r.consigliata)} ·
+                <strong class="${classe}">Δ ${segnoDecimale(delta)}</strong></span>
+            </h5>
+        `;
+        if (!d) return `<article class="bilancio-scheda">${intestazione}<p class="bilancio-nota">Dettaglio non disponibile per questa giornata.</p></article>`;
+
+        const comuni = d.inComune.length
+            ? `<p class="bilancio-comuni"><strong>${d.inComune.length} in comune</strong>, ${virgola(d.puntiInComune)} punti in tutte e due:
+                   ${d.inComune.map(g => `${anagraficaGiocatore(g.p).name} ${virgola(g.fv)}`).join(', ')}</p>`
+            : '<p class="bilancio-comuni">Nessun giocatore in comune.</p>';
+        return `
+            <article class="bilancio-scheda">
+                ${intestazione}
+                <div class="bilancio-colonne">
+                    ${colonna('Solo nella schierata', d.soloSchierata, d.puntiSoloSchierata, d.scopertiSchierata)}
+                    ${colonna('Solo nel consiglio', d.soloConsigliata, d.puntiSoloConsigliata, d.scopertiConsigliata)}
+                </div>
+                ${comuni}
+            </article>
+        `;
+    }).join('');
+
+    return `
+        <h4 class="bilancio-dettaglio-titolo">Da dove viene il Δ: ${squadra}</h4>
+        <p class="bilancio-nota">
+            Chi ha preso punti in tutte e due le formazioni si elide: la differenza è la colonna di sinistra
+            meno quella di destra. Accanto al fantavoto, quanto si aspettava il modello.
+        </p>
+        ${schede}
     `;
 }
 

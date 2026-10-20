@@ -5486,6 +5486,92 @@ body.sipario-aperto { overflow: hidden; }
 [data-theme="dark"] .bilancio-meglio { color: #4ade80; }
 [data-theme="dark"] .bilancio-peggio { color: #f87171; }
 
+.bilancio-riga { cursor: pointer; }
+.bilancio-riga:hover td { background: rgba(127, 127, 127, 0.05); }
+.bilancio-riga:focus-visible { outline: 2px solid var(--primary-color, #3b82f6); outline-offset: -2px; }
+
+/* Da dove viene il Δ: le due formazioni a confronto, una scheda per giornata */
+.bilancio-dettaglio { margin-top: 1rem; }
+.consiglio-bilancio .bilancio-dettaglio-titolo { margin: 0 0 0.3rem; }
+
+.bilancio-scheda {
+    border-top: 1px solid rgba(127, 127, 127, 0.18);
+    padding: 0.7rem 0 0.4rem;
+}
+
+.bilancio-giornata {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.2rem 0.8rem;
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+}
+
+.bilancio-giornata span {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+.bilancio-colonne {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem 1rem;
+}
+
+.bilancio-colonna h5 {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 0.3rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    opacity: 0.75;
+}
+
+.bilancio-totale { font-variant-numeric: tabular-nums; }
+
+.bilancio-colonna ul { list-style: none; margin: 0; padding: 0; }
+
+.bilancio-colonna li {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.22rem 0;
+    font-size: 0.8rem;
+    border-bottom: 1px dashed rgba(127, 127, 127, 0.15);
+}
+
+.bilancio-colonna li:last-child { border-bottom: none; }
+
+.bilancio-nome { min-width: 0; overflow-wrap: anywhere; }
+.bilancio-entrato { display: block; font-size: 0.68rem; color: var(--text-secondary); }
+.bilancio-atteso { font-size: 0.68rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.bilancio-fv { font-weight: 700; font-variant-numeric: tabular-nums; min-width: 2.2em; text-align: right; }
+
+.bilancio-colonna li.bilancio-scoperto,
+.bilancio-colonna li.bilancio-vuoto {
+    display: block;
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.bilancio-comuni {
+    margin: 0.5rem 0 0;
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 560px) {
+    .bilancio-colonne { grid-template-columns: 1fr; }
+}
+
 /* E se avesse giocato il sito? — nella card della partita */
 .se-sito-blocco {
     margin-top: 1rem;
