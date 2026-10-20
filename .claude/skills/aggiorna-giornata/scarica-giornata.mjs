@@ -40,8 +40,14 @@ const EVENTI = {
 
 // Due sentinelle diverse, entrambe con cscr = 100:
 //   scr 55 = senza voto (s.v.), scr 56 = non ha giocato
+// La sentinella è lo scr, non il cscr: un fantavoto pari a 0 arriva anch'esso
+// come cscr = 100 (Muric, Serie A 7: voto 4, quattro gol subiti), e il
+// fantavoto può andare sotto zero. Con un voto vero e un cscr fuori scala il
+// fantavoto si ricostruisce dagli eventi.
 const SENTINELLA_CSCR = 100;
 const SCR_SENZA_VOTO = 55;
+const SCR_NON_GIOCA = 56;
+const FANTAVOTO_MAX = 50; // nessun fantavoto vero ci arriva: oltre è un codice
 
 function fail(message) {
     console.error(`ERRORE: ${message}`);
@@ -87,22 +93,28 @@ function decodificaEventi(raw, voto, votoBonus) {
 function convertiGiocatore(p, stato, contesto, anomalie) {
     const rec = { p: p.pid, t: stato };
 
-    if (p.cscr === SENTINELLA_CSCR) {
+    if (p.scr === SCR_SENZA_VOTO || p.scr === SCR_NON_GIOCA) {
+        if (p.cscr !== SENTINELLA_CSCR) {
+            anomalie.push(`${contesto} pid ${p.pid}: scr ${p.scr} ma cscr ${p.cscr} invece di ${SENTINELLA_CSCR}`);
+        }
         // sv = è sceso in campo ma senza voto; senza il flag non ha proprio giocato
         if (p.scr === SCR_SENZA_VOTO) rec.sv = true;
         return rec;
     }
 
-    rec.v = p.scr;
-    rec.b = p.cscr;
-
+    const fuoriScala = p.cscr > FANTAVOTO_MAX;
     const { eventi, sconosciuti, quadra, atteso, effettivo } = decodificaEventi(p.b, p.scr, p.cscr);
+
+    rec.v = p.scr;
+    rec.b = fuoriScala ? Math.round((p.scr + atteso) * 10) / 10 : p.cscr;
     if (Object.keys(eventi).length > 0) rec.e = eventi;
 
     if (sconosciuti.length > 0) {
         anomalie.push(`${contesto} pid ${p.pid}: slot sconosciuti ${sconosciuti.join(', ')} (b="${p.b}")`);
     }
-    if (!quadra) {
+    // Ricostruito dagli eventi non c'è niente con cui farlo quadrare: basta
+    // che gli slot siano tutti noti, e quello lo dice già il controllo sopra
+    if (!fuoriScala && !quadra) {
         anomalie.push(
             `${contesto} pid ${p.pid}: gli eventi valgono ${atteso} ma il voto cambia di ${effettivo} (b="${p.b}")`
         );
