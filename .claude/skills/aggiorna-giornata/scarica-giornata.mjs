@@ -34,6 +34,7 @@ const EVENTI = {
     7: { chiave: 'autogol', peso: -2, label: 'autogol' },            // verificato per sottrazione
     12: { chiave: 'assist', peso: 1, label: 'assist' },              // verificato, 3 campioni
     13: { chiave: 'assist', peso: 1, label: 'assist' },              // verificato, 8 campioni
+    14: { chiave: 'assist', peso: 1, label: 'assist' },              // verificato, 2 campioni (Serie A 7, assist sui voti fantacalcio.it)
     15: { chiave: null, peso: 0, label: 'flag senza punti' }         // verificato: non muove il voto
 };
 
