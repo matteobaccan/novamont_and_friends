@@ -8,6 +8,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { valutaStagione, leggiConsigli } from './valuta-consigli.mjs';
 
 // Moduli ammessi: difensori, centrocampisti, attaccanti. Il portiere è sempre uno.
 const MODULI = [
@@ -274,6 +275,17 @@ function main() {
 
     fs.writeFileSync(seasonPath, JSON.stringify(data, null, 2) + '\n');
     console.log(`\nScritto ${season.file} (${data.rounds.length} giornate).`);
+
+    // Il workflow delle probabili rifà la valutazione dei consigli a ogni giro,
+    // ma fino al giro dopo il sito mostrerebbe quella senza la giornata appena
+    // inserita: tanto vale rifarla qui
+    const cartellaConsigli = path.join(repoRoot, 'data', 'consigli', season.id);
+    const valutazione = valutaStagione(data, leggiConsigli(cartellaConsigli));
+    if (valutazione.giornate.length > 0) {
+        const destinazione = path.join(cartellaConsigli, 'valutazione.json');
+        fs.writeFileSync(destinazione, JSON.stringify(valutazione, null, 2) + '\n');
+        console.log(`Scritto ${path.relative(repoRoot, destinazione)} (consigli valutati fino alla giornata ${valutazione.ultimaGiornata}).`);
+    }
 }
 
 // argv[1] manca quando il modulo viene importato da `node -e`

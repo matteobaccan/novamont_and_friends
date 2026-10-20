@@ -167,7 +167,10 @@ giocatori con quello slot da solo, ricava il peso dividendo il delta per il cont
 aggiorna `EVENTI` e rilancia.
 
 Due sentinelle, entrambe con `cscr = 100`: `scr 55` = senza voto (s.v.), `scr 56` = non
-ha giocato.
+ha giocato. **La sentinella è lo `scr`, non il `cscr`**: un fantavoto pari a 0 arriva anche
+lui come `cscr = 100` (un portiere da 4 con quattro gol subiti), e il fantavoto può andare
+sotto zero. Con un voto vero e un `cscr` fuori scala lo script ricostruisce il fantavoto
+dagli eventi, quindi non va corretto a mano.
 
 ## Rose che cambiano
 
@@ -274,7 +277,9 @@ ruolo, probabilità di giocare) e i pesi del modello con cui è stato dato.
 
 Il confronto con la realtà lo fa `valuta-consigli.mjs`, che il workflow lancia a ogni giro
 con `--scrivi`: la valutazione finisce in `data/consigli/<stagione>/valutazione.json` e
-il sito la mostra sotto la formazione consigliata. A mano:
+il sito la mostra sotto la formazione consigliata. La rifà anche `calcola-giornata.mjs`
+appena scrive una giornata, così il bilancio degli allenatori non resta una giornata
+indietro fino al giro dopo: quel file va committato insieme alla giornata. A mano:
 
 ```bash
 node .claude/skills/aggiorna-giornata/valuta-consigli.mjs [stagione] [--scrivi]
