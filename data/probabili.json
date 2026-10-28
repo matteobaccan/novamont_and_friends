@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-27T21:09:13.051Z",
+  "aggiornato": "2026-10-28T13:54:20.122Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -91,8 +91,8 @@
     "Lazio": 1,
     "Inter": 2,
     "Roma": 3,
-    "Milan": 4,
-    "Como": 5,
+    "Como": 4,
+    "Milan": 5,
     "Frosinone": 6,
     "Juventus": 7,
     "Torino": 8,
@@ -247,13 +247,13 @@
         "data": "2026-10-28T17:30Z",
         "avversario": "Venezia",
         "esiti": {
-          "vittoria": 0.693,
-          "pareggio": 0.176,
-          "sconfitta": 0.132,
+          "vittoria": 0.69,
+          "pareggio": 0.177,
+          "sconfitta": 0.133,
           "quote": {
             "casa": 7,
             "pareggio": 5.25,
-            "fuori": 1.33,
+            "fuori": 1.35,
             "fonte": "DraftKings"
           }
         }
@@ -274,46 +274,76 @@
     },
     "Roma": {
       "prossima": {
-        "data": "2026-10-27T19:45Z",
-        "avversario": "Cagliari",
+        "data": "2026-10-31T17:00Z",
+        "avversario": "Udinese",
         "esiti": {
-          "vittoria": 0.666,
-          "pareggio": 0.21,
-          "sconfitta": 0.123,
+          "vittoria": 0.594,
+          "pareggio": 0.223,
+          "sconfitta": 0.183,
           "quote": {
-            "casa": 1.39,
-            "pareggio": 4.4,
+            "casa": 5,
+            "pareggio": 4.1,
+            "fuori": 1.54,
+            "fonte": "DraftKings"
+          }
+        }
+      },
+      "precedente": {
+        "data": "2026-10-27T19:45Z",
+        "competizione": "Serie A",
+        "avversario": "Cagliari"
+      },
+      "giorniRiposo": 4,
+      "partiteUltimaSettimana": 1,
+      "dopo": {
+        "data": "2026-11-03T20:00Z",
+        "competizione": "Champions League",
+        "avversario": "Manchester United"
+      },
+      "giorniAllaSuccessiva": 3
+    },
+    "Como": {
+      "prossima": {
+        "data": "2026-11-01T11:30Z",
+        "avversario": "Venezia",
+        "esiti": {
+          "vittoria": 0.711,
+          "pareggio": 0.167,
+          "sconfitta": 0.122,
+          "quote": {
+            "casa": 1.29,
+            "pareggio": 5.5,
             "fuori": 7.5,
             "fonte": "DraftKings"
           }
         }
       },
       "precedente": {
-        "data": "2026-10-24T16:00Z",
+        "data": "2026-10-27T19:45Z",
         "competizione": "Serie A",
-        "avversario": "Napoli"
+        "avversario": "Torino"
       },
-      "giorniRiposo": 3,
+      "giorniRiposo": 5,
       "partiteUltimaSettimana": 1,
       "dopo": {
-        "data": "2026-10-31T17:00Z",
-        "competizione": "Serie A",
-        "avversario": "Udinese"
+        "data": "2026-11-04T20:00Z",
+        "competizione": "Champions League",
+        "avversario": "Lens"
       },
-      "giorniAllaSuccessiva": 4
+      "giorniAllaSuccessiva": 3
     },
     "Milan": {
       "prossima": {
         "data": "2026-10-28T17:30Z",
         "avversario": "Bologna",
         "esiti": {
-          "vittoria": 0.555,
-          "pareggio": 0.247,
-          "sconfitta": 0.197,
+          "vittoria": 0.549,
+          "pareggio": 0.261,
+          "sconfitta": 0.189,
           "quote": {
-            "casa": 1.67,
-            "pareggio": 3.75,
-            "fuori": 4.7,
+            "casa": 1.69,
+            "pareggio": 3.55,
+            "fuori": 4.9,
             "fonte": "DraftKings"
           }
         }
@@ -331,36 +361,6 @@
         "avversario": "Internazionale"
       },
       "giorniAllaSuccessiva": 3
-    },
-    "Como": {
-      "prossima": {
-        "data": "2026-10-27T19:45Z",
-        "avversario": "Torino",
-        "esiti": {
-          "vittoria": 0.551,
-          "pareggio": 0.251,
-          "sconfitta": 0.198,
-          "quote": {
-            "casa": 4.7,
-            "pareggio": 3.7,
-            "fuori": 1.69,
-            "fonte": "DraftKings"
-          }
-        }
-      },
-      "precedente": {
-        "data": "2026-10-24T13:00Z",
-        "competizione": "Serie A",
-        "avversario": "Sassuolo"
-      },
-      "giorniRiposo": 3,
-      "partiteUltimaSettimana": 2,
-      "dopo": {
-        "data": "2026-11-01T11:30Z",
-        "competizione": "Serie A",
-        "avversario": "Venezia"
-      },
-      "giorniAllaSuccessiva": 5
     },
     "Frosinone": {
       "prossima": {
@@ -397,13 +397,13 @@
         "data": "2026-10-28T19:45Z",
         "avversario": "Genoa",
         "esiti": {
-          "vittoria": 0.559,
-          "pareggio": 0.256,
-          "sconfitta": 0.185,
+          "vittoria": 0.531,
+          "pareggio": 0.28,
+          "sconfitta": 0.189,
           "quote": {
-            "casa": 5,
-            "pareggio": 3.6,
-            "fuori": 1.65,
+            "casa": 4.9,
+            "pareggio": 3.3,
+            "fuori": 1.74,
             "fonte": "DraftKings"
           }
         }
@@ -424,76 +424,76 @@
     },
     "Torino": {
       "prossima": {
-        "data": "2026-10-27T19:45Z",
-        "avversario": "Como",
+        "data": "2026-11-01T14:00Z",
+        "avversario": "Frosinone",
         "esiti": {
-          "vittoria": 0.198,
-          "pareggio": 0.251,
-          "sconfitta": 0.551,
+          "vittoria": 0.315,
+          "pareggio": 0.25,
+          "sconfitta": 0.435,
           "quote": {
-            "casa": 4.7,
-            "pareggio": 3.7,
-            "fuori": 1.69,
+            "casa": 2.1,
+            "pareggio": 3.65,
+            "fuori": 2.9,
             "fonte": "DraftKings"
           }
         }
       },
       "precedente": {
-        "data": "2026-10-23T18:45Z",
+        "data": "2026-10-27T19:45Z",
         "competizione": "Serie A",
-        "avversario": "Monza"
+        "avversario": "Como"
       },
-      "giorniRiposo": 4,
+      "giorniRiposo": 5,
       "partiteUltimaSettimana": 1,
       "dopo": {
-        "data": "2026-11-01T14:00Z",
+        "data": "2026-11-07T14:00Z",
         "competizione": "Serie A",
-        "avversario": "Frosinone"
+        "avversario": "Lecce"
       },
-      "giorniAllaSuccessiva": 5
+      "giorniAllaSuccessiva": 6
     },
     "Cagliari": {
       "prossima": {
-        "data": "2026-10-27T19:45Z",
-        "avversario": "Roma",
+        "data": "2026-11-01T14:00Z",
+        "avversario": "Lazio",
         "esiti": {
-          "vittoria": 0.123,
-          "pareggio": 0.21,
-          "sconfitta": 0.666,
+          "vittoria": 0.141,
+          "pareggio": 0.218,
+          "sconfitta": 0.641,
           "quote": {
-            "casa": 1.39,
-            "pareggio": 4.4,
-            "fuori": 7.5,
+            "casa": 1.43,
+            "pareggio": 4.2,
+            "fuori": 6.5,
             "fonte": "DraftKings"
           }
         }
       },
       "precedente": {
-        "data": "2026-10-24T13:00Z",
+        "data": "2026-10-27T19:45Z",
         "competizione": "Serie A",
-        "avversario": "Bologna"
+        "avversario": "AS Roma"
       },
-      "giorniRiposo": 3,
+      "giorniRiposo": 5,
       "partiteUltimaSettimana": 1,
       "dopo": {
-        "data": "2026-11-01T14:00Z",
+        "data": "2026-11-07T14:00Z",
         "competizione": "Serie A",
-        "avversario": "Lazio"
+        "avversario": "Frosinone"
       },
-      "giorniAllaSuccessiva": 5
+      "giorniAllaSuccessiva": 6
     },
     "Napoli": {
       "prossima": {
         "data": "2026-10-28T19:45Z",
         "avversario": "Monza",
         "esiti": {
-          "vittoria": 0.535,
-          "pareggio": 0.239,
-          "sconfitta": 0.227,
+          "vittoria": 0.538,
+          "pareggio": 0.242,
+          "sconfitta": 0.219,
           "quote": {
-            "casa": 4.1,
-            "pareggio": 3.9,
-            "fuori": 1.74,
+            "casa": 4.2,
+            "pareggio": 3.8,
+            "fuori": 1.71,
             "fonte": "DraftKings"
           }
         }
@@ -577,13 +577,13 @@
         "data": "2026-10-28T17:30Z",
         "avversario": "Milan",
         "esiti": {
-          "vittoria": 0.197,
-          "pareggio": 0.247,
-          "sconfitta": 0.555,
+          "vittoria": 0.189,
+          "pareggio": 0.261,
+          "sconfitta": 0.549,
           "quote": {
-            "casa": 1.67,
-            "pareggio": 3.75,
-            "fuori": 4.7,
+            "casa": 1.69,
+            "pareggio": 3.55,
+            "fuori": 4.9,
             "fonte": "DraftKings"
           }
         }
@@ -637,13 +637,13 @@
         "data": "2026-10-28T19:45Z",
         "avversario": "Napoli",
         "esiti": {
-          "vittoria": 0.227,
-          "pareggio": 0.239,
-          "sconfitta": 0.535,
+          "vittoria": 0.219,
+          "pareggio": 0.242,
+          "sconfitta": 0.538,
           "quote": {
-            "casa": 4.1,
-            "pareggio": 3.9,
-            "fuori": 1.74,
+            "casa": 4.2,
+            "pareggio": 3.8,
+            "fuori": 1.71,
             "fonte": "DraftKings"
           }
         }
@@ -667,13 +667,13 @@
         "data": "2026-10-28T19:45Z",
         "avversario": "Juventus",
         "esiti": {
-          "vittoria": 0.185,
-          "pareggio": 0.256,
-          "sconfitta": 0.559,
+          "vittoria": 0.189,
+          "pareggio": 0.28,
+          "sconfitta": 0.531,
           "quote": {
-            "casa": 5,
-            "pareggio": 3.6,
-            "fuori": 1.65,
+            "casa": 4.9,
+            "pareggio": 3.3,
+            "fuori": 1.74,
             "fonte": "DraftKings"
           }
         }
@@ -697,13 +697,13 @@
         "data": "2026-10-28T17:30Z",
         "avversario": "Parma",
         "esiti": {
-          "vittoria": 0.362,
-          "pareggio": 0.303,
-          "sconfitta": 0.336,
+          "vittoria": 0.343,
+          "pareggio": 0.308,
+          "sconfitta": 0.349,
           "quote": {
-            "casa": 2.75,
-            "pareggio": 3.05,
-            "fuori": 2.55,
+            "casa": 2.65,
+            "pareggio": 3,
+            "fuori": 2.7,
             "fonte": "DraftKings"
           }
         }
@@ -757,13 +757,13 @@
         "data": "2026-10-28T17:30Z",
         "avversario": "Udinese",
         "esiti": {
-          "vittoria": 0.336,
-          "pareggio": 0.303,
-          "sconfitta": 0.362,
+          "vittoria": 0.349,
+          "pareggio": 0.308,
+          "sconfitta": 0.343,
           "quote": {
-            "casa": 2.75,
-            "pareggio": 3.05,
-            "fuori": 2.55,
+            "casa": 2.65,
+            "pareggio": 3,
+            "fuori": 2.7,
             "fonte": "DraftKings"
           }
         }
@@ -787,13 +787,13 @@
         "data": "2026-10-28T17:30Z",
         "avversario": "Inter",
         "esiti": {
-          "vittoria": 0.132,
-          "pareggio": 0.176,
-          "sconfitta": 0.693,
+          "vittoria": 0.133,
+          "pareggio": 0.177,
+          "sconfitta": 0.69,
           "quote": {
             "casa": 7,
             "pareggio": 5.25,
-            "fuori": 1.33,
+            "fuori": 1.35,
             "fonte": "DraftKings"
           }
         }
@@ -2540,9 +2540,9 @@
       "fuori": "Bologna",
       "annullata": false,
       "quote": {
-        "casa": 1.67,
-        "pareggio": 3.75,
-        "fuori": 4.7,
+        "casa": 1.69,
+        "pareggio": 3.55,
+        "fuori": 4.9,
         "fonte": "DraftKings"
       }
     },
@@ -2553,9 +2553,9 @@
       "fuori": "Udinese",
       "annullata": false,
       "quote": {
-        "casa": 2.75,
-        "pareggio": 3.05,
-        "fuori": 2.55,
+        "casa": 2.65,
+        "pareggio": 3,
+        "fuori": 2.7,
         "fonte": "DraftKings"
       }
     },
@@ -2568,7 +2568,7 @@
       "quote": {
         "casa": 7,
         "pareggio": 5.25,
-        "fuori": 1.33,
+        "fuori": 1.35,
         "fonte": "DraftKings"
       }
     },
@@ -2579,9 +2579,9 @@
       "fuori": "Juventus",
       "annullata": false,
       "quote": {
-        "casa": 5,
-        "pareggio": 3.6,
-        "fuori": 1.65,
+        "casa": 4.9,
+        "pareggio": 3.3,
+        "fuori": 1.74,
         "fonte": "DraftKings"
       }
     },
@@ -2592,9 +2592,9 @@
       "fuori": "Napoli",
       "annullata": false,
       "quote": {
-        "casa": 4.1,
-        "pareggio": 3.9,
-        "fuori": 1.74,
+        "casa": 4.2,
+        "pareggio": 3.8,
+        "fuori": 1.71,
         "fonte": "DraftKings"
       }
     },
@@ -2670,9 +2670,9 @@
       "fuori": "Venezia",
       "annullata": false,
       "quote": {
-        "casa": 1.32,
-        "pareggio": 5.25,
-        "fuori": 7,
+        "casa": 1.29,
+        "pareggio": 5.5,
+        "fuori": 7.5,
         "fonte": "DraftKings"
       }
     },
@@ -2878,9 +2878,9 @@
       "fuori": "Real Madrid",
       "annullata": false,
       "quote": {
-        "casa": 7.5,
-        "pareggio": 5.75,
-        "fuori": 1.32,
+        "casa": 8,
+        "pareggio": 6,
+        "fuori": 1.3,
         "fonte": "DraftKings"
       }
     },
@@ -3210,7 +3210,7 @@
       "fuori": "Lech Poznan",
       "annullata": false,
       "quote": {
-        "casa": 1.21,
+        "casa": 1.2,
         "pareggio": 6.5,
         "fuori": 11,
         "fonte": "DraftKings"
@@ -3753,12 +3753,12 @@
     {
       "nome": "Scamacca",
       "squadra": "Atalanta",
-      "nota": "L'attaccante fuori causa per giovedì a Firenze a causa di un risentimento ai muscoli flessori della coscia destra. Verrà rivalutato la prossima settimana, si spera di averlo a disposizione prima della sosta di metà novembre."
+      "nota": "L'attaccante fuori causa per giovedì a Firenze a causa di un risentimento ai muscoli flessori della coscia destra. Verrà rivalutato, si proverà ad averlo a disposizione già da inizio novembre."
     },
     {
       "nome": "Kessiè",
       "squadra": "Atalanta",
-      "nota": "L'ivoriano condizionato da una distrazione di basso grado al polpaccio della gamba destra e out contro Milan e Frosinone. Da valutare in vista di giovedì a Firenze nel turno infrasettimanale, proverà a recuperare in extremis."
+      "nota": "L'ivoriano condizionato da una distrazione di basso grado al polpaccio della gamba destra, tentativo rientro da inizio novembre."
     },
     {
       "nome": "Pompei",
@@ -3948,7 +3948,7 @@
     {
       "nome": "Ilic",
       "squadra": "Lecce",
-      "nota": "il regista dei salentini KO l'11 ottobre in casa contro il Bologna vittima di una lesione miotendinea del retto femorale sinistro con lesione parziale del tendine, rientro da fine marzo."
+      "nota": "il regista dei salentini KO l'11 ottobre in casa contro il Bologna vittima di una lesione miotendinea del retto femorale sinistro con lesione parziale del tendine, rientro da aprile."
     },
     {
       "nome": "Pierotti",
@@ -4315,7 +4315,7 @@
       "nome": "Meret",
       "squadra": "Napoli",
       "ruolo": "P",
-      "probabilita": 45,
+      "probabilita": 5,
       "titolare": false
     },
     "608": {
@@ -4462,7 +4462,7 @@
       "nome": "Milinkovic-Savic V.",
       "squadra": "Napoli",
       "ruolo": "P",
-      "probabilita": 55,
+      "probabilita": 75,
       "titolare": true
     },
     "2194": {
@@ -5533,7 +5533,7 @@
       "nome": "Hojlund",
       "squadra": "Napoli",
       "ruolo": "A",
-      "probabilita": 80,
+      "probabilita": 55,
       "titolare": true
     },
     "6054": {
@@ -5645,7 +5645,7 @@
       "nome": "Lucca",
       "squadra": "Napoli",
       "ruolo": "A",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "6217": {
@@ -6422,7 +6422,7 @@
       "nome": "Giovane",
       "squadra": "Napoli",
       "ruolo": "A",
-      "probabilita": 60,
+      "probabilita": 85,
       "titolare": true
     },
     "7165": {
