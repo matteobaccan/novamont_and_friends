@@ -1,145 +1,145 @@
 {
   "stagione": "2026-2027",
-  "ultimaGiornata": 4,
+  "ultimaGiornata": 5,
   "modello": {
     "resa": {
       "tutti": {
-        "voti": 429,
-        "erroreMedio": 1.29,
-        "distorsione": -0.07
+        "voti": 571,
+        "erroreMedio": 1.35,
+        "distorsione": -0.03
       },
       "P": {
-        "voti": 37,
-        "erroreMedio": 1.24,
-        "distorsione": -0.67
+        "voti": 49,
+        "erroreMedio": 1.31,
+        "distorsione": -0.5
       },
       "D": {
-        "voti": 154,
-        "erroreMedio": 0.74,
-        "distorsione": -0.09
+        "voti": 204,
+        "erroreMedio": 0.76,
+        "distorsione": -0.06
       },
       "C": {
-        "voti": 135,
-        "erroreMedio": 1.48,
-        "distorsione": -0.1
+        "voti": 182,
+        "erroreMedio": 1.63,
+        "distorsione": 0.02
       },
       "A": {
-        "voti": 103,
-        "erroreMedio": 1.89,
-        "distorsione": 0.2
+        "voti": 136,
+        "erroreMedio": 1.87,
+        "distorsione": 0.12
       }
     },
     "gioca": {
-      "giocatori": 600,
-      "brier": 0.055,
-      "attesiInCampo": 442.8,
-      "inCampo": 429
+      "giocatori": 800,
+      "brier": 0.056,
+      "attesiInCampo": 581.9,
+      "inCampo": 571
     }
   },
   "allenatori": [
     {
       "squadra": "Ultimo",
-      "giornate": 3,
-      "schierata": 215.5,
-      "consigliata": 197,
-      "ideale": 230,
+      "giornate": 4,
+      "schierata": 281.5,
+      "consigliata": 267.5,
+      "ideale": 305,
       "meglio": 3,
       "pari": 0,
-      "peggio": 0,
-      "inComune": 7,
-      "differenza": 18.5,
-      "mediaDifferenza": 6.17
-    },
-    {
-      "squadra": "Real Pattagghiu",
-      "giornate": 3,
-      "schierata": 225,
-      "consigliata": 223.5,
-      "ideale": 238.5,
-      "meglio": 1,
-      "pari": 1,
       "peggio": 1,
-      "inComune": 8.3,
-      "differenza": 1.5,
-      "mediaDifferenza": 0.5
-    },
-    {
-      "squadra": "Cusiana",
-      "giornate": 3,
-      "schierata": 201,
-      "consigliata": 201,
-      "ideale": 217.5,
-      "meglio": 1,
-      "pari": 0,
-      "peggio": 2,
-      "inComune": 7.3,
-      "differenza": 0,
-      "mediaDifferenza": 0
-    },
-    {
-      "squadra": "Shakhtar Donuts",
-      "giornate": 3,
-      "schierata": 227.5,
-      "consigliata": 227.5,
-      "ideale": 247,
-      "meglio": 1,
-      "pari": 1,
-      "peggio": 1,
-      "inComune": 8.3,
-      "differenza": 0,
-      "mediaDifferenza": 0
-    },
-    {
-      "squadra": "Real Ichnusa",
-      "giornate": 3,
-      "schierata": 227.5,
-      "consigliata": 229.5,
-      "ideale": 238,
-      "meglio": 0,
-      "pari": 1,
-      "peggio": 2,
-      "inComune": 9,
-      "differenza": -2,
-      "mediaDifferenza": -0.67
-    },
-    {
-      "squadra": "SM Frattese",
-      "giornate": 3,
-      "schierata": 198,
-      "consigliata": 204,
-      "ideale": 224,
-      "meglio": 0,
-      "pari": 0,
-      "peggio": 3,
-      "inComune": 8,
-      "differenza": -6,
-      "mediaDifferenza": -2
-    },
-    {
-      "squadra": "Partizan Tirana",
-      "giornate": 3,
-      "schierata": 202,
-      "consigliata": 208.5,
-      "ideale": 225,
-      "meglio": 1,
-      "pari": 0,
-      "peggio": 2,
-      "inComune": 7,
-      "differenza": -6.5,
-      "mediaDifferenza": -2.17
+      "inComune": 6.5,
+      "differenza": 14,
+      "mediaDifferenza": 3.5
     },
     {
       "squadra": "Team24",
-      "giornate": 3,
-      "schierata": 224,
-      "consigliata": 232,
-      "ideale": 255.5,
-      "meglio": 1,
+      "giornate": 4,
+      "schierata": 289.5,
+      "consigliata": 286.5,
+      "ideale": 326,
+      "meglio": 2,
       "pari": 1,
       "peggio": 1,
       "inComune": 7,
-      "differenza": -8,
-      "mediaDifferenza": -2.67
+      "differenza": 3,
+      "mediaDifferenza": 0.75
+    },
+    {
+      "squadra": "Shakhtar Donuts",
+      "giornate": 4,
+      "schierata": 304,
+      "consigliata": 306.5,
+      "ideale": 333,
+      "meglio": 1,
+      "pari": 1,
+      "peggio": 2,
+      "inComune": 8,
+      "differenza": -2.5,
+      "mediaDifferenza": -0.62
+    },
+    {
+      "squadra": "Real Ichnusa",
+      "giornate": 4,
+      "schierata": 295,
+      "consigliata": 298.5,
+      "ideale": 315.5,
+      "meglio": 0,
+      "pari": 1,
+      "peggio": 3,
+      "inComune": 9.3,
+      "differenza": -3.5,
+      "mediaDifferenza": -0.87
+    },
+    {
+      "squadra": "Cusiana",
+      "giornate": 4,
+      "schierata": 263.5,
+      "consigliata": 268,
+      "ideale": 289,
+      "meglio": 1,
+      "pari": 0,
+      "peggio": 3,
+      "inComune": 6.8,
+      "differenza": -4.5,
+      "mediaDifferenza": -1.12
+    },
+    {
+      "squadra": "Partizan Tirana",
+      "giornate": 4,
+      "schierata": 283.5,
+      "consigliata": 290,
+      "ideale": 225,
+      "meglio": 1,
+      "pari": 1,
+      "peggio": 2,
+      "inComune": 8,
+      "differenza": -6.5,
+      "mediaDifferenza": -1.62
+    },
+    {
+      "squadra": "SM Frattese",
+      "giornate": 4,
+      "schierata": 275.5,
+      "consigliata": 284,
+      "ideale": 306,
+      "meglio": 0,
+      "pari": 0,
+      "peggio": 4,
+      "inComune": 8.3,
+      "differenza": -8.5,
+      "mediaDifferenza": -2.12
+    },
+    {
+      "squadra": "Real Pattagghiu",
+      "giornate": 4,
+      "schierata": 301,
+      "consigliata": 320.5,
+      "ideale": 339,
+      "meglio": 1,
+      "pari": 1,
+      "peggio": 2,
+      "inComune": 8,
+      "differenza": -19.5,
+      "mediaDifferenza": -4.87
     }
   ],
   "giornate": [
@@ -3460,6 +3460,1107 @@
           "brier": 0.053,
           "attesiInCampo": 140.2,
           "inCampo": 136
+        }
+      }
+    },
+    {
+      "giornata": 5,
+      "probabiliDel": "2026-10-29T21:40:27.168Z",
+      "parametri": {
+        "GIORNATE_PRIOR": 4,
+        "PESO_FORMA": 0.4,
+        "EPS_MODULO": 1,
+        "VOTO_RIPIEGO": 4.5,
+        "PESO_CONTESTO": 0.03,
+        "PESO_STANCHEZZA": 0.03,
+        "PESO_QUOTE": 0.1,
+        "SOGLIA_QUOTE": 0.2,
+        "BONUS_RIGORE_PARTITA": 0.35,
+        "PROB_FUORI_LISTA": 0.15,
+        "PROB_INFORTUNATO": 0.03
+      },
+      "squadre": [
+        {
+          "squadra": "Team24",
+          "schierata": 65.5,
+          "consigliata": 54.5,
+          "formazioni": {
+            "schierata": {
+              "punti": [
+                {
+                  "p": 2170,
+                  "fv": 6,
+                  "al": 572,
+                  "a": 5.1
+                },
+                {
+                  "p": 6867,
+                  "fv": 5.5,
+                  "a": 6.4
+                },
+                {
+                  "p": 6495,
+                  "fv": 5.5,
+                  "a": 5.8
+                },
+                {
+                  "p": 6642,
+                  "fv": 5,
+                  "a": 6.1
+                },
+                {
+                  "p": 6021,
+                  "fv": 5.5,
+                  "a": 5.8
+                },
+                {
+                  "p": 5687,
+                  "fv": 5.5,
+                  "a": 7.5
+                },
+                {
+                  "p": 2766,
+                  "fv": 5.5,
+                  "a": 6.1
+                },
+                {
+                  "p": 4465,
+                  "fv": 5,
+                  "a": 6.5
+                },
+                {
+                  "p": 6052,
+                  "fv": 10,
+                  "a": 6.7
+                },
+                {
+                  "p": 2061,
+                  "fv": 6.5,
+                  "a": 7.8
+                },
+                {
+                  "p": 6435,
+                  "fv": 5.5,
+                  "a": 9.4
+                }
+              ],
+              "scoperti": []
+            },
+            "consigliata": {
+              "punti": [
+                {
+                  "p": 2170,
+                  "fv": 6,
+                  "a": 5.1
+                },
+                {
+                  "p": 6867,
+                  "fv": 5.5,
+                  "a": 6.4
+                },
+                {
+                  "p": 6642,
+                  "fv": 5,
+                  "a": 6.1
+                },
+                {
+                  "p": 5851,
+                  "fv": 5.5,
+                  "a": 5.8
+                },
+                {
+                  "p": 5687,
+                  "fv": 5.5,
+                  "a": 7.5
+                },
+                {
+                  "p": 4465,
+                  "fv": 5,
+                  "a": 6.5
+                },
+                {
+                  "p": 2766,
+                  "fv": 5.5,
+                  "a": 6.1
+                },
+                {
+                  "p": 6435,
+                  "fv": 5.5,
+                  "a": 9.4
+                },
+                {
+                  "p": 2061,
+                  "fv": 6.5,
+                  "a": 7.8
+                },
+                {
+                  "p": 531,
+                  "fv": 4.5,
+                  "a": 7.1
+                }
+              ],
+              "scoperti": [
+                2528
+              ]
+            }
+          },
+          "ideale": 70.5,
+          "attesoSchierata": 72.59,
+          "attesoConsigliata": 73.29,
+          "inComune": 7
+        },
+        {
+          "squadra": "Real Pattagghiu",
+          "schierata": 76,
+          "consigliata": 97,
+          "formazioni": {
+            "schierata": {
+              "punti": [
+                {
+                  "p": 6482,
+                  "fv": 4,
+                  "a": 5.9
+                },
+                {
+                  "p": 4734,
+                  "fv": 8,
+                  "a": 5.8
+                },
+                {
+                  "p": 6217,
+                  "fv": 5.5,
+                  "a": 5.9
+                },
+                {
+                  "p": 4159,
+                  "fv": 6,
+                  "a": 5.3
+                },
+                {
+                  "p": 256,
+                  "fv": 6,
+                  "a": 5.5
+                },
+                {
+                  "p": 5750,
+                  "fv": 6.5,
+                  "a": 6.1
+                },
+                {
+                  "p": 6398,
+                  "fv": 12,
+                  "a": 7.9
+                },
+                {
+                  "p": 5559,
+                  "fv": 6.5,
+                  "a": 7.1
+                },
+                {
+                  "p": 6206,
+                  "fv": 5.5,
+                  "a": 5.5
+                },
+                {
+                  "p": 7523,
+                  "fv": 10,
+                  "a": 9
+                },
+                {
+                  "p": 5734,
+                  "fv": 6,
+                  "a": 7.3
+                }
+              ],
+              "scoperti": []
+            },
+            "consigliata": {
+              "punti": [
+                {
+                  "p": 6482,
+                  "fv": 4,
+                  "a": 5.9
+                },
+                {
+                  "p": 5831,
+                  "fv": 5.5,
+                  "a": 6.4
+                },
+                {
+                  "p": 5750,
+                  "fv": 6.5,
+                  "a": 6.1
+                },
+                {
+                  "p": 6217,
+                  "fv": 5.5,
+                  "a": 5.9
+                },
+                {
+                  "p": 6398,
+                  "fv": 12,
+                  "a": 7.9
+                },
+                {
+                  "p": 5559,
+                  "fv": 6.5,
+                  "a": 7.1
+                },
+                {
+                  "p": 6833,
+                  "fv": 18,
+                  "a": 6.9
+                },
+                {
+                  "p": 5823,
+                  "fv": 11.5,
+                  "a": 6.5
+                },
+                {
+                  "p": 7523,
+                  "fv": 10,
+                  "a": 9
+                },
+                {
+                  "p": 5734,
+                  "fv": 6,
+                  "a": 7.3
+                },
+                {
+                  "p": 5995,
+                  "fv": 11.5,
+                  "a": 6.7
+                }
+              ],
+              "scoperti": []
+            }
+          },
+          "ideale": 100.5,
+          "attesoSchierata": 71.3,
+          "attesoConsigliata": 75.72,
+          "inComune": 7
+        },
+        {
+          "squadra": "Ultimo",
+          "schierata": 66,
+          "consigliata": 70.5,
+          "formazioni": {
+            "schierata": {
+              "punti": [
+                {
+                  "p": 610,
+                  "fv": 5,
+                  "a": 5.1
+                },
+                {
+                  "p": 7181,
+                  "fv": 6,
+                  "a": 5.6
+                },
+                {
+                  "p": 5739,
+                  "fv": 5,
+                  "a": 5.9
+                },
+                {
+                  "p": 6042,
+                  "fv": 5.5,
+                  "a": 5.9
+                },
+                {
+                  "p": 6684,
+                  "fv": 6,
+                  "a": 6.4
+                },
+                {
+                  "p": 2194,
+                  "fv": 6.5,
+                  "a": 6.2
+                },
+                {
+                  "p": 7203,
+                  "fv": 5.5,
+                  "a": 6.5
+                },
+                {
+                  "p": 5792,
+                  "fv": 5,
+                  "a": 6.8
+                },
+                {
+                  "p": 152,
+                  "fv": 6,
+                  "a": 7.4
+                },
+                {
+                  "p": 4463,
+                  "fv": 10,
+                  "a": 6.8
+                },
+                {
+                  "p": 6669,
+                  "fv": 5.5,
+                  "a": 7.1
+                }
+              ],
+              "scoperti": []
+            },
+            "consigliata": {
+              "punti": [
+                {
+                  "p": 610,
+                  "fv": 5,
+                  "a": 5.1
+                },
+                {
+                  "p": 2816,
+                  "fv": 7,
+                  "a": 6.1
+                },
+                {
+                  "p": 554,
+                  "fv": 5.5,
+                  "a": 6
+                },
+                {
+                  "p": 6989,
+                  "fv": 4.5,
+                  "a": 6
+                },
+                {
+                  "p": 152,
+                  "fv": 6,
+                  "a": 7.4
+                },
+                {
+                  "p": 5792,
+                  "fv": 5,
+                  "a": 6.8
+                },
+                {
+                  "p": 5422,
+                  "fv": 11.5,
+                  "a": 6.8
+                },
+                {
+                  "p": 6151,
+                  "fv": 5,
+                  "a": 6.7
+                },
+                {
+                  "p": 6669,
+                  "fv": 5.5,
+                  "a": 7.1
+                },
+                {
+                  "p": 4463,
+                  "fv": 10,
+                  "a": 6.8
+                },
+                {
+                  "p": 6904,
+                  "fv": 5.5,
+                  "al": 6215,
+                  "a": 5.4
+                }
+              ],
+              "scoperti": []
+            }
+          },
+          "ideale": 75,
+          "attesoSchierata": 69.79,
+          "attesoConsigliata": 70.43,
+          "inComune": 5
+        },
+        {
+          "squadra": "SM Frattese",
+          "schierata": 77.5,
+          "consigliata": 80,
+          "formazioni": {
+            "schierata": {
+              "punti": [
+                {
+                  "p": 4964,
+                  "fv": 4,
+                  "a": 4.9
+                },
+                {
+                  "p": 6869,
+                  "fv": 9.5,
+                  "a": 6.5
+                },
+                {
+                  "p": 5022,
+                  "fv": 5.5,
+                  "a": 6.2
+                },
+                {
+                  "p": 2788,
+                  "fv": 5,
+                  "a": 6.3
+                },
+                {
+                  "p": 6531,
+                  "fv": 7.5,
+                  "a": 6.9
+                },
+                {
+                  "p": 632,
+                  "fv": 9.5,
+                  "a": 7.5
+                },
+                {
+                  "p": 2517,
+                  "fv": 10,
+                  "a": 5.9
+                },
+                {
+                  "p": 7556,
+                  "fv": 10.5,
+                  "a": 5.8
+                },
+                {
+                  "p": 5951,
+                  "fv": 5,
+                  "a": 7.1
+                },
+                {
+                  "p": 7071,
+                  "fv": 6,
+                  "a": 5.7
+                },
+                {
+                  "p": 6397,
+                  "fv": 5,
+                  "a": 6.9
+                }
+              ],
+              "scoperti": []
+            },
+            "consigliata": {
+              "punti": [
+                {
+                  "p": 6344,
+                  "fv": 6,
+                  "a": 5.1
+                },
+                {
+                  "p": 6531,
+                  "fv": 7.5,
+                  "a": 6.9
+                },
+                {
+                  "p": 6869,
+                  "fv": 9.5,
+                  "a": 6.5
+                },
+                {
+                  "p": 2788,
+                  "fv": 5,
+                  "a": 6.3
+                },
+                {
+                  "p": 632,
+                  "fv": 9.5,
+                  "a": 7.5
+                },
+                {
+                  "p": 7436,
+                  "fv": 6,
+                  "a": 6.7
+                },
+                {
+                  "p": 2517,
+                  "fv": 10,
+                  "a": 5.9
+                },
+                {
+                  "p": 7556,
+                  "fv": 10.5,
+                  "a": 5.8
+                },
+                {
+                  "p": 5951,
+                  "fv": 5,
+                  "a": 7.1
+                },
+                {
+                  "p": 6397,
+                  "fv": 5,
+                  "a": 6.9
+                },
+                {
+                  "p": 7071,
+                  "fv": 6,
+                  "a": 5.7
+                }
+              ],
+              "scoperti": []
+            }
+          },
+          "ideale": 82,
+          "attesoSchierata": 69.74,
+          "attesoConsigliata": 70.44,
+          "inComune": 9
+        },
+        {
+          "squadra": "Cusiana",
+          "schierata": 62.5,
+          "consigliata": 67,
+          "formazioni": {
+            "schierata": {
+              "punti": [
+                {
+                  "p": 4431,
+                  "fv": 4,
+                  "al": 6966,
+                  "a": 4.6
+                },
+                {
+                  "p": 5862,
+                  "fv": 6,
+                  "a": 5.2
+                },
+                {
+                  "p": 5555,
+                  "fv": 5.5,
+                  "a": 5.7
+                },
+                {
+                  "p": 4976,
+                  "fv": 4.5,
+                  "a": 6
+                },
+                {
+                  "p": 4911,
+                  "fv": 5,
+                  "a": 7.2
+                },
+                {
+                  "p": 4973,
+                  "fv": 5.5,
+                  "a": 6.9
+                },
+                {
+                  "p": 5131,
+                  "fv": 6.5,
+                  "al": 6677,
+                  "a": 5.8
+                },
+                {
+                  "p": 5844,
+                  "fv": 4,
+                  "al": 4287,
+                  "a": 6.9
+                },
+                {
+                  "p": 6752,
+                  "fv": 5.5,
+                  "a": 5.7
+                },
+                {
+                  "p": 7374,
+                  "fv": 6,
+                  "a": 5.6
+                },
+                {
+                  "p": 5585,
+                  "fv": 10,
+                  "a": 5.9
+                }
+              ],
+              "scoperti": []
+            },
+            "consigliata": {
+              "punti": [
+                {
+                  "p": 133,
+                  "fv": 4.5,
+                  "a": 4.8
+                },
+                {
+                  "p": 2296,
+                  "fv": 5.5,
+                  "a": 6.2
+                },
+                {
+                  "p": 4976,
+                  "fv": 4.5,
+                  "a": 6
+                },
+                {
+                  "p": 6047,
+                  "fv": 9.5,
+                  "a": 5.9
+                },
+                {
+                  "p": 4911,
+                  "fv": 5,
+                  "a": 7.2
+                },
+                {
+                  "p": 4973,
+                  "fv": 5.5,
+                  "a": 6.9
+                },
+                {
+                  "p": 5844,
+                  "fv": 4,
+                  "a": 6.9
+                },
+                {
+                  "p": 5131,
+                  "fv": 6.5,
+                  "al": 4287,
+                  "a": 5.8
+                },
+                {
+                  "p": 7600,
+                  "fv": 6.5,
+                  "a": 7.4
+                },
+                {
+                  "p": 5585,
+                  "fv": 10,
+                  "a": 5.9
+                },
+                {
+                  "p": 2832,
+                  "fv": 5.5,
+                  "a": 5.9
+                }
+              ],
+              "scoperti": []
+            }
+          },
+          "ideale": 71.5,
+          "attesoSchierata": 64.91,
+          "attesoConsigliata": 69.4,
+          "inComune": 5
+        },
+        {
+          "squadra": "Shakhtar Donuts",
+          "schierata": 76.5,
+          "consigliata": 79,
+          "formazioni": {
+            "schierata": {
+              "punti": [
+                {
+                  "p": 2521,
+                  "fv": 4.5,
+                  "a": 4.5
+                },
+                {
+                  "p": 6664,
+                  "fv": 6.5,
+                  "a": 5.5
+                },
+                {
+                  "p": 7599,
+                  "fv": 11.5,
+                  "a": 7
+                },
+                {
+                  "p": 5620,
+                  "fv": 6.5,
+                  "a": 7.2
+                },
+                {
+                  "p": 6727,
+                  "fv": 7.5,
+                  "a": 6.1
+                },
+                {
+                  "p": 1870,
+                  "fv": 5.5,
+                  "a": 5.7
+                },
+                {
+                  "p": 6274,
+                  "fv": 6,
+                  "a": 6.7
+                },
+                {
+                  "p": 7551,
+                  "fv": 8,
+                  "a": 8
+                },
+                {
+                  "p": 7472,
+                  "fv": 10.5,
+                  "a": 8.6
+                },
+                {
+                  "p": 5637,
+                  "fv": 5.5,
+                  "a": 6.4
+                },
+                {
+                  "p": 7023,
+                  "fv": 4.5,
+                  "a": 6.2
+                }
+              ],
+              "scoperti": []
+            },
+            "consigliata": {
+              "punti": [
+                {
+                  "p": 2521,
+                  "fv": 4.5,
+                  "a": 4.5
+                },
+                {
+                  "p": 5620,
+                  "fv": 6.5,
+                  "a": 7.2
+                },
+                {
+                  "p": 7599,
+                  "fv": 11.5,
+                  "a": 7
+                },
+                {
+                  "p": 6727,
+                  "fv": 7.5,
+                  "a": 6.1
+                },
+                {
+                  "p": 7472,
+                  "fv": 10.5,
+                  "a": 8.6
+                },
+                {
+                  "p": 7551,
+                  "fv": 8,
+                  "a": 8
+                },
+                {
+                  "p": 6274,
+                  "fv": 6,
+                  "a": 6.7
+                },
+                {
+                  "p": 7311,
+                  "fv": 5.5,
+                  "a": 6.1
+                },
+                {
+                  "p": 4871,
+                  "fv": 6.5,
+                  "a": 8.3
+                },
+                {
+                  "p": 6572,
+                  "fv": 5.5,
+                  "a": 7.7
+                },
+                {
+                  "p": 7546,
+                  "fv": 7,
+                  "a": 7
+                }
+              ],
+              "scoperti": []
+            }
+          },
+          "ideale": 86,
+          "attesoSchierata": 71.97,
+          "attesoConsigliata": 77.16,
+          "inComune": 7
+        },
+        {
+          "squadra": "Partizan Tirana",
+          "schierata": 81.5,
+          "consigliata": 81.5,
+          "formazioni": {
+            "schierata": {
+              "punti": [
+                {
+                  "p": 2814,
+                  "fv": 7,
+                  "a": 4.8
+                },
+                {
+                  "p": 254,
+                  "fv": 5.5,
+                  "a": 6
+                },
+                {
+                  "p": 4994,
+                  "fv": 6,
+                  "a": 5.1
+                },
+                {
+                  "p": 184,
+                  "fv": 6,
+                  "a": 7.9
+                },
+                {
+                  "p": 7314,
+                  "fv": 11,
+                  "a": 7.4
+                },
+                {
+                  "p": 536,
+                  "fv": 11,
+                  "a": 7
+                },
+                {
+                  "p": 6875,
+                  "fv": 11.5,
+                  "a": 7.7
+                },
+                {
+                  "p": 7347,
+                  "fv": 5.5,
+                  "al": 4923,
+                  "a": 5.5
+                },
+                {
+                  "p": 5436,
+                  "fv": 10,
+                  "a": 7.8
+                },
+                {
+                  "p": 7120,
+                  "fv": 8,
+                  "a": 7.1
+                }
+              ],
+              "scoperti": [
+                4807
+              ]
+            },
+            "consigliata": {
+              "punti": [
+                {
+                  "p": 2814,
+                  "fv": 7,
+                  "a": 4.8
+                },
+                {
+                  "p": 254,
+                  "fv": 5.5,
+                  "a": 6
+                },
+                {
+                  "p": 4994,
+                  "fv": 6,
+                  "a": 5.1
+                },
+                {
+                  "p": 184,
+                  "fv": 6,
+                  "a": 7.9
+                },
+                {
+                  "p": 6875,
+                  "fv": 11.5,
+                  "a": 7.7
+                },
+                {
+                  "p": 7314,
+                  "fv": 11,
+                  "a": 7.4
+                },
+                {
+                  "p": 536,
+                  "fv": 11,
+                  "a": 7
+                },
+                {
+                  "p": 5436,
+                  "fv": 10,
+                  "a": 7.8
+                },
+                {
+                  "p": 7120,
+                  "fv": 8,
+                  "a": 7.1
+                },
+                {
+                  "p": 7347,
+                  "fv": 5.5,
+                  "al": 4923,
+                  "a": 5.5
+                }
+              ],
+              "scoperti": [
+                4807
+              ]
+            }
+          },
+          "ideale": null,
+          "attesoSchierata": 72.23,
+          "attesoConsigliata": 72.23,
+          "inComune": 11
+        },
+        {
+          "squadra": "Real Ichnusa",
+          "schierata": 67.5,
+          "consigliata": 69,
+          "formazioni": {
+            "schierata": {
+              "punti": [
+                {
+                  "p": 4312,
+                  "fv": 2,
+                  "a": 5.2
+                },
+                {
+                  "p": 4998,
+                  "fv": 7.5,
+                  "a": 6.4
+                },
+                {
+                  "p": 7485,
+                  "fv": 5,
+                  "a": 6
+                },
+                {
+                  "p": 5877,
+                  "fv": 6.5,
+                  "a": 6.9
+                },
+                {
+                  "p": 4777,
+                  "fv": 6.5,
+                  "a": 7.7
+                },
+                {
+                  "p": 2848,
+                  "fv": 3,
+                  "a": 6.6
+                },
+                {
+                  "p": 7078,
+                  "fv": 6.5,
+                  "a": 6.5
+                },
+                {
+                  "p": 2423,
+                  "fv": 5,
+                  "a": 6.1
+                },
+                {
+                  "p": 7017,
+                  "fv": 5.5,
+                  "a": 8.5
+                },
+                {
+                  "p": 6204,
+                  "fv": 10,
+                  "a": 6.9
+                },
+                {
+                  "p": 6646,
+                  "fv": 10,
+                  "a": 7.2
+                }
+              ],
+              "scoperti": []
+            },
+            "consigliata": {
+              "punti": [
+                {
+                  "p": 4312,
+                  "fv": 2,
+                  "a": 5.2
+                },
+                {
+                  "p": 5877,
+                  "fv": 6.5,
+                  "a": 6.9
+                },
+                {
+                  "p": 4998,
+                  "fv": 7.5,
+                  "a": 6.4
+                },
+                {
+                  "p": 7485,
+                  "fv": 5,
+                  "a": 6
+                },
+                {
+                  "p": 4777,
+                  "fv": 6.5,
+                  "a": 7.7
+                },
+                {
+                  "p": 2848,
+                  "fv": 3,
+                  "a": 6.6
+                },
+                {
+                  "p": 7078,
+                  "fv": 6.5,
+                  "a": 6.5
+                },
+                {
+                  "p": 5791,
+                  "fv": 6.5,
+                  "a": 6.4
+                },
+                {
+                  "p": 7017,
+                  "fv": 5.5,
+                  "a": 8.5
+                },
+                {
+                  "p": 6646,
+                  "fv": 10,
+                  "a": 7.2
+                },
+                {
+                  "p": 6204,
+                  "fv": 10,
+                  "a": 6.9
+                }
+              ],
+              "scoperti": []
+            }
+          },
+          "ideale": 77.5,
+          "attesoSchierata": 74.07,
+          "attesoConsigliata": 74.33,
+          "inComune": 10
+        }
+      ],
+      "modello": {
+        "resa": {
+          "tutti": {
+            "voti": 142,
+            "erroreMedio": 1.53,
+            "distorsione": 0.11
+          },
+          "P": {
+            "voti": 12,
+            "erroreMedio": 1.54,
+            "distorsione": 0.05
+          },
+          "D": {
+            "voti": 50,
+            "erroreMedio": 0.83,
+            "distorsione": 0.03
+          },
+          "C": {
+            "voti": 47,
+            "erroreMedio": 2.07,
+            "distorsione": 0.37
+          },
+          "A": {
+            "voti": 33,
+            "erroreMedio": 1.82,
+            "distorsione": -0.14
+          }
+        },
+        "gioca": {
+          "giocatori": 200,
+          "brier": 0.059,
+          "attesiInCampo": 139.1,
+          "inCampo": 142
         }
       }
     }

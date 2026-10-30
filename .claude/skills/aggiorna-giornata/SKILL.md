@@ -145,6 +145,12 @@ Miglior 11 possibile **da tutta la rosa** (titolari + panchina), scegliendo anch
 modulo migliore fra `3-4-3 3-5-2 4-3-3 4-4-2 4-5-1 5-3-2 5-4-1`. Solo i giocatori con un
 voto sono selezionabili.
 
+**Uno slot che non si riesce a riempire vale 0**, e il modulo resta valido. Capita quando
+una squadra manda una panchina corta e un ruolo resta scoperto: alla giornata 5 il
+PARTIZAN TIRANA aveva un solo portiere e due difensori col voto, e nessun modulo chiede
+meno di tre difensori. È la stessa cosa che fa la lega col punteggio reale — il titolare
+senza voto che non ha un cambio di ruolo in panchina conta zero, non viene saltato.
+
 **Nel JSON va senza fattore campo.** Il `+1` di casa lo aggiunge `script.js` quando
 calcola gol e punti persi (vedi `BONUS_CASA.md`). Sommarlo qui lo conterebbe due volte.
 
@@ -192,8 +198,37 @@ L'unico caso in cui ha senso forzare è un recupero vero — una partita rinviat
 dopo le giornate successive. Lì si passa `--forza`, e si controlla a mano che le rose
 siano rimaste giuste.
 
-Se un `pid` non è in `players`, lo script si ferma: è un acquisto nuovo e va aggiunto
-leggendo la pagina Rose della lega, dove ogni riga ha il `pid` come attributo `data-id`.
+### Gli acquisti di mercato
+
+Se un `pid` schierato non è in `players`, `calcola-giornata.mjs` si ferma ed elenca i pid
+con la squadra in cui sono comparsi. Vale per **tutti** gli schierati, non solo per chi ha
+preso il voto: il ruolo serve all'ideale, ma il nome serve alla rosa, e un acquisto che
+alla sua prima giornata resta in panchina senza giocare entra comunque in `rosterHistory`.
+Prima il controllo guardava solo chi aveva un voto, e alla giornata 5 Samardzic è passato
+liscio: sul sito sarebbe rimasta una riga senza nome.
+
+L'anagrafica **non è nell'API**: `/gaming/v1/teamLineup` dà solo `pid, scr, cscr, ptype, b`.
+Sta nella pagina Rose, che il server manda già scritta, e si prende da lì:
+
+```bash
+# 1. apri la pagina Rose della lega e incolla preleva-rose.js
+#    mettendo in PID quelli che lo script ha segnalato. Stampa
+#    { "<pid>": { name, role, serieA } }, da salvare in un file.
+# 2. unisci al dizionario:
+node .claude/skills/aggiorna-giornata/aggiungi-giocatori.mjs <nuovi.json> [--dry-run]
+```
+
+Nome e squadra si leggono dall'href del giocatore (`/squadre/<squadra>/<nome>/<pid>`), che
+usa già la convenzione del dizionario, abbreviazioni comprese (`Paz N.`); il ruolo sta in
+`data-roles`. Il testo della cella no: è minuscolo, con il maiuscolo messo dal CSS.
+
+`aggiungi-giocatori.mjs` aggiunge solo i pid che mancano, quindi lo stesso file si può
+ripassare senza fare danni. Se un pid c'è già con dati diversi lo segnala e **non lo
+tocca**: un trasferimento di gennaio è vero, ma riscriverlo cambierebbe anche le rose delle
+giornate già pubblicate, e quella è una scelta da fare a mano.
+
+Lo snapshot delle rose resta comunque ricavato dalle **formazioni**, non dalla pagina Rose:
+la pagina dice com'è la rosa *oggi*, e non servirebbe per ricostruire le giornate passate.
 
 ## Commenti Caressa / Bergomi
 
@@ -216,7 +251,7 @@ Cita solo numeri che hai davvero letto. Un voto inventato è indistinguibile da 
 |---|---|
 | `manca la variabile d'ambiente FANTA_TOKEN` | token non passato, o scaduto (dura un anno) |
 | `ATTENZIONE, decodifica eventi non pulita` | evento nuovo non in `EVENTI`: va aggiunto il peso |
-| `pid non presenti nel dizionario "players"` | acquisto nuovo: aggiorna `players` dalla pagina Rose |
+| `pid non presenti nel dizionario "players"` | acquisto nuovo: `preleva-rose.js` + `aggiungi-giocatori.mjs` |
 | `squadra "X" non presente fra le squadre` | nome che non esiste nella stagione, o squadra fuori competizione |
 | `i gol non coincidono` | `roundSerieA` sbagliato: hai scaricato un'altra giornata |
 | `la giornata N esiste già` | rimuovila dal JSON prima di reinserirla |

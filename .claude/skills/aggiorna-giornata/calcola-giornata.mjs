@@ -33,9 +33,10 @@ function round1(value) {
     return Math.round(value * 10) / 10;
 }
 
-// Somma dei migliori `count` punteggi; null se i giocatori non bastano
+// Somma dei migliori `count` punteggi. Gli slot che non si riescono a riempire
+// valgono 0, come fa la lega col titolare senza voto che non ha un cambio di
+// ruolo in panchina: il modulo resta schierabile, solo più povero.
 function topN(scores, count) {
-    if (scores.length < count) return null;
     return scores.slice(0, count).reduce((sum, score) => sum + score, 0);
 }
 
@@ -51,14 +52,10 @@ export function calcolaIdeale(voti) {
 
     let best = null;
     for (const [d, c, a] of MODULI) {
-        const parti = [topN(perRuolo.D, d), topN(perRuolo.C, c), topN(perRuolo.A, a)];
-        if (parti.some(p => p === null)) continue; // modulo non schierabile
-
-        const score = perRuolo.P[0] + parti[0] + parti[1] + parti[2];
+        const score = perRuolo.P[0] + topN(perRuolo.D, d) + topN(perRuolo.C, c) + topN(perRuolo.A, a);
         if (!best || score > best.score) best = { score: round1(score), modulo: `${d}-${c}-${a}` };
     }
 
-    if (!best) return { score: null, modulo: null, motivo: 'nessun modulo schierabile' };
     return best;
 }
 
@@ -69,24 +66,45 @@ export function golDaPunteggio(score) {
 }
 
 // Prende i voti utili al calcolo ideale, con il ruolo dal dizionario giocatori
-function votiConRuolo(lineup, players, contesto) {
-    const sconosciuti = [];
+// L'anagrafica di tutti gli schierati è già stata verificata da
+// verificaAnagrafica: qui il dizionario si può dare per buono.
+function votiConRuolo(lineup, players) {
     const voti = [];
-
     for (const g of lineup) {
         if (g.b === undefined) continue; // senza voto: non selezionabile
-        const anagrafica = players[g.p];
-        if (!anagrafica) { sconosciuti.push(g.p); continue; }
-        voti.push({ role: anagrafica.role, score: g.b });
-    }
-
-    if (sconosciuti.length > 0) {
-        fail(
-            `${contesto}: pid non presenti nel dizionario "players": ${sconosciuti.join(', ')}\n` +
-            `  Sono acquisti nuovi: riallinea "players" dalla pagina Rose prima di rilanciare.`
-        );
+        voti.push({ role: players[g.p].role, score: g.b });
     }
     return voti;
+}
+
+// Il ruolo serve solo per l'ideale, e per un po' è bastato controllare chi
+// avesse preso il voto. Ma il *nome* serve a tutta la rosa: un acquisto che
+// alla sua prima giornata non gioca entra comunque in `rosterHistory`, e sul
+// sito diventa una riga senza nome. Quindi si controlla OGNI giocatore
+// schierato, col voto o senza. È il mercato: succede a ogni finestra.
+function verificaAnagrafica(matches, players) {
+    const mancanti = new Map(); // pid -> squadre in cui è comparso
+
+    for (const match of matches) {
+        if (!match.lineups) continue;
+        for (const [lato, team] of [['home', match.homeTeam], ['away', match.awayTeam]]) {
+            for (const g of match.lineups[lato] || []) {
+                if (players[g.p]) continue;
+                if (!mancanti.has(g.p)) mancanti.set(g.p, new Set());
+                mancanti.get(g.p).add(team);
+            }
+        }
+    }
+
+    if (mancanti.size === 0) return;
+
+    const righe = [...mancanti].map(([pid, squadre]) => `    ${pid} (${[...squadre].join(', ')})`);
+    fail(
+        `pid non presenti nel dizionario "players":\n${righe.join('\n')}\n` +
+        `  Sono acquisti nuovi. Si prendono dalla pagina Rose della lega:\n` +
+        `  incolla preleva-rose.js nel browser con questi pid, salva l'uscita\n` +
+        `  e passala a aggiungi-giocatori.mjs, poi rilancia.`
+    );
 }
 
 // La lega scrive certi nomi tutti maiuscoli ("PARTIZAN TIRANA"): senza
@@ -114,8 +132,8 @@ function elaboraMatch(match, players, teams, index) {
 
     let moduli = null;
     if (match.lineups) {
-        const casa = calcolaIdeale(votiConRuolo(match.lineups.home, players, `match ${index + 1} casa`));
-        const fuori = calcolaIdeale(votiConRuolo(match.lineups.away, players, `match ${index + 1} trasferta`));
+        const casa = calcolaIdeale(votiConRuolo(match.lineups.home, players));
+        const fuori = calcolaIdeale(votiConRuolo(match.lineups.away, players));
 
         if (casa.score === null) fail(`match ${index + 1} (${match.homeTeam}): ${casa.motivo}`);
         if (fuori.score === null) fail(`match ${index + 1} (${match.awayTeam}): ${fuori.motivo}`);
@@ -232,6 +250,8 @@ function main() {
 `
             + `Se e' un recupero fuori ordine e sai quello che fai, rilancia con --forza.`);
     }
+
+    verificaAnagrafica(input.matches, data.players || {});
 
     const elaborati = input.matches.map((m, i) => elaboraMatch(m, data.players || {}, data.teams, i));
     const matches = elaborati.map(e => e.risultato);
