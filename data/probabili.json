@@ -1,29 +1,21 @@
 {
-  "aggiornato": "2026-10-29T21:40:27.168Z",
+  "aggiornato": "2026-10-30T13:55:26.448Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
-    "numero": 9,
+    "numero": 10,
     "partite": [
       {
-        "casa": "Sassuolo",
-        "fuori": "Lazio",
+        "casa": "Bologna",
+        "fuori": "Monza",
         "data": null,
         "giocata": false,
         "golCasa": null,
         "golFuori": null
       },
       {
-        "casa": "Roma",
-        "fuori": "Cagliari",
-        "data": null,
-        "giocata": false,
-        "golCasa": null,
-        "golFuori": null
-      },
-      {
-        "casa": "Torino",
-        "fuori": "Como",
+        "casa": "Udinese",
+        "fuori": "Roma",
         "data": null,
         "giocata": false,
         "golCasa": null,
@@ -31,22 +23,6 @@
       },
       {
         "casa": "Milan",
-        "fuori": "Bologna",
-        "data": null,
-        "giocata": false,
-        "golCasa": null,
-        "golFuori": null
-      },
-      {
-        "casa": "Parma",
-        "fuori": "Udinese",
-        "data": null,
-        "giocata": false,
-        "golCasa": null,
-        "golFuori": null
-      },
-      {
-        "casa": "Venezia",
         "fuori": "Inter",
         "data": null,
         "giocata": false,
@@ -54,16 +30,8 @@
         "golFuori": null
       },
       {
-        "casa": "Genoa",
-        "fuori": "Juventus",
-        "data": null,
-        "giocata": false,
-        "golCasa": null,
-        "golFuori": null
-      },
-      {
-        "casa": "Monza",
-        "fuori": "Napoli",
+        "casa": "Como",
+        "fuori": "Venezia",
         "data": null,
         "giocata": false,
         "golCasa": null,
@@ -71,15 +39,47 @@
       },
       {
         "casa": "Frosinone",
-        "fuori": "Lecce",
+        "fuori": "Torino",
         "data": null,
         "giocata": false,
         "golCasa": null,
         "golFuori": null
       },
       {
-        "casa": "Fiorentina",
-        "fuori": "Atalanta",
+        "casa": "Lazio",
+        "fuori": "Cagliari",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Lecce",
+        "fuori": "Genoa",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Juventus",
+        "fuori": "Napoli",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Sassuolo",
+        "fuori": "Fiorentina",
+        "data": null,
+        "giocata": false,
+        "golCasa": null,
+        "golFuori": null
+      },
+      {
+        "casa": "Atalanta",
+        "fuori": "Parma",
         "data": null,
         "giocata": false,
         "golCasa": null,
@@ -105,50 +105,85 @@
     "Sassuolo": 15,
     "Monza": 16,
     "Udinese": 17,
-    "Parma": 18,
-    "Fiorentina": 19,
+    "Fiorentina": 18,
+    "Parma": 19,
     "Venezia": 20
   },
   "formaSerieA": {
-    "Genoa": {
-      "punti": 6,
+    "Frosinone": {
+      "punti": 7,
       "partite": 3,
-      "esiti": "VPV"
+      "esiti": "VNV"
     },
-    "Fiorentina": {
+    "Sassuolo": {
       "punti": 0,
       "partite": 3,
       "esiti": "PPP"
+    },
+    "Venezia": {
+      "punti": 3,
+      "partite": 3,
+      "esiti": "VPP"
+    },
+    "Napoli": {
+      "punti": 4,
+      "partite": 3,
+      "esiti": "PNV"
+    },
+    "Bologna": {
+      "punti": 6,
+      "partite": 3,
+      "esiti": "PVV"
     },
     "Inter": {
       "punti": 9,
       "partite": 3,
       "esiti": "VVV"
     },
-    "Parma": {
-      "punti": 0,
-      "partite": 3,
-      "esiti": "PPP"
-    },
-    "Napoli": {
-      "punti": 4,
-      "partite": 3,
-      "esiti": "VPN"
-    },
-    "Frosinone": {
-      "punti": 4,
-      "partite": 3,
-      "esiti": "PVN"
-    },
-    "Como": {
+    "Roma": {
       "punti": 7,
       "partite": 3,
-      "esiti": "NVV"
+      "esiti": "VNV"
     },
-    "Roma": {
-      "punti": 5,
+    "Genoa": {
+      "punti": 6,
       "partite": 3,
-      "esiti": "NVN"
+      "esiti": "PVV"
+    },
+    "Udinese": {
+      "punti": 1,
+      "partite": 3,
+      "esiti": "PPN"
+    },
+    "Lecce": {
+      "punti": 3,
+      "partite": 3,
+      "esiti": "VPP"
+    },
+    "Fiorentina": {
+      "punti": 1,
+      "partite": 3,
+      "esiti": "PPN"
+    },
+    "Como": {
+      "punti": 9,
+      "partite": 3,
+      "esiti": "VVV"
+    },
+    "Milan": {
+      "punti": 6,
+      "partite": 3,
+      "esiti": "VVP"
+    },
+    "Atalanta": {
+      "punti": 2,
+      "partite": 3,
+      "esiti": "PNN"
+    },
+    "Juventus": {
+      "punti": 3,
+      "partite": 3,
+      "esiti": "PVP"
     },
     "Lazio": {
       "punti": 9,
@@ -158,57 +193,22 @@
     "Monza": {
       "punti": 3,
       "partite": 3,
-      "esiti": "PVP"
-    },
-    "Lecce": {
-      "punti": 3,
-      "partite": 3,
-      "esiti": "PVP"
-    },
-    "Bologna": {
-      "punti": 6,
-      "partite": 3,
-      "esiti": "VPV"
-    },
-    "Sassuolo": {
-      "punti": 1,
-      "partite": 3,
-      "esiti": "NPP"
-    },
-    "Milan": {
-      "punti": 7,
-      "partite": 3,
-      "esiti": "NVV"
+      "esiti": "VPP"
     },
     "Cagliari": {
-      "punti": 1,
-      "partite": 3,
-      "esiti": "NPP"
-    },
-    "Juventus": {
-      "punti": 4,
-      "partite": 3,
-      "esiti": "NPV"
-    },
-    "Atalanta": {
-      "punti": 4,
-      "partite": 3,
-      "esiti": "VPN"
-    },
-    "Venezia": {
-      "punti": 3,
-      "partite": 3,
-      "esiti": "PVP"
-    },
-    "Torino": {
-      "punti": 9,
-      "partite": 3,
-      "esiti": "VVV"
-    },
-    "Udinese": {
       "punti": 0,
       "partite": 3,
       "esiti": "PPP"
+    },
+    "Parma": {
+      "punti": 1,
+      "partite": 3,
+      "esiti": "PPN"
+    },
+    "Torino": {
+      "punti": 6,
+      "partite": 3,
+      "esiti": "VVP"
     }
   },
   "calendarioSquadre": {
@@ -217,12 +217,12 @@
         "data": "2026-10-31T19:45Z",
         "avversario": "Milan",
         "esiti": {
-          "vittoria": 0.474,
-          "pareggio": 0.253,
-          "sconfitta": 0.272,
+          "vittoria": 0.473,
+          "pareggio": 0.26,
+          "sconfitta": 0.267,
           "quote": {
-            "casa": 3.4,
-            "pareggio": 3.65,
+            "casa": 3.45,
+            "pareggio": 3.55,
             "fuori": 1.95,
             "fonte": "DraftKings"
           }
@@ -247,11 +247,11 @@
         "data": "2026-11-01T14:00Z",
         "avversario": "Cagliari",
         "esiti": {
-          "vittoria": 0.644,
-          "pareggio": 0.214,
+          "vittoria": 0.642,
+          "pareggio": 0.215,
           "sconfitta": 0.142,
           "quote": {
-            "casa": 1.43,
+            "casa": 1.44,
             "pareggio": 4.3,
             "fuori": 6.5,
             "fonte": "DraftKings"
@@ -337,12 +337,12 @@
         "data": "2026-10-31T19:45Z",
         "avversario": "Inter",
         "esiti": {
-          "vittoria": 0.272,
-          "pareggio": 0.253,
-          "sconfitta": 0.474,
+          "vittoria": 0.267,
+          "pareggio": 0.26,
+          "sconfitta": 0.473,
           "quote": {
-            "casa": 3.4,
-            "pareggio": 3.65,
+            "casa": 3.45,
+            "pareggio": 3.55,
             "fuori": 1.95,
             "fonte": "DraftKings"
           }
@@ -397,13 +397,13 @@
         "data": "2026-11-01T19:45Z",
         "avversario": "Juventus",
         "esiti": {
-          "vittoria": 0.3,
-          "pareggio": 0.286,
+          "vittoria": 0.295,
+          "pareggio": 0.291,
           "sconfitta": 0.414,
           "quote": {
             "casa": 2.25,
-            "pareggio": 3.25,
-            "fuori": 3.1,
+            "pareggio": 3.2,
+            "fuori": 3.15,
             "fonte": "DraftKings"
           }
         }
@@ -428,12 +428,12 @@
         "avversario": "Napoli",
         "esiti": {
           "vittoria": 0.414,
-          "pareggio": 0.286,
-          "sconfitta": 0.3,
+          "pareggio": 0.291,
+          "sconfitta": 0.295,
           "quote": {
             "casa": 2.25,
-            "pareggio": 3.25,
-            "fuori": 3.1,
+            "pareggio": 3.2,
+            "fuori": 3.15,
             "fonte": "DraftKings"
           }
         }
@@ -488,10 +488,10 @@
         "avversario": "Lazio",
         "esiti": {
           "vittoria": 0.142,
-          "pareggio": 0.214,
-          "sconfitta": 0.644,
+          "pareggio": 0.215,
+          "sconfitta": 0.642,
           "quote": {
-            "casa": 1.43,
+            "casa": 1.44,
             "pareggio": 4.3,
             "fuori": 6.5,
             "fonte": "DraftKings"
@@ -544,33 +544,33 @@
     },
     "Atalanta": {
       "prossima": {
-        "data": "2026-10-29T19:45Z",
-        "avversario": "Fiorentina",
+        "data": "2026-11-02T19:45Z",
+        "avversario": "Parma",
         "esiti": {
-          "vittoria": 0.332,
-          "pareggio": 0.255,
-          "sconfitta": 0.413,
+          "vittoria": 0.626,
+          "pareggio": 0.214,
+          "sconfitta": 0.16,
           "quote": {
-            "casa": 2.25,
-            "pareggio": 3.65,
-            "fuori": 2.8,
+            "casa": 1.47,
+            "pareggio": 4.3,
+            "fuori": 5.75,
             "fonte": "DraftKings"
           }
         }
       },
       "precedente": {
-        "data": "2026-10-25T14:00Z",
+        "data": "2026-10-29T19:45Z",
         "competizione": "Serie A",
-        "avversario": "Frosinone"
+        "avversario": "Fiorentina"
       },
       "giorniRiposo": 4,
       "partiteUltimaSettimana": 1,
       "dopo": {
-        "data": "2026-11-02T19:45Z",
-        "competizione": "Serie A",
-        "avversario": "Parma"
+        "data": "2026-11-05T17:45Z",
+        "competizione": "Conference League",
+        "avversario": "Kairat Almaty"
       },
-      "giorniAllaSuccessiva": 4
+      "giorniAllaSuccessiva": 3
     },
     "Genoa": {
       "prossima": {
@@ -722,6 +722,36 @@
       },
       "giorniAllaSuccessiva": 6
     },
+    "Fiorentina": {
+      "prossima": {
+        "data": "2026-11-02T17:30Z",
+        "avversario": "Sassuolo",
+        "esiti": {
+          "vittoria": 0.404,
+          "pareggio": 0.26,
+          "sconfitta": 0.337,
+          "quote": {
+            "casa": 2.7,
+            "pareggio": 3.5,
+            "fuori": 2.25,
+            "fonte": "DraftKings"
+          }
+        }
+      },
+      "precedente": {
+        "data": "2026-10-29T19:45Z",
+        "competizione": "Serie A",
+        "avversario": "Atalanta"
+      },
+      "giorniRiposo": 4,
+      "partiteUltimaSettimana": 1,
+      "dopo": {
+        "data": "2026-11-08T19:45Z",
+        "competizione": "Serie A",
+        "avversario": "Juventus"
+      },
+      "giorniAllaSuccessiva": 6
+    },
     "Parma": {
       "prossima": {
         "data": "2026-11-02T19:45Z",
@@ -751,36 +781,6 @@
         "avversario": "Bologna"
       },
       "giorniAllaSuccessiva": 5
-    },
-    "Fiorentina": {
-      "prossima": {
-        "data": "2026-10-29T19:45Z",
-        "avversario": "Atalanta",
-        "esiti": {
-          "vittoria": 0.413,
-          "pareggio": 0.255,
-          "sconfitta": 0.332,
-          "quote": {
-            "casa": 2.25,
-            "pareggio": 3.65,
-            "fuori": 2.8,
-            "fonte": "DraftKings"
-          }
-        }
-      },
-      "precedente": {
-        "data": "2026-10-25T11:30Z",
-        "competizione": "Serie A",
-        "avversario": "Internazionale"
-      },
-      "giorniRiposo": 4,
-      "partiteUltimaSettimana": 1,
-      "dopo": {
-        "data": "2026-11-02T17:30Z",
-        "competizione": "Serie A",
-        "avversario": "Sassuolo"
-      },
-      "giorniAllaSuccessiva": 4
     },
     "Venezia": {
       "prossima": {
@@ -2415,8 +2415,8 @@
       "fuori": "Internazionale",
       "annullata": false,
       "quote": {
-        "casa": 3.4,
-        "pareggio": 3.65,
+        "casa": 3.45,
+        "pareggio": 3.55,
         "fuori": 1.95,
         "fonte": "DraftKings"
       }
@@ -2454,7 +2454,7 @@
       "fuori": "Cagliari",
       "annullata": false,
       "quote": {
-        "casa": 1.43,
+        "casa": 1.44,
         "pareggio": 4.3,
         "fuori": 6.5,
         "fonte": "DraftKings"
@@ -2481,8 +2481,8 @@
       "annullata": false,
       "quote": {
         "casa": 2.25,
-        "pareggio": 3.25,
-        "fuori": 3.1,
+        "pareggio": 3.2,
+        "fuori": 3.15,
         "fonte": "DraftKings"
       }
     },
@@ -3019,9 +3019,9 @@
       "fuori": "Besiktas",
       "annullata": false,
       "quote": {
-        "casa": 2.85,
+        "casa": 2.9,
         "pareggio": 3.75,
-        "fuori": 2.3,
+        "fuori": 2.25,
         "fonte": "DraftKings"
       }
     },
@@ -3085,7 +3085,7 @@
       "annullata": false,
       "quote": {
         "casa": 1.49,
-        "pareggio": 4.6,
+        "pareggio": 4.7,
         "fuori": 5.5,
         "fonte": "DraftKings"
       }
@@ -3097,9 +3097,9 @@
       "fuori": "Egnatia",
       "annullata": false,
       "quote": {
-        "casa": 1.43,
-        "pareggio": 4.6,
-        "fuori": 6.5,
+        "casa": 1.47,
+        "pareggio": 4.4,
+        "fuori": 6,
         "fonte": "DraftKings"
       }
     },
@@ -3136,7 +3136,7 @@
       "fuori": "Pafos",
       "annullata": false,
       "quote": {
-        "casa": 1.3,
+        "casa": 1.32,
         "pareggio": 5.5,
         "fuori": 8,
         "fonte": "DraftKings"
@@ -3170,9 +3170,9 @@
       "fuori": "Jablonec",
       "annullata": false,
       "quote": {
-        "casa": 2.4,
-        "pareggio": 3.25,
-        "fuori": 2.95,
+        "casa": 2.3,
+        "pareggio": 3.35,
+        "fuori": 3,
         "fonte": "DraftKings"
       }
     },
@@ -3554,29 +3554,9 @@
       "nota": "Il difensore frenato da una lesione muscolare di medio-alto grado del bicipite femorale della coscia sinistra alla vigilia della sfida di campionato contro la Juventus (del 20 settembre). Lungo stop, rientro dalla seconda metà di novembre."
     },
     {
-      "nome": "Hien",
+      "nome": "Kolasinac",
       "squadra": "Atalanta",
-      "nota": "il difensore operato a fine giugno per una lesione del tendine prossimale del muscolo semimembranoso della coscia sinistra, in recupero e pronto a tornare in campo dalla metà di novembre."
-    },
-    {
-      "nome": "Pompei",
-      "squadra": "Atalanta",
-      "nota": "Il portiere fermo da inizio ottobre per la frattura della falange della mano destra, out nel prossimo turno di campionato. Tempi di recupero da valutare."
-    },
-    {
-      "nome": "Kessiè",
-      "squadra": "Atalanta",
-      "nota": "L'ivoriano condizionato da una distrazione di basso grado al polpaccio della gamba destra, tentativo rientro da inizio novembre."
-    },
-    {
-      "nome": "Scamacca",
-      "squadra": "Atalanta",
-      "nota": "L'attaccante fuori causa per giovedì a Firenze a causa di un risentimento ai muscoli flessori della coscia destra. Verrà rivalutato, si proverà ad averlo a disposizione già da inizio novembre."
-    },
-    {
-      "nome": "Raspadori",
-      "squadra": "Atalanta",
-      "nota": "Nuovo stop muscolare per l'attaccante, frenato il 15 ottobre in Conference League da una distrazione muscolare di basso grado al bicipite femorale della coscia destra, rientro dall'inizio di novembre."
+      "nota": "il difensore KO il 18 ottobre a Milano vittima di una distrazione muscolare al retto femorale della coscia sinistra, recuperabile dalla metà di novembre."
     },
     {
       "nome": "Bellanova",
@@ -3584,24 +3564,44 @@
       "nota": "il terzino KO il 25 ottobre per una distrazione di basso grado dell'adduttore lungo dell&rsquo;arto sinistro, recuperabile dalla metà di novembre."
     },
     {
-      "nome": "Kolasinac",
+      "nome": "Gaetano",
       "squadra": "Atalanta",
-      "nota": "il difensore KO il 18 ottobre a Milano vittima di una distrazione muscolare al retto femorale della coscia sinistra, recuperabile dalla metà di novembre."
+      "nota": "il centrocampista giovedì scorso a Firenze ha lasciato il campo per un fastidio muscolare all'inguine che rimane da valutare. Viaggia verso il forfait per lunedì contro il Parma."
     },
     {
-      "nome": "De Silvestri",
-      "squadra": "Bologna",
-      "nota": "Il difensore non convocato mercoledì contro il Milan per un risentimento muscolare ai flessori della coscia destra. Da valutare in vista della 10a giornata."
+      "nome": "Raspadori",
+      "squadra": "Atalanta",
+      "nota": "Nuovo stop muscolare per l'attaccante, frenato il 15 ottobre in Conference League da una distrazione muscolare di basso grado al bicipite femorale della coscia destra, rientro dall'inizio di novembre."
     },
     {
-      "nome": "Holm",
-      "squadra": "Bologna",
-      "nota": "Lo svedese KO in Nazionale il 26 settembre vittima di un problema al tendine della coscia destra. Ha deciso di operarsi e affronterà un lungo stop. Ipotesi di rientro in campo da fine febbraio."
+      "nome": "Scamacca",
+      "squadra": "Atalanta",
+      "nota": "L'attaccante fuori causa per giovedì a Firenze a causa di un risentimento ai muscoli flessori della coscia destra. Verrà rivalutato, si proverà ad averlo a disposizione già da inizio novembre."
     },
     {
-      "nome": "Orsolini",
+      "nome": "Kristensen T.",
+      "squadra": "Atalanta",
+      "nota": "il difensore costretto al cambio il 29 ottobre a Firenze dopo pochi minuti di gara a causa di un fastidio muscolare alla gamba. Da valutare, out lunedì contro il Parma."
+    },
+    {
+      "nome": "Kessiè",
+      "squadra": "Atalanta",
+      "nota": "L'ivoriano condizionato da una distrazione di basso grado al polpaccio della gamba destra, tentativo rientro da inizio novembre."
+    },
+    {
+      "nome": "Pompei",
+      "squadra": "Atalanta",
+      "nota": "Il portiere fermo da inizio ottobre per la frattura della falange della mano destra, out nel prossimo turno di campionato. Tempi di recupero da valutare."
+    },
+    {
+      "nome": "Hien",
+      "squadra": "Atalanta",
+      "nota": "il difensore operato a fine giugno per una lesione del tendine prossimale del muscolo semimembranoso della coscia sinistra, in recupero e pronto a tornare in campo dalla metà di novembre."
+    },
+    {
+      "nome": "Enem",
       "squadra": "Bologna",
-      "nota": "il capitano dei felsinei KO l'11 ottobre a Lecce sul finale di match per una lesione di primo grado al bicipite femorale della coscia destra, stop di circa tre settimane. Recuperabile dall'inizio di novembre."
+      "nota": "Lavoro a parte negli ultimi giorni per l'attaccante a causa di un lieve affaticamento muscolare alla gamba. Out contro Milan e Monza, da valutare in vista della 11a giornata."
     },
     {
       "nome": "Piccoli",
@@ -3609,19 +3609,14 @@
       "nota": "l'attaccante indisponibile a causa di un guaio muscolare al bicipite femorale della coscia destra. Recuperabile dalla metà di novembre."
     },
     {
-      "nome": "Enem",
+      "nome": "Holm",
       "squadra": "Bologna",
-      "nota": "Lavoro a parte negli ultimi giorni per l'attaccante a causa di un lieve affaticamento muscolare alla gamba. Out mercoledì contro il Milan, da valutare in vista della 10a giornata."
+      "nota": "Lo svedese KO in Nazionale il 26 settembre vittima di un problema al tendine della coscia destra. Ha deciso di operarsi e affronterà un lungo stop. Ipotesi di rientro in campo da fine febbraio."
     },
     {
-      "nome": "Idrissi R.",
-      "squadra": "Cagliari",
-      "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla metà di novembre."
-    },
-    {
-      "nome": "Winks",
-      "squadra": "Cagliari",
-      "nota": "Il regista dei sardi non convocato per Roma a causa di una fastidiosa lombalgia. Punta a recuperare però già nella 10a giornata di campionato."
+      "nome": "De Silvestri",
+      "squadra": "Bologna",
+      "nota": "Il difensore out contro Milan e Monza per un risentimento muscolare ai flessori della coscia destra. Da valutare in vista della 11a giornata."
     },
     {
       "nome": "Felici",
@@ -3629,9 +3624,14 @@
       "nota": "il centrocampista KO il 7 settembre contro il Lecce in casa vittima della rottura del legamento crociato anteriore. Verrà operato e costretto a un lungo stop (ipotizziamo un rientro da marzo)."
     },
     {
-      "nome": "Liberali",
+      "nome": "Idrissi R.",
+      "squadra": "Cagliari",
+      "nota": "il calciatore in ripresa dalla rottura del legamento crociato, può tornare arruolabile dalla metà di novembre."
+    },
+    {
+      "nome": "Addai",
       "squadra": "Como",
-      "nota": "Il centrocampista offensivo dei lariani mercoledì scorso in Champions League prima di subentrare ha lamentato un fastidio alla gamba, out ora in campionato contro Sassuolo e Torino. Da valutare rientro nella 10a di A."
+      "nota": "l'esterno offensivo ai box per un problema muscolare alla gamba che rimane da valutare. Assente domenica contro il Venezia."
     },
     {
       "nome": "Rodriguez Je.",
@@ -3651,7 +3651,7 @@
     {
       "nome": "Kean",
       "squadra": "Como",
-      "nota": "l'attaccante in recupero dal fastidio alla tibia e, dopo aver saltato le sfide contro Sassuolo, Roma e Fiorentina, non è tra i convocati neppure per martedì a Torino. Punta a tornare dalla 10a giornata di A."
+      "nota": "l'attaccante si sottoporrà a nuove cure per il perdurare del fastidio alla tibia che lo affligge da diverse settimane. Appare recuperabile dall'inizio di dicembre."
     },
     {
       "nome": "Pongracic",
@@ -3674,24 +3674,24 @@
       "nota": "il centrocampista non convocato dalla gara di Genova (12 settembre) a causa di una sindrome retto-adduttoria, ha poi deciso di operarsi. Stop di circa sei settimane, può tornare convocabile da metà novembre."
     },
     {
+      "nome": "Venturino",
+      "squadra": "Genoa",
+      "nota": "il calciatore operato al tendine rotuleo e ora in fase di recupero. Di certo assente nel prossimo turno di campionato, rientro da metà novembre."
+    },
+    {
       "nome": "Havel",
       "squadra": "Genoa",
       "nota": "L'attaccante ha deciso di operarsi alla caviglia e dovrebbe tornare arruolabile dall'inizio di novembre."
     },
     {
-      "nome": "Venturino",
-      "squadra": "Genoa",
-      "nota": "il calciatore operato al tendine rotuleo e ora in fase di recupero. Di certo assente nel prossimo turno di campionato, rientro da inizio novembre."
-    },
-    {
       "nome": "Pavard",
       "squadra": "Inter",
-      "nota": "il difensore out per un risentimento agli adduttori della coscia destra, recuperabile dalla fine di ottobre."
+      "nota": "il difensore out per un risentimento agli adduttori della coscia destra, recuperabile dall'inizio di novembre."
     },
     {
-      "nome": "Luis Henrique",
+      "nome": "Jones C.",
       "squadra": "Inter",
-      "nota": "l'esterno nerazzurro sottoposto il 23 ottobre a esami medici che hanno evidenziato un risentimento all'adduttore lungo della coscia sinistra. Ipotesi di recupero da metà novembre."
+      "nota": "Il centrocampista fermato da un risentimento miofasciale agli adduttori della coscia destra, rientro dall'inizio di novembre."
     },
     {
       "nome": "Martinez L.",
@@ -3699,44 +3699,14 @@
       "nota": "L'argentino sottoposto il 15 ottobre a controlli medici che hanno evidenziato un risentimento muscolare ai flessori della coscia sinistra. Recuperabile dalla metà di novembre."
     },
     {
-      "nome": "Jones C.",
+      "nome": "Luis Henrique",
       "squadra": "Inter",
-      "nota": "Il centrocampista fermato da un risentimento miofasciale agli adduttori della coscia destra, tentativo rientro tra i convocati dalla fine di ottobre."
+      "nota": "l'esterno nerazzurro sottoposto il 23 ottobre a esami medici che hanno evidenziato un risentimento all'adduttore lungo della coscia sinistra. Ipotesi di recupero da metà novembre."
     },
     {
       "nome": "Stones",
       "squadra": "Inter",
-      "nota": "il difensore alle prese con un risentimento ai flessori della coscia sinistra, recuperabile dalla fine di ottobre."
-    },
-    {
-      "nome": "Ekhator",
-      "squadra": "Juventus",
-      "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, rientro dalla metà di novembre."
-    },
-    {
-      "nome": "Gonzalez N.",
-      "squadra": "Juventus",
-      "nota": "l'argentino ai box per una lesione di basso grado del soleo destro, recuperabile da metà novembre."
-    },
-    {
-      "nome": "Grabara",
-      "squadra": "Juventus",
-      "nota": "Il portiere out dal 20 settembre per una lesione al crociato anteriore del ginocchio destro. Operazione chirurgica e lungo stop, rientro da aprile."
-    },
-    {
-      "nome": "Yildiz",
-      "squadra": "Juventus",
-      "nota": "l'attaccante turco, dopo la gara di Frosinone (23 agosto), ha lamentato un problema al piede. Operato il 31 agosto di osteosintesi della frattura della base del V metatarso del piede sinistro, stop di circa tre mesi. Rientro in campo da inizio dicembre."
-    },
-    {
-      "nome": "Conceicao",
-      "squadra": "Juventus",
-      "nota": "il portoghese KO il 18 ottobre contro la Lazio vittima di una lussazione alla spalla sinistra, prontamente ridotta. Recuperabile dalla metà di novembre."
-    },
-    {
-      "nome": "Thuram K.",
-      "squadra": "Juventus",
-      "nota": "il centrocampista condizionato da una sindrome femoro-rotulea e, dopo un consulto medico a fine agosto, è stato sottoposto il 3 settembre a operazione chirurgica. Lungo stop, ipotizziamo un rientro da gennaio."
+      "nota": "il difensore alle prese con un risentimento ai flessori della coscia sinistra, rientro dall'inizio di novembre."
     },
     {
       "nome": "Locatelli",
@@ -3744,19 +3714,39 @@
       "nota": "il metronomo del centrocampo bianconero ha rimediato la rottura del menisco esterno del ginocchio. Verrà operato a Lione a stretto giro. Lungo stop e possibilità di rivederlo in campo da febbraio."
     },
     {
+      "nome": "Thuram K.",
+      "squadra": "Juventus",
+      "nota": "il centrocampista condizionato da una sindrome femoro-rotulea e, dopo un consulto medico a fine agosto, è stato sottoposto il 3 settembre a operazione chirurgica. Lungo stop, ipotizziamo un rientro da gennaio."
+    },
+    {
+      "nome": "Conceicao",
+      "squadra": "Juventus",
+      "nota": "il portoghese KO il 18 ottobre contro la Lazio vittima di una lussazione alla spalla sinistra, prontamente ridotta. Recuperabile dalla metà di novembre."
+    },
+    {
+      "nome": "Ekhator",
+      "squadra": "Juventus",
+      "nota": "l'attaccante vittima di una lesione di medio grado del muscolo semitendinoso, rientro dalla metà di novembre."
+    },
+    {
+      "nome": "Yildiz",
+      "squadra": "Juventus",
+      "nota": "l'attaccante turco, dopo la gara di Frosinone (23 agosto), ha lamentato un problema al piede. Operato il 31 agosto di osteosintesi della frattura della base del V metatarso del piede sinistro, stop di circa tre mesi. Rientro in campo da inizio dicembre."
+    },
+    {
+      "nome": "Grabara",
+      "squadra": "Juventus",
+      "nota": "Il portiere out dal 20 settembre per una lesione al crociato anteriore del ginocchio destro. Operazione chirurgica e lungo stop, rientro da aprile."
+    },
+    {
+      "nome": "Gonzalez N.",
+      "squadra": "Juventus",
+      "nota": "l'argentino ai box per una lesione di basso grado del soleo destro, recuperabile da metà novembre."
+    },
+    {
       "nome": "Celik",
       "squadra": "Juventus",
       "nota": "Il turco il 22 ottobre in Europa League ha lamentato una lesione di basso grado del bicipite femorale sinistro, recuperabile da metà novembre."
-    },
-    {
-      "nome": "Marusic",
-      "squadra": "Lazio",
-      "nota": "il terzino dei biancocelesti KO il 24 agosto a Bologna vittima di una lesione muscolare alla coscia. Recuperabile dalla fine di ottobre."
-    },
-    {
-      "nome": "Rovella",
-      "squadra": "Lazio",
-      "nota": "il regista dei biancocelesti KO il 30 agosto contro il Genoa vittima di una lesione muscolare al polpaccio, ai box fino alla fine di ottobre."
     },
     {
       "nome": "Gudmundsson A.",
@@ -3764,19 +3754,14 @@
       "nota": "L'islandese in Nazionale il 26 settembre vittima di un problema alla spalla destra dopo una caduta fortuita in partita. Condizioni da monitorare, si confida di riaverlo a disposizione dalla metà di novembre."
     },
     {
-      "nome": "Ilic",
-      "squadra": "Lecce",
-      "nota": "il regista dei salentini KO l'11 ottobre in casa contro il Bologna vittima di una lesione miotendinea del retto femorale sinistro con lesione parziale del tendine, rientro da aprile."
+      "nome": "Rovella",
+      "squadra": "Lazio",
+      "nota": "il regista dei biancocelesti KO il 30 agosto contro il Genoa vittima di una lesione muscolare al polpaccio, ai box fino all'inizio di novembre."
     },
     {
-      "nome": "Pierotti",
-      "squadra": "Lecce",
-      "nota": "l'ala offensiva dei salentini ferma ai box per la frattura composta del malleolo mediale della caviglia destra rimediata nella seconda metà di ottobre. Si prospetta un lungo stop, ipotizziamo un rientro in campo da gennaio."
-    },
-    {
-      "nome": "Berisha M.",
-      "squadra": "Lecce",
-      "nota": "Il centrocampista ha lamentato un sovraccarico muscolare alla gamba e non ha preso parte alle sfide contro Monza e Milan, out anche domenica contro il Bologna. Recuperabile da inizio novembre."
+      "nome": "Marusic",
+      "squadra": "Lazio",
+      "nota": "il terzino dei biancocelesti KO il 24 agosto a Bologna vittima di una lesione muscolare alla coscia. Recuperabile da inizio novembre."
     },
     {
       "nome": "Coulibaly L.",
@@ -3784,34 +3769,24 @@
       "nota": "il centrocampista costretto al cambio il 18 ottobre a Udine per una lesione muscolare al bicipite femorale della coscia destra, recuperabile dall'inizio di novembre."
     },
     {
-      "nome": "Rabiot",
-      "squadra": "Milan",
-      "nota": "Il francese out domenica scorsa a Udine per un affaticamento muscolare al polpaccio rimediato nella rifinitura, salterà anche il turno infrasettimanale contro il Bologna. Da valutare, ma l'obiettivo è averlo a disposizione per il derby di sabato."
+      "nome": "Berisha M.",
+      "squadra": "Lecce",
+      "nota": "Il centrocampista ha lamentato un sovraccarico muscolare alla gamba e non ha preso parte alle sfide contro Monza e Milan, out anche domenica contro il Bologna. Recuperabile da inizio novembre."
     },
     {
-      "nome": "Loftus-Cheek",
-      "squadra": "Milan",
-      "nota": "il centrocampista non al meglio per una lesione muscolare al flessore ravvisato sul finire del match di Udine (25 ottobre). Recuperabile dalla seconda metà di novembre."
+      "nome": "Pierotti",
+      "squadra": "Lecce",
+      "nota": "l'ala offensiva dei salentini ferma ai box per la frattura composta del malleolo mediale della caviglia destra rimediata nella seconda metà di ottobre. Si prospetta un lungo stop, ipotizziamo un rientro in campo da gennaio."
     },
     {
-      "nome": "Moreira",
-      "squadra": "Milan",
-      "nota": "L'esterno rossonero frenato da un affaticamento muscolare al flessore sinistro e out contro Udinese e Bologna. Da valutare in vista del derby di fine ottobre."
+      "nome": "Geubbels",
+      "squadra": "Lecce",
+      "nota": "L'attaccante si è fermato giovedì scorso a Frosinone nella fase di riscaldamento prematch a causa di un fastidio muscolare all'adduttore e andrà valutato. Forfait per domenica contro il Genoa."
     },
     {
-      "nome": "Chukwueze",
-      "squadra": "Milan",
-      "nota": "Il nigeriano dal 21 ottobre fermo per un problema all'anca sinistra. Iniziato un trattamento infiltrativo all'anca, a inizio novembre nuovi controlli medici per stabilire i tempi di rientro."
-    },
-    {
-      "nome": "Gila",
-      "squadra": "Milan",
-      "nota": "Il difensore assente contro Udinese e Bologna per un sovraccarico alla caviglia sinistra. Da valutare in vista della 10a giornata di campionato."
-    },
-    {
-      "nome": "Saelemaekers",
-      "squadra": "Milan",
-      "nota": "Il belga fermo da inizio ottobre per un problema alla caviglia destra e operata il 13 ottobre. Stop lungo e lo rivedremo in campo nel 2027 inoltrato (ipotesi da febbraio)."
+      "nome": "Ilic",
+      "squadra": "Lecce",
+      "nota": "il regista dei salentini KO l'11 ottobre in casa contro il Bologna vittima di una lesione miotendinea del retto femorale sinistro con lesione parziale del tendine, rientro da aprile."
     },
     {
       "nome": "Terracciano",
@@ -3824,6 +3799,26 @@
       "nota": "il difensore KO l'11 ottobre contro il Sassuolo vittima di una lesione del flessore della coscia sinistra con parziale interessamento tendineo. Lo stop sarà lungo, anche con la terapia conservativa. Ipotesi rientro in campo da fine febbraio."
     },
     {
+      "nome": "Tomori",
+      "squadra": "Milan",
+      "nota": "Il difensore KO il 28 ottobre contro il Bologna vittima di una lesione a carico del muscolo flessore mediale della coscia destra. Recuperabile dalla seconda metà di novembre."
+    },
+    {
+      "nome": "Saelemaekers",
+      "squadra": "Milan",
+      "nota": "Il belga fermo da inizio ottobre per un problema alla caviglia destra e operata il 13 ottobre. Stop lungo e lo rivedremo in campo nel 2027 inoltrato (ipotesi da febbraio)."
+    },
+    {
+      "nome": "Loftus-Cheek",
+      "squadra": "Milan",
+      "nota": "il centrocampista non al meglio per una lesione muscolare al flessore ravvisato sul finire del match di Udine (25 ottobre). Recuperabile dalla seconda metà di novembre."
+    },
+    {
+      "nome": "Chukwueze",
+      "squadra": "Milan",
+      "nota": "Il nigeriano dal 21 ottobre fermo per un problema all'anca sinistra. Iniziato un trattamento infiltrativo all'anca, a inizio novembre nuovi controlli medici per stabilire i tempi di rientro."
+    },
+    {
       "nome": "Pessina",
       "squadra": "Monza",
       "nota": "Il centrocampista costretto a saltare l'inizio di campionato per una lussazione della rotula del ginocchio destro rimediata nella prima metà di agosto in allenamento. Tempi di recupero da monitorare, ma proverà a tornare arruolabile dalla metà di novembre."
@@ -3831,7 +3826,12 @@
     {
       "nome": "Maye",
       "squadra": "Monza",
-      "nota": "Il difensore ai box per noie fisiche, assente nelle ultime due sfide di campionato e ora da valutare in vista di mercoledì in casa contro il Napoli."
+      "nota": "Il difensore ai box per noie fisiche, assente nelle ultime tre sfide di campionato e ora da valutare in vista di sabato a Bologna."
+    },
+    {
+      "nome": "Folorunsho",
+      "squadra": "Monza",
+      "nota": "Il centrocampista alle prese con noie muscolari al polpaccio, viaggia verso il forfait sabato a Bologna. Da valutare."
     },
     {
       "nome": "Ziolkowski",
@@ -3839,19 +3839,9 @@
       "nota": "Il difensore condizionato da una fastidiosa fascite plantare, recuperabile dalla metà di novembre."
     },
     {
-      "nome": "Buongiorno",
+      "nome": "Favasuli",
       "squadra": "Napoli",
-      "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
-    },
-    {
-      "nome": "Spinazzola",
-      "squadra": "Napoli",
-      "nota": "Il terzino vittima di una lesione di basso grado del bicipite femorale della coscia destra, recuperabile dalla metà di novembre."
-    },
-    {
-      "nome": "Santos A.",
-      "squadra": "Napoli",
-      "nota": "l'ala offensiva azzurra KO il 18 ottobre a Venezia, vittima di una lesione distrattiva di medio grado del bicipite femorale sinistro. Recuperabile dall'inizio di dicembre."
+      "nota": "Il cursore di fascia degli azzurri ai box da inizio ottobre per una lesione muscolare di secondo grado del retto femorale della coscia destra. Recuperabile dalla metà di novembre."
     },
     {
       "nome": "Neres",
@@ -3859,29 +3849,39 @@
       "nota": "L'ala offensiva azzurra ai box per una lesione di basso grado al muscolo semimembranoso della coscia destra, tentativo di rientro tra i convocati dalla prima metà di novembre."
     },
     {
-      "nome": "Favasuli",
-      "squadra": "Napoli",
-      "nota": "Il cursore di fascia degli azzurri ai box da inizio ottobre per una lesione muscolare di secondo grado del retto femorale della coscia destra. Recuperabile dalla metà di novembre."
-    },
-    {
       "nome": "Badiashile",
       "squadra": "Napoli",
       "nota": "il difensore KO il 24 ottobre contro la Roma per una lesione distrattiva di medio grado del retto femorale destro, recuperabile dalla fine di novembre."
     },
     {
+      "nome": "Spinazzola",
+      "squadra": "Napoli",
+      "nota": "Il terzino vittima di una lesione di basso grado del bicipite femorale della coscia destra, recuperabile dalla metà di novembre."
+    },
+    {
+      "nome": "Lobotka",
+      "squadra": "Napoli",
+      "nota": "lo slovacco il 28 ottobre vittima a Monza di una lesione della sindesmosi tibio-peroneale senza instabilità, associata a lesione di basso grado del LPAA della caviglia sinistra. Recuperabile dalla metà di dicembre."
+    },
+    {
+      "nome": "Santos A.",
+      "squadra": "Napoli",
+      "nota": "l'ala offensiva azzurra KO il 18 ottobre a Venezia, vittima di una lesione distrattiva di medio grado del bicipite femorale sinistro. Recuperabile dall'inizio di dicembre."
+    },
+    {
+      "nome": "Buongiorno",
+      "squadra": "Napoli",
+      "nota": "il difensore operato nella seconda metà di luglio al menisco del ginocchio destro. Sta recuperando lentamente, ipotizziamo possa tornare arruolabile da fine dicembre."
+    },
+    {
       "nome": "Elphege",
       "squadra": "Parma",
-      "nota": "l'attaccante operato per una appendicite acuta l'11 ottobre, condizioni ora da valutare per stabilire i tempi di rientro in campo. Di certo assente mercoledì al Tardini contro l'Udinese."
+      "nota": "l'attaccante operato per una appendicite acuta l'11 ottobre, condizioni ora da valutare per stabilire i tempi di rientro in campo. Di certo assente lunedì a Bergamo."
     },
     {
-      "nome": "Dybala",
+      "nome": "Svilar",
       "squadra": "Roma",
-      "nota": "l'argentino out anche martedì contro il Cagliari, ma le sue condizioni migliorano e il fastidio al polpaccio va attenuandosi. Appare recuperabile da fine ottobre e convocabile nella 10a giornata di A."
-    },
-    {
-      "nome": "Pellegrini Lo.",
-      "squadra": "Roma",
-      "nota": "Il centrocampista dei giallorossi il 20 ottobre in Champions League ha rimediato una lesione di alto grado in corrispondenza della giunzione muscolo - tendinea distale del muscolo semitendinoso della coscia destra. Stop lungo, ipotizziamo un rientro dalla fine di dicembre."
+      "nota": "Il portiere condizionato da una frattura a un dito del piede e fuori dal match contro il Como. Ipotesi di rientro a disposizione dalla metà di novembre."
     },
     {
       "nome": "Konè M.",
@@ -3889,14 +3889,19 @@
       "nota": "Il centrocampista frenato il 14 ottobre in Champions League contro il Real Madrid da una lesione di primo grado al bicipite femorale destro, tentativo di rientro tra i convocati in campionato dalla prima metà di novembre."
     },
     {
-      "nome": "Svilar",
+      "nome": "Dybala",
       "squadra": "Roma",
-      "nota": "Il portiere condizionato da una frattura a un dito del piede e fuori dal match contro il Como. Ipotesi di rientro a disposizione dall'inizio di novembre."
+      "nota": "l'argentino out anche martedì scorso contro il Cagliari, ma le sue condizioni migliorano e il fastidio al polpaccio va attenuandosi. Appare recuperabile da inizio novembre, dunque difficilmente convocabile nella 10a giornata di A sabato a Udine. Da valutare nella rifinitura odierna."
+    },
+    {
+      "nome": "Pellegrini Lo.",
+      "squadra": "Roma",
+      "nota": "Il centrocampista dei giallorossi il 20 ottobre in Champions League ha rimediato una lesione di alto grado in corrispondenza della giunzione muscolo - tendinea distale del muscolo semitendinoso della coscia destra. Stop lungo, ipotizziamo un rientro dalla fine di dicembre."
     },
     {
       "nome": "Boloca",
       "squadra": "Sassuolo",
-      "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da fine ottobre."
+      "nota": "il centrocampista fuori causa per un problema al ginocchio e fuori causa in questo inizio di campionato. Da valutare rientro da metà novembre."
     },
     {
       "nome": "Konè I.",
@@ -3911,12 +3916,7 @@
     {
       "nome": "Fortini",
       "squadra": "Torino",
-      "nota": "Il cursore di fascia dei granata rientrato in anticipo dagli impegni con l'U21 azzurra a inizio ottobre a causa di un affaticamento muscolare all'adduttore. Da valutare nei prossimi allenamenti le possibilità di convocazione dalla fine di ottobre."
-    },
-    {
-      "nome": "Mandragora",
-      "squadra": "Torino",
-      "nota": "il centrocampista granata fermato il 23 ottobre contro il Monza da un problema muscolare al flessore sinistro. Condizioni da valutare, di certo out martedì in campionato contro il Como."
+      "nota": "Il cursore di fascia dei granata rientrato in anticipo dagli impegni con l'U21 azzurra a inizio ottobre a causa di un affaticamento muscolare all'adduttore. Da valutare nei prossimi allenamenti le possibilità di convocazione per domenica a Frosinone."
     },
     {
       "nome": "Rodriguez R.",
@@ -3924,24 +3924,19 @@
       "nota": "Il difensore svizzero ai box per una lesione tendinea di basso grado ai muscoli flessori della coscia sinistra, rientro possibile dalla prima metà di novembre."
     },
     {
-      "nome": "Alaba",
-      "squadra": "Udinese",
-      "nota": "il difensore sostituito nell'intervallo della sfida contro il Lecce (18 ottobre) per un risentimento muscolare al polpaccio destro. Recuperabile dalla metà di novembre."
+      "nome": "Mandragora",
+      "squadra": "Torino",
+      "nota": "il centrocampista granata fermato il 23 ottobre contro il Monza da un problema muscolare al flessore sinistro. Rientro dalla metà di novembre."
     },
     {
-      "nome": "Gueye",
-      "squadra": "Udinese",
-      "nota": "L'attaccante vittima di un problema alla caviglia a fine settembre. Ha deciso di operarsi, lungo stop di circa tre mesi e possibile ritorno in campo da fine gennaio."
+      "nome": "Cacciamani",
+      "squadra": "Torino",
+      "nota": "l'esterno dei granata non al meglio per una sub-lussazione alla spalla sinistra rimediata nel turno precedente e ora verso il forfait per domenica a Frosinone. Da valutare."
     },
     {
       "nome": "Zanoli",
       "squadra": "Udinese",
-      "nota": "Il cursore di fascia dei friulani out domenica scorsa contro il Milan per noie muscolari. Da valutare, ma rischia il forfait anche mercoledì a Parma."
-    },
-    {
-      "nome": "Solet",
-      "squadra": "Udinese",
-      "nota": "Il difensore non al meglio per un risentimento muscolare alla gamba, out contro il Milan domenica scorsa e non ci sarà neppure mercoledì a Parma. Tempi di recupero da valutare dopo ulteriori controlli medici."
+      "nota": "Il cursore di fascia dei friulani out contro Milan e Parma per noie muscolari. Da valutare, ma rischia il forfait anche sabato contro la Roma."
     },
     {
       "nome": "Bayo V.",
@@ -3949,9 +3944,24 @@
       "nota": "l'attaccante assente a Torino il 12 ottobre a causa di una lesione al bicipite femorale della coscia destra, rientro tra i convocati da metà novembre."
     },
     {
-      "nome": "Sverko",
+      "nome": "Gueye",
+      "squadra": "Udinese",
+      "nota": "L'attaccante vittima di un problema alla caviglia a fine settembre. Ha deciso di operarsi, lungo stop di circa tre mesi e possibile ritorno in campo da fine gennaio."
+    },
+    {
+      "nome": "Alaba",
+      "squadra": "Udinese",
+      "nota": "il difensore sostituito nell'intervallo della sfida contro il Lecce (18 ottobre) per un risentimento muscolare al polpaccio destro. Recuperabile dalla metà di novembre."
+    },
+    {
+      "nome": "Correia T.",
       "squadra": "Venezia",
-      "nota": "il difensore operato in estate per il perdurare di un problema all'anca e recuperabile dalla metà di novembre."
+      "nota": "il cursore di fascia dei veneti KO il 12 ottobre a Bergamo vittima di un risentimento muscolare al flessore della gamba sinistra, sarà out anche domenica a Como. Da valutare in vista dell'11a giornata."
+    },
+    {
+      "nome": "Adorante",
+      "squadra": "Venezia",
+      "nota": "l'attaccante a fine luglio ha deciso di operarsi per un problema alla schiena, che lo costringerà a stare ai box per buona parte del girone d'andata del campionato. Tentativo di rientro dall'inizio di novembre."
     },
     {
       "nome": "Franjic",
@@ -3959,14 +3969,9 @@
       "nota": "il difensore costretto al cambio a Milano contro i rossoneri a fine agosto per un guaio alla spalla che ha richiesto l'intervento chirurgico. Lungo stop e rientro dalla metà di dicembre."
     },
     {
-      "nome": "Correia T.",
+      "nome": "Sverko",
       "squadra": "Venezia",
-      "nota": "il cursore di fascia dei veneti KO il 12 ottobre a Bergamo vittima di un risentimento muscolare al flessore della gamba sinistra, sarà out anche mercoledì contro l'Inter. Da valutare."
-    },
-    {
-      "nome": "Adorante",
-      "squadra": "Venezia",
-      "nota": "l'attaccante a fine luglio ha deciso di operarsi per un problema alla schiena, che lo costringerà a stare ai box per buona parte del girone d'andata del campionato. Tentativo di rientro dalla fine di ottobre."
+      "nota": "il difensore operato in estate per il perdurare di un problema all'anca e recuperabile dalla metà di novembre."
     }
   ],
   "squalificati": [
@@ -3974,6 +3979,11 @@
       "pid": 6632,
       "nome": "Gaspar K.",
       "squadra": "Lecce"
+    },
+    {
+      "pid": 5844,
+      "nome": "Thorstvedt",
+      "squadra": "Sassuolo"
     }
   ],
   "giocatori": {
@@ -3995,21 +4005,21 @@
       "nome": "De Roon",
       "squadra": "Roma",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "133": {
       "nome": "Skorupski",
       "squadra": "Bologna",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "152": {
       "nome": "Zielinski",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 75,
       "titolare": true
     },
     "158": {
@@ -4023,7 +4033,7 @@
       "nome": "Bernardeschi",
       "squadra": "Bologna",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "219": {
@@ -4044,14 +4054,14 @@
       "nome": "Dimarco",
       "squadra": "Inter",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "256": {
       "nome": "Juan Jesus",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "283": {
@@ -4072,35 +4082,35 @@
       "nome": "Cataldi",
       "squadra": "Lazio",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 40,
       "titolare": false
     },
     "418": {
       "nome": "Goldaniga",
       "squadra": "Como",
       "ruolo": "D",
-      "probabilita": 20,
+      "probabilita": 30,
       "titolare": false
     },
     "526": {
       "nome": "Duncan",
       "squadra": "Venezia",
       "ruolo": "C",
-      "probabilita": 10,
+      "probabilita": 15,
       "titolare": false
     },
     "531": {
       "nome": "Berardi",
       "squadra": "Sassuolo",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "536": {
       "nome": "Politano",
       "squadra": "Napoli",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "543": {
@@ -4114,63 +4124,63 @@
       "nome": "Zappacosta",
       "squadra": "Atalanta",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "572": {
       "nome": "Meret",
       "squadra": "Napoli",
       "ruolo": "P",
-      "probabilita": 5,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "608": {
       "nome": "Zapata D.",
       "squadra": "Torino",
       "ruolo": "A",
-      "probabilita": 40,
+      "probabilita": 30,
       "titolare": false
     },
     "610": {
       "nome": "Gollini",
       "squadra": "Roma",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "632": {
       "nome": "Zaccagni",
       "squadra": "Lazio",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "779": {
       "nome": "Cristante",
       "squadra": "Roma",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "791": {
       "nome": "Sabelli",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 35,
+      "probabilita": 30,
       "titolare": false
     },
     "795": {
       "nome": "El Shaarawy",
       "squadra": "Genoa",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 80,
+      "titolare": true
     },
     "801": {
       "nome": "Gagliardini",
       "squadra": "Cagliari",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "1842": {
@@ -4184,14 +4194,14 @@
       "nome": "Barella",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "1871": {
       "nome": "Deiola",
       "squadra": "Cagliari",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "1926": {
@@ -4212,22 +4222,22 @@
       "nome": "Pinamonti",
       "squadra": "Lazio",
       "ruolo": "A",
-      "probabilita": 30,
+      "probabilita": 60,
       "titolare": false
     },
     "2061": {
       "nome": "Simeone",
       "squadra": "Torino",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "2077": {
       "nome": "Pasalic",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 80,
+      "titolare": true
     },
     "2103": {
       "nome": "Pellegri",
@@ -4240,7 +4250,7 @@
       "nome": "Bastoni",
       "squadra": "Inter",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "2127": {
@@ -4254,7 +4264,7 @@
       "nome": "Falcone",
       "squadra": "Lecce",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "2155": {
@@ -4264,19 +4274,26 @@
       "probabilita": 60,
       "titolare": false
     },
+    "2167": {
+      "nome": "Orsolini",
+      "squadra": "Bologna",
+      "ruolo": "C",
+      "probabilita": 60,
+      "titolare": false
+    },
     "2170": {
       "nome": "Milinkovic-Savic V.",
       "squadra": "Napoli",
       "ruolo": "P",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 5,
+      "titolare": false
     },
     "2194": {
       "nome": "Calhanoglu",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "2263": {
       "nome": "Lazzari",
@@ -4289,57 +4306,64 @@
       "nome": "Mancini",
       "squadra": "Roma",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 75,
+      "titolare": true
+    },
+    "2379": {
+      "nome": "Rabiot",
+      "squadra": "Milan",
+      "ruolo": "C",
+      "probabilita": 55,
       "titolare": true
     },
     "2423": {
       "nome": "Pulisic",
       "squadra": "Milan",
       "ruolo": "C",
-      "probabilita": 55,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "2517": {
       "nome": "De Bruyne",
       "squadra": "Napoli",
       "ruolo": "C",
-      "probabilita": 55,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "2521": {
       "nome": "De Gea",
       "squadra": "Fiorentina",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "2525": {
       "nome": "Darmian",
       "squadra": "Bologna",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "2528": {
       "nome": "Matic",
       "squadra": "Sassuolo",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "2529": {
       "nome": "Mkhitaryan",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 40,
+      "probabilita": 55,
       "titolare": false
     },
     "2606": {
       "nome": "Modric",
       "squadra": "Milan",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "2728": {
       "nome": "Pellegrini Lu.",
@@ -4352,21 +4376,21 @@
       "nome": "Odgaard",
       "squadra": "Bologna",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "2766": {
       "nome": "Zaniolo",
       "squadra": "Udinese",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "2788": {
       "nome": "Bremer",
       "squadra": "Juventus",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "2809": {
@@ -4380,14 +4404,14 @@
       "nome": "Provedel",
       "squadra": "Inter",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "2816": {
       "nome": "Di Lorenzo",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "2832": {
@@ -4408,7 +4432,7 @@
       "nome": "Frattesi",
       "squadra": "Lazio",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "2857": {
@@ -4416,7 +4440,7 @@
       "squadra": "Genoa",
       "ruolo": "C",
       "probabilita": 55,
-      "titolare": false
+      "titolare": true
     },
     "2874": {
       "nome": "Ghidotti",
@@ -4430,34 +4454,34 @@
       "squadra": "Parma",
       "ruolo": "D",
       "probabilita": 55,
-      "titolare": false
+      "titolare": true
     },
     "4147": {
       "nome": "Caleta-Car",
       "squadra": "Sassuolo",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 70,
       "titolare": true
     },
     "4159": {
       "nome": "Akanji",
       "squadra": "Inter",
       "ruolo": "D",
-      "probabilita": 55,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "4210": {
       "nome": "Mina",
       "squadra": "Cagliari",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "4220": {
       "nome": "Zambo Anguissa",
       "squadra": "Napoli",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "4236": {
@@ -4467,33 +4491,33 @@
       "probabilita": 5,
       "titolare": false
     },
+    "4260": {
+      "nome": "Winks",
+      "squadra": "Cagliari",
+      "ruolo": "C",
+      "probabilita": 25,
+      "titolare": false
+    },
     "4263": {
       "nome": "Kabasele",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
-    },
-    "4287": {
-      "nome": "Lobotka",
-      "squadra": "Napoli",
-      "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4312": {
       "nome": "Maignan",
       "squadra": "Milan",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4317": {
       "nome": "N'Dicka",
       "squadra": "Roma",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "4349": {
       "nome": "Nicolussi Caviglia",
@@ -4506,14 +4530,7 @@
       "nome": "Caprile",
       "squadra": "Cagliari",
       "ruolo": "P",
-      "probabilita": 100,
-      "titolare": true
-    },
-    "4364": {
-      "nome": "Gaetano",
-      "squadra": "Atalanta",
-      "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4374": {
@@ -4527,8 +4544,8 @@
       "nome": "Terzic",
       "squadra": "Frosinone",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "4378": {
       "nome": "Ranieri L.",
@@ -4541,21 +4558,21 @@
       "nome": "Rrahmani",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4431": {
       "nome": "Carnesecchi",
       "squadra": "Atalanta",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4433": {
       "nome": "Zortea",
       "squadra": "Bologna",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 85,
       "titolare": true
     },
     "4436": {
@@ -4569,14 +4586,14 @@
       "nome": "Esposito Se.",
       "squadra": "Sassuolo",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "4465": {
       "nome": "Fagioli",
       "squadra": "Fiorentina",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 85,
       "titolare": true
     },
     "4468": {
@@ -4590,7 +4607,7 @@
       "nome": "Elmas",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "4485": {
@@ -4604,7 +4621,7 @@
       "nome": "Gallo",
       "squadra": "Lecce",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4705": {
@@ -4612,35 +4629,28 @@
       "squadra": "Roma",
       "ruolo": "D",
       "probabilita": 60,
-      "titolare": false
+      "titolare": true
     },
     "4734": {
       "nome": "Miranda J.",
       "squadra": "Bologna",
       "ruolo": "D",
-      "probabilita": 60,
-      "titolare": false
-    },
-    "4751": {
-      "nome": "Tomori",
-      "squadra": "Milan",
-      "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4777": {
       "nome": "McTominay",
       "squadra": "Napoli",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4807": {
       "nome": "Hermoso",
       "squadra": "Roma",
       "ruolo": "D",
-      "probabilita": 55,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "4817": {
       "nome": "Pedraza",
@@ -4653,35 +4663,35 @@
       "nome": "Turati",
       "squadra": "Sassuolo",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 75,
       "titolare": true
     },
     "4870": {
       "nome": "Adopo",
       "squadra": "Cagliari",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 85,
       "titolare": true
     },
     "4871": {
       "nome": "Thuram",
       "squadra": "Inter",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4896": {
       "nome": "Maldini",
       "squadra": "Cagliari",
       "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "4911": {
       "nome": "Douglas Luiz",
       "squadra": "Juventus",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4923": {
@@ -4695,7 +4705,7 @@
       "nome": "Carboni A.",
       "squadra": "Monza",
       "ruolo": "D",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "4930": {
@@ -4709,15 +4719,15 @@
       "nome": "Brescianini",
       "squadra": "Fiorentina",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "4952": {
       "nome": "Monterisi",
       "squadra": "Frosinone",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "4957": {
       "nome": "Montipò",
@@ -4730,7 +4740,7 @@
       "nome": "Vicario",
       "squadra": "Juventus",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4970": {
@@ -4744,63 +4754,56 @@
       "nome": "McKennie",
       "squadra": "Juventus",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4976": {
       "nome": "Kalulu",
       "squadra": "Juventus",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "4994": {
       "nome": "Vojvoda",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "4998": {
       "nome": "Molina N.",
       "squadra": "Roma",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "5010": {
       "nome": "Ismajli",
       "squadra": "Torino",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "5022": {
       "nome": "Pavlovic",
       "squadra": "Milan",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
-    },
-    "5029": {
-      "nome": "Geubbels",
-      "squadra": "Lecce",
-      "ruolo": "A",
-      "probabilita": 10,
-      "titolare": false
     },
     "5036": {
       "nome": "Caqueret",
       "squadra": "Como",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 70,
       "titolare": true
     },
     "5116": {
       "nome": "Martinez Jo.",
       "squadra": "Inter",
       "ruolo": "P",
-      "probabilita": 5,
+      "probabilita": 45,
       "titolare": false
     },
     "5119": {
@@ -4814,64 +4817,64 @@
       "nome": "Gilmour",
       "squadra": "Napoli",
       "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "5273": {
       "nome": "Estupinan",
       "squadra": "Milan",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "5295": {
       "nome": "Musah",
       "squadra": "Milan",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "5298": {
       "nome": "Pobega",
       "squadra": "Bologna",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 75,
       "titolare": true
     },
     "5319": {
       "nome": "Sohm",
       "squadra": "Venezia",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 75,
       "titolare": true
     },
     "5336": {
       "nome": "Nzola",
       "squadra": "Cagliari",
       "ruolo": "A",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "5365": {
       "nome": "Dragusin",
       "squadra": "Fiorentina",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 85,
       "titolare": true
     },
     "5399": {
       "nome": "Antov",
       "squadra": "Monza",
       "ruolo": "D",
-      "probabilita": 20,
+      "probabilita": 25,
       "titolare": false
     },
     "5422": {
       "nome": "Zalewski",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "5424": {
       "nome": "Amey",
@@ -4884,7 +4887,7 @@
       "nome": "Raimondo",
       "squadra": "Frosinone",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5453": {
@@ -4898,7 +4901,7 @@
       "nome": "Maleh",
       "squadra": "Lecce",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "5462": {
@@ -4912,14 +4915,14 @@
       "nome": "Mazzocchi",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "5498": {
       "nome": "Casale",
       "squadra": "Bologna",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "5500": {
@@ -4933,63 +4936,63 @@
       "nome": "Busio",
       "squadra": "Venezia",
       "ruolo": "C",
-      "probabilita": 50,
-      "titolare": false
+      "probabilita": 55,
+      "titolare": true
     },
     "5514": {
       "nome": "Vasquez",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5520": {
       "nome": "Cambiaso",
       "squadra": "Juventus",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "5526": {
       "nome": "Scalvini",
       "squadra": "Atalanta",
       "ruolo": "D",
-      "probabilita": 30,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "5555": {
       "nome": "Kamara H.",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "5559": {
       "nome": "Da Cunha",
       "squadra": "Como",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "5585": {
       "nome": "Malen",
       "squadra": "Roma",
       "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "5620": {
       "nome": "Tavares N.",
       "squadra": "Lazio",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5637": {
       "nome": "Davis K.",
       "squadra": "Udinese",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5674": {
@@ -5003,14 +5006,14 @@
       "nome": "Theate",
       "squadra": "Bologna",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "5680": {
       "nome": "Sarr P.",
       "squadra": "Juventus",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5685": {
@@ -5024,7 +5027,7 @@
       "nome": "Vlasic",
       "squadra": "Torino",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5694": {
@@ -5038,126 +5041,133 @@
       "nome": "Haps",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 85,
+      "titolare": true
     },
     "5701": {
       "nome": "Obert",
       "squadra": "Cagliari",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5734": {
       "nome": "Soulè",
       "squadra": "Roma",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "5735": {
       "nome": "Volpato",
       "squadra": "Sassuolo",
       "ruolo": "C",
-      "probabilita": 40,
+      "probabilita": 60,
       "titolare": false
     },
     "5739": {
       "nome": "De Winter",
       "squadra": "Milan",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
+    },
+    "5742": {
+      "nome": "Drameh",
+      "squadra": "Genoa",
+      "ruolo": "D",
+      "probabilita": 15,
+      "titolare": false
     },
     "5750": {
       "nome": "Ostigard",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5751": {
       "nome": "Patterson",
       "squadra": "Torino",
       "ruolo": "D",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 85,
+      "titolare": true
     },
     "5757": {
       "nome": "Cittadini",
       "squadra": "Frosinone",
       "ruolo": "D",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 55,
+      "titolare": true
     },
     "5761": {
       "nome": "Zhegrova",
       "squadra": "Juventus",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "5791": {
       "nome": "Frendrup",
       "squadra": "Genoa",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5792": {
       "nome": "Ederson D.S.",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5812": {
       "nome": "Terracciano F.",
       "squadra": "Milan",
       "ruolo": "D",
-      "probabilita": 50,
+      "probabilita": 25,
       "titolare": false
     },
     "5820": {
       "nome": "Bertola",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 40,
+      "titolare": false
     },
     "5823": {
       "nome": "Baldanzi",
       "squadra": "Genoa",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "5831": {
       "nome": "Gatti",
       "squadra": "Juventus",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 85,
+      "titolare": true
+    },
+    "5833": {
+      "nome": "Gila",
+      "squadra": "Milan",
+      "ruolo": "D",
+      "probabilita": 70,
       "titolare": true
     },
     "5838": {
       "nome": "Birindelli",
       "squadra": "Monza",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5840": {
       "nome": "Olivera",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
-    },
-    "5844": {
-      "nome": "Thorstvedt",
-      "squadra": "Sassuolo",
-      "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5850": {
@@ -5171,42 +5181,42 @@
       "nome": "Doig",
       "squadra": "Sassuolo",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "5858": {
       "nome": "Ferguson",
       "squadra": "Bologna",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "5862": {
       "nome": "Valeri",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "5872": {
       "nome": "Helgason",
       "squadra": "Venezia",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 55,
+      "titolare": false
     },
     "5877": {
       "nome": "Carlos Augusto",
       "squadra": "Inter",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "5878": {
       "nome": "Colpani",
       "squadra": "Monza",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "5880": {
@@ -5220,7 +5230,7 @@
       "nome": "Mota",
       "squadra": "Monza",
       "ruolo": "A",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "5885": {
@@ -5241,7 +5251,7 @@
       "nome": "Sulemana K.",
       "squadra": "Atalanta",
       "ruolo": "A",
-      "probabilita": 50,
+      "probabilita": 60,
       "titolare": false
     },
     "5946": {
@@ -5255,63 +5265,63 @@
       "nome": "Kolo Muani",
       "squadra": "Juventus",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5982": {
       "nome": "Spence",
       "squadra": "Inter",
       "ruolo": "D",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "5994": {
       "nome": "Ebosse",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "5995": {
       "nome": "De Ketelaere",
       "squadra": "Atalanta",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "5998": {
       "nome": "Zerbin",
       "squadra": "Frosinone",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "6005": {
       "nome": "Ilkhan",
       "squadra": "Torino",
       "ruolo": "C",
-      "probabilita": 30,
+      "probabilita": 60,
       "titolare": false
     },
     "6010": {
       "nome": "Fazzini",
       "squadra": "Cagliari",
       "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 50,
       "titolare": false
     },
     "6020": {
       "nome": "Ellertsson",
       "squadra": "Genoa",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 15,
+      "titolare": false
     },
     "6021": {
       "nome": "Abankwah",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 85,
       "titolare": true
     },
     "6024": {
@@ -5332,35 +5342,35 @@
       "nome": "Lucumì",
       "squadra": "Juventus",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6047": {
       "nome": "Ehizibue",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6052": {
       "nome": "Hojlund",
       "squadra": "Napoli",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6054": {
       "nome": "Moro N.",
       "squadra": "Bologna",
       "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "6060": {
       "nome": "Laurientè",
       "squadra": "Sassuolo",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6125": {
@@ -5374,29 +5384,29 @@
       "nome": "Ngonge",
       "squadra": "Monza",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "6149": {
       "nome": "Carboni F.",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 50,
+      "titolare": false
     },
     "6151": {
       "nome": "Perrone",
       "squadra": "Como",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 75,
       "titolare": true
     },
     "6164": {
       "nome": "Vitinha O.",
       "squadra": "Genoa",
       "ruolo": "A",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "6170": {
       "nome": "Gineitis",
@@ -5409,28 +5419,28 @@
       "nome": "Pisilli",
       "squadra": "Roma",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "6191": {
       "nome": "Belahyane",
       "squadra": "Lazio",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 85,
       "titolare": true
     },
     "6202": {
       "nome": "Beukema",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 35,
+      "probabilita": 40,
       "titolare": false
     },
     "6204": {
       "nome": "Kvernadze",
       "squadra": "Frosinone",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6206": {
@@ -5444,99 +5454,99 @@
       "nome": "Almqvist",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 35,
+      "probabilita": 50,
       "titolare": false
     },
     "6212": {
       "nome": "Zarraga",
       "squadra": "Udinese",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 40,
       "titolare": false
     },
     "6215": {
       "nome": "Lucca",
       "squadra": "Napoli",
       "ruolo": "A",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "6217": {
       "nome": "Bisseck",
       "squadra": "Inter",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6218": {
       "nome": "Oristanio",
       "squadra": "Torino",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 55,
       "titolare": false
     },
     "6225": {
       "nome": "El Azzouzi O.",
       "squadra": "Bologna",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "6229": {
       "nome": "Tourè E.",
       "squadra": "Parma",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 75,
       "titolare": true
     },
     "6230": {
       "nome": "Dossena",
       "squadra": "Como",
       "ruolo": "D",
-      "probabilita": 15,
+      "probabilita": 20,
       "titolare": false
     },
     "6238": {
       "nome": "Oyono A.",
       "squadra": "Frosinone",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6246": {
       "nome": "Lipani",
       "squadra": "Sassuolo",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "6248": {
       "nome": "Stankovic F.",
       "squadra": "Venezia",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6274": {
       "nome": "Diouf",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6294": {
       "nome": "Ndour",
       "squadra": "Fiorentina",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6319": {
       "nome": "Leite",
       "squadra": "Lazio",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 50,
+      "titolare": false
     },
     "6320": {
       "nome": "Doekhi",
@@ -5549,21 +5559,28 @@
       "nome": "Sanchez Ro.",
       "squadra": "Como",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 5,
+      "titolare": false
+    },
+    "6372": {
+      "nome": "Moreira",
+      "squadra": "Milan",
+      "ruolo": "C",
+      "probabilita": 70,
       "titolare": true
     },
     "6397": {
       "nome": "Ramos G.",
       "squadra": "Milan",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6398": {
       "nome": "Isaksen",
       "squadra": "Lazio",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6403": {
@@ -5584,112 +5601,105 @@
       "nome": "Kaba",
       "squadra": "Lecce",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 85,
+      "titolare": true
     },
     "6415": {
       "nome": "Palmisani",
       "squadra": "Frosinone",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6435": {
       "nome": "Krstovic",
       "squadra": "Atalanta",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6462": {
       "nome": "Okoye",
       "squadra": "Udinese",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6482": {
       "nome": "Mandas",
       "squadra": "Lazio",
       "ruolo": "P",
-      "probabilita": 100,
-      "titolare": true
-    },
-    "6485": {
-      "nome": "Kristensen T.",
-      "squadra": "Atalanta",
-      "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6495": {
       "nome": "Comuzzo",
       "squadra": "Torino",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6496": {
       "nome": "Bartesaghi",
       "squadra": "Milan",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "6503": {
       "nome": "Stankovic A.",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 35,
+      "titolare": false
     },
     "6506": {
       "nome": "Fini",
       "squadra": "Frosinone",
       "ruolo": "C",
-      "probabilita": 40,
+      "probabilita": 35,
       "titolare": false
     },
     "6519": {
       "nome": "Camarda",
       "squadra": "Milan",
       "ruolo": "A",
-      "probabilita": 55,
+      "probabilita": 50,
       "titolare": false
     },
     "6530": {
       "nome": "Ghedjemis",
       "squadra": "Frosinone",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6531": {
       "nome": "Jimenez A.",
       "squadra": "Fiorentina",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "6534": {
       "nome": "Perri",
       "squadra": "Torino",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6537": {
       "nome": "Goglichidze",
       "squadra": "Monza",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "6556": {
       "nome": "Noslin",
       "squadra": "Lazio",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "6569": {
@@ -5703,8 +5713,8 @@
       "nome": "Castro S.",
       "squadra": "Roma",
       "ruolo": "A",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "6592": {
       "nome": "Forson O.",
@@ -5717,22 +5727,22 @@
       "nome": "Akinsanmiro",
       "squadra": "Monza",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "6601": {
       "nome": "Kambwala",
       "squadra": "Como",
       "ruolo": "D",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "6618": {
       "nome": "Cissè A.",
       "squadra": "Milan",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "6629": {
       "nome": "Dele-Bashiru",
@@ -5752,21 +5762,21 @@
       "nome": "Marin R.",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6642": {
       "nome": "Coco",
       "squadra": "Torino",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "6646": {
       "nome": "Adams C.",
       "squadra": "Torino",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "6650": {
@@ -5780,14 +5790,14 @@
       "nome": "Lucchesi",
       "squadra": "Monza",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6660": {
       "nome": "Marcandalli",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "6662": {
@@ -5801,22 +5811,22 @@
       "nome": "Delprato",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6666": {
       "nome": "Bernabè",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6669": {
       "nome": "Bonny",
       "squadra": "Inter",
       "ruolo": "A",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "6671": {
       "nome": "Grandi",
@@ -5843,63 +5853,70 @@
       "nome": "Adzic",
       "squadra": "Sassuolo",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 80,
+      "titolare": true
+    },
+    "6678": {
+      "nome": "Liberali",
+      "squadra": "Como",
+      "ruolo": "C",
+      "probabilita": 15,
       "titolare": false
     },
     "6680": {
       "nome": "Karlstrom",
       "squadra": "Udinese",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "6681": {
       "nome": "Sagrado",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 55,
+      "probabilita": 40,
       "titolare": false
     },
     "6684": {
       "nome": "Ekkelenkamp",
       "squadra": "Udinese",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6727": {
       "nome": "Couto",
       "squadra": "Como",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "6752": {
       "nome": "Woltemade",
       "squadra": "Juventus",
       "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 85,
+      "titolare": true
     },
     "6766": {
       "nome": "Kelly L.",
       "squadra": "Juventus",
       "ruolo": "D",
-      "probabilita": 50,
+      "probabilita": 40,
       "titolare": false
     },
     "6783": {
       "nome": "Unai Gomez",
       "squadra": "Udinese",
       "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "6809": {
       "nome": "Marianucci",
       "squadra": "Napoli",
       "ruolo": "D",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "6813": {
@@ -5913,63 +5930,63 @@
       "nome": "Fadera",
       "squadra": "Cagliari",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "6821": {
       "nome": "Hainaut",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "6826": {
       "nome": "Dembelè A.",
       "squadra": "Lecce",
       "ruolo": "D",
-      "probabilita": 30,
+      "probabilita": 35,
       "titolare": false
     },
     "6827": {
       "nome": "Njie",
       "squadra": "Fiorentina",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6833": {
       "nome": "Mbangula",
       "squadra": "Bologna",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6844": {
       "nome": "Rowe",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 85,
+      "titolare": true
     },
     "6867": {
       "nome": "Valle",
       "squadra": "Como",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "6869": {
       "nome": "Ramon",
       "squadra": "Como",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "6875": {
       "nome": "Paz N.",
       "squadra": "Como",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6883": {
@@ -5983,7 +6000,7 @@
       "nome": "Moreno M.",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "6892": {
@@ -5997,7 +6014,7 @@
       "nome": "Kempf",
       "squadra": "Como",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 70,
       "titolare": true
     },
     "6895": {
@@ -6011,50 +6028,57 @@
       "nome": "Van Der Brempt",
       "squadra": "Sassuolo",
       "ruolo": "D",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "6898": {
       "nome": "Keita M.",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "6903": {
       "nome": "Hasa",
       "squadra": "Frosinone",
       "ruolo": "C",
-      "probabilita": 35,
+      "probabilita": 40,
       "titolare": false
     },
     "6904": {
       "nome": "Yeboah J.",
       "squadra": "Venezia",
       "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "6917": {
       "nome": "Masini",
       "squadra": "Frosinone",
       "ruolo": "C",
-      "probabilita": 55,
-      "titolare": false
+      "probabilita": 80,
+      "titolare": true
     },
     "6925": {
       "nome": "Palma",
       "squadra": "Udinese",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
+    },
+    "6956": {
+      "nome": "Solet",
+      "squadra": "Udinese",
+      "ruolo": "D",
+      "probabilita": 25,
+      "titolare": false
     },
     "6966": {
       "nome": "Butez",
       "squadra": "Como",
       "ruolo": "P",
-      "probabilita": 5,
-      "titolare": false
+      "probabilita": 80,
+      "titolare": true
     },
     "6977": {
       "nome": "Otoa",
@@ -6074,28 +6098,28 @@
       "nome": "Rensch",
       "squadra": "Roma",
       "ruolo": "D",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "6989": {
       "nome": "Tiago Gabriel",
       "squadra": "Lecce",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 75,
       "titolare": true
     },
     "6990": {
       "nome": "Veiga D.",
       "squadra": "Lecce",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "6994": {
       "nome": "Perez K.",
       "squadra": "Venezia",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "7001": {
@@ -6103,41 +6127,41 @@
       "squadra": "Lecce",
       "ruolo": "A",
       "probabilita": 55,
-      "titolare": false
+      "titolare": true
     },
     "7012": {
       "nome": "Provstgaard",
       "squadra": "Lazio",
       "ruolo": "D",
-      "probabilita": 50,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "7014": {
       "nome": "Smolcic I.",
       "squadra": "Como",
       "ruolo": "D",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "7017": {
       "nome": "Douvikas",
       "squadra": "Como",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 70,
       "titolare": true
     },
     "7023": {
       "nome": "Pellegrino M.",
       "squadra": "Fiorentina",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "7036": {
       "nome": "Bakola",
       "squadra": "Sassuolo",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "7048": {
@@ -6146,13 +6170,6 @@
       "ruolo": "P",
       "probabilita": 5,
       "titolare": false
-    },
-    "7060": {
-      "nome": "Cacciamani",
-      "squadra": "Torino",
-      "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
     },
     "7068": {
       "nome": "Vitik",
@@ -6165,21 +6182,21 @@
       "nome": "Sucic P.",
       "squadra": "Inter",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7071": {
       "nome": "Esposito F.P.",
       "squadra": "Inter",
       "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 65,
+      "titolare": true
     },
     "7078": {
       "nome": "Mastantuono",
       "squadra": "Fiorentina",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7092": {
@@ -6193,35 +6210,28 @@
       "nome": "Lang",
       "squadra": "Napoli",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "7126": {
       "nome": "Baturina",
       "squadra": "Como",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
-    },
-    "7127": {
-      "nome": "Addai",
-      "squadra": "Como",
-      "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "7131": {
       "nome": "Floriani Mussolini",
       "squadra": "Lazio",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7138": {
       "nome": "Ordonez C.",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 50,
+      "probabilita": 40,
       "titolare": false
     },
     "7146": {
@@ -6235,7 +6245,7 @@
       "nome": "Odenthal",
       "squadra": "Sassuolo",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "7162": {
@@ -6249,7 +6259,7 @@
       "nome": "Liteta",
       "squadra": "Cagliari",
       "ruolo": "C",
-      "probabilita": 25,
+      "probabilita": 20,
       "titolare": false
     },
     "7172": {
@@ -6263,28 +6273,28 @@
       "nome": "Joao Mario",
       "squadra": "Fiorentina",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "7181": {
       "nome": "Wesley",
       "squadra": "Roma",
       "ruolo": "D",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 90,
+      "titolare": true
     },
     "7182": {
       "nome": "Ndaba",
       "squadra": "Lecce",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7183": {
       "nome": "Aboukhlal",
       "squadra": "Torino",
       "ruolo": "C",
-      "probabilita": 30,
+      "probabilita": 40,
       "titolare": false
     },
     "7198": {
@@ -6305,8 +6315,8 @@
       "nome": "Jashari",
       "squadra": "Milan",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 55,
+      "titolare": false
     },
     "7208": {
       "nome": "Miller L.",
@@ -6333,14 +6343,14 @@
       "nome": "Bernasconi",
       "squadra": "Atalanta",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7220": {
       "nome": "Belghali",
       "squadra": "Torino",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7223": {
@@ -6354,14 +6364,14 @@
       "nome": "Fernandez T.",
       "squadra": "Venezia",
       "ruolo": "C",
-      "probabilita": 35,
+      "probabilita": 30,
       "titolare": false
     },
     "7235": {
       "nome": "Troilo",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7238": {
@@ -6369,13 +6379,13 @@
       "squadra": "Monza",
       "ruolo": "D",
       "probabilita": 60,
-      "titolare": false
+      "titolare": true
     },
     "7240": {
       "nome": "Siebert",
       "squadra": "Lecce",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7248": {
@@ -6389,7 +6399,7 @@
       "nome": "Stulic",
       "squadra": "Lecce",
       "ruolo": "A",
-      "probabilita": 50,
+      "probabilita": 60,
       "titolare": false
     },
     "7253": {
@@ -6403,21 +6413,21 @@
       "nome": "Britschgi",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "7268": {
       "nome": "Rodriguez Ju.",
       "squadra": "Cagliari",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "7274": {
       "nome": "Zè Pedro",
       "squadra": "Cagliari",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 85,
       "titolare": true
     },
     "7276": {
@@ -6431,14 +6441,14 @@
       "nome": "Valdepenas",
       "squadra": "Fiorentina",
       "ruolo": "D",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "7301": {
       "nome": "Tornqvist",
       "squadra": "Monza",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7307": {
@@ -6452,7 +6462,7 @@
       "nome": "Romano",
       "squadra": "Cagliari",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7312": {
@@ -6466,22 +6476,22 @@
       "nome": "Taylor K.",
       "squadra": "Lazio",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7317": {
       "nome": "Trepy",
       "squadra": "Cagliari",
       "ruolo": "A",
-      "probabilita": 10,
+      "probabilita": 40,
       "titolare": false
     },
     "7318": {
       "nome": "Gandelman",
       "squadra": "Lecce",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7319": {
       "nome": "Fofana Sa.",
@@ -6494,7 +6504,7 @@
       "nome": "Ngom",
       "squadra": "Lecce",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7326": {
@@ -6515,7 +6525,7 @@
       "nome": "Bijlow",
       "squadra": "Genoa",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7337": {
@@ -6529,8 +6539,8 @@
       "nome": "Amorim",
       "squadra": "Genoa",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 40,
+      "titolare": false
     },
     "7345": {
       "nome": "Przyborek",
@@ -6572,7 +6582,7 @@
       "squadra": "Cagliari",
       "ruolo": "A",
       "probabilita": 60,
-      "titolare": false
+      "titolare": true
     },
     "7408": {
       "nome": "Lisman",
@@ -6585,35 +6595,35 @@
       "nome": "Meichtry",
       "squadra": "Genoa",
       "ruolo": "C",
-      "probabilita": 40,
+      "probabilita": 50,
       "titolare": false
     },
     "7410": {
       "nome": "Viery",
       "squadra": "Fiorentina",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7411": {
       "nome": "Daffara",
       "squadra": "Parma",
       "ruolo": "P",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "7412": {
       "nome": "Milla",
       "squadra": "Como",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7413": {
       "nome": "Puczka",
       "squadra": "Genoa",
       "ruolo": "D",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "7414": {
@@ -6627,21 +6637,21 @@
       "nome": "Chakvetadze",
       "squadra": "Udinese",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "7436": {
       "nome": "Alajbegovic",
       "squadra": "Juventus",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7449": {
       "nome": "Rrahmani Al.",
       "squadra": "Venezia",
       "ruolo": "A",
-      "probabilita": 55,
+      "probabilita": 50,
       "titolare": false
     },
     "7454": {
@@ -6676,36 +6686,36 @@
       "nome": "Oulai",
       "squadra": "Fiorentina",
       "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 60,
       "titolare": false
     },
     "7467": {
       "nome": "Calvani",
       "squadra": "Frosinone",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "7469": {
       "nome": "Bracaglia",
       "squadra": "Frosinone",
       "ruolo": "D",
-      "probabilita": 55,
-      "titolare": false
+      "probabilita": 60,
+      "titolare": true
     },
     "7472": {
       "nome": "Calò",
       "squadra": "Frosinone",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7473": {
       "nome": "Cichella",
       "squadra": "Frosinone",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7475": {
       "nome": "Strajnar",
@@ -6718,70 +6728,70 @@
       "nome": "Bakoune",
       "squadra": "Monza",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 55,
+      "titolare": false
     },
     "7477": {
       "nome": "Colombo L.",
       "squadra": "Monza",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 40,
+      "titolare": false
     },
     "7481": {
       "nome": "Dagasso",
       "squadra": "Venezia",
       "ruolo": "C",
-      "probabilita": 35,
+      "probabilita": 30,
       "titolare": false
     },
     "7482": {
       "nome": "Lauberbach",
       "squadra": "Venezia",
       "ruolo": "A",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7483": {
       "nome": "Alhassane",
       "squadra": "Bologna",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 35,
+      "titolare": false
     },
     "7484": {
       "nome": "Adams A.",
       "squadra": "Venezia",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "7485": {
       "nome": "Mangas",
       "squadra": "Monza",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "7523": {
       "nome": "Varela G.",
       "squadra": "Monza",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7525": {
       "nome": "Diawara S.",
       "squadra": "Milan",
       "ruolo": "D",
-      "probabilita": 55,
+      "probabilita": 35,
       "titolare": false
     },
     "7526": {
       "nome": "Comert",
       "squadra": "Torino",
       "ruolo": "D",
-      "probabilita": 55,
+      "probabilita": 40,
       "titolare": false
     },
     "7528": {
@@ -6795,8 +6805,8 @@
       "nome": "Koulierakis",
       "squadra": "Roma",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 50,
+      "titolare": false
     },
     "7532": {
       "nome": "Kofler",
@@ -6823,7 +6833,7 @@
       "nome": "Fitz-Jim",
       "squadra": "Torino",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 80,
       "titolare": true
     },
     "7536": {
@@ -6838,13 +6848,13 @@
       "squadra": "Genoa",
       "ruolo": "D",
       "probabilita": 55,
-      "titolare": false
+      "titolare": true
     },
     "7538": {
       "nome": "Halhal",
       "squadra": "Venezia",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7540": {
@@ -6858,14 +6868,14 @@
       "nome": "Robinson J.",
       "squadra": "Monza",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "7547": {
       "nome": "Kevin Carlos",
       "squadra": "Cagliari",
       "ruolo": "A",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "7548": {
@@ -6879,7 +6889,7 @@
       "nome": "Schmid",
       "squadra": "Frosinone",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7553": {
@@ -6893,7 +6903,7 @@
       "nome": "Romero D.",
       "squadra": "Parma",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "7556": {
@@ -6928,42 +6938,42 @@
       "nome": "Comotto",
       "squadra": "Milan",
       "ruolo": "C",
-      "probabilita": 35,
+      "probabilita": 25,
       "titolare": false
     },
     "7573": {
       "nome": "Cinquegrano",
       "squadra": "Sassuolo",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "7574": {
       "nome": "Foe Ondoa",
       "squadra": "Monza",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7575": {
       "nome": "Mout",
       "squadra": "Monza",
       "ruolo": "C",
-      "probabilita": 40,
+      "probabilita": 30,
       "titolare": false
     },
     "7579": {
       "nome": "Massolin",
       "squadra": "Cagliari",
       "ruolo": "C",
-      "probabilita": 40,
-      "titolare": false
+      "probabilita": 55,
+      "titolare": true
     },
     "7580": {
       "nome": "Sutalo J.",
       "squadra": "Lazio",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 55,
       "titolare": true
     },
     "7581": {
@@ -6977,22 +6987,22 @@
       "nome": "Lulli",
       "squadra": "Roma",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7600": {
       "nome": "Osmajic",
       "squadra": "Genoa",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7602": {
       "nome": "Fatah",
       "squadra": "Lecce",
       "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 80,
+      "titolare": true
     },
     "7605": {
       "nome": "Tchato",
@@ -7012,7 +7022,7 @@
       "nome": "Birligea",
       "squadra": "Frosinone",
       "ruolo": "A",
-      "probabilita": 40,
+      "probabilita": 60,
       "titolare": false
     },
     "7611": {
@@ -7026,43 +7036,43 @@
       "nome": "Bobcek",
       "squadra": "Frosinone",
       "ruolo": "A",
-      "probabilita": 60,
+      "probabilita": 50,
       "titolare": false
     },
     "7615": {
       "nome": "Drobnic",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7618": {
       "nome": "Hutchinson",
       "squadra": "Milan",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 75,
       "titolare": true
     },
     "7619": {
       "nome": "Monteiro J.",
       "squadra": "Lecce",
       "ruolo": "C",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7620": {
       "nome": "Zeballos",
       "squadra": "Monza",
       "ruolo": "A",
-      "probabilita": 60,
+      "probabilita": 55,
       "titolare": false
     },
     "7621": {
       "nome": "Sugawara",
       "squadra": "Cagliari",
       "ruolo": "D",
-      "probabilita": 100,
-      "titolare": true
+      "probabilita": 60,
+      "titolare": false
     },
     "7622": {
       "nome": "Robinho Junior",
@@ -7082,7 +7092,7 @@
       "nome": "Braganca",
       "squadra": "Torino",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "7625": {
@@ -7096,21 +7106,21 @@
       "nome": "Sierro",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 100,
+      "probabilita": 85,
       "titolare": true
     },
     "7629": {
       "nome": "Libra",
       "squadra": "Bologna",
       "ruolo": "C",
-      "probabilita": 55,
+      "probabilita": 30,
       "titolare": false
     },
     "7633": {
       "nome": "Obric",
       "squadra": "Atalanta",
       "ruolo": "D",
-      "probabilita": 100,
+      "probabilita": 90,
       "titolare": true
     },
     "7634": {
@@ -7124,7 +7134,7 @@
       "nome": "Esteban",
       "squadra": "Lecce",
       "ruolo": "A",
-      "probabilita": 100,
+      "probabilita": 60,
       "titolare": true
     },
     "7652": {
@@ -7132,6 +7142,27 @@
       "squadra": "Udinese",
       "ruolo": "A",
       "probabilita": 35,
+      "titolare": false
+    },
+    "7653": {
+      "nome": "Sonzogni",
+      "squadra": "Atalanta",
+      "ruolo": "P",
+      "probabilita": 1,
+      "titolare": false
+    },
+    "7654": {
+      "nome": "Plaia",
+      "squadra": "Atalanta",
+      "ruolo": "D",
+      "probabilita": 15,
+      "titolare": false
+    },
+    "7655": {
+      "nome": "Idele",
+      "squadra": "Atalanta",
+      "ruolo": "D",
+      "probabilita": 15,
       "titolare": false
     }
   }
