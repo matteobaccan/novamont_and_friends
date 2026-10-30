@@ -4724,7 +4724,8 @@ function rigaConsiglio(g, titolare) {
     const rigori = g.rigori ? badgeRigorista(g.rigori) : '';
 
     return `
-        <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}${fuoriCerto ? ' squalificato' : ''}${g.infortunio ? ' infortunato' : ''}">
+        <div class="consiglio-row ${titolare ? 'titolare' : 'panca'}${fuoriCerto ? ' squalificato' : ''}${g.infortunio ? ' infortunato' : ''}"
+            data-pid="${g.pid}" role="button" tabindex="0" aria-expanded="false">
             <span class="ruolo-${info.role}">${info.role}</span>
             <span class="consiglio-nome">
                 <span class="consiglio-nome-testo">${info.name}${rigori}</span>
@@ -4738,6 +4739,120 @@ function rigaConsiglio(g, titolare) {
             <span class="consiglio-atteso" title="Valore atteso: probabilità x rendimento">${g.atteso.toFixed(2)}</span>
         </div>
     `;
+}
+
+// Lo stato nella formazione, con le stesse parole che usa rigaGiocatore nelle
+// formazioni delle partite
+const STATO_STORICO = { s: 'titolare', b: 'panchina', in: 'entrato', out: 'sostituito' };
+
+// Tutte le giornate del giocatore, dalla più recente. Nella scheda Formazione si
+// decide chi schierare: il suggeritore dice cosa aspettarsi, questo dice cosa ha
+// fatto davvero.
+//
+// Le formazioni non coprono sempre la rosa intera: una squadra può consegnarne
+// 19 su 25, e quel giocatore in quella giornata non compare da nessuna parte.
+// Le giornate così restano in elenco come "non convocato", altrimenti lo storico
+// salterebbe dalla 5 alla 1 senza dire perché. Si parte dalla sua prima
+// comparsa, così un acquisto di gennaio non si porta dietro un autunno di righe
+// vuote in cui non era nemmeno nella lega.
+function storicoGiocatore(pid) {
+    const rounds = [...((fantacalcioData && fantacalcioData.rounds) || [])].sort((a, b) => b.round - a.round);
+
+    const trova = (r) => {
+        for (const m of r.matches || []) {
+            if (!m.lineups) continue;
+            for (const lato of ['home', 'away']) {
+                const g = (m.lineups[lato] || []).find(x => x.p === pid);
+                if (g) return { avversario: lato === 'home' ? m.awayTeam : m.homeTeam, giocatore: g };
+            }
+        }
+        return null;
+    };
+
+    const storico = rounds.map(r => ({ round: r.round, ...(trova(r) || { avversario: null, giocatore: null }) }));
+
+    // Tagliata la coda di giornate precedenti alla prima in cui compare
+    const ultimaUtile = storico.reduce((ultima, voce, i) => (voce.giocatore ? i : ultima), -1);
+    return ultimaUtile < 0 ? [] : storico.slice(0, ultimaUtile + 1);
+}
+
+function htmlStoricoGiocatore(pid) {
+    const info = anagraficaGiocatore(pid);
+    const storico = storicoGiocatore(pid);
+
+    const corpo = storico.length === 0
+        ? '<p class="storico-vuoto">Non è ancora comparso in nessuna formazione.</p>'
+        : storico.map(({ round, avversario, giocatore: g }) => {
+            // Le giornate senza voto restano in elenco: anche "non giocato" tre
+            // volte di fila è un'informazione su chi schierare.
+            const senzaVoto = !g || g.b === undefined;
+            const fantavoto = !g ? 'non convocato' : g.b === undefined ? (g.sv ? 's.v.' : 'non giocato') : g.b;
+            const scarto = senzaVoto ? 0 : g.b - g.v;
+            const classeVoto = senzaVoto ? 'voto-assente'
+                : scarto > 0 ? 'voto-bonus' : scarto < 0 ? 'voto-malus' : 'voto-neutro';
+
+            // Senza voto non c'è niente da incolonnare e le parole sono lunghe
+            // ("non convocato" non entra in una cella da numero): le tre celle
+            // di destra diventano una sola.
+            const destra = senzaVoto
+                ? `<span class="storico-esito">${fantavoto}</span>`
+                : `<span class="storico-voto">${g.v}</span>
+                   <span class="storico-eventi">${badgeEventi(g.e)}</span>
+                   <span class="storico-fantavoto ${classeVoto}">${fantavoto}</span>`;
+
+            return `
+                <div class="storico-row${senzaVoto ? ' senza-voto' : ''}">
+                    <span class="storico-giornata">G${round}</span>
+                    <span class="storico-avversario">${avversario || ''}</span>
+                    <span class="storico-stato">${g ? (STATO_STORICO[g.t] || '') : ''}</span>
+                    ${destra}
+                </div>
+            `;
+        }).join('');
+
+    return `
+        <div class="storico-header">
+            <span class="storico-titolo">
+                <strong>${info.name}</strong> · ${info.role} · ${info.serieA || ''}
+            </span>
+            <button type="button" class="storico-close" aria-label="Chiudi"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="storico-lista">${corpo}</div>
+    `;
+}
+
+// Un clic sulla riga apre lo storico subito sotto, uno solo per volta: sul
+// telefono due pannelli aperti fanno perdere il filo di dove si era.
+function collegaStoricoGiocatori(contenitore) {
+    const chiudi = (riga) => {
+        const pannello = riga.nextElementSibling;
+        if (pannello && pannello.classList.contains('consiglio-storico')) pannello.remove();
+        riga.classList.remove('aperta');
+        riga.setAttribute('aria-expanded', 'false');
+    };
+
+    contenitore.querySelectorAll('.consiglio-row[data-pid]').forEach(riga => {
+        const apri = () => {
+            const eraAperta = riga.classList.contains('aperta');
+            contenitore.querySelectorAll('.consiglio-row.aperta').forEach(chiudi);
+            if (eraAperta) return;
+
+            const pannello = document.createElement('div');
+            pannello.className = 'consiglio-storico';
+            pannello.innerHTML = htmlStoricoGiocatore(Number(riga.dataset.pid));
+            riga.parentNode.insertBefore(pannello, riga.nextSibling);
+            riga.classList.add('aperta');
+            riga.setAttribute('aria-expanded', 'true');
+
+            pannello.querySelector('.storico-close')
+                .addEventListener('click', e => { e.stopPropagation(); chiudi(riga); });
+        };
+
+        riga.addEventListener('click', apri);
+        riga.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); apri(); }
+        });
+    });
 }
 
 function displayFormazione() {
@@ -4810,13 +4925,17 @@ function displayFormazione() {
                     </span>
                 </div>
                 <div class="consiglio-lista">
+                    <!-- Le stesse classi delle righe dati: così le colonne che
+                         il mobile nasconde spariscono anche dall'intestazione,
+                         che altrimenti resta larga otto e va a capo -->
                     <div class="consiglio-row intestazione">
-                        <span>R</span><span>Giocatore</span><span>Team</span>
-                        <span title="Forma recente rispetto alla media">Forma</span>
-                        <span></span>
-                        <span title="Rendimento medio quando gioca">Resa</span>
-                        <span title="Probabilità di scendere in campo">Gioca</span>
-                        <span title="Valore atteso">Atteso</span>
+                        <span>R</span><span class="consiglio-nome">Giocatore</span>
+                        <span class="consiglio-serieA">Team</span>
+                        <span class="consiglio-forma" title="Forma recente rispetto alla media">Forma</span>
+                        <span class="consiglio-nota"></span>
+                        <span class="consiglio-qualita" title="Rendimento medio quando gioca">Resa</span>
+                        <span class="consiglio-prob" title="Probabilità di scendere in campo">Gioca</span>
+                        <span class="consiglio-atteso" title="Valore atteso">Atteso</span>
                     </div>
                     ${f.undici.map(g => rigaConsiglio(g, true)).join('')}
                     <div class="consiglio-separatore">
@@ -4941,6 +5060,8 @@ function displayFormazione() {
             displayFormazione();
         });
     }
+
+    collegaStoricoGiocatori(contenitore);
 
     // Il bilancio arriva da un file a parte e dopo: la formazione non lo aspetta
     const stagione = currentSeasonId;
