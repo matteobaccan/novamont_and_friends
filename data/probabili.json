@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-11-02T16:55:16.068Z",
+  "aggiornato": "2026-11-02T23:49:05.708Z",
   "fonte": "https://www.fantacalcio.it/probabili-formazioni-serie-a",
   "squadre": 20,
   "prossimoTurno": {
@@ -217,13 +217,13 @@
         "data": "2026-11-08T11:30Z",
         "avversario": "Napoli",
         "esiti": {
-          "vittoria": 0.294,
+          "vittoria": 0.304,
           "pareggio": 0.261,
-          "sconfitta": 0.445,
+          "sconfitta": 0.435,
           "quote": {
-            "casa": 2.05,
+            "casa": 2.1,
             "pareggio": 3.5,
-            "fuori": 3.1,
+            "fuori": 3,
             "fonte": "DraftKings"
           }
         }
@@ -269,12 +269,12 @@
         "data": "2026-11-07T19:45Z",
         "avversario": "Sassuolo",
         "esiti": {
-          "vittoria": 0.705,
-          "pareggio": 0.173,
-          "sconfitta": 0.121,
+          "vittoria": 0.711,
+          "pareggio": 0.167,
+          "sconfitta": 0.122,
           "quote": {
             "casa": 1.29,
-            "pareggio": 5.25,
+            "pareggio": 5.5,
             "fuori": 7.5,
             "fonte": "DraftKings"
           }
@@ -347,13 +347,13 @@
         "data": "2026-11-07T14:00Z",
         "avversario": "Cagliari",
         "esiti": {
-          "vittoria": 0.381,
+          "vittoria": 0.388,
           "pareggio": 0.261,
-          "sconfitta": 0.358,
+          "sconfitta": 0.351,
           "quote": {
-            "casa": 2.55,
+            "casa": 2.6,
             "pareggio": 3.5,
-            "fuori": 2.4,
+            "fuori": 2.35,
             "fonte": "DraftKings"
           }
         }
@@ -373,13 +373,13 @@
         "data": "2026-11-08T19:45Z",
         "avversario": "Fiorentina",
         "esiti": {
-          "vittoria": 0.48,
-          "pareggio": 0.262,
-          "sconfitta": 0.258,
+          "vittoria": 0.456,
+          "pareggio": 0.272,
+          "sconfitta": 0.272,
           "quote": {
-            "casa": 3.55,
-            "pareggio": 3.5,
-            "fuori": 1.91,
+            "casa": 3.35,
+            "pareggio": 3.35,
+            "fuori": 2,
             "fonte": "DraftKings"
           }
         }
@@ -399,13 +399,13 @@
         "data": "2026-11-08T11:30Z",
         "avversario": "Lazio",
         "esiti": {
-          "vittoria": 0.445,
+          "vittoria": 0.435,
           "pareggio": 0.261,
-          "sconfitta": 0.294,
+          "sconfitta": 0.304,
           "quote": {
-            "casa": 2.05,
+            "casa": 2.1,
             "pareggio": 3.5,
-            "fuori": 3.1,
+            "fuori": 3,
             "fonte": "DraftKings"
           }
         }
@@ -503,13 +503,13 @@
         "data": "2026-11-07T14:00Z",
         "avversario": "Frosinone",
         "esiti": {
-          "vittoria": 0.358,
+          "vittoria": 0.351,
           "pareggio": 0.261,
-          "sconfitta": 0.381,
+          "sconfitta": 0.388,
           "quote": {
-            "casa": 2.55,
+            "casa": 2.6,
             "pareggio": 3.5,
-            "fuori": 2.4,
+            "fuori": 2.35,
             "fonte": "DraftKings"
           }
         }
@@ -526,33 +526,29 @@
     },
     "Atalanta": {
       "prossima": {
-        "data": "2026-11-02T19:45Z",
-        "avversario": "Parma",
+        "data": "2026-11-08T14:00Z",
+        "avversario": "Monza",
         "esiti": {
-          "vittoria": 0.645,
-          "pareggio": 0.201,
-          "sconfitta": 0.154,
+          "vittoria": 0.458,
+          "pareggio": 0.251,
+          "sconfitta": 0.291,
           "quote": {
-            "casa": 1.43,
-            "pareggio": 4.6,
-            "fuori": 6,
+            "casa": 3.15,
+            "pareggio": 3.65,
+            "fuori": 2,
             "fonte": "DraftKings"
           }
         }
       },
       "precedente": {
-        "data": "2026-10-29T19:45Z",
-        "competizione": "Serie A",
-        "avversario": "Fiorentina"
-      },
-      "giorniRiposo": 4,
-      "partiteUltimaSettimana": 1,
-      "dopo": {
         "data": "2026-11-05T17:45Z",
         "competizione": "Conference League",
         "avversario": "Kairat Almaty"
       },
-      "giorniAllaSuccessiva": 3
+      "giorniRiposo": 3,
+      "partiteUltimaSettimana": 2,
+      "dopo": null,
+      "giorniAllaSuccessiva": null
     },
     "Lecce": {
       "prossima": {
@@ -582,46 +578,42 @@
     },
     "Sassuolo": {
       "prossima": {
-        "data": "2026-11-02T17:30Z",
-        "avversario": "Fiorentina",
+        "data": "2026-11-07T19:45Z",
+        "avversario": "Roma",
         "esiti": {
-          "vittoria": 0.328,
-          "pareggio": 0.263,
-          "sconfitta": 0.409,
+          "vittoria": 0.122,
+          "pareggio": 0.167,
+          "sconfitta": 0.711,
           "quote": {
-            "casa": 2.8,
-            "pareggio": 3.5,
-            "fuori": 2.25,
+            "casa": 1.29,
+            "pareggio": 5.5,
+            "fuori": 7.5,
             "fonte": "DraftKings"
           }
         }
       },
       "precedente": {
-        "data": "2026-10-27T17:30Z",
+        "data": "2026-11-02T17:30Z",
         "competizione": "Serie A",
-        "avversario": "Lazio"
+        "avversario": "Fiorentina"
       },
-      "giorniRiposo": 6,
+      "giorniRiposo": 5,
       "partiteUltimaSettimana": 1,
-      "dopo": {
-        "data": "2026-11-07T19:45Z",
-        "competizione": "Serie A",
-        "avversario": "AS Roma"
-      },
-      "giorniAllaSuccessiva": 5
+      "dopo": null,
+      "giorniAllaSuccessiva": null
     },
     "Monza": {
       "prossima": {
         "data": "2026-11-08T14:00Z",
         "avversario": "Atalanta",
         "esiti": {
-          "vittoria": 0.284,
-          "pareggio": 0.249,
-          "sconfitta": 0.467,
+          "vittoria": 0.291,
+          "pareggio": 0.251,
+          "sconfitta": 0.458,
           "quote": {
-            "casa": 3.2,
+            "casa": 3.15,
             "pareggio": 3.65,
-            "fuori": 1.95,
+            "fuori": 2,
             "fonte": "DraftKings"
           }
         }
@@ -638,76 +630,68 @@
     },
     "Fiorentina": {
       "prossima": {
-        "data": "2026-11-02T17:30Z",
-        "avversario": "Sassuolo",
+        "data": "2026-11-08T19:45Z",
+        "avversario": "Juventus",
         "esiti": {
-          "vittoria": 0.409,
-          "pareggio": 0.263,
-          "sconfitta": 0.328,
+          "vittoria": 0.272,
+          "pareggio": 0.272,
+          "sconfitta": 0.456,
           "quote": {
-            "casa": 2.8,
-            "pareggio": 3.5,
-            "fuori": 2.25,
+            "casa": 3.35,
+            "pareggio": 3.35,
+            "fuori": 2,
             "fonte": "DraftKings"
           }
         }
       },
       "precedente": {
-        "data": "2026-10-29T19:45Z",
+        "data": "2026-11-02T17:30Z",
         "competizione": "Serie A",
-        "avversario": "Atalanta"
+        "avversario": "Sassuolo"
       },
-      "giorniRiposo": 4,
+      "giorniRiposo": 6,
       "partiteUltimaSettimana": 1,
-      "dopo": {
-        "data": "2026-11-08T19:45Z",
-        "competizione": "Serie A",
-        "avversario": "Juventus"
-      },
-      "giorniAllaSuccessiva": 6
+      "dopo": null,
+      "giorniAllaSuccessiva": null
     },
     "Parma": {
       "prossima": {
-        "data": "2026-11-02T19:45Z",
-        "avversario": "Atalanta",
+        "data": "2026-11-07T17:00Z",
+        "avversario": "Bologna",
         "esiti": {
-          "vittoria": 0.154,
-          "pareggio": 0.201,
-          "sconfitta": 0.645,
+          "vittoria": 0.218,
+          "pareggio": 0.273,
+          "sconfitta": 0.509,
           "quote": {
-            "casa": 1.43,
-            "pareggio": 4.6,
-            "fuori": 6,
+            "casa": 4.2,
+            "pareggio": 3.35,
+            "fuori": 1.8,
             "fonte": "DraftKings"
           }
         }
       },
       "precedente": {
-        "data": "2026-10-28T17:30Z",
+        "data": "2026-11-02T19:45Z",
         "competizione": "Serie A",
-        "avversario": "Udinese"
+        "avversario": "Atalanta"
       },
       "giorniRiposo": 5,
       "partiteUltimaSettimana": 1,
-      "dopo": {
-        "data": "2026-11-07T17:00Z",
-        "competizione": "Serie A",
-        "avversario": "Bologna"
-      },
-      "giorniAllaSuccessiva": 5
+      "dopo": null,
+      "giorniAllaSuccessiva": null
     },
     "Udinese": {
       "prossima": {
         "data": "2026-11-06T19:45Z",
         "avversario": "Venezia",
         "esiti": {
-          "vittoria": 0.297,
-          "pareggio": 0.263,
-          "sconfitta": 0.439,
+          "vittoria": 0.3,
+          "pareggio": 0.265,
+          "sconfitta": 0.435,
           "quote": {
             "casa": 2.1,
-            "pareggio": 3.5,
-            "fuori": 3.1,
+            "pareggio": 3.45,
+            "fuori": 3.05,
             "fonte": "DraftKings"
           }
         }
@@ -727,13 +711,13 @@
         "data": "2026-11-06T19:45Z",
         "avversario": "Udinese",
         "esiti": {
-          "vittoria": 0.439,
-          "pareggio": 0.263,
-          "sconfitta": 0.297,
+          "vittoria": 0.435,
+          "pareggio": 0.265,
+          "sconfitta": 0.3,
           "quote": {
             "casa": 2.1,
-            "pareggio": 3.5,
-            "fuori": 3.1,
+            "pareggio": 3.45,
+            "fuori": 3.05,
             "fonte": "DraftKings"
           }
         }
@@ -750,19 +734,6 @@
     }
   },
   "partiteCalendario": [
-    {
-      "data": "2026-10-18T18:45Z",
-      "competizione": "Serie A",
-      "casa": "Juventus",
-      "fuori": "Lazio",
-      "annullata": false,
-      "quote": {
-        "casa": 1.63,
-        "pareggio": 3.75,
-        "fuori": 5,
-        "fonte": "DraftKings"
-      }
-    },
     {
       "data": "2026-10-19T16:30Z",
       "competizione": "Serie A",
@@ -1953,9 +1924,9 @@
       "fuori": "Lille",
       "annullata": false,
       "quote": {
-        "casa": 1.83,
-        "pareggio": 4.1,
-        "fuori": 3.85,
+        "casa": 1.8,
+        "pareggio": 4.2,
+        "fuori": 3.9,
         "fonte": "DraftKings"
       }
     },
@@ -1979,9 +1950,9 @@
       "fuori": "Slovan Bratislava",
       "annullata": false,
       "quote": {
-        "casa": 1.41,
+        "casa": 1.4,
         "pareggio": 5.25,
-        "fuori": 6.5,
+        "fuori": 7,
         "fonte": "DraftKings"
       }
     },
@@ -1992,9 +1963,9 @@
       "fuori": "AS Roma",
       "annullata": false,
       "quote": {
-        "casa": 2.3,
-        "pareggio": 3.95,
-        "fuori": 2.75,
+        "casa": 2.25,
+        "pareggio": 4,
+        "fuori": 2.8,
         "fonte": "DraftKings"
       }
     },
@@ -2123,8 +2094,8 @@
       "annullata": false,
       "quote": {
         "casa": 10,
-        "pareggio": 5.75,
-        "fuori": 1.29,
+        "pareggio": 6,
+        "fuori": 1.28,
         "fonte": "DraftKings"
       }
     },
@@ -2135,8 +2106,8 @@
       "fuori": "Sabah FK",
       "annullata": false,
       "quote": {
-        "casa": 1.48,
-        "pareggio": 4.9,
+        "casa": 1.47,
+        "pareggio": 5,
         "fuori": 6,
         "fonte": "DraftKings"
       }
@@ -2148,9 +2119,9 @@
       "fuori": "Ferencvaros",
       "annullata": false,
       "quote": {
-        "casa": 1.32,
+        "casa": 1.33,
         "pareggio": 5.5,
-        "fuori": 8,
+        "fuori": 8.5,
         "fonte": "DraftKings"
       }
     },
@@ -2161,9 +2132,9 @@
       "fuori": "RB Salzburg",
       "annullata": false,
       "quote": {
-        "casa": 1.91,
-        "pareggio": 3.85,
-        "fuori": 3.7,
+        "casa": 1.95,
+        "pareggio": 3.9,
+        "fuori": 3.65,
         "fonte": "DraftKings"
       }
     },
@@ -2175,8 +2146,8 @@
       "annullata": false,
       "quote": {
         "casa": 1.95,
-        "pareggio": 3.9,
-        "fuori": 3.45,
+        "pareggio": 3.95,
+        "fuori": 3.5,
         "fonte": "DraftKings"
       }
     },
@@ -2188,7 +2159,7 @@
       "annullata": false,
       "quote": {
         "casa": 2,
-        "pareggio": 3.55,
+        "pareggio": 3.6,
         "fuori": 3.6,
         "fonte": "DraftKings"
       }
@@ -2200,9 +2171,9 @@
       "fuori": "Viktoria Plzen",
       "annullata": false,
       "quote": {
-        "casa": 2.75,
-        "pareggio": 3.75,
-        "fuori": 2.3,
+        "casa": 2.8,
+        "pareggio": 3.8,
+        "fuori": 2.35,
         "fonte": "DraftKings"
       }
     },
@@ -2215,7 +2186,7 @@
       "quote": {
         "casa": 1.8,
         "pareggio": 4,
-        "fuori": 4,
+        "fuori": 4.1,
         "fonte": "DraftKings"
       }
     },
@@ -2227,8 +2198,8 @@
       "annullata": false,
       "quote": {
         "casa": 1.83,
-        "pareggio": 3.95,
-        "fuori": 3.85,
+        "pareggio": 4,
+        "fuori": 3.9,
         "fonte": "DraftKings"
       }
     },
@@ -2240,8 +2211,8 @@
       "annullata": false,
       "quote": {
         "casa": 5.75,
-        "pareggio": 4.5,
-        "fuori": 1.51,
+        "pareggio": 4.6,
+        "fuori": 1.53,
         "fonte": "DraftKings"
       }
     },
@@ -2252,7 +2223,7 @@
       "fuori": "Braga",
       "annullata": false,
       "quote": {
-        "casa": 3.75,
+        "casa": 3.8,
         "pareggio": 3.35,
         "fuori": 2.05,
         "fonte": "DraftKings"
@@ -2266,8 +2237,8 @@
       "annullata": false,
       "quote": {
         "casa": 1.17,
-        "pareggio": 7.5,
-        "fuori": 14,
+        "pareggio": 8,
+        "fuori": 15,
         "fonte": "DraftKings"
       }
     },
@@ -2287,7 +2258,7 @@
       "annullata": false,
       "quote": {
         "casa": 2.4,
-        "pareggio": 3.55,
+        "pareggio": 3.6,
         "fuori": 2.8,
         "fonte": "DraftKings"
       }
@@ -2301,7 +2272,7 @@
       "quote": {
         "casa": 4.9,
         "pareggio": 4.1,
-        "fuori": 1.65,
+        "fuori": 1.67,
         "fonte": "DraftKings"
       }
     },
@@ -2314,7 +2285,7 @@
       "quote": {
         "casa": 8,
         "pareggio": 5,
-        "fuori": 1.36,
+        "fuori": 1.37,
         "fonte": "DraftKings"
       }
     },
@@ -2325,9 +2296,9 @@
       "fuori": "Borac Banja Luka",
       "annullata": false,
       "quote": {
-        "casa": 2.2,
-        "pareggio": 3.3,
-        "fuori": 3.3,
+        "casa": 2.25,
+        "pareggio": 3.35,
+        "fuori": 3.35,
         "fonte": "DraftKings"
       }
     },
@@ -2338,9 +2309,9 @@
       "fuori": "Inter D'Escaldes",
       "annullata": false,
       "quote": {
-        "casa": 1.06,
-        "pareggio": 12,
-        "fuori": 26,
+        "casa": 1.07,
+        "pareggio": 13,
+        "fuori": 29,
         "fonte": "DraftKings"
       }
     },
@@ -2352,7 +2323,7 @@
       "annullata": false,
       "quote": {
         "casa": 2.55,
-        "pareggio": 3.7,
+        "pareggio": 3.75,
         "fuori": 2.55,
         "fonte": "DraftKings"
       }
@@ -2364,9 +2335,9 @@
       "fuori": "Juventus",
       "annullata": false,
       "quote": {
-        "casa": 3.7,
-        "pareggio": 3.75,
-        "fuori": 1.91,
+        "casa": 3.75,
+        "pareggio": 3.8,
+        "fuori": 1.95,
         "fonte": "DraftKings"
       }
     },
@@ -2377,8 +2348,8 @@
       "fuori": "Marseille",
       "annullata": false,
       "quote": {
-        "casa": 1.4,
-        "pareggio": 5,
+        "casa": 1.41,
+        "pareggio": 5.25,
         "fuori": 6.5,
         "fonte": "DraftKings"
       }
@@ -2403,9 +2374,9 @@
       "fuori": "Union St.-Gilloise",
       "annullata": false,
       "quote": {
-        "casa": 2.15,
-        "pareggio": 3.65,
-        "fuori": 3.05,
+        "casa": 2.2,
+        "pareggio": 3.7,
+        "fuori": 3.1,
         "fonte": "DraftKings"
       }
     },
@@ -2416,8 +2387,8 @@
       "fuori": "Besiktas",
       "annullata": false,
       "quote": {
-        "casa": 3,
-        "pareggio": 3.8,
+        "casa": 3.1,
+        "pareggio": 3.85,
         "fuori": 2.15,
         "fonte": "DraftKings"
       }
@@ -2429,8 +2400,8 @@
       "fuori": "OFI Crete",
       "annullata": false,
       "quote": {
-        "casa": 2.1,
-        "pareggio": 3.65,
+        "casa": 2.15,
+        "pareggio": 3.7,
         "fuori": 3.25,
         "fonte": "DraftKings"
       }
@@ -2442,8 +2413,8 @@
       "fuori": "NK Celje",
       "annullata": false,
       "quote": {
-        "casa": 1.56,
-        "pareggio": 4.4,
+        "casa": 1.57,
+        "pareggio": 4.5,
         "fuori": 5.25,
         "fonte": "DraftKings"
       }
@@ -2455,7 +2426,7 @@
       "fuori": "Dinamo Zagreb",
       "annullata": false,
       "quote": {
-        "casa": 1.45,
+        "casa": 1.48,
         "pareggio": 4.7,
         "fuori": 6.5,
         "fonte": "DraftKings"
@@ -2469,7 +2440,7 @@
       "annullata": false,
       "quote": {
         "casa": 1.77,
-        "pareggio": 3.85,
+        "pareggio": 3.9,
         "fuori": 4.4,
         "fonte": "DraftKings"
       }
@@ -2481,8 +2452,8 @@
       "fuori": "FC Nordsjælland",
       "annullata": false,
       "quote": {
-        "casa": 1.45,
-        "pareggio": 4.9,
+        "casa": 1.47,
+        "pareggio": 5,
         "fuori": 6,
         "fonte": "DraftKings"
       }
@@ -2494,7 +2465,7 @@
       "fuori": "Egnatia",
       "annullata": false,
       "quote": {
-        "casa": 1.53,
+        "casa": 1.54,
         "pareggio": 4.3,
         "fuori": 6,
         "fonte": "DraftKings"
@@ -2507,7 +2478,7 @@
       "fuori": "Iberia 1999",
       "annullata": false,
       "quote": {
-        "casa": 1.19,
+        "casa": 1.2,
         "pareggio": 7,
         "fuori": 13,
         "fonte": "DraftKings"
@@ -2521,7 +2492,7 @@
       "annullata": false,
       "quote": {
         "casa": 1.2,
-        "pareggio": 7,
+        "pareggio": 7.5,
         "fuori": 12,
         "fonte": "DraftKings"
       }
@@ -2533,7 +2504,7 @@
       "fuori": "Pafos",
       "annullata": false,
       "quote": {
-        "casa": 1.31,
+        "casa": 1.32,
         "pareggio": 5.75,
         "fuori": 8.5,
         "fonte": "DraftKings"
@@ -2547,7 +2518,7 @@
       "annullata": false,
       "quote": {
         "casa": 5.75,
-        "pareggio": 3.95,
+        "pareggio": 4,
         "fuori": 1.59,
         "fonte": "DraftKings"
       }
@@ -2560,7 +2531,7 @@
       "annullata": false,
       "quote": {
         "casa": 1.56,
-        "pareggio": 4.3,
+        "pareggio": 4.4,
         "fuori": 5.5,
         "fonte": "DraftKings"
       }
@@ -2574,7 +2545,7 @@
       "quote": {
         "casa": 2.35,
         "pareggio": 3.4,
-        "fuori": 2.95,
+        "fuori": 3,
         "fonte": "DraftKings"
       }
     },
@@ -2594,8 +2565,8 @@
       "annullata": false,
       "quote": {
         "casa": 2.1,
-        "pareggio": 3.5,
-        "fuori": 3.1,
+        "pareggio": 3.45,
+        "fuori": 3.05,
         "fonte": "DraftKings"
       }
     },
@@ -2606,9 +2577,9 @@
       "fuori": "Frosinone",
       "annullata": false,
       "quote": {
-        "casa": 2.55,
+        "casa": 2.6,
         "pareggio": 3.5,
-        "fuori": 2.4,
+        "fuori": 2.35,
         "fonte": "DraftKings"
       }
     },
@@ -2646,7 +2617,7 @@
       "annullata": false,
       "quote": {
         "casa": 1.29,
-        "pareggio": 5.25,
+        "pareggio": 5.5,
         "fuori": 7.5,
         "fonte": "DraftKings"
       }
@@ -2658,9 +2629,9 @@
       "fuori": "Lazio",
       "annullata": false,
       "quote": {
-        "casa": 2.05,
+        "casa": 2.1,
         "pareggio": 3.5,
-        "fuori": 3.1,
+        "fuori": 3,
         "fonte": "DraftKings"
       }
     },
@@ -2684,9 +2655,9 @@
       "fuori": "Atalanta",
       "annullata": false,
       "quote": {
-        "casa": 3.2,
+        "casa": 3.15,
         "pareggio": 3.65,
-        "fuori": 1.95,
+        "fuori": 2,
         "fonte": "DraftKings"
       }
     },
@@ -2710,9 +2681,9 @@
       "fuori": "Juventus",
       "annullata": false,
       "quote": {
-        "casa": 3.55,
-        "pareggio": 3.5,
-        "fuori": 1.91,
+        "casa": 3.35,
+        "pareggio": 3.35,
+        "fuori": 2,
         "fonte": "DraftKings"
       }
     }
@@ -3589,7 +3560,7 @@
       "nome": "Zappacosta",
       "squadra": "Atalanta",
       "ruolo": "D",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "572": {
@@ -3701,7 +3672,7 @@
       "nome": "Pasalic",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 80,
+      "probabilita": 100,
       "titolare": true
     },
     "2103": {
@@ -3905,7 +3876,7 @@
       "squadra": "Parma",
       "ruolo": "D",
       "probabilita": 55,
-      "titolare": true
+      "titolare": false
     },
     "4147": {
       "nome": "Caleta-Car",
@@ -4009,7 +3980,7 @@
       "nome": "Carnesecchi",
       "squadra": "Atalanta",
       "ruolo": "P",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "4433": {
@@ -4052,7 +4023,7 @@
       "squadra": "Atalanta",
       "ruolo": "C",
       "probabilita": 60,
-      "titolare": true
+      "titolare": false
     },
     "4485": {
       "nome": "Thiam",
@@ -4317,8 +4288,8 @@
       "nome": "Zalewski",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 100,
+      "titolare": true
     },
     "5424": {
       "nome": "Amey",
@@ -4401,7 +4372,7 @@
       "nome": "Scalvini",
       "squadra": "Atalanta",
       "ruolo": "D",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "5555": {
@@ -4555,7 +4526,7 @@
       "nome": "Ederson D.S.",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "5812": {
@@ -4632,7 +4603,7 @@
       "nome": "Valeri",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "5872": {
@@ -4723,7 +4694,7 @@
       "nome": "De Ketelaere",
       "squadra": "Atalanta",
       "ruolo": "A",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "5998": {
@@ -4877,7 +4848,7 @@
       "nome": "Fabbian",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 60,
+      "probabilita": 100,
       "titolare": true
     },
     "6207": {
@@ -4926,7 +4897,7 @@
       "nome": "Tourè E.",
       "squadra": "Parma",
       "ruolo": "A",
-      "probabilita": 75,
+      "probabilita": 100,
       "titolare": true
     },
     "6230": {
@@ -5045,7 +5016,7 @@
       "nome": "Krstovic",
       "squadra": "Atalanta",
       "ruolo": "A",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "6462": {
@@ -5241,7 +5212,7 @@
       "nome": "Delprato",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "6669": {
@@ -5395,7 +5366,7 @@
       "nome": "Rowe",
       "squadra": "Atalanta",
       "ruolo": "C",
-      "probabilita": 85,
+      "probabilita": 100,
       "titolare": true
     },
     "6867": {
@@ -5465,7 +5436,7 @@
       "nome": "Keita M.",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "6903": {
@@ -5773,7 +5744,7 @@
       "nome": "Bernasconi",
       "squadra": "Atalanta",
       "ruolo": "D",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "7220": {
@@ -5801,7 +5772,7 @@
       "nome": "Troilo",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "7238": {
@@ -5843,7 +5814,7 @@
       "nome": "Britschgi",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 80,
+      "probabilita": 100,
       "titolare": true
     },
     "7268": {
@@ -6046,7 +6017,7 @@
       "nome": "Daffara",
       "squadra": "Parma",
       "ruolo": "P",
-      "probabilita": 80,
+      "probabilita": 100,
       "titolare": true
     },
     "7412": {
@@ -6334,7 +6305,7 @@
       "squadra": "Parma",
       "ruolo": "A",
       "probabilita": 60,
-      "titolare": true
+      "titolare": false
     },
     "7556": {
       "nome": "Mora",
@@ -6354,8 +6325,8 @@
       "nome": "Lontani",
       "squadra": "Parma",
       "ruolo": "A",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 100,
+      "titolare": true
     },
     "7572": {
       "nome": "Comotto",
@@ -6473,8 +6444,8 @@
       "nome": "Drobnic",
       "squadra": "Parma",
       "ruolo": "D",
-      "probabilita": 60,
-      "titolare": false
+      "probabilita": 100,
+      "titolare": true
     },
     "7618": {
       "nome": "Hutchinson",
@@ -6529,7 +6500,7 @@
       "nome": "Sierro",
       "squadra": "Parma",
       "ruolo": "C",
-      "probabilita": 85,
+      "probabilita": 100,
       "titolare": true
     },
     "7629": {
@@ -6543,7 +6514,7 @@
       "nome": "Obric",
       "squadra": "Atalanta",
       "ruolo": "D",
-      "probabilita": 90,
+      "probabilita": 100,
       "titolare": true
     },
     "7634": {
