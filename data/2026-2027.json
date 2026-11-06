@@ -1,5 +1,5 @@
 {
-  "lastUpdate": "30 Ottobre 2026, 10:00",
+  "lastUpdate": "6 Novembre 2026, 12:00",
   "season": "2026-2027",
   "teams": [
     {
@@ -8045,6 +8045,1303 @@
         }
       ],
       "generalComment": "Giornata 5 e il Real Pattagghiu scappa: 2-1 in casa del Team24, 13 punti e primo posto tutto suo. Il Team24 resta secondo a 9, lo Shakhtar Donuts fa 3-0 alla Cusiana e sale a 8 punti con i totali quasi da capolista: 380 contro 380.5. Prima vittoria larga del PARTIZAN TIRANA, 3-1 al Real Ichnusa con quattro marcatori, mentre la SM Frattese passa 3-1 a Ultimo, che resta ultimo a 4 punti. Uomo della giornata Mbangula: tripletta e 18 punti, ma dalla panchina del Pattagghiu."
+    },
+    {
+      "round": 6,
+      "date": "Novembre 2026",
+      "matches": [
+        {
+          "id": 1,
+          "homeTeam": "Real Pattagghiu",
+          "awayTeam": "Partizan Tirana",
+          "homeScore": 78.5,
+          "awayScore": 62.5,
+          "homeIdealScore": 89.5,
+          "awayIdealScore": 64.5,
+          "commentary": {
+            "caressa": "Il Real Pattagghiu non sbaglia un colpo! 78.5 a 62.5, 3-0 al PARTIZAN TIRANA: in gol Da Cunha, Isaksen e Varela, tre attaccanti oltre quota 10. La capolista vola!",
+            "bergomi": "Fabio, il PARTIZAN è partito con Provedel e Dimarco senza voto: dentro Martinez in porta, tre gol presi e 3 di fantavoto. Non bastano i gol di Pinamonti e Bernardeschi. E il Pattagghiu si permetteva di lasciare in panchina Fabbian, gol e assist per 11.5, e Soulè con due assist. Con le formazioni ideali sarebbe finita 5-0."
+          },
+          "lineups": {
+            "home": [
+              {
+                "p": 6482,
+                "t": "s",
+                "v": 6,
+                "b": 5,
+                "e": {
+                  "golSubiti": 1
+                }
+              },
+              {
+                "p": 4734,
+                "t": "s",
+                "v": 7,
+                "b": 8,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 5750,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5365,
+                "t": "s",
+                "v": 5,
+                "b": 4.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 6217,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 5559,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 6833,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6398,
+                "t": "s",
+                "v": 7.5,
+                "b": 10.5,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 5823,
+                "t": "out"
+              },
+              {
+                "p": 7523,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 5995,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 7337,
+                "t": "b"
+              },
+              {
+                "p": 4159,
+                "t": "b",
+                "v": 6,
+                "b": 7,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 256,
+                "t": "b",
+                "v": 5,
+                "b": 4.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 5831,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4263,
+                "t": "b",
+                "v": 4,
+                "b": 4
+              },
+              {
+                "p": 4870,
+                "t": "in",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6206,
+                "t": "b",
+                "v": 7.5,
+                "b": 11.5,
+                "e": {
+                  "gol": 1,
+                  "assist": 1
+                }
+              },
+              {
+                "p": 6010,
+                "t": "b",
+                "v": 5.5,
+                "b": 5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 5734,
+                "t": "b",
+                "v": 7.5,
+                "b": 9.5,
+                "e": {
+                  "assist": 2
+                }
+              },
+              {
+                "p": 6675,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 4359,
+                "t": "b"
+              }
+            ],
+            "away": [
+              {
+                "p": 2814,
+                "t": "out"
+              },
+              {
+                "p": 254,
+                "t": "out",
+                "sv": true
+              },
+              {
+                "p": 4807,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4994,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 184,
+                "t": "s",
+                "v": 6.5,
+                "b": 9.5,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 7314,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 536,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6875,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 2038,
+                "t": "s",
+                "v": 7,
+                "b": 9.5,
+                "e": {
+                  "amm": 1,
+                  "gol": 1
+                }
+              },
+              {
+                "p": 5436,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 7120,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 5116,
+                "t": "in",
+                "v": 6,
+                "b": 3,
+                "e": {
+                  "golSubiti": 3
+                }
+              },
+              {
+                "p": 1926,
+                "t": "b"
+              },
+              {
+                "p": 7347,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 4923,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 6618,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 5761,
+                "t": "b",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 4137,
+                "t": "b"
+              },
+              {
+                "p": 4378,
+                "t": "b"
+              },
+              {
+                "p": 5800,
+                "t": "b"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "homeTeam": "Real Ichnusa",
+          "awayTeam": "Cusiana",
+          "homeScore": 73,
+          "awayScore": 74,
+          "homeIdealScore": 81.5,
+          "awayIdealScore": 81,
+          "commentary": {
+            "caressa": "Che equilibrio fra Real Ichnusa e Cusiana! 2-2, 73 a 74: Mastantuono e Pulisic da una parte, Osmajic e Malen dall'altra. Un punto per uno e nessuno scappa!",
+            "bergomi": "Fabio, all'Ichnusa è costato caro Carlos Augusto, 4.5 e un giallo, mentre in panchina Bastoni segnava, 9.5 punti. Ma anche la Cusiana ha lasciato fuori Boga con un gol e Skorupski con un rigore parato, 9 di fantavoto. Con le formazioni ideali sarebbe finita 3-3."
+          },
+          "lineups": {
+            "home": [
+              {
+                "p": 4312,
+                "t": "s",
+                "v": 7,
+                "b": 6,
+                "e": {
+                  "golSubiti": 1
+                }
+              },
+              {
+                "p": 4998,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 7485,
+                "t": "s",
+                "v": 6,
+                "b": 5.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 5877,
+                "t": "s",
+                "v": 4.5,
+                "b": 4,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 4777,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 2848,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 7078,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 2423,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 7017,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 6204,
+                "t": "s",
+                "v": 7,
+                "b": 8,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 6646,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 2815,
+                "t": "b"
+              },
+              {
+                "p": 6813,
+                "t": "b"
+              },
+              {
+                "p": 7126,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5791,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5685,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 7223,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 2137,
+                "t": "b"
+              },
+              {
+                "p": 4371,
+                "t": "b"
+              },
+              {
+                "p": 6434,
+                "t": "b"
+              },
+              {
+                "p": 2120,
+                "t": "b",
+                "v": 6.5,
+                "b": 9.5,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 5833,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 2514,
+                "t": "b"
+              },
+              {
+                "p": 6660,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5526,
+                "t": "b",
+                "v": 5,
+                "b": 5
+              }
+            ],
+            "away": [
+              {
+                "p": 6966,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5862,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5555,
+                "t": "s",
+                "v": 5.5,
+                "b": 6.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 4976,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 6047,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4911,
+                "t": "s",
+                "v": 6,
+                "b": 5.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 4973,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6677,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 6752,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 7600,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 5585,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 4431,
+                "t": "b",
+                "v": 5.5,
+                "b": 2.5,
+                "e": {
+                  "golSubiti": 3
+                }
+              },
+              {
+                "p": 133,
+                "t": "b",
+                "v": 7,
+                "b": 9,
+                "e": {
+                  "golSubiti": 1,
+                  "rigParato": 1
+                }
+              },
+              {
+                "p": 6956,
+                "t": "b"
+              },
+              {
+                "p": 2296,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 5838,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 5514,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 6884,
+                "t": "b"
+              },
+              {
+                "p": 5844,
+                "t": "b"
+              },
+              {
+                "p": 5589,
+                "t": "b"
+              },
+              {
+                "p": 7252,
+                "t": "b",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 2832,
+                "t": "b",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 5131,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 4287,
+                "t": "b"
+              },
+              {
+                "p": 7374,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              }
+            ]
+          }
+        },
+        {
+          "id": 3,
+          "homeTeam": "Ultimo",
+          "awayTeam": "Shakhtar Donuts",
+          "homeScore": 65.5,
+          "awayScore": 75.5,
+          "homeIdealScore": 66.5,
+          "awayIdealScore": 79.5,
+          "commentary": {
+            "caressa": "Lo Shakhtar Donuts espugna il campo di Ultimo! 75.5 a 65.5, 2-0: Calò segna ancora, 10.5, e Pellegrino fa 10. Secondo posto, amici!",
+            "bergomi": "Fabio, lo Shakhtar ha perso Lulli e Samardzic prima di cominciare, ma dalla panchina è entrato Valdepenas e ha segnato, 9.5. Davanti Thuram si è fermato al 5. Ultimo invece si è aggrappato al 7 di Modric, e Gollini ha preso due gol. Con le formazioni ideali sarebbe finita 1-3."
+          },
+          "lineups": {
+            "home": [
+              {
+                "p": 610,
+                "t": "s",
+                "v": 6,
+                "b": 4,
+                "e": {
+                  "golSubiti": 2
+                }
+              },
+              {
+                "p": 6989,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 2816,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 7181,
+                "t": "s",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 5792,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 2194,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 2606,
+                "t": "s",
+                "v": 7,
+                "b": 7
+              },
+              {
+                "p": 152,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 4463,
+                "t": "s",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 6669,
+                "t": "out",
+                "sv": true
+              },
+              {
+                "p": 6904,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 7048,
+                "t": "b"
+              },
+              {
+                "p": 5739,
+                "t": "b",
+                "v": 6.5,
+                "b": 6,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 6042,
+                "t": "b",
+                "v": 6,
+                "b": 5.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 6821,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 554,
+                "t": "b",
+                "v": 4.5,
+                "b": 2.5,
+                "e": {
+                  "autogol": 1
+                }
+              },
+              {
+                "p": 7203,
+                "t": "b",
+                "sv": true
+              },
+              {
+                "p": 6684,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 5422,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6151,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 6215,
+                "t": "in",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 608,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              }
+            ],
+            "away": [
+              {
+                "p": 2521,
+                "t": "s",
+                "v": 5,
+                "b": 3,
+                "e": {
+                  "golSubiti": 2
+                }
+              },
+              {
+                "p": 6664,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 7599,
+                "t": "out"
+              },
+              {
+                "p": 5620,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 6727,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 6274,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 5119,
+                "t": "out",
+                "sv": true
+              },
+              {
+                "p": 7472,
+                "t": "s",
+                "v": 7.5,
+                "b": 10.5,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 7551,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 7023,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 4871,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 4236,
+                "t": "b"
+              },
+              {
+                "p": 6462,
+                "t": "b",
+                "v": 5,
+                "b": 0,
+                "e": {
+                  "golSubiti": 5
+                }
+              },
+              {
+                "p": 7294,
+                "t": "in",
+                "v": 6.5,
+                "b": 9.5,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 4409,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4952,
+                "t": "b",
+                "v": 7,
+                "b": 7
+              },
+              {
+                "p": 5507,
+                "t": "in",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 7311,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 5878,
+                "t": "b"
+              },
+              {
+                "p": 7484,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 7546,
+                "t": "b",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5637,
+                "t": "b",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 6572,
+                "t": "b",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 1870,
+                "t": "b",
+                "v": 5,
+                "b": 5
+              }
+            ]
+          }
+        },
+        {
+          "id": 4,
+          "homeTeam": "SM Frattese",
+          "awayTeam": "Team24",
+          "homeScore": 74,
+          "awayScore": 72.5,
+          "homeIdealScore": 80.5,
+          "awayIdealScore": 88,
+          "commentary": {
+            "caressa": "Spettacolo fra SM Frattese e Team24! 2-2, 74 a 72.5: Moreira è ovunque, gol e due assist per 12.5 punti, e Rabiot segna ancora. Dall'altra parte Mora e Alajbegovic!",
+            "bergomi": "Fabio, la Frattese ha perso Orsolini ed Esposito, ma Alajbegovic è entrato e ha segnato, 10. Il rimpianto vero è del Team24: in panchina Laurientè doppietta da 14 punti e Zaniolo con un gol, 9, mentre Krstovic giocava da 5. Con le formazioni ideali sarebbe finita 3-4."
+          },
+          "lineups": {
+            "home": [
+              {
+                "p": 4964,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 6869,
+                "t": "s",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 6531,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 2788,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 2167,
+                "t": "out"
+              },
+              {
+                "p": 632,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 2517,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 7556,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 6397,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 7071,
+                "t": "out",
+                "sv": true
+              },
+              {
+                "p": 5951,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 4360,
+                "t": "b",
+                "v": 6.5,
+                "b": 4.5,
+                "e": {
+                  "golSubiti": 2
+                }
+              },
+              {
+                "p": 6344,
+                "t": "b"
+              },
+              {
+                "p": 5675,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 5022,
+                "t": "b",
+                "v": 7,
+                "b": 7
+              },
+              {
+                "p": 4317,
+                "t": "b",
+                "v": 6.5,
+                "b": 9.5,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 5520,
+                "t": "b",
+                "v": 6,
+                "b": 7,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 4887,
+                "t": "b"
+              },
+              {
+                "p": 7436,
+                "t": "in",
+                "v": 7.5,
+                "b": 10,
+                "e": {
+                  "amm": 1,
+                  "gol": 1
+                }
+              },
+              {
+                "p": 6844,
+                "t": "b",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 6908,
+                "t": "b"
+              },
+              {
+                "p": 4856,
+                "t": "b"
+              },
+              {
+                "p": 5694,
+                "t": "in",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 6967,
+                "t": "b"
+              },
+              {
+                "p": 7351,
+                "t": "b"
+              }
+            ],
+            "away": [
+              {
+                "p": 572,
+                "t": "s",
+                "v": 6.5,
+                "b": 4.5,
+                "e": {
+                  "golSubiti": 2
+                }
+              },
+              {
+                "p": 6021,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 6867,
+                "t": "out",
+                "sv": true
+              },
+              {
+                "p": 6642,
+                "t": "s",
+                "v": 7,
+                "b": 6.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 5687,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 4465,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6372,
+                "t": "s",
+                "v": 8,
+                "b": 12.5,
+                "e": {
+                  "amm": 1,
+                  "gol": 1,
+                  "assist": 2
+                }
+              },
+              {
+                "p": 2379,
+                "t": "s",
+                "v": 7,
+                "b": 10,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 4896,
+                "t": "s",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 2061,
+                "t": "s",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6435,
+                "t": "s",
+                "v": 5,
+                "b": 5
+              },
+              {
+                "p": 2845,
+                "t": "b"
+              },
+              {
+                "p": 2170,
+                "t": "b"
+              },
+              {
+                "p": 7469,
+                "t": "in",
+                "v": 6.5,
+                "b": 6.5
+              },
+              {
+                "p": 5851,
+                "t": "b",
+                "v": 6,
+                "b": 6
+              },
+              {
+                "p": 4925,
+                "t": "b"
+              },
+              {
+                "p": 6659,
+                "t": "b",
+                "v": 5,
+                "b": 4.5,
+                "e": {
+                  "amm": 1
+                }
+              },
+              {
+                "p": 6495,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 2528,
+                "t": "b",
+                "v": 6.5,
+                "b": 7.5,
+                "e": {
+                  "assist": 1
+                }
+              },
+              {
+                "p": 1933,
+                "t": "b"
+              },
+              {
+                "p": 5504,
+                "t": "b"
+              },
+              {
+                "p": 2766,
+                "t": "b",
+                "v": 6,
+                "b": 9,
+                "e": {
+                  "gol": 1
+                }
+              },
+              {
+                "p": 6052,
+                "t": "b"
+              },
+              {
+                "p": 531,
+                "t": "b",
+                "v": 5.5,
+                "b": 5.5
+              },
+              {
+                "p": 6060,
+                "t": "b",
+                "v": 8,
+                "b": 14,
+                "e": {
+                  "gol": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "generalComment": "Giornata 6 e il Real Pattagghiu allunga ancora: 3-0 al PARTIZAN TIRANA, 16 punti e cinque di vantaggio. Dietro sale lo Shakhtar Donuts, 2-0 in casa di Ultimo e secondo posto a 11, davanti al Team24 fermato sul 2-2 dalla SM Frattese. Pari anche fra Real Ichnusa e Cusiana, 73 a 74: in tre restano appaiate a 7 punti. Ultimo chiude la classifica a 4. Uomo della giornata Laurientè, doppietta e 14 punti, ma dalla panchina del Team24: come Mbangula una settimana fa."
     }
   ],
   "settings": {
