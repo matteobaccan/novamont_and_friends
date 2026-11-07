@@ -5946,3 +5946,56 @@ body.sipario-aperto { overflow: hidden; }
     .squadra-iniziali { font-size: 0.62rem; }
     .team-name { gap: 7px; }
 }
+
+/* ==================================================================
+   Pagine da salvare
+   ------------------------------------------------------------------
+   I link a fantacalcio.it da aprire e salvare a mano con Ctrl+S per
+   aggiornare il sito. Chiuso di default: serve a chi aggiorna, non a
+   chi guarda i risultati.
+   ================================================================== */
+
+.pagine-da-salvare {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.pagine-da-salvare summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.pagine-nota {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0.75rem 0;
+}
+
+.pagine-griglia {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.pagine-blocco h4 {
+    font-size: 0.85rem;
+    margin: 0 0 0.4rem;
+}
+
+.pagine-blocco ol,
+.pagine-blocco p {
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+.pagine-blocco ol { padding-left: 1.25rem; }
+
+.pagine-blocco a {
+    color: var(--primary-color);
+    overflow-wrap: anywhere;
+}

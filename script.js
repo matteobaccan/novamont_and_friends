@@ -2916,8 +2916,86 @@ function setupRoundSelector() {
     }
 }
 
+// Pagine da salvare a mano (Ctrl+S) per aggiornare il sito. I dati non si
+// scaricano più in automatico: fantacalcio.it consente solo l'accesso manuale
+// dal sito ufficiale. Si apre la pagina da qui, la si salva come "Pagina web
+// completa" e il file lo legge uno script in locale, senza toccare la rete.
+const URL_PROBABILI_FORMAZIONI = 'https://www.fantacalcio.it/probabili-formazioni-serie-a';
+
+// L'indirizzo della singola partita: {match} è la posizione nella giornata,
+// contata da matchIndexBase (1 se non è indicato)
+function urlPartitaLega(source, giornata, indice) {
+    if (!source || !source.roundUrl) return null;
+    const base = Number.isInteger(source.matchIndexBase) ? source.matchIndexBase : 1;
+    return source.roundUrl
+        .replace('{round}', String(giornata))
+        .replace('{match}', String(indice + base));
+}
+
+// Le pagine da salvare, come dati: la giornata a video con le sue partite, la
+// prossima ancora da inserire (di cui non si sanno gli accoppiamenti, quindi
+// solo i numeri) e le probabili. null se la stagione non ha una sorgente.
+function pagineDaSalvare(source, round, prossimaGiornata, partitePerGiornata) {
+    if (!source || !source.roundUrl) return null;
+
+    const partite = (giornata, matches) => matches.map((m, i) => ({
+        etichetta: m ? `${m.homeTeam} - ${m.awayTeam}` : `Partita ${i + 1}`,
+        url: urlPartitaLega(source, giornata, i)
+    }));
+
+    const vuote = Array.from({ length: Math.max(0, partitePerGiornata || 0) }, () => null);
+
+    return {
+        calendario: source.calendarUrl || null,
+        giornata: round ? { numero: round.round, partite: partite(round.round, round.matches || []) } : null,
+        prossima: prossimaGiornata ? { numero: prossimaGiornata, partite: partite(prossimaGiornata, vuote) } : null,
+        probabili: URL_PROBABILI_FORMAZIONI
+    };
+}
+
+function htmlPagineDaSalvare(pagine) {
+    if (!pagine) return '';
+    const link = (url, testo) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${testo}</a>`;
+    const elenco = (g) => `<ol>${g.partite.map(p => `<li>${link(p.url, p.etichetta)}</li>`).join('')}</ol>`;
+
+    const blocchi = [];
+    if (pagine.calendario) {
+        blocchi.push(`<div class="pagine-blocco"><h4>Calendario della lega</h4><p>${link(pagine.calendario, 'Calendario')}: accoppiamenti e giornata di Serie A</p></div>`);
+    }
+    if (pagine.giornata) {
+        blocchi.push(`<div class="pagine-blocco"><h4>Formazioni della giornata ${pagine.giornata.numero}</h4>${elenco(pagine.giornata)}</div>`);
+    }
+    if (pagine.prossima) {
+        blocchi.push(`<div class="pagine-blocco"><h4>Prossima da inserire: giornata ${pagine.prossima.numero}</h4>${elenco(pagine.prossima)}</div>`);
+    }
+    blocchi.push(`<div class="pagine-blocco"><h4>Serie A</h4><p>${link(pagine.probabili, 'Probabili formazioni')}: per il consiglio di formazione</p></div>`);
+
+    return `
+        <details class="pagine-da-salvare">
+            <summary><i class="fas fa-floppy-disk"></i> Pagine da salvare per l'aggiornamento</summary>
+            <p class="pagine-nota">Apri la pagina, salvala con <kbd>Ctrl</kbd>+<kbd>S</kbd> come «Pagina web completa» e passa il file allo script di aggiornamento.</p>
+            <div class="pagine-griglia">${blocchi.join('')}</div>
+        </details>`;
+}
+
+function mostraPagineDaSalvare(round) {
+    const contenitore = document.getElementById('pagine-da-salvare');
+    if (!contenitore) return;
+
+    const season = getSeasonById(currentSeasonId);
+    const rounds = (fantacalcioData && fantacalcioData.rounds) || [];
+    const ultima = rounds.reduce((max, r) => Math.max(max, r.round), 0);
+    const squadre = (fantacalcioData && fantacalcioData.teams) ? fantacalcioData.teams.length : 0;
+
+    contenitore.innerHTML = htmlPagineDaSalvare(
+        pagineDaSalvare(season && season.source, round || null, ultima + 1, Math.floor(squadre / 2))
+    );
+}
+
 // Stato mostrato quando una stagione è nel calendario ma non ha ancora giornate
 function displayNoRoundsMessage() {
+    mostraPagineDaSalvare(null);
+
     const commentary = document.getElementById('match-commentary');
     if (commentary) commentary.style.display = 'none';
 
@@ -2963,6 +3041,7 @@ function displayRoundResults(roundNumber) {
     
     // Mostra il commento per la giornata selezionata
     displayMatchCommentary(roundNumber);
+    mostraPagineDaSalvare(round);
 
     if (!round) {
         roundResults.innerHTML = '<p>Nessun risultato disponibile per questa giornata.</p>';
