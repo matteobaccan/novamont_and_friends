@@ -1,22 +1,24 @@
 #!/usr/bin/env node
-// Scarica da fantacalcio.it tutto ciò che serve al suggeritore di formazione e
-// lo salva in data/probabili.json:
+// Prepara data/probabili.json per il suggeritore di formazione:
 //
-//   - probabili formazioni: quanto è probabile che un giocatore scenda in campo
-//   - rigoristi: chi batte i rigori, in ordine di gerarchia
-//   - infortunati: chi non schierare, con il motivo
-//   - squalificati: chi non può proprio scendere in campo questo turno
-//   - contesto: classifica di Serie A, partite del prossimo turno, forma recente
+//   - probabili formazioni, squalificati e prossimo turno
+//   - rigoristi, in ordine di gerarchia
+//   - infortunati e classifica di Serie A
 //   - calendario: partite di coppa e di campionato a ridosso del turno, per la
 //     stanchezza di chi ha giocato a metà settimana (da ESPN, vedi
 //     calendario-squadre.mjs)
 //
-//   node scarica-probabili.mjs [--dry-run]
+//   node scarica-probabili.mjs [--probabili <file.html>] [--rigoristi <file.html>]
+//                              [--infortunati <file.html>] [--dry-run]
 //
-// Le pagine sono pubbliche e non richiedono autenticazione. I giocatori sono
-// identificati dallo stesso id globale Fantacalcio usato in data/<stagione>.json,
-// tranne gli infortunati: quella pagina non espone id, quindi l'abbinamento alla
-// rosa si fa per nome e squadra nel browser, dove le rose sono già caricate.
+// Da fantacalcio.it non si scarica niente: l'accesso automatico non è
+// consentito. Le pagine si aprono e si salvano a mano (Ctrl+S, link nella
+// scheda Giornate del sito) e si passano qui come file. Quello che non si
+// passa resta com'era nel data/probabili.json precedente; il calendario ESPN
+// invece si aggiorna sempre. I giocatori sono identificati dallo stesso id
+// globale Fantacalcio usato in data/<stagione>.json, tranne gli infortunati:
+// quella pagina non espone id, quindi l'abbinamento alla rosa si fa per nome e
+// squadra nel browser, dove le rose sono già caricate.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -24,13 +26,7 @@ import { pathToFileURL } from 'node:url';
 import { scaricaCalendario } from './calendario-squadre.mjs';
 
 const URL_PROBABILI = 'https://www.fantacalcio.it/probabili-formazioni-serie-a';
-const URL_RIGORISTI = 'https://www.fantacalcio.it/rigoristi-serie-a';
-const URL_INFORTUNATI = 'https://www.fantacalcio.it/infortunati-serie-a';
-const URL_CALENDARIO = 'https://www.fantacalcio.it/serie-a/calendario';
 const DESTINAZIONE = 'data/probabili.json';
-
-// Quanti turni giocati guardare per la forma recente
-const TURNI_FORMA = 3;
 
 function fail(message) {
     console.error(`ERRORE: ${message}`);
@@ -50,17 +46,6 @@ async function scaricaJson(url) {
         throw new Error(`${url} ha risposto ${res.status}${corpo ? `: ${corpo}` : ''}`);
     }
     return res.json();
-}
-
-async function scarica(url) {
-    const res = await fetch(url, {
-        headers: {
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36',
-            accept: 'text/html,application/xhtml+xml'
-        }
-    });
-    if (!res.ok) throw new Error(`${url} ha risposto ${res.status}`);
-    return res.text();
 }
 
 // Le descrizioni degli infortuni arrivano con le entità HTML non decodificate
@@ -325,100 +310,35 @@ export function numeroProssimoTurno(html) {
     return Math.min(...numeri);
 }
 
-// Punti ed esiti delle ultime giornate, dalla più vecchia alla più recente.
-// A inizio stagione i turni sono meno di TURNI_FORMA e si usa quel che c'è: il
-// front-end normalizza sui turni effettivamente contati.
-async function scaricaForma(prossimoTurno) {
-    const forma = {};
-    const primo = Math.max(1, prossimoTurno - TURNI_FORMA);
-
-    for (let turno = primo; turno < prossimoTurno; turno++) {
-        let partite;
-        try {
-            partite = analizzaPartite(await scarica(`${URL_CALENDARIO}/${turno}`), turno);
-        } catch (error) {
-            console.warn(`Turno ${turno} non scaricato: ${error.message}`);
-            continue;
-        }
-
-        for (const p of partite) {
-            if (!p.giocata || p.golCasa === null || p.golFuori === null) continue;
-
-            const esiti = p.golCasa === p.golFuori
-                ? ['N', 'N']
-                : (p.golCasa > p.golFuori ? ['V', 'P'] : ['P', 'V']);
-
-            for (const [squadra, esito] of [[p.casa, esiti[0]], [p.fuori, esiti[1]]]) {
-                if (!forma[squadra]) forma[squadra] = { punti: 0, partite: 0, esiti: '' };
-                forma[squadra].punti += esito === 'V' ? 3 : (esito === 'N' ? 1 : 0);
-                forma[squadra].partite += 1;
-                forma[squadra].esiti += esito;
-            }
-        }
-    }
-    return forma;
-}
 
 // ============================================================
 
+// Il valore di un'opzione (--probabili file.html), null se non c'è
+function opzione(argv, nome) {
+    const i = argv.indexOf(nome);
+    if (i === -1) return null;
+    const valore = argv[i + 1];
+    if (!valore || valore.startsWith('--')) fail(`${nome} vuole il file della pagina salvata`);
+    return valore;
+}
+
+function leggiPagina(file) {
+    try {
+        return fs.readFileSync(file, 'utf8');
+    } catch (error) {
+        fail(`non riesco a leggere ${file}: ${error.message}`);
+    }
+}
+
 async function main() {
-    const dryRun = process.argv.includes('--dry-run');
+    const argv = process.argv.slice(2);
+    const dryRun = argv.includes('--dry-run');
+    const fileProbabili = opzione(argv, '--probabili');
+    const fileRigoristi = opzione(argv, '--rigoristi');
+    const fileInfortunati = opzione(argv, '--infortunati');
 
-    let htmlProbabili;
-    try {
-        htmlProbabili = await scarica(URL_PROBABILI);
-    } catch (error) {
-        fail(error.message);
-    }
-
-    const { squadre, giocatori } = analizza(htmlProbabili);
-
-    if (squadre.length === 0) {
-        fail('nessuna squadra trovata: la pagina ha probabilmente cambiato struttura');
-    }
-
-    console.log(`Probabili formazioni: ${squadre.length} squadre, ${Object.keys(giocatori).length} giocatori`);
-    for (const s of squadre) {
-        console.log(`  ${s.nome.padEnd(12)} ${s.modulo.padEnd(7)} titolari ${s.titolari}, riserve ${s.riserve}`);
-    }
-
-    const incomplete = squadre.filter(s => s.titolari !== 11);
-    if (incomplete.length > 0) {
-        console.warn('\nATTENZIONE, squadre senza 11 titolari:');
-        for (const s of incomplete) console.warn(`  ${s.nome}: ${s.titolari}`);
-    }
-
-    // Dalla stessa pagina, e per questo senza un try suo: se quella è arrivata,
-    // ci sono anche gli squalificati
-    const squalificati = analizzaSqualificati(htmlProbabili);
-    console.log(`\nSqualificati: ${squalificati.length}`);
-    for (const g of squalificati) console.log(`  ${g.nome} (${g.squadra})`);
-
-    // Da qui in poi nulla è bloccante: rigoristi, infortunati e contesto affinano
-    // il suggerimento, ma senza di loro resta valido
-    let rigoristi = {};
-    try {
-        rigoristi = analizzaRigoristi(await scarica(URL_RIGORISTI));
-        const quantiRigoristi = Object.values(rigoristi).reduce((somma, v) => somma + v.length, 0);
-        console.log(`\nRigoristi: ${quantiRigoristi} in ${Object.keys(rigoristi).length} squadre`);
-    } catch (error) {
-        console.warn(`\nRigoristi non disponibili: ${error.message}`);
-    }
-
-    let infortunati = [];
-    let classifica = {};
-    try {
-        const htmlInfortunati = await scarica(URL_INFORTUNATI);
-        infortunati = analizzaInfortunati(htmlInfortunati);
-        classifica = analizzaClassifica(htmlInfortunati);
-        console.log(`Infortunati: ${infortunati.length}`);
-        console.log(`Classifica: ${Object.keys(classifica).length} squadre`);
-    } catch (error) {
-        console.warn(`Infortunati e classifica non disponibili: ${error.message}`);
-    }
-
-    // Il file del giro prima: serve per le partite di coppa già giocate, che
-    // la fonte del calendario non dà più
+    // Il file del giro prima: quello che non arriva da una pagina salvata resta
+    // com'era, e le partite di coppa già giocate non le dà più nessuno
     let precedenti = {};
     try {
         precedenti = JSON.parse(fs.readFileSync(path.join(process.cwd(), DESTINAZIONE), 'utf8'));
@@ -426,24 +346,82 @@ async function main() {
         // primo giro, o file rotto: si riparte senza memoria
     }
 
-    const turno = numeroProssimoTurno(htmlProbabili);
-    const partite = turno ? analizzaPartite(htmlProbabili, turno) : [];
-    console.log(`Prossimo turno: ${turno ?? 'ignoto'}, ${partite.length} partite`);
+    let aggiornato = precedenti.aggiornato || null;
+    let nSquadre = precedenti.squadre || 0;
+    let giocatori = precedenti.giocatori || {};
+    let squalificati = precedenti.squalificati || [];
+    let prossimoTurno = precedenti.prossimoTurno || null;
+    let nomiProbabili = [];
 
-    const forma = turno ? await scaricaForma(turno) : {};
-    console.log(`Forma recente: ${Object.keys(forma).length} squadre`);
+    if (fileProbabili) {
+        const htmlProbabili = leggiPagina(fileProbabili);
+        const analisi = analizza(htmlProbabili);
+        if (analisi.squadre.length === 0) {
+            fail(`nessuna squadra trovata in ${fileProbabili}: è la pagina delle probabili formazioni?`);
+        }
 
-    // Le squadre di Serie A si prendono da tutte le fonti già lette: se una
-    // manca dalla classifica, c'è comunque nelle probabili o nel calendario
+        console.log(`Probabili formazioni: ${analisi.squadre.length} squadre, ${Object.keys(analisi.giocatori).length} giocatori`);
+        for (const s of analisi.squadre) {
+            console.log(`  ${s.nome.padEnd(12)} ${s.modulo.padEnd(7)} titolari ${s.titolari}, riserve ${s.riserve}`);
+        }
+        const incomplete = analisi.squadre.filter(s => s.titolari !== 11);
+        if (incomplete.length > 0) {
+            console.warn('\nATTENZIONE, squadre senza 11 titolari:');
+            for (const s of incomplete) console.warn(`  ${s.nome}: ${s.titolari}`);
+        }
+
+        // Dalla stessa pagina vengono squalificati e prossimo turno
+        squalificati = analizzaSqualificati(htmlProbabili);
+        console.log(`\nSqualificati: ${squalificati.length}`);
+        for (const g of squalificati) console.log(`  ${g.nome} (${g.squadra})`);
+
+        const turno = numeroProssimoTurno(htmlProbabili);
+        const partite = turno ? analizzaPartite(htmlProbabili, turno) : [];
+        console.log(`Prossimo turno: ${turno ?? 'ignoto'}, ${partite.length} partite`);
+
+        aggiornato = new Date().toISOString();
+        nSquadre = analisi.squadre.length;
+        giocatori = analisi.giocatori;
+        prossimoTurno = turno ? { numero: turno, partite } : null;
+        nomiProbabili = analisi.squadre.map(s => s.nome);
+    } else {
+        console.log(`Probabili: nessun file, restano quelle del ${aggiornato || 'giro precedente'}`);
+    }
+
+    let rigoristi = precedenti.rigoristi || {};
+    if (fileRigoristi) {
+        rigoristi = analizzaRigoristi(leggiPagina(fileRigoristi));
+        const quanti = Object.values(rigoristi).reduce((somma, v) => somma + v.length, 0);
+        console.log(`Rigoristi: ${quanti} in ${Object.keys(rigoristi).length} squadre`);
+    }
+
+    let infortunati = precedenti.infortunati || [];
+    let classifica = precedenti.classificaSerieA || {};
+    if (fileInfortunati) {
+        const html = leggiPagina(fileInfortunati);
+        infortunati = analizzaInfortunati(html);
+        classifica = analizzaClassifica(html);
+        console.log(`Infortunati: ${infortunati.length}`);
+        console.log(`Classifica: ${Object.keys(classifica).length} squadre`);
+    }
+
+    // La forma recente veniva dalle pagine del calendario di Serie A: per ora
+    // resta quella del file precedente
+    const forma = precedenti.formaSerieA || {};
+
+    // Le squadre di Serie A da tutte le fonti a disposizione: se una manca
+    // dalla classifica, c'è comunque nelle probabili o nel prossimo turno
     const squadreSerieA = [...new Set([
         ...Object.keys(classifica),
-        ...squadre.map(s => s.nome),
-        ...partite.flatMap(p => [p.casa, p.fuori])
+        ...nomiProbabili,
+        ...((prossimoTurno && prossimoTurno.partite) || []).flatMap(p => [p.casa, p.fuori]),
+        ...Object.keys(precedenti.calendarioSquadre || {})
     ])];
-    let calendario = {};
+
+    let calendario = precedenti.calendarioSquadre || {};
     let partiteCalendario = precedenti.partiteCalendario || [];
     try {
-        console.log('Calendario di tutte le competizioni:');
+        console.log('\nCalendario di tutte le competizioni (ESPN):');
         const risultato = await scaricaCalendario(squadreSerieA, scaricaJson, partiteCalendario);
         calendario = risultato.calendario;
         partiteCalendario = risultato.partite;
@@ -465,11 +443,13 @@ async function main() {
         return;
     }
 
+    // "aggiornato" è l'età delle probabili, che il sito mostra: cambia solo
+    // quando arriva una pagina nuova, non a ogni giro del calendario
     const output = {
-        aggiornato: new Date().toISOString(),
+        aggiornato,
         fonte: URL_PROBABILI,
-        squadre: squadre.length,
-        prossimoTurno: turno ? { numero: turno, partite } : null,
+        squadre: nSquadre,
+        prossimoTurno,
         classificaSerieA: classifica,
         formaSerieA: forma,
         calendarioSquadre: calendario,

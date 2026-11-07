@@ -1,14 +1,12 @@
 name: Probabili formazioni
 
-# Due passaggi al giorno, tutti i giorni: le probabili si muovono di continuo e
-# i turni infrasettimanali non stanno nel giovedì-sabato. Il giro del mattino
-# raccoglie le notizie della notte, quello del tardo pomeriggio arriva dopo
-# allenamenti e conferenze, ed entrambi cadono prima del blocco delle formazioni.
-# Gli orari del cron sono UTC: le 09:00 e le 19:00 italiane d'estate, le 08:00 e
-# le 18:00 d'inverno.
+# Solo ad avvio manuale. Il cron è stato tolto: da fantacalcio.it non si scarica
+# più niente in automatico (l'accesso automatico ai loro servizi non è
+# consentito), e senza probabili fresche il giro programmato salverebbe consigli
+# calcolati su dati vecchi. Così come gira qui aggiorna solo il calendario ESPN
+# e la valutazione dei consigli; le probabili si aggiornano da pagine salvate a
+# mano, in locale (vedi la skill aggiorna-giornata).
 on:
-  schedule:
-    - cron: '0 7,17 * * *'
   workflow_dispatch:
 
 permissions:
@@ -33,7 +31,7 @@ jobs:
           ULTIMO_GIORNO: '2027-06-01'
         run: |
           # L'avvio a mano passa sempre, anche fuori stagione: serve per provare
-          # lo scraper o per rifare il file dopo un cambio di impaginazione.
+          # il workflow anche a stagione finita.
           if [[ "${{ github.event_name }}" != 'schedule' ]]; then
             echo 'attiva=true' >> "$GITHUB_OUTPUT"
             exit 0
@@ -58,7 +56,7 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Scarica probabili, rigoristi, infortunati, squalificati e contesto
+      - name: Aggiorna il calendario ESPN (le probabili restano quelle del file)
         run: node .claude/skills/aggiorna-giornata/scarica-probabili.mjs
 
       # Lo script si ferma da solo se non trova nessuna squadra, ma non se ne

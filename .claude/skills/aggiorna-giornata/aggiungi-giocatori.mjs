@@ -3,7 +3,7 @@
 //
 //   node aggiungi-giocatori.mjs <nuovi.json> [--stagione 2026-2027] [--dry-run]
 //
-// `nuovi.json` è l'uscita di preleva-rose.js: { "<pid>": { name, role, serieA } }.
+// `nuovi.json` viene dalla pagina Rose della lega salvata a mano: { "<pid>": { name, role, serieA } }.
 // Aggiunge solo i pid che mancano e lascia stare gli altri, così si può
 // ripassare lo stesso file senza farci danni. Se un pid c'è già ma con dati
 // diversi lo segnala e non lo tocca: un cambio di squadra di Serie A a gennaio
@@ -33,7 +33,7 @@ const stagioneChiesta = iStagione >= 0 ? argomenti[iStagione + 1] : null;
 const iValore = iStagione >= 0 ? iStagione + 1 : -1;
 const file = argomenti.find((a, i) => !a.startsWith('--') && i !== iValore);
 
-if (!file) fail('manca il file con i giocatori nuovi (uscita di preleva-rose.js)');
+if (!file) fail('manca il file con i giocatori nuovi ({ "<pid>": { name, role, serieA } })');
 
 const index = JSON.parse(fs.readFileSync(path.join(RADICE, 'data/seasons.json'), 'utf8'));
 const seasonId = stagioneChiesta || index.currentSeason;

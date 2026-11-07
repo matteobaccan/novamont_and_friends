@@ -102,8 +102,8 @@ function verificaAnagrafica(matches, players) {
     fail(
         `pid non presenti nel dizionario "players":\n${righe.join('\n')}\n` +
         `  Sono acquisti nuovi. Si prendono dalla pagina Rose della lega:\n` +
-        `  incolla preleva-rose.js nel browser con questi pid, salva l'uscita\n` +
-        `  e passala a aggiungi-giocatori.mjs, poi rilancia.`
+        `  salvala a mano, scrivi nome, ruolo e squadra di questi pid in un file\n` +
+        `  e passalo a aggiungi-giocatori.mjs, poi rilancia.`
     );
 }
 

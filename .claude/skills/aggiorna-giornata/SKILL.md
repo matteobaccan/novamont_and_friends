@@ -5,7 +5,7 @@ description: Use when adding a new matchday (giornata) to the Novamont & Friends
 
 # Aggiornare una giornata del sito fantacalcio
 
-Scarica una giornata dall'API della lega, calcola i punteggi ideali e la scrive in
+Converte una giornata della lega, presa da pagine salvate a mano, calcola i punteggi ideali e la scrive in
 `data/<stagione>.json`. Classifica, classifica ideale, statistiche allenatori, rose e
 classifiche marcatori sono tutte **derivate** dai risultati: non vanno mai scritte a mano.
 
@@ -16,17 +16,12 @@ giornata se ne manca una prima, e il perché sta in *Rose che cambiano*.
 
 ## Prima di iniziare
 
-Serve il token della lega in `FANTA_TOKEN`. **Non va messo in un file del repo**, che è
-pubblico: passalo da variabile d'ambiente. Si ricava dall'header `authorization` di una
-qualsiasi chiamata a `apileague.fantacalcio.it` fatta dal browser loggato, e dura un anno.
-
-**Senza token si passa dal browser**, che è loggato e il token ce l'ha già. Si incolla
-`preleva-browser.js` in una pagina della lega (le istruzioni sono in cima al file): il
-bearer resta dentro la pagina, non passa dalla chat e non finisce in nessun file. Le
-partite vengono fuori in forma compatta, una per volta, perché il canale che le riporta
-taglia i risultati lunghi; `espandi-compatto.mjs` le rimette in forma piena e
-`scarica-giornata.mjs --grezzo` le legge al posto dell'API. Il resto della procedura non
-cambia: decodifica degli eventi, quadratura e controlli sono gli stessi.
+**Niente accesso automatico a fantacalcio.it.** Fantacalcio consente l'accesso ai suoi
+servizi solo dal sito e dalle app ufficiali, in modo manuale: niente API, niente token,
+niente script incollati nella pagina, niente browser pilotato (`mcp__claude-in-chrome`).
+Le pagine le apre e le salva a mano l'utente (Ctrl+S, «Pagina web completa»); i link sono
+nella scheda **Giornate** del sito, pannello *Pagine da salvare per l'aggiornamento*. Si
+lavora sui file salvati, o su testo e screenshot incollati in chat.
 
 ## Procedura
 
@@ -65,12 +60,11 @@ seguenti, e nell'input del passo 3 è il campo `round`.
 
 ### 2. Leggere gli accoppiamenti dal calendario
 
-Il calendario non è esposto via API: va letto dalla pagina `calendario` della lega con il
-browser (`mcp__claude-in-chrome`). Serve sapere, per la giornata, **chi gioca in casa con
+Si legge dalla pagina `calendario` della lega, salvata o incollata dall'utente. Serve sapere, per la giornata, **chi gioca in casa con
 chi** e a quale **giornata di Serie A** corrisponde (il calendario la indica fra parentesi:
 "1ª GIORNATA (5ª giornata di Serie A)").
 
-### 3. Scaricare la giornata
+### 3. Convertire la giornata
 
 Prepara un input nella scratchpad — non nel repo:
 
@@ -91,17 +85,15 @@ Prepara un input nella scratchpad — non nel repo:
 ```
 
 I nomi possono essere scritti come li scrive la lega: vengono normalizzati sul nome
-canonico della stagione. Gli id squadra si risolvono da soli via API.
+canonico della stagione.
+
+Le formazioni vanno in un file `--grezzo`: un array di partite con `casa`, `fuori`, `res`
+e i due lati (`tot`, `starts`, `bench`, con `pid, scr, cscr, ptype, b` per giocatore). Si
+ricava dalle pagine delle partite salvate a mano; **il lettore di quelle pagine non c'è
+ancora**: va scritto partendo da una pagina salvata vera, verificando che contenga voti ed
+eventi.
 
 ```bash
-FANTA_TOKEN=... node .claude/skills/aggiorna-giornata/scarica-giornata.mjs <input.json> > <estratto.json>
-```
-
-Oppure, con le formazioni già prelevate dal browser (vedi *Prima di iniziare*), senza
-token:
-
-```bash
-node .claude/skills/aggiorna-giornata/espandi-compatto.mjs <compatto.json> > <grezzo.json>
 node .claude/skills/aggiorna-giornata/scarica-giornata.mjs <input.json> --grezzo <grezzo.json> > <estratto.json>
 ```
 
@@ -155,14 +147,14 @@ senza voto che non ha un cambio di ruolo in panchina conta zero, non viene salta
 calcola gol e punti persi (vedi `BONUS_CASA.md`). Sommarlo qui lo conterebbe due volte.
 
 **L'ideale non comprende il modificatore di difesa.** Il punteggio reale arriva
-dall'API già modificato, l'ideale si ricostruisce dai voti e quindi no: per questo su una
+dalla lega già modificato, l'ideale si ricostruisce dai voti e quindi no: per questo su una
 squadra con la difesa premiata l'ideale può uscire più basso del reale. Non è un errore di
 calcolo, ed è il motivo per cui la somma dei voti di una squadra a volte non torna col suo
 punteggio. Nei commenti, quindi, non citare somme di voti: cita il punteggio della lega.
 
 ## Il campo `b` delle formazioni
 
-L'API restituisce per ogni giocatore `scr` (voto), `cscr` (voto con bonus) e `b`, una
+Le formazioni portano per ogni giocatore `scr` (voto), `cscr` (voto con bonus) e `b`, una
 stringa di 16 slot con gli eventi. I pesi sono in `EVENTI` dentro `scarica-giornata.mjs`,
 ricavati dai dati isolando i giocatori con un solo slot attivo.
 
@@ -207,14 +199,11 @@ alla sua prima giornata resta in panchina senza giocare entra comunque in `roste
 Prima il controllo guardava solo chi aveva un voto, e alla giornata 5 Samardzic è passato
 liscio: sul sito sarebbe rimasta una riga senza nome.
 
-L'anagrafica **non è nell'API**: `/gaming/v1/teamLineup` dà solo `pid, scr, cscr, ptype, b`.
-Sta nella pagina Rose, che il server manda già scritta, e si prende da lì:
+Le formazioni danno solo `pid, scr, cscr, ptype, b`: l'anagrafica sta nella pagina Rose
+della lega. L'utente la salva a mano; da lì si scrive un file
+`{ "<pid>": { name, role, serieA } }` e lo si unisce al dizionario:
 
 ```bash
-# 1. apri la pagina Rose della lega e incolla preleva-rose.js
-#    mettendo in PID quelli che lo script ha segnalato. Stampa
-#    { "<pid>": { name, role, serieA } }, da salvare in un file.
-# 2. unisci al dizionario:
 node .claude/skills/aggiorna-giornata/aggiungi-giocatori.mjs <nuovi.json> [--dry-run]
 ```
 
@@ -249,25 +238,28 @@ Cita solo numeri che hai davvero letto. Un voto inventato è indistinguibile da 
 
 | Sintomo | Causa |
 |---|---|
-| `manca la variabile d'ambiente FANTA_TOKEN` | token non passato, o scaduto (dura un anno) |
 | `ATTENZIONE, decodifica eventi non pulita` | evento nuovo non in `EVENTI`: va aggiunto il peso |
-| `pid non presenti nel dizionario "players"` | acquisto nuovo: `preleva-rose.js` + `aggiungi-giocatori.mjs` |
+| `pid non presenti nel dizionario "players"` | acquisto nuovo: pagina Rose salvata + `aggiungi-giocatori.mjs` |
 | `squadra "X" non presente fra le squadre` | nome che non esiste nella stagione, o squadra fuori competizione |
 | `i gol non coincidono` | `roundSerieA` sbagliato: hai scaricato un'altra giornata |
 | `la giornata N esiste già` | rimuovila dal JSON prima di reinserirla |
-| Classifica diversa da quella della lega | `homeScore` deve includere il fattore campo, come lo dà l'API |
+| Classifica diversa da quella della lega | `homeScore` deve includere il fattore campo, come lo dà la lega |
 
 ## Dati di Serie A per il suggeritore
 
-**Di norma non serve lanciarlo a mano**: il workflow `.github/workflows/probabili.yml` lo
-esegue giovedì, venerdì e sabato mattina e committa il risultato. Serve solo per anticipare
-l'Action, tipicamente prima di un turno infrasettimanale.
+Da fantacalcio.it non scarica niente: le pagine delle probabili, dei rigoristi e degli
+infortunati le salva l'utente a mano e si passano come file. Quelle non passate restano
+come nel `data/probabili.json` precedente; il calendario ESPN si aggiorna sempre. Il
+workflow `.github/workflows/probabili.yml` non ha più il cron: avviato a mano aggiorna solo
+il calendario ESPN e la valutazione dei consigli.
 
 ```bash
-node .claude/skills/aggiorna-giornata/scarica-probabili.mjs [--dry-run]
+node .claude/skills/aggiorna-giornata/scarica-probabili.mjs \
+    [--probabili <probabili.html>] [--rigoristi <rigoristi.html>] \
+    [--infortunati <infortunati.html>] [--dry-run]
 ```
 
-Le pagine sono pubbliche, non serve token. Lo script scrive `data/probabili.json`, che è
+`aggiornato` cambia solo quando si passano le probabili. Lo script scrive `data/probabili.json`, che è
 un'istantanea della **prossima** giornata e non storico, con:
 
 | Chiave | Da dove viene | A cosa serve |
@@ -276,7 +268,7 @@ un'istantanea della **prossima** giornata e non storico, con:
 | `rigoristi` | pagina rigoristi | spareggio a parità di punteggio atteso |
 | `infortunati` | pagina infortunati | chi non schierare, con il motivo |
 | `squalificati` | probabili formazioni, sezione per partita | chi non può proprio giocare: probabilità zero |
-| `classificaSerieA`, `prossimoTurno`, `formaSerieA` | widget e calendario | il contesto della partita |
+| `classificaSerieA`, `prossimoTurno`, `formaSerieA` | pagine infortunati e probabili; `formaSerieA` per ora resta quella del file precedente | il contesto della partita |
 | `calendarioSquadre` | API pubblica ESPN (Serie A, Coppa Italia, coppe europee) | giorni di riposo prima del turno e partita successiva: stanchezza e rischio turnover |
 
 Giocatori, rigoristi e squalificati portano il pid nell'href, quindi combaciano
@@ -295,7 +287,7 @@ Se stampa `squadre di Serie A non riconosciute`, ESPN chiama una squadra in un m
 aggiunta in `ALIAS`. Finché manca, quella squadra non ha calendario e la stanchezza la
 ignora.
 
-Se si ferma con `nessuna squadra trovata`, la pagina ha cambiato struttura e vanno riviste
+Se si ferma con `nessuna squadra trovata`, il file non è la pagina delle probabili o la pagina ha cambiato struttura e vanno riviste
 le espressioni regolari in `scarica-probabili.mjs`. Se invece a mancare è una delle altre
 chiavi, lo script si limita a un warning: sono rifiniture, e il suggeritore regge lo stesso.
 

@@ -1,8 +1,7 @@
-// Lo scraper gira due volte al giorno in una GitHub Action e committa il
-// risultato: se fantacalcio.it cambia impaginazione, i parser restituiscono
-// meno dati e il suggeritore di formazione peggiora senza che nessuno se ne
-// accorga. Il controllo di plausibilità nel workflow prende solo il caso
-// limite (zero squadre, meno di 300 giocatori); questi test prendono il resto.
+// I parser leggono le pagine di fantacalcio.it salvate a mano: se il sito cambia
+// impaginazione, restituiscono meno dati e il suggeritore di formazione
+// peggiora senza che nessuno se ne accorga. Lo script si ferma solo nel caso
+// limite (zero squadre); questi test prendono il resto.
 //
 // Le fixture sono frammenti reali di pagina, datati nel loro commento di testa.
 // Quando un test fallisce va capito se è cambiato il sito o si è rotto il

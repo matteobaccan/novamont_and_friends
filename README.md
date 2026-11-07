@@ -148,10 +148,10 @@ Classifica Miglior Allenatore per quella giornata non viene mostrata e la Classi
 Ideale ricade sui punteggi reali.
 
 L'inserimento non va fatto a mano: la skill in `.claude/skills/aggiorna-giornata/`
-scarica la giornata dall'API della lega, calcola i punteggi ideali e scrive il JSON.
-Nella stessa cartella vive `scarica-probabili.mjs`, che raccoglie i dati di Serie A per il
-suggeritore di formazione e gira anche da solo (vedi
-[Aggiornamento automatico](#-aggiornamento-automatico)).
+converte la giornata, presa da pagine della lega salvate a mano, calcola i punteggi
+ideali e scrive il JSON. Nella stessa cartella vive `scarica-probabili.mjs`, che prepara i
+dati di Serie A per il suggeritore di formazione (vedi
+[Aggiornamento dei dati](#-aggiornamento-dei-dati)).
 
 ### 👥 Dati per giocatore
 
@@ -175,28 +175,28 @@ un'ammonizione, uno per un'espulsione, due per un autogol, tre per un rigore sba
 I gol subiti dai portieri restano fuori: sono il loro mestiere, non un errore, e da soli
 riempirebbero la classifica di portieri.
 
-## 🤖 Aggiornamento automatico
+## 🔄 Aggiornamento dei dati
 
-`data/probabili.json` non dipende più dalla memoria di nessuno: il workflow
-`.github/workflows/probabili.yml` rilancia `scarica-probabili.mjs` **due volte al giorno,
-tutti i giorni**, e committa il risultato, così Netlify ridispiega il sito da sé. Il giro del
-mattino raccoglie le notizie della notte, quello del pomeriggio arriva dopo allenamenti e
-conferenze, ed entrambi cadono prima del blocco delle formazioni. Un job di controllo ferma
-tutto dopo il 1° giugno 2027: GitHub non sa far scadere un cron da solo. Le pagine
-di fantacalcio.it sono pubbliche e lo script non usa token, quindi il workflow non ha
-bisogno di nessun segreto.
-
-Prima di committare, un controllo di plausibilità ferma il job se il file scende sotto le
-18 squadre o i 300 giocatori: lo script si accorge da solo di una pagina vuota, ma non di
-una pagina che è cambiata e si lascia interpretare a metà. Rigoristi, infortunati e
-contesto vuoti sono solo un avviso, perché sono rifiniture e non il cuore del calcolo.
-
-Per i turni infrasettimanali c'è **Actions → Probabili formazioni → Run workflow**, e lo
-script resta lanciabile a mano:
+Da fantacalcio.it non si scarica più niente in automatico: Fantacalcio consente l'accesso
+ai suoi servizi solo dal sito e dalle app ufficiali, in modo manuale. Le pagine si aprono
+e si salvano a mano (Ctrl+S, «Pagina web completa»): i link sono nella scheda **Giornate**,
+pannello *Pagine da salvare per l'aggiornamento*. I file salvati si passano agli script
+della skill, che lavorano in locale.
 
 ```bash
-node .claude/skills/aggiorna-giornata/scarica-probabili.mjs [--dry-run]
+node .claude/skills/aggiorna-giornata/scarica-probabili.mjs \
+    [--probabili <probabili.html>] [--rigoristi <rigoristi.html>] \
+    [--infortunati <infortunati.html>] [--dry-run]
 ```
+
+Quello che non si passa resta com'era in `data/probabili.json`. L'unica fonte che si
+aggiorna sempre è il calendario di Serie A e delle coppe, dall'API pubblica di ESPN, per
+stanchezza e rischio turnover.
+
+Il workflow `.github/workflows/probabili.yml` non ha più il cron e parte solo a mano
+(**Actions → Probabili formazioni → Run workflow**): aggiorna il calendario ESPN e la
+valutazione dei consigli, e prima di committare ferma il job se il file scende sotto le 18
+squadre o i 300 giocatori.
 
 ## 🪄 Formazione consigliata
 
@@ -289,8 +289,8 @@ difensori.
 
 Tutto quello che il suggeritore legge da fuori sta in `data/probabili.json`: percentuali,
 rigoristi, infortunati, squalificati, classifica di Serie A, partite del turno e forma
-recente. Lo scrive `scarica-probabili.mjs` della skill, che lo rigenera anche **da solo
-due volte al giorno** (vedi [Aggiornamento automatico](#-aggiornamento-automatico)). La
+recente. Lo scrive `scarica-probabili.mjs` della skill, partendo dalle pagine salvate a mano (vedi
+[Aggiornamento dei dati](#-aggiornamento-dei-dati)). La
 pagina mostra sempre la data dell'ultimo aggiornamento e avvisa quando il file ha più di
 due giorni o manca del tutto: senza quella riga, un file vecchio continuerebbe a produrre
 percentuali dall'aria credibile riferite a una giornata già giocata.
@@ -331,16 +331,16 @@ novamont_and_friends/
 ├── .claude/skills/aggiorna-giornata/
 │   ├── SKILL.md            # Istruzioni della skill
 │   ├── giornate-mancanti.mjs  # Quali giornate mancano e da quale ricominciare
-│   ├── scarica-giornata.mjs   # Giornata dall'API della lega
+│   ├── scarica-giornata.mjs   # Giornata da formazioni salvate, decodifica eventi
 │   ├── calcola-giornata.mjs   # Punteggi ideali
-│   └── scarica-probabili.mjs  # Probabili, rigoristi, infortunati, squalificati, contesto
+│   └── scarica-probabili.mjs  # Probabili da pagine salvate, calendario ESPN
 ├── test/
 │   ├── regole.test.mjs     # Gol, bonus casa, malus, punti di merito
-│   ├── parser.test.mjs     # I parser dello scraper, su fixture reali
+│   ├── parser.test.mjs     # I parser delle pagine salvate, su fixture reali
 │   ├── aiuto/              # Carica script.js in un contesto vm
 │   └── fixture/            # Frammenti di pagina datati, niente rete nei test
 ├── .github/workflows/
-│   ├── probabili.yml       # Rigenera probabili.json due volte al giorno
+│   ├── probabili.yml       # Ad avvio manuale: calendario ESPN e valutazione consigli
 │   └── test.yml            # node --test su ogni push e pull request
 ├── BONUS_CASA.md           # Il bonus casa nei gol ideali
 ├── CACHE_MANAGEMENT.md     # Come è gestita la cache

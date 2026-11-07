@@ -1,21 +1,19 @@
 #!/usr/bin/env node
-// Scarica una giornata dall'API della lega e produce l'estratto per
-// calcola-giornata.mjs, con voti ed eventi per ogni giocatore.
+// Converte le formazioni di una giornata nell'estratto per calcola-giornata.mjs,
+// con voti ed eventi per ogni giocatore.
 //
-//   FANTA_TOKEN=... node scarica-giornata.mjs <input.json> > estratto.json
+//   node scarica-giornata.mjs <input.json> --grezzo <formazioni.json> > estratto.json
 //
-// Con --grezzo <file> legge le formazioni gia' scaricate invece di chiamare
-// l'API, e allora il token non serve: utile quando i dati arrivano dal
-// browser loggato. Il file e' un array di partite, ognuna con casa, fuori,
-// res e i due lati nella forma che restituisce l'API (tot, starts, bench).
+// Non va in rete: l'accesso automatico ai servizi di Leghe Fantacalcio non è
+// consentito, quindi niente API e niente token. Il file passato a --grezzo è
+// un array di partite, ognuna con casa, fuori, res e i due lati (tot, starts,
+// bench), ricavato dalle pagine della lega salvate a mano. Qui resta la
+// decodifica degli eventi, che vale comunque da qualunque parte arrivino i dati.
 //
 // L'input descrive la giornata e gli accoppiamenti, che si leggono dal
 // calendario della lega; vedi SKILL.md.
 
 import fs from 'node:fs';
-
-const API = 'https://apileague.fantacalcio.it';
-const APP_KEY = 'ICiELOObd5DF5uJEATi77CRvHiiRuMU0';
 
 // Slot del campo "b" delle formazioni, col peso che hanno sul voto.
 // I pesi marcati "verificato" sono stati ricavati dai dati, isolando i
@@ -52,20 +50,6 @@ const FANTAVOTO_MAX = 50; // nessun fantavoto vero ci arriva: oltre è un codice
 function fail(message) {
     console.error(`ERRORE: ${message}`);
     process.exit(1);
-}
-
-async function chiamaApi(path, token) {
-    const res = await fetch(`${API}${path}`, {
-        headers: {
-            accept: 'application/json, text/plain, */*',
-            app_key: APP_KEY,
-            authorization: `Bearer ${token}`,
-            origin: 'https://leghe.fantacalcio.it',
-            referer: 'https://leghe.fantacalcio.it/'
-        }
-    });
-    if (!res.ok) fail(`${path} ha risposto ${res.status}`);
-    return res.json();
 }
 
 // Traduce il campo "b" in eventi con un nome, verificando che i pesi
@@ -136,56 +120,34 @@ function convertiSquadra(lato, contesto, anomalie) {
     ];
 }
 
-async function main() {
+function main() {
     const argv = process.argv.slice(2);
     const iGrezzo = argv.indexOf('--grezzo');
     const grezzoPath = iGrezzo === -1 ? null : argv[iGrezzo + 1];
-    if (iGrezzo !== -1 && !grezzoPath) fail('--grezzo vuole il file con le formazioni');
     const inputPath = argv.filter((a, i) => i !== iGrezzo && i !== iGrezzo + 1)[0];
-    if (!inputPath) fail('uso: FANTA_TOKEN=... node scarica-giornata.mjs <input.json> [--grezzo <file>]');
-
-    const token = process.env.FANTA_TOKEN;
-    if (!token && !grezzoPath) fail('manca la variabile d\'ambiente FANTA_TOKEN');
+    if (!inputPath || !grezzoPath) fail('uso: node scarica-giornata.mjs <input.json> --grezzo <formazioni.json>');
 
     const input = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
-    for (const campo of ['competizione', 'round', 'roundSerieA', 'date', 'partite']) {
+    for (const campo of ['round', 'date', 'partite']) {
         if (input[campo] === undefined) fail(`l'input non ha il campo "${campo}"`);
     }
 
-    // Dal file grezzo le partite si cercano per accoppiamento; dall'API
-    // servono prima gli id squadra, che non vanno scritti a mano.
-    let prendiPartita;
-    if (grezzoPath) {
-        const grezzo = JSON.parse(fs.readFileSync(grezzoPath, 'utf8'));
-        prendiPartita = (casa, trasferta) => {
-            const m = grezzo.find(g =>
-                g.casa.toLowerCase() === casa.toLowerCase() &&
-                g.fuori.toLowerCase() === trasferta.toLowerCase());
-            if (!m) fail(`${casa}-${trasferta} non e' nel file passato a --grezzo`);
-            return m;
-        };
-    } else {
-        const partecipanti = await chiamaApi('/onboarding/v1/invitation/participants?pageNumber=1&pageSize=1000', token);
-        const idDi = {};
-        for (const t of partecipanti) idDi[t.teamName.toLowerCase()] = t.teamId;
-        prendiPartita = (casa, trasferta) => {
-            const idCasa = idDi[casa.toLowerCase()];
-            const idTrasferta = idDi[trasferta.toLowerCase()];
-            if (!idCasa) fail(`squadra "${casa}" non trovata fra i partecipanti`);
-            if (!idTrasferta) fail(`squadra "${trasferta}" non trovata fra i partecipanti`);
-            return chiamaApi(
-                `/gaming/v1/teamLineup/${input.competizione}/${input.round}/${input.roundSerieA}/${idCasa}/${idTrasferta}`,
-                token
-            );
-        };
-    }
+    // Le partite si cercano per accoppiamento
+    const grezzo = JSON.parse(fs.readFileSync(grezzoPath, 'utf8'));
+    const prendiPartita = (casa, trasferta) => {
+        const m = grezzo.find(g =>
+            g.casa.toLowerCase() === casa.toLowerCase() &&
+            g.fuori.toLowerCase() === trasferta.toLowerCase());
+        if (!m) fail(`${casa}-${trasferta} non e' nel file passato a --grezzo`);
+        return m;
+    };
 
     const anomalie = [];
     const matches = [];
 
     for (const [i, partita] of input.partite.entries()) {
         const [casa, trasferta] = partita;
-        const d = await prendiPartita(casa, trasferta);
+        const d = prendiPartita(casa, trasferta);
 
         const contesto = `${casa}-${trasferta}`;
         matches.push({
