@@ -3840,10 +3840,22 @@ const PROB_SQUALIFICATO = 0;
 const BONUS_RIGORE_PARTITA = 0.35;
 
 // Quanto pesa ciascuna delle tre voci di contesto: campo, differenza di
-// classifica e forma recente della squadra di Serie A. Al massimo ±9% in tutto,
+// classifica e forma recente della squadra di Serie A (dai voti della lega). Al massimo ±9% in tutto,
 // cioè meno di ±0,6 di fantavoto su una resa da 6,5: un leggero vantaggio, che
 // riordina due giocatori quasi pari senza ribaltare uno scarto vero.
 const PESO_CONTESTO = 0.03;
+
+// Forma della squadra di Serie A, ricavata dai voti della lega: lo scarto medio
+// dei fantavoto dei suoi giocatori dalla media del loro ruolo, nelle ultime
+// TURNI_FORMA_SQUADRA giornate. Una squadra che vince prende voti alti, una
+// che perde li prende bassi. Lo scarto dal ruolo, e non la media secca, perché
+// un club con due portieri in rosa non sembri in crisi. Con meno di
+// VOTI_MINIMI_FORMA voti la forma non si conosce; SCALA_FORMA è lo scarto che
+// vale tutto PESO_CONTESTO, SOGLIA_FRECCIA_FORMA quello che accende la freccia.
+const TURNI_FORMA_SQUADRA = 3;
+const VOTI_MINIMI_FORMA = 4;
+const SCALA_FORMA = 1.0;
+const SOGLIA_FRECCIA_FORMA = 0.3;
 
 // Probabili formazioni di Serie A, caricate a parte perché cambiano ogni
 // settimana e non fanno parte dello storico della stagione
@@ -4023,10 +4035,12 @@ function quotaRigori(pid) {
 // dall'avversario.
 const contestiPartita = new Map();
 let contestiPartitaPer = null;
+let contestiPartitaDati = null;
 
 function contestoPartita(squadraSerieA) {
-    if (contestiPartitaPer !== probabiliFormazioni) {
+    if (contestiPartitaPer !== probabiliFormazioni || contestiPartitaDati !== fantacalcioData) {
         contestiPartitaPer = probabiliFormazioni;
+        contestiPartitaDati = fantacalcioData;
         contestiPartita.clear();
     }
     if (contestiPartita.has(squadraSerieA)) return contestiPartita.get(squadraSerieA);
@@ -4034,6 +4048,62 @@ function contestoPartita(squadraSerieA) {
     const contesto = calcolaContestoPartita(squadraSerieA);
     contestiPartita.set(squadraSerieA, contesto);
     return contesto;
+}
+
+// La forma di ogni squadra di Serie A dai voti delle ultime giornate della
+// lega: { scarto, media, voti, giornate } per squadra. Un giocatore sta in una
+// sola rosa, quindi ogni voto si conta una volta sola.
+let formaSquadreCache = null;
+let formaSquadrePer = null;
+
+function formaSquadreDaiVoti() {
+    if (formaSquadrePer === fantacalcioData && formaSquadreCache) return formaSquadreCache;
+
+    const giornate = ((fantacalcioData && fantacalcioData.rounds) || [])
+        .filter(r => r.matches.some(m => m.lineups))
+        .map(r => r.round)
+        .sort((a, b) => a - b)
+        .slice(-TURNI_FORMA_SQUADRA);
+    const considerate = new Set(giornate);
+    const medie = giornate.length ? medieDiRuolo() : {};
+
+    const somme = {};
+    for (const round of (fantacalcioData && fantacalcioData.rounds) || []) {
+        if (!considerate.has(round.round)) continue;
+        for (const match of round.matches) {
+            if (!match.lineups) continue;
+            for (const lato of ['home', 'away']) {
+                for (const g of match.lineups[lato]) {
+                    if (g.b === undefined) continue;
+                    const { serieA, role } = anagraficaGiocatore(g.p);
+                    if (!serieA || medie[role] === undefined) continue;
+                    const s = somme[serieA] || (somme[serieA] = { scarti: 0, voti: 0, totale: 0 });
+                    s.scarti += g.b - medie[role];
+                    s.totale += g.b;
+                    s.voti += 1;
+                }
+            }
+        }
+    }
+
+    const forma = {};
+    for (const [squadra, s] of Object.entries(somme)) {
+        if (s.voti < VOTI_MINIMI_FORMA) continue;
+        forma[squadra] = { scarto: s.scarti / s.voti, media: s.totale / s.voti, voti: s.voti, giornate: giornate.length };
+    }
+
+    formaSquadrePer = fantacalcioData;
+    formaSquadreCache = forma;
+    return forma;
+}
+
+// Il racconto della forma per i title: "fantavoto 6,8 nelle ultime 3, +0,4 sul ruolo (12 voti)"
+function testoFormaSquadra(forma) {
+    if (!forma) return '';
+    const num = (x) => x.toFixed(1).replace('.', ',');
+    const segno = forma.scarto >= 0 ? '+' : '−';
+    return `fantavoto ${num(forma.media)} nelle ultime ${forma.giornate}, `
+        + `${segno}${num(Math.abs(forma.scarto))} sul ruolo (${forma.voti} voti)`;
 }
 
 function calcolaContestoPartita(squadraSerieA) {
@@ -4053,7 +4123,7 @@ function calcolaContestoPartita(squadraSerieA) {
     const posizione = classifica[squadraSerieA] || null;
     const posizioneAvversario = classifica[avversario] || null;
 
-    const forma = (probabiliFormazioni.formaSerieA || {})[squadraSerieA] || null;
+    const forma = formaSquadreDaiVoti()[squadraSerieA] || null;
 
     const campo = casa ? PESO_CONTESTO : -PESO_CONTESTO;
 
@@ -4063,10 +4133,10 @@ function calcolaContestoPartita(squadraSerieA) {
         ? PESO_CONTESTO * (posizioneAvversario - posizione) / 19
         : 0;
 
-    // Media punti delle ultime giornate contate, riportata sull'intervallo
-    // [-1, +1]: 3 punti a partita in alto, zero in basso, 1,5 al centro
-    const andamento = forma && forma.partite > 0
-        ? PESO_CONTESTO * ((forma.punti / forma.partite) - 1.5) / 1.5
+    // Scarto dei voti dal ruolo, riportato sull'intervallo [-1, +1]: a
+    // SCALA_FORMA di fantavoto sopra la media vale tutto PESO_CONTESTO
+    const andamento = forma
+        ? PESO_CONTESTO * Math.max(-1, Math.min(1, forma.scarto / SCALA_FORMA))
         : 0;
 
     return {
@@ -4077,9 +4147,7 @@ function calcolaContestoPartita(squadraSerieA) {
         avversario,
         posizione,
         posizioneAvversario,
-        punti: forma ? forma.punti : null,
-        partite: forma ? forma.partite : null,
-        esiti: forma ? forma.esiti : ''
+        forma
     };
 }
 
@@ -4600,7 +4668,7 @@ function glifoContesto(contesto) {
     const pezzi = [partita, contesto.casa ? 'in casa' : 'in trasferta'];
     if (contesto.posizione) pezzi.push(`${contesto.posizione}° in classifica`);
     if (contesto.posizioneAvversario) pezzi.push(`avversario ${contesto.posizioneAvversario}°`);
-    if (contesto.partite) pezzi.push(`${contesto.punti} punti nelle ultime ${contesto.partite} (${contesto.esiti})`);
+    if (contesto.forma) pezzi.push(testoFormaSquadra(contesto.forma));
     pezzi.push(`contesto ${scarto > 0 ? '+' : ''}${Math.round(scarto * 100)}%`);
 
     const su = scarto > 0.005;
@@ -4611,19 +4679,18 @@ function glifoContesto(contesto) {
     return `<span class="consiglio-contesto ${classe}" title="${pezzi.join(' · ')}">${glifo}</span>`;
 }
 
-// Freccia di forma di una squadra di Serie A, dai punti delle ultime giornate:
-// su da 2 punti a partita (due vittorie su tre), giù sotto 1, uguale nel mezzo
+// Freccia di forma di una squadra di Serie A, dai voti delle ultime giornate:
+// su da SOGLIA_FRECCIA_FORMA sopra la media di ruolo, giù altrettanto sotto
 function formaSquadraSerieA(squadra) {
-    const forma = probabiliFormazioni && (probabiliFormazioni.formaSerieA || {})[squadra];
-    if (!forma || !forma.partite) return { glifo: '', classe: '', testo: '' };
+    const forma = formaSquadreDaiVoti()[squadra];
+    if (!forma) return { glifo: '', classe: '', testo: '' };
 
-    const media = forma.punti / forma.partite;
-    const su = media >= 2;
-    const giu = media < 1;
+    const su = forma.scarto >= SOGLIA_FRECCIA_FORMA;
+    const giu = forma.scarto <= -SOGLIA_FRECCIA_FORMA;
     return {
         glifo: su ? '↑' : (giu ? '↓' : '='),
         classe: su ? 'contesto-su' : (giu ? 'contesto-giu' : 'contesto-pari'),
-        testo: `ultime ${forma.partite} ${forma.esiti || ''} (${forma.punti} punti)`.replace('  ', ' ')
+        testo: testoFormaSquadra(forma)
     };
 }
 
@@ -4965,12 +5032,14 @@ function displayFormazione() {
                         Prima di stimare cosa farà il giocatore si guarda la partita che lo aspetta.
                         Tre leggeri vantaggi correggono la resa, fino a un massimo del 9% in tutto:
                         giocare <strong>in casa</strong>, affrontare un avversario <strong>più in
-                        basso in classifica</strong> (tanto più quanto è distante) e arrivarci con
-                        <strong>punti nelle ultime tre giornate</strong>. La freccia accanto alla
+                        basso in classifica</strong> (tanto più quanto è distante) e arrivarci <strong>in
+                        forma</strong>. La forma della squadra si ricava dai voti della lega: quanto i
+                        fantavoto dei suoi giocatori, nelle ultime ${TURNI_FORMA_SQUADRA} giornate, stanno
+                        sopra o sotto la media del loro ruolo. La freccia accanto alla
                         sigla di Serie A riassume il conto, con il dettaglio nel suggerimento. Sotto il nome
                         del giocatore c'è la partita: casa prima, la sua squadra in grassetto, e per
-                        tutte e due la posizione in classifica e la forma — ↑ da due punti a partita
-                        nelle ultime tre, ↓ sotto uno: il dettaglio è nel suggerimento al passaggio del mouse.
+                        tutte e due la posizione in classifica e la forma — ↑ da ${String(SOGLIA_FRECCIA_FORMA).replace('.', ',')}
+                        sopra la media di ruolo, ↓ altrettanto sotto: il dettaglio è nel suggerimento al passaggio del mouse.
                     </dd>
                     <dt>Gioca</dt>
                     <dd>

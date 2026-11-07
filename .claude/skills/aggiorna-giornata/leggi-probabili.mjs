@@ -382,9 +382,6 @@ function main() {
         console.log(`Classifica: ${Object.keys(classifica).length} squadre`);
     }
 
-    // La forma recente veniva dalle pagine del calendario di Serie A: per ora
-    // resta quella del file precedente
-    const forma = precedenti.formaSerieA || {};
 
     if (dryRun) {
         console.log('\n--dry-run: nessuna scrittura.');
@@ -399,7 +396,6 @@ function main() {
         squadre: nSquadre,
         prossimoTurno,
         classificaSerieA: classifica,
-        formaSerieA: forma,
         rigoristi,
         infortunati,
         squalificati,

@@ -266,7 +266,7 @@ un'istantanea della **prossima** giornata e non storico, con:
 | `rigoristi` | pagina rigoristi | spareggio a parità di punteggio atteso |
 | `infortunati` | pagina infortunati | chi non schierare, con il motivo |
 | `squalificati` | probabili formazioni, sezione per partita | chi non può proprio giocare: probabilità zero |
-| `classificaSerieA`, `prossimoTurno`, `formaSerieA` | pagine infortunati e probabili; `formaSerieA` per ora resta quella del file precedente | il contesto della partita |
+| `classificaSerieA`, `prossimoTurno` | pagine infortunati e probabili | il contesto della partita; la forma delle squadre il sito la ricava dai voti della lega |
 
 Giocatori, rigoristi e squalificati portano il pid nell'href, quindi combaciano
 esattamente con `data/<stagione>.json`. Gli **infortunati no**: quella pagina non espone

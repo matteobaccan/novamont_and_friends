@@ -283,16 +283,62 @@ test('il rigorista squalificato lascia i rigori al suo vice, per intero', () => 
 // La partita di Serie A sotto il nome
 // ------------------------------------------------------------------
 
+// Una giornata con quattro centrocampisti per squadra: l'Inter prende 7,5,
+// il Parma 5. Con così pochi voti la media di ruolo è quella di ripiego (6,2).
+function giornataForma(round) {
+    const lato = (pids, voto) => pids.map(p => ({ p, t: 's', v: voto, b: voto }));
+    return {
+        round,
+        matches: [{ homeTeam: 'X', awayTeam: 'Y', lineups: { home: lato([1, 2, 3, 4], 7.5), away: lato([5, 6, 7, 8], 5) } }]
+    };
+}
+const giocatoriForma = Object.fromEntries([1, 2, 3, 4, 5, 6, 7, 8].map(p => [p, {
+    name: `G${p}`, role: 'C', serieA: p <= 4 ? 'Inter' : 'Parma'
+}]));
+
+test('la forma di una squadra di Serie A viene dai voti delle ultime giornate, rispetto al ruolo', () => {
+    esegui(app, `fantacalcioData = ${JSON.stringify({ players: giocatoriForma, rounds: [giornataForma(1)] })};`);
+    const forma = JSON.parse(JSON.stringify(valuta(app, 'formaSquadreDaiVoti()')));
+    const mediaC = valuta(app, 'medieDiRuolo().C');
+    assert.equal(forma.Inter.voti, 4);
+    assert.ok(Math.abs(forma.Inter.scarto - (7.5 - mediaC)) < 1e-9);
+    assert.ok(Math.abs(forma.Parma.scarto - (5 - mediaC)) < 1e-9);
+    assert.equal(forma.Inter.media, 7.5);
+});
+
+test('la forma guarda solo le ultime tre giornate', () => {
+    // Quattro giornate: nella prima i voti sono rovesciati, e non deve contare
+    const rovesciata = giornataForma(1);
+    for (const g of rovesciata.matches[0].lineups.home) g.b = 5;
+    for (const g of rovesciata.matches[0].lineups.away) g.b = 7.5;
+    esegui(app, `fantacalcioData = ${JSON.stringify({
+        players: giocatoriForma, rounds: [rovesciata, giornataForma(2), giornataForma(3), giornataForma(4)]
+    })};`);
+    const forma = JSON.parse(JSON.stringify(valuta(app, 'formaSquadreDaiVoti()')));
+    assert.equal(forma.Inter.voti, 12);
+    assert.equal(forma.Inter.giornate, 3);
+    assert.ok(forma.Inter.scarto > 0);
+});
+
+test('con troppi pochi voti la forma non si conosce', () => {
+    const giornata = giornataForma(1);
+    giornata.matches[0].lineups.home = giornata.matches[0].lineups.home.slice(0, 2);
+    esegui(app, `fantacalcioData = ${JSON.stringify({ players: giocatoriForma, rounds: [giornata] })};`);
+    const forma = JSON.parse(JSON.stringify(valuta(app, 'formaSquadreDaiVoti()')));
+    assert.equal(forma.Inter, undefined, 'due voti non bastano');
+    assert.ok(forma.Parma);
+});
+
 test('la partita mette la casa prima, la squadra del giocatore in grassetto, posizione e forma di tutte e due', () => {
+    esegui(app, `fantacalcioData = ${JSON.stringify({ players: giocatoriForma, rounds: [giornataForma(1)] })};`);
     esegui(app, `probabiliFormazioni = ${JSON.stringify({
-        classificaSerieA: { Inter: 2, Parma: 15 },
-        formaSerieA: { Inter: { punti: 7, partite: 3, esiti: 'VVP' }, Parma: { punti: 1, partite: 3, esiti: 'PNP' } }
+        classificaSerieA: { Inter: 2, Parma: 15 }
     })};`);
     const html = valuta(app, `htmlPartitaSerieA({ noto: true, squadra: 'Parma', avversario: 'Inter', casa: false })`);
     assert.ok(html.indexOf('INT') < html.indexOf('PAR'), 'la squadra di casa va prima');
     assert.match(html, /<span class="partita-squadra">INT 2°<span class="contesto-su">↑<\/span>/);
     assert.match(html, /<span class="partita-squadra sua">PAR 15°<span class="contesto-giu">↓<\/span>/);
-    assert.match(html, /title="Inter-Parma · Inter, 2° in classifica, ultime 3 VVP \(7 punti\) · Parma/);
+    assert.match(html, /title="Inter-Parma · Inter, 2° in classifica, fantavoto 7,5 nelle ultime 1, \+1,3 sul ruolo \(4 voti\) · Parma/);
 });
 
 test('senza partita nota non si scrive niente sotto il nome', () => {
