@@ -1,29 +1,24 @@
 #!/usr/bin/env node
-// Prepara data/probabili.json per il suggeritore di formazione:
+// Prepara data/probabili.json per il suggeritore di formazione, a partire dalle
+// pagine di fantacalcio.it salvate a mano dall'utente (Ctrl+S, link nella
+// scheda Giornate del sito):
 //
 //   - probabili formazioni, squalificati e prossimo turno
 //   - rigoristi, in ordine di gerarchia
 //   - infortunati e classifica di Serie A
-//   - calendario: partite di coppa e di campionato a ridosso del turno, per la
-//     stanchezza di chi ha giocato a metà settimana (da ESPN, vedi
-//     calendario-squadre.mjs)
 //
 //   node leggi-probabili.mjs [--probabili <file.html>] [--rigoristi <file.html>]
-//                              [--infortunati <file.html>] [--dry-run]
+//                            [--infortunati <file.html>] [--dry-run]
 //
-// Da fantacalcio.it non si scarica niente: l'accesso automatico non è
-// consentito. Le pagine si aprono e si salvano a mano (Ctrl+S, link nella
-// scheda Giornate del sito) e si passano qui come file. Quello che non si
-// passa resta com'era nel data/probabili.json precedente; il calendario ESPN
-// invece si aggiorna sempre. I giocatori sono identificati dallo stesso id
-// globale Fantacalcio usato in data/<stagione>.json, tranne gli infortunati:
-// quella pagina non espone id, quindi l'abbinamento alla rosa si fa per nome e
-// squadra nel browser, dove le rose sono già caricate.
+// Non va in rete. Quello che non si passa resta com'era nel data/probabili.json
+// precedente. I giocatori sono identificati dallo stesso id globale Fantacalcio
+// usato in data/<stagione>.json, tranne gli infortunati: quella pagina non
+// espone id, quindi l'abbinamento alla rosa si fa per nome e squadra nel
+// browser, dove le rose sono già caricate.
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { scaricaCalendario } from './calendario-squadre.mjs';
 
 const URL_PROBABILI = 'https://www.fantacalcio.it/probabili-formazioni-serie-a';
 const DESTINAZIONE = 'data/probabili.json';
@@ -31,21 +26,6 @@ const DESTINAZIONE = 'data/probabili.json';
 function fail(message) {
     console.error(`ERRORE: ${message}`);
     process.exit(1);
-}
-
-async function scaricaJson(url) {
-    const res = await fetch(url, {
-        headers: {
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36',
-            accept: 'application/json'
-        }
-    });
-    if (!res.ok) {
-        // L'inizio della risposta dice quasi sempre il perché di un 400
-        const corpo = (await res.text().catch(() => '')).replace(/\s+/g, ' ').slice(0, 160);
-        throw new Error(`${url} ha risposto ${res.status}${corpo ? `: ${corpo}` : ''}`);
-    }
-    return res.json();
 }
 
 // Le descrizioni degli infortuni arrivano con le entità HTML non decodificate
@@ -330,15 +310,14 @@ function leggiPagina(file) {
     }
 }
 
-async function main() {
+function main() {
     const argv = process.argv.slice(2);
     const dryRun = argv.includes('--dry-run');
     const fileProbabili = opzione(argv, '--probabili');
     const fileRigoristi = opzione(argv, '--rigoristi');
     const fileInfortunati = opzione(argv, '--infortunati');
 
-    // Il file del giro prima: quello che non arriva da una pagina salvata resta
-    // com'era, e le partite di coppa già giocate non le dà più nessuno
+    // Il file precedente: quello che non arriva da una pagina salvata resta com'era
     let precedenti = {};
     try {
         precedenti = JSON.parse(fs.readFileSync(path.join(process.cwd(), DESTINAZIONE), 'utf8'));
@@ -351,7 +330,6 @@ async function main() {
     let giocatori = precedenti.giocatori || {};
     let squalificati = precedenti.squalificati || [];
     let prossimoTurno = precedenti.prossimoTurno || null;
-    let nomiProbabili = [];
 
     if (fileProbabili) {
         const htmlProbabili = leggiPagina(fileProbabili);
@@ -383,7 +361,6 @@ async function main() {
         nSquadre = analisi.squadre.length;
         giocatori = analisi.giocatori;
         prossimoTurno = turno ? { numero: turno, partite } : null;
-        nomiProbabili = analisi.squadre.map(s => s.nome);
     } else {
         console.log(`Probabili: nessun file, restano quelle del ${aggiornato || 'giro precedente'}`);
     }
@@ -409,42 +386,13 @@ async function main() {
     // resta quella del file precedente
     const forma = precedenti.formaSerieA || {};
 
-    // Le squadre di Serie A da tutte le fonti a disposizione: se una manca
-    // dalla classifica, c'è comunque nelle probabili o nel prossimo turno
-    const squadreSerieA = [...new Set([
-        ...Object.keys(classifica),
-        ...nomiProbabili,
-        ...((prossimoTurno && prossimoTurno.partite) || []).flatMap(p => [p.casa, p.fuori]),
-        ...Object.keys(precedenti.calendarioSquadre || {})
-    ])];
-
-    let calendario = precedenti.calendarioSquadre || {};
-    let partiteCalendario = precedenti.partiteCalendario || [];
-    try {
-        console.log('\nCalendario di tutte le competizioni (ESPN):');
-        const risultato = await scaricaCalendario(squadreSerieA, scaricaJson, partiteCalendario);
-        calendario = risultato.calendario;
-        partiteCalendario = risultato.partite;
-        const stanche = Object.entries(calendario).filter(([, c]) => c.giorniRiposo !== null && c.giorniRiposo <= 4);
-        console.log(`  ${Object.keys(calendario).length} squadre con la prossima di Serie A, ${stanche.length} con 4 giorni di riposo o meno`
-            + (stanche.length ? `: ${stanche.map(([s, c]) => `${s} ${c.giorniRiposo}g`).join(', ')}` : ''));
-        const conQuote = Object.entries(calendario).filter(([, c]) => c.prossima.esiti);
-        console.log(`  ${conQuote.length} squadre con le quote della prossima`
-            + (conQuote.length ? `: ${conQuote.map(([s, c]) => `${s} ${Math.round(c.prossima.esiti.vittoria * 100)}%`).join(', ')}` : ''));
-        if (risultato.sconosciute.length) {
-            console.warn(`  ATTENZIONE, squadre di Serie A non riconosciute: ${risultato.sconosciute.join(', ')}`);
-        }
-    } catch (error) {
-        console.warn(`Calendario non disponibile: ${error.message}`);
-    }
-
     if (dryRun) {
         console.log('\n--dry-run: nessuna scrittura.');
         return;
     }
 
     // "aggiornato" è l'età delle probabili, che il sito mostra: cambia solo
-    // quando arriva una pagina nuova, non a ogni giro del calendario
+    // quando arriva una pagina nuova
     const output = {
         aggiornato,
         fonte: URL_PROBABILI,
@@ -452,8 +400,6 @@ async function main() {
         prossimoTurno,
         classificaSerieA: classifica,
         formaSerieA: forma,
-        calendarioSquadre: calendario,
-        partiteCalendario,
         rigoristi,
         infortunati,
         squalificati,

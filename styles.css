@@ -5626,21 +5626,6 @@ body.sipario-aperto { overflow: hidden; }
 .consiglio-partita .contesto-giu,
 .consiglio-partita .contesto-pari { margin-left: 0.1rem; font-weight: 700; }
 
-/* Riposo corto e partita ravvicinata, accanto alla squadra */
-.consiglio-partita .partita-riposo,
-.consiglio-partita .partita-turnover {
-    margin-left: 0.2rem;
-    font-weight: 700;
-    color: #b45309;
-}
-[data-theme="dark"] .consiglio-partita .partita-riposo,
-[data-theme="dark"] .consiglio-partita .partita-turnover { color: #fbbf24; }
-
-/* Probabilità di vittoria dai bookmaker, accanto alla squadra */
-.consiglio-partita .partita-quota { margin-left: 0.25rem; opacity: 0.8; }
-.consiglio-partita .partita-quota.favorita { font-weight: 700; opacity: 1; color: #1d4ed8; }
-[data-theme="dark"] .consiglio-partita .partita-quota.favorita { color: #93c5fd; }
-
 
 /* ============================================================
    Storico del giocatore, nella formazione consigliata

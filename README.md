@@ -189,9 +189,7 @@ node .claude/skills/aggiorna-giornata/leggi-probabili.mjs \
     [--infortunati <infortunati.html>] [--dry-run]
 ```
 
-Quello che non si passa resta com'era in `data/probabili.json`. Lo script chiede anche il
-calendario di Serie A e delle coppe all'API pubblica di ESPN, per stanchezza e rischio
-turnover; se non risponde restano le partite già note.
+Quello che non si passa resta com'era in `data/probabili.json`. Lo script non va in rete.
 
 ## 🪄 Formazione consigliata
 
@@ -328,7 +326,7 @@ novamont_and_friends/
 │   ├── giornate-mancanti.mjs  # Quali giornate mancano e da quale ricominciare
 │   ├── converti-giornata.mjs  # Giornata da formazioni salvate, decodifica eventi
 │   ├── calcola-giornata.mjs   # Punteggi ideali
-│   └── leggi-probabili.mjs    # Probabili da pagine salvate, calendario ESPN
+│   └── leggi-probabili.mjs    # Probabili, rigoristi, infortunati da pagine salvate
 ├── test/
 │   ├── regole.test.mjs     # Gol, bonus casa, malus, punti di merito
 │   ├── parser.test.mjs     # I parser delle pagine salvate, su fixture reali

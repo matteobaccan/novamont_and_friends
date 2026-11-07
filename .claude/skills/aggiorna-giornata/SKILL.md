@@ -267,7 +267,6 @@ un'istantanea della **prossima** giornata e non storico, con:
 | `infortunati` | pagina infortunati | chi non schierare, con il motivo |
 | `squalificati` | probabili formazioni, sezione per partita | chi non può proprio giocare: probabilità zero |
 | `classificaSerieA`, `prossimoTurno`, `formaSerieA` | pagine infortunati e probabili; `formaSerieA` per ora resta quella del file precedente | il contesto della partita |
-| `calendarioSquadre` | API pubblica ESPN (Serie A, Coppa Italia, coppe europee) | giorni di riposo prima del turno e partita successiva: stanchezza e rischio turnover |
 
 Giocatori, rigoristi e squalificati portano il pid nell'href, quindi combaciano
 esattamente con `data/<stagione>.json`. Gli **infortunati no**: quella pagina non espone
@@ -280,10 +279,6 @@ un turno senza squalificati capita davvero.
 
 Se stampa `ATTENZIONE, squadre senza 11 titolari` le probabili non sono ancora complete
 (succede a inizio settimana): il file resta valido ma il suggerimento è più debole.
-Se stampa `squadre di Serie A non riconosciute`, ESPN chiama una squadra in un modo che
-`nomeSerieA()` in `calendario-squadre.mjs` non riporta al nome di fantacalcio.it: va
-aggiunta in `ALIAS`. Finché manca, quella squadra non ha calendario e la stanchezza la
-ignora.
 
 Se si ferma con `nessuna squadra trovata`, il file non è la pagina delle probabili o la pagina ha cambiato struttura e vanno riviste
 le espressioni regolari in `leggi-probabili.mjs`. Se invece a mancare è una delle altre
