@@ -3,7 +3,7 @@
 //
 //   node calcola-giornata.mjs <estratto.json> [--dry-run]
 //
-// L'estratto è quello prodotto da scarica-giornata.mjs; vedi SKILL.md.
+// L'estratto è quello prodotto da converti-giornata.mjs; vedi SKILL.md.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -296,9 +296,8 @@ function main() {
     fs.writeFileSync(seasonPath, JSON.stringify(data, null, 2) + '\n');
     console.log(`\nScritto ${season.file} (${data.rounds.length} giornate).`);
 
-    // Il workflow delle probabili rifà la valutazione dei consigli a ogni giro,
-    // ma fino al giro dopo il sito mostrerebbe quella senza la giornata appena
-    // inserita: tanto vale rifarla qui
+    // La valutazione dei consigli dipende dalle giornate giocate: si rifà qui,
+    // così il sito non mostra quella senza la giornata appena inserita
     const cartellaConsigli = path.join(repoRoot, 'data', 'consigli', season.id);
     const valutazione = valutaStagione(data, leggiConsigli(cartellaConsigli));
     if (valutazione.giornate.length > 0) {

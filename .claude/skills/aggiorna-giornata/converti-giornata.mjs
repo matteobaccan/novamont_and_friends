@@ -2,7 +2,7 @@
 // Converte le formazioni di una giornata nell'estratto per calcola-giornata.mjs,
 // con voti ed eventi per ogni giocatore.
 //
-//   node scarica-giornata.mjs <input.json> --grezzo <formazioni.json> > estratto.json
+//   node converti-giornata.mjs <input.json> --grezzo <formazioni.json> > estratto.json
 //
 // Non va in rete: l'accesso automatico ai servizi di Leghe Fantacalcio non è
 // consentito, quindi niente API e niente token. Il file passato a --grezzo è
@@ -125,7 +125,7 @@ function main() {
     const iGrezzo = argv.indexOf('--grezzo');
     const grezzoPath = iGrezzo === -1 ? null : argv[iGrezzo + 1];
     const inputPath = argv.filter((a, i) => i !== iGrezzo && i !== iGrezzo + 1)[0];
-    if (!inputPath || !grezzoPath) fail('uso: node scarica-giornata.mjs <input.json> --grezzo <formazioni.json>');
+    if (!inputPath || !grezzoPath) fail('uso: node converti-giornata.mjs <input.json> --grezzo <formazioni.json>');
 
     const input = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
     for (const campo of ['round', 'date', 'partite']) {

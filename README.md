@@ -149,7 +149,7 @@ Ideale ricade sui punteggi reali.
 
 L'inserimento non va fatto a mano: la skill in `.claude/skills/aggiorna-giornata/`
 converte la giornata, presa da pagine della lega salvate a mano, calcola i punteggi
-ideali e scrive il JSON. Nella stessa cartella vive `scarica-probabili.mjs`, che prepara i
+ideali e scrive il JSON. Nella stessa cartella vive `leggi-probabili.mjs`, che prepara i
 dati di Serie A per il suggeritore di formazione (vedi
 [Aggiornamento dei dati](#-aggiornamento-dei-dati)).
 
@@ -177,26 +177,21 @@ riempirebbero la classifica di portieri.
 
 ## 🔄 Aggiornamento dei dati
 
-Da fantacalcio.it non si scarica più niente in automatico: Fantacalcio consente l'accesso
-ai suoi servizi solo dal sito e dalle app ufficiali, in modo manuale. Le pagine si aprono
-e si salvano a mano (Ctrl+S, «Pagina web completa»): i link sono nella scheda **Giornate**,
-pannello *Pagine da salvare per l'aggiornamento*. I file salvati si passano agli script
-della skill, che lavorano in locale.
+Il sito si aggiorna elaborando **poche pagine HTML salvate a mano**: niente è automatico
+e niente va su fantacalcio.it da solo. Le pagine si aprono dal browser e si salvano con
+Ctrl+S («Pagina web completa»); i link sono nella scheda **Giornate**, pannello *Pagine da
+salvare per l'aggiornamento*. I file salvati si passano agli script della skill, che
+lavorano in locale.
 
 ```bash
-node .claude/skills/aggiorna-giornata/scarica-probabili.mjs \
+node .claude/skills/aggiorna-giornata/leggi-probabili.mjs \
     [--probabili <probabili.html>] [--rigoristi <rigoristi.html>] \
     [--infortunati <infortunati.html>] [--dry-run]
 ```
 
-Quello che non si passa resta com'era in `data/probabili.json`. L'unica fonte che si
-aggiorna sempre è il calendario di Serie A e delle coppe, dall'API pubblica di ESPN, per
-stanchezza e rischio turnover.
-
-Il workflow `.github/workflows/probabili.yml` non ha più il cron e parte solo a mano
-(**Actions → Probabili formazioni → Run workflow**): aggiorna il calendario ESPN e la
-valutazione dei consigli, e prima di committare ferma il job se il file scende sotto le 18
-squadre o i 300 giocatori.
+Quello che non si passa resta com'era in `data/probabili.json`. Lo script chiede anche il
+calendario di Serie A e delle coppe all'API pubblica di ESPN, per stanchezza e rischio
+turnover; se non risponde restano le partite già note.
 
 ## 🪄 Formazione consigliata
 
@@ -289,7 +284,7 @@ difensori.
 
 Tutto quello che il suggeritore legge da fuori sta in `data/probabili.json`: percentuali,
 rigoristi, infortunati, squalificati, classifica di Serie A, partite del turno e forma
-recente. Lo scrive `scarica-probabili.mjs` della skill, partendo dalle pagine salvate a mano (vedi
+recente. Lo scrive `leggi-probabili.mjs` della skill, partendo dalle pagine salvate a mano (vedi
 [Aggiornamento dei dati](#-aggiornamento-dei-dati)). La
 pagina mostra sempre la data dell'ultimo aggiornamento e avvisa quando il file ha più di
 due giorni o manca del tutto: senza quella riga, un file vecchio continuerebbe a produrre
@@ -331,16 +326,15 @@ novamont_and_friends/
 ├── .claude/skills/aggiorna-giornata/
 │   ├── SKILL.md            # Istruzioni della skill
 │   ├── giornate-mancanti.mjs  # Quali giornate mancano e da quale ricominciare
-│   ├── scarica-giornata.mjs   # Giornata da formazioni salvate, decodifica eventi
+│   ├── converti-giornata.mjs  # Giornata da formazioni salvate, decodifica eventi
 │   ├── calcola-giornata.mjs   # Punteggi ideali
-│   └── scarica-probabili.mjs  # Probabili da pagine salvate, calendario ESPN
+│   └── leggi-probabili.mjs    # Probabili da pagine salvate, calendario ESPN
 ├── test/
 │   ├── regole.test.mjs     # Gol, bonus casa, malus, punti di merito
 │   ├── parser.test.mjs     # I parser delle pagine salvate, su fixture reali
 │   ├── aiuto/              # Carica script.js in un contesto vm
 │   └── fixture/            # Frammenti di pagina datati, niente rete nei test
 ├── .github/workflows/
-│   ├── probabili.yml       # Ad avvio manuale: calendario ESPN e valutazione consigli
 │   └── test.yml            # node --test su ogni push e pull request
 ├── BONUS_CASA.md           # Il bonus casa nei gol ideali
 ├── CACHE_MANAGEMENT.md     # Come è gestita la cache
@@ -353,7 +347,7 @@ novamont_and_friends/
 - **`script.js`**: ~4800 righe di JavaScript: calcolo classifiche, rose e suggeritore di formazione
 - **`data/seasons.json`**: Indice delle stagioni: id, etichetta, file e stato
 - **`data/<stagione>.json`**: Database JSON con teams, players, rosterHistory, rounds e settings
-- **`data/probabili.json`**: Istantanea di Serie A rigenerata dal workflow, non scritta a mano
+- **`data/probabili.json`**: Istantanea di Serie A ricavata dalle pagine salvate, non scritta a mano
 - **`config.js`**: Impostazioni configurabili per personalizzazione
 
 ## 🔧 Funzioni Avanzate

@@ -94,7 +94,7 @@ ancora**: va scritto partendo da una pagina salvata vera, verificando che conten
 eventi.
 
 ```bash
-node .claude/skills/aggiorna-giornata/scarica-giornata.mjs <input.json> --grezzo <grezzo.json> > <estratto.json>
+node .claude/skills/aggiorna-giornata/converti-giornata.mjs <input.json> --grezzo <grezzo.json> > <estratto.json>
 ```
 
 Se stampa `ATTENZIONE, decodifica eventi non pulita`, **fermati**: significa che un
@@ -155,7 +155,7 @@ punteggio. Nei commenti, quindi, non citare somme di voti: cita il punteggio del
 ## Il campo `b` delle formazioni
 
 Le formazioni portano per ogni giocatore `scr` (voto), `cscr` (voto con bonus) e `b`, una
-stringa di 16 slot con gli eventi. I pesi sono in `EVENTI` dentro `scarica-giornata.mjs`,
+stringa di 16 slot con gli eventi. I pesi sono in `EVENTI` dentro `converti-giornata.mjs`,
 ricavati dai dati isolando i giocatori con un solo slot attivo.
 
 Lo script **verifica ogni giocatore**: la somma dei pesi deve spiegare esattamente
@@ -241,20 +241,18 @@ Cita solo numeri che hai davvero letto. Un voto inventato è indistinguibile da 
 | `ATTENZIONE, decodifica eventi non pulita` | evento nuovo non in `EVENTI`: va aggiunto il peso |
 | `pid non presenti nel dizionario "players"` | acquisto nuovo: pagina Rose salvata + `aggiungi-giocatori.mjs` |
 | `squadra "X" non presente fra le squadre` | nome che non esiste nella stagione, o squadra fuori competizione |
-| `i gol non coincidono` | `roundSerieA` sbagliato: hai scaricato un'altra giornata |
+| `i gol non coincidono` | `roundSerieA` sbagliato: hai convertito un'altra giornata |
 | `la giornata N esiste già` | rimuovila dal JSON prima di reinserirla |
 | Classifica diversa da quella della lega | `homeScore` deve includere il fattore campo, come lo dà la lega |
 
 ## Dati di Serie A per il suggeritore
 
-Da fantacalcio.it non scarica niente: le pagine delle probabili, dei rigoristi e degli
-infortunati le salva l'utente a mano e si passano come file. Quelle non passate restano
-come nel `data/probabili.json` precedente; il calendario ESPN si aggiorna sempre. Il
-workflow `.github/workflows/probabili.yml` non ha più il cron: avviato a mano aggiorna solo
-il calendario ESPN e la valutazione dei consigli.
+Si lancia a mano, prima della giornata, sulle pagine delle probabili, dei rigoristi e
+degli infortunati salvate dall'utente. Quelle non passate restano come nel
+`data/probabili.json` precedente.
 
 ```bash
-node .claude/skills/aggiorna-giornata/scarica-probabili.mjs \
+node .claude/skills/aggiorna-giornata/leggi-probabili.mjs \
     [--probabili <probabili.html>] [--rigoristi <rigoristi.html>] \
     [--infortunati <infortunati.html>] [--dry-run]
 ```
@@ -288,25 +286,27 @@ aggiunta in `ALIAS`. Finché manca, quella squadra non ha calendario e la stanch
 ignora.
 
 Se si ferma con `nessuna squadra trovata`, il file non è la pagina delle probabili o la pagina ha cambiato struttura e vanno riviste
-le espressioni regolari in `scarica-probabili.mjs`. Se invece a mancare è una delle altre
+le espressioni regolari in `leggi-probabili.mjs`. Se invece a mancare è una delle altre
 chiavi, lo script si limita a un warning: sono rifiniture, e il suggeritore regge lo stesso.
 
 ## Il suggeritore ha avuto ragione?
 
-Lo stesso workflow, dopo le probabili, lancia `salva-consigli.mjs`: salva la formazione
+Dopo `leggi-probabili.mjs` si lancia `salva-consigli.mjs`: salva la formazione
 consigliata di ogni squadra per la prossima giornata in
-`data/consigli/<stagione>/giornata-<N>.json`. Il file si riscrive a ogni giro finché le
-probabili riguardano lo stesso turno di Serie A e nessuna partita è cominciata, poi resta
+`data/consigli/<stagione>/giornata-<N>.json`. Il file si riscrive finché le probabili
+riguardano lo stesso turno di Serie A e nessuna partita è cominciata, poi resta
 congelato: è il consiglio che il sito dava prima del fischio.
+
+```bash
+node .claude/skills/aggiorna-giornata/salva-consigli.mjs [--dry-run]
+```
 
 Ogni consiglio salva anche la previsione per **tutta la rosa** (atteso, resa, media di
 ruolo, probabilità di giocare) e i pesi del modello con cui è stato dato.
 
-Il confronto con la realtà lo fa `valuta-consigli.mjs`, che il workflow lancia a ogni giro
-con `--scrivi`: la valutazione finisce in `data/consigli/<stagione>/valutazione.json` e
+Il confronto con la realtà lo fa `valuta-consigli.mjs --scrivi`: la valutazione finisce in `data/consigli/<stagione>/valutazione.json` e
 il sito la mostra sotto la formazione consigliata. La rifà anche `calcola-giornata.mjs`
-appena scrive una giornata, così il bilancio degli allenatori non resta una giornata
-indietro fino al giro dopo: quel file va committato insieme alla giornata. A mano:
+appena scrive una giornata: quel file va committato insieme alla giornata. A mano:
 
 ```bash
 node .claude/skills/aggiorna-giornata/valuta-consigli.mjs [stagione] [--scrivi]

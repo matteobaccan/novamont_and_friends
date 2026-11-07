@@ -12,7 +12,7 @@
 //
 // Per una giornata senza consiglio salvato si può indicare a mano da quale
 // commit prendere le probabili: --giornata 1 --probabili <commit>.
-// Attenzione a non usare probabili scaricate dopo la giornata: sanno già chi ha
+// Attenzione a non usare probabili salvate dopo la giornata: sanno già chi ha
 // giocato e fanno sembrare il modello più bravo di quanto sia.
 
 import fs from 'node:fs';

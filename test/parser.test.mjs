@@ -20,7 +20,7 @@ import {
     analizzaRigoristi,
     analizzaInfortunati,
     analizzaSqualificati
-} from '../.claude/skills/aggiorna-giornata/scarica-probabili.mjs';
+} from '../.claude/skills/aggiorna-giornata/leggi-probabili.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const fixture = (nome) => fs.readFileSync(path.join(QUI, 'fixture', nome), 'utf8');

@@ -8,7 +8,7 @@
 //     stanchezza di chi ha giocato a metà settimana (da ESPN, vedi
 //     calendario-squadre.mjs)
 //
-//   node scarica-probabili.mjs [--probabili <file.html>] [--rigoristi <file.html>]
+//   node leggi-probabili.mjs [--probabili <file.html>] [--rigoristi <file.html>]
 //                              [--infortunati <file.html>] [--dry-run]
 //
 // Da fantacalcio.it non si scarica niente: l'accesso automatico non è

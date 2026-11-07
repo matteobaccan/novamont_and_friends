@@ -5,7 +5,7 @@
 //
 //   node salva-consigli.mjs [--dry-run]
 //
-// Gira nella stessa Action delle probabili, subito dopo averle scaricate. Il
+// Si lancia a mano subito dopo leggi-probabili.mjs. Il
 // file di una giornata si riscrive finché le probabili riguardano ancora lo
 // stesso turno di Serie A e nessuna partita di quel turno è cominciata: così
 // resta l'ultimo consiglio utile prima del fischio, e non uno scritto dopo,

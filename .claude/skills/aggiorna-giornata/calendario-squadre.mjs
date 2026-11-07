@@ -11,9 +11,9 @@
 // ESPN dà solo le partite da oggi in avanti, non quelle già giocate: la
 // partita di coppa di mercoledì, che serve per il riposo del weekend, sparisce
 // appena giocata. Per questo le partite viste si ricordano da un giro all'altro
-// (in probabili.json, `partiteCalendario`): il workflow gira due volte al giorno
-// e guarda dodici giorni avanti, quindi ogni partita viene vista prima di essere
-// giocata. Si tengono quindici giorni indietro, poi si buttano.
+// (in probabili.json, `partiteCalendario`): si guarda dodici giorni avanti,
+// quindi lanciando lo script almeno una volta a turno ogni partita viene vista
+// prima di essere giocata. Si tengono quindici giorni indietro, poi si buttano.
 //
 // Nulla qui è bloccante: senza calendario il suggeritore ignora la stanchezza.
 
