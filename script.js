@@ -3738,6 +3738,62 @@ const PROB_INFORTUNATO = 0.03;
 // uno squalificato quel turno lo salta e basta.
 const PROB_SQUALIFICATO = 0;
 
+// Le probabili invecchiano. Salvate il venerdì per la domenica sanno quasi
+// tutto, salvate il martedì no: chi era in dubbio avrà recuperato, chi era
+// titolare si sarà fermato in allenamento. Quando sono state salvate più di
+// GIORNI_PROBABILI_AFFIDABILI giorni prima della data del turno, la loro
+// percentuale si mescola con lo storico (quante volte il giocatore ha preso il
+// voto finora): PESO_STORICO_PER_GIORNO in più per ogni giorno oltre la
+// soglia, fino a PESO_STORICO_MAX.
+//
+// Il peso parte da ZERO, cioè spento. Sulle giornate 2-6, con probabili
+// aggiornate fino al fischio, lo storico peggiorava sempre la previsione
+// (Brier 0,060 con le sole probabili, 0,067 con lo storico al 30%), e quando
+// le due fonti non erano d'accordo avevano ragione le probabili. Va acceso
+// solo quando rigioca-consigli.mjs, su giornate con probabili salvate a mano,
+// dirà che conviene.
+const GIORNI_PROBABILI_AFFIDABILI = 2;
+const PESO_STORICO_PER_GIORNO = 0;
+const PESO_STORICO_MAX = 0.5;
+
+// Quanti giorni prima della data del turno di Serie A sono state salvate le
+// probabili. La data è quella del calendario ufficiale precaricato; senza
+// calendario non si sa, e lo storico resta fuori.
+function giorniPrimaDelTurno() {
+    if (!probabiliFormazioni || !probabiliFormazioni.aggiornato || !probabiliFormazioni.prossimoTurno) return null;
+    const turno = giornataSerieA(probabiliFormazioni.prossimoTurno.numero);
+    if (!turno || !turno.data) return null;
+    const salvate = new Date(probabiliFormazioni.aggiornato);
+    if (isNaN(salvate.getTime())) return null;
+    const [a, m, g] = String(turno.data).split('-').map(Number);
+    const giornoSalvate = Date.UTC(salvate.getFullYear(), salvate.getMonth(), salvate.getDate());
+    return Math.round((Date.UTC(a, m - 1, g) - giornoSalvate) / 86400000);
+}
+
+// La riga della spiegazione: dice se lo storico conta, e perché
+function testoPesoStorico() {
+    const giorni = giorniPrimaDelTurno();
+    const peso = pesoStorico();
+    if (peso > 0) {
+        return `<br>Queste probabili sono state salvate <strong>${giorni} giorni prima</strong> del turno:
+            la percentuale pesa il ${Math.round((1 - peso) * 100)}% e il resto lo mette lo
+            <strong>storico</strong>, cioè quante volte il giocatore ha preso il voto finora.`;
+    }
+    if (PESO_STORICO_PER_GIORNO > 0) {
+        return `<br>Se le probabili fossero salvate più di ${GIORNI_PROBABILI_AFFIDABILI} giorni prima
+            del turno, la percentuale si mescolerebbe con lo storico dei voti presi.`;
+    }
+    return '';
+}
+
+// Quanto pesa lo storico nella probabilità di giocare, fra 0 e PESO_STORICO_MAX
+function pesoStorico() {
+    const giorni = giorniPrimaDelTurno();
+    if (giorni === null || giorni <= GIORNI_PROBABILI_AFFIDABILI) return 0;
+    const peso = PESO_STORICO_PER_GIORNO * (giorni - GIORNI_PROBABILI_AFFIDABILI);
+    return Math.max(0, Math.min(PESO_STORICO_MAX, peso));
+}
+
 // Quanto vale a partita battere i rigori della propria squadra. Il primo
 // rigorista ne calcia dai 5 ai 10 in una stagione: su una trentina di partite
 // giocate fanno ~0,22 rigori a partita, e ogni rigore vale in media
@@ -3873,8 +3929,11 @@ function probabilitaDiGiocare(pid, continuitaStorica) {
     // Chi è nelle probabili con una percentuale ha già il giudizio più
     // aggiornato: l'elenco infortunati sa dell'acciacco, le probabili sanno
     // anche se il rientro è previsto per domenica
+    // Se sono vecchie, la percentuale si mescola con lo storico: vedi pesoStorico()
     if (voce) {
-        return { p: voce.probabilita / 100, fonte: 'probabili', voce, infortunio };
+        const peso = pesoStorico();
+        const p = (1 - peso) * (voce.probabilita / 100) + peso * continuitaStorica;
+        return { p, fonte: 'probabili', pesoStorico: peso, voce, infortunio };
     }
     if (infortunio) {
         return { p: PROB_INFORTUNATO, fonte: 'infortunato', voce: null, infortunio };
@@ -4195,7 +4254,7 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
         ? prior
         : (votiPresi * grezza + GIORNATE_PRIOR * prior) / (votiPresi + GIORNATE_PRIOR);
 
-    const { p, fonte, voce, infortunio } = probabilitaDiGiocare(pid, affidabilita);
+    const { p, fonte, voce, infortunio, pesoStorico: pesoDelloStorico = 0 } = probabilitaDiGiocare(pid, affidabilita);
 
     // Prima di stimare cosa farà il giocatore si guarda la partita che lo
     // aspetta: campo, avversario e forma della sua squadra di Serie A
@@ -4224,6 +4283,7 @@ function punteggioAtteso(pid, stats, giornateGiocate) {
         forma,
         probabilita: p,
         fonteProbabilita: fonte,
+        pesoStorico: pesoDelloStorico,
         rigorista: rigori ? rigori.ordine : null,
         rigori,
         infortunio: infortunio ? infortunio.nota : null,
@@ -4972,6 +5032,7 @@ function displayFormazione() {
                         <a href="https://www.fantacalcio.it/infortunati-serie-a" target="_blank" rel="noopener noreferrer">infortunati</a>
                         al 3%, con il motivo scritto in riga. Chi invece è infortunato ma compare nelle
                         probabili tiene la sua percentuale: quella sa già dei rientri in dubbio.
+                        ${testoPesoStorico()}
                         <br>Gli <strong>squalificati</strong> invece vanno a <strong>zero</strong>, e il
                         nome è sbarrato: non è una stima prudente come le altre due, è che quel turno non
                         possono proprio scendere in campo. La stessa pagina delle probabili li elenca

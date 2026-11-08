@@ -369,3 +369,53 @@ test('la differenza col consiglio è tutta nei giocatori che hanno preso punti i
 test('le giornate valutate prima dei dettagli non rompono il bilancio', () => {
     assert.equal(valuta(app, 'scomponiConsiglio({ schierata: 70, consigliata: 66 })'), null);
 });
+
+// ------------------------------------------------------------------
+// Probabili vecchie e storico
+// ------------------------------------------------------------------
+
+// Probabili al 40% per il turno 11 (domenica 8 novembre), salvate il giorno
+// indicato. Lo storico del giocatore di prova è 1: ha sempre preso il voto.
+function conProbabiliDel(salvate, costanti = {}) {
+    const prova = caricaScript({ costanti });
+    const dati = { ...lega([7, 7, 7, 7, 7, 7]), calendarioSerieA: [{ giornata: 11, data: '2026-11-08', partite: [] }] };
+    esegui(prova, `fantacalcioData = ${JSON.stringify(dati)};`);
+    esegui(prova, `probabiliFormazioni = ${JSON.stringify({
+        aggiornato: salvate,
+        prossimoTurno: { numero: 11, partite: [] },
+        giocatori: { 1: { nome: 'Uno', squadra: 'A', ruolo: 'C', probabilita: 40, titolare: true } }
+    })};`);
+    return valuta(prova, `punteggioAtteso(1, {}, ${dati.rounds.length})`);
+}
+
+test('lo storico è spento finché non lo si tara: conta solo la percentuale', () => {
+    const g = conProbabiliDel('2026-11-02T10:00:00');
+    assert.equal(g.affidabilita, 1);
+    assert.equal(g.probabilita, 0.4);
+    assert.equal(g.pesoStorico, 0);
+});
+
+test('acceso, lo storico entra solo con probabili vecchie, e cresce con i giorni', () => {
+    const acceso = { PESO_STORICO_PER_GIORNO: 0.1 };
+    // Venerdì per domenica: due giorni prima, le probabili bastano
+    assert.equal(conProbabiliDel('2026-11-06T18:00:00', acceso).probabilita, 0.4);
+
+    // Martedì per domenica: cinque giorni, tre oltre la soglia, peso 0,3
+    const martedi = conProbabiliDel('2026-11-03T10:00:00', acceso);
+    assert.ok(Math.abs(martedi.pesoStorico - 0.3) < 1e-9);
+    assert.ok(Math.abs(martedi.probabilita - (0.7 * 0.4 + 0.3 * 1)) < 1e-9);
+
+    // Mai oltre il massimo, anche con probabili di settimane prima
+    assert.equal(conProbabiliDel('2026-10-01T10:00:00', acceso).pesoStorico, 0.5);
+});
+
+test('senza la data del turno lo storico resta fuori', () => {
+    const prova = caricaScript({ costanti: { PESO_STORICO_PER_GIORNO: 0.1 } });
+    esegui(prova, `fantacalcioData = ${JSON.stringify(lega([7, 7, 7]))};`);
+    esegui(prova, `probabiliFormazioni = ${JSON.stringify({
+        aggiornato: '2026-10-01T10:00:00',
+        prossimoTurno: { numero: 11, partite: [] },
+        giocatori: { 1: { nome: 'Uno', squadra: 'A', ruolo: 'C', probabilita: 40, titolare: true } }
+    })};`);
+    assert.equal(valuta(prova, 'punteggioAtteso(1, {}, 3)').probabilita, 0.4);
+});

@@ -55,8 +55,8 @@ non esserci e basta.
 
 L'undici migliore per la prossima giornata, provando tutti i moduli. Non è "AI": è un modello
 dichiarato, e la pagina spiega riga per riga come arriva al numero — resa, forma, contesto
-della partita, probabilità di giocare, rigori. I dati di Serie A vengono dalle pagine di
-fantacalcio.it salvate a mano, non si scaricano da soli.
+della partita, probabilità di giocare, rigori. I dati di Serie A li inserisce a mano chi
+gestisce il sito: nessuno script li prende da internet.
 
 Ogni consiglio viene salvato prima del fischio e, a giornata giocata, confrontato con quello
 che è successo davvero: sotto la formazione consigliata c'è il bilancio del modello e dei
@@ -94,7 +94,7 @@ in stile Corelli-Bergamotti, uno per partita più uno di giornata.
 - **Bonus casa** — +1 alla squadra di casa nel calcolo dei gol ideali, non nel punteggio
 - **Calendario precaricato** — tutte le giornate della lega e le 38 di Serie A stanno nel JSON
   della stagione, verificate prima di essere scritte
-- **100 test** senza dipendenze, su ogni push e pull request
+- **106 test** senza dipendenze, su ogni push e pull request
 - **Nessuna libreria** — grafici, heatmap e marchio sono SVG e CSS grid scritti a mano
 
 ## 🚀 Come utilizzare
@@ -149,8 +149,7 @@ I campi `homeIdealScore` / `awayIdealScore` sono facoltativi: dove mancano, la
 Classifica Miglior Allenatore per quella giornata non viene mostrata e la Classifica
 Ideale ricade sui punteggi reali.
 
-**Come si aggiornano i dati è in [AGENTS.md](AGENTS.md)**: si parte sempre da pagine di
-fantacalcio.it salvate a mano, e nessuno script va in rete.
+**Come si aggiornano i dati è in [AGENTS.md](AGENTS.md)**: nessuno script va in rete.
 
 ### 📆 Calendario
 
@@ -240,6 +239,24 @@ la squalifica batte ogni altra fonte — anche un 100% rimasto in formazione per
 distrazione. Senza questa voce uno squalificato sarebbe un "fuori dalle probabili"
 qualunque al 15%, e il suggeritore se lo poteva ritrovare in formazione.
 
+**Probabili vecchie e storico.** Le probabili salvate molti giorni prima del turno sanno
+meno di quelle del venerdì. Per quel caso il modello può mescolare la percentuale con lo
+**storico**, cioè la quota di giornate in cui il giocatore ha preso il voto:
+
+```
+gioca = (1 − peso) × probabili + peso × storico
+peso  = 0,1 × (giorni prima del turno − 2), fra 0 e 0,5   (0,1 se acceso; oggi è 0)
+```
+
+I giorni si contano fra il salvataggio delle probabili e la data del turno nel calendario
+di Serie A; fino a due giorni prima il peso è zero. Infortunati, squalificati e fuori lista
+restano come sopra. **Oggi la miscela è spenta** (`PESO_STORICO_PER_GIORNO = 0`): sulle
+giornate 2-6 lo storico peggiorava sempre la previsione (Brier 0,060 con le sole probabili,
+0,067 con lo storico al 30%, 0,147 con il solo storico), e quando le due fonti non erano
+d'accordo avevano ragione le probabili. Si accende solo se, su giornate con le probabili
+salvate a mano, il confronto dirà che conviene. Quando è accesa, la spiegazione nella
+pagina dice quanto pesa lo storico.
+
 ### I rigori
 
 Chi batte i [rigori](https://www.fantacalcio.it/rigoristi-serie-a) porta punteggio che la
@@ -278,7 +295,7 @@ difensori.
 
 Tutto quello che il suggeritore legge da fuori sta in `data/probabili.json`: percentuali,
 rigoristi, infortunati, squalificati, classifica di Serie A e partite del turno; la forma
-delle squadre il sito la ricava dai voti della lega. Lo scrive `leggi-probabili.mjs` della skill, partendo dalle pagine salvate a mano (vedi
+delle squadre il sito la ricava dai voti della lega. Lo scrive `leggi-probabili.mjs` della skill, a partire da file locali (vedi
 [AGENTS.md](AGENTS.md#prima-di-una-giornata-probabili-e-consiglio)). La
 pagina mostra sempre la data dell'ultimo aggiornamento e avvisa quando il file ha più di
 due giorni o manca del tutto: senza quella riga, un file vecchio continuerebbe a produrre
@@ -339,6 +356,7 @@ novamont_and_friends/
 │   ├── calendario.test.mjs # Coerenza del calendario e giornate da giocare
 │   ├── cosa-serve.test.mjs # Le pagine da chiedere all'utente
 │   ├── link-lega.test.mjs  # I link alle pagine della lega
+│   ├── niente-rete.test.mjs # Nessuno script va in rete o gira da solo
 │   ├── aiuto/              # Carica script.js in un contesto vm
 │   └── fixture/            # Frammenti di pagina datati, niente rete nei test
 ├── .github/workflows/

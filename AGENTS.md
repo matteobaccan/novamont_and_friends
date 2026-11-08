@@ -16,6 +16,8 @@ l'accesso ai suoi servizi solo dal sito e dalle app ufficiali, in modo manuale. 
 - le pagine le apre l'utente nel suo browser e le salva con Ctrl+S come «Pagina web
   completa»; gli script leggono solo quei file
 - in questo repo non si descrive come ci si autentica a fantacalcio.it o ad altri siti
+- un agente non apre pagine web, non usa browser né strumenti di rete: se serve un dato
+  che non è in un file, lo chiede all'utente
 
 I test girano su frammenti di pagine salvate in `test/fixture`, e anche loro non vanno
 in rete.

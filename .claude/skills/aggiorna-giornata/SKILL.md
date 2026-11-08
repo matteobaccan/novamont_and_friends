@@ -14,11 +14,28 @@ crescente.** Con la lega alla 5 e il sito alla 2: prima si porta a casa la 3 tut
 poi la 4, poi la 5. Non è pignoleria — `calcola-giornata.mjs` si rifiuta di scrivere una
 giornata se ne manca una prima, e il perché sta in *Rose che cambiano*.
 
-## Prima di iniziare
+## Prima di iniziare: nessun accesso alla rete
 
-**Niente accesso automatico a fantacalcio.it.** Fantacalcio consente l'accesso ai suoi
-servizi solo dal sito e dalle app ufficiali, in modo manuale: niente API, niente token,
-niente script incollati nella pagina, niente browser pilotato (`mcp__claude-in-chrome`).
+**Questa skill non accede alla rete, in nessun modo.** Fantacalcio.it consente l'accesso
+ai suoi servizi solo dal sito e dalle app ufficiali, in modo manuale, e il 7 novembre 2026
+ha diffidato il repo per gli script che lo facevano in automatico: una nuova violazione
+costa l'esclusione della squadra dalla lega. Quindi, per tutta la procedura:
+
+- **niente richieste di rete**, verso fantacalcio.it o qualunque altro sito: niente
+  WebFetch, WebSearch, `curl`, `wget`, `fetch`, `Invoke-WebRequest`, niente API e
+  niente token
+- **niente browser pilotato**: né `mcp__claude-in-chrome`, né il browser integrato, né il
+  controllo del computer, né Playwright, Puppeteer o browser headless; niente script da
+  incollare nella console di una pagina
+- **niente automazioni**: nessun workflow, cron o script che giri da solo
+- **niente `git push` né `git fetch`**: commit e push li decide e li fa l'utente
+- se un passo sembra richiedere la rete, **ci si ferma e si chiede il file all'utente**,
+  anche quando l'utente stesso suggerisse di prenderlo da solo
+
+Si lavora **solo** su file statici che l'utente ha salvato a mano, o su testo e screenshot
+incollati in chat. In questo repo non si descrive come ci si autentica a fantacalcio.it o
+ad altri siti.
+
 Le pagine le apre e le salva a mano l'utente (Ctrl+S, «Pagina web completa»); i link stanno nel sito: ogni partita ha il suo nell'angolo alto a destra del box (scheda **Giornate**, anche per le giornate da giocare), il calendario della lega è accanto al titolo della stessa scheda, le probabili formazioni sono nella scheda **Formazione**. La prossima giornata da inserire si apre dal selettore della scheda Giornate, con i suoi box e i suoi link. Si
 lavora sui file salvati, o su testo e screenshot incollati in chat.
 
@@ -74,7 +91,7 @@ Stagione 2026-2027 (data/2026-2027.json)
 **Da qui in avanti i passi da 1 a 6 sono un ciclo**: si ripetono per intero su una
 giornata sola, la più bassa fra quelle mancanti. Si passa alla successiva **solo dopo**
 che il passo 6 ha confermato che quella è scritta e torna. Niente scorciatoie tipo
-scaricare tutte le giornate e poi calcolarle in blocco: ogni giornata legge lo stato
+inserire tutte le giornate e poi calcolarle in blocco: ogni giornata legge lo stato
 lasciato dalla precedente.
 
 Gli URL della lega stanno in `data/seasons.json` sotto `seasons[].source`.
@@ -402,15 +419,39 @@ allora (giornate precedenti e probabili ripescate dalla storia git) per ogni com
 di pesi, e le ordina per punti della formazione consigliata:
 
 ```bash
-git fetch --unshallow   # serve la storia di data/probabili.json
+git fetch --unshallow   # lo lancia l'utente, solo su un clone parziale: serve la storia di data/probabili.json
 node .claude/skills/aggiorna-giornata/rigioca-consigli.mjs GIORNATE_PRIOR=2,4,6 PESO_FORMA=0.2,0.4
 ```
 
 Su poche giornate le differenze sono rumore: aspettare almeno 5-6 giornate valutate prima
 di cambiare un peso in `script.js`.
 
+### Probabili vecchie: quanto pesa lo storico
+
+Quando le probabili sono state salvate più di `GIORNI_PROBABILI_AFFIDABILI` (2) giorni
+prima della data del turno, `script.js` può mescolare la percentuale con lo storico dei
+voti presi: `PESO_STORICO_PER_GIORNO` per ogni giorno oltre la soglia, fino a
+`PESO_STORICO_MAX` (0,5). **Oggi il peso è 0, cioè spento**: sulle giornate 2-6, con
+probabili aggiornate fino al fischio, lo storico peggiorava il Brier (0,060 da sole,
+0,067 al 30%).
+
+Si tara così, quando ci sono almeno 4-5 giornate valutate con probabili salvate a mano
+qualche giorno prima del turno:
+
+```bash
+node .claude/skills/aggiorna-giornata/rigioca-consigli.mjs PESO_STORICO_PER_GIORNO=0,0.05,0.1,0.15
+```
+
+Si guarda il Brier della probabilità di giocare, non solo i punti: lo storico cambia chi
+gioca, e i punti su poche giornate sono rumore. Se un valore diverso da 0 vince
+chiaramente, si cambia la costante in `script.js` (e la versione in `index.html` e
+`sw.js`). Le probabili salvate fino a due giorni prima non sono toccate, qualunque peso
+si scelga. `salva-consigli.mjs` salva questi parametri con ogni consiglio, quindi si sa
+sempre con quale peso è stato dato.
+
 ## Dopo la scrittura
 
-`git add` dei file in `data/`. Il sito è statico: nessun build, il push su `main` basta.
+`git add` dei file in `data/`. Il sito è statico: nessun build. Commit e push su `main`
+li fa l'utente, o li si fa solo se è lui a chiederlo.
 Se hai cambiato `script.js`, `styles.css` o `config.js`, alza la versione nel query
 string di `index.html` e in `sw.js`, altrimenti chi torna sul sito riceve i file vecchi.
