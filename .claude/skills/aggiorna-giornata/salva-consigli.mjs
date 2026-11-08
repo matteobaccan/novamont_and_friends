@@ -5,7 +5,7 @@
 //
 //   node salva-consigli.mjs [--dry-run]
 //
-// Gira nella stessa Action delle probabili, subito dopo averle scaricate. Il
+// Si lancia a mano subito dopo leggi-probabili.mjs. Il
 // file di una giornata si riscrive finché le probabili riguardano ancora lo
 // stesso turno di Serie A e nessuna partita di quel turno è cominciata: così
 // resta l'ultimo consiglio utile prima del fischio, e non uno scritto dopo,
@@ -35,7 +35,7 @@ export function sovrascrivibile(esistente, probabili) {
 // Si salvano con ogni consiglio, così si sa con quali pesi era stato dato.
 export const PARAMETRI = [
     'GIORNATE_PRIOR', 'PESO_FORMA', 'EPS_MODULO', 'VOTO_RIPIEGO',
-    'PESO_CONTESTO', 'PESO_STANCHEZZA', 'PESO_QUOTE', 'SOGLIA_QUOTE', 'BONUS_RIGORE_PARTITA', 'PROB_FUORI_LISTA', 'PROB_INFORTUNATO'
+    'PESO_CONTESTO', 'SCALA_FORMA', 'BONUS_RIGORE_PARTITA', 'PROB_FUORI_LISTA', 'PROB_INFORTUNATO'
 ];
 
 // JSON leggibile in un diff ma senza una riga per numero: un oggetto o un

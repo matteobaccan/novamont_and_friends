@@ -476,7 +476,6 @@ function renderAllSections() {
     displayHeatmap();
     displayScontriDiretti();
     displayAchievement();
-    collegaPulsantiCsv();
     displayStatistics();
     setupRoundSelector();
     updateLastUpdate();
@@ -1256,138 +1255,6 @@ function displayAchievement() {
             <div class="ach-griglia">${tessere}</div>
         </div>
     `;
-}
-
-// ============================================================
-// Export CSV
-// ============================================================
-
-// Chi vuole farsi i suoi conti oggi ricopia a mano dalla pagina. I numeri
-// sono gia' tutti qui: basta darglieli.
-//
-// Tre dettagli non sono opzionali, se il file deve aprirsi in Excel italiano:
-// il separatore e' il punto e virgola (con la virgola Excel mette tutta la riga
-// in una cella), in testa ci va il BOM (senza, legge il file come ANSI e gli
-// accenti dei nomi squadra diventano caratteri strani) e i decimali vogliono la
-// virgola (col punto li tratta come testo e non li somma).
-
-function cellaCsv(valore) {
-    if (valore === null || valore === undefined) return '';
-    let testo = String(valore).trim();
-
-    // I decimali in formato italiano, coerenti col separatore punto e virgola
-    if (/^[+-]?\d+\.\d+$/.test(testo)) testo = testo.replace('.', ',');
-
-    // Le virgolette si raddoppiano, e si racchiude solo quando serve. I nomi
-    // squadra oggi sono innocui, ma arrivano da un JSON modificabile a mano:
-    // l'escape va fatto comunque, non verificato caso per caso.
-    if (/[;"\n\r]/.test(testo)) return '"' + testo.replace(/"/g, '""') + '"';
-    return testo;
-}
-
-function scaricaCsv(nomeFile, intestazioni, righe) {
-    const contenuto = [intestazioni, ...righe]
-        .map(r => r.map(cellaCsv).join(';'))
-        .join('\r\n');
-
-    const blob = new Blob(['﻿' + contenuto], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = nomeFile;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
-    // Senza questo il blob resta in memoria per tutta la sessione
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
-function nomeFileCsv(tabella) {
-    const stagione = currentSeasonId || 'stagione';
-    return `novamont-${tabella}-${stagione}.csv`;
-}
-
-// Le tre classifiche si leggono dalla tabella disegnata invece che dai dati:
-// cosi' il CSV esce con le stesse colonne e nello stesso ordine che si ha
-// sotto gli occhi. Esportare un ordine diverso da quello a schermo e' un
-// piccolo tradimento che costa fiducia.
-//
-// Le colonne nascoste su mobile restano nel DOM e finiscono nel file: chi
-// scarica vuole i dati, non la vista ridotta del telefono.
-function csvDaTabella(idTabella, nomeFile) {
-    const tabella = document.getElementById(idTabella);
-    if (!tabella) return false;
-
-    const pulisci = (el) => el.textContent.replace(/[▲▼]/g, '').replace(/\s+/g, ' ').trim();
-
-    const intestazioni = [...tabella.querySelectorAll('thead th')].map(pulisci);
-    const righe = [...tabella.querySelectorAll('tbody tr.team-row')]
-        .map(tr => [...tr.querySelectorAll('td')].map(pulisci));
-
-    scaricaCsv(nomeFile, intestazioni, righe);
-    return true;
-}
-
-function csvGiocatori() {
-    const stats = calcolaStatisticheGiocatori();
-    const intestazioni = [
-        'Squadra', 'Giocatore', 'Ruolo', 'Serie A', 'Presenze', 'Panchine',
-        'Giornate con voto', 'Media voto', 'Media fantavoto', 'Media fantavoto Serie A',
-        'Gol', 'Assist', 'Ammonizioni', 'Espulsioni', 'Malus', 'Punti in panchina', 'Incompreso'
-    ];
-
-    const numero2 = (v) => (v === null || v === undefined ? '' : String(Math.round(v * 100) / 100));
-
-    const righe = Object.values(stats)
-        .map(s => {
-            const info = anagraficaGiocatore(s.pid);
-            return [
-                s.team, info.name, info.role, info.serieA || '',
-                s.presenze, s.panchine, s.votiSerieA,
-                numero2(s.mediaVoto), numero2(s.mediaFanta), numero2(s.mediaFantaSerieA),
-                s.gol, s.assist, s.amm, s.esp, s.malus, s.puntiInPanchina, s.incompreso
-            ];
-        })
-        .sort((a, b) => String(a[0]).localeCompare(String(b[0])) || String(a[1]).localeCompare(String(b[1])));
-
-    scaricaCsv(nomeFileCsv('giocatori'), intestazioni, righe);
-}
-
-function csvGiornate() {
-    const intestazioni = ['Giornata', 'Casa', 'Trasferta', 'Punti casa', 'Punti trasferta', 'Gol casa', 'Gol trasferta'];
-    const righe = [];
-
-    (fantacalcioData.rounds || []).forEach(round => {
-        (round.matches || []).forEach(m => {
-            if (typeof m.homeScore !== 'number' || typeof m.awayScore !== 'number') return;
-            const { homeGoals, awayGoals } = calculateMatchGoals(m.homeScore, m.awayScore);
-            righe.push([round.round, m.homeTeam, m.awayTeam, m.homeScore, m.awayScore, homeGoals, awayGoals]);
-        });
-    });
-
-    scaricaCsv(nomeFileCsv('giornate'), intestazioni, righe);
-}
-
-// Un pulsante di servizio nell'intestazione di sezione: dice cosa succede
-// ("Scarica CSV", non "Esporta") e non si prende un blocco tutto suo
-function collegaPulsantiCsv() {
-    const azioni = {
-        'csv-classifica': () => csvDaTabella('main-standings-table', nomeFileCsv('classifica')),
-        'csv-ideale': () => csvDaTabella('ideal-table', nomeFileCsv('classifica-ideale')),
-        'csv-merito': () => csvDaTabella('merit-table', nomeFileCsv('merito')),
-        'csv-giocatori': csvGiocatori,
-        'csv-giornate': csvGiornate
-    };
-
-    for (const [id, azione] of Object.entries(azioni)) {
-        const btn = document.getElementById(id);
-        if (btn && !btn.dataset.collegato) {
-            btn.dataset.collegato = '1';
-            btn.addEventListener('click', azione);
-        }
-    }
 }
 
 // ============================================================
@@ -2882,6 +2749,68 @@ function displayIdealVsRealComparison() {
 }
 
 // Setup del selettore delle giornate
+// ============================================================
+// Calendario
+// ============================================================
+
+// Il calendario è precaricato in data/<stagione>.json da leggi-calendario.mjs:
+// "calendar" per la lega (accoppiamenti e giornata di Serie A di ogni
+// giornata), "calendarioSerieA" per le 38 giornate di Serie A. Le stagioni
+// archiviate non ce l'hanno, e tutto quello che segue si spegne da sé.
+
+function giornataInCalendario(numero) {
+    const calendario = (fantacalcioData && fantacalcioData.calendar) || [];
+    return calendario.find(g => g.round === numero) || null;
+}
+
+function giornataSerieA(numero) {
+    const calendario = (fantacalcioData && fantacalcioData.calendarioSerieA) || [];
+    return calendario.find(g => g.giornata === numero) || null;
+}
+
+function giornateDaGiocare() {
+    const giocate = new Set(((fantacalcioData && fantacalcioData.rounds) || []).map(r => r.round));
+    return ((fantacalcioData && fantacalcioData.calendar) || []).filter(g => !giocate.has(g.round));
+}
+
+// "2026-11-08" -> "domenica 8 novembre 2026". La data è quella del calendario
+// ufficiale: il turno poi si spalma fra venerdì e lunedì.
+function dataEstesa(iso) {
+    const [a, m, g] = String(iso).split('-').map(Number);
+    if (!a || !m || !g) return '';
+    return new Date(a, m - 1, g).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function htmlGiornataDaGiocare(giornata) {
+    const serieA = giornata.roundSerieA ? giornataSerieA(giornata.roundSerieA) : null;
+    const quando = giornata.roundSerieA
+        ? `${giornata.roundSerieA}ª giornata di Serie A${serieA && serieA.data ? `, ${dataEstesa(serieA.data)}` : ''}`
+        : '';
+
+    const partite = giornata.matches.map((m, i) => `
+            <div class="match-card match-da-giocare" style="animation-delay: ${i * 0.1}s">
+                ${linkPartitaLega(giornata.round, i)}
+                <div class="match-header">Match ${i + 1}</div>
+                <div class="match-teams">
+                    <div class="team">
+                        ${logoSquadra(m.homeTeam)}
+                        <div class="team-name-match">${m.homeTeam}</div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team">
+                        ${logoSquadra(m.awayTeam)}
+                        <div class="team-name-match">${m.awayTeam}</div>
+                    </div>
+                </div>
+                <div class="match-result">Da giocare</div>
+            </div>`).join('');
+
+    // La riga del quando occupa tutta la griglia dei risultati, le partite
+    // ne prendono le colonne come quelle giocate
+    return `
+        <p class="giornata-da-giocare-quando"><i class="fas fa-calendar-day"></i> Giornata ${giornata.round}${quando ? ` · ${quando}` : ''}</p>${partite}`;
+}
+
 function setupRoundSelector() {
     const roundSelect = document.getElementById('giornata-select');
     const rounds = (fantacalcioData && fantacalcioData.rounds) || [];
@@ -2889,15 +2818,22 @@ function setupRoundSelector() {
     // Svuota il selettore: la funzione viene richiamata ad ogni cambio stagione
     roundSelect.innerHTML = '';
 
-    // Popola il selettore delle giornate
+    // Popola il selettore delle giornate: quelle giocate e, dal calendario,
+    // quelle ancora da giocare
     rounds.forEach(round => {
         const option = document.createElement('option');
         option.value = round.round;
         option.textContent = `Giornata ${round.round}`;
         roundSelect.appendChild(option);
     });
+    giornateDaGiocare().forEach(g => {
+        const option = document.createElement('option');
+        option.value = g.round;
+        option.textContent = `Giornata ${g.round} · da giocare`;
+        roundSelect.appendChild(option);
+    });
 
-    roundSelect.disabled = rounds.length === 0;
+    roundSelect.disabled = roundSelect.options.length === 0;
 
     // Imposta la giornata più recente come default
     if (rounds.length > 0) {
@@ -2916,8 +2852,51 @@ function setupRoundSelector() {
     }
 }
 
+// Link alle pagine da salvare a mano (Ctrl+S) per aggiornare il sito. I dati
+// non si scaricano in automatico: fantacalcio.it consente solo l'accesso
+// manuale dal sito ufficiale. Si apre la pagina da qui, la si salva come
+// "Pagina web completa" e il file lo legge uno script in locale, senza toccare
+// la rete. Ogni link sta dove serve: la partita nell'angolo del suo box (anche
+// per le giornate da giocare, quindi la prossima da inserire è a un clic dal
+// selettore), il calendario accanto al titolo della sezione Giornate, le
+// probabili nella sezione Formazione.
+const URL_PROBABILI_FORMAZIONI = 'https://www.fantacalcio.it/probabili-formazioni-serie-a';
+
+// L'indirizzo della singola partita: {match} è la posizione nella giornata,
+// contata da matchIndexBase. La lega conta da 0: ?i=0 è la prima partita
+// della giornata, ?i=1 la seconda
+function urlPartitaLega(source, giornata, indice) {
+    if (!source || !source.roundUrl) return null;
+    const base = Number.isInteger(source.matchIndexBase) ? source.matchIndexBase : 0;
+    return source.roundUrl
+        .replace('{round}', String(giornata))
+        .replace('{match}', String(indice + base));
+}
+
+// Il link alla pagina di una partita sulla lega: occupa l'angolo alto a
+// destra del box, abbastanza grande da prenderlo al primo colpo anche dal
+// telefono. Vuoto per le stagioni archiviate, che non hanno una sorgente.
+function linkPartitaLega(giornata, indice) {
+    const season = getSeasonById(currentSeasonId);
+    const url = urlPartitaLega(season && season.source, giornata, indice);
+    if (!url) return '';
+    return `<a class="match-link" href="${url}" target="_blank" rel="noopener noreferrer" title="Apri la partita sulla lega. Per aggiornare il sito salvala con Ctrl+S come «Pagina web completa»" aria-label="Apri la partita ${indice + 1} della giornata ${giornata} sulla lega"><i class="fas fa-up-right-from-square"></i></a>`;
+}
+
+// Il link al calendario della lega, accanto al titolo della sezione Giornate
+function mostraLinkCalendario() {
+    const a = document.getElementById('link-calendario-lega');
+    if (!a) return;
+    const season = getSeasonById(currentSeasonId);
+    const url = season && season.source && season.source.calendarUrl;
+    if (url) a.href = url;
+    a.hidden = !url;
+}
+
 // Stato mostrato quando una stagione è nel calendario ma non ha ancora giornate
 function displayNoRoundsMessage() {
+    mostraLinkCalendario();
+
     const commentary = document.getElementById('match-commentary');
     if (commentary) commentary.style.display = 'none';
 
@@ -2963,9 +2942,15 @@ function displayRoundResults(roundNumber) {
     
     // Mostra il commento per la giornata selezionata
     displayMatchCommentary(roundNumber);
+    mostraLinkCalendario();
 
     if (!round) {
-        roundResults.innerHTML = '<p>Nessun risultato disponibile per questa giornata.</p>';
+        const futura = giornataInCalendario(roundNumber);
+        const coachRanking = document.getElementById('coach-ranking-container');
+        if (coachRanking) coachRanking.innerHTML = '';
+        roundResults.innerHTML = futura
+            ? htmlGiornataDaGiocare(futura)
+            : '<p>Nessun risultato disponibile per questa giornata.</p>';
         return;
     }
 
@@ -3133,34 +3118,34 @@ function displayRoundResults(roundNumber) {
             const awayDifferenceForComment = awayIdealScoreWithBonus - match.awayScore;
 
             // Build subtle auto-insight sentences without mentioning the threshold
-            let autoInsightCaressa = '';
-            let autoInsightBergomi = '';
+            let autoInsightCorelli = '';
+            let autoInsightBergamotti = '';
 
             // If both underperformed
             if (homeDifferenceForComment > 0 && awayDifferenceForComment > 0) {
                 const maxDiff = Math.max(Math.abs(homeDifferenceForComment), Math.abs(awayDifferenceForComment));
                 if (maxDiff > threshold) {
-                    autoInsightCaressa = ' Clamoroso flop! Entrambe le squadre HANNO DELUSO: c\'era molto di più in campo e lo hanno buttato via!';
-                    autoInsightBergomi = ' Un vero spreco di qualità: tattiche confuse e scelte sbagliate hanno tradito il potenziale mostrato sulla carta.';
+                    autoInsightCorelli = ' Clamoroso flop! Entrambe le squadre HANNO DELUSO: c\'era molto di più in campo e lo hanno buttato via!';
+                    autoInsightBergamotti = ' Un vero spreco di qualità: tattiche confuse e scelte sbagliate hanno tradito il potenziale mostrato sulla carta.';
                 } else {
-                    autoInsightCaressa = ' Partita al cardiopalma: decisa dai dettagli, con errori e scelte che hanno fatto esplodere la tensione fino alla fine!';
-                    autoInsightBergomi = ' Match tiratissimo, risolto dai particolari — qualche scelta ha inciso in modo decisivo sul risultato.';
+                    autoInsightCorelli = ' Partita al cardiopalma: decisa dai dettagli, con errori e scelte che hanno fatto esplodere la tensione fino alla fine!';
+                    autoInsightBergamotti = ' Match tiratissimo, risolto dai particolari — qualche scelta ha inciso in modo decisivo sul risultato.';
                 }
             } else if (homeDifferenceForComment > awayDifferenceForComment) {
                 if (homeDifferenceForComment > threshold) {
-                    autoInsightCaressa = ` Scandaloso! ${match.homeTeam} ha sprecato punti pesanti — una prova sotto le aspettative e dai contorni drammatici!`;
-                    autoInsightBergomi = ` Grave passo falso: la gestione di ${match.homeTeam} è stata discutibile, con scelte che non si spiegano alla luce del potenziale.`;
+                    autoInsightCorelli = ` Scandaloso! ${match.homeTeam} ha sprecato punti pesanti — una prova sotto le aspettative e dai contorni drammatici!`;
+                    autoInsightBergamotti = ` Grave passo falso: la gestione di ${match.homeTeam} è stata discutibile, con scelte che non si spiegano alla luce del potenziale.`;
                 } else if (homeDifferenceForComment > 0) {
-                    autoInsightCaressa = ` ${match.homeTeam} ha lasciato qualche punto per strada: non catastrofico, ma certo c\'è rammarico in panchina.`;
-                    autoInsightBergomi = ` Qualche scelta infelice da parte di ${match.homeTeam}, sì, ma la partita è stata combattuta e tutto si è deciso per dettagli.`;
+                    autoInsightCorelli = ` ${match.homeTeam} ha lasciato qualche punto per strada: non catastrofico, ma certo c\'è rammarico in panchina.`;
+                    autoInsightBergamotti = ` Qualche scelta infelice da parte di ${match.homeTeam}, sì, ma la partita è stata combattuta e tutto si è deciso per dettagli.`;
                 }
             } else if (awayDifferenceForComment > homeDifferenceForComment) {
                 if (awayDifferenceForComment > threshold) {
-                    autoInsightCaressa = ` Incredibile: ${match.awayTeam} ha tradito le attese e ha buttato via punti pesanti — esplode il rammarico tra i tifosi!`;
-                    autoInsightBergomi = ` Un rovescio tecnico per ${match.awayTeam}: le scelte tattiche non hanno reso giustizia alla rosa disponibile.`;
+                    autoInsightCorelli = ` Incredibile: ${match.awayTeam} ha tradito le attese e ha buttato via punti pesanti — esplode il rammarico tra i tifosi!`;
+                    autoInsightBergamotti = ` Un rovescio tecnico per ${match.awayTeam}: le scelte tattiche non hanno reso giustizia alla rosa disponibile.`;
                 } else if (awayDifferenceForComment > 0) {
-                    autoInsightCaressa = ` ${match.awayTeam} ha perso qualche punto per strada: non è stata una débâcle, ma certo c\'è spazio per rimpianti.`;
-                    autoInsightBergomi = ` Poche scelte decisive da parte di ${match.awayTeam}; la partita si è decisa su dettagli più che su un netto dominio.`;
+                    autoInsightCorelli = ` ${match.awayTeam} ha perso qualche punto per strada: non è stata una débâcle, ma certo c\'è spazio per rimpianti.`;
+                    autoInsightBergamotti = ` Poche scelte decisive da parte di ${match.awayTeam}; la partita si è decisa su dettagli più che su un netto dominio.`;
                 }
             }
 
@@ -3170,10 +3155,10 @@ function displayRoundResults(roundNumber) {
                         <i class="fas fa-microphone"></i> Commento Match
                     </div>
                     <div class="commentary-dialogue-inline">
-                        <span class="speaker">Caressa:</span> "${match.commentary.caressa}${autoInsightCaressa}"
+                        <span class="speaker">Corelli:</span> "${match.commentary.corelli}${autoInsightCorelli}"
                     </div>
                     <div class="commentary-dialogue-inline">
-                        <span class="speaker bergomi">Bergomi:</span> "${match.commentary.bergomi}${autoInsightBergomi}"
+                        <span class="speaker bergamotti">Bergamotti:</span> "${match.commentary.bergamotti}${autoInsightBergamotti}"
                     </div>
                 </div>
             `;
@@ -3181,6 +3166,7 @@ function displayRoundResults(roundNumber) {
 
         html += `
             <div class="match-card" style="animation-delay: ${index * 0.1}s">
+                ${linkPartitaLega(round.round, index)}
                 <div class="match-header">Match ${index + 1}</div>
                 <div class="match-teams">
                     <div class="team">
@@ -3282,7 +3268,7 @@ function esitoPer(lato, s) {
 
 const risultatoGol = (s) => `${s.golCasa}-${s.golFuori}`;
 
-// Caressa racconta il cambio di risultato più clamoroso, Bergomi fa i conti
+// Corelli racconta il cambio di risultato più clamoroso, Bergamotti fa i conti
 function commentoSito(match, scenari) {
     const casi = [
         { squadra: match.homeTeam, lato: 'casa', alternativo: scenari.sitoCasa, r: scenari.casa },
@@ -3299,7 +3285,7 @@ function commentoSito(match, scenari) {
         .filter(c => c.reale !== c.col)
         .sort((a, b) => Math.abs(PESO_ESITO[b.col] - PESO_ESITO[b.reale]) - Math.abs(PESO_ESITO[a.col] - PESO_ESITO[a.reale]));
 
-    let caressa;
+    let corelli;
     if (cambiati.length > 0) {
         const c = cambiati[0];
         const ris = risultatoGol(c.alternativo);
@@ -3311,10 +3297,10 @@ function commentoSito(match, scenari) {
             'vittoria>pareggio': `${c.squadra} ha fatto meglio del sito: con il suo consiglio sarebbe finita ${ris} e la vittoria sarebbe sfumata!`,
             'pareggio>sconfitta': `${c.squadra} si tiene stretto il pari: col sito in panchina sarebbe finita ${ris}, sconfitta!`
         };
-        caressa = frasi[`${c.reale}>${c.col}`];
+        corelli = frasi[`${c.reale}>${c.col}`];
     } else {
         const entrambe = scenari.sitoEntrambe;
-        caressa = risultatoGol(entrambe) === risultatoGol(scenari.reale)
+        corelli = risultatoGol(entrambe) === risultatoGol(scenari.reale)
             ? `Anche con il sito in panchina da tutte e due le parti sarebbe finita ${risultatoGol(entrambe)}: verdetto confermato, l'algoritmo non sposta niente!`
             : `Da sola nessuna delle due formazioni del sito cambia il verdetto, ma con tutte e due sarebbe finita ${risultatoGol(entrambe)}!`;
     }
@@ -3328,13 +3314,13 @@ function commentoSito(match, scenari) {
         : (peggio === 2
             ? 'Il sito avrebbe fatto meglio a tutti e due, e questo deve far riflettere.'
             : (meglio === 1 && peggio === 1 ? 'Uno a uno, palla al centro.' : 'Scelte quasi identiche a quelle del sito.'));
-    const bergomi = `Numeri alla mano, Fabio: ${conto(casi[0])}, ${conto(casi[1])}. ${giudizio}`;
+    const bergamotti = `Numeri alla mano, Fabio: ${conto(casi[0])}, ${conto(casi[1])}. ${giudizio}`;
 
-    return { caressa, bergomi };
+    return { corelli, bergamotti };
 }
 
 function htmlSeGiocavaIlSito(match, scenari) {
-    const { caressa, bergomi } = commentoSito(match, scenari);
+    const { corelli, bergamotti } = commentoSito(match, scenari);
     const riga = (etichetta, s, evidenzia) => `
         <span class="confronto-etichetta">${etichetta}</span>
         <span class="confronto-valore${evidenzia === 'casa' ? ' sito' : ''}">${s.golCasa} <small>(${String(s.casa).replace('.', ',')})</small></span>
@@ -3358,10 +3344,10 @@ function htmlSeGiocavaIlSito(match, scenari) {
                 <span class="confronto-valore sito">${scenari.sitoEntrambe.golFuori} <small>(${String(scenari.sitoEntrambe.fuori).replace('.', ',')})</small></span>
             </div>
             <div class="commentary-dialogue-inline">
-                <span class="speaker">Caressa:</span> "${caressa}"
+                <span class="speaker">Corelli:</span> "${corelli}"
             </div>
             <div class="commentary-dialogue-inline">
-                <span class="speaker bergomi">Bergomi:</span> "${bergomi}"
+                <span class="speaker bergamotti">Bergamotti:</span> "${bergamotti}"
             </div>
         </div>
     `;
@@ -3761,29 +3747,22 @@ const PROB_SQUALIFICATO = 0;
 const BONUS_RIGORE_PARTITA = 0.35;
 
 // Quanto pesa ciascuna delle tre voci di contesto: campo, differenza di
-// classifica e forma recente della squadra di Serie A. Al massimo ±9% in tutto,
+// classifica e forma recente della squadra di Serie A (dai voti della lega). Al massimo ±9% in tutto,
 // cioè meno di ±0,6 di fantavoto su una resa da 6,5: un leggero vantaggio, che
 // riordina due giocatori quasi pari senza ribaltare uno scarto vero.
 const PESO_CONTESTO = 0.03;
 
-// Quanto pesa la stanchezza: chi ha giocato da tre giorni o meno (una coppa a
-// metà settimana, un turno infrasettimanale) contro chi ha riposato una
-// settimana. Conta la differenza fra le due squadre: se hanno giocato tutte e
-// due, nessuno ha un vantaggio. Con quattro giorni di riposo vale la metà.
-// Va sommato agli altri tre: in tutto si resta entro ±12%.
-const PESO_STANCHEZZA = 0.03;
-const GIORNI_STANCHEZZA = 3;
-
-// Le quote dei bookmaker, quando ci sono, prendono il posto delle quattro voci
-// qui sopra: chi le fa conosce già campo, classifica, forma, stanchezza, e in
-// più assenze e motivazioni. Sommarle conterebbe le stesse cose due volte.
-//
-// Si guarda lo scarto fra probabilità di vincere e di perdere: sotto
-// SOGLIA_QUOTE la partita è equilibrata e non sposta niente; sopra, la squadra
-// favorita guadagna e l'altra perde in proporzione, fino a PESO_QUOTE quando
-// la vittoria è certa. Un 65% contro 15% (scarto 0,5) vale il 3,75%.
-const SOGLIA_QUOTE = 0.2;
-const PESO_QUOTE = 0.10;
+// Forma della squadra di Serie A, ricavata dai voti della lega: lo scarto medio
+// dei fantavoto dei suoi giocatori dalla media del loro ruolo, nelle ultime
+// TURNI_FORMA_SQUADRA giornate. Una squadra che vince prende voti alti, una
+// che perde li prende bassi. Lo scarto dal ruolo, e non la media secca, perché
+// un club con due portieri in rosa non sembri in crisi. Con meno di
+// VOTI_MINIMI_FORMA voti la forma non si conosce; SCALA_FORMA è lo scarto che
+// vale tutto PESO_CONTESTO, SOGLIA_FRECCIA_FORMA quello che accende la freccia.
+const TURNI_FORMA_SQUADRA = 3;
+const VOTI_MINIMI_FORMA = 4;
+const SCALA_FORMA = 1.0;
+const SOGLIA_FRECCIA_FORMA = 0.3;
 
 // Probabili formazioni di Serie A, caricate a parte perché cambiano ogni
 // settimana e non fanno parte dello storico della stagione
@@ -3963,10 +3942,12 @@ function quotaRigori(pid) {
 // dall'avversario.
 const contestiPartita = new Map();
 let contestiPartitaPer = null;
+let contestiPartitaDati = null;
 
 function contestoPartita(squadraSerieA) {
-    if (contestiPartitaPer !== probabiliFormazioni) {
+    if (contestiPartitaPer !== probabiliFormazioni || contestiPartitaDati !== fantacalcioData) {
         contestiPartitaPer = probabiliFormazioni;
+        contestiPartitaDati = fantacalcioData;
         contestiPartita.clear();
     }
     if (contestiPartita.has(squadraSerieA)) return contestiPartita.get(squadraSerieA);
@@ -3976,38 +3957,70 @@ function contestoPartita(squadraSerieA) {
     return contesto;
 }
 
-// Quanto la superiorità di una squadra secondo i bookmaker sposta la resa dei
-// suoi giocatori: zero fino a SOGLIA_QUOTE di scarto fra vittoria e sconfitta,
-// poi in proporzione fino a ±PESO_QUOTE
-function fattoreQuote(esiti) {
-    const scarto = esiti.vittoria - esiti.sconfitta;
-    const oltre = Math.max(0, Math.abs(scarto) - SOGLIA_QUOTE) / (1 - SOGLIA_QUOTE);
-    return Math.sign(scarto) * oltre * PESO_QUOTE;
+// La forma di ogni squadra di Serie A dai voti delle ultime giornate della
+// lega: { scarto, media, voti, giornate } per squadra. Un giocatore sta in una
+// sola rosa, quindi ogni voto si conta una volta sola.
+let formaSquadreCache = null;
+let formaSquadrePer = null;
+
+function formaSquadreDaiVoti() {
+    if (formaSquadrePer === fantacalcioData && formaSquadreCache) return formaSquadreCache;
+
+    const giornate = ((fantacalcioData && fantacalcioData.rounds) || [])
+        .filter(r => r.matches.some(m => m.lineups))
+        .map(r => r.round)
+        .sort((a, b) => a - b)
+        .slice(-TURNI_FORMA_SQUADRA);
+    const considerate = new Set(giornate);
+    const medie = giornate.length ? medieDiRuolo() : {};
+
+    const somme = {};
+    for (const round of (fantacalcioData && fantacalcioData.rounds) || []) {
+        if (!considerate.has(round.round)) continue;
+        for (const match of round.matches) {
+            if (!match.lineups) continue;
+            for (const lato of ['home', 'away']) {
+                for (const g of match.lineups[lato]) {
+                    if (g.b === undefined) continue;
+                    const { serieA, role } = anagraficaGiocatore(g.p);
+                    if (!serieA || medie[role] === undefined) continue;
+                    const s = somme[serieA] || (somme[serieA] = { scarti: 0, voti: 0, totale: 0 });
+                    s.scarti += g.b - medie[role];
+                    s.totale += g.b;
+                    s.voti += 1;
+                }
+            }
+        }
+    }
+
+    const forma = {};
+    for (const [squadra, s] of Object.entries(somme)) {
+        if (s.voti < VOTI_MINIMI_FORMA) continue;
+        forma[squadra] = { scarto: s.scarti / s.voti, media: s.totale / s.voti, voti: s.voti, giornate: giornate.length };
+    }
+
+    formaSquadrePer = fantacalcioData;
+    formaSquadreCache = forma;
+    return forma;
 }
 
-// 1 se ha giocato da GIORNI_STANCHEZZA giorni o meno, 0,5 con un giorno in
-// più, 0 altrimenti o se il calendario non si conosce
-function livelloStanchezza(calendario) {
-    if (!calendario || calendario.giorniRiposo === null || calendario.giorniRiposo === undefined) return 0;
-    if (calendario.giorniRiposo <= GIORNI_STANCHEZZA) return 1;
-    if (calendario.giorniRiposo === GIORNI_STANCHEZZA + 1) return 0.5;
-    return 0;
+// Il racconto della forma per i title: "fantavoto 6,8 nelle ultime 3, +0,4 sul ruolo (12 voti)"
+function testoFormaSquadra(forma) {
+    if (!forma) return '';
+    const num = (x) => x.toFixed(1).replace('.', ',');
+    const segno = forma.scarto >= 0 ? '+' : '−';
+    return `fantavoto ${num(forma.media)} nelle ultime ${forma.giornate}, `
+        + `${segno}${num(Math.abs(forma.scarto))} sul ruolo (${forma.voti} voti)`;
 }
 
-// Il racconto del calendario di una squadra, per i title: da quando non gioca
-// e cosa la aspetta dopo
-function testoCalendario(squadra, calendario) {
-    if (!calendario) return '';
-    const pezzi = [];
-    const giorno = (data) => new Date(data).toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'numeric' });
-    if (calendario.precedente) {
-        pezzi.push(`${squadra} ha giocato ${giorno(calendario.precedente.data)} (${calendario.precedente.competizione}`
-            + ` con ${calendario.precedente.avversario}): ${calendario.giorniRiposo} giorni di riposo`);
-    }
-    if (calendario.dopo && calendario.giorniAllaSuccessiva !== null && calendario.giorniAllaSuccessiva <= 4) {
-        pezzi.push(`Fra ${calendario.giorniAllaSuccessiva} giorni ${calendario.dopo.competizione} con ${calendario.dopo.avversario}: rischio turnover`);
-    }
-    return pezzi.join('. ');
+// Le partite del turno di Serie A a cui si riferiscono le probabili. Di solito
+// le portano le probabili stesse; se la pagina non le aveva si prendono dal
+// calendario di Serie A, che per casa e trasferta basta.
+function partiteDelTurno(turno) {
+    if (!turno) return [];
+    if (turno.partite && turno.partite.length) return turno.partite;
+    const dalCalendario = Number.isInteger(turno.numero) ? giornataSerieA(turno.numero) : null;
+    return dalCalendario ? dalCalendario.partite : [];
 }
 
 function calcolaContestoPartita(squadraSerieA) {
@@ -4015,7 +4028,7 @@ function calcolaContestoPartita(squadraSerieA) {
     if (!squadraSerieA || !probabiliFormazioni) return neutro;
 
     const turno = probabiliFormazioni.prossimoTurno;
-    const partita = turno && (turno.partite || []).find(p => p.casa === squadraSerieA || p.fuori === squadraSerieA);
+    const partita = partiteDelTurno(turno).find(p => p.casa === squadraSerieA || p.fuori === squadraSerieA);
 
     // Squadra che riposa, o dati di contesto non scaricati: nessun aggiustamento
     if (!partita) return neutro;
@@ -4027,19 +4040,9 @@ function calcolaContestoPartita(squadraSerieA) {
     const posizione = classifica[squadraSerieA] || null;
     const posizioneAvversario = classifica[avversario] || null;
 
-    const forma = (probabiliFormazioni.formaSerieA || {})[squadraSerieA] || null;
+    const forma = formaSquadreDaiVoti()[squadraSerieA] || null;
 
     const campo = casa ? PESO_CONTESTO : -PESO_CONTESTO;
-
-    // Stanchezza: positivo se l'avversario è più stanco
-    const calendario = probabiliFormazioni.calendarioSquadre || {};
-    const mio = calendario[squadraSerieA] || null;
-    const suo = calendario[avversario] || null;
-    const stanchezza = PESO_STANCHEZZA * (livelloStanchezza(suo) - livelloStanchezza(mio));
-
-    // Le quote, se ci sono, riassumono tutto il resto
-    const esiti = mio && mio.prossima && mio.prossima.esiti;
-    const quote = esiti ? fattoreQuote(esiti) : null;
 
     // Proporzionale alla distanza in classifica: fra squadre vicine tende a zero
     // da sé, che è giusto anche a inizio stagione quando la classifica dice poco
@@ -4047,28 +4050,21 @@ function calcolaContestoPartita(squadraSerieA) {
         ? PESO_CONTESTO * (posizioneAvversario - posizione) / 19
         : 0;
 
-    // Media punti delle ultime giornate contate, riportata sull'intervallo
-    // [-1, +1]: 3 punti a partita in alto, zero in basso, 1,5 al centro
-    const andamento = forma && forma.partite > 0
-        ? PESO_CONTESTO * ((forma.punti / forma.partite) - 1.5) / 1.5
+    // Scarto dei voti dal ruolo, riportato sull'intervallo [-1, +1]: a
+    // SCALA_FORMA di fantavoto sopra la media vale tutto PESO_CONTESTO
+    const andamento = forma
+        ? PESO_CONTESTO * Math.max(-1, Math.min(1, forma.scarto / SCALA_FORMA))
         : 0;
 
     return {
-        fattore: 1 + (quote !== null ? quote : campo + graduatoria + andamento + stanchezza),
+        fattore: 1 + campo + graduatoria + andamento,
         noto: true,
-        stanchezza,
-        quote,
-        probabilitaEsiti: esiti || null,
-        calendario: mio,
-        calendarioAvversario: suo,
         squadra: squadraSerieA,
         casa,
         avversario,
         posizione,
         posizioneAvversario,
-        punti: forma ? forma.punti : null,
-        partite: forma ? forma.partite : null,
-        esiti: forma ? forma.esiti : ''
+        forma
     };
 }
 
@@ -4589,14 +4585,7 @@ function glifoContesto(contesto) {
     const pezzi = [partita, contesto.casa ? 'in casa' : 'in trasferta'];
     if (contesto.posizione) pezzi.push(`${contesto.posizione}° in classifica`);
     if (contesto.posizioneAvversario) pezzi.push(`avversario ${contesto.posizioneAvversario}°`);
-    if (contesto.partite) pezzi.push(`${contesto.punti} punti nelle ultime ${contesto.partite} (${contesto.esiti})`);
-    if (contesto.probabilitaEsiti) {
-        const e = contesto.probabilitaEsiti;
-        pezzi.push(`bookmaker: vittoria ${Math.round(e.vittoria * 100)}%, pari ${Math.round(e.pareggio * 100)}%, sconfitta ${Math.round(e.sconfitta * 100)}%`);
-        pezzi.push('le quote sostituiscono campo, classifica, forma e stanchezza');
-    } else if (contesto.stanchezza) {
-        pezzi.push(`stanchezza ${contesto.stanchezza > 0 ? '+' : ''}${Math.round(contesto.stanchezza * 1000) / 10}%`);
-    }
+    if (contesto.forma) pezzi.push(testoFormaSquadra(contesto.forma));
     pezzi.push(`contesto ${scarto > 0 ? '+' : ''}${Math.round(scarto * 100)}%`);
 
     const su = scarto > 0.005;
@@ -4607,19 +4596,18 @@ function glifoContesto(contesto) {
     return `<span class="consiglio-contesto ${classe}" title="${pezzi.join(' · ')}">${glifo}</span>`;
 }
 
-// Freccia di forma di una squadra di Serie A, dai punti delle ultime giornate:
-// su da 2 punti a partita (due vittorie su tre), giù sotto 1, uguale nel mezzo
+// Freccia di forma di una squadra di Serie A, dai voti delle ultime giornate:
+// su da SOGLIA_FRECCIA_FORMA sopra la media di ruolo, giù altrettanto sotto
 function formaSquadraSerieA(squadra) {
-    const forma = probabiliFormazioni && (probabiliFormazioni.formaSerieA || {})[squadra];
-    if (!forma || !forma.partite) return { glifo: '', classe: '', testo: '' };
+    const forma = formaSquadreDaiVoti()[squadra];
+    if (!forma) return { glifo: '', classe: '', testo: '' };
 
-    const media = forma.punti / forma.partite;
-    const su = media >= 2;
-    const giu = media < 1;
+    const su = forma.scarto >= SOGLIA_FRECCIA_FORMA;
+    const giu = forma.scarto <= -SOGLIA_FRECCIA_FORMA;
     return {
         glifo: su ? '↑' : (giu ? '↓' : '='),
         classe: su ? 'contesto-su' : (giu ? 'contesto-giu' : 'contesto-pari'),
-        testo: `ultime ${forma.partite} ${forma.esiti || ''} (${forma.punti} punti)`.replace('  ', ' ')
+        testo: testoFormaSquadra(forma)
     };
 }
 
@@ -4632,45 +4620,21 @@ function htmlPartitaSerieA(contesto) {
     const fuori = contesto.casa ? contesto.avversario : contesto.squadra;
     const classifica = (probabiliFormazioni && probabiliFormazioni.classificaSerieA) || {};
 
-    const calendari = (probabiliFormazioni && probabiliFormazioni.calendarioSquadre) || {};
-
     const lato = (nome) => {
         const posizione = classifica[nome];
         const forma = formaSquadraSerieA(nome);
-        const calendario = calendari[nome] || null;
-        const stanca = livelloStanchezza(calendario) > 0;
-        const turnover = calendario && calendario.giorniAllaSuccessiva !== null && calendario.giorniAllaSuccessiva <= 4;
-        // Un segno solo quando c'è qualcosa da dire: i giorni di riposo se sono
-        // pochi, una freccia avanti se fra pochi giorni c'è un'altra partita
-        const segni = (stanca ? `<span class="partita-riposo">${calendario.giorniRiposo}g</span>` : '')
-            + (turnover ? '<span class="partita-turnover">»</span>' : '');
         return {
             html: `<span class="partita-squadra${nome === contesto.squadra ? ' sua' : ''}">`
                 + `${siglaSerieA(nome)}${posizione ? ` ${posizione}°` : ''}`
-                + `${forma.glifo ? `<span class="${forma.classe}">${forma.glifo}</span>` : ''}${segni}</span>`,
+                + `${forma.glifo ? `<span class="${forma.classe}">${forma.glifo}</span>` : ''}</span>`,
             titolo: [nome, posizione ? `${posizione}° in classifica` : '', forma.testo].filter(Boolean).join(', ')
-                + (testoCalendario(nome, calendario) ? `. ${testoCalendario(nome, calendario)}` : '')
         };
     };
 
     const a = lato(casa);
     const b = lato(fuori);
 
-    // Con le quote, la probabilità di vittoria accanto a ciascuna squadra
-    let titoloQuote = '';
-    if (contesto.probabilitaEsiti) {
-        const e = contesto.probabilitaEsiti;
-        const vCasa = contesto.casa ? e.vittoria : e.sconfitta;
-        const vFuori = contesto.casa ? e.sconfitta : e.vittoria;
-        const favorita = Math.abs(e.vittoria - e.sconfitta) >= SOGLIA_QUOTE;
-        const pct = (p, alta) => `<span class="partita-quota${favorita && alta ? ' favorita' : ''}">${Math.round(p * 100)}%</span>`;
-        a.html = a.html.replace(/<\/span>$/, `${pct(vCasa, vCasa > vFuori)}</span>`);
-        b.html = b.html.replace(/<\/span>$/, `${pct(vFuori, vFuori > vCasa)}</span>`);
-        const q = e.quote || {};
-        titoloQuote = ` · Quote 1 ${q.casa} · X ${q.pareggio} · 2 ${q.fuori}${q.fonte ? ` (${q.fonte})` : ''}:`
-            + ` vince ${casa} ${Math.round(vCasa * 100)}%, pari ${Math.round(e.pareggio * 100)}%, vince ${fuori} ${Math.round(vFuori * 100)}%`;
-    }
-    const titolo = `${casa}-${fuori} · ${a.titolo} · ${b.titolo}${titoloQuote}`;
+    const titolo = `${casa}-${fuori} · ${a.titolo} · ${b.titolo}`;
     return `<span class="consiglio-partita" title="${titolo.replace(/"/g, '&quot;')}">${a.html}<span class="partita-trattino">–</span>${b.html}</span>`;
 }
 
@@ -4896,21 +4860,26 @@ function displayFormazione() {
     // Da quando sono ferme le probabili formazioni. Senza questa riga un file
     // vecchio consiglia sulla giornata sbagliata senza dare alcun segnale.
     const fresche = freschezzaProbabili();
+
+    // Il link alla pagina da salvare sta qui, accanto a quando è stata salvata
+    // l'ultima volta: è il momento in cui si capisce se va aggiornata
+    const linkProbabili = `<a class="consiglio-link" href="${URL_PROBABILI_FORMAZIONI}" target="_blank" rel="noopener noreferrer"><i class="fas fa-up-right-from-square"></i> Probabili formazioni</a>`;
+
     const avvisoProbabili = fresche.stato === 'mancanti'
         ? `<div class="consiglio-avviso attenzione">
                <i class="fas fa-triangle-exclamation"></i>
                Probabili formazioni non disponibili: la colonna Gioca usa la continuità storica,
-               non le probabili di Serie A.
+               non le probabili di Serie A. ${linkProbabili}
            </div>`
         : (fresche.stato === 'vecchie'
             ? `<div class="consiglio-avviso attenzione">
                    <i class="fas fa-triangle-exclamation"></i>
                    Probabili formazioni del ${fresche.data}, ${fresche.quando}: potrebbero riferirsi
-                   alla giornata già giocata.
+                   alla giornata già giocata. ${linkProbabili}
                </div>`
             : `<div class="consiglio-avviso nota">
                    <i class="fas fa-clock-rotate-left"></i>
-                   Probabili formazioni del ${fresche.data}, aggiornate ${fresche.quando}.
+                   Probabili formazioni del ${fresche.data}, aggiornate ${fresche.quando}. ${linkProbabili}
                </div>`);
 
     const corpo = !f
@@ -4983,25 +4952,16 @@ function displayFormazione() {
                     <dt>Contesto della partita</dt>
                     <dd>
                         Prima di stimare cosa farà il giocatore si guarda la partita che lo aspetta.
-                        Quattro leggeri vantaggi correggono la resa, fino a un massimo del 12% in tutto:
+                        Tre leggeri vantaggi correggono la resa, fino a un massimo del 9% in tutto:
                         giocare <strong>in casa</strong>, affrontare un avversario <strong>più in
-                        basso in classifica</strong> (tanto più quanto è distante), arrivarci con
-                        <strong>punti nelle ultime tre giornate</strong>, e arrivarci <strong>più
-                        riposati</strong>: chi ha giocato da tre giorni o meno (coppa o turno
-                        infrasettimanale) perde fino al 3% contro chi ha riposato, metà con quattro
-                        giorni. Se hanno giocato tutte e due, non cambia niente.
-                        <br>Quando ci sono le <strong>quote dei bookmaker</strong>, queste quattro voci
-                        lasciano il posto a una sola: le quote sanno già di campo, classifica, forma e
-                        stanchezza, e in più di assenze e motivazioni. Se lo scarto fra probabilità di
-                        vincere e di perdere supera il 20%, la favorita guadagna e l'altra perde in
-                        proporzione, fino al 10% quando la vittoria è certa: un 65% contro 15% vale
-                        circa il 4%. Sotto quella soglia la partita è equilibrata e non sposta niente. La freccia accanto alla
+                        basso in classifica</strong> (tanto più quanto è distante) e arrivarci <strong>in
+                        forma</strong>. La forma della squadra si ricava dai voti della lega: quanto i
+                        fantavoto dei suoi giocatori, nelle ultime ${TURNI_FORMA_SQUADRA} giornate, stanno
+                        sopra o sotto la media del loro ruolo. La freccia accanto alla
                         sigla di Serie A riassume il conto, con il dettaglio nel suggerimento. Sotto il nome
                         del giocatore c'è la partita: casa prima, la sua squadra in grassetto, e per
-                        tutte e due la posizione in classifica e la forma — ↑ da due punti a partita
-                        nelle ultime tre, ↓ sotto uno. «3g» dice che la squadra ha avuto solo tre
-                        giorni di riposo, «»» che fra pochi giorni ha un'altra partita e potrebbe
-                        far ruotare i titolari: il dettaglio è nel suggerimento al passaggio del mouse.
+                        tutte e due la posizione in classifica e la forma — ↑ da ${String(SOGLIA_FRECCIA_FORMA).replace('.', ',')}
+                        sopra la media di ruolo, ↓ altrettanto sotto: il dettaglio è nel suggerimento al passaggio del mouse.
                     </dd>
                     <dt>Gioca</dt>
                     <dd>

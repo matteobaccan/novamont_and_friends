@@ -1604,7 +1604,7 @@ html.theme-transition *:after {
     border-left-width: 6px;
 }
 
-.commentary-dialogue:has(.bergomi) {
+.commentary-dialogue:has(.bergamotti) {
     border-left-color: #87ceeb;
 }
 
@@ -1617,7 +1617,7 @@ html.theme-transition *:after {
     margin-right: 0.5rem;
 }
 
-.speaker.bergomi {
+.speaker.bergamotti {
     color: #87ceeb;
 }
 
@@ -1852,15 +1852,15 @@ html.theme-transition *:after {
 [data-theme="light"] .commentary-dialogue .speaker,
 [data-theme="light"] .commentary-dialogue-inline .speaker,
 [data-theme="light"] .commentary-content .speaker {
-    /* darker, high-contrast gold-like for Caressa */
+    /* darker, high-contrast gold-like for Corelli */
     color: #b06b00;
     text-shadow: none;
 }
 
-[data-theme="light"] .commentary-dialogue .speaker.bergomi,
-[data-theme="light"] .commentary-dialogue-inline .speaker.bergomi,
-[data-theme="light"] .commentary-content .speaker.bergomi {
-    /* deeper blue for Bergomi */
+[data-theme="light"] .commentary-dialogue .speaker.bergamotti,
+[data-theme="light"] .commentary-dialogue-inline .speaker.bergamotti,
+[data-theme="light"] .commentary-content .speaker.bergamotti {
+    /* deeper blue for Bergamotti */
     color: #0b66a3;
 }
 
@@ -3929,6 +3929,22 @@ html.theme-transition *:after {
     .match-card .team-score { font-size: 1.7rem; }
 }
 
+/* Giornata ancora da giocare: solo gli accoppiamenti, dal calendario */
+.giornata-da-giocare-quando {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.giornata-da-giocare-quando i { margin-right: 0.35rem; }
+
+.match-da-giocare .match-result {
+    opacity: 0.6;
+    font-style: italic;
+}
+
 /* Le formazioni dentro i pannelli delle classifiche ereditavano
    l'allineamento centrato del contenitore */
 .lineup-row { text-align: left; }
@@ -4756,34 +4772,6 @@ html.theme-transition *:after {
     .sd-cella { font-size: 0.64rem; }
     .sd-incontro { grid-template-columns: 1.8rem 3.6rem 2.9rem minmax(0, 1fr); font-size: 0.72rem; }
 }
-
-/* Pulsante di servizio per l'export: sta nell'intestazione di sezione accanto
-   al titolo, non in un blocco tutto suo. Dice cosa succede — "CSV", non
-   "Esporta" — e resta defilato finche' non lo si cerca. */
-.csv-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    border: 1px solid var(--border-color);
-    background: transparent;
-    color: inherit;
-    font: inherit;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.35rem 0.75rem;
-    border-radius: 999px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s ease, background-color 0.2s ease;
-}
-
-.csv-btn:hover,
-.csv-btn:focus-visible {
-    opacity: 1;
-    background: var(--bg-secondary);
-}
-
-.csv-btn i { font-size: 0.7rem; }
 
 /* ==================================================================
    Albo d'oro
@@ -5626,21 +5614,6 @@ body.sipario-aperto { overflow: hidden; }
 .consiglio-partita .contesto-giu,
 .consiglio-partita .contesto-pari { margin-left: 0.1rem; font-weight: 700; }
 
-/* Riposo corto e partita ravvicinata, accanto alla squadra */
-.consiglio-partita .partita-riposo,
-.consiglio-partita .partita-turnover {
-    margin-left: 0.2rem;
-    font-weight: 700;
-    color: #b45309;
-}
-[data-theme="dark"] .consiglio-partita .partita-riposo,
-[data-theme="dark"] .consiglio-partita .partita-turnover { color: #fbbf24; }
-
-/* Probabilità di vittoria dai bookmaker, accanto alla squadra */
-.consiglio-partita .partita-quota { margin-left: 0.25rem; opacity: 0.8; }
-.consiglio-partita .partita-quota.favorita { font-weight: 700; opacity: 1; color: #1d4ed8; }
-[data-theme="dark"] .consiglio-partita .partita-quota.favorita { color: #93c5fd; }
-
 
 /* ============================================================
    Storico del giocatore, nella formazione consigliata
@@ -5946,3 +5919,71 @@ body.sipario-aperto { overflow: hidden; }
     .squadra-iniziali { font-size: 0.62rem; }
     .team-name { gap: 7px; }
 }
+
+/* ==================================================================
+   Link alle pagine della lega
+   ------------------------------------------------------------------
+   Le pagine di fantacalcio.it da aprire e salvare a mano con Ctrl+S per
+   aggiornare il sito. Ognuno sta dove serve, invece che in un pannello.
+   ================================================================== */
+
+/* Link alle probabili formazioni, nella riga che dice quando sono state salvate */
+.consiglio-link {
+    margin-left: 0.35rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    white-space: nowrap;
+}
+
+.consiglio-link i { font-size: 0.75em; }
+
+/* Link al calendario della lega, accanto al titolo della sezione Giornate */
+.link-calendario {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+}
+
+.link-calendario:hover,
+.link-calendario:focus-visible { background: var(--bg-secondary); }
+
+/* La partita sulla lega: un triangolo che occupa l'angolo alto a destra del
+   box. L'angolo arrotondato e overflow: hidden della card lo rifilano da soli. */
+.match-card { position: relative; }
+
+.match-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0.6rem 0.65rem 0 0;
+    box-sizing: border-box;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    background: var(--primary-color);
+    color: #ffffff;
+    font-size: 0.85rem;
+    line-height: 1;
+    opacity: 0.85;
+    transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease;
+    z-index: 1;
+}
+
+.match-link:hover,
+.match-link:focus-visible {
+    opacity: 1;
+    width: 4rem;
+    height: 4rem;
+}
+
+.match-link:focus-visible { outline: none; }
