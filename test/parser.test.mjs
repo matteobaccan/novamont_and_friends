@@ -1,14 +1,17 @@
-// I parser leggono le pagine di fantacalcio.it salvate a mano: se il sito cambia
+// I parser leggono pagine HTML: se il sito cambia
 // impaginazione, restituiscono meno dati e il suggeritore di formazione
 // peggiora senza che nessuno se ne accorga. Lo script si ferma solo nel caso
 // limite (zero squadre); questi test prendono il resto.
 //
-// Le fixture sono frammenti reali di pagina, datati nel loro commento di testa.
+// Le fixture sono file HTML che NON stanno nel repo (test/fixture/*.html è
+// in .gitignore). Se non sono presenti, i test non li validano: quelli che li
+// usano vengono saltati, e quelli che non ne hanno bisogno girano lo stesso.
+//
 // Quando un test fallisce va capito se è cambiato il sito o si è rotto il
-// parser: nel primo caso si rigenera la fixture e si aggiornano le attese
-// insieme, nel secondo si aggiusta il parser. Mai il contrario.
+// parser: nel primo caso si aggiornano le attese, nel secondo si aggiusta il
+// parser. Mai il contrario.
 
-import test from 'node:test';
+import base from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,7 +30,22 @@ import { leggiCalendarioLega, leggiCalendarioSerieA } from '../.claude/skills/ag
 import { leggiPartita, confrontaPartita } from '../.claude/skills/aggiorna-giornata/leggi-partita.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
-const fixture = (nome) => fs.readFileSync(path.join(QUI, 'fixture', nome), 'utf8');
+class SenzaFixture extends Error {}
+const fixture = (nome) => {
+    const file = path.join(QUI, 'fixture', nome);
+    if (!fs.existsSync(file)) throw new SenzaFixture(`manca test/fixture/${nome}, file HTML non presente, il test non lo valida`);
+    return fs.readFileSync(file, 'utf8');
+};
+
+// Un test che chiede una fixture assente viene saltato, non fallisce
+const test = (nome, corpo) => base(nome, (t) => {
+    try {
+        return corpo(t);
+    } catch (e) {
+        if (e instanceof SenzaFixture) return t.skip(e.message);
+        throw e;
+    }
+});
 
 // ------------------------------------------------------------------
 // Entità HTML
@@ -296,9 +314,9 @@ test('un evento mai visto ferma la lettura invece di essere indovinato', () => {
 // Partite del turno nelle probabili
 // ------------------------------------------------------------------
 
-test('le partite del turno si leggono anche dalla pagina salvata dal browser', () => {
+test('le partite del turno si leggono anche con i <meta> senza barra finale', () => {
     const originale = fixture('probabili.html');
-    // «Pagina web completa» riscrive <meta ... /> come <meta ...>: prima di
+    // Alcuni file HTML hanno <meta ...> invece di <meta ... />: prima di
     // novembre 2026 il lettore non trovava più nessuna partita
     const salvata = originale.replace(/(<meta itemprop="name" content="[^"]*")\s*\/>/g, '$1>');
     assert.notEqual(salvata, originale);

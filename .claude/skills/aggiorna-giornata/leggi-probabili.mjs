@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-// Prepara data/probabili.json per il suggeritore di formazione, a partire dalle
-// pagine di fantacalcio.it salvate a mano dall'utente (Ctrl+S, link nella
-// scheda Giornate del sito):
+// Prepara data/probabili.json per il suggeritore di formazione, a partire da
+// pagine HTML:
 //
 //   - probabili formazioni, squalificati e prossimo turno
 //   - rigoristi, in ordine di gerarchia
@@ -254,8 +253,7 @@ export function analizzaPartite(html, turno) {
         const numero = /<div class="matchweek">\s*(\d+)\s*<\/div>/.exec(pill);
         if (!numero || Number(numero[1]) !== turno) continue;
 
-        // La barra finale c'è nell'HTML del sito ma non in quello salvato dal
-        // browser («Pagina web completa» riscrive <meta ... /> come <meta ...>)
+        // La barra finale in <meta ... /> non c'è in tutti i file HTML
         const squadre = [...pill.matchAll(/<meta itemprop="name" content="([^"]+)"\s*\/?>/g)].map(x => decodificaEntita(x[1]));
         if (squadre.length < 2) continue;
 
@@ -300,7 +298,7 @@ function opzione(argv, nome) {
     const i = argv.indexOf(nome);
     if (i === -1) return null;
     const valore = argv[i + 1];
-    if (!valore || valore.startsWith('--')) fail(`${nome} vuole il file della pagina salvata`);
+    if (!valore || valore.startsWith('--')) fail(`${nome} vuole il file HTML della pagina`);
     return valore;
 }
 
@@ -319,7 +317,7 @@ function main() {
     const fileRigoristi = opzione(argv, '--rigoristi');
     const fileInfortunati = opzione(argv, '--infortunati');
 
-    // Il file precedente: quello che non arriva da una pagina salvata resta com'era
+    // Il file precedente: quello che non arriva da una pagina HTML resta com'era
     let precedenti = {};
     try {
         precedenti = JSON.parse(fs.readFileSync(path.join(process.cwd(), DESTINAZIONE), 'utf8'));

@@ -1,5 +1,5 @@
 // La regola di AGENTS.md: nessuno script va in rete, si lavora solo su file
-// salvati dall'utente. Fantacalcio.it ha diffidato il repo per gli script che
+// HTML forniti dall'utente. Fantacalcio.it ha diffidato il repo per gli script che
 // accedevano ai suoi servizi in automatico: questo test impedisce che ne
 // rientri uno, anche per sbaglio.
 

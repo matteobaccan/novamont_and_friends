@@ -3,7 +3,7 @@
 //
 //   node aggiungi-giocatori.mjs <nuovi.json> [--stagione 2026-2027] [--dry-run]
 //
-// `nuovi.json` viene dalla pagina Rose della lega salvata a mano: { "<pid>": { name, role, serieA } }.
+// `nuovi.json` viene dalla pagina HTML Rose della lega: { "<pid>": { name, role, serieA } }.
 // Aggiunge solo i pid che mancano e lascia stare gli altri, così si può
 // ripassare lo stesso file senza farci danni. Se un pid c'è già ma con dati
 // diversi lo segnala e non lo tocca: un cambio di squadra di Serie A a gennaio

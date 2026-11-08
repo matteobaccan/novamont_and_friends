@@ -1,9 +1,10 @@
 name: Test
 
-# Le regole della lega sono aritmetica e i parser leggono le pagine salvate a
-# mano: qui si controlla che nessuna delle due cose si sia rotta.
-# I test non vanno in rete — le pagine di fantacalcio.it stanno in test/fixture
-# come frammenti salvati — quindi questo workflow non dipende da nessun sito.
+# Le regole della lega sono aritmetica e i parser leggono pagine HTML: qui si
+# controlla che nessuna delle due cose si sia rotta.
+# I test non vanno in rete, quindi questo workflow non dipende da nessun sito.
+# I file HTML per i test dei lettori non sono nel repo: se non presenti, i
+# test non li validano.
 on:
   push:
     branches: [main]

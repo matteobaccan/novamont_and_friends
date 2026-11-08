@@ -55,8 +55,8 @@ non esserci e basta.
 
 L'undici migliore per la prossima giornata, provando tutti i moduli. Non è "AI": è un modello
 dichiarato, e la pagina spiega riga per riga come arriva al numero — resa, forma, contesto
-della partita, probabilità di giocare, rigori. I dati di Serie A li inserisce a mano chi
-gestisce il sito: nessuno script li prende da internet.
+della partita, probabilità di giocare, rigori. I dati di Serie A si leggono da pagine HTML:
+nessuno script li prende da internet.
 
 Ogni consiglio viene salvato prima del fischio e, a giornata giocata, confrontato con quello
 che è successo davvero: sotto la formazione consigliata c'è il bilancio del modello e dei
@@ -94,7 +94,7 @@ in stile Corelli-Bergamotti, uno per partita più uno di giornata.
 - **Bonus casa** — +1 alla squadra di casa nel calcolo dei gol ideali, non nel punteggio
 - **Calendario precaricato** — tutte le giornate della lega e le 38 di Serie A stanno nel JSON
   della stagione, verificate prima di essere scritte
-- **106 test** senza dipendenze, su ogni push e pull request
+- **106 test** senza dipendenze, su ogni push e pull request (19 leggono file HTML: se non presenti, non li validano)
 - **Nessuna libreria** — grafici, heatmap e marchio sono SVG e CSS grid scritti a mano
 
 ## 🚀 Come utilizzare
@@ -239,7 +239,7 @@ la squalifica batte ogni altra fonte — anche un 100% rimasto in formazione per
 distrazione. Senza questa voce uno squalificato sarebbe un "fuori dalle probabili"
 qualunque al 15%, e il suggeritore se lo poteva ritrovare in formazione.
 
-**Probabili vecchie e storico.** Le probabili salvate molti giorni prima del turno sanno
+**Probabili vecchie e storico.** Le probabili aggiornate molti giorni prima del turno sanno
 meno di quelle del venerdì. Per quel caso il modello può mescolare la percentuale con lo
 **storico**, cioè la quota di giornate in cui il giocatore ha preso il voto:
 
@@ -248,13 +248,13 @@ gioca = (1 − peso) × probabili + peso × storico
 peso  = 0,1 × (giorni prima del turno − 2), fra 0 e 0,5   (0,1 se acceso; oggi è 0)
 ```
 
-I giorni si contano fra il salvataggio delle probabili e la data del turno nel calendario
+I giorni si contano fra l'aggiornamento delle probabili e la data del turno nel calendario
 di Serie A; fino a due giorni prima il peso è zero. Infortunati, squalificati e fuori lista
 restano come sopra. **Oggi la miscela è spenta** (`PESO_STORICO_PER_GIORNO = 0`): sulle
 giornate 2-6 lo storico peggiorava sempre la previsione (Brier 0,060 con le sole probabili,
 0,067 con lo storico al 30%, 0,147 con il solo storico), e quando le due fonti non erano
 d'accordo avevano ragione le probabili. Si accende solo se, su giornate con le probabili
-salvate a mano, il confronto dirà che conviene. Quando è accesa, la spiegazione nella
+aggiornate qualche giorno prima, il confronto dirà che conviene. Quando è accesa, la spiegazione nella
 pagina dice quanto pesa lo storico.
 
 ### I rigori
@@ -341,24 +341,24 @@ novamont_and_friends/
 │   ├── cosa-serve.mjs         # Il primo passo: cosa manca e quali pagine chiedere
 │   ├── leggi-calendario.mjs   # Calendario della lega e di Serie A, a inizio stagione
 │   ├── giornate-mancanti.mjs  # Quali giornate mancano e da quale ricominciare
-│   ├── converti-giornata.mjs  # Giornata da formazioni salvate, decodifica eventi
-│   ├── leggi-partita.mjs      # Formazioni, voti ed eventi dalla pagina di una partita salvata
+│   ├── converti-giornata.mjs  # Giornata dalle formazioni, decodifica eventi
+│   ├── leggi-partita.mjs      # Formazioni, voti ed eventi dalla pagina HTML di una partita
 │   ├── calcola-giornata.mjs   # Punteggi ideali, scrittura della giornata
 │   ├── aggiungi-giocatori.mjs # Acquisti di mercato nel dizionario dei giocatori
-│   ├── leggi-probabili.mjs    # Probabili, rigoristi, infortunati da pagine salvate
+│   ├── leggi-probabili.mjs    # Probabili, rigoristi, infortunati da pagine HTML
 │   ├── salva-consigli.mjs     # Fotografia del consiglio prima della giornata
 │   ├── valuta-consigli.mjs    # Il consiglio confrontato con la realtà
 │   └── rigioca-consigli.mjs   # Le giornate passate rigiocate con altri pesi
 ├── test/
 │   ├── regole.test.mjs     # Gol, bonus casa, malus, punti di merito
-│   ├── parser.test.mjs     # I parser delle pagine salvate (Serie A, calendario, partite), su fixture reali
+│   ├── parser.test.mjs     # I parser delle pagine HTML: se i file non sono presenti, non li validano
 │   ├── consigli.test.mjs   # Suggeritore, salvataggio e valutazione dei consigli
 │   ├── calendario.test.mjs # Coerenza del calendario e giornate da giocare
 │   ├── cosa-serve.test.mjs # Le pagine da chiedere all'utente
 │   ├── link-lega.test.mjs  # I link alle pagine della lega
 │   ├── niente-rete.test.mjs # Nessuno script va in rete o gira da solo
 │   ├── aiuto/              # Carica script.js in un contesto vm
-│   └── fixture/            # Frammenti di pagina datati, niente rete nei test
+│   └── fixture/            # Solo in locale: file HTML per i test, fuori dal repo (.gitignore)
 ├── .github/workflows/
 │   └── test.yml            # node --test su ogni push e pull request
 ├── BONUS_CASA.md           # Il bonus casa nei gol ideali
@@ -373,7 +373,7 @@ novamont_and_friends/
 - **`script.js`**: ~5700 righe di JavaScript: calcolo classifiche, rose, calendario e suggeritore di formazione
 - **`data/seasons.json`**: Indice delle stagioni: id, etichetta, file, stato e indirizzi delle pagine della lega
 - **`data/<stagione>.json`**: Database JSON con teams, players, rosterHistory, rounds, calendar, calendarioSerieA e settings
-- **`data/probabili.json`**: Istantanea di Serie A ricavata dalle pagine salvate, non scritta a mano
+- **`data/probabili.json`**: Istantanea di Serie A ricavata dalle pagine HTML, non scritta a mano
 - **`config.js`**: Impostazioni configurabili per personalizzazione
 
 ## 🔧 Funzioni Avanzate

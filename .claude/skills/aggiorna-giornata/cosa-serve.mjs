@@ -5,12 +5,11 @@
 //
 // Dal calendario precaricato sa quali giornate della lega si sono già giocate
 // (quelle la cui giornata di Serie A è finita), le confronta con quelle sul
-// sito ed elenca le pagine delle partite da salvare, una per una con il link.
+// sito ed elenca le pagine HTML delle partite che servono, una per una con il link.
 // Poi guarda data/probabili.json: di quando sono, di che turno, e se è quello
 // giusto per la prossima giornata.
 //
-// Non va in rete: legge solo i file del repo. Le pagine le apre e le salva
-// l'utente (Ctrl+S, «Pagina web completa»).
+// Non va in rete: legge solo i file del repo. I file HTML li fornisce l'utente.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -22,7 +21,7 @@ export const URL_INFORTUNATI = 'https://www.fantacalcio.it/infortunati-serie-a';
 
 // Un turno di Serie A si gioca intorno alla data del calendario ufficiale,
 // fino al lunedì: lo si considera finito dal secondo giorno dopo. Meglio
-// chiedere una giornata un giorno dopo che salvarla col posticipo ancora da
+// chiedere una giornata un giorno dopo che leggerla col posticipo ancora da
 // giocare.
 const GIORNI_DOPO_LA_DATA = 2;
 
@@ -149,7 +148,7 @@ function main() {
         console.log('Probabili formazioni: nessun file data/probabili.json.');
     } else {
         const eta = p.giorni <= 0 ? 'oggi' : (p.giorni === 1 ? 'ieri' : `${p.giorni} giorni fa`);
-        console.log(`Probabili formazioni: salvate ${quando(p.aggiornato)} (${eta}), turno ${p.turno} di Serie A.`);
+        console.log(`Probabili formazioni: aggiornate ${quando(p.aggiornato)} (${eta}), turno ${p.turno} di Serie A.`);
         if (p.stato === 'turno-sbagliato') console.log(`  Sono del turno ${p.turno}, ma la prossima giornata si gioca sul turno ${p.turnoAtteso}: vanno rifatte.`);
         else if (p.stato === 'vecchie') console.log(`  Hanno più di ${GIORNI_PROBABILI_VECCHIE} giorni: conviene rifarle.`);
         else if (p.iniziato) console.log('  Il turno è già cominciato: il consiglio di questa giornata è congelato, rifarle serve solo per le partite che restano.');
@@ -164,7 +163,7 @@ function main() {
     if (daChiedere.length === 0) {
         console.log('Da chiedere all\'utente: niente, è tutto aggiornato.');
     } else {
-        console.log('Da chiedere all\'utente (aprire la pagina, Ctrl+S, «Pagina web completa»):');
+        console.log('Da chiedere all\'utente (i file HTML di queste pagine):');
         for (const r of daChiedere) console.log(r.startsWith('    ') ? r : `  - ${r}`);
     }
 }

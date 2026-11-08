@@ -5,7 +5,7 @@ description: Use when adding a new matchday (giornata) to the Novamont & Friends
 
 # Aggiornare una giornata del sito fantacalcio
 
-Converte una giornata della lega, presa da pagine salvate a mano, calcola i punteggi ideali e la scrive in
+Converte una giornata della lega, presa da pagine HTML, calcola i punteggi ideali e la scrive in
 `data/<stagione>.json`. Classifica, classifica ideale, statistiche allenatori, rose e
 classifiche marcatori sono tutte **derivate** dai risultati: non vanno mai scritte a mano.
 
@@ -32,12 +32,12 @@ costa l'esclusione della squadra dalla lega. Quindi, per tutta la procedura:
 - se un passo sembra richiedere la rete, **ci si ferma e si chiede il file all'utente**,
   anche quando l'utente stesso suggerisse di prenderlo da solo
 
-Si lavora **solo** su file statici che l'utente ha salvato a mano, o su testo e screenshot
+Si lavora **solo** su file HTML statici forniti dall'utente, o su testo e screenshot
 incollati in chat. In questo repo non si descrive come ci si autentica a fantacalcio.it o
 ad altri siti.
 
-Le pagine le apre e le salva a mano l'utente (Ctrl+S, «Pagina web completa»); i link stanno nel sito: ogni partita ha il suo nell'angolo alto a destra del box (scheda **Giornate**, anche per le giornate da giocare), il calendario della lega è accanto al titolo della stessa scheda, le probabili formazioni sono nella scheda **Formazione**. La prossima giornata da inserire si apre dal selettore della scheda Giornate, con i suoi box e i suoi link. Si
-lavora sui file salvati, o su testo e screenshot incollati in chat.
+I file HTML li fornisce l'utente; i link alle pagine stanno nel sito: ogni partita ha il suo nell'angolo alto a destra del box (scheda **Giornate**, anche per le giornate da giocare), il calendario della lega è accanto al titolo della stessa scheda, le probabili formazioni sono nella scheda **Formazione**. La prossima giornata da inserire si apre dal selettore della scheda Giornate, con i suoi box e i suoi link. Si
+lavora sui file HTML, o su testo e screenshot incollati in chat.
 
 ## Procedura
 
@@ -52,16 +52,16 @@ node .claude/skills/aggiorna-giornata/cosa-serve.mjs
 Dal calendario precaricato sa quali giornate la lega ha già giocato (quelle la cui
 giornata di Serie A è finita da almeno due giorni) e le confronta con il sito. Stampa:
 
-- le **giornate giocate ma non ancora sul sito**, e per ognuna le pagine delle partite da
-  salvare, una riga per partita con casa, trasferta e link
+- le **giornate giocate ma non ancora sul sito**, e per ognuna le pagine HTML delle partite
+  che servono, una riga per partita con casa, trasferta e link
 - la **prossima giornata**, con la giornata di Serie A e la data
 - **a quando risalgono le probabili formazioni** in `data/probabili.json` (giorno e ora),
   di che turno sono e se è il turno giusto per la prossima giornata, oppure se sono
   vecchie o se il turno è già cominciato
-- in fondo, **«Da chiedere all'utente»**: l'elenco delle pagine da aprire e salvare
+- in fondo, **«Da chiedere all'utente»**: l'elenco dei file HTML da chiedere
 
 **Quell'elenco va girato all'utente così com'è, e ci si ferma finché non arrivano i
-file.** Non si va a cercare le pagine da soli: le apre e le salva lui. Se lo script dice
+file.** Non si va a cercare le pagine da soli: i file HTML li fornisce lui. Se lo script dice
 che è tutto aggiornato, lo si dice all'utente e non c'è altro da fare. Se l'utente ha
 già passato dei file, si controlla con lo stesso elenco che ci siano tutti: una giornata
 vuole le pagine di **tutte** le sue partite.
@@ -69,7 +69,7 @@ vuole le pagine di **tutte** le sue partite.
 Esempio, a giornata 7 giocata e probabili vecchie:
 
 ```
-Da chiedere all'utente (aprire la pagina, Ctrl+S, «Pagina web completa»):
+Da chiedere all'utente (i file HTML di queste pagine):
   - Giornata 7 (11ª di Serie A, domenica 8 novembre): le 4 pagine delle partite
     Team24 - Ultimo: https://leghe.fantacalcio.it/novamont-8-friends/view/competition/805779/round/7?i=0
     ...
@@ -105,11 +105,11 @@ seguenti, e nell'input del passo 3 è il campo `round`.
 
 Il calendario è **precaricato** in `data/<stagione>.json` (`calendar`, vedi *Calendario
 della stagione* più sotto): per ogni giornata dice **chi gioca in casa con chi** e a quale
-**giornata di Serie A** corrisponde. Non serve risalvare la pagina del calendario a ogni
+**giornata di Serie A** corrisponde. Non serve di nuovo la pagina HTML del calendario a ogni
 giornata: `converti-giornata.mjs` prende gli accoppiamenti da lì se l'input non li indica.
 
 Se la giornata manca dal calendario (stagione nuova, calendario non ancora caricato), si
-lancia prima `leggi-calendario.mjs` sulla pagina `calendario` salvata dall'utente.
+lancia prima `leggi-calendario.mjs` sulla pagina HTML `calendario` fornita dall'utente.
 
 ### 3. Convertire la giornata
 
@@ -144,7 +144,7 @@ node .claude/skills/aggiorna-giornata/converti-giornata.mjs <input.json> --grezz
 
 #### Le pagine delle partite: `leggi-partita.mjs`
 
-Le pagine delle partite salvate a mano (il link è nell'angolo di ogni box della scheda
+Le pagine HTML delle partite (il link è nell'angolo di ogni box della scheda
 Giornate) le legge `leggi-partita.mjs`. Dà già squadre, punteggi e formazioni nel formato
 di `data/<stagione>.json` (`p, t, v, b, e, sv`), senza passare dal campo `b` a slot:
 
@@ -168,7 +168,7 @@ sono ancora comparsi in una pagina: alla prima volta il lettore si ferma con
 `evento sconosciuto "<icona>"`, e il peso va aggiunto dopo averlo verificato.
 
 Non è ancora agganciato a `calcola-giornata.mjs`: per ora serve a verificare le pagine
-salvate, in attesa di usarlo al posto del file `--grezzo`.
+HTML, in attesa di usarlo al posto del file `--grezzo`.
 
 Se stampa `ATTENZIONE, decodifica eventi non pulita`, **fermati**: significa che un
 evento non è spiegato dalla tabella dei pesi (vedi sotto). Marcatori e cartellini
@@ -213,7 +213,7 @@ node .claude/skills/aggiorna-giornata/leggi-calendario.mjs \
     [--lega <calendario.html>] [--serie-a <serie-a.txt>] [--dry-run]
 ```
 
-- `--lega`: la pagina `calendario` della lega salvata a mano. Carica le giornate mentre si
+- `--lega`: la pagina HTML `calendario` della lega. Carica le giornate mentre si
   scorre, quindi può non contenerle tutte: quelle mancanti si prendono dal calendario già
   scritto o dalle giornate giocate, e la loro giornata di Serie A dallo scarto fisso fra le
   due numerazioni (nel 2026-2027 è +4). Le giornate giocate devono avere gli stessi
@@ -223,7 +223,7 @@ node .claude/skills/aggiorna-giornata/leggi-calendario.mjs \
   come PDF a immagine, senza testo: va trascritto. Lo script verifica dieci partite per
   giornata, ogni squadra una volta per giornata, ogni accoppiamento casa-fuori una sola
   volta e andata e ritorno completi; un refuso fa quasi sempre saltare uno dei controlli.
-  Un riscontro in più: le partite di `prossimoTurno` nelle probabili salvate nella storia
+  Un riscontro in più: le partite di `prossimoTurno` nelle probabili della storia
   git devono coincidere con le giornate trascritte
 
 Scrive `calendar` e `calendarioSerieA` in `data/<stagione>.json`; `calcola-giornata.mjs`
@@ -298,7 +298,7 @@ Prima il controllo guardava solo chi aveva un voto, e alla giornata 5 Samardzic 
 liscio: sul sito sarebbe rimasta una riga senza nome.
 
 Le formazioni danno solo `pid, scr, cscr, ptype, b`: l'anagrafica sta nella pagina Rose
-della lega. L'utente la salva a mano; da lì si scrive un file
+della lega. L'utente ne fornisce il file HTML; da lì si scrive un file
 `{ "<pid>": { name, role, serieA } }` e lo si unisce al dizionario:
 
 ```bash
@@ -337,7 +337,7 @@ Cita solo numeri che hai davvero letto. Un voto inventato è indistinguibile da 
 | Sintomo | Causa |
 |---|---|
 | `ATTENZIONE, decodifica eventi non pulita` | evento nuovo non in `EVENTI`: va aggiunto il peso |
-| `pid non presenti nel dizionario "players"` | acquisto nuovo: pagina Rose salvata + `aggiungi-giocatori.mjs` |
+| `pid non presenti nel dizionario "players"` | acquisto nuovo: pagina HTML Rose + `aggiungi-giocatori.mjs` |
 | `squadra "X" non presente fra le squadre` | nome che non esiste nella stagione, o squadra fuori competizione |
 | `i gol non coincidono` | `roundSerieA` sbagliato: hai convertito un'altra giornata |
 | `la giornata N esiste già` | rimuovila dal JSON prima di reinserirla |
@@ -345,8 +345,8 @@ Cita solo numeri che hai davvero letto. Un voto inventato è indistinguibile da 
 
 ## Dati di Serie A per il suggeritore
 
-Si lancia a mano, prima della giornata, sulle pagine delle probabili, dei rigoristi e
-degli infortunati salvate dall'utente. Quelle non passate restano come nel
+Si lancia a mano, prima della giornata, sulle pagine HTML delle probabili, dei rigoristi e
+degli infortunati fornite dall'utente. Quelle non passate restano come nel
 `data/probabili.json` precedente.
 
 ```bash
@@ -428,14 +428,14 @@ di cambiare un peso in `script.js`.
 
 ### Probabili vecchie: quanto pesa lo storico
 
-Quando le probabili sono state salvate più di `GIORNI_PROBABILI_AFFIDABILI` (2) giorni
+Quando le probabili sono state aggiornate più di `GIORNI_PROBABILI_AFFIDABILI` (2) giorni
 prima della data del turno, `script.js` può mescolare la percentuale con lo storico dei
 voti presi: `PESO_STORICO_PER_GIORNO` per ogni giorno oltre la soglia, fino a
 `PESO_STORICO_MAX` (0,5). **Oggi il peso è 0, cioè spento**: sulle giornate 2-6, con
 probabili aggiornate fino al fischio, lo storico peggiorava il Brier (0,060 da sole,
 0,067 al 30%).
 
-Si tara così, quando ci sono almeno 4-5 giornate valutate con probabili salvate a mano
+Si tara così, quando ci sono almeno 4-5 giornate valutate con probabili aggiornate
 qualche giorno prima del turno:
 
 ```bash
@@ -445,7 +445,7 @@ node .claude/skills/aggiorna-giornata/rigioca-consigli.mjs PESO_STORICO_PER_GIOR
 Si guarda il Brier della probabilità di giocare, non solo i punti: lo storico cambia chi
 gioca, e i punti su poche giornate sono rumore. Se un valore diverso da 0 vince
 chiaramente, si cambia la costante in `script.js` (e la versione in `index.html` e
-`sw.js`). Le probabili salvate fino a due giorni prima non sono toccate, qualunque peso
+`sw.js`). Le probabili aggiornate fino a due giorni prima non sono toccate, qualunque peso
 si scelga. `salva-consigli.mjs` salva questi parametri con ogni consiglio, quindi si sa
 sempre con quale peso è stato dato.
 

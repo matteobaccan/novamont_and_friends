@@ -2852,11 +2852,9 @@ function setupRoundSelector() {
     }
 }
 
-// Link alle pagine da salvare a mano (Ctrl+S) per aggiornare il sito. I dati
-// non si scaricano in automatico: fantacalcio.it consente solo l'accesso
-// manuale dal sito ufficiale. Si apre la pagina da qui, la si salva come
-// "Pagina web completa" e il file lo legge uno script in locale, senza toccare
-// la rete. Ogni link sta dove serve: la partita nell'angolo del suo box (anche
+// Link alle pagine della lega e di Serie A. I dati non si scaricano in
+// automatico: gli script in locale leggono solo file HTML, senza toccare la
+// rete. Ogni link sta dove serve: la partita nell'angolo del suo box (anche
 // per le giornate da giocare, quindi la prossima da inserire è a un clic dal
 // selettore), il calendario accanto al titolo della sezione Giornate, le
 // probabili nella sezione Formazione.
@@ -2880,7 +2878,7 @@ function linkPartitaLega(giornata, indice) {
     const season = getSeasonById(currentSeasonId);
     const url = urlPartitaLega(season && season.source, giornata, indice);
     if (!url) return '';
-    return `<a class="match-link" href="${url}" target="_blank" rel="noopener noreferrer" title="Apri la partita sulla lega. Per aggiornare il sito salvala con Ctrl+S come «Pagina web completa»" aria-label="Apri la partita ${indice + 1} della giornata ${giornata} sulla lega"><i class="fas fa-up-right-from-square"></i></a>`;
+    return `<a class="match-link" href="${url}" target="_blank" rel="noopener noreferrer" title="Apri la partita sulla lega" aria-label="Apri la partita ${indice + 1} della giornata ${giornata} sulla lega"><i class="fas fa-up-right-from-square"></i></a>`;
 }
 
 // Il link al calendario della lega, accanto al titolo della sezione Giornate
@@ -3738,9 +3736,9 @@ const PROB_INFORTUNATO = 0.03;
 // uno squalificato quel turno lo salta e basta.
 const PROB_SQUALIFICATO = 0;
 
-// Le probabili invecchiano. Salvate il venerdì per la domenica sanno quasi
-// tutto, salvate il martedì no: chi era in dubbio avrà recuperato, chi era
-// titolare si sarà fermato in allenamento. Quando sono state salvate più di
+// Le probabili invecchiano. Aggiornate il venerdì per la domenica sanno quasi
+// tutto, aggiornate il martedì no: chi era in dubbio avrà recuperato, chi era
+// titolare si sarà fermato in allenamento. Quando sono state aggiornate più di
 // GIORNI_PROBABILI_AFFIDABILI giorni prima della data del turno, la loro
 // percentuale si mescola con lo storico (quante volte il giocatore ha preso il
 // voto finora): PESO_STORICO_PER_GIORNO in più per ogni giorno oltre la
@@ -3750,13 +3748,13 @@ const PROB_SQUALIFICATO = 0;
 // aggiornate fino al fischio, lo storico peggiorava sempre la previsione
 // (Brier 0,060 con le sole probabili, 0,067 con lo storico al 30%), e quando
 // le due fonti non erano d'accordo avevano ragione le probabili. Va acceso
-// solo quando rigioca-consigli.mjs, su giornate con probabili salvate a mano,
+// solo quando rigioca-consigli.mjs, su giornate con probabili aggiornate prima,
 // dirà che conviene.
 const GIORNI_PROBABILI_AFFIDABILI = 2;
 const PESO_STORICO_PER_GIORNO = 0;
 const PESO_STORICO_MAX = 0.5;
 
-// Quanti giorni prima della data del turno di Serie A sono state salvate le
+// Quanti giorni prima della data del turno di Serie A sono state aggiornate le
 // probabili. La data è quella del calendario ufficiale precaricato; senza
 // calendario non si sa, e lo storico resta fuori.
 function giorniPrimaDelTurno() {
@@ -3775,12 +3773,12 @@ function testoPesoStorico() {
     const giorni = giorniPrimaDelTurno();
     const peso = pesoStorico();
     if (peso > 0) {
-        return `<br>Queste probabili sono state salvate <strong>${giorni} giorni prima</strong> del turno:
+        return `<br>Queste probabili sono state aggiornate <strong>${giorni} giorni prima</strong> del turno:
             la percentuale pesa il ${Math.round((1 - peso) * 100)}% e il resto lo mette lo
             <strong>storico</strong>, cioè quante volte il giocatore ha preso il voto finora.`;
     }
     if (PESO_STORICO_PER_GIORNO > 0) {
-        return `<br>Se le probabili fossero salvate più di ${GIORNI_PROBABILI_AFFIDABILI} giorni prima
+        return `<br>Se le probabili fossero aggiornate più di ${GIORNI_PROBABILI_AFFIDABILI} giorni prima
             del turno, la percentuale si mescolerebbe con lo storico dei voti presi.`;
     }
     return '';
@@ -4921,7 +4919,7 @@ function displayFormazione() {
     // vecchio consiglia sulla giornata sbagliata senza dare alcun segnale.
     const fresche = freschezzaProbabili();
 
-    // Il link alla pagina da salvare sta qui, accanto a quando è stata salvata
+    // Il link alla pagina sta qui, accanto a quando sono state aggiornate
     // l'ultima volta: è il momento in cui si capisce se va aggiornata
     const linkProbabili = `<a class="consiglio-link" href="${URL_PROBABILI_FORMAZIONI}" target="_blank" rel="noopener noreferrer"><i class="fas fa-up-right-from-square"></i> Probabili formazioni</a>`;
 

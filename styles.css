@@ -5923,11 +5923,10 @@ body.sipario-aperto { overflow: hidden; }
 /* ==================================================================
    Link alle pagine della lega
    ------------------------------------------------------------------
-   Le pagine di fantacalcio.it da aprire e salvare a mano con Ctrl+S per
-   aggiornare il sito. Ognuno sta dove serve, invece che in un pannello.
+   Ognuno sta dove serve, invece che in un pannello.
    ================================================================== */
 
-/* Link alle probabili formazioni, nella riga che dice quando sono state salvate */
+/* Link alle probabili formazioni, nella riga che dice quando sono state aggiornate */
 .consiglio-link {
     margin-left: 0.35rem;
     font-weight: 600;

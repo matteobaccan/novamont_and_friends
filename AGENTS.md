@@ -8,19 +8,19 @@ stessa cartella.
 
 ## La regola
 
-**Ogni elaborazione si fa su file statici copiati dall'utente.** Fantacalcio.it consente
+**Ogni elaborazione si fa su file HTML statici forniti dall'utente.** Fantacalcio.it consente
 l'accesso ai suoi servizi solo dal sito e dalle app ufficiali, in modo manuale. Quindi:
 
 - nessuno script va in rete, su fantacalcio.it o altrove: niente richieste HTTP, niente
   API, niente browser pilotato o headless
-- le pagine le apre l'utente nel suo browser e le salva con Ctrl+S come «Pagina web
-  completa»; gli script leggono solo quei file
+- i file HTML delle pagine li fornisce l'utente; gli script leggono solo quei file
 - in questo repo non si descrive come ci si autentica a fantacalcio.it o ad altri siti
 - un agente non apre pagine web, non usa browser né strumenti di rete: se serve un dato
   che non è in un file, lo chiede all'utente
 
-I test girano su frammenti di pagine salvate in `test/fixture`, e anche loro non vanno
-in rete.
+I test non vanno in rete. Quelli dei lettori usano file HTML in `test/fixture`, che **non
+stanno nel repo** (`.gitignore` li tiene fuori): se non sono presenti, i test non li
+validano e vengono saltati. Nessun file HTML di quelle pagine va mai aggiunto al repo.
 
 ## Da dove si parte: cosa serve
 
@@ -31,7 +31,7 @@ node .claude/skills/aggiorna-giornata/cosa-serve.mjs
 Dice quali giornate la lega ha già giocato ma mancano sul sito, con il link alla pagina di
 ogni partita, qual è la prossima giornata e a quando risalgono le probabili formazioni. In
 fondo stampa l'elenco **«Da chiedere all'utente»**: quello si gira all'utente, e si aspetta
-che salvi le pagine prima di andare avanti.
+che fornisca i file HTML prima di andare avanti.
 
 I link stanno anche nel sito:
 
@@ -39,14 +39,14 @@ I link stanno anche nel sito:
   Giornate, anche per le giornate da giocare
 - **il calendario della lega**: accanto al titolo della scheda Giornate
 - **le probabili formazioni**: nella scheda Formazione, accanto a quando sono state
-  salvate l'ultima volta
+  aggiornate l'ultima volta
 
 ## Una giornata
 
 Le giornate si inseriscono **una alla volta e in ordine crescente**: ogni giornata parte
 dalle rose lasciate da quella prima. In breve:
 
-1. le pagine delle partite della giornata, salvate dall'utente, le legge
+1. le pagine HTML delle partite della giornata le legge
    `leggi-partita.mjs` (con `--confronta` le verifica contro una giornata già pubblicata)
 2. `converti-giornata.mjs` prepara l'estratto; gli accoppiamenti li prende dal calendario
 3. si scrivono i commenti di Corelli e Bergamotti
@@ -66,7 +66,7 @@ node .claude/skills/aggiorna-giornata/leggi-probabili.mjs \
 node .claude/skills/aggiorna-giornata/salva-consigli.mjs [--dry-run]
 ```
 
-Le pagine da salvare sono le
+Le pagine HTML che servono sono le
 [probabili formazioni](https://www.fantacalcio.it/probabili-formazioni-serie-a) e, quando
 cambiano, [rigoristi](https://www.fantacalcio.it/rigoristi-serie-a) e
 [infortunati](https://www.fantacalcio.it/infortunati-serie-a). Quello che non si passa
@@ -82,7 +82,7 @@ node .claude/skills/aggiorna-giornata/leggi-calendario.mjs \
     [--lega <calendario.html>] [--serie-a <serie-a.txt>] [--dry-run]
 ```
 
-- `--lega` è la pagina *calendario* della lega salvata a mano; le giornate che la pagina
+- `--lega` è la pagina HTML *calendario* della lega; le giornate che la pagina
   non contiene si recuperano da quelle già giocate
 - `--serie-a` è un file di testo con una riga per giornata
   (`11 08/11/2026 Cagliari-Frosinone Fiorentina-Juventus ...`), trascritto dal calendario
@@ -111,4 +111,4 @@ Il nome del file deve rispettare il formato `AAAA-AAAA.json`, richiesto dalla wh
   versione nel query string di `index.html` e in `sw.js`, altrimenti chi torna sul sito
   riceve i file vecchi
 - `git add` dei file in `data/`: il sito è statico, il push su `main` basta
-- i file salvati dall'utente non vanno nel repo
+- i file HTML forniti dall'utente non vanno nel repo

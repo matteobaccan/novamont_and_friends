@@ -1,6 +1,5 @@
-// I link alle pagine di fantacalcio.it da salvare a mano: se l'indirizzo di
-// una partita è sbagliato si salva la pagina sbagliata e lo si scopre solo
-// quando i conti non tornano.
+// I link alle pagine della lega: se l'indirizzo di una partita è sbagliato si
+// legge la pagina sbagliata e lo si scopre solo quando i conti non tornano.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -27,7 +26,7 @@ test('il link di ogni partita, per l\'angolo del suo box', () => {
     const html = app.linkPartitaLega(7, 1);
     assert.match(html, /class="match-link"/);
     assert.match(html, /\/round\/7\?i=1"/);
-    assert.match(html, /Ctrl\+S/, 'il suggerimento dice come salvare la pagina');
+    assert.doesNotMatch(html, /Ctrl\+S|salva/i, 'il suggerimento non parla di salvare pagine');
 });
 
 test('una stagione archiviata, senza sorgente, non ha link alle partite', () => {

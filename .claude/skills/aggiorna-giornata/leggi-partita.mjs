@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-// Legge la pagina di una partita della lega salvata a mano (Ctrl+S, «Pagina
-// web completa») e ne ricava squadre, punteggi e formazioni con voti ed
+// Legge la pagina HTML di una partita della lega e ne ricava squadre, punteggi e formazioni con voti ed
 // eventi, nel formato di data/<stagione>.json.
 //
 // Uso:

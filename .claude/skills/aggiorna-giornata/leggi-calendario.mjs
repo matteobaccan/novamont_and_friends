@@ -9,8 +9,7 @@
 //   node leggi-calendario.mjs [--lega <calendario.html>] [--serie-a <serie-a.txt>]
 //                             [--stagione 2026-2027] [--dry-run]
 //
-// --lega è la pagina "calendario" della lega salvata a mano (Ctrl+S, «Pagina
-// web completa»). La pagina carica le giornate mentre si scorre: quelle che
+// --lega è la pagina HTML "calendario" della lega. La pagina carica le giornate mentre si scorre: quelle che
 // non contiene si prendono dal calendario già scritto o dalle giornate già
 // giocate, che hanno gli accoppiamenti. La giornata di Serie A di quelle si
 // ricava dallo scarto fisso fra le due numerazioni, se è lo stesso per tutte
@@ -140,7 +139,7 @@ function completaCalendarioLega(lette, data) {
 
     const buchi = [];
     for (let n = 1; n <= calendario[calendario.length - 1].round; n++) if (!perGiornata.has(n)) buchi.push(n);
-    if (buchi.length) fail(`mancano le giornate ${buchi.join(', ')}: la pagina salvata non le contiene`);
+    if (buchi.length) fail(`mancano le giornate ${buchi.join(', ')}: la pagina HTML non le contiene`);
 
     return { calendario, recuperate };
 }

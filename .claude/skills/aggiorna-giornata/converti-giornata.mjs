@@ -7,7 +7,7 @@
 // Non va in rete: l'accesso automatico ai servizi di Leghe Fantacalcio non è
 // consentito, quindi niente API e niente token. Il file passato a --grezzo è
 // un array di partite, ognuna con casa, fuori, res e i due lati (tot, starts,
-// bench), ricavato dalle pagine della lega salvate a mano. Qui resta la
+// bench), ricavato dalle pagine HTML della lega. Qui resta la
 // decodifica degli eventi, che vale comunque da qualunque parte arrivino i dati.
 //
 // L'input descrive la giornata. Gli accoppiamenti ("partite") si possono
