@@ -254,7 +254,9 @@ export function analizzaPartite(html, turno) {
         const numero = /<div class="matchweek">\s*(\d+)\s*<\/div>/.exec(pill);
         if (!numero || Number(numero[1]) !== turno) continue;
 
-        const squadre = [...pill.matchAll(/<meta itemprop="name" content="([^"]+)" \/>/g)].map(x => decodificaEntita(x[1]));
+        // La barra finale c'è nell'HTML del sito ma non in quello salvato dal
+        // browser («Pagina web completa» riscrive <meta ... /> come <meta ...>)
+        const squadre = [...pill.matchAll(/<meta itemprop="name" content="([^"]+)"\s*\/?>/g)].map(x => decodificaEntita(x[1]));
         if (squadre.length < 2) continue;
 
         const [casa, fuori] = squadre;

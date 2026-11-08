@@ -23,10 +23,10 @@
     <meta name="apple-mobile-web-app-title" content="Novamont FC">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <link rel="stylesheet" href="styles.css?v=10.9">
+    <link rel="stylesheet" href="styles.css?v=11.2">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
-    <script src="config.js?v=10.9"></script>
+    <script src="config.js?v=11.2"></script>
 </head>
 <body>
     <!-- Sipario d'apertura. Sta nell'HTML e non lo crea il JavaScript, perche'
@@ -221,9 +221,6 @@
             <section id="classifica" class="tab-content active">
                 <div class="section-header">
                     <h2><i class="fas fa-trophy"></i> Classifica Generale</h2>
-                    <button type="button" class="csv-btn" id="csv-classifica" title="Scarica la classifica in CSV, pronto per un foglio di calcolo">
-                        <i class="fas fa-download"></i> CSV
-                    </button>
                     <div class="last-update">
                         Ultimo aggiornamento: <span id="last-update">Caricamento...</span>
                     </div>
@@ -249,9 +246,6 @@
                 <div class="section-header">
                     <h2><i class="fas fa-star"></i> Classifica Ideale</h2>
                     <p class="section-description">Classifica basata sulle migliori formazioni possibili</p>
-                    <button type="button" class="csv-btn" id="csv-ideale" title="Scarica la classifica ideale in CSV, pronto per un foglio di calcolo">
-                        <i class="fas fa-download"></i> CSV
-                    </button>
                     <div class="last-update">
                         Ultimo aggiornamento: <span id="last-update-ideal">Caricamento...</span>
                     </div>
@@ -272,9 +266,6 @@
                         si distribuiscono come in Formula 1 — 25 al primo, poi 18, 15, 12,
                         10, 8, 6, 4. L'avversario che ti è capitato non c'entra.
                     </p>
-                    <button type="button" class="csv-btn" id="csv-merito" title="Scarica la classifica di merito in CSV, pronto per un foglio di calcolo">
-                        <i class="fas fa-download"></i> CSV
-                    </button>
                 </div>
                 <div class="standings-container">
                     <div class="standings-table" id="merit-standings-table">
@@ -287,9 +278,7 @@
             <section id="giornate" class="tab-content">
                 <div class="section-header">
                     <h2><i class="fas fa-calendar-alt"></i> Risultati per Giornata</h2>
-                    <button type="button" class="csv-btn" id="csv-giornate" title="Scarica tutti i risultati in CSV, pronto per un foglio di calcolo">
-                        <i class="fas fa-download"></i> CSV
-                    </button>
+                    <a id="link-calendario-lega" class="link-calendario" target="_blank" rel="noopener noreferrer" hidden><i class="fas fa-calendar-week"></i> Calendario della lega</a>
                     <div class="giornata-selector">
                         <label for="giornata-select">Seleziona Giornata:</label>
                         <select id="giornata-select">
@@ -299,15 +288,14 @@
                 </div>
 
                 <!-- Pagine di fantacalcio.it da salvare a mano per aggiornare il sito -->
-                <div id="pagine-da-salvare"></div>
 
                 <!-- Commento della Giornata -->
                 <div class="match-commentary" id="match-commentary" style="display: none;">
                     <div class="commentary-header">
                         <h3><i class="fas fa-microphone"></i> Il Commento della Giornata</h3>
                         <div class="commentators">
-                            <span class="commentator primary">Fabio Caressa</span>
-                            <span class="commentator secondary">Beppe Bergomi</span>
+                            <span class="commentator primary">Fabio Corelli</span>
+                            <span class="commentator secondary">Beppe Bergamotti</span>
                         </div>
                     </div>
                     <div class="commentary-content" id="commentary-content">
@@ -334,9 +322,6 @@
                         schierati: l'unica eccezione sono gli Incompresi, che raccolgono quello
                         che hanno combinato restando in panchina
                     </p>
-                    <button type="button" class="csv-btn" id="csv-giocatori" title="Scarica le statistiche dei giocatori in CSV, pronto per un foglio di calcolo">
-                        <i class="fas fa-download"></i> CSV
-                    </button>
                 </div>
                 <div id="achievement">
                     <!-- Albo d'oro, generato dinamicamente -->
@@ -384,7 +369,7 @@
         </div>
     </footer>
 
-    <script src="rigiocala.js?v=10.9"></script>
-    <script src="script.js?v=10.9"></script>
+    <script src="rigiocala.js?v=11.2"></script>
+    <script src="script.js?v=11.2"></script>
 </body>
 </html>

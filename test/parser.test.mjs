@@ -19,8 +19,12 @@ import {
     analizza,
     analizzaRigoristi,
     analizzaInfortunati,
-    analizzaSqualificati
+    analizzaSqualificati,
+    analizzaPartite,
+    numeroProssimoTurno
 } from '../.claude/skills/aggiorna-giornata/leggi-probabili.mjs';
+import { leggiCalendarioLega, leggiCalendarioSerieA } from '../.claude/skills/aggiorna-giornata/leggi-calendario.mjs';
+import { leggiPartita, confrontaPartita } from '../.claude/skills/aggiorna-giornata/leggi-partita.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const fixture = (nome) => fs.readFileSync(path.join(QUI, 'fixture', nome), 'utf8');
@@ -198,5 +202,110 @@ test('la nota dell\'infortunio esce senza tag e con gli accenti giusti', () => {
         assert.ok(!/[<>]/.test(i.nota), `la nota di ${i.nome} contiene ancora del markup`);
         assert.ok(!/&[a-zA-Z#]+;/.test(i.nota), `la nota di ${i.nome} contiene ancora un'entità`);
         assert.equal(i.nota, i.nota.trim(), `la nota di ${i.nome} ha spazi ai bordi`);
+    }
+});
+
+// ------------------------------------------------------------------
+// Calendario
+// ------------------------------------------------------------------
+
+test('il calendario della lega: accoppiamenti e giornata di Serie A, giocata o no', () => {
+    const giornate = leggiCalendarioLega(fixture('calendario-lega.html'));
+    assert.deepEqual(giornate.map(g => [g.round, g.roundSerieA]), [[6, 10], [7, 11]]);
+
+    // La 6 è giocata: il risultato in mezzo non deve finire nei nomi
+    assert.deepEqual(giornate[0].matches[0], { homeTeam: 'Real Pattagghiu', awayTeam: 'PARTIZAN TIRANA' });
+    assert.deepEqual(giornate[1].matches.map(m => `${m.homeTeam}-${m.awayTeam}`), [
+        'Team24-Ultimo', 'Cusiana-Real Pattagghiu', 'PARTIZAN TIRANA-SM Frattese', 'Shakhtar Donuts-Real Ichnusa'
+    ]);
+});
+
+test('il calendario di Serie A trascritto: data in ISO, partite casa-fuori', () => {
+    const [g] = leggiCalendarioSerieA('# commento\n11 08/11/2026 Cagliari-Frosinone Venezia-Udinese\n');
+    assert.equal(g.giornata, 11);
+    assert.equal(g.data, '2026-11-08');
+    assert.deepEqual(g.partite, [{ casa: 'Cagliari', fuori: 'Frosinone' }, { casa: 'Venezia', fuori: 'Udinese' }]);
+});
+
+// ------------------------------------------------------------------
+// Pagina di una partita della lega
+// ------------------------------------------------------------------
+
+const partita = () => leggiPartita(fixture('partita-lega.html'));
+const pubblicata = () => {
+    const dati = JSON.parse(fs.readFileSync(path.join(QUI, '..', 'data', '2026-2027.json'), 'utf8'));
+    return dati.rounds.find(r => r.round === 6).matches[0];
+};
+
+test('la partita: squadre, moduli, gol e punteggi dall\'intestazione', () => {
+    const p = partita();
+    assert.deepEqual(
+        [p.casa, p.fuori, p.moduloCasa, p.moduloFuori, p.golCasa, p.golFuori, p.puntiCasa, p.puntiFuori],
+        ['Real Pattagghiu', 'PARTIZAN TIRANA', '4-4-2', '3-4-3', 3, 0, 78.5, 62.5]
+    );
+    assert.deepEqual(p.anomalie, []);
+});
+
+test('la partita: titolari e panchina divisi per squadra, con lo stato di ognuno', () => {
+    const { lineups, giocatori } = partita();
+    assert.equal(lineups.home.length, 22);
+    assert.equal(lineups.away.length, 20);
+
+    const stato = (lato, nome) => lineups[lato].find(g => giocatori[g.p].nome === nome).t;
+    assert.equal(stato('home', 'Mandas'), 's');
+    assert.equal(stato('home', 'Baldanzi'), 'out', 'titolare attenuato: uscito');
+    assert.equal(stato('home', 'Adopo'), 'in', 'panchinaro non attenuato: entrato');
+    assert.equal(stato('home', 'Fabbian'), 'b');
+    assert.equal(stato('away', 'Martinez Jo.'), 'in');
+});
+
+test('la partita: voti, fantavoti, senza voto ed eventi contati per icona', () => {
+    const { lineups, giocatori } = partita();
+    const di = (nome) => [...lineups.home, ...lineups.away].find(g => giocatori[g.p].nome === nome);
+
+    assert.deepEqual(di('Da Cunha'), { p: 5559, t: 's', v: 7, b: 10, e: { gol: 1 } }, 'rigore segnato è un gol, il migliore in campo non pesa');
+    assert.deepEqual(di('Soulè').e, { assist: 2 }, 'assist e assist soft si sommano');
+    assert.deepEqual(di('Martinez Jo.').e, { golSubiti: 3 }, 'tre icone, tre gol subiti');
+    assert.deepEqual(di('Dimarco'), { p: 254, t: 'out', sv: true });
+    assert.deepEqual(di('Provedel'), { p: 2814, t: 'out' }, 'non ha giocato: niente voto e niente sv');
+});
+
+test('la partita letta dalla pagina coincide con quella pubblicata', () => {
+    assert.deepEqual(confrontaPartita(partita(), pubblicata()), []);
+});
+
+test('il confronto trova le differenze', () => {
+    const m = pubblicata();
+    m.homeScore = 79;
+    m.lineups.home[1].v = 6.5;
+    delete m.lineups.away[1].sv;
+    const diff = confrontaPartita(partita(), m);
+    assert.equal(diff.length, 3);
+    assert.match(diff.join('\n'), /punteggio casa: pagina 78.5, dati 79/);
+    assert.match(diff.join('\n'), /Miranda J\.: v pagina 7, dati 6.5/);
+    assert.match(diff.join('\n'), /Dimarco: senza voto/);
+});
+
+test('un evento mai visto ferma la lettura invece di essere indovinato', () => {
+    const html = fixture('partita-lega.html').replace('data-icon-key="yellowCards"', 'data-icon-key="redCards"');
+    const { anomalie } = leggiPartita(html);
+    assert.ok(anomalie.some(a => /evento sconosciuto "redCards"/.test(a)), anomalie.join('\n'));
+});
+
+// ------------------------------------------------------------------
+// Partite del turno nelle probabili
+// ------------------------------------------------------------------
+
+test('le partite del turno si leggono anche dalla pagina salvata dal browser', () => {
+    const originale = fixture('probabili.html');
+    // «Pagina web completa» riscrive <meta ... /> come <meta ...>: prima di
+    // novembre 2026 il lettore non trovava più nessuna partita
+    const salvata = originale.replace(/(<meta itemprop="name" content="[^"]*")\s*\/>/g, '$1>');
+    assert.notEqual(salvata, originale);
+
+    for (const html of [originale, salvata]) {
+        const turno = numeroProssimoTurno(html);
+        assert.equal(turno, 6);
+        assert.deepEqual(analizzaPartite(html, turno).map(p => `${p.casa}-${p.fuori}`), ['Inter-Parma']);
     }
 });

@@ -210,15 +210,15 @@ test('il punteggio col sito è quello vero più lo scarto fra consigliata e schi
     assert.equal(`${s.sitoCasa.golCasa}-${s.sitoCasa.golFuori}`, '3-2');
 });
 
-test('Caressa racconta il risultato che cambia, Bergomi fa i conti dal lato del fantallenatore', () => {
+test('Corelli racconta il risultato che cambia, Bergamotti fa i conti dal lato del fantallenatore', () => {
     const mappa = `new Map(${JSON.stringify([...perSquadra({ schierata: 68, consigliata: 75 }, { schierata: 70, consigliata: 67 })])})`;
     const c = valuta(app, `commentoSito(${JSON.stringify(partita)}, scenariSito(${JSON.stringify(partita)}, ${mappa}))`);
     // A passa da sconfitta a vittoria, B solo da vittoria a pari: vince il cambio più grosso
-    assert.match(c.caressa, /Con la formazione del sito A l'avrebbe vinta 3-2/);
+    assert.match(c.corelli, /Con la formazione del sito A l'avrebbe vinta 3-2/);
     // A ha fatto 7 punti meno del sito, B 3 punti più del sito
-    assert.match(c.bergomi, /A −7,0 sul sito/);
-    assert.match(c.bergomi, /B \+3,0 sul sito/);
-    assert.match(c.bergomi, /Uno a uno/);
+    assert.match(c.bergamotti, /A −7,0 sul sito/);
+    assert.match(c.bergamotti, /B \+3,0 sul sito/);
+    assert.match(c.bergamotti, /Uno a uno/);
 });
 
 test('senza la valutazione di una delle due squadre non si inventa niente', () => {

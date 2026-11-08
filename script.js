@@ -476,7 +476,6 @@ function renderAllSections() {
     displayHeatmap();
     displayScontriDiretti();
     displayAchievement();
-    collegaPulsantiCsv();
     displayStatistics();
     setupRoundSelector();
     updateLastUpdate();
@@ -1256,138 +1255,6 @@ function displayAchievement() {
             <div class="ach-griglia">${tessere}</div>
         </div>
     `;
-}
-
-// ============================================================
-// Export CSV
-// ============================================================
-
-// Chi vuole farsi i suoi conti oggi ricopia a mano dalla pagina. I numeri
-// sono gia' tutti qui: basta darglieli.
-//
-// Tre dettagli non sono opzionali, se il file deve aprirsi in Excel italiano:
-// il separatore e' il punto e virgola (con la virgola Excel mette tutta la riga
-// in una cella), in testa ci va il BOM (senza, legge il file come ANSI e gli
-// accenti dei nomi squadra diventano caratteri strani) e i decimali vogliono la
-// virgola (col punto li tratta come testo e non li somma).
-
-function cellaCsv(valore) {
-    if (valore === null || valore === undefined) return '';
-    let testo = String(valore).trim();
-
-    // I decimali in formato italiano, coerenti col separatore punto e virgola
-    if (/^[+-]?\d+\.\d+$/.test(testo)) testo = testo.replace('.', ',');
-
-    // Le virgolette si raddoppiano, e si racchiude solo quando serve. I nomi
-    // squadra oggi sono innocui, ma arrivano da un JSON modificabile a mano:
-    // l'escape va fatto comunque, non verificato caso per caso.
-    if (/[;"\n\r]/.test(testo)) return '"' + testo.replace(/"/g, '""') + '"';
-    return testo;
-}
-
-function scaricaCsv(nomeFile, intestazioni, righe) {
-    const contenuto = [intestazioni, ...righe]
-        .map(r => r.map(cellaCsv).join(';'))
-        .join('\r\n');
-
-    const blob = new Blob(['﻿' + contenuto], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = nomeFile;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
-    // Senza questo il blob resta in memoria per tutta la sessione
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
-function nomeFileCsv(tabella) {
-    const stagione = currentSeasonId || 'stagione';
-    return `novamont-${tabella}-${stagione}.csv`;
-}
-
-// Le tre classifiche si leggono dalla tabella disegnata invece che dai dati:
-// cosi' il CSV esce con le stesse colonne e nello stesso ordine che si ha
-// sotto gli occhi. Esportare un ordine diverso da quello a schermo e' un
-// piccolo tradimento che costa fiducia.
-//
-// Le colonne nascoste su mobile restano nel DOM e finiscono nel file: chi
-// scarica vuole i dati, non la vista ridotta del telefono.
-function csvDaTabella(idTabella, nomeFile) {
-    const tabella = document.getElementById(idTabella);
-    if (!tabella) return false;
-
-    const pulisci = (el) => el.textContent.replace(/[▲▼]/g, '').replace(/\s+/g, ' ').trim();
-
-    const intestazioni = [...tabella.querySelectorAll('thead th')].map(pulisci);
-    const righe = [...tabella.querySelectorAll('tbody tr.team-row')]
-        .map(tr => [...tr.querySelectorAll('td')].map(pulisci));
-
-    scaricaCsv(nomeFile, intestazioni, righe);
-    return true;
-}
-
-function csvGiocatori() {
-    const stats = calcolaStatisticheGiocatori();
-    const intestazioni = [
-        'Squadra', 'Giocatore', 'Ruolo', 'Serie A', 'Presenze', 'Panchine',
-        'Giornate con voto', 'Media voto', 'Media fantavoto', 'Media fantavoto Serie A',
-        'Gol', 'Assist', 'Ammonizioni', 'Espulsioni', 'Malus', 'Punti in panchina', 'Incompreso'
-    ];
-
-    const numero2 = (v) => (v === null || v === undefined ? '' : String(Math.round(v * 100) / 100));
-
-    const righe = Object.values(stats)
-        .map(s => {
-            const info = anagraficaGiocatore(s.pid);
-            return [
-                s.team, info.name, info.role, info.serieA || '',
-                s.presenze, s.panchine, s.votiSerieA,
-                numero2(s.mediaVoto), numero2(s.mediaFanta), numero2(s.mediaFantaSerieA),
-                s.gol, s.assist, s.amm, s.esp, s.malus, s.puntiInPanchina, s.incompreso
-            ];
-        })
-        .sort((a, b) => String(a[0]).localeCompare(String(b[0])) || String(a[1]).localeCompare(String(b[1])));
-
-    scaricaCsv(nomeFileCsv('giocatori'), intestazioni, righe);
-}
-
-function csvGiornate() {
-    const intestazioni = ['Giornata', 'Casa', 'Trasferta', 'Punti casa', 'Punti trasferta', 'Gol casa', 'Gol trasferta'];
-    const righe = [];
-
-    (fantacalcioData.rounds || []).forEach(round => {
-        (round.matches || []).forEach(m => {
-            if (typeof m.homeScore !== 'number' || typeof m.awayScore !== 'number') return;
-            const { homeGoals, awayGoals } = calculateMatchGoals(m.homeScore, m.awayScore);
-            righe.push([round.round, m.homeTeam, m.awayTeam, m.homeScore, m.awayScore, homeGoals, awayGoals]);
-        });
-    });
-
-    scaricaCsv(nomeFileCsv('giornate'), intestazioni, righe);
-}
-
-// Un pulsante di servizio nell'intestazione di sezione: dice cosa succede
-// ("Scarica CSV", non "Esporta") e non si prende un blocco tutto suo
-function collegaPulsantiCsv() {
-    const azioni = {
-        'csv-classifica': () => csvDaTabella('main-standings-table', nomeFileCsv('classifica')),
-        'csv-ideale': () => csvDaTabella('ideal-table', nomeFileCsv('classifica-ideale')),
-        'csv-merito': () => csvDaTabella('merit-table', nomeFileCsv('merito')),
-        'csv-giocatori': csvGiocatori,
-        'csv-giornate': csvGiornate
-    };
-
-    for (const [id, azione] of Object.entries(azioni)) {
-        const btn = document.getElementById(id);
-        if (btn && !btn.dataset.collegato) {
-            btn.dataset.collegato = '1';
-            btn.addEventListener('click', azione);
-        }
-    }
 }
 
 // ============================================================
@@ -2882,6 +2749,68 @@ function displayIdealVsRealComparison() {
 }
 
 // Setup del selettore delle giornate
+// ============================================================
+// Calendario
+// ============================================================
+
+// Il calendario è precaricato in data/<stagione>.json da leggi-calendario.mjs:
+// "calendar" per la lega (accoppiamenti e giornata di Serie A di ogni
+// giornata), "calendarioSerieA" per le 38 giornate di Serie A. Le stagioni
+// archiviate non ce l'hanno, e tutto quello che segue si spegne da sé.
+
+function giornataInCalendario(numero) {
+    const calendario = (fantacalcioData && fantacalcioData.calendar) || [];
+    return calendario.find(g => g.round === numero) || null;
+}
+
+function giornataSerieA(numero) {
+    const calendario = (fantacalcioData && fantacalcioData.calendarioSerieA) || [];
+    return calendario.find(g => g.giornata === numero) || null;
+}
+
+function giornateDaGiocare() {
+    const giocate = new Set(((fantacalcioData && fantacalcioData.rounds) || []).map(r => r.round));
+    return ((fantacalcioData && fantacalcioData.calendar) || []).filter(g => !giocate.has(g.round));
+}
+
+// "2026-11-08" -> "domenica 8 novembre 2026". La data è quella del calendario
+// ufficiale: il turno poi si spalma fra venerdì e lunedì.
+function dataEstesa(iso) {
+    const [a, m, g] = String(iso).split('-').map(Number);
+    if (!a || !m || !g) return '';
+    return new Date(a, m - 1, g).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function htmlGiornataDaGiocare(giornata) {
+    const serieA = giornata.roundSerieA ? giornataSerieA(giornata.roundSerieA) : null;
+    const quando = giornata.roundSerieA
+        ? `${giornata.roundSerieA}ª giornata di Serie A${serieA && serieA.data ? `, ${dataEstesa(serieA.data)}` : ''}`
+        : '';
+
+    const partite = giornata.matches.map((m, i) => `
+            <div class="match-card match-da-giocare" style="animation-delay: ${i * 0.1}s">
+                ${linkPartitaLega(giornata.round, i)}
+                <div class="match-header">Match ${i + 1}</div>
+                <div class="match-teams">
+                    <div class="team">
+                        ${logoSquadra(m.homeTeam)}
+                        <div class="team-name-match">${m.homeTeam}</div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team">
+                        ${logoSquadra(m.awayTeam)}
+                        <div class="team-name-match">${m.awayTeam}</div>
+                    </div>
+                </div>
+                <div class="match-result">Da giocare</div>
+            </div>`).join('');
+
+    // La riga del quando occupa tutta la griglia dei risultati, le partite
+    // ne prendono le colonne come quelle giocate
+    return `
+        <p class="giornata-da-giocare-quando"><i class="fas fa-calendar-day"></i> Giornata ${giornata.round}${quando ? ` · ${quando}` : ''}</p>${partite}`;
+}
+
 function setupRoundSelector() {
     const roundSelect = document.getElementById('giornata-select');
     const rounds = (fantacalcioData && fantacalcioData.rounds) || [];
@@ -2889,15 +2818,22 @@ function setupRoundSelector() {
     // Svuota il selettore: la funzione viene richiamata ad ogni cambio stagione
     roundSelect.innerHTML = '';
 
-    // Popola il selettore delle giornate
+    // Popola il selettore delle giornate: quelle giocate e, dal calendario,
+    // quelle ancora da giocare
     rounds.forEach(round => {
         const option = document.createElement('option');
         option.value = round.round;
         option.textContent = `Giornata ${round.round}`;
         roundSelect.appendChild(option);
     });
+    giornateDaGiocare().forEach(g => {
+        const option = document.createElement('option');
+        option.value = g.round;
+        option.textContent = `Giornata ${g.round} · da giocare`;
+        roundSelect.appendChild(option);
+    });
 
-    roundSelect.disabled = rounds.length === 0;
+    roundSelect.disabled = roundSelect.options.length === 0;
 
     // Imposta la giornata più recente come default
     if (rounds.length > 0) {
@@ -2916,85 +2852,50 @@ function setupRoundSelector() {
     }
 }
 
-// Pagine da salvare a mano (Ctrl+S) per aggiornare il sito. I dati non si
-// scaricano più in automatico: fantacalcio.it consente solo l'accesso manuale
-// dal sito ufficiale. Si apre la pagina da qui, la si salva come "Pagina web
-// completa" e il file lo legge uno script in locale, senza toccare la rete.
+// Link alle pagine da salvare a mano (Ctrl+S) per aggiornare il sito. I dati
+// non si scaricano in automatico: fantacalcio.it consente solo l'accesso
+// manuale dal sito ufficiale. Si apre la pagina da qui, la si salva come
+// "Pagina web completa" e il file lo legge uno script in locale, senza toccare
+// la rete. Ogni link sta dove serve: la partita nell'angolo del suo box (anche
+// per le giornate da giocare, quindi la prossima da inserire è a un clic dal
+// selettore), il calendario accanto al titolo della sezione Giornate, le
+// probabili nella sezione Formazione.
 const URL_PROBABILI_FORMAZIONI = 'https://www.fantacalcio.it/probabili-formazioni-serie-a';
 
 // L'indirizzo della singola partita: {match} è la posizione nella giornata,
-// contata da matchIndexBase (1 se non è indicato)
+// contata da matchIndexBase. La lega conta da 0: ?i=0 è la prima partita
+// della giornata, ?i=1 la seconda
 function urlPartitaLega(source, giornata, indice) {
     if (!source || !source.roundUrl) return null;
-    const base = Number.isInteger(source.matchIndexBase) ? source.matchIndexBase : 1;
+    const base = Number.isInteger(source.matchIndexBase) ? source.matchIndexBase : 0;
     return source.roundUrl
         .replace('{round}', String(giornata))
         .replace('{match}', String(indice + base));
 }
 
-// Le pagine da salvare, come dati: la giornata a video con le sue partite, la
-// prossima ancora da inserire (di cui non si sanno gli accoppiamenti, quindi
-// solo i numeri) e le probabili. null se la stagione non ha una sorgente.
-function pagineDaSalvare(source, round, prossimaGiornata, partitePerGiornata) {
-    if (!source || !source.roundUrl) return null;
-
-    const partite = (giornata, matches) => matches.map((m, i) => ({
-        etichetta: m ? `${m.homeTeam} - ${m.awayTeam}` : `Partita ${i + 1}`,
-        url: urlPartitaLega(source, giornata, i)
-    }));
-
-    const vuote = Array.from({ length: Math.max(0, partitePerGiornata || 0) }, () => null);
-
-    return {
-        calendario: source.calendarUrl || null,
-        giornata: round ? { numero: round.round, partite: partite(round.round, round.matches || []) } : null,
-        prossima: prossimaGiornata ? { numero: prossimaGiornata, partite: partite(prossimaGiornata, vuote) } : null,
-        probabili: URL_PROBABILI_FORMAZIONI
-    };
-}
-
-function htmlPagineDaSalvare(pagine) {
-    if (!pagine) return '';
-    const link = (url, testo) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${testo}</a>`;
-    const elenco = (g) => `<ol>${g.partite.map(p => `<li>${link(p.url, p.etichetta)}</li>`).join('')}</ol>`;
-
-    const blocchi = [];
-    if (pagine.calendario) {
-        blocchi.push(`<div class="pagine-blocco"><h4>Calendario della lega</h4><p>${link(pagine.calendario, 'Calendario')}: accoppiamenti e giornata di Serie A</p></div>`);
-    }
-    if (pagine.giornata) {
-        blocchi.push(`<div class="pagine-blocco"><h4>Formazioni della giornata ${pagine.giornata.numero}</h4>${elenco(pagine.giornata)}</div>`);
-    }
-    if (pagine.prossima) {
-        blocchi.push(`<div class="pagine-blocco"><h4>Prossima da inserire: giornata ${pagine.prossima.numero}</h4>${elenco(pagine.prossima)}</div>`);
-    }
-    blocchi.push(`<div class="pagine-blocco"><h4>Serie A</h4><p>${link(pagine.probabili, 'Probabili formazioni')}: per il consiglio di formazione</p></div>`);
-
-    return `
-        <details class="pagine-da-salvare">
-            <summary><i class="fas fa-floppy-disk"></i> Pagine da salvare per l'aggiornamento</summary>
-            <p class="pagine-nota">Apri la pagina, salvala con <kbd>Ctrl</kbd>+<kbd>S</kbd> come «Pagina web completa» e passa il file allo script di aggiornamento.</p>
-            <div class="pagine-griglia">${blocchi.join('')}</div>
-        </details>`;
-}
-
-function mostraPagineDaSalvare(round) {
-    const contenitore = document.getElementById('pagine-da-salvare');
-    if (!contenitore) return;
-
+// Il link alla pagina di una partita sulla lega: occupa l'angolo alto a
+// destra del box, abbastanza grande da prenderlo al primo colpo anche dal
+// telefono. Vuoto per le stagioni archiviate, che non hanno una sorgente.
+function linkPartitaLega(giornata, indice) {
     const season = getSeasonById(currentSeasonId);
-    const rounds = (fantacalcioData && fantacalcioData.rounds) || [];
-    const ultima = rounds.reduce((max, r) => Math.max(max, r.round), 0);
-    const squadre = (fantacalcioData && fantacalcioData.teams) ? fantacalcioData.teams.length : 0;
+    const url = urlPartitaLega(season && season.source, giornata, indice);
+    if (!url) return '';
+    return `<a class="match-link" href="${url}" target="_blank" rel="noopener noreferrer" title="Apri la partita sulla lega. Per aggiornare il sito salvala con Ctrl+S come «Pagina web completa»" aria-label="Apri la partita ${indice + 1} della giornata ${giornata} sulla lega"><i class="fas fa-up-right-from-square"></i></a>`;
+}
 
-    contenitore.innerHTML = htmlPagineDaSalvare(
-        pagineDaSalvare(season && season.source, round || null, ultima + 1, Math.floor(squadre / 2))
-    );
+// Il link al calendario della lega, accanto al titolo della sezione Giornate
+function mostraLinkCalendario() {
+    const a = document.getElementById('link-calendario-lega');
+    if (!a) return;
+    const season = getSeasonById(currentSeasonId);
+    const url = season && season.source && season.source.calendarUrl;
+    if (url) a.href = url;
+    a.hidden = !url;
 }
 
 // Stato mostrato quando una stagione è nel calendario ma non ha ancora giornate
 function displayNoRoundsMessage() {
-    mostraPagineDaSalvare(null);
+    mostraLinkCalendario();
 
     const commentary = document.getElementById('match-commentary');
     if (commentary) commentary.style.display = 'none';
@@ -3041,10 +2942,15 @@ function displayRoundResults(roundNumber) {
     
     // Mostra il commento per la giornata selezionata
     displayMatchCommentary(roundNumber);
-    mostraPagineDaSalvare(round);
+    mostraLinkCalendario();
 
     if (!round) {
-        roundResults.innerHTML = '<p>Nessun risultato disponibile per questa giornata.</p>';
+        const futura = giornataInCalendario(roundNumber);
+        const coachRanking = document.getElementById('coach-ranking-container');
+        if (coachRanking) coachRanking.innerHTML = '';
+        roundResults.innerHTML = futura
+            ? htmlGiornataDaGiocare(futura)
+            : '<p>Nessun risultato disponibile per questa giornata.</p>';
         return;
     }
 
@@ -3212,34 +3118,34 @@ function displayRoundResults(roundNumber) {
             const awayDifferenceForComment = awayIdealScoreWithBonus - match.awayScore;
 
             // Build subtle auto-insight sentences without mentioning the threshold
-            let autoInsightCaressa = '';
-            let autoInsightBergomi = '';
+            let autoInsightCorelli = '';
+            let autoInsightBergamotti = '';
 
             // If both underperformed
             if (homeDifferenceForComment > 0 && awayDifferenceForComment > 0) {
                 const maxDiff = Math.max(Math.abs(homeDifferenceForComment), Math.abs(awayDifferenceForComment));
                 if (maxDiff > threshold) {
-                    autoInsightCaressa = ' Clamoroso flop! Entrambe le squadre HANNO DELUSO: c\'era molto di più in campo e lo hanno buttato via!';
-                    autoInsightBergomi = ' Un vero spreco di qualità: tattiche confuse e scelte sbagliate hanno tradito il potenziale mostrato sulla carta.';
+                    autoInsightCorelli = ' Clamoroso flop! Entrambe le squadre HANNO DELUSO: c\'era molto di più in campo e lo hanno buttato via!';
+                    autoInsightBergamotti = ' Un vero spreco di qualità: tattiche confuse e scelte sbagliate hanno tradito il potenziale mostrato sulla carta.';
                 } else {
-                    autoInsightCaressa = ' Partita al cardiopalma: decisa dai dettagli, con errori e scelte che hanno fatto esplodere la tensione fino alla fine!';
-                    autoInsightBergomi = ' Match tiratissimo, risolto dai particolari — qualche scelta ha inciso in modo decisivo sul risultato.';
+                    autoInsightCorelli = ' Partita al cardiopalma: decisa dai dettagli, con errori e scelte che hanno fatto esplodere la tensione fino alla fine!';
+                    autoInsightBergamotti = ' Match tiratissimo, risolto dai particolari — qualche scelta ha inciso in modo decisivo sul risultato.';
                 }
             } else if (homeDifferenceForComment > awayDifferenceForComment) {
                 if (homeDifferenceForComment > threshold) {
-                    autoInsightCaressa = ` Scandaloso! ${match.homeTeam} ha sprecato punti pesanti — una prova sotto le aspettative e dai contorni drammatici!`;
-                    autoInsightBergomi = ` Grave passo falso: la gestione di ${match.homeTeam} è stata discutibile, con scelte che non si spiegano alla luce del potenziale.`;
+                    autoInsightCorelli = ` Scandaloso! ${match.homeTeam} ha sprecato punti pesanti — una prova sotto le aspettative e dai contorni drammatici!`;
+                    autoInsightBergamotti = ` Grave passo falso: la gestione di ${match.homeTeam} è stata discutibile, con scelte che non si spiegano alla luce del potenziale.`;
                 } else if (homeDifferenceForComment > 0) {
-                    autoInsightCaressa = ` ${match.homeTeam} ha lasciato qualche punto per strada: non catastrofico, ma certo c\'è rammarico in panchina.`;
-                    autoInsightBergomi = ` Qualche scelta infelice da parte di ${match.homeTeam}, sì, ma la partita è stata combattuta e tutto si è deciso per dettagli.`;
+                    autoInsightCorelli = ` ${match.homeTeam} ha lasciato qualche punto per strada: non catastrofico, ma certo c\'è rammarico in panchina.`;
+                    autoInsightBergamotti = ` Qualche scelta infelice da parte di ${match.homeTeam}, sì, ma la partita è stata combattuta e tutto si è deciso per dettagli.`;
                 }
             } else if (awayDifferenceForComment > homeDifferenceForComment) {
                 if (awayDifferenceForComment > threshold) {
-                    autoInsightCaressa = ` Incredibile: ${match.awayTeam} ha tradito le attese e ha buttato via punti pesanti — esplode il rammarico tra i tifosi!`;
-                    autoInsightBergomi = ` Un rovescio tecnico per ${match.awayTeam}: le scelte tattiche non hanno reso giustizia alla rosa disponibile.`;
+                    autoInsightCorelli = ` Incredibile: ${match.awayTeam} ha tradito le attese e ha buttato via punti pesanti — esplode il rammarico tra i tifosi!`;
+                    autoInsightBergamotti = ` Un rovescio tecnico per ${match.awayTeam}: le scelte tattiche non hanno reso giustizia alla rosa disponibile.`;
                 } else if (awayDifferenceForComment > 0) {
-                    autoInsightCaressa = ` ${match.awayTeam} ha perso qualche punto per strada: non è stata una débâcle, ma certo c\'è spazio per rimpianti.`;
-                    autoInsightBergomi = ` Poche scelte decisive da parte di ${match.awayTeam}; la partita si è decisa su dettagli più che su un netto dominio.`;
+                    autoInsightCorelli = ` ${match.awayTeam} ha perso qualche punto per strada: non è stata una débâcle, ma certo c\'è spazio per rimpianti.`;
+                    autoInsightBergamotti = ` Poche scelte decisive da parte di ${match.awayTeam}; la partita si è decisa su dettagli più che su un netto dominio.`;
                 }
             }
 
@@ -3249,10 +3155,10 @@ function displayRoundResults(roundNumber) {
                         <i class="fas fa-microphone"></i> Commento Match
                     </div>
                     <div class="commentary-dialogue-inline">
-                        <span class="speaker">Caressa:</span> "${match.commentary.caressa}${autoInsightCaressa}"
+                        <span class="speaker">Corelli:</span> "${match.commentary.corelli}${autoInsightCorelli}"
                     </div>
                     <div class="commentary-dialogue-inline">
-                        <span class="speaker bergomi">Bergomi:</span> "${match.commentary.bergomi}${autoInsightBergomi}"
+                        <span class="speaker bergamotti">Bergamotti:</span> "${match.commentary.bergamotti}${autoInsightBergamotti}"
                     </div>
                 </div>
             `;
@@ -3260,6 +3166,7 @@ function displayRoundResults(roundNumber) {
 
         html += `
             <div class="match-card" style="animation-delay: ${index * 0.1}s">
+                ${linkPartitaLega(round.round, index)}
                 <div class="match-header">Match ${index + 1}</div>
                 <div class="match-teams">
                     <div class="team">
@@ -3361,7 +3268,7 @@ function esitoPer(lato, s) {
 
 const risultatoGol = (s) => `${s.golCasa}-${s.golFuori}`;
 
-// Caressa racconta il cambio di risultato più clamoroso, Bergomi fa i conti
+// Corelli racconta il cambio di risultato più clamoroso, Bergamotti fa i conti
 function commentoSito(match, scenari) {
     const casi = [
         { squadra: match.homeTeam, lato: 'casa', alternativo: scenari.sitoCasa, r: scenari.casa },
@@ -3378,7 +3285,7 @@ function commentoSito(match, scenari) {
         .filter(c => c.reale !== c.col)
         .sort((a, b) => Math.abs(PESO_ESITO[b.col] - PESO_ESITO[b.reale]) - Math.abs(PESO_ESITO[a.col] - PESO_ESITO[a.reale]));
 
-    let caressa;
+    let corelli;
     if (cambiati.length > 0) {
         const c = cambiati[0];
         const ris = risultatoGol(c.alternativo);
@@ -3390,10 +3297,10 @@ function commentoSito(match, scenari) {
             'vittoria>pareggio': `${c.squadra} ha fatto meglio del sito: con il suo consiglio sarebbe finita ${ris} e la vittoria sarebbe sfumata!`,
             'pareggio>sconfitta': `${c.squadra} si tiene stretto il pari: col sito in panchina sarebbe finita ${ris}, sconfitta!`
         };
-        caressa = frasi[`${c.reale}>${c.col}`];
+        corelli = frasi[`${c.reale}>${c.col}`];
     } else {
         const entrambe = scenari.sitoEntrambe;
-        caressa = risultatoGol(entrambe) === risultatoGol(scenari.reale)
+        corelli = risultatoGol(entrambe) === risultatoGol(scenari.reale)
             ? `Anche con il sito in panchina da tutte e due le parti sarebbe finita ${risultatoGol(entrambe)}: verdetto confermato, l'algoritmo non sposta niente!`
             : `Da sola nessuna delle due formazioni del sito cambia il verdetto, ma con tutte e due sarebbe finita ${risultatoGol(entrambe)}!`;
     }
@@ -3407,13 +3314,13 @@ function commentoSito(match, scenari) {
         : (peggio === 2
             ? 'Il sito avrebbe fatto meglio a tutti e due, e questo deve far riflettere.'
             : (meglio === 1 && peggio === 1 ? 'Uno a uno, palla al centro.' : 'Scelte quasi identiche a quelle del sito.'));
-    const bergomi = `Numeri alla mano, Fabio: ${conto(casi[0])}, ${conto(casi[1])}. ${giudizio}`;
+    const bergamotti = `Numeri alla mano, Fabio: ${conto(casi[0])}, ${conto(casi[1])}. ${giudizio}`;
 
-    return { caressa, bergomi };
+    return { corelli, bergamotti };
 }
 
 function htmlSeGiocavaIlSito(match, scenari) {
-    const { caressa, bergomi } = commentoSito(match, scenari);
+    const { corelli, bergamotti } = commentoSito(match, scenari);
     const riga = (etichetta, s, evidenzia) => `
         <span class="confronto-etichetta">${etichetta}</span>
         <span class="confronto-valore${evidenzia === 'casa' ? ' sito' : ''}">${s.golCasa} <small>(${String(s.casa).replace('.', ',')})</small></span>
@@ -3437,10 +3344,10 @@ function htmlSeGiocavaIlSito(match, scenari) {
                 <span class="confronto-valore sito">${scenari.sitoEntrambe.golFuori} <small>(${String(scenari.sitoEntrambe.fuori).replace('.', ',')})</small></span>
             </div>
             <div class="commentary-dialogue-inline">
-                <span class="speaker">Caressa:</span> "${caressa}"
+                <span class="speaker">Corelli:</span> "${corelli}"
             </div>
             <div class="commentary-dialogue-inline">
-                <span class="speaker bergomi">Bergomi:</span> "${bergomi}"
+                <span class="speaker bergamotti">Bergamotti:</span> "${bergamotti}"
             </div>
         </div>
     `;
@@ -4106,12 +4013,22 @@ function testoFormaSquadra(forma) {
         + `${segno}${num(Math.abs(forma.scarto))} sul ruolo (${forma.voti} voti)`;
 }
 
+// Le partite del turno di Serie A a cui si riferiscono le probabili. Di solito
+// le portano le probabili stesse; se la pagina non le aveva si prendono dal
+// calendario di Serie A, che per casa e trasferta basta.
+function partiteDelTurno(turno) {
+    if (!turno) return [];
+    if (turno.partite && turno.partite.length) return turno.partite;
+    const dalCalendario = Number.isInteger(turno.numero) ? giornataSerieA(turno.numero) : null;
+    return dalCalendario ? dalCalendario.partite : [];
+}
+
 function calcolaContestoPartita(squadraSerieA) {
     const neutro = { fattore: 1, noto: false };
     if (!squadraSerieA || !probabiliFormazioni) return neutro;
 
     const turno = probabiliFormazioni.prossimoTurno;
-    const partita = turno && (turno.partite || []).find(p => p.casa === squadraSerieA || p.fuori === squadraSerieA);
+    const partita = partiteDelTurno(turno).find(p => p.casa === squadraSerieA || p.fuori === squadraSerieA);
 
     // Squadra che riposa, o dati di contesto non scaricati: nessun aggiustamento
     if (!partita) return neutro;
@@ -4943,21 +4860,26 @@ function displayFormazione() {
     // Da quando sono ferme le probabili formazioni. Senza questa riga un file
     // vecchio consiglia sulla giornata sbagliata senza dare alcun segnale.
     const fresche = freschezzaProbabili();
+
+    // Il link alla pagina da salvare sta qui, accanto a quando è stata salvata
+    // l'ultima volta: è il momento in cui si capisce se va aggiornata
+    const linkProbabili = `<a class="consiglio-link" href="${URL_PROBABILI_FORMAZIONI}" target="_blank" rel="noopener noreferrer"><i class="fas fa-up-right-from-square"></i> Probabili formazioni</a>`;
+
     const avvisoProbabili = fresche.stato === 'mancanti'
         ? `<div class="consiglio-avviso attenzione">
                <i class="fas fa-triangle-exclamation"></i>
                Probabili formazioni non disponibili: la colonna Gioca usa la continuità storica,
-               non le probabili di Serie A.
+               non le probabili di Serie A. ${linkProbabili}
            </div>`
         : (fresche.stato === 'vecchie'
             ? `<div class="consiglio-avviso attenzione">
                    <i class="fas fa-triangle-exclamation"></i>
                    Probabili formazioni del ${fresche.data}, ${fresche.quando}: potrebbero riferirsi
-                   alla giornata già giocata.
+                   alla giornata già giocata. ${linkProbabili}
                </div>`
             : `<div class="consiglio-avviso nota">
                    <i class="fas fa-clock-rotate-left"></i>
-                   Probabili formazioni del ${fresche.data}, aggiornate ${fresche.quando}.
+                   Probabili formazioni del ${fresche.data}, aggiornate ${fresche.quando}. ${linkProbabili}
                </div>`);
 
     const corpo = !f

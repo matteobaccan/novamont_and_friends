@@ -10,10 +10,23 @@
 // bench), ricavato dalle pagine della lega salvate a mano. Qui resta la
 // decodifica degli eventi, che vale comunque da qualunque parte arrivino i dati.
 //
-// L'input descrive la giornata e gli accoppiamenti, che si leggono dal
-// calendario della lega; vedi SKILL.md.
+// L'input descrive la giornata. Gli accoppiamenti ("partite") si possono
+// omettere: si prendono dal calendario precaricato in data/<stagione>.json da
+// leggi-calendario.mjs. Vedi SKILL.md.
 
 import fs from 'node:fs';
+import path from 'node:path';
+
+// Gli accoppiamenti della giornata dal calendario della stagione corrente (o
+// di input.season), come [casa, fuori]. null se il calendario non c'è.
+function partiteDalCalendario(input) {
+    const indice = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/seasons.json'), 'utf8'));
+    const stagione = indice.seasons.find(s => s.id === (input.season || indice.currentSeason));
+    if (!stagione) return null;
+    const data = JSON.parse(fs.readFileSync(path.join(process.cwd(), stagione.file), 'utf8'));
+    const giornata = (data.calendar || []).find(g => g.round === input.round);
+    return giornata ? giornata.matches.map(m => [m.homeTeam, m.awayTeam]) : null;
+}
 
 // Slot del campo "b" delle formazioni, col peso che hanno sul voto.
 // I pesi marcati "verificato" sono stati ricavati dai dati, isolando i
@@ -128,8 +141,13 @@ function main() {
     if (!inputPath || !grezzoPath) fail('uso: node converti-giornata.mjs <input.json> --grezzo <formazioni.json>');
 
     const input = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
-    for (const campo of ['round', 'date', 'partite']) {
+    for (const campo of ['round', 'date']) {
         if (input[campo] === undefined) fail(`l'input non ha il campo "${campo}"`);
+    }
+    if (input.partite === undefined) {
+        input.partite = partiteDalCalendario(input);
+        if (!input.partite) fail(`l'input non ha "partite" e la giornata ${input.round} non è nel calendario: lancia leggi-calendario.mjs`);
+        console.error(`Accoppiamenti della giornata ${input.round} dal calendario: ${input.partite.map(p => p.join('-')).join(', ')}`);
     }
 
     // Le partite si cercano per accoppiamento

@@ -55,21 +55,31 @@ non esserci e basta.
 
 L'undici migliore per la prossima giornata, provando tutti i moduli. Non è "AI": è un modello
 dichiarato, e la pagina spiega riga per riga come arriva al numero — resa, forma, contesto
-della partita, probabilità di giocare, rigori. I dati di Serie A si aggiornano da soli.
+della partita, probabilità di giocare, rigori. I dati di Serie A vengono dalle pagine di
+fantacalcio.it salvate a mano, non si scaricano da soli.
+
+Ogni consiglio viene salvato prima del fischio e, a giornata giocata, confrontato con quello
+che è successo davvero: sotto la formazione consigliata c'è il bilancio del modello e dei
+fantallenatori.
 
 ### 📅 Giornate
 
 Risultati reali e ideali per ogni partita, confronto automatico fra i due e commenti inline
-in stile Caressa-Bergomi, uno per partita più uno di giornata.
+in stile Corelli-Bergamotti, uno per partita più uno di giornata.
+
+- **Calendario completo** — nel selettore ci sono anche le giornate da giocare, con gli
+  accoppiamenti, la giornata di Serie A corrispondente e la sua data
+- **Rigiocala** — ripercorre una partita su un campo visto dall'alto, con gli eventi della
+  giornata addosso ai protagonisti. I minuti sono inventati ma ripetibili: la stessa partita
+  si rigioca sempre allo stesso modo
+- **E se avesse giocato il sito?** — dove c'era un consiglio salvato, il risultato che
+  sarebbe uscito schierando la formazione consigliata, da una parte o da tutte e due
 
 ### 🧰 Cose di servizio
 
 - **Più stagioni** — selettore in alto, la scelta finisce nell'URL e il link è condivisibile
 - **La scheda resta dov'era** — ricaricando da Merito si riapre Merito, e il link con l'ancora
   si può passare già aperto sulla scheda giusta
-- **Export CSV** — le tre classifiche, i risultati per giornata e le statistiche dei giocatori.
-  Escono nello stesso ordine che si ha sotto gli occhi, e il file si apre in Excel italiano
-  con un doppio clic
 - **App installabile** — manifest e icone: dal telefono si aggiunge alla schermata Home e si
   apre senza barra degli indirizzi, con i dati dell'ultima visita anche offline
 - **Tema chiaro e scuro**, e tutto responsive fino a 390px
@@ -82,7 +92,9 @@ in stile Caressa-Bergomi, uno per partita più uno di giornata.
 - **Algoritmo gol** — primo gol a 66 punti, poi uno ogni 6. A parità di gol con almeno 4 punti
   di scarto, chi ha fatto di più ne prende uno in più
 - **Bonus casa** — +1 alla squadra di casa nel calcolo dei gol ideali, non nel punteggio
-- **49 test** senza dipendenze, su ogni push e pull request
+- **Calendario precaricato** — tutte le giornate della lega e le 38 di Serie A stanno nel JSON
+  della stagione, verificate prima di essere scritte
+- **100 test** senza dipendenze, su ogni push e pull request
 - **Nessuna libreria** — grafici, heatmap e marchio sono SVG e CSS grid scritti a mano
 
 ## 🚀 Come utilizzare
@@ -125,33 +137,33 @@ Ogni stagione ha il suo file in `data/<id>.json` e viene caricata solo quando la
 seleziona dal menu a tendina nell'header. La stagione scelta viene ricordata in
 `localStorage` e finisce nell'URL (`?stagione=2025-2026`), così il link è condivisibile.
 
-### Aprire una nuova stagione
+Come si apre una stagione nuova è in [AGENTS.md](AGENTS.md#una-stagione-nuova).
 
-1. Crea `data/<nuova-stagione>.json` con `lastUpdate`, `season`, `teams`, `rounds: []` e `settings`
-   (copia la struttura da una stagione esistente).
-2. Aggiungi la stagione **in cima** all'array `seasons` di `data/seasons.json` e aggiorna
-   `currentSeason`; porta la vecchia stagione a `"status": "archived"`.
-3. Finché `rounds` è vuoto, la sezione Giornate mostra "Stagione non ancora iniziata".
+## 📝 I dati
 
-Nessuna modifica al codice è necessaria: il nome del file deve solo rispettare il
-formato `AAAA-AAAA.json`, richiesto dalla whitelist in `.htaccess`.
-
-## 📝 Aggiornare i dati
-
-Modifica il file JSON della stagione in corso (`data/<id>.json`) per aggiornare
-risultati delle giornate, commenti e data di ultimo aggiornamento. Classifica reale,
-classifica ideale e statistiche allenatori sono **ricalcolate dai risultati**, quindi
-non vanno inserite a mano.
+Tutto quello che il sito mostra sta nel JSON della stagione (`data/<id>.json`): risultati,
+formazioni, commenti e calendario. Classifica reale, classifica ideale e statistiche
+allenatori sono **ricalcolate dai risultati**, quindi nel file non ci sono.
 
 I campi `homeIdealScore` / `awayIdealScore` sono facoltativi: dove mancano, la
 Classifica Miglior Allenatore per quella giornata non viene mostrata e la Classifica
 Ideale ricade sui punteggi reali.
 
-L'inserimento non va fatto a mano: la skill in `.claude/skills/aggiorna-giornata/`
-converte la giornata, presa da pagine della lega salvate a mano, calcola i punteggi
-ideali e scrive il JSON. Nella stessa cartella vive `leggi-probabili.mjs`, che prepara i
-dati di Serie A per il suggeritore di formazione (vedi
-[Aggiornamento dei dati](#-aggiornamento-dei-dati)).
+**Come si aggiornano i dati è in [AGENTS.md](AGENTS.md)**: si parte sempre da pagine di
+fantacalcio.it salvate a mano, e nessuno script va in rete.
+
+### 📆 Calendario
+
+Il JSON della stagione porta anche il calendario intero, scritto una volta a inizio
+stagione:
+
+- **`calendar`**: le giornate della lega, ognuna con `round`, `roundSerieA` (la giornata di
+  Serie A su cui si gioca) e `matches` con casa e trasferta
+- **`calendarioSerieA`**: le 38 giornate di Serie A, con la data ufficiale e le partite
+  (`casa`, `fuori`)
+
+Il sito li usa per mostrare le giornate da giocare, con il link a ogni partita sulla lega; il suggeritore ripiega sul calendario di Serie A per casa
+e trasferta quando le probabili non riportano le partite del turno.
 
 ### 👥 Dati per giocatore
 
@@ -174,22 +186,6 @@ fuori. Accanto, la classifica **Malus** somma i punti persi in campo — mezzo p
 un'ammonizione, uno per un'espulsione, due per un autogol, tre per un rigore sbagliato.
 I gol subiti dai portieri restano fuori: sono il loro mestiere, non un errore, e da soli
 riempirebbero la classifica di portieri.
-
-## 🔄 Aggiornamento dei dati
-
-Il sito si aggiorna elaborando **poche pagine HTML salvate a mano**: niente è automatico
-e niente va su fantacalcio.it da solo. Le pagine si aprono dal browser e si salvano con
-Ctrl+S («Pagina web completa»); i link sono nella scheda **Giornate**, pannello *Pagine da
-salvare per l'aggiornamento*. I file salvati si passano agli script della skill, che
-lavorano in locale.
-
-```bash
-node .claude/skills/aggiorna-giornata/leggi-probabili.mjs \
-    [--probabili <probabili.html>] [--rigoristi <rigoristi.html>] \
-    [--infortunati <infortunati.html>] [--dry-run]
-```
-
-Quello che non si passa resta com'era in `data/probabili.json`. Lo script non va in rete.
 
 ## 🪄 Formazione consigliata
 
@@ -214,7 +210,7 @@ vantaggi correggono la resa, ognuno al massimo del 3%:
 |---|---|
 | **Campo** | in casa +3%, in trasferta −3% |
 | **Classifica** | proporzionale alla distanza dall'avversario, ±3% agli estremi |
-| **Forma** | media punti nelle ultime 3 giornate, da +3% (nove punti) a −3% (zero) |
+| **Forma** | quanto i giocatori di quella squadra, nelle rose della lega, sono andati sopra o sotto la media del ruolo nelle ultime 3 giornate: +3% a un punto di fantavoto sopra, −3% a uno sotto |
 
 Al massimo ±9% in tutto, meno di ±0,6 di fantavoto su una resa da 6,5: abbastanza per
 riordinare due giocatori quasi pari, non per ribaltare uno scarto vero. La freccia accanto
@@ -281,9 +277,9 @@ difensori.
 ### I dati
 
 Tutto quello che il suggeritore legge da fuori sta in `data/probabili.json`: percentuali,
-rigoristi, infortunati, squalificati, classifica di Serie A, partite del turno e forma
-recente. Lo scrive `leggi-probabili.mjs` della skill, partendo dalle pagine salvate a mano (vedi
-[Aggiornamento dei dati](#-aggiornamento-dei-dati)). La
+rigoristi, infortunati, squalificati, classifica di Serie A e partite del turno; la forma
+delle squadre il sito la ricava dai voti della lega. Lo scrive `leggi-probabili.mjs` della skill, partendo dalle pagine salvate a mano (vedi
+[AGENTS.md](AGENTS.md#prima-di-una-giornata-probabili-e-consiglio)). La
 pagina mostra sempre la data dell'ultimo aggiornamento e avvisa quando il file ha più di
 due giorni o manca del tutto: senza quella riga, un file vecchio continuerebbe a produrre
 percentuali dall'aria credibile riferite a una giornata già giocata.
@@ -307,7 +303,8 @@ novamont_and_friends/
 ├── index.html              # Pagina principale, 6 sezioni
 ├── manifest.webmanifest    # Manifest PWA, non .json: sw.js e .htaccess trattano i .json a parte
 ├── styles.css              # Stili responsive
-├── script.js               # Tutta la logica: classifiche, rose, suggeritore
+├── script.js               # Tutta la logica: classifiche, rose, calendario, suggeritore
+├── rigiocala.js            # "Rigiocala": la partita animata su un campo visto dall'alto
 ├── config.js               # Impostazioni di presentazione
 ├── sw.js                   # Service worker, cache versionata
 ├── .htaccess               # Header di cache e whitelist dei file dati
@@ -318,33 +315,46 @@ novamont_and_friends/
 │   └── icona-*.png         # 192, 512, 180 e maskable-512, generate dagli SVG
 ├── data/
 │   ├── seasons.json        # Indice delle stagioni disponibili
-│   ├── 2026-2027.json      # Stagione corrente
+│   ├── 2026-2027.json      # Stagione corrente, calendario compreso
 │   ├── 2025-2026.json      # Stagione archiviata
-│   └── probabili.json      # Dati di Serie A per il suggeritore
+│   ├── probabili.json      # Dati di Serie A per il suggeritore
+│   └── consigli/<stagione>/ # Consigli salvati prima del fischio e loro valutazione
 ├── .claude/skills/aggiorna-giornata/
 │   ├── SKILL.md            # Istruzioni della skill
+│   ├── cosa-serve.mjs         # Il primo passo: cosa manca e quali pagine chiedere
+│   ├── leggi-calendario.mjs   # Calendario della lega e di Serie A, a inizio stagione
 │   ├── giornate-mancanti.mjs  # Quali giornate mancano e da quale ricominciare
 │   ├── converti-giornata.mjs  # Giornata da formazioni salvate, decodifica eventi
-│   ├── calcola-giornata.mjs   # Punteggi ideali
-│   └── leggi-probabili.mjs    # Probabili, rigoristi, infortunati da pagine salvate
+│   ├── leggi-partita.mjs      # Formazioni, voti ed eventi dalla pagina di una partita salvata
+│   ├── calcola-giornata.mjs   # Punteggi ideali, scrittura della giornata
+│   ├── aggiungi-giocatori.mjs # Acquisti di mercato nel dizionario dei giocatori
+│   ├── leggi-probabili.mjs    # Probabili, rigoristi, infortunati da pagine salvate
+│   ├── salva-consigli.mjs     # Fotografia del consiglio prima della giornata
+│   ├── valuta-consigli.mjs    # Il consiglio confrontato con la realtà
+│   └── rigioca-consigli.mjs   # Le giornate passate rigiocate con altri pesi
 ├── test/
 │   ├── regole.test.mjs     # Gol, bonus casa, malus, punti di merito
-│   ├── parser.test.mjs     # I parser delle pagine salvate, su fixture reali
+│   ├── parser.test.mjs     # I parser delle pagine salvate (Serie A, calendario, partite), su fixture reali
+│   ├── consigli.test.mjs   # Suggeritore, salvataggio e valutazione dei consigli
+│   ├── calendario.test.mjs # Coerenza del calendario e giornate da giocare
+│   ├── cosa-serve.test.mjs # Le pagine da chiedere all'utente
+│   ├── link-lega.test.mjs  # I link alle pagine della lega
 │   ├── aiuto/              # Carica script.js in un contesto vm
 │   └── fixture/            # Frammenti di pagina datati, niente rete nei test
 ├── .github/workflows/
 │   └── test.yml            # node --test su ogni push e pull request
 ├── BONUS_CASA.md           # Il bonus casa nei gol ideali
 ├── CACHE_MANAGEMENT.md     # Come è gestita la cache
+├── AGENTS.md               # Come si aggiornano i dati
 └── README.md               # Questo file
 ```
 
 ### 🗂️ **Dettaglio File**
 - **`index.html`**: Interfaccia con 6 sezioni (Classifica, Classifica Ideale, Merito, Giornate, Rose, Formazione) e selettore stagione
-- **`styles.css`**: ~5300 righe di CSS responsive con glassmorphism e animazioni
-- **`script.js`**: ~4800 righe di JavaScript: calcolo classifiche, rose e suggeritore di formazione
-- **`data/seasons.json`**: Indice delle stagioni: id, etichetta, file e stato
-- **`data/<stagione>.json`**: Database JSON con teams, players, rosterHistory, rounds e settings
+- **`styles.css`**: ~6000 righe di CSS responsive con glassmorphism e animazioni
+- **`script.js`**: ~5700 righe di JavaScript: calcolo classifiche, rose, calendario e suggeritore di formazione
+- **`data/seasons.json`**: Indice delle stagioni: id, etichetta, file, stato e indirizzi delle pagine della lega
+- **`data/<stagione>.json`**: Database JSON con teams, players, rosterHistory, rounds, calendar, calendarioSerieA e settings
 - **`data/probabili.json`**: Istantanea di Serie A ricavata dalle pagine salvate, non scritta a mano
 - **`config.js`**: Impostazioni configurabili per personalizzazione
 
@@ -381,7 +391,7 @@ sono ricalcolati**, quindi non compaiono nel file.
             awayScore: 70,
             homeIdealScore: 79,      // facoltativi: senza, niente Classifica Allenatori
             awayIdealScore: 76.5,
-            commentary: { caressa: "...", bergomi: "..." },
+            commentary: { corelli: "...", bergamotti: "..." },
             lineups: { home: [ /* una voce per giocatore */ ], away: [ /* ... */ ] }
         }
     ]

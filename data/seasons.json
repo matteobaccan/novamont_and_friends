@@ -9,7 +9,7 @@
       "source": {
         "calendarUrl": "https://leghe.fantacalcio.it/novamont-8-friends/calendario",
         "roundUrl": "https://leghe.fantacalcio.it/novamont-8-friends/view/competition/805779/round/{round}?i={match}",
-        "matchIndexBase": 1,
+        "matchIndexBase": 0,
         "rosterUrl": "https://leghe.fantacalcio.it/novamont-8-friends/rose",
         "standingsUrl": "https://leghe.fantacalcio.it/novamont-8-friends/classifica"
       }

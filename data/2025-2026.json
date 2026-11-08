@@ -58,8 +58,8 @@
           "homeIdealScore": 70,
           "awayIdealScore": 74,
           "commentary": {
-            "caressa": "Che partita equilibrata! Cusiana e Cortomuso si dividono la posta: 1-1 il risultato finale! 69 punti per la Cusiana, 70 per la Cortomuso, ma entrambe portano a casa un punto!",
-            "bergomi": "Match tiratissimo, Fabio. Solo un punto di differenza! Curiosità: con le formazioni ideali sarebbe comunque finita 2-2. Nessuna delle due ha saputo sfruttare al meglio la propria rosa."
+            "corelli": "Che partita equilibrata! Cusiana e Cortomuso si dividono la posta: 1-1 il risultato finale! 69 punti per la Cusiana, 70 per la Cortomuso, ma entrambe portano a casa un punto!",
+            "bergamotti": "Match tiratissimo, Fabio. Solo un punto di differenza! Curiosità: con le formazioni ideali sarebbe comunque finita 2-2. Nessuna delle due ha saputo sfruttare al meglio la propria rosa."
           }
         },
         {
@@ -71,8 +71,8 @@
           "homeIdealScore": 83,
           "awayIdealScore": 84.5,
           "commentary": {
-            "caressa": "CHE PARTITA! Real Ichnusa-Cambra City, uno spettacolare 2-3 per gli ospiti! 77.5 punti per il Real, 78 per il Cambra. Vittoria di misura ma meritata!",
-            "bergomi": "Partita bellissima, Fabio! Cambra City ha fatto scelte eccellenti, solo mezzo punto lasciato in panchina. Curiosità: con le formazioni ideali sarebbe finita 4-4! Che occasione sprecata per entrambe!"
+            "corelli": "CHE PARTITA! Real Ichnusa-Cambra City, uno spettacolare 2-3 per gli ospiti! 77.5 punti per il Real, 78 per il Cambra. Vittoria di misura ma meritata!",
+            "bergamotti": "Partita bellissima, Fabio! Cambra City ha fatto scelte eccellenti, solo mezzo punto lasciato in panchina. Curiosità: con le formazioni ideali sarebbe finita 4-4! Che occasione sprecata per entrambe!"
           }
         },
         {
@@ -84,8 +84,8 @@
           "homeIdealScore": 82.5,
           "awayIdealScore": 80,
           "commentary": {
-            "caressa": "Vittoria dello Shakhtar Donuts! 2-1 contro l'Ultimo! 75.5 punti per lo Shakhtar, 69.5 per l'Ultimo. Tre punti importanti per Marco Fedele!",
-            "bergomi": "L'Ultimo sta vivendo un momento difficile, Fabio. Sei punti di distacco sono tanti. Con le formazioni ideali sarebbe stato un 3-3 pirotecnico! L'Ultimo ha lasciato troppi punti in panchina."
+            "corelli": "Vittoria dello Shakhtar Donuts! 2-1 contro l'Ultimo! 75.5 punti per lo Shakhtar, 69.5 per l'Ultimo. Tre punti importanti per Marco Fedele!",
+            "bergamotti": "L'Ultimo sta vivendo un momento difficile, Fabio. Sei punti di distacco sono tanti. Con le formazioni ideali sarebbe stato un 3-3 pirotecnico! L'Ultimo ha lasciato troppi punti in panchina."
           }
         },
         {
@@ -97,8 +97,8 @@
           "homeIdealScore": 72,
           "awayIdealScore": 72,
           "commentary": {
-            "caressa": "Vittoria esterna dell'SM Frattese! 0-1 sul campo del Partizan Tirana! 64 punti per il Partizan, 67.5 per la Frattese. Pezant porta a casa tre punti d'oro!",
-            "bergomi": "Match combattuto ma la Frattese è stata più concreta. Il Partizan ha lasciato 8 punti in panchina, Fabio! Con le scelte giuste poteva essere un 2-2. Occasione sprecata!"
+            "corelli": "Vittoria esterna dell'SM Frattese! 0-1 sul campo del Partizan Tirana! 64 punti per il Partizan, 67.5 per la Frattese. Pezant porta a casa tre punti d'oro!",
+            "bergamotti": "Match combattuto ma la Frattese è stata più concreta. Il Partizan ha lasciato 8 punti in panchina, Fabio! Con le scelte giuste poteva essere un 2-2. Occasione sprecata!"
           }
         }
       ]
@@ -117,8 +117,8 @@
           "homeIdealScore": 81,
           "awayIdealScore": 75,
           "commentary": {
-            "caressa": "GOOOOL! Cortomuso! Vittoria netta per 3-2 sul Partizan Tirana! 78.5 punti contro 72, sei punti di vantaggio. Sir Alex Baccan domina la partita!",
-            "bergomi": "Partita ben gestita, Fabio. L'attacco del Cortomuso ha funzionato alla perfezione. Con le formazioni ideali sarebbe finita 3-2 comunque, stesso risultato! Scelte azzeccate da entrambe le parti."
+            "corelli": "GOOOOL! Cortomuso! Vittoria netta per 3-2 sul Partizan Tirana! 78.5 punti contro 72, sei punti di vantaggio. Sir Alex Baccan domina la partita!",
+            "bergamotti": "Partita ben gestita, Fabio. L'attacco del Cortomuso ha funzionato alla perfezione. Con le formazioni ideali sarebbe finita 3-2 comunque, stesso risultato! Scelte azzeccate da entrambe le parti."
           }
         },
         {
@@ -130,8 +130,8 @@
           "homeIdealScore": 79,
           "awayIdealScore": 70.5,
           "commentary": {
-            "caressa": "SM Frattese vince ancora! 2-1 contro lo Shakhtar Donuts! 75 punti per Pezant, 69 per lo Shakhtar. Seconda vittoria consecutiva per la Frattese!",
-            "bergomi": "Difesa solida della Frattese, Fabio. Sei punti di vantaggio sono un bel margine. Con le formazioni ideali sarebbe finita 3-1, ancora più netta! Lo Shakhtar ha lasciato punti preziosi in panchina."
+            "corelli": "SM Frattese vince ancora! 2-1 contro lo Shakhtar Donuts! 75 punti per Pezant, 69 per lo Shakhtar. Seconda vittoria consecutiva per la Frattese!",
+            "bergamotti": "Difesa solida della Frattese, Fabio. Sei punti di vantaggio sono un bel margine. Con le formazioni ideali sarebbe finita 3-1, ancora più netta! Lo Shakhtar ha lasciato punti preziosi in panchina."
           }
         },
         {
@@ -143,8 +143,8 @@
           "homeIdealScore": 79,
           "awayIdealScore": 79,
           "commentary": {
-            "caressa": "L'ULTIMO VINCE! 2-1 contro il Real Ichnusa! Match tiratissimo: 73.5 punti per l'Ultimo, 71.5 per il Real. Solo due punti di differenza ma pesano come macigni!",
-            "bergomi": "Vittoria di misura ma fondamentale, Fabio. L'Ultimo sfrutta il fattore campo. Curiosità: con le formazioni ideali sarebbe finita 3-3! Entrambe hanno lasciato qualcosa in panchina."
+            "corelli": "L'ULTIMO VINCE! 2-1 contro il Real Ichnusa! Match tiratissimo: 73.5 punti per l'Ultimo, 71.5 per il Real. Solo due punti di differenza ma pesano come macigni!",
+            "bergamotti": "Vittoria di misura ma fondamentale, Fabio. L'Ultimo sfrutta il fattore campo. Curiosità: con le formazioni ideali sarebbe finita 3-3! Entrambe hanno lasciato qualcosa in panchina."
           }
         },
         {
@@ -156,8 +156,8 @@
           "homeIdealScore": 71,
           "awayIdealScore": 69.5,
           "commentary": {
-            "caressa": "Pareggio tra Cambra City e Cusiana! 1-1 il finale! 71.5 punti per il Cambra, 68.5 per la Cusiana. Tre punti di differenza ma un punto a testa!",
-            "bergomi": "Partita bloccata, Fabio. Prestazioni sottotono da entrambe le parti. Con le formazioni ideali sarebbe finita 1-1 comunque! Almeno hanno fatto scelte coerenti con le loro rose."
+            "corelli": "Pareggio tra Cambra City e Cusiana! 1-1 il finale! 71.5 punti per il Cambra, 68.5 per la Cusiana. Tre punti di differenza ma un punto a testa!",
+            "bergamotti": "Partita bloccata, Fabio. Prestazioni sottotono da entrambe le parti. Con le formazioni ideali sarebbe finita 1-1 comunque! Almeno hanno fatto scelte coerenti con le loro rose."
           }
         }
       ]
@@ -176,8 +176,8 @@
           "homeIdealScore": 68,
           "awayIdealScore": 79,
           "commentary": {
-            "caressa": "Guardando alla proiezione ideale, il quadro che emerge è netta supremazia degli ospiti: 79 a 68 nella simulazione, un margine che sulla carta si tradurrebbe in un netto 3-1. Tuttavia, seguendo la nostra regola di inserire i numeri reali solo quando lo scarto supera quattro punti, in questo caso preferisco descrivere ciò che si è visto sul campo: il Cortomuso ha imposto il suo ritmo con azioni offensive fluide e una pressione continua che ha tolto tempo e spazi allo Shakhtar. Gli ospiti hanno dimostrato maggiore lucidità nelle scelte e compattezza difensiva; lo Shakhtar, pur cercando di reagire, non è mai riuscito a dare continuità alle giocate offensive.",
-            "bergomi": "Dal mio punto di vista tecnico la differenza principale non sta tanto nel singolo numero quanto nel modo in cui le due squadre hanno interpretato la partita: l'ideale fotografa un Cortomuso dominante, e sul campo si è visto un equilibrio a favore degli ospiti in termini di gestione delle transizioni e finalizzazioni. Lo Shakhtar ha peccato di idee e di incisività, mentre il Cortomuso ha capitalizzato le occasioni con calma e precisione."
+            "corelli": "Guardando alla proiezione ideale, il quadro che emerge è netta supremazia degli ospiti: 79 a 68 nella simulazione, un margine che sulla carta si tradurrebbe in un netto 3-1. Tuttavia, seguendo la nostra regola di inserire i numeri reali solo quando lo scarto supera quattro punti, in questo caso preferisco descrivere ciò che si è visto sul campo: il Cortomuso ha imposto il suo ritmo con azioni offensive fluide e una pressione continua che ha tolto tempo e spazi allo Shakhtar. Gli ospiti hanno dimostrato maggiore lucidità nelle scelte e compattezza difensiva; lo Shakhtar, pur cercando di reagire, non è mai riuscito a dare continuità alle giocate offensive.",
+            "bergamotti": "Dal mio punto di vista tecnico la differenza principale non sta tanto nel singolo numero quanto nel modo in cui le due squadre hanno interpretato la partita: l'ideale fotografa un Cortomuso dominante, e sul campo si è visto un equilibrio a favore degli ospiti in termini di gestione delle transizioni e finalizzazioni. Lo Shakhtar ha peccato di idee e di incisività, mentre il Cortomuso ha capitalizzato le occasioni con calma e precisione."
           }
         },
         {
@@ -189,8 +189,8 @@
           "homeIdealScore": 68.5,
           "awayIdealScore": 71.5,
           "commentary": {
-            "caressa": "L'analisi ideale ci porta a pensare a un confronto equilibrato, con un 68.5 a 71.5 che suggerisce un 1-1 ipotetico. Tuttavia, la Frattese ha segnato un risultato reale che si discosta in modo significativo dall'ideale (62.5 reali contro 71.5 ideali), quindi è giusto evidenziare questo scostamento: la squadra di Pezant non ha saputo trasformare in punti quanto la sua rosa lasciava intravedere. Real Ichnusa, invece, ha mostrato maggior concretezza nelle scelte e un'attitudine a capitalizzare le occasioni che ha fatto la differenza. Nel narrare la partita mi concentro quindi sia sulle qualità tecniche mostrate che sul fatto che la Frattese non è riuscita a esprimere il suo potenziale.",
-            "bergomi": "È un caso interessante: l'ideale ci dice di una partita molto equilibrata, ma il peso dei numeri reali della Frattese — ben sotto il suo ideale — parla di una sottoperformance vera e propria. Questo non vuol dire che la Frattese non abbia provato a reagire, ma che le scelte tattiche e la gestione della panchina non hanno prodotto l'effetto sperato. Real Ichnusa ha invece capitalizzato meglio, dimostrando concretezza e pragmatismo, elementi che in certe partite valgono più del mero potenziale sulla carta."
+            "corelli": "L'analisi ideale ci porta a pensare a un confronto equilibrato, con un 68.5 a 71.5 che suggerisce un 1-1 ipotetico. Tuttavia, la Frattese ha segnato un risultato reale che si discosta in modo significativo dall'ideale (62.5 reali contro 71.5 ideali), quindi è giusto evidenziare questo scostamento: la squadra di Pezant non ha saputo trasformare in punti quanto la sua rosa lasciava intravedere. Real Ichnusa, invece, ha mostrato maggior concretezza nelle scelte e un'attitudine a capitalizzare le occasioni che ha fatto la differenza. Nel narrare la partita mi concentro quindi sia sulle qualità tecniche mostrate che sul fatto che la Frattese non è riuscita a esprimere il suo potenziale.",
+            "bergamotti": "È un caso interessante: l'ideale ci dice di una partita molto equilibrata, ma il peso dei numeri reali della Frattese — ben sotto il suo ideale — parla di una sottoperformance vera e propria. Questo non vuol dire che la Frattese non abbia provato a reagire, ma che le scelte tattiche e la gestione della panchina non hanno prodotto l'effetto sperato. Real Ichnusa ha invece capitalizzato meglio, dimostrando concretezza e pragmatismo, elementi che in certe partite valgono più del mero potenziale sulla carta."
           }
         },
         {
@@ -202,8 +202,8 @@
           "homeIdealScore": 67,
           "awayIdealScore": 64,
           "commentary": {
-            "caressa": "La partita tra Partizan e Cusiana è stata decisa dalla solidità e dalla gestione dei momenti chiave: l'ideale suggeriva un margine molto contenuto (67-64), e la pratica ha confermato una sfida tirata e decisa dai dettagli. Poiché gli scarti reali rispetto agli ideali non superano la nostra soglia di quattro punti, privilegiamo l'analisi tattica: il Partizan ha saputo amministrare meglio le fasi difensive e trovare il guizzo giusto nei momenti topici, mentre la Cusiana è apparsa meno incisiva e ha faticato a rendere pericolose le occasioni create.",
-            "bergomi": "Dal punto di vista tecnico, questa è stata una partita dove la differenza l'ha fatta la capacità di leggere il ritmo e non tanto una netta differenza di valori sulla carta. La Cusiana ha mostrato segnali di stanchezza o imprecisione nelle rifiniture; il Partizan, più ordinato, ha sfruttato le opportunità. Un risultato che rispecchia più la gestione degli episodi che il divario tra le rose."
+            "corelli": "La partita tra Partizan e Cusiana è stata decisa dalla solidità e dalla gestione dei momenti chiave: l'ideale suggeriva un margine molto contenuto (67-64), e la pratica ha confermato una sfida tirata e decisa dai dettagli. Poiché gli scarti reali rispetto agli ideali non superano la nostra soglia di quattro punti, privilegiamo l'analisi tattica: il Partizan ha saputo amministrare meglio le fasi difensive e trovare il guizzo giusto nei momenti topici, mentre la Cusiana è apparsa meno incisiva e ha faticato a rendere pericolose le occasioni create.",
+            "bergamotti": "Dal punto di vista tecnico, questa è stata una partita dove la differenza l'ha fatta la capacità di leggere il ritmo e non tanto una netta differenza di valori sulla carta. La Cusiana ha mostrato segnali di stanchezza o imprecisione nelle rifiniture; il Partizan, più ordinato, ha sfruttato le opportunità. Un risultato che rispecchia più la gestione degli episodi che il divario tra le rose."
           }
         },
         {
@@ -215,8 +215,8 @@
           "homeIdealScore": 71,
           "awayIdealScore": 82,
           "commentary": {
-            "caressa": "Cambra City è l'esempio perfetto di come il valore sulla carta e la realtà di una partita possano divergere: idealmente il Cambra veniva proiettato a 82 punti, ma nella trasferta il punteggio effettivo è stato di 72.5, oltre nove punti in meno rispetto all'ideale. Dal momento che lo scarto supera la soglia dei quattro punti, è giusto riportare il numero reale: nonostante questo, la squadra ha mostrato capacità di adattamento e freddezza nei momenti chiave, trovando il gol decisivo e portando a casa i tre punti. In sintesi: il potenziale è evidente, ma la prova praticata è stata più pragmatica e meno eclatante rispetto alle attese.",
-            "bergomi": "Il Cambra dispone di risorse importanti e l'ideale lo conferma, tuttavia la trasferta ha messo in luce problemi di esecuzione che hanno ridotto il divario numerico rispetto alle proiezioni. Poiché lo scostamento reale-ideale è significativo, lo sottolineo con i numeri: 82 idealmente contro 72.5 realmente. Malgrado ciò, la squadra ha saputo gestire la pressione e finalizzare quando necessario, meritandosi la vittoria."
+            "corelli": "Cambra City è l'esempio perfetto di come il valore sulla carta e la realtà di una partita possano divergere: idealmente il Cambra veniva proiettato a 82 punti, ma nella trasferta il punteggio effettivo è stato di 72.5, oltre nove punti in meno rispetto all'ideale. Dal momento che lo scarto supera la soglia dei quattro punti, è giusto riportare il numero reale: nonostante questo, la squadra ha mostrato capacità di adattamento e freddezza nei momenti chiave, trovando il gol decisivo e portando a casa i tre punti. In sintesi: il potenziale è evidente, ma la prova praticata è stata più pragmatica e meno eclatante rispetto alle attese.",
+            "bergamotti": "Il Cambra dispone di risorse importanti e l'ideale lo conferma, tuttavia la trasferta ha messo in luce problemi di esecuzione che hanno ridotto il divario numerico rispetto alle proiezioni. Poiché lo scostamento reale-ideale è significativo, lo sottolineo con i numeri: 82 idealmente contro 72.5 realmente. Malgrado ciò, la squadra ha saputo gestire la pressione e finalizzare quando necessario, meritandosi la vittoria."
           }
         }
       ]
@@ -235,8 +235,8 @@
           "homeIdealScore": 79,
           "awayIdealScore": 75,
           "commentary": {
-            "caressa": "Cortomuso vs Real Ichnusa: partita combattuta, 72.5 a 70.5 il risultato reale.",
-            "bergomi": "Differenza sottile ma fondamentale, entrambe le squadre hanno mostrato voglia di vittoria."
+            "corelli": "Cortomuso vs Real Ichnusa: partita combattuta, 72.5 a 70.5 il risultato reale.",
+            "bergamotti": "Differenza sottile ma fondamentale, entrambe le squadre hanno mostrato voglia di vittoria."
           }
         },
         {
@@ -248,8 +248,8 @@
           "homeIdealScore": 67,
           "awayIdealScore": 85.5,
           "commentary": {
-            "caressa": "Shakhtar Donuts travolgente in trasferta: 81 a 63.5, prestazione super per Marco Fedele.",
-            "bergomi": "Lo scarto reale-ideale restituisce l'idea di una performance dominante dello Shakhtar; la Cusiana è stata troppo timida in fase offensiva."
+            "corelli": "Shakhtar Donuts travolgente in trasferta: 81 a 63.5, prestazione super per Marco Fedele.",
+            "bergamotti": "Lo scarto reale-ideale restituisce l'idea di una performance dominante dello Shakhtar; la Cusiana è stata troppo timida in fase offensiva."
           }
         },
         {
@@ -261,8 +261,8 @@
           "homeIdealScore": 73.5,
           "awayIdealScore": 72,
           "commentary": {
-            "caressa": "SM Frattese controlla il match e porta a casa i tre punti: 70.5 a 59.5.",
-            "bergomi": "Prestazione solida della Frattese, l'Ultimo ha pagato qualche errore di impostazione."
+            "corelli": "SM Frattese controlla il match e porta a casa i tre punti: 70.5 a 59.5.",
+            "bergamotti": "Prestazione solida della Frattese, l'Ultimo ha pagato qualche errore di impostazione."
           }
         },
         {
@@ -274,8 +274,8 @@
           "homeIdealScore": 64.5,
           "awayIdealScore": 75,
           "commentary": {
-            "caressa": "Partizan Tirana espugna la trasferta: 67.5 a 62.5, una vittoria importante.",
-            "bergomi": "Il Partizan ha saputo sfruttare i momenti chiave; il Cambra non è riuscito a concretizzare il suo potenziale."
+            "corelli": "Partizan Tirana espugna la trasferta: 67.5 a 62.5, una vittoria importante.",
+            "bergamotti": "Il Partizan ha saputo sfruttare i momenti chiave; il Cambra non è riuscito a concretizzare il suo potenziale."
           }
         }
       ]
@@ -294,8 +294,8 @@
           "homeIdealScore": 76,
           "awayIdealScore": 65.6,
           "commentary": {
-            "caressa": "Giornata 5, e che giornata per l'Ultimo: 78.5 a 63.5 contro il Cortomuso. Un successo netto che vale punti pesanti in classifica e dà morale alla squadra di casa.",
-            "bergomi": "L'Ultimo ha interpretato la partita con grande concretezza. Dal punto di vista della classifica questi tre punti possono essere decisivi: il Cortomuso invece dovrà rivedere qualche scelta in chiave formazione."
+            "corelli": "Giornata 5, e che giornata per l'Ultimo: 78.5 a 63.5 contro il Cortomuso. Un successo netto che vale punti pesanti in classifica e dà morale alla squadra di casa.",
+            "bergamotti": "L'Ultimo ha interpretato la partita con grande concretezza. Dal punto di vista della classifica questi tre punti possono essere decisivi: il Cortomuso invece dovrà rivedere qualche scelta in chiave formazione."
           }
         },
         {
@@ -307,8 +307,8 @@
           "homeIdealScore": 73.5,
           "awayIdealScore": 76,
           "commentary": {
-            "caressa": "Real Ichnusa contro Cusiana, giornata 5: 72.5 a 74, partita tirata e decisa da dettagli. La Cusiana conquista una vittoria importante che la mantiene in corsa in classifica.",
-            "bergomi": "Scontro equilibrato, decisione arrivata nei momenti topici. La classifica si accorcia: entrambe le squadre dimostrano carattere, ma la Cusiana è stata più lucida nel finale."
+            "corelli": "Real Ichnusa contro Cusiana, giornata 5: 72.5 a 74, partita tirata e decisa da dettagli. La Cusiana conquista una vittoria importante che la mantiene in corsa in classifica.",
+            "bergamotti": "Scontro equilibrato, decisione arrivata nei momenti topici. La classifica si accorcia: entrambe le squadre dimostrano carattere, ma la Cusiana è stata più lucida nel finale."
           }
         },
         {
@@ -320,8 +320,8 @@
           "homeIdealScore": 73.5,
           "awayIdealScore": 72,
           "commentary": {
-            "caressa": "Shakhtar Donuts vince 69-64.5 in questa giornata 5: una prova di carattere che tiene lontano il Partizan nella corsa ai piani alti della classifica.",
-            "bergomi": "Lo Shakhtar ha mostrato maggiore incisività nelle situazioni decisive; per il Partizan una battuta d'arresto che complica il suo percorso in campionato, serve rapidità nelle scelte."
+            "corelli": "Shakhtar Donuts vince 69-64.5 in questa giornata 5: una prova di carattere che tiene lontano il Partizan nella corsa ai piani alti della classifica.",
+            "bergamotti": "Lo Shakhtar ha mostrato maggiore incisività nelle situazioni decisive; per il Partizan una battuta d'arresto che complica il suo percorso in campionato, serve rapidità nelle scelte."
           }
         },
         {
@@ -333,8 +333,8 @@
           "homeIdealScore": 84.5,
           "awayIdealScore": 74,
           "commentary": {
-            "caressa": "Frattese-Cambra City, 76.5 contro 74.5: match vibrante nella giornata 5. Tre punti che confermano la bontà del momento della Frattese e la tengono in alto in classifica.",
-            "bergomi": "Prestazione di sostanza della Frattese: ha saputo gestire meglio i momenti chiave. Il Cambra esce a testa alta ma dovrà lavorare sulla concretezza per scalare la classifica."
+            "corelli": "Frattese-Cambra City, 76.5 contro 74.5: match vibrante nella giornata 5. Tre punti che confermano la bontà del momento della Frattese e la tengono in alto in classifica.",
+            "bergamotti": "Prestazione di sostanza della Frattese: ha saputo gestire meglio i momenti chiave. Il Cambra esce a testa alta ma dovrà lavorare sulla concretezza per scalare la classifica."
           }
         }
       ]
@@ -353,8 +353,8 @@
           "homeIdealScore": 77.5,
           "awayIdealScore": 78.5,
           "commentary": {
-            "caressa": "Giornata 6: grandissimo equilibrio tra Cortomuso e Frattese, partita da pareggio che vale come un pugno nello stomaco per entrambe le squadre. Un punto a testa che mantiene alta la tensione in classifica e dimostra quanto questo campionato sia combattuto.",
-            "bergomi": "Dal punto di vista tattico, partita intensa. La Frattese ha ceduto nei momenti chiave, mentre il Cortomuso ha saputo sfruttare meglio le opportunità. In ottica classifica questo successo consolida la posizione del Cortomuso tra i protagonisti della stagione."
+            "corelli": "Giornata 6: grandissimo equilibrio tra Cortomuso e Frattese, partita da pareggio che vale come un pugno nello stomaco per entrambe le squadre. Un punto a testa che mantiene alta la tensione in classifica e dimostra quanto questo campionato sia combattuto.",
+            "bergamotti": "Dal punto di vista tattico, partita intensa. La Frattese ha ceduto nei momenti chiave, mentre il Cortomuso ha saputo sfruttare meglio le opportunità. In ottica classifica questo successo consolida la posizione del Cortomuso tra i protagonisti della stagione."
           }
         },
         {
@@ -366,8 +366,8 @@
           "homeIdealScore": 65,
           "awayIdealScore": 72,
           "commentary": {
-            "caressa": "Giornata 6: Vittoria esterna dell'Ultimo, 69-60 contro la Cusiana. Un risultato che vale più di tre punti: l'Ultimo si afferma come una mina vagante della classifica e mette pressione alle inseguitrici.",
-            "bergomi": "La Cusiana non è riuscita a reggere il ritmo, mentre l'Ultimo ha messo intensità e concretezza. In chiave graduatoria questi tre punti possono essere fondamentali per la corsa alle posizioni alte."
+            "corelli": "Giornata 6: Vittoria esterna dell'Ultimo, 69-60 contro la Cusiana. Un risultato che vale più di tre punti: l'Ultimo si afferma come una mina vagante della classifica e mette pressione alle inseguitrici.",
+            "bergamotti": "La Cusiana non è riuscita a reggere il ritmo, mentre l'Ultimo ha messo intensità e concretezza. In chiave graduatoria questi tre punti possono essere fondamentali per la corsa alle posizioni alte."
           }
         },
         {
@@ -379,8 +379,8 @@
           "homeIdealScore": 78.5,
           "awayIdealScore": 62.5,
           "commentary": {
-            "caressa": "Giornata 6: lo Shakhtar domina la trasferta e sconfigge il Cambra 72.5-53. Una prestazione autoritaria che mantiene lo Shakhtar in scia ai piani alti: la squadra risponde presente quando conta.",
-            "bergomi": "Prestazione solida dello Shakhtar, che limita le iniziative del Cambra e incassa tre punti fondamentali. Per il Cambra è una battuta d'arresto che complica la risalita in classifica."
+            "corelli": "Giornata 6: lo Shakhtar domina la trasferta e sconfigge il Cambra 72.5-53. Una prestazione autoritaria che mantiene lo Shakhtar in scia ai piani alti: la squadra risponde presente quando conta.",
+            "bergamotti": "Prestazione solida dello Shakhtar, che limita le iniziative del Cambra e incassa tre punti fondamentali. Per il Cambra è una battuta d'arresto che complica la risalita in classifica."
           }
         },
         {
@@ -392,8 +392,8 @@
           "homeIdealScore": 70.5,
           "awayIdealScore": 73,
           "commentary": {
-            "caressa": "Giornata 6: Real Ichnusa espugna il campo del Partizan per 70.5-62.0 e mette punti importanti in cascina. Una vittoria che dà respiro e fiducia, e che può cambiare prospettive in classifica per gli ospiti.",
-            "bergomi": "Il Real Ichnusa ha interpretato la partita con grande personalità, sfruttando gli errori del Partizan. In termini di graduatoria questo successo può rappresentare un punto di svolta per il loro cammino stagionale."
+            "corelli": "Giornata 6: Real Ichnusa espugna il campo del Partizan per 70.5-62.0 e mette punti importanti in cascina. Una vittoria che dà respiro e fiducia, e che può cambiare prospettive in classifica per gli ospiti.",
+            "bergamotti": "Il Real Ichnusa ha interpretato la partita con grande personalità, sfruttando gli errori del Partizan. In termini di graduatoria questo successo può rappresentare un punto di svolta per il loro cammino stagionale."
           }
         }
       ]
@@ -412,8 +412,8 @@
           "homeIdealScore": 61.5,
           "awayIdealScore": 76.5,
           "commentary": {
-            "caressa": "Giornata 7: il Cortomuso mette ordine e vince 71-56 contro il Cambra City. In chiave classifica questi tre punti pesano e permettono al Cortomuso di consolidare la sua posizione tra i protagonisti della stagione.",
-            "bergomi": "Tatticamente il Cortomuso ha saputo gestire meglio i momenti chiave; il Cambra ha avuto difficoltà a trovare continuità. In prospettiva classifica è un passo importante per Sir Alex Baccan."
+            "corelli": "Giornata 7: il Cortomuso mette ordine e vince 71-56 contro il Cambra City. In chiave classifica questi tre punti pesano e permettono al Cortomuso di consolidare la sua posizione tra i protagonisti della stagione.",
+            "bergamotti": "Tatticamente il Cortomuso ha saputo gestire meglio i momenti chiave; il Cambra ha avuto difficoltà a trovare continuità. In prospettiva classifica è un passo importante per Sir Alex Baccan."
           }
         },
         {
@@ -425,8 +425,8 @@
           "homeIdealScore": 72,
           "awayIdealScore": 68.5,
           "commentary": {
-            "caressa": "Giornata 7: Real Ichnusa vince di misura 65-64.5 in una sfida combattuta — un successo che porta morale e punti pesanti nella corsa verso la zona alta della graduatoria.",
-            "bergomi": "Partita decisa dai dettagli: il Real Ichnusa ha mostrato più concretezza nei momenti decisivi. Per lo Shakhtar è un campanello d'allarme in ottica classifica."
+            "corelli": "Giornata 7: Real Ichnusa vince di misura 65-64.5 in una sfida combattuta — un successo che porta morale e punti pesanti nella corsa verso la zona alta della graduatoria.",
+            "bergamotti": "Partita decisa dai dettagli: il Real Ichnusa ha mostrato più concretezza nei momenti decisivi. Per lo Shakhtar è un campanello d'allarme in ottica classifica."
           }
         },
         {
@@ -438,8 +438,8 @@
           "homeIdealScore": 81.5,
           "awayIdealScore": 74.5,
           "commentary": {
-            "caressa": "Giornata 7: la Cusiana espugna il campo della Frattese per 70.5-63.5. In termini di classifica è una vittoria che può dare slancio alla corsa verso le posizioni di vertice.",
-            "bergomi": "La Frattese non è riuscita a esprimere il suo potenziale ideale; la Cusiana ha colto l'occasione e porta a casa tre punti molto importanti per la sua fiducia in campionato."
+            "corelli": "Giornata 7: la Cusiana espugna il campo della Frattese per 70.5-63.5. In termini di classifica è una vittoria che può dare slancio alla corsa verso le posizioni di vertice.",
+            "bergamotti": "La Frattese non è riuscita a esprimere il suo potenziale ideale; la Cusiana ha colto l'occasione e porta a casa tre punti molto importanti per la sua fiducia in campionato."
           }
         },
         {
@@ -451,8 +451,8 @@
           "homeIdealScore": 84.5,
           "awayIdealScore": 69,
           "commentary": {
-            "caressa": "Giornata 7: l'Ultimo domina e vince 80.5-62.5 contro il Partizan. Prestazione da applausi che vale punti pesanti in classifica e conferma l'ottimo momento della squadra di casa.",
-            "bergomi": "Ottima prova dell'Ultimo: intensità e concretezza hanno fatto la differenza. Il Partizan invece subisce un duro colpo in ottica classifica."
+            "corelli": "Giornata 7: l'Ultimo domina e vince 80.5-62.5 contro il Partizan. Prestazione da applausi che vale punti pesanti in classifica e conferma l'ottimo momento della squadra di casa.",
+            "bergamotti": "Ottima prova dell'Ultimo: intensità e concretezza hanno fatto la differenza. Il Partizan invece subisce un duro colpo in ottica classifica."
           }
         }
       ]
@@ -471,8 +471,8 @@
           "homeIdealScore": 81,
           "awayIdealScore": 72.5,
           "commentary": {
-            "caressa": "Cortomuso batte la Cusiana 78.5-72.5 in una partita ricca di occasioni: tre punti preziosi per Sir Alex Baccan.",
-            "bergomi": "Prestazione concreta del Cortomuso, la Cusiana ha provato a reagire ma ha pagato qualche scelta non ottimale in fase realizzativa."
+            "corelli": "Cortomuso batte la Cusiana 78.5-72.5 in una partita ricca di occasioni: tre punti preziosi per Sir Alex Baccan.",
+            "bergamotti": "Prestazione concreta del Cortomuso, la Cusiana ha provato a reagire ma ha pagato qualche scelta non ottimale in fase realizzativa."
           }
         },
         {
@@ -484,8 +484,8 @@
           "homeIdealScore": 77.5,
           "awayIdealScore": 83,
           "commentary": {
-            "caressa": "Cambra City vince di misura 75.5-73 contro il Real Ichnusa: partita vera fino all'ultimo minuto.",
-            "bergomi": "Il Cambra è riuscito a spuntarla nei momenti decisivi; l'Ichnusa ha mostrato qualità, ma non è bastato per portare a casa il risultato."
+            "corelli": "Cambra City vince di misura 75.5-73 contro il Real Ichnusa: partita vera fino all'ultimo minuto.",
+            "bergamotti": "Il Cambra è riuscito a spuntarla nei momenti decisivi; l'Ichnusa ha mostrato qualità, ma non è bastato per portare a casa il risultato."
           }
         },
         {
@@ -497,8 +497,8 @@
           "homeIdealScore": 71,
           "awayIdealScore": 77.5,
           "commentary": {
-            "caressa": "Ultimo ha la meglio sullo Shakhtar per 69-66.5: vittoria sofferta ma meritata.",
-            "bergomi": "Lo Shakhtar è rimasto sotto il suo ideale, mentre l'Ultimo ha capitalizzato il proprio potenziale nei momenti chiave."
+            "corelli": "Ultimo ha la meglio sullo Shakhtar per 69-66.5: vittoria sofferta ma meritata.",
+            "bergamotti": "Lo Shakhtar è rimasto sotto il suo ideale, mentre l'Ultimo ha capitalizzato il proprio potenziale nei momenti chiave."
           }
         },
         {
@@ -510,8 +510,8 @@
           "homeIdealScore": 77,
           "awayIdealScore": 73,
           "commentary": {
-            "caressa": "Frattese solida in casa: 76.5-66.5 sul Partizan, tre punti importanti per la classifica.",
-            "bergomi": "Prestazione convincente della Frattese, il Partizan ha pagato qualche errore e non ha saputo sfruttare al meglio le proprie opportunità."
+            "corelli": "Frattese solida in casa: 76.5-66.5 sul Partizan, tre punti importanti per la classifica.",
+            "bergamotti": "Prestazione convincente della Frattese, il Partizan ha pagato qualche errore e non ha saputo sfruttare al meglio le proprie opportunità."
           }
         }
       ]
@@ -530,8 +530,8 @@
           "homeIdealScore": 78.5,
           "awayIdealScore": 75.5,
           "commentary": {
-            "caressa": "Partizan domina la partita e batte il Cortomuso 79-69.5: tre punti importanti per la squadra di casa.",
-            "bergomi": "Prestazione di sostanza del Partizan, il Cortomuso ha pagato qualche errore difensivo e non è riuscito a rimontare."
+            "corelli": "Partizan domina la partita e batte il Cortomuso 79-69.5: tre punti importanti per la squadra di casa.",
+            "bergamotti": "Prestazione di sostanza del Partizan, il Cortomuso ha pagato qualche errore difensivo e non è riuscito a rimontare."
           }
         },
         {
@@ -543,8 +543,8 @@
           "homeIdealScore": 74,
           "awayIdealScore": 75,
           "commentary": {
-            "caressa": "Pareggio spettacolare tra Shakhtar Donuts e SM Frattese: 70-70 il risultato finale.",
-            "bergomi": "Match equilibrato con poche differenze reali; entrambe le squadre restano in corsa dopo questo punto a testa."
+            "corelli": "Pareggio spettacolare tra Shakhtar Donuts e SM Frattese: 70-70 il risultato finale.",
+            "bergamotti": "Match equilibrato con poche differenze reali; entrambe le squadre restano in corsa dopo questo punto a testa."
           }
         },
         {
@@ -556,8 +556,8 @@
           "homeIdealScore": 80.5,
           "awayIdealScore": 73.5,
           "commentary": {
-            "caressa": "Real Ichnusa la spunta per un soffio sull'Ultimo: 72-71.5, partita decisa sul filo.",
-            "bergomi": "L'Ichnusa ha sfruttato qualche occasione in più; l'Ultimo ha dato battaglia ma non è riuscito a trovare il guizzo vincente."
+            "corelli": "Real Ichnusa la spunta per un soffio sull'Ultimo: 72-71.5, partita decisa sul filo.",
+            "bergamotti": "L'Ichnusa ha sfruttato qualche occasione in più; l'Ultimo ha dato battaglia ma non è riuscito a trovare il guizzo vincente."
           }
         },
         {
@@ -569,8 +569,8 @@
           "homeIdealScore": 77,
           "awayIdealScore": 74.5,
           "commentary": {
-            "caressa": "Cusiana vince 78.5-74 contro il Cambra City: una prova convincente che vale tre punti pesanti.",
-            "bergomi": "Ottima prova offensiva della Cusiana, il Cambra ha provato a reagire ma è mancata la precisione finale."
+            "corelli": "Cusiana vince 78.5-74 contro il Cambra City: una prova convincente che vale tre punti pesanti.",
+            "bergamotti": "Ottima prova offensiva della Cusiana, il Cambra ha provato a reagire ma è mancata la precisione finale."
           }
         }
       ]
@@ -589,8 +589,8 @@
           "homeIdealScore": 66,
           "awayIdealScore": 74.5,
           "commentary": {
-            "caressa": "Shakhtar Donuts vince 72-64 in trasferta contro il Cortomuso: tre punti che rilanciano la squadra di Marco Fedele.",
-            "bergomi": "Prestazione solida dello Shakhtar, il Cortomuso ha faticato in fase offensiva e non è riuscito a trovare il ritmo giusto."
+            "corelli": "Shakhtar Donuts vince 72-64 in trasferta contro il Cortomuso: tre punti che rilanciano la squadra di Marco Fedele.",
+            "bergamotti": "Prestazione solida dello Shakhtar, il Cortomuso ha faticato in fase offensiva e non è riuscito a trovare il ritmo giusto."
           }
         },
         {
@@ -602,8 +602,8 @@
           "homeIdealScore": 69.5,
           "awayIdealScore": 89.5,
           "commentary": {
-            "caressa": "Real Ichnusa travolgente: 82.5-67.5 in trasferta, una prestazione da standing ovation!",
-            "bergomi": "Prestazione straordinaria dell'Ichnusa che si avvicina al suo ideale monstre di 89.5. La Frattese ha subito la superiorità avversaria."
+            "corelli": "Real Ichnusa travolgente: 82.5-67.5 in trasferta, una prestazione da standing ovation!",
+            "bergamotti": "Prestazione straordinaria dell'Ichnusa che si avvicina al suo ideale monstre di 89.5. La Frattese ha subito la superiorità avversaria."
           }
         },
         {
@@ -615,8 +615,8 @@
           "homeIdealScore": 72,
           "awayIdealScore": 72.5,
           "commentary": {
-            "caressa": "Partizan Tirana espugna il campo della Cusiana per 71.5-64: vittoria esterna che vale punti pesanti.",
-            "bergomi": "Il Partizan è stato più cinico nei momenti chiave, la Cusiana ha pagato una prestazione sottotono rispetto al suo potenziale."
+            "corelli": "Partizan Tirana espugna il campo della Cusiana per 71.5-64: vittoria esterna che vale punti pesanti.",
+            "bergamotti": "Il Partizan è stato più cinico nei momenti chiave, la Cusiana ha pagato una prestazione sottotono rispetto al suo potenziale."
           }
         },
         {
@@ -628,8 +628,8 @@
           "homeIdealScore": 80,
           "awayIdealScore": 76.5,
           "commentary": {
-            "caressa": "Pareggio perfetto tra Cambra City e Ultimo: 72.5-72.5, un punto a testa in una sfida equilibrata.",
-            "bergomi": "Match combattuto con entrambe le squadre sotto il loro ideale, ma l'equilibrio ha premiato il fairplay calcistico."
+            "corelli": "Pareggio perfetto tra Cambra City e Ultimo: 72.5-72.5, un punto a testa in una sfida equilibrata.",
+            "bergamotti": "Match combattuto con entrambe le squadre sotto il loro ideale, ma l'equilibrio ha premiato il fairplay calcistico."
           }
         }
       ]
@@ -648,8 +648,8 @@
           "homeIdealScore": 82.5,
           "awayIdealScore": 63.5,
           "commentary": {
-            "caressa": "Real Ichnusa inarrestabile: 83.5-63.5 contro il Cortomuso, una prestazione da applausi!",
-            "bergomi": "L'Ichnusa ha raggiunto praticamente il suo ideale, prestazione perfetta. Il Cortomuso non ha trovato le contromisure."
+            "corelli": "Real Ichnusa inarrestabile: 83.5-63.5 contro il Cortomuso, una prestazione da applausi!",
+            "bergamotti": "L'Ichnusa ha raggiunto praticamente il suo ideale, prestazione perfetta. Il Cortomuso non ha trovato le contromisure."
           }
         },
         {
@@ -661,8 +661,8 @@
           "homeIdealScore": 70,
           "awayIdealScore": 67,
           "commentary": {
-            "caressa": "Shakhtar Donuts vince 67-61.5 contro la Cusiana: tre punti che consolidano la posizione in classifica.",
-            "bergomi": "Prestazione solida dello Shakhtar, la Cusiana è rimasta sotto il suo potenziale e ha pagato qualche errore di troppo."
+            "corelli": "Shakhtar Donuts vince 67-61.5 contro la Cusiana: tre punti che consolidano la posizione in classifica.",
+            "bergamotti": "Prestazione solida dello Shakhtar, la Cusiana è rimasta sotto il suo potenziale e ha pagato qualche errore di troppo."
           }
         },
         {
@@ -674,8 +674,8 @@
           "homeIdealScore": 75.5,
           "awayIdealScore": 74,
           "commentary": {
-            "caressa": "Ultimo batte la Frattese 75-66.5: vittoria casalinga che vale punti preziosi.",
-            "bergomi": "L'Ultimo ha espresso quasi tutto il suo potenziale, la Frattese invece è rimasta sotto le aspettative e ha subito il ritmo di casa."
+            "corelli": "Ultimo batte la Frattese 75-66.5: vittoria casalinga che vale punti preziosi.",
+            "bergamotti": "L'Ultimo ha espresso quasi tutto il suo potenziale, la Frattese invece è rimasta sotto le aspettative e ha subito il ritmo di casa."
           }
         },
         {
@@ -687,8 +687,8 @@
           "homeIdealScore": 72.5,
           "awayIdealScore": 63.5,
           "commentary": {
-            "caressa": "Partizan Tirana vince di misura 63.5-59.5 contro il Cambra City: match combattuto deciso dai dettagli.",
-            "bergomi": "Entrambe le squadre sotto il loro ideale, ma il Partizan ha saputo sfruttare meglio le occasioni create. Il Cambra fatica a trovare continuità."
+            "corelli": "Partizan Tirana vince di misura 63.5-59.5 contro il Cambra City: match combattuto deciso dai dettagli.",
+            "bergamotti": "Entrambe le squadre sotto il loro ideale, ma il Partizan ha saputo sfruttare meglio le occasioni create. Il Cambra fatica a trovare continuità."
           }
         }
       ]
@@ -707,8 +707,8 @@
           "homeIdealScore": 84,
           "awayIdealScore": 68,
           "commentary": {
-            "caressa": "Vittoria netta del Cortomuso! 84-68 contro l'Ultimo! Sir Alex Baccan porta a casa tre punti importanti!",
-            "bergomi": "Il Cortomuso perfetto, Fabio! Ha fatto esattamente il suo ideale: 84 su 84! L'Ultimo invece ha dato il massimo ma non è bastato."
+            "corelli": "Vittoria netta del Cortomuso! 84-68 contro l'Ultimo! Sir Alex Baccan porta a casa tre punti importanti!",
+            "bergamotti": "Il Cortomuso perfetto, Fabio! Ha fatto esattamente il suo ideale: 84 su 84! L'Ultimo invece ha dato il massimo ma non è bastato."
           }
         },
         {
@@ -720,8 +720,8 @@
           "homeIdealScore": 66.5,
           "awayIdealScore": 65.5,
           "commentary": {
-            "caressa": "CHE EQUILIBRIO! Cusiana batte il Real Ichnusa 66.5-65.5! Un solo punto di differenza!",
-            "bergomi": "Fabio, qui siamo alla perfezione assoluta! ENTRAMBE le squadre hanno fatto ESATTAMENTE il loro ideale! 66.5 su 66.5 per la Cusiana e 65.5 su 65.5 per il Real! Non si può giocare meglio di così!"
+            "corelli": "CHE EQUILIBRIO! Cusiana batte il Real Ichnusa 66.5-65.5! Un solo punto di differenza!",
+            "bergamotti": "Fabio, qui siamo alla perfezione assoluta! ENTRAMBE le squadre hanno fatto ESATTAMENTE il loro ideale! 66.5 su 66.5 per la Cusiana e 65.5 su 65.5 per il Real! Non si può giocare meglio di così!"
           }
         },
         {
@@ -733,8 +733,8 @@
           "homeIdealScore": 69,
           "awayIdealScore": 64.5,
           "commentary": {
-            "caressa": "Partizan Tirana batte lo Shakhtar Donuts 69-64.5! Vittoria importante per Loran10!",
-            "bergomi": "Anche qui perfezione assoluta, Fabio! Il Partizan ha fatto 69 su 69 di ideale, lo Shakhtar 64.5 su 64.5! Entrambe impeccabili nella gestione della rosa."
+            "corelli": "Partizan Tirana batte lo Shakhtar Donuts 69-64.5! Vittoria importante per Loran10!",
+            "bergamotti": "Anche qui perfezione assoluta, Fabio! Il Partizan ha fatto 69 su 69 di ideale, lo Shakhtar 64.5 su 64.5! Entrambe impeccabili nella gestione della rosa."
           }
         },
         {
@@ -746,8 +746,8 @@
           "homeIdealScore": 71.5,
           "awayIdealScore": 85,
           "commentary": {
-            "caressa": "SM FRATTESE SHOW! 85 punti in trasferta contro il Cambra City! 71.5-85 il risultato finale! Che prestazione di Pezant!",
-            "bergomi": "Entrambe PERFETTE, Fabio! Il Cambra 71.5 su 71.5, la Frattese 85 su 85! È raro vedere partite dove tutte e due le squadre fanno esattamente il loro ideale. Complimenti a entrambi!"
+            "corelli": "SM FRATTESE SHOW! 85 punti in trasferta contro il Cambra City! 71.5-85 il risultato finale! Che prestazione di Pezant!",
+            "bergamotti": "Entrambe PERFETTE, Fabio! Il Cambra 71.5 su 71.5, la Frattese 85 su 85! È raro vedere partite dove tutte e due le squadre fanno esattamente il loro ideale. Complimenti a entrambi!"
           }
         }
       ]
@@ -766,8 +766,8 @@
           "homeIdealScore": 73.5,
           "awayIdealScore": 66,
           "commentary": {
-            "caressa": "Vittoria convincente della SM Frattese che batte il Cortomuso 74-63.5! Pezant porta a casa tre punti importanti!",
-            "bergomi": "La Frattese ha fatto meglio del suo ideale, Fabio! 73.5 era il massimo, ma ne ha fatti 74! Ottima gestione della rosa. Il Cortomuso invece ha lasciato qualche punto in panchina."
+            "corelli": "Vittoria convincente della SM Frattese che batte il Cortomuso 74-63.5! Pezant porta a casa tre punti importanti!",
+            "bergamotti": "La Frattese ha fatto meglio del suo ideale, Fabio! 73.5 era il massimo, ma ne ha fatti 74! Ottima gestione della rosa. Il Cortomuso invece ha lasciato qualche punto in panchina."
           }
         },
         {
@@ -779,8 +779,8 @@
           "homeIdealScore": 66,
           "awayIdealScore": 71.5,
           "commentary": {
-            "caressa": "Cusiana espugna il campo dell'Ultimo con un netto 71-63.5! Roby continua la sua corsa in classifica!",
-            "bergomi": "Entrambe vicine al proprio ideale, Fabio. Cusiana praticamente perfetta con solo mezzo punto lasciato, l'Ultimo ha dato il massimo ma non è bastato."
+            "corelli": "Cusiana espugna il campo dell'Ultimo con un netto 71-63.5! Roby continua la sua corsa in classifica!",
+            "bergamotti": "Entrambe vicine al proprio ideale, Fabio. Cusiana praticamente perfetta con solo mezzo punto lasciato, l'Ultimo ha dato il massimo ma non è bastato."
           }
         },
         {
@@ -792,8 +792,8 @@
           "homeIdealScore": 86,
           "awayIdealScore": 79,
           "commentary": {
-            "caressa": "CHE PARTITA! Lo Shakhtar Donuts vince 79.5-77.5 in casa del Cambra City! Match spettacolare con oltre 150 punti totali!",
-            "bergomi": "Lo Shakhtar ha fatto meglio del suo ideale, 79.5 contro un ideale di 79! Perfetto! Il Cambra invece ha lasciato ben 8.5 punti in panchina, poteva essere una partita diversa."
+            "corelli": "CHE PARTITA! Lo Shakhtar Donuts vince 79.5-77.5 in casa del Cambra City! Match spettacolare con oltre 150 punti totali!",
+            "bergamotti": "Lo Shakhtar ha fatto meglio del suo ideale, 79.5 contro un ideale di 79! Perfetto! Il Cambra invece ha lasciato ben 8.5 punti in panchina, poteva essere una partita diversa."
           }
         },
         {
@@ -805,8 +805,8 @@
           "homeIdealScore": 77,
           "awayIdealScore": 79,
           "commentary": {
-            "caressa": "Vittoria di misura del Partizan Tirana! 77.5-76.5 sul campo del Real Ichnusa! Che equilibrio!",
-            "bergomi": "Solo un punto di differenza, Fabio! Entrambe vicine al loro ideale. Il Real quasi perfetto con 76.5 su 77, ma il Partizan ha fatto meglio con 77.5 su 79 di ideale."
+            "corelli": "Vittoria di misura del Partizan Tirana! 77.5-76.5 sul campo del Real Ichnusa! Che equilibrio!",
+            "bergamotti": "Solo un punto di differenza, Fabio! Entrambe vicine al loro ideale. Il Real quasi perfetto con 76.5 su 77, ma il Partizan ha fatto meglio con 77.5 su 79 di ideale."
           }
         }
       ]
@@ -825,8 +825,8 @@
           "homeIdealScore": 81,
           "awayIdealScore": 72.5,
           "commentary": {
-            "caressa": "Vittoria netta del Cortomuso! 76-64.5 contro il Cambra City! Sir Alex Baccan porta a casa tre punti preziosi!",
-            "bergomi": "Il Cortomuso ha lasciato 5 punti in panchina, Fabio, poteva fare ancora meglio! Il Cambra invece ha perso con 8 punti di scarto dall'ideale. Prestazione sottotono degli ospiti."
+            "corelli": "Vittoria netta del Cortomuso! 76-64.5 contro il Cambra City! Sir Alex Baccan porta a casa tre punti preziosi!",
+            "bergamotti": "Il Cortomuso ha lasciato 5 punti in panchina, Fabio, poteva fare ancora meglio! Il Cambra invece ha perso con 8 punti di scarto dall'ideale. Prestazione sottotono degli ospiti."
           }
         },
         {
@@ -838,8 +838,8 @@
           "homeIdealScore": 71,
           "awayIdealScore": 70.5,
           "commentary": {
-            "caressa": "CHE EQUILIBRIO! Lo Shakhtar Donuts batte il Real Ichnusa 71-70.5! Mezzo punto di differenza!",
-            "bergomi": "Fabio, qui siamo alla perfezione assoluta! ENTRAMBE le squadre hanno fatto ESATTAMENTE il loro ideale! 71 su 71 per lo Shakhtar e 70.5 su 70.5 per il Real! Non si può giocare meglio di così!"
+            "corelli": "CHE EQUILIBRIO! Lo Shakhtar Donuts batte il Real Ichnusa 71-70.5! Mezzo punto di differenza!",
+            "bergamotti": "Fabio, qui siamo alla perfezione assoluta! ENTRAMBE le squadre hanno fatto ESATTAMENTE il loro ideale! 71 su 71 per lo Shakhtar e 70.5 su 70.5 per il Real! Non si può giocare meglio di così!"
           }
         },
         {
@@ -851,8 +851,8 @@
           "homeIdealScore": 71.5,
           "awayIdealScore": 68,
           "commentary": {
-            "caressa": "Cusiana vince in casa contro la SM Frattese 73-62.5! Roby continua la sua marcia positiva!",
-            "bergomi": "La Cusiana ha fatto meglio del suo ideale, Fabio! 73 contro 71.5! Gestione perfetta della rosa. La Frattese invece ha lasciato 5.5 punti in panchina, poteva essere più combattuta."
+            "corelli": "Cusiana vince in casa contro la SM Frattese 73-62.5! Roby continua la sua marcia positiva!",
+            "bergamotti": "La Cusiana ha fatto meglio del suo ideale, Fabio! 73 contro 71.5! Gestione perfetta della rosa. La Frattese invece ha lasciato 5.5 punti in panchina, poteva essere più combattuta."
           }
         },
         {
@@ -864,8 +864,8 @@
           "homeIdealScore": 73.5,
           "awayIdealScore": 73.5,
           "commentary": {
-            "caressa": "Partizan Tirana batte l'Ultimo 69-67.5! Match combattuto deciso da un gol e mezzo di scarto!",
-            "bergomi": "Entrambe ben sotto il loro ideale, Fabio. Stesso ideale di 73.5 punti per entrambe, ma nessuna ci è andata vicina. Il Partizan ha lasciato 4.5 punti, l'Ultimo addirittura 6."
+            "corelli": "Partizan Tirana batte l'Ultimo 69-67.5! Match combattuto deciso da un gol e mezzo di scarto!",
+            "bergamotti": "Entrambe ben sotto il loro ideale, Fabio. Stesso ideale di 73.5 punti per entrambe, ma nessuna ci è andata vicina. Il Partizan ha lasciato 4.5 punti, l'Ultimo addirittura 6."
           }
         }
       ]
@@ -884,8 +884,8 @@
           "homeIdealScore": 77,
           "awayIdealScore": 78.5,
           "commentary": {
-            "caressa": "Cusiana batte il Cortomuso 72.5-66.5! Roby chiude bene la stagione regolare!",
-            "bergomi": "Entrambe sotto il loro ideale, Fabio. La Cusiana ha lasciato 4.5 punti, il Cortomuso ben 12 punti in panchina! Poteva essere una partita molto diversa."
+            "corelli": "Cusiana batte il Cortomuso 72.5-66.5! Roby chiude bene la stagione regolare!",
+            "bergamotti": "Entrambe sotto il loro ideale, Fabio. La Cusiana ha lasciato 4.5 punti, il Cortomuso ben 12 punti in panchina! Poteva essere una partita molto diversa."
           }
         },
         {
@@ -897,8 +897,8 @@
           "homeIdealScore": 63,
           "awayIdealScore": 87.5,
           "commentary": {
-            "caressa": "CAMBRA CITY SHOW! 82 punti in trasferta contro il Real Ichnusa! 62-82 il risultato finale! Che prestazione di Stefano!",
-            "bergomi": "Il Real quasi perfetto con 62 su 63 di ideale, ma il Cambra ha dominato con 82 punti! Anche se ha lasciato 5.5 punti in panchina, una prestazione maiuscola!"
+            "corelli": "CAMBRA CITY SHOW! 82 punti in trasferta contro il Real Ichnusa! 62-82 il risultato finale! Che prestazione di Stefano!",
+            "bergamotti": "Il Real quasi perfetto con 62 su 63 di ideale, ma il Cambra ha dominato con 82 punti! Anche se ha lasciato 5.5 punti in panchina, una prestazione maiuscola!"
           }
         },
         {
@@ -910,8 +910,8 @@
           "homeIdealScore": 70.5,
           "awayIdealScore": 73.5,
           "commentary": {
-            "caressa": "Vittoria di misura dello Shakhtar Donuts! 70.5-70 contro l'Ultimo! Mezzo punto decide la partita!",
-            "bergomi": "Lo Shakhtar PERFETTO, Fabio! Ha fatto ESATTAMENTE il suo ideale: 70.5 su 70.5! L'Ultimo ha lasciato 3.5 punti in panchina, poteva essere un pareggio."
+            "corelli": "Vittoria di misura dello Shakhtar Donuts! 70.5-70 contro l'Ultimo! Mezzo punto decide la partita!",
+            "bergamotti": "Lo Shakhtar PERFETTO, Fabio! Ha fatto ESATTAMENTE il suo ideale: 70.5 su 70.5! L'Ultimo ha lasciato 3.5 punti in panchina, poteva essere un pareggio."
           }
         },
         {
@@ -923,8 +923,8 @@
           "homeIdealScore": 85,
           "awayIdealScore": 78,
           "commentary": {
-            "caressa": "La SM Frattese chiude alla grande! 2-3 sul campo del Partizan Tirana! 72-76.5 il punteggio finale. Pezant porta a casa tre punti nell'ultima giornata!",
-            "bergomi": "Il Partizan ha deluso, Fabio! 13 punti lasciati in panchina, un ideale di 85 e ne ha fatti solo 72. La Frattese invece ha fatto meglio del suo ideale: 76.5 contro 78, ottima gestione! E attenzione: 4.5 punti di differenza, quindi gol in più per la Frattese!"
+            "corelli": "La SM Frattese chiude alla grande! 2-3 sul campo del Partizan Tirana! 72-76.5 il punteggio finale. Pezant porta a casa tre punti nell'ultima giornata!",
+            "bergamotti": "Il Partizan ha deluso, Fabio! 13 punti lasciati in panchina, un ideale di 85 e ne ha fatti solo 72. La Frattese invece ha fatto meglio del suo ideale: 76.5 contro 78, ottima gestione! E attenzione: 4.5 punti di differenza, quindi gol in più per la Frattese!"
           }
         }
       ]
@@ -943,8 +943,8 @@
           "homeIdealScore": 77,
           "awayIdealScore": 73,
           "commentary": {
-            "caressa": "Partizan Tirana vince in trasferta 73.5-69.5 contro il Cortomuso! Vittoria importante per Loran10!",
-            "bergomi": "Il Partizan ha fatto meglio del suo ideale, Fabio! 73.5 contro 73! Il Cortomuso invece ha lasciato 7.5 punti in panchina. Poteva essere diversa."
+            "corelli": "Partizan Tirana vince in trasferta 73.5-69.5 contro il Cortomuso! Vittoria importante per Loran10!",
+            "bergamotti": "Il Partizan ha fatto meglio del suo ideale, Fabio! 73.5 contro 73! Il Cortomuso invece ha lasciato 7.5 punti in panchina. Poteva essere diversa."
           }
         },
         {
@@ -956,8 +956,8 @@
           "homeIdealScore": 88.5,
           "awayIdealScore": 85.5,
           "commentary": {
-            "caressa": "CHE PARTITA! La SM Frattese batte lo Shakhtar Donuts 83-76.5! Match spettacolare con oltre 150 punti totali!",
-            "bergomi": "Entrambe sotto il loro ideale ma che numeri, Fabio! La Frattese ha lasciato 5.5 punti, lo Shakhtar addirittura 9. Poteva essere un pirotecnico 14-14!"
+            "corelli": "CHE PARTITA! La SM Frattese batte lo Shakhtar Donuts 83-76.5! Match spettacolare con oltre 150 punti totali!",
+            "bergamotti": "Entrambe sotto il loro ideale ma che numeri, Fabio! La Frattese ha lasciato 5.5 punti, lo Shakhtar addirittura 9. Poteva essere un pirotecnico 14-14!"
           }
         },
         {
@@ -969,8 +969,8 @@
           "homeIdealScore": 74,
           "awayIdealScore": 67,
           "commentary": {
-            "caressa": "L'Ultimo batte il Real Ichnusa 72.5-66! Beppe porta a casa tre punti importanti!",
-            "bergomi": "Entrambe vicine al loro ideale, Fabio. L'Ultimo ha lasciato solo 1.5 punti, ottima gestione! Il Real quasi perfetto con 66 su 67."
+            "corelli": "L'Ultimo batte il Real Ichnusa 72.5-66! Beppe porta a casa tre punti importanti!",
+            "bergamotti": "Entrambe vicine al loro ideale, Fabio. L'Ultimo ha lasciato solo 1.5 punti, ottima gestione! Il Real quasi perfetto con 66 su 67."
           }
         },
         {
@@ -982,8 +982,8 @@
           "homeIdealScore": 76,
           "awayIdealScore": 72,
           "commentary": {
-            "caressa": "Cambra City batte la Cusiana 77-67.5! Stefano continua a macinare punti!",
-            "bergomi": "Il Cambra ha fatto meglio del suo ideale, Fabio! 77 contro 76! Perfetto! La Cusiana invece ha lasciato 4.5 punti in panchina."
+            "corelli": "Cambra City batte la Cusiana 77-67.5! Stefano continua a macinare punti!",
+            "bergamotti": "Il Cambra ha fatto meglio del suo ideale, Fabio! 77 contro 76! Perfetto! La Cusiana invece ha lasciato 4.5 punti in panchina."
           }
         }
       ]
@@ -1002,8 +1002,8 @@
           "homeIdealScore": 73,
           "awayIdealScore": 70,
           "commentary": {
-            "caressa": "Lo Shakhtar Donuts batte il Cortomuso 70.5-68! Vittoria di misura ma importante per Marco Fedele!",
-            "bergomi": "Match equilibrato, Fabio. Lo Shakhtar ha lasciato 2.5 punti in panchina, il Cortomuso 2. Entrambe sotto il loro ideale."
+            "corelli": "Lo Shakhtar Donuts batte il Cortomuso 70.5-68! Vittoria di misura ma importante per Marco Fedele!",
+            "bergamotti": "Match equilibrato, Fabio. Lo Shakhtar ha lasciato 2.5 punti in panchina, il Cortomuso 2. Entrambe sotto il loro ideale."
           }
         },
         {
@@ -1015,8 +1015,8 @@
           "homeIdealScore": 74.5,
           "awayIdealScore": 73.5,
           "commentary": {
-            "caressa": "Il Real Ichnusa batte la SM Frattese 71.5-68! Tre punti d'oro per Robertino Trogu!",
-            "bergomi": "Entrambe sotto il loro ideale, Fabio. Il Real ha lasciato 3 punti, la Frattese 5.5. Poteva essere una partita più spettacolare con le formazioni ideali!"
+            "corelli": "Il Real Ichnusa batte la SM Frattese 71.5-68! Tre punti d'oro per Robertino Trogu!",
+            "bergamotti": "Entrambe sotto il loro ideale, Fabio. Il Real ha lasciato 3 punti, la Frattese 5.5. Poteva essere una partita più spettacolare con le formazioni ideali!"
           }
         },
         {
@@ -1028,8 +1028,8 @@
           "homeIdealScore": 71,
           "awayIdealScore": 77.5,
           "commentary": {
-            "caressa": "DOMINIO TOTALE! La Cusiana travolge il Partizan Tirana 77.5-67.5! Roby mette in campo una formazione perfetta!",
-            "bergomi": "Prestazione eccezionale della Cusiana, Fabio! Formazione ideale perfetta: 77.5 su 77.5! Il Partizan invece ha lasciato 3.5 punti in panchina."
+            "corelli": "DOMINIO TOTALE! La Cusiana travolge il Partizan Tirana 77.5-67.5! Roby mette in campo una formazione perfetta!",
+            "bergamotti": "Prestazione eccezionale della Cusiana, Fabio! Formazione ideale perfetta: 77.5 su 77.5! Il Partizan invece ha lasciato 3.5 punti in panchina."
           }
         },
         {
@@ -1041,8 +1041,8 @@
           "homeIdealScore": 67.5,
           "awayIdealScore": 72,
           "commentary": {
-            "caressa": "Il Cambra City vince di un soffio contro l'Ultimo! 62-61! Partita combattuta fino all'ultimo!",
-            "bergomi": "Che brivido finale, Fabio! L'Ultimo ha lasciato 6.5 punti in panchina, il Cambra ben 10! Con le formazioni ideali sarebbe finita 9-11!"
+            "corelli": "Il Cambra City vince di un soffio contro l'Ultimo! 62-61! Partita combattuta fino all'ultimo!",
+            "bergamotti": "Che brivido finale, Fabio! L'Ultimo ha lasciato 6.5 punti in panchina, il Cambra ben 10! Con le formazioni ideali sarebbe finita 9-11!"
           }
         }
       ]
@@ -1061,8 +1061,8 @@
           "homeIdealScore": 68,
           "awayIdealScore": 74,
           "commentary": {
-            "caressa": "Il Real Ichnusa vince in trasferta 73-66.5 contro il Cortomuso! Robertino Trogu porta a casa tre punti importanti!",
-            "bergomi": "Entrambe vicine al loro ideale, Fabio. Il Cortomuso ha lasciato 1.5 punti, il Real solo 1. Prestazione quasi perfetta del Real!"
+            "corelli": "Il Real Ichnusa vince in trasferta 73-66.5 contro il Cortomuso! Robertino Trogu porta a casa tre punti importanti!",
+            "bergamotti": "Entrambe vicine al loro ideale, Fabio. Il Cortomuso ha lasciato 1.5 punti, il Real solo 1. Prestazione quasi perfetta del Real!"
           }
         },
         {
@@ -1074,8 +1074,8 @@
           "homeIdealScore": 80,
           "awayIdealScore": 82,
           "commentary": {
-            "caressa": "CHE SFIDA! Lo Shakhtar Donuts vince 80-78.5 contro la Cusiana! Partita spettacolare con oltre 158 punti totali!",
-            "bergomi": "Match combattuto fino all'ultimo, Fabio! La Cusiana ha lasciato 1.5 punti, lo Shakhtar 2. Entrambe hanno giocato quasi alla perfezione!"
+            "corelli": "CHE SFIDA! Lo Shakhtar Donuts vince 80-78.5 contro la Cusiana! Partita spettacolare con oltre 158 punti totali!",
+            "bergamotti": "Match combattuto fino all'ultimo, Fabio! La Cusiana ha lasciato 1.5 punti, lo Shakhtar 2. Entrambe hanno giocato quasi alla perfezione!"
           }
         },
         {
@@ -1087,8 +1087,8 @@
           "homeIdealScore": 75,
           "awayIdealScore": 80.5,
           "commentary": {
-            "caressa": "L'Ultimo vince in trasferta 73.5-70.5 contro la SM Frattese! Beppe continua la sua rincorsa!",
-            "bergomi": "Entrambe sotto il loro ideale, Fabio. La Frattese ha lasciato 4.5 punti, l'Ultimo ben 7! Con le formazioni ideali sarebbe stata una partita più equilibrata."
+            "corelli": "L'Ultimo vince in trasferta 73.5-70.5 contro la SM Frattese! Beppe continua la sua rincorsa!",
+            "bergamotti": "Entrambe sotto il loro ideale, Fabio. La Frattese ha lasciato 4.5 punti, l'Ultimo ben 7! Con le formazioni ideali sarebbe stata una partita più equilibrata."
           }
         },
         {
@@ -1100,8 +1100,8 @@
           "homeIdealScore": 88,
           "awayIdealScore": 82,
           "commentary": {
-            "caressa": "PRESTAZIONE STRAORDINARIA! Il Cambra City travolge il Partizan Tirana 87.5-75! Stefano mette in campo una squadra devastante!",
-            "bergomi": "Che numeri, Fabio! Il Cambra quasi perfetto con solo 0.5 punti lasciati in panchina! 87.5 su 88! Il Partizan invece ha lasciato 7 punti."
+            "corelli": "PRESTAZIONE STRAORDINARIA! Il Cambra City travolge il Partizan Tirana 87.5-75! Stefano mette in campo una squadra devastante!",
+            "bergamotti": "Che numeri, Fabio! Il Cambra quasi perfetto con solo 0.5 punti lasciati in panchina! 87.5 su 88! Il Partizan invece ha lasciato 7 punti."
           }
         }
       ]
@@ -1120,8 +1120,8 @@
           "homeIdealScore": 82.5,
           "awayIdealScore": 77,
           "commentary": {
-            "caressa": "Vittoria di misura dell'Ultimo! 1-0 sul Cortomuso con un punteggio di 69 a 65.",
-            "bergomi": "Partita che poteva offrire molto di più, Fabio. L'Ultimo ha lasciato 13.5 punti in panchina, il Cortomuso 12. Un vero peccato!"
+            "corelli": "Vittoria di misura dell'Ultimo! 1-0 sul Cortomuso con un punteggio di 69 a 65.",
+            "bergamotti": "Partita che poteva offrire molto di più, Fabio. L'Ultimo ha lasciato 13.5 punti in panchina, il Cortomuso 12. Un vero peccato!"
           }
         },
         {
@@ -1133,8 +1133,8 @@
           "homeIdealScore": 89.5,
           "awayIdealScore": 71,
           "commentary": {
-            "caressa": "Pareggio combattuto tra Real e Cusiana! Un 1-1 frutto di un 67.5 a 68.",
-            "bergomi": "Il Real Ichnusa deve mangiarsi le mani: 22 punti lasciati fuori! Con la formazione ideale avrebbe vinto 4-1. Occasione sprecata."
+            "corelli": "Pareggio combattuto tra Real e Cusiana! Un 1-1 frutto di un 67.5 a 68.",
+            "bergamotti": "Il Real Ichnusa deve mangiarsi le mani: 22 punti lasciati fuori! Con la formazione ideale avrebbe vinto 4-1. Occasione sprecata."
           }
         },
         {
@@ -1146,8 +1146,8 @@
           "homeIdealScore": 80.5,
           "awayIdealScore": 73,
           "commentary": {
-            "caressa": "Lo Shakhtar Donuts si impone 2-1 sul Partizan Tirana! 75.5 a 67.5 il punteggio fantacalcio.",
-            "bergomi": "Buona prova dello Shakhtar, che ha sfruttato bene la rosa lasciando solo 5 punti fuori. Il Partizan un po' sottotono."
+            "corelli": "Lo Shakhtar Donuts si impone 2-1 sul Partizan Tirana! 75.5 a 67.5 il punteggio fantacalcio.",
+            "bergamotti": "Buona prova dello Shakhtar, che ha sfruttato bene la rosa lasciando solo 5 punti fuori. Il Partizan un po' sottotono."
           }
         },
         {
@@ -1159,8 +1159,8 @@
           "homeIdealScore": 78,
           "awayIdealScore": 85.5,
           "commentary": {
-            "caressa": "Spettacolo al cardiopalma! Frattese e Cambra chiudono sul 2-2! Punteggi quasi identici: 72.5 a 72.",
-            "bergomi": "Il Cambra City ha lasciato troppi punti in panchina, 13.5 per l'esattezza. Poteva portare a casa l'intera posta in palio."
+            "corelli": "Spettacolo al cardiopalma! Frattese e Cambra chiudono sul 2-2! Punteggi quasi identici: 72.5 a 72.",
+            "bergamotti": "Il Cambra City ha lasciato troppi punti in panchina, 13.5 per l'esattezza. Poteva portare a casa l'intera posta in palio."
           }
         }
       ]
@@ -1179,8 +1179,8 @@
           "homeIdealScore": 73.5,
           "awayIdealScore": 81,
           "commentary": {
-            "caressa": "Il Cortomuso espugna il campo del Cambra City! 74.5 punti contro 70.0! Una vittoria fondamentale per la classifica!",
-            "bergomi": "Entrambe le squadre potevano fare meglio, Fabio. Il Cambra ha lasciato 3.5 punti, il Cortomuso ben 6.5! Con le formazioni ideali, il divario sarebbe stato ancora più netto."
+            "corelli": "Il Cortomuso espugna il campo del Cambra City! 74.5 punti contro 70.0! Una vittoria fondamentale per la classifica!",
+            "bergamotti": "Entrambe le squadre potevano fare meglio, Fabio. Il Cambra ha lasciato 3.5 punti, il Cortomuso ben 6.5! Con le formazioni ideali, il divario sarebbe stato ancora più netto."
           }
         },
         {
@@ -1192,8 +1192,8 @@
           "homeIdealScore": 76.5,
           "awayIdealScore": 72.5,
           "commentary": {
-            "caressa": "Vittoria di misura per il Real Ichnusa! 67.5 a 62.0 contro gli Shakhtar Donuts. Pochi bonus ma tre punti pesanti!",
-            "bergomi": "Che spreco però, Fabio! Il Real ha lasciato 9 punti in panchina, i Donuts addirittura 10.5! Poteva essere una partita molto più spettacolare."
+            "corelli": "Vittoria di misura per il Real Ichnusa! 67.5 a 62.0 contro gli Shakhtar Donuts. Pochi bonus ma tre punti pesanti!",
+            "bergamotti": "Che spreco però, Fabio! Il Real ha lasciato 9 punti in panchina, i Donuts addirittura 10.5! Poteva essere una partita molto più spettacolare."
           }
         },
         {
@@ -1205,8 +1205,8 @@
           "homeIdealScore": 85,
           "awayIdealScore": 67.5,
           "commentary": {
-            "caressa": "La SM Frattese domina contro la Cusiana! 76.5 a 64.0! Una prestazione convincente che non lascia scampo agli avversari.",
-            "bergomi": "Vittoria netta, ma attenzione: la Frattese aveva un potenziale mostruoso di 85 punti! Ha lasciato 8.5 punti fuori. La Cusiana invece ha fatto quel che poteva."
+            "corelli": "La SM Frattese domina contro la Cusiana! 76.5 a 64.0! Una prestazione convincente che non lascia scampo agli avversari.",
+            "bergamotti": "Vittoria netta, ma attenzione: la Frattese aveva un potenziale mostruoso di 85 punti! Ha lasciato 8.5 punti fuori. La Cusiana invece ha fatto quel che poteva."
           }
         },
         {
@@ -1218,8 +1218,8 @@
           "homeIdealScore": 80.5,
           "awayIdealScore": 69,
           "commentary": {
-            "caressa": "L'Ultimo non sbaglia un colpo in casa! 75.5 contro i 62.0 del Partizan Tirana. Vittoria mai in discussione!",
-            "bergomi": "L'Ultimo ha gestito bene, anche se ha lasciato 5 punti in panchina. Il Partizan invece fatica a trovare continuità, ben 7 punti lasciati fuori oggi."
+            "corelli": "L'Ultimo non sbaglia un colpo in casa! 75.5 contro i 62.0 del Partizan Tirana. Vittoria mai in discussione!",
+            "bergamotti": "L'Ultimo ha gestito bene, anche se ha lasciato 5 punti in panchina. Il Partizan invece fatica a trovare continuità, ben 7 punti lasciati fuori oggi."
           }
         }
       ]
@@ -1238,8 +1238,8 @@
           "homeIdealScore": 75.5,
           "awayIdealScore": 71.5,
           "commentary": {
-            "caressa": "Il Cortomuso batte la SM Frattese 75.5 a 71.5!",
-            "bergomi": "Vittoria importante per il Cortomuso."
+            "corelli": "Il Cortomuso batte la SM Frattese 75.5 a 71.5!",
+            "bergamotti": "Vittoria importante per il Cortomuso."
           }
         },
         {
@@ -1251,8 +1251,8 @@
           "homeIdealScore": 71.5,
           "awayIdealScore": 72.5,
           "commentary": {
-            "caressa": "Ultimo passa di misura su Cusiana, 72.5 a 71.5.",
-            "bergomi": "Che partita tirata! Un solo punto di differenza."
+            "corelli": "Ultimo passa di misura su Cusiana, 72.5 a 71.5.",
+            "bergamotti": "Che partita tirata! Un solo punto di differenza."
           }
         },
         {
@@ -1264,8 +1264,8 @@
           "homeIdealScore": 71,
           "awayIdealScore": 70.5,
           "commentary": {
-            "caressa": "Shakhtar Donuts vince di un soffio su Cambra City: 71 a 70.5.",
-            "bergomi": "Davvero per mezzo punto! Incredibile."
+            "corelli": "Shakhtar Donuts vince di un soffio su Cambra City: 71 a 70.5.",
+            "bergamotti": "Davvero per mezzo punto! Incredibile."
           }
         },
         {
@@ -1277,8 +1277,8 @@
           "homeIdealScore": 83.5,
           "awayIdealScore": 72.5,
           "commentary": {
-            "caressa": "Partizan Tirana travolgente contro Real Ichnusa: 83.5 a 72.5!",
-            "bergomi": "Prestazione superlativa del Partizan."
+            "corelli": "Partizan Tirana travolgente contro Real Ichnusa: 83.5 a 72.5!",
+            "bergamotti": "Prestazione superlativa del Partizan."
           }
         }
       ]
@@ -1297,8 +1297,8 @@
           "homeIdealScore": 73,
           "awayIdealScore": 66,
           "commentary": {
-            "caressa": "Il Cortomuso vince 70 a 66.5 contro la Cusiana! Gara decisa sul filo dei punti.",
-            "bergomi": "Match equilibrato. Cortomuso ha lasciato 3 punti. Cusiana ha fatto meglio del suo ideale!"
+            "corelli": "Il Cortomuso vince 70 a 66.5 contro la Cusiana! Gara decisa sul filo dei punti.",
+            "bergamotti": "Match equilibrato. Cortomuso ha lasciato 3 punti. Cusiana ha fatto meglio del suo ideale!"
           }
         },
         {
@@ -1310,8 +1310,8 @@
           "homeIdealScore": 79.5,
           "awayIdealScore": 72,
           "commentary": {
-            "caressa": "Cambra City si impone nettamente sul Real Ichnusa: 73.5 a 66.",
-            "bergomi": "Entrambe potevano fare meglio: Cambra ha lasciato 6 punti, il Real 6. Vittoria meritata del Cambra."
+            "corelli": "Cambra City si impone nettamente sul Real Ichnusa: 73.5 a 66.",
+            "bergamotti": "Entrambe potevano fare meglio: Cambra ha lasciato 6 punti, il Real 6. Vittoria meritata del Cambra."
           }
         },
         {
@@ -1323,8 +1323,8 @@
           "homeIdealScore": 73.5,
           "awayIdealScore": 66,
           "commentary": {
-            "caressa": "L'Ultimo batte Shakhtar Donuts 71.5 a 65.5. Punti importanti per la classifica.",
-            "bergomi": "Partita equilibrata nelle potenzialità, ma l'Ultimo è stato più concreto."
+            "corelli": "L'Ultimo batte Shakhtar Donuts 71.5 a 65.5. Punti importanti per la classifica.",
+            "bergamotti": "Partita equilibrata nelle potenzialità, ma l'Ultimo è stato più concreto."
           }
         },
         {
@@ -1336,8 +1336,8 @@
           "homeIdealScore": 81,
           "awayIdealScore": 76,
           "commentary": {
-            "caressa": "Grande prestazione della SM Frattese che vince 81 a 73 contro il Partizan Tirana!",
-            "bergomi": "Frattese perfetta! Ha schierato la formazione migliore possibile ottenendo il massimo: 81 su 81. Chapeau."
+            "corelli": "Grande prestazione della SM Frattese che vince 81 a 73 contro il Partizan Tirana!",
+            "bergamotti": "Frattese perfetta! Ha schierato la formazione migliore possibile ottenendo il massimo: 81 su 81. Chapeau."
           }
         }
       ]
@@ -1356,8 +1356,8 @@
           "homeIdealScore": 76,
           "awayIdealScore": 82,
           "commentary": {
-            "caressa": "Il Cortomuso vince in trasferta! 2-3 contro il Partizan Tirana. 72 punti contro 76.5.",
-            "bergomi": "Vittoria meritata del Cortomuso, Fabio. 4.5 punti di differenza. Entrambe hanno lasciato punti importanti in panchina."
+            "corelli": "Il Cortomuso vince in trasferta! 2-3 contro il Partizan Tirana. 72 punti contro 76.5.",
+            "bergamotti": "Vittoria meritata del Cortomuso, Fabio. 4.5 punti di differenza. Entrambe hanno lasciato punti importanti in panchina."
           }
         },
         {
@@ -1369,8 +1369,8 @@
           "homeIdealScore": 84,
           "awayIdealScore": 87.5,
           "commentary": {
-            "caressa": "Altro 2-2! Shakhtar Donuts e Frattese si dividono la posta in palio. 73 a 75.5.",
-            "bergomi": "Che occasione persa per entrambe! Donuts ha lasciato 11 punti fuori, Frattese 12! Con le formazioni ideali sarebbe stato un match da 4-4."
+            "corelli": "Altro 2-2! Shakhtar Donuts e Frattese si dividono la posta in palio. 73 a 75.5.",
+            "bergamotti": "Che occasione persa per entrambe! Donuts ha lasciato 11 punti fuori, Frattese 12! Con le formazioni ideali sarebbe stato un match da 4-4."
           }
         },
         {
@@ -1382,8 +1382,8 @@
           "homeIdealScore": 67.5,
           "awayIdealScore": 74,
           "commentary": {
-            "caressa": "Vincono le difese a Olbia: 0-0 tra Real Ichnusa e Ultimo. Punteggi bassi: 65.5 a 63.",
-            "bergomi": "Partita brutta, Fabio. L'Ultimo in particolare ha deluso molto rispetto al potenziale di 74 punti."
+            "corelli": "Vincono le difese a Olbia: 0-0 tra Real Ichnusa e Ultimo. Punteggi bassi: 65.5 a 63.",
+            "bergamotti": "Partita brutta, Fabio. L'Ultimo in particolare ha deluso molto rispetto al potenziale di 74 punti."
           }
         },
         {
@@ -1395,8 +1395,8 @@
           "homeIdealScore": 68,
           "awayIdealScore": 84,
           "commentary": {
-            "caressa": "Il Cambra City è un rullo compressore! 0-3 in casa della Cusiana con un perentorio 81 punti.",
-            "bergomi": "Cambra dominante, 81 punti sono tanti. Cusiana non poteva fare molto di più oggi."
+            "corelli": "Il Cambra City è un rullo compressore! 0-3 in casa della Cusiana con un perentorio 81 punti.",
+            "bergamotti": "Cambra dominante, 81 punti sono tanti. Cusiana non poteva fare molto di più oggi."
           }
         }
       ]
@@ -1415,8 +1415,8 @@
           "homeIdealScore": 82,
           "awayIdealScore": 74,
           "commentary": {
-            "caressa": "Shakhtar Donuts espugna il campo del Cortomuso: 72 a 70 in una sfida molto tirata.",
-            "bergomi": "Partita equilibrata ma decisa nei dettagli. Cortomuso lascia tanto potenziale in panchina rispetto all'ideale di 82."
+            "corelli": "Shakhtar Donuts espugna il campo del Cortomuso: 72 a 70 in una sfida molto tirata.",
+            "bergamotti": "Partita equilibrata ma decisa nei dettagli. Cortomuso lascia tanto potenziale in panchina rispetto all'ideale di 82."
           }
         },
         {
@@ -1428,8 +1428,8 @@
           "homeIdealScore": 72.5,
           "awayIdealScore": 80,
           "commentary": {
-            "caressa": "Real Ichnusa passa sul campo della Frattese: 73 a 64.5, vittoria netta e meritata.",
-            "bergomi": "Ichnusa più concreta per tutta la gara. La Frattese resta lontana dal suo ideale e paga il divario."
+            "corelli": "Real Ichnusa passa sul campo della Frattese: 73 a 64.5, vittoria netta e meritata.",
+            "bergamotti": "Ichnusa più concreta per tutta la gara. La Frattese resta lontana dal suo ideale e paga il divario."
           }
         },
         {
@@ -1441,8 +1441,8 @@
           "homeIdealScore": 78.5,
           "awayIdealScore": 81,
           "commentary": {
-            "caressa": "Cusiana vince 78.5 a 70.5 contro il Partizan Tirana, prestazione di alto livello.",
-            "bergomi": "Cusiana perfetta sul proprio ideale, mentre il Partizan non concretizza il potenziale da 81 punti."
+            "corelli": "Cusiana vince 78.5 a 70.5 contro il Partizan Tirana, prestazione di alto livello.",
+            "bergamotti": "Cusiana perfetta sul proprio ideale, mentre il Partizan non concretizza il potenziale da 81 punti."
           }
         },
         {
@@ -1454,8 +1454,8 @@
           "homeIdealScore": 73.5,
           "awayIdealScore": 85.5,
           "commentary": {
-            "caressa": "Ultimo domina in trasferta: 77 a 67 contro Cambra City e tre punti pesantissimi.",
-            "bergomi": "Prestazione solida dell'Ultimo, vicino ai piani alti. Cambra sotto ritmo rispetto all'ideale."
+            "corelli": "Ultimo domina in trasferta: 77 a 67 contro Cambra City e tre punti pesantissimi.",
+            "bergamotti": "Prestazione solida dell'Ultimo, vicino ai piani alti. Cambra sotto ritmo rispetto all'ideale."
           }
         }
       ]
@@ -1474,8 +1474,8 @@
           "homeIdealScore": 72,
           "awayIdealScore": 73,
           "commentary": {
-            "caressa": "Colpo esterno del Cortomuso: 68.5 a 62 sul campo del Real Ichnusa.",
-            "bergomi": "Cortomuso più concreto nei momenti chiave; Ichnusa ben sotto l'ideale da 72 punti."
+            "corelli": "Colpo esterno del Cortomuso: 68.5 a 62 sul campo del Real Ichnusa.",
+            "bergamotti": "Cortomuso più concreto nei momenti chiave; Ichnusa ben sotto l'ideale da 72 punti."
           }
         },
         {
@@ -1487,8 +1487,8 @@
           "homeIdealScore": 66,
           "awayIdealScore": 69,
           "commentary": {
-            "caressa": "La Cusiana passa in trasferta: 69 a 62.5 contro lo Shakhtar Donuts.",
-            "bergomi": "Risultato netto nonostante ideali alla pari: la Cusiana sfrutta meglio le scelte decisive."
+            "corelli": "La Cusiana passa in trasferta: 69 a 62.5 contro lo Shakhtar Donuts.",
+            "bergamotti": "Risultato netto nonostante ideali alla pari: la Cusiana sfrutta meglio le scelte decisive."
           }
         },
         {
@@ -1500,8 +1500,8 @@
           "homeIdealScore": 73.5,
           "awayIdealScore": 81,
           "commentary": {
-            "caressa": "SM Frattese dominante: 75.5 a 66.5 sul campo dell'Ultimo.",
-            "bergomi": "Frattese solidissima e vicina all'ideale; Ultimo paga un passaggio a vuoto pesante."
+            "corelli": "SM Frattese dominante: 75.5 a 66.5 sul campo dell'Ultimo.",
+            "bergamotti": "Frattese solidissima e vicina all'ideale; Ultimo paga un passaggio a vuoto pesante."
           }
         },
         {
@@ -1513,8 +1513,8 @@
           "homeIdealScore": 82,
           "awayIdealScore": 79.5,
           "commentary": {
-            "caressa": "Spettacolo a Tirana: 80.5 a 75 contro Cambra City e tre punti pesantissimi per il Partizan.",
-            "bergomi": "Partizan sopra l'ideale di giornata e grande intensita' offensiva; Cambra resta competitivo ma cede nel finale."
+            "corelli": "Spettacolo a Tirana: 80.5 a 75 contro Cambra City e tre punti pesantissimi per il Partizan.",
+            "bergamotti": "Partizan sopra l'ideale di giornata e grande intensita' offensiva; Cambra resta competitivo ma cede nel finale."
           }
         }
       ]
@@ -1533,8 +1533,8 @@
           "homeIdealScore": 70,
           "awayIdealScore": 74.5,
           "commentary": {
-            "caressa": "Ultimo espugna il campo del Cortomuso: 71 a 68.5 al termine di una sfida tirata.",
-            "bergomi": "Partita equilibrata ma gestita meglio dall'Ultimo nei momenti decisivi; Cortomuso resta vicino al proprio ideale."
+            "corelli": "Ultimo espugna il campo del Cortomuso: 71 a 68.5 al termine di una sfida tirata.",
+            "bergamotti": "Partita equilibrata ma gestita meglio dall'Ultimo nei momenti decisivi; Cortomuso resta vicino al proprio ideale."
           }
         },
         {
@@ -1546,8 +1546,8 @@
           "homeIdealScore": 69.5,
           "awayIdealScore": 71,
           "commentary": {
-            "caressa": "Cusiana vince in casa 70.5 a 63.5 contro Real Ichnusa, tre punti importanti.",
-            "bergomi": "Ichnusa lontanissima dall'ideale da 85.5: la differenza di rendimento e' stata decisiva."
+            "corelli": "Cusiana vince in casa 70.5 a 63.5 contro Real Ichnusa, tre punti importanti.",
+            "bergamotti": "Ichnusa lontanissima dall'ideale da 85.5: la differenza di rendimento e' stata decisiva."
           }
         },
         {
@@ -1559,8 +1559,8 @@
           "homeIdealScore": 72.5,
           "awayIdealScore": 89,
           "commentary": {
-            "caressa": "Shakhtar Donuts straripante in trasferta: 83 a 70 sul campo del Partizan Tirana.",
-            "bergomi": "Donuts dominante e anche sopra il proprio ideale: prestazione offensiva di altissimo livello."
+            "corelli": "Shakhtar Donuts straripante in trasferta: 83 a 70 sul campo del Partizan Tirana.",
+            "bergamotti": "Donuts dominante e anche sopra il proprio ideale: prestazione offensiva di altissimo livello."
           }
         },
         {
@@ -1572,8 +1572,8 @@
           "homeIdealScore": 84.5,
           "awayIdealScore": 85.5,
           "commentary": {
-            "caressa": "SM Frattese passa di misura: 74 a 73.5 sul campo del Cambra City.",
-            "bergomi": "Finale deciso da dettagli minimi, con Cambra che lascia parecchio potenziale rispetto all'84.5 ideale."
+            "corelli": "SM Frattese passa di misura: 74 a 73.5 sul campo del Cambra City.",
+            "bergamotti": "Finale deciso da dettagli minimi, con Cambra che lascia parecchio potenziale rispetto all'84.5 ideale."
           }
         }
       ]
@@ -1592,8 +1592,8 @@
           "homeIdealScore": 82.5,
           "awayIdealScore": 66,
           "commentary": {
-            "caressa": "SM Frattese travolgente: 79 a 64.5 contro Cortomuso, vittoria larga e meritata.",
-            "bergomi": "Frattese molto vicina al proprio ideale e partita indirizzata subito; Cortomuso fatica a tenere il ritmo."
+            "corelli": "SM Frattese travolgente: 79 a 64.5 contro Cortomuso, vittoria larga e meritata.",
+            "bergamotti": "Frattese molto vicina al proprio ideale e partita indirizzata subito; Cortomuso fatica a tenere il ritmo."
           }
         },
         {
@@ -1605,8 +1605,8 @@
           "homeIdealScore": 85.5,
           "awayIdealScore": 73,
           "commentary": {
-            "caressa": "Ultimo domina in casa: 79.5 a 66.5 contro la Cusiana e tre punti pesantissimi.",
-            "bergomi": "Differenza netta in entrambe le fasi: Ultimo crea e concretizza, Cusiana resta troppo distante dal livello richiesto."
+            "corelli": "Ultimo domina in casa: 79.5 a 66.5 contro la Cusiana e tre punti pesantissimi.",
+            "bergamotti": "Differenza netta in entrambe le fasi: Ultimo crea e concretizza, Cusiana resta troppo distante dal livello richiesto."
           }
         },
         {
@@ -1618,8 +1618,8 @@
           "homeIdealScore": 81,
           "awayIdealScore": 78.5,
           "commentary": {
-            "caressa": "Grande spettacolo tra Cambra e Donuts: finisce 83.5 a 77.5, Cambra porta a casa una vittoria di spessore.",
-            "bergomi": "Entrambe sopra quota alta, ma Cambra ha avuto piu' continuita' nei momenti decisivi e ha gestito meglio il vantaggio."
+            "corelli": "Grande spettacolo tra Cambra e Donuts: finisce 83.5 a 77.5, Cambra porta a casa una vittoria di spessore.",
+            "bergamotti": "Entrambe sopra quota alta, ma Cambra ha avuto piu' continuita' nei momenti decisivi e ha gestito meglio il vantaggio."
           }
         },
         {
@@ -1631,8 +1631,8 @@
           "homeIdealScore": 77.5,
           "awayIdealScore": 76.5,
           "commentary": {
-            "caressa": "Partizan Tirana passa con autorita' sul campo del Real Ichnusa: 70 a 56 il finale.",
-            "bergomi": "Scarto pesante e prova opaca del Real, lontanissimo dal proprio ideale; Partizan cinico e ordinato."
+            "corelli": "Partizan Tirana passa con autorita' sul campo del Real Ichnusa: 70 a 56 il finale.",
+            "bergamotti": "Scarto pesante e prova opaca del Real, lontanissimo dal proprio ideale; Partizan cinico e ordinato."
           }
         }
       ]
@@ -1651,8 +1651,8 @@
           "homeIdealScore": 74.5,
           "awayIdealScore": 77.5,
           "commentary": {
-            "caressa": "Cambra City passa sul campo del Cortomuso: 70.5 a 66, vittoria preziosa in trasferta.",
-            "bergomi": "Cortomuso resta sotto il proprio ideale, mentre Cambra mantiene buona continuita' e porta a casa tre punti importanti."
+            "corelli": "Cambra City passa sul campo del Cortomuso: 70.5 a 66, vittoria preziosa in trasferta.",
+            "bergamotti": "Cortomuso resta sotto il proprio ideale, mentre Cambra mantiene buona continuita' e porta a casa tre punti importanti."
           }
         },
         {
@@ -1664,8 +1664,8 @@
           "homeIdealScore": 72.5,
           "awayIdealScore": 72.5,
           "commentary": {
-            "caressa": "Shakhtar Donuts batte Real Ichnusa 70.5 a 64.5 e consolida la propria corsa.",
-            "bergomi": "Donuts concreto nei momenti chiave; Ichnusa paga un rendimento reale lontano dal livello necessario."
+            "corelli": "Shakhtar Donuts batte Real Ichnusa 70.5 a 64.5 e consolida la propria corsa.",
+            "bergamotti": "Donuts concreto nei momenti chiave; Ichnusa paga un rendimento reale lontano dal livello necessario."
           }
         },
         {
@@ -1677,8 +1677,8 @@
           "homeIdealScore": 70.5,
           "awayIdealScore": 87,
           "commentary": {
-            "caressa": "SM Frattese dominante in trasferta: 81 a 72 contro la Cusiana.",
-            "bergomi": "Frattese devastante anche rispetto all'ideale, con ritmo e qualita' superiori per tutta la gara."
+            "corelli": "SM Frattese dominante in trasferta: 81 a 72 contro la Cusiana.",
+            "bergamotti": "Frattese devastante anche rispetto all'ideale, con ritmo e qualita' superiori per tutta la gara."
           }
         },
         {
@@ -1690,8 +1690,8 @@
           "homeIdealScore": 81.5,
           "awayIdealScore": 82,
           "commentary": {
-            "caressa": "Pari ad alta intensita' tra Partizan Tirana e Ultimo: 75-75, un punto a testa.",
-            "bergomi": "Equilibrio totale nel punteggio reale, con ideali altissimi per entrambe: match aperto fino all'ultimo."
+            "corelli": "Pari ad alta intensita' tra Partizan Tirana e Ultimo: 75-75, un punto a testa.",
+            "bergamotti": "Equilibrio totale nel punteggio reale, con ideali altissimi per entrambe: match aperto fino all'ultimo."
           }
         }
       ]
@@ -1710,8 +1710,8 @@
           "homeIdealScore": 63.5,
           "awayIdealScore": 79,
           "commentary": {
-            "caressa": "Cortomuso espugna il campo della Cusiana: 69.5 a 65 in una sfida molto tirata.",
-            "bergomi": "Partita equilibrata ma decisa nei dettagli. Cusiana ha fatto meglio del proprio ideale, ma Cortomuso è stato più concreto."
+            "corelli": "Cortomuso espugna il campo della Cusiana: 69.5 a 65 in una sfida molto tirata.",
+            "bergamotti": "Partita equilibrata ma decisa nei dettagli. Cusiana ha fatto meglio del proprio ideale, ma Cortomuso è stato più concreto."
           }
         },
         {
@@ -1723,8 +1723,8 @@
           "homeIdealScore": 73,
           "awayIdealScore": 71,
           "commentary": {
-            "caressa": "Cambra City passa sul campo del Real Ichnusa: 69.5 a 67, vittoria preziosa in trasferta.",
-            "bergomi": "Entrambe le squadre sotto il proprio ideale, ma Cambra ha gestito meglio i momenti decisivi."
+            "corelli": "Cambra City passa sul campo del Real Ichnusa: 69.5 a 67, vittoria preziosa in trasferta.",
+            "bergamotti": "Entrambe le squadre sotto il proprio ideale, ma Cambra ha gestito meglio i momenti decisivi."
           }
         },
         {
@@ -1736,8 +1736,8 @@
           "homeIdealScore": 74,
           "awayIdealScore": 80.5,
           "commentary": {
-            "caressa": "Ultimo domina in trasferta: 72.5 a 63 contro Shakhtar Donuts e tre punti pesantissimi.",
-            "bergomi": "Prestazione solida dell'Ultimo, vicino ai piani alti. Donuts sotto ritmo rispetto all'ideale."
+            "corelli": "Ultimo domina in trasferta: 72.5 a 63 contro Shakhtar Donuts e tre punti pesantissimi.",
+            "bergamotti": "Prestazione solida dell'Ultimo, vicino ai piani alti. Donuts sotto ritmo rispetto all'ideale."
           }
         },
         {
@@ -1749,8 +1749,8 @@
           "homeIdealScore": 73.5,
           "awayIdealScore": 79.5,
           "commentary": {
-            "caressa": "SM Frattese vince in trasferta: 74.5 a 70 contro Partizan Tirana.",
-            "bergomi": "Frattese più concreta per tutta la gara; Partizan resta lontana dal proprio ideale."
+            "corelli": "SM Frattese vince in trasferta: 74.5 a 70 contro Partizan Tirana.",
+            "bergamotti": "Frattese più concreta per tutta la gara; Partizan resta lontana dal proprio ideale."
           }
         }
       ]
@@ -1769,8 +1769,8 @@
           "homeIdealScore": 75.4,
           "awayIdealScore": 77.5,
           "commentary": {
-            "caressa": "Cortomuso batte Partizan Tirana 69 a 68.5 in una sfida molto tirata.",
-            "bergomi": "Partita equilibrata decisa da dettagli minimi. Entrambe le squadre sotto il proprio ideale."
+            "corelli": "Cortomuso batte Partizan Tirana 69 a 68.5 in una sfida molto tirata.",
+            "bergamotti": "Partita equilibrata decisa da dettagli minimi. Entrambe le squadre sotto il proprio ideale."
           }
         },
         {
@@ -1782,8 +1782,8 @@
           "homeIdealScore": 71,
           "awayIdealScore": 80,
           "commentary": {
-            "caressa": "Shakhtar Donuts travolgente in trasferta: 79.5 a 68.5 contro SM Frattese.",
-            "bergomi": "Prestazione dominante dei Donuts, vicinissimi all'ideale. Frattese sotto ritmo."
+            "corelli": "Shakhtar Donuts travolgente in trasferta: 79.5 a 68.5 contro SM Frattese.",
+            "bergamotti": "Prestazione dominante dei Donuts, vicinissimi all'ideale. Frattese sotto ritmo."
           }
         },
         {
@@ -1795,8 +1795,8 @@
           "homeIdealScore": 77.5,
           "awayIdealScore": 76,
           "commentary": {
-            "caressa": "Ultimo vince 75.5 a 73 contro Real Ichnusa in una partita combattuta.",
-            "bergomi": "Entrambe vicine al proprio ideale, ma Ultimo più concreto nei momenti decisivi."
+            "corelli": "Ultimo vince 75.5 a 73 contro Real Ichnusa in una partita combattuta.",
+            "bergamotti": "Entrambe vicine al proprio ideale, ma Ultimo più concreto nei momenti decisivi."
           }
         },
         {
@@ -1808,8 +1808,8 @@
           "homeIdealScore": 79.5,
           "awayIdealScore": 66,
           "commentary": {
-            "caressa": "Cambra City domina contro Cusiana: 79.5 a 59, vittoria netta e meritata.",
-            "bergomi": "Cambra perfetta sul proprio ideale, prestazione maiuscola. Cusiana sotto ritmo."
+            "corelli": "Cambra City domina contro Cusiana: 79.5 a 59, vittoria netta e meritata.",
+            "bergamotti": "Cambra perfetta sul proprio ideale, prestazione maiuscola. Cusiana sotto ritmo."
           }
         }
       ]
@@ -1828,8 +1828,8 @@
           "homeIdealScore": 62.5,
           "awayIdealScore": 72,
           "commentary": {
-            "caressa": "Cortomuso vince in trasferta: 72 a 62.5 contro Shakhtar Donuts.",
-            "bergomi": "Vittoria importante per il Cortomuso che ha sfruttato bene le occasioni."
+            "corelli": "Cortomuso vince in trasferta: 72 a 62.5 contro Shakhtar Donuts.",
+            "bergamotti": "Vittoria importante per il Cortomuso che ha sfruttato bene le occasioni."
           }
         },
         {
@@ -1841,8 +1841,8 @@
           "homeIdealScore": 77,
           "awayIdealScore": 65.5,
           "commentary": {
-            "caressa": "Il Real Ichnusa batte la SM Frattese 77 a 65.5!",
-            "bergomi": "Grande prestazione del Real Ichnusa."
+            "corelli": "Il Real Ichnusa batte la SM Frattese 77 a 65.5!",
+            "bergamotti": "Grande prestazione del Real Ichnusa."
           }
         },
         {
@@ -1854,8 +1854,8 @@
           "homeIdealScore": 68,
           "awayIdealScore": 69.5,
           "commentary": {
-            "caressa": "Vittoria di misura per la Cusiana in trasferta: 69.5 a 68 contro il Partizan Tirana.",
-            "bergomi": "Partita molto equilibrata."
+            "corelli": "Vittoria di misura per la Cusiana in trasferta: 69.5 a 68 contro il Partizan Tirana.",
+            "bergamotti": "Partita molto equilibrata."
           }
         },
         {
@@ -1867,8 +1867,8 @@
           "homeIdealScore": 74.5,
           "awayIdealScore": 64,
           "commentary": {
-            "caressa": "Ultimo domina in casa: 74.5 a 64 contro il Cambra City.",
-            "bergomi": "L'Ultimo porta a casa tre punti preziosi con una solida prestazione."
+            "corelli": "Ultimo domina in casa: 74.5 a 64 contro il Cambra City.",
+            "bergamotti": "L'Ultimo porta a casa tre punti preziosi con una solida prestazione."
           }
         }
       ]
@@ -1887,8 +1887,8 @@
           "homeIdealScore": 66,
           "awayIdealScore": 78.5,
           "commentary": {
-            "caressa": "Real Ichnusa espugna il campo del Cortomuso: 71 a 63.5.",
-            "bergomi": "Vittoria meritata. Entrambe le squadre non hanno sfruttato tutto il potenziale."
+            "corelli": "Real Ichnusa espugna il campo del Cortomuso: 71 a 63.5.",
+            "bergamotti": "Vittoria meritata. Entrambe le squadre non hanno sfruttato tutto il potenziale."
           }
         },
         {
@@ -1900,8 +1900,8 @@
           "homeIdealScore": 76.5,
           "awayIdealScore": 80,
           "commentary": {
-            "caressa": "Vittoria per lo Shakhtar Donuts in trasferta: 75 a 69.5 contro Cusiana.",
-            "bergomi": "I Donuts capitalizzano di più rispetto alla Cusiana."
+            "corelli": "Vittoria per lo Shakhtar Donuts in trasferta: 75 a 69.5 contro Cusiana.",
+            "bergamotti": "I Donuts capitalizzano di più rispetto alla Cusiana."
           }
         },
         {
@@ -1913,8 +1913,8 @@
           "homeIdealScore": 79,
           "awayIdealScore": 77,
           "commentary": {
-            "caressa": "Che equilibrio! SM Frattese batte l'Ultimo 75 a 74.",
-            "bergomi": "Partita giocata su livelli alti, un punto fa la differenza."
+            "corelli": "Che equilibrio! SM Frattese batte l'Ultimo 75 a 74.",
+            "bergamotti": "Partita giocata su livelli alti, un punto fa la differenza."
           }
         },
         {
@@ -1926,8 +1926,8 @@
           "homeIdealScore": 85.5,
           "awayIdealScore": 76.5,
           "commentary": {
-            "caressa": "Cambra City straripante: 82 a 64 contro il Partizan Tirana!",
-            "bergomi": "Il Cambra City ha dominato la partita in lungo e in largo."
+            "corelli": "Cambra City straripante: 82 a 64 contro il Partizan Tirana!",
+            "bergamotti": "Il Cambra City ha dominato la partita in lungo e in largo."
           }
         }
       ]
@@ -1946,8 +1946,8 @@
           "homeIdealScore": 71.5,
           "awayIdealScore": 71,
           "commentary": {
-            "caressa": "Ultimo vince di un soffio: 70.5 a 70 contro il Cortomuso!",
-            "bergomi": "Partita tiratissima, entrambe vicine al loro potenziale ideale."
+            "corelli": "Ultimo vince di un soffio: 70.5 a 70 contro il Cortomuso!",
+            "bergamotti": "Partita tiratissima, entrambe vicine al loro potenziale ideale."
           }
         },
         {
@@ -1959,8 +1959,8 @@
           "homeIdealScore": 77.5,
           "awayIdealScore": 82.5,
           "commentary": {
-            "caressa": "Cusiana passa in trasferta con un perentorio 80 a 72.5 sul Real Ichnusa.",
-            "bergomi": "Grande prestazione della Cusiana che fa fruttare al meglio le proprie scelte."
+            "corelli": "Cusiana passa in trasferta con un perentorio 80 a 72.5 sul Real Ichnusa.",
+            "bergamotti": "Grande prestazione della Cusiana che fa fruttare al meglio le proprie scelte."
           }
         },
         {
@@ -1972,8 +1972,8 @@
           "homeIdealScore": 71,
           "awayIdealScore": 79,
           "commentary": {
-            "caressa": "Partizan Tirana dominante: 79.5 a 69 contro lo Shakhtar Donuts in trasferta.",
-            "bergomi": "Vittoria netta per il Partizan che raccoglie una prestazione superlativa."
+            "corelli": "Partizan Tirana dominante: 79.5 a 69 contro lo Shakhtar Donuts in trasferta.",
+            "bergamotti": "Vittoria netta per il Partizan che raccoglie una prestazione superlativa."
           }
         },
         {
@@ -1985,8 +1985,8 @@
           "homeIdealScore": 72.5,
           "awayIdealScore": 64,
           "commentary": {
-            "caressa": "SM Frattese si impone 70 a 63.5 contro il Cambra City.",
-            "bergomi": "La Frattese amministra e sfrutta le proprie occasioni rispetto ad un Cambra sottotono."
+            "corelli": "SM Frattese si impone 70 a 63.5 contro il Cambra City.",
+            "bergamotti": "La Frattese amministra e sfrutta le proprie occasioni rispetto ad un Cambra sottotono."
           }
         }
       ]
@@ -2005,8 +2005,8 @@
           "homeIdealScore": 74,
           "awayIdealScore": 71.5,
           "commentary": {
-            "caressa": "Cortomuso la spunta per mezzo punto! 69 a 68.5 contro la SM Frattese.",
-            "bergomi": "Entrambe hanno lasciato punti per strada rispetto ai loro ideali, ma il Cortomuso è stato quel pizzico più concreto per portare a casa il risultato."
+            "corelli": "Cortomuso la spunta per mezzo punto! 69 a 68.5 contro la SM Frattese.",
+            "bergamotti": "Entrambe hanno lasciato punti per strada rispetto ai loro ideali, ma il Cortomuso è stato quel pizzico più concreto per portare a casa il risultato."
           }
         },
         {
@@ -2018,8 +2018,8 @@
           "homeIdealScore": 81.5,
           "awayIdealScore": 81,
           "commentary": {
-            "caressa": "Cusiana esagerata! 80 a 73.5 contro l'Ultimo.",
-            "bergomi": "Una Cusiana quasi perfetta rispetto al suo ideale. L'Ultimo aveva un potenziale altissimo di 81, ma ha sprecato troppo in panchina."
+            "corelli": "Cusiana esagerata! 80 a 73.5 contro l'Ultimo.",
+            "bergamotti": "Una Cusiana quasi perfetta rispetto al suo ideale. L'Ultimo aveva un potenziale altissimo di 81, ma ha sprecato troppo in panchina."
           }
         },
         {
@@ -2031,8 +2031,8 @@
           "homeIdealScore": 69.5,
           "awayIdealScore": 69,
           "commentary": {
-            "caressa": "Cambra City espugna di un soffio il campo dello Shakhtar Donuts: 68 a 67.5.",
-            "bergomi": "Partita estremamente equilibrata e decisa dai dettagli. Entrambe molto vicine al loro potenziale."
+            "corelli": "Cambra City espugna di un soffio il campo dello Shakhtar Donuts: 68 a 67.5.",
+            "bergamotti": "Partita estremamente equilibrata e decisa dai dettagli. Entrambe molto vicine al loro potenziale."
           }
         },
         {
@@ -2044,8 +2044,8 @@
           "homeIdealScore": 77.5,
           "awayIdealScore": 63.5,
           "commentary": {
-            "caressa": "Dominio assoluto del Partizan Tirana! 77 a 56 contro il Real Ichnusa.",
-            "bergomi": "Il Partizan sfiora la perfezione con 77 punti su un potenziale di 77.5. Real Ichnusa totalmente fuori partita, lontano anche da un ideale già modesto."
+            "corelli": "Dominio assoluto del Partizan Tirana! 77 a 56 contro il Real Ichnusa.",
+            "bergamotti": "Il Partizan sfiora la perfezione con 77 punti su un potenziale di 77.5. Real Ichnusa totalmente fuori partita, lontano anche da un ideale già modesto."
           }
         }
       ]
