@@ -48,11 +48,9 @@ export function calcolaIdeale(voti) {
         perRuolo[ruolo] = voti.filter(v => v.role === ruolo).map(v => v.score).sort((a, b) => b - a);
     }
 
-    if (perRuolo.P.length === 0) return { score: null, modulo: null, motivo: 'nessun portiere con voto' };
-
     let best = null;
     for (const [d, c, a] of MODULI) {
-        const score = perRuolo.P[0] + topN(perRuolo.D, d) + topN(perRuolo.C, c) + topN(perRuolo.A, a);
+        const score = topN(perRuolo.P, 1) + topN(perRuolo.D, d) + topN(perRuolo.C, c) + topN(perRuolo.A, a);
         if (!best || score > best.score) best = { score: round1(score), modulo: `${d}-${c}-${a}` };
     }
 
